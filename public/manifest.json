@@ -1,0 +1,30 @@
+{
+  "name": "Autovinci — AI-Powered Automotive Marketplace",
+  "short_name": "Autovinci",
+  "description": "India's AI-powered luxury automotive marketplace for buying and selling pre-owned cars.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0c10",
+  "theme_color": "#137fec",
+  "orientation": "portrait",
+  "scope": "/",
+  "categories": ["auto", "shopping", "business"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

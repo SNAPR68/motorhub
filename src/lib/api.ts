@@ -1,0 +1,405 @@
+/* Autovinci — Client-side API helpers
+ *
+ * Provides typed fetch wrappers for all API routes,
+ * plus adapters to convert Prisma DB records into the
+ * component-level types used by pages.
+ */
+
+import type { Vehicle, Lead } from "./types";
+
+// ── Base Fetch ──
+
+const BASE = process.env.NEXT_PUBLIC_APP_URL || "";
+
+async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(`${BASE}${path}`, {
+    ...init,
+    headers: {
+      "Content-Type": "application/json",
+      ...init?.headers,
+    },
+  });
+  if (!res.ok) throw new Error(`API ${path}: ${res.status}`);
+  return res.json();
+}
+
+// ── Vehicle API ──
+
+export async function fetchVehicles(params?: {
+  category?: string;
+  status?: string;
+  search?: string;
+  sort?: string;
+  limit?: number;
+  offset?: number;
+}) {
+  const sp = new URLSearchParams();
+  if (params?.category) sp.set("category", params.category);
+  if (params?.status) sp.set("status", params.status);
+  if (params?.search) sp.set("search", params.search);
+  if (params?.sort) sp.set("sort", params.sort);
+  if (params?.limit) sp.set("limit", String(params.limit));
+  if (params?.offset) sp.set("offset", String(params.offset));
+
+  const qs = sp.toString();
+  return apiFetch<{ vehicles: DbVehicle[]; total: number }>(
+    `/api/vehicles${qs ? `?${qs}` : ""}`
+  );
+}
+
+export async function fetchVehicle(id: string) {
+  return apiFetch<{ vehicle: DbVehicle }>(`/api/vehicles/${id}`);
+}
+
+// ── Lead API ──
+
+export async function fetchLeads(params?: {
+  status?: string;
+  sentiment?: string;
+  search?: string;
+  limit?: number;
+}) {
+  const sp = new URLSearchParams();
+  if (params?.status) sp.set("status", params.status);
+  if (params?.sentiment) sp.set("sentiment", params.sentiment);
+  if (params?.search) sp.set("search", params.search);
+  if (params?.limit) sp.set("limit", String(params.limit));
+
+  const qs = sp.toString();
+  return apiFetch<{ leads: DbLead[]; total: number }>(
+    `/api/leads${qs ? `?${qs}` : ""}`
+  );
+}
+
+export async function fetchLead(id: string) {
+  return apiFetch<{ lead: DbLead; timeline: DbLeadMessage[] }>(
+    `/api/leads/${id}`
+  );
+}
+
+// ── Dashboard API ──
+
+export async function fetchDashboard() {
+  return apiFetch<{
+    stats: Record<string, unknown>;
+    activities: DbActivity[];
+    recentLeads: DbLead[];
+  }>("/api/analytics/dashboard");
+}
+
+// ── Analytics Funnel API ──
+
+export interface FunnelStage {
+  stage: string;
+  count: number;
+  conversion: number;
+}
+
+export interface FunnelData {
+  funnel: FunnelStage[];
+  sentiment: { hot: number; warm: number; cool: number; total: number };
+  statusBreakdown: Record<string, number>;
+  totalLeads: number;
+}
+
+export async function fetchFunnel() {
+  return apiFetch<FunnelData>("/api/analytics/funnel");
+}
+
+// ── Concierge Chat API ──
+
+export interface ConciergeVehicle {
+  id: string;
+  name: string;
+  year: number;
+  price: string;
+  image: string;
+  fuel: string;
+  km: string;
+}
+
+export interface ConciergeResponse {
+  response: {
+    text: string;
+    vehicles?: ConciergeVehicle[];
+  };
+}
+
+export async function sendConciergeMessage(message: string) {
+  return apiFetch<ConciergeResponse>("/api/concierge/chat", {
+    method: "POST",
+    body: JSON.stringify({ message }),
+  });
+}
+
+// ── Store API ──
+
+export async function fetchStores() {
+  return apiFetch<{
+    stores: DbStore[];
+    team: DbTeamMember[];
+    total: number;
+  }>("/api/stores");
+}
+
+export async function fetchStore(id: string) {
+  return apiFetch<{ store: DbStore }>(`/api/stores/${id}`);
+}
+
+// ── Wishlist API ──
+
+export async function fetchWishlist() {
+  return apiFetch<{
+    wishlists: Array<{ vehicle: DbVehicle }>;
+    vehicles: DbVehicle[];
+    total: number;
+  }>("/api/wishlist");
+}
+
+export async function addToWishlist(vehicleId: string) {
+  return apiFetch<{ wishlist: unknown }>("/api/wishlist", {
+    method: "POST",
+    body: JSON.stringify({ vehicleId }),
+  });
+}
+
+export async function removeFromWishlist(vehicleId: string) {
+  return apiFetch<{ deleted: boolean }>(
+    `/api/wishlist?vehicleId=${vehicleId}`,
+    { method: "DELETE" }
+  );
+}
+
+// ── Appointments API ──
+
+export async function fetchAppointments(status?: string) {
+  const qs = status ? `?status=${status}` : "";
+  return apiFetch<{ appointments: DbAppointment[]; total: number }>(
+    `/api/appointments${qs}`
+  );
+}
+
+// ── Notifications API ──
+
+export async function fetchNotifications() {
+  return apiFetch<{
+    notifications: DbNotification[];
+    total: number;
+    unreadCount: number;
+  }>("/api/notifications");
+}
+
+// ── Dealer Profile ──
+
+export async function fetchDealerProfile() {
+  return apiFetch<{
+    profile: Record<string, unknown>;
+    user: Record<string, unknown>;
+  }>("/api/dealer/profile");
+}
+
+// ── Dealer Team ──
+
+export async function fetchDealerTeam() {
+  return apiFetch<{
+    team: DbTeamMember[];
+    total: number;
+  }>("/api/dealer/team");
+}
+
+// ═══════════════════════════════════════════════
+// DB RECORD TYPES (what the API returns)
+// ═══════════════════════════════════════════════
+
+export interface DbVehicle {
+  id: string;
+  name: string;
+  year: number;
+  price: number;
+  priceDisplay: string;
+  status: string;
+  category: string;
+  fuel: string;
+  transmission: string;
+  engine: string;
+  power: string;
+  mileage: string;
+  km: string;
+  location: string;
+  owner: string;
+  badge: string | null;
+  aiScore: number | null;
+  images: string[];
+  features: Array<{ key: string; label: string; available: boolean }> | null;
+  createdAt: string;
+  store?: { name: string; city: string } | null;
+  dealerProfile?: {
+    dealershipName: string;
+    dealershipId: string;
+    city: string;
+    phone: string | null;
+    logoUrl: string | null;
+  } | null;
+}
+
+export interface DbLead {
+  id: string;
+  buyerName: string;
+  source: string;
+  sentiment: number;
+  sentimentLabel: string;
+  message: string | null;
+  phone: string | null;
+  email: string | null;
+  location: string | null;
+  budget: string | null;
+  status: string;
+  createdAt: string;
+  vehicle?: {
+    id: string;
+    name: string;
+    priceDisplay: string;
+    images: string[];
+  } | null;
+  _count?: { messages: number };
+}
+
+export interface DbLeadMessage {
+  id: string;
+  role: string;
+  text: string;
+  type: string;
+  createdAt: string;
+}
+
+export interface DbActivity {
+  id: string;
+  title: string;
+  description: string;
+  type: string;
+  createdAt: string;
+}
+
+export interface DbStore {
+  id: string;
+  name: string;
+  address: string;
+  city: string;
+  phone: string | null;
+  manager: string | null;
+  status: string;
+  vehicleCount?: number;
+  _count?: { vehicles: number };
+}
+
+export interface DbTeamMember {
+  id: string;
+  name: string;
+  role: string;
+  email: string;
+  avatarUrl: string | null;
+  status: string;
+  joinedAt: string;
+}
+
+export interface DbAppointment {
+  id: string;
+  buyerName: string;
+  buyerPhone: string | null;
+  scheduledAt: string;
+  duration: number;
+  status: string;
+  location: string | null;
+  notes: string | null;
+  lead?: { id: string; buyerName: string; phone: string | null; sentimentLabel: string } | null;
+  vehicle?: { id: string; name: string; priceDisplay: string; images: string[] } | null;
+}
+
+export interface DbNotification {
+  id: string;
+  title: string;
+  message: string;
+  type: string;
+  read: boolean;
+  createdAt: string;
+}
+
+// ═══════════════════════════════════════════════
+// ADAPTERS — Convert DB records to page-level types
+// ═══════════════════════════════════════════════
+
+const STATUS_COLOR_MAP: Record<string, string> = {
+  AVAILABLE: "bg-emerald-500",
+  IN_REVIEW: "bg-amber-500",
+  RESERVED: "bg-blue-500",
+  SOLD: "bg-slate-500",
+  ARCHIVED: "bg-slate-700",
+};
+
+const SOURCE_COLOR_MAP: Record<string, string> = {
+  WEBSITE: "bg-blue-500",
+  FACEBOOK: "bg-indigo-500",
+  INSTAGRAM: "bg-pink-500",
+  WHATSAPP: "bg-green-500",
+  WALKIN: "bg-amber-500",
+  REFERRAL: "bg-purple-500",
+  OTHER: "bg-slate-500",
+};
+
+/** Convert a DB vehicle record to the page-component Vehicle type */
+export function adaptVehicle(v: DbVehicle): Vehicle {
+  return {
+    id: v.id,
+    name: v.name,
+    year: v.year,
+    price: v.priceDisplay,
+    priceNumeric: v.price,
+    image: v.images[0] || "",
+    status: v.status.toLowerCase() as Vehicle["status"],
+    statusColor: STATUS_COLOR_MAP[v.status] || "bg-slate-500",
+    aiTag: (v.aiScore ?? 0) >= 90,
+    aiScore: v.aiScore ?? 0,
+    km: v.km,
+    fuel: v.fuel.charAt(0) + v.fuel.slice(1).toLowerCase(),
+    transmission: v.transmission.charAt(0) + v.transmission.slice(1).toLowerCase(),
+    engine: v.engine,
+    power: v.power,
+    mileage: v.mileage,
+    location: v.location,
+    owner: v.owner,
+    badge: v.badge,
+    category: v.category.toLowerCase() as Vehicle["category"],
+    features: v.features ?? [],
+    gallery: v.images.length > 0 ? v.images : [v.images[0] || ""],
+  };
+}
+
+/** Convert a DB lead record to the page-component Lead type */
+export function adaptLead(l: DbLead): Lead {
+  const ago = timeAgo(l.createdAt);
+  return {
+    id: l.id,
+    name: l.buyerName,
+    source: l.source.charAt(0) + l.source.slice(1).toLowerCase(),
+    sourceColor: SOURCE_COLOR_MAP[l.source] || "bg-slate-500",
+    sentiment: l.sentiment,
+    sentimentLabel: l.sentimentLabel.toLowerCase() as Lead["sentimentLabel"],
+    car: l.vehicle?.name ?? "No vehicle",
+    carImage: l.vehicle?.images?.[0] ?? "",
+    time: ago,
+    message: l.message ?? "",
+    phone: l.phone ?? undefined,
+    location: l.location ?? undefined,
+    budget: l.budget ?? undefined,
+  };
+}
+
+function timeAgo(dateStr: string): string {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
+}

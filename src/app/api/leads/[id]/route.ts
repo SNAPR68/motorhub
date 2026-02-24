@@ -1,0 +1,126 @@
+/* GET /api/leads/[id] — Get single lead with messages timeline (auth required)
+ * PUT /api/leads/[id] — Update lead status or details (auth required)
+ * DELETE /api/leads/[id] — Delete lead (auth required)
+ */
+
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { db } from "@/lib/db";
+import { requireDealerAuth } from "@/lib/auth-guard";
+
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const dealer = await requireDealerAuth();
+  if (!dealer) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  try {
+    const lead = await db.lead.findUnique({
+      where: { id },
+      include: {
+        vehicle: {
+          select: {
+            id: true,
+            name: true,
+            priceDisplay: true,
+            images: true,
+            year: true,
+            category: true,
+            fuel: true,
+            transmission: true,
+          },
+        },
+        messages: {
+          orderBy: { createdAt: "asc" },
+        },
+        appointments: {
+          orderBy: { scheduledAt: "desc" },
+        },
+      },
+    });
+
+    if (!lead) {
+      return NextResponse.json(
+        { error: "Lead not found" },
+        { status: 404 }
+      );
+    }
+
+    // Build timeline from messages
+    const timeline = lead.messages.map((m) => ({
+      id: m.id,
+      role: m.role,
+      text: m.text,
+      type: m.type,
+      createdAt: m.createdAt,
+    }));
+
+    return NextResponse.json({ lead, timeline });
+  } catch (error) {
+    console.error("GET /api/leads/[id] error:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch lead" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const dealer = await requireDealerAuth();
+  if (!dealer) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  try {
+    const body = await request.json();
+
+    const lead = await db.lead.update({
+      where: { id },
+      data: body,
+      include: {
+        vehicle: { select: { id: true, name: true, priceDisplay: true } },
+      },
+    });
+
+    return NextResponse.json({ lead });
+  } catch (error) {
+    console.error("PUT /api/leads/[id] error:", error);
+    return NextResponse.json(
+      { error: "Failed to update lead" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const dealer = await requireDealerAuth();
+  if (!dealer) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  try {
+    await db.lead.delete({ where: { id } });
+    return NextResponse.json({ deleted: true });
+  } catch (error) {
+    console.error("DELETE /api/leads/[id] error:", error);
+    return NextResponse.json(
+      { error: "Failed to delete lead" },
+      { status: 500 }
+    );
+  }
+}

@@ -1,0 +1,413 @@
+// Autovinci — Production Database Schema
+// PostgreSQL via Supabase + Prisma ORM
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────
+
+enum UserRole {
+  BUYER
+  DEALER
+}
+
+enum VehicleStatus {
+  AVAILABLE
+  IN_REVIEW
+  RESERVED
+  SOLD
+  ARCHIVED
+}
+
+enum VehicleCategory {
+  SUV
+  SEDAN
+  HATCHBACK
+  EV
+  LUXURY
+}
+
+enum FuelType {
+  PETROL
+  DIESEL
+  ELECTRIC
+  HYBRID
+  CNG
+}
+
+enum TransmissionType {
+  MANUAL
+  AUTOMATIC
+  CVT
+  AMT
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  FOLLOW_UP
+  TEST_DRIVE
+  NEGOTIATION
+  CLOSED_WON
+  CLOSED_LOST
+}
+
+enum SentimentLevel {
+  HOT
+  WARM
+  COOL
+}
+
+enum LeadSource {
+  WEBSITE
+  FACEBOOK
+  INSTAGRAM
+  WHATSAPP
+  WALKIN
+  REFERRAL
+  OTHER
+}
+
+enum MessageRole {
+  AI
+  USER
+  SYSTEM
+}
+
+enum MessageType {
+  AUTO
+  MANUAL
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum TeamMemberStatus {
+  ACTIVE
+  INVITED
+  INACTIVE
+}
+
+enum SubscriptionPlan {
+  STARTER
+  GROWTH
+  ENTERPRISE
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  TRIALING
+}
+
+enum NotificationType {
+  LEAD
+  APPOINTMENT
+  VEHICLE
+  SYSTEM
+  PAYMENT
+}
+
+enum ActivityType {
+  SUCCESS
+  WARNING
+  INFO
+  AUTO
+}
+
+enum StoreStatus {
+  ACTIVE
+  INACTIVE
+}
+
+// ─────────────────────────────────────────────
+// MODELS
+// ─────────────────────────────────────────────
+
+/// Application user — linked to Supabase Auth via `auth_id`
+model User {
+  id        String   @id @default(cuid())
+  authId    String   @unique @map("auth_id") // Supabase Auth UUID
+  email     String   @unique
+  name      String
+  role      UserRole
+  phone     String?
+  avatarUrl String?  @map("avatar_url")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  dealerProfile DealerProfile?
+  wishlists     Wishlist[]
+  notifications Notification[]
+
+  @@map("users")
+}
+
+/// Dealer business profile — one-to-one with User (role=DEALER)
+model DealerProfile {
+  id             String           @id @default(cuid())
+  userId         String           @unique @map("user_id")
+  dealershipName String           @map("dealership_name")
+  dealershipId   String           @unique @map("dealership_id") // e.g. "mag-delhi-01"
+  gstin          String?          // GST Identification Number (Indian market)
+  phone          String?
+  address        String?
+  city           String?
+  state          String?
+  logoUrl        String?          @map("logo_url")
+  plan           SubscriptionPlan @default(STARTER)
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+
+  // Relations
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stores        StoreLocation[]
+  vehicles      Vehicle[]
+  leads         Lead[]
+  appointments  Appointment[]
+  teamMembers   TeamMember[]
+  subscriptions Subscription[]
+  activities    Activity[]
+
+  @@map("dealer_profiles")
+}
+
+/// Physical store / showroom location
+model StoreLocation {
+  id              String      @id @default(cuid())
+  dealerProfileId String      @map("dealer_profile_id")
+  name            String
+  address         String
+  city            String
+  phone           String?
+  manager         String?
+  status          StoreStatus @default(ACTIVE)
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id], onDelete: Cascade)
+  vehicles      Vehicle[]
+
+  @@map("store_locations")
+}
+
+/// Vehicle listing
+model Vehicle {
+  id              String          @id @default(cuid())
+  dealerProfileId String          @map("dealer_profile_id")
+  storeId         String?         @map("store_id")
+  name            String          // e.g. "Hyundai Creta SX(O)"
+  year            Int
+  price           Int             // Price in INR (paise or whole rupees)
+  priceDisplay    String          @map("price_display") // e.g. "₹ 12.50 Lakh"
+  status          VehicleStatus   @default(AVAILABLE)
+  category        VehicleCategory
+  fuel            FuelType
+  transmission    TransmissionType
+  engine          String          // e.g. "1.5L CRDi"
+  power           String          // e.g. "115 bhp"
+  mileage         String          // e.g. "21.4 km/l" or "437 km range"
+  km              String          // e.g. "18,300"
+  location        String          // City
+  owner           String          // e.g. "1st Owner"
+  badge           String?         // e.g. "Premium", "Trending", "Low KM"
+  aiScore         Int?            @map("ai_score") // 0-100
+  images          String[]        // Array of image URLs
+  features        Json?           // JSON array of { key, label, available }
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  // Relations
+  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id], onDelete: Cascade)
+  store         StoreLocation? @relation(fields: [storeId], references: [id], onDelete: SetNull)
+  leads         Lead[]
+  wishlists     Wishlist[]
+  appointments  Appointment[]
+
+  @@index([dealerProfileId])
+  @@index([status])
+  @@index([category])
+  @@index([price])
+  @@map("vehicles")
+}
+
+/// Sales lead
+model Lead {
+  id              String         @id @default(cuid())
+  dealerProfileId String         @map("dealer_profile_id")
+  vehicleId       String?        @map("vehicle_id")
+  buyerName       String         @map("buyer_name")
+  source          LeadSource
+  sentiment       Int            @default(0) // 0-100
+  sentimentLabel  SentimentLevel @default(COOL) @map("sentiment_label")
+  message         String?
+  phone           String?
+  email           String?
+  location        String?
+  budget          String?
+  status          LeadStatus     @default(NEW)
+  assignedTo      String?        @map("assigned_to") // Team member ID
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+
+  // Relations
+  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id], onDelete: Cascade)
+  vehicle       Vehicle?      @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  messages      LeadMessage[]
+  appointments  Appointment[]
+
+  @@index([dealerProfileId])
+  @@index([status])
+  @@index([sentimentLabel])
+  @@map("leads")
+}
+
+/// Messages in a lead conversation timeline
+model LeadMessage {
+  id        String      @id @default(cuid())
+  leadId    String      @map("lead_id")
+  role      MessageRole
+  text      String
+  type      MessageType @default(MANUAL)
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  // Relations
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId])
+  @@map("lead_messages")
+}
+
+/// Test drive / meeting appointments
+model Appointment {
+  id              String            @id @default(cuid())
+  dealerProfileId String            @map("dealer_profile_id")
+  leadId          String?           @map("lead_id")
+  vehicleId       String?           @map("vehicle_id")
+  buyerName       String            @map("buyer_name")
+  buyerPhone      String?           @map("buyer_phone")
+  scheduledAt     DateTime          @map("scheduled_at")
+  duration        Int               @default(30) // minutes
+  status          AppointmentStatus @default(SCHEDULED)
+  location        String?
+  notes           String?
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+
+  // Relations
+  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id], onDelete: Cascade)
+  lead          Lead?         @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  vehicle       Vehicle?      @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+
+  @@index([dealerProfileId])
+  @@index([scheduledAt])
+  @@index([leadId])
+  @@index([vehicleId])
+  @@map("appointments")
+}
+
+/// Buyer wishlist
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  vehicleId String   @map("vehicle_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, vehicleId])
+  @@index([vehicleId])
+  @@map("wishlists")
+}
+
+/// Dealer team members (may or may not have a User account)
+model TeamMember {
+  id              String           @id @default(cuid())
+  dealerProfileId String           @map("dealer_profile_id")
+  userId          String?          @map("user_id") // Linked user account (nullable)
+  name            String
+  role            String           // "Owner", "Sales Manager", etc.
+  email           String
+  avatarUrl       String?          @map("avatar_url")
+  status          TeamMemberStatus @default(INVITED)
+  joinedAt        DateTime         @default(now()) @map("joined_at")
+
+  // Relations
+  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id], onDelete: Cascade)
+
+  @@index([dealerProfileId])
+  @@map("team_members")
+}
+
+/// Dealer subscription (Razorpay)
+model Subscription {
+  id                    String             @id @default(cuid())
+  dealerProfileId       String             @map("dealer_profile_id")
+  plan                  SubscriptionPlan
+  status                SubscriptionStatus @default(TRIALING)
+  razorpaySubscriptionId String?           @unique @map("razorpay_subscription_id")
+  razorpayCustomerId    String?            @map("razorpay_customer_id")
+  currentPeriodStart    DateTime?          @map("current_period_start")
+  currentPeriodEnd      DateTime?          @map("current_period_end")
+  createdAt             DateTime           @default(now()) @map("created_at")
+  updatedAt             DateTime           @updatedAt @map("updated_at")
+
+  // Relations
+  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id], onDelete: Cascade)
+
+  @@index([dealerProfileId])
+  @@map("subscriptions")
+}
+
+/// User notifications
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String           @map("user_id")
+  title     String
+  message   String
+  type      NotificationType @default(SYSTEM)
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([read])
+  @@map("notifications")
+}
+
+/// Dealer activity feed
+model Activity {
+  id              String       @id @default(cuid())
+  dealerProfileId String       @map("dealer_profile_id")
+  title           String
+  description     String
+  type            ActivityType @default(INFO)
+  createdAt       DateTime     @default(now()) @map("created_at")
+
+  // Relations
+  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id], onDelete: Cascade)
+
+  @@index([dealerProfileId])
+  @@index([createdAt])
+  @@map("activities")
+}
