@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Quick Draft Studio - Smart Chips</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Main Container (Phone Mockup Style) -->
+<div class="relative flex min-h-screen w-full max-w-[430px] mx-auto flex-col bg-white dark:bg-slate-900 shadow-2xl overflow-x-hidden border-x border-slate-200 dark:border-slate-800">
+<!-- Header Section -->
+<header class="sticky top-0 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 px-4 py-3 flex items-center justify-between">
+<button class="flex items-center text-primary">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="text-sm font-bold tracking-tight">AI Quick Draft Studio</h1>
+<span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Smart Chips Mode</span>
+</div>
+<button class="text-slate-400">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</header>
+<!-- Chat Context Area -->
+<section class="p-4 bg-slate-50 dark:bg-slate-800/50">
+<div class="flex items-center gap-3 mb-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h3 class="text-sm font-bold">Inquiry: Alex Chen</h3>
+<p class="text-xs text-slate-500">2022 SUV • White Pearl Edition</p>
+</div>
+<div class="ml-auto">
+<span class="text-[10px] bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 px-2 py-0.5 rounded-full font-bold">ONLINE</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 shadow-sm">
+<p class="text-sm italic text-slate-600 dark:text-slate-300 line-clamp-2">
+                    "Is this still available? I'm looking to trade in my 2018 Sedan. Does the price include the tech package?"
+                </p>
+<div class="flex justify-between items-center mt-2">
+<span class="text-[10px] text-slate-400">Received 2m ago</span>
+<span class="text-[10px] text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">auto_awesome</span> Context Synced
+                    </span>
+</div>
+</div>
+</section>
+<!-- Horizontal Tone Chips -->
+<section class="py-4">
+<h3 class="px-4 text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Select Intent</h3>
+<div class="flex gap-2 px-4 overflow-x-auto no-scrollbar pb-2">
+<button class="flex-none bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                    Availability
+                </button>
+<button class="flex-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">sell</span>
+                    Discount Offer
+                </button>
+<button class="flex-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+                    Schedule Drive
+                </button>
+<button class="flex-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">settings</span>
+                    Tech Specs
+                </button>
+<button class="flex-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">currency_exchange</span>
+                    Trade-In
+                </button>
+</div>
+</section>
+<!-- Draft Area -->
+<main class="flex-1 px-4 pb-4 overflow-y-auto">
+<div class="relative h-full flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">AI Draft Content</h3>
+<button class="text-primary text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">refresh</span> Regenerate
+                    </button>
+</div>
+<div class="flex-1 bg-slate-50 dark:bg-slate-800/80 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-inner relative">
+<textarea class="w-full h-full bg-transparent border-none focus:ring-0 text-slate-800 dark:text-slate-200 text-base leading-relaxed resize-none" placeholder="AI is thinking...">Hi Alex! Thanks for reaching out. Yes, the 2022 SUV is currently available in our showroom. It does come with the Premium Tech Package included in the listed price.
+
+Regarding your 2018 Sedan, we'd love to take a look! We're offering top-dollar for trades this month. Would you be free to bring it by for a quick appraisal tomorrow afternoon?</textarea>
+<!-- AI Insight Tag -->
+<div class="absolute bottom-4 right-4 bg-white dark:bg-slate-700 px-2 py-1 rounded-lg border border-slate-100 dark:border-slate-600 flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[14px] fill-1">bolt</span>
+<span class="text-[10px] font-bold text-slate-500 uppercase">94% Fit Score</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Tone Control & Action Section -->
+<footer class="p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 space-y-6">
+<!-- Tone Slider -->
+<div class="space-y-3 px-2">
+<div class="flex justify-between items-center text-[11px] font-bold uppercase tracking-widest text-slate-400">
+<span>Formal</span>
+<span class="text-primary">Optimized Tone</span>
+<span>Casual</span>
+</div>
+<div class="relative h-6 flex items-center">
+<div class="absolute w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+<div class="absolute w-3/4 h-1.5 bg-primary/30 rounded-full"></div>
+<div class="absolute left-3/4 -translate-x-1/2 size-5 bg-white border-2 border-primary rounded-full shadow-lg cursor-pointer"></div>
+</div>
+</div>
+<!-- Main CTA Buttons -->
+<div class="flex gap-3">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/25">
+<span class="material-symbols-outlined">send</span>
+                    Approve &amp; Send
+                </button>
+</div>
+</footer>
+<!-- Bottom Navigation (Simplified for sub-view) -->
+<nav class="flex border-t border-slate-100 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 pb-8 pt-2">
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<p class="text-[10px] font-medium">Inventory</p>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-[10px] font-medium">Leads</p>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">magic_button</span>
+<p class="text-[10px] font-bold">Studio</p>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<p class="text-[10px] font-medium">Analytics</p>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-[10px] font-medium">Settings</p>
+</a>
+</nav>
+<!-- Home Indicator (iOS style) -->
+<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+</div>
+</body></html>

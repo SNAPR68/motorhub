@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci | AI Market Intelligence Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1754cf",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "accent-gold": "#d4af37",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-panel {
+            background: rgba(26, 34, 50, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .kardeco-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(23, 84, 207, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(23, 84, 207, 0.2) 0%, rgba(23, 84, 207, 0) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-display">
+<div class="relative flex h-screen w-full flex-col overflow-hidden max-w-[430px] mx-auto border-x border-slate-800/50 shadow-2xl">
+<!-- Executive Header -->
+<header class="flex items-center justify-between px-6 pt-12 pb-4 bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-[0.3em] text-primary font-bold">Autovinci</span>
+<h1 class="text-xl font-extrabold tracking-tight">Intelligence</h1>
+</div>
+<div class="flex gap-3">
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-slate-300">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-slate-300">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+</header>
+<!-- Main Scrollable Area -->
+<main class="flex-1 overflow-y-auto kardeco-pattern pb-24">
+<!-- Price Summary -->
+<section class="px-6 pt-6">
+<div class="flex justify-between items-end mb-2">
+<div>
+<p class="text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Porsche 911 GT3 RS (992)</p>
+<h2 class="text-4xl font-extrabold tracking-tight">$312,450</h2>
+</div>
+<div class="flex items-center gap-1 text-emerald-400 font-bold text-sm bg-emerald-400/10 px-2 py-1 rounded-lg mb-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>4.2%</span>
+</div>
+</div>
+<!-- Time Range Selector -->
+<div class="flex justify-between items-center bg-slate-800/30 p-1 rounded-xl mt-6 border border-slate-700/50">
+<button class="flex-1 py-2 text-xs font-bold text-slate-500">1M</button>
+<button class="flex-1 py-2 text-xs font-bold text-slate-500">3M</button>
+<button class="flex-1 py-2 text-xs font-bold text-slate-500">6M</button>
+<button class="flex-1 py-2 text-xs font-bold bg-primary text-white rounded-lg shadow-lg shadow-primary/20">1Y</button>
+<button class="flex-1 py-2 text-xs font-bold text-slate-500">ALL</button>
+</div>
+</section>
+<!-- Main Chart Visualization -->
+<section class="mt-8 px-2 relative h-48">
+<div class="absolute inset-x-6 bottom-0 top-4">
+<svg class="w-full h-full" viewbox="0 0 400 150">
+<!-- Grid Lines -->
+<line class="text-slate-800" stroke="currentColor" stroke-width="0.5" x1="0" x2="400" y1="20" y2="20"></line>
+<line class="text-slate-800" stroke="currentColor" stroke-width="0.5" x1="0" x2="400" y1="70" y2="70"></line>
+<line class="text-slate-800" stroke="currentColor" stroke-width="0.5" x1="0" x2="400" y1="120" y2="120"></line>
+<!-- Area Fill -->
+<path class="fill-primary/10" d="M0,130 L40,110 L80,125 L120,90 L160,95 L200,60 L240,75 L280,40 L320,55 L360,25 L400,35 V150 H0 Z"></path>
+<!-- Line Path -->
+<path d="M0,130 L40,110 L80,125 L120,90 L160,95 L200,60 L240,75 L280,40 L320,55 L360,25 L400,35" fill="none" stroke="#1754cf" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" style="filter: drop-shadow(0px 4px 8px rgba(23, 84, 207, 0.4));"></path>
+<!-- Indicator Point -->
+<circle cx="360" cy="25" fill="#1754cf" r="5"></circle>
+<circle cx="360" cy="25" fill="#1754cf" fill-opacity="0.2" r="10"></circle>
+</svg>
+</div>
+</section>
+<!-- AI Intelligence Insight -->
+<section class="px-6 mt-8">
+<div class="glass-panel rounded-2xl p-4 flex gap-4 items-start border-l-2 border-l-primary">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+</div>
+<div>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">AI Recommendation</h4>
+<p class="text-sm leading-relaxed text-slate-200 italic">
+                            "Limited allocations and low private inventory are driving high premiums. Expect consistent appreciation through Q4."
+                        </p>
+</div>
+</div>
+</section>
+<!-- Watch-Style Gauges -->
+<section class="px-6 mt-10 grid grid-cols-2 gap-6">
+<!-- Demand Gauge -->
+<div class="flex flex-col items-center">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+<circle class="text-slate-800" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="4"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#1754cf" stroke-dasharray="251.2" stroke-dashoffset="40" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-extrabold italic">84</span>
+<span class="text-[8px] uppercase tracking-widest text-slate-500 font-bold">Demand</span>
+</div>
+<!-- Needle indicator -->
+<div class="absolute w-[2px] h-10 bg-white bottom-1/2 left-1/2 -translate-x-1/2 origin-bottom rotate-[65deg]"></div>
+</div>
+<p class="text-[10px] text-slate-500 mt-2 font-bold uppercase tracking-widest">Bullish Sector</p>
+</div>
+<!-- Volatility Gauge -->
+<div class="flex flex-col items-center">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+<circle class="text-slate-800" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="4"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#d4af37" stroke-dasharray="251.2" stroke-dashoffset="180" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-extrabold italic text-accent-gold">Low</span>
+<span class="text-[8px] uppercase tracking-widest text-slate-500 font-bold">Risk</span>
+</div>
+<!-- Needle indicator -->
+<div class="absolute w-[2px] h-10 bg-accent-gold bottom-1/2 left-1/2 -translate-x-1/2 origin-bottom rotate-[-45deg]"></div>
+</div>
+<p class="text-[10px] text-slate-500 mt-2 font-bold uppercase tracking-widest">Stable Asset</p>
+</div>
+</section>
+<!-- Auction Results -->
+<section class="px-6 mt-12">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-sm font-bold uppercase tracking-widest">Recent Sales</h3>
+<button class="text-primary text-xs font-bold">View Archive</button>
+</div>
+<div class="space-y-4">
+<!-- Result Item 1 -->
+<div class="glass-panel rounded-xl p-3 flex gap-4 border border-slate-700/30">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-slate-800">
+<img class="w-full h-full object-cover" data-alt="Silver Porsche 911 GT3 RS front quarter view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArAgIEgUs0omSTWWvzLCa6Jgd2x0bqwx-hHr-zKmnoye3Kak97Zy8TJx36XjfO3ppmO4RRL24B1PaNR-mFYiPIy0ruEnlSr6XlWZg990FpBYi3jeuoaCpsNb0m2ZdCbvuBW9taR6rgQD_Nn1Vq8q4dRAZgmpMWCfCFTbHELzCNSJp_I0m0Dio4YGJbR8oU4vvOnDP5L8UMPvsS_03AWQJMDI85QAAEeDolD5ZkpuucREo8RuTy9govWaWgybNZ8gTvwOscBm-83tI"/>
+</div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<h4 class="text-sm font-bold leading-tight">2023 911 GT3 RS</h4>
+<p class="text-[10px] text-slate-500 font-medium">Bring a Trailer • 1,240 mi</p>
+</div>
+<div class="flex justify-between items-end">
+<p class="text-lg font-extrabold tracking-tight">$345,500</p>
+<span class="text-[10px] font-bold text-slate-500 mb-0.5">2d ago</span>
+</div>
+</div>
+</div>
+<!-- Result Item 2 -->
+<div class="glass-panel rounded-xl p-3 flex gap-4 border border-slate-700/30">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-slate-800">
+<img class="w-full h-full object-cover" data-alt="White Porsche 911 at high end auction house" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXbECLVhbhr4z_lJHZZof36HYanjHPfHOmFkS5WUIwG0qFfJlB4nPVM1c4bTozZF7H6oDpXAfSjcf6dOAA_ze0wW25GgNR61DN0OgENjfN4-sWKLofNVMpHlaZdU5R8cUKSvPH0lg9GbsWs5rkUU00FcWuPSJLc9nxDlvwgJPZrx25lQm75zQBM0gtVtkuBbtZkFtCRkutFhyheL7Kq6A6hXDb8lMOIo9xmnxyv6xw2jGiKE1tv5vmSXY530yGOL7sR4rMoe5OE7s"/>
+</div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<h4 class="text-sm font-bold leading-tight">2023 911 GT3 RS</h4>
+<p class="text-[10px] text-slate-500 font-medium">RM Sotheby's • 45 mi</p>
+</div>
+<div class="flex justify-between items-end">
+<p class="text-lg font-extrabold tracking-tight">$382,000</p>
+<span class="text-[10px] font-bold text-slate-500 mb-0.5">1w ago</span>
+</div>
+</div>
+</div>
+<!-- Result Item 3 -->
+<div class="glass-panel rounded-xl p-3 flex gap-4 border border-slate-700/30 opacity-60">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-slate-800">
+<img class="w-full h-full object-cover" data-alt="Blue luxury sports car side profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAohy6W2lvfrOxNvz1FYTHjoglrpiWf0XVeWpf_B8KOGm7AGeYtadybuAU16BC0UqzW7QIZDXLRt20SrxSHYhZnnTmsRx5p7d0-7FKH0F3xBCewmFpTReCMCbPrW67rO0hm0elA-eNwR8nFNIUmAhqUrwF64CaQKkFxZ934tQa8xXANwXUUl0aDiY_KooyS77prbICdqyJ2zMBwZoKevB2cBiuCB6gKHZV4qYROghJHSFfBqj7LKuqqaqVpbSV8mFzOorsx4HecZ1Q"/>
+</div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<h4 class="text-sm font-bold leading-tight">2022 911 GT3</h4>
+<p class="text-[10px] text-slate-500 font-medium">PCARMARKET • 2,100 mi</p>
+</div>
+<div class="flex justify-between items-end">
+<p class="text-lg font-extrabold tracking-tight">$255,000</p>
+<span class="text-[10px] font-bold text-slate-500 mb-0.5">2w ago</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="absolute bottom-0 left-0 right-0 glass-panel border-t border-slate-700/50 px-6 pt-3 pb-8 flex justify-between items-center z-20">
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Explore</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px] font-fill">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Market</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">wallet</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Vault</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

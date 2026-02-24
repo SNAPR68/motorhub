@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600;6..72,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2b90d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#121212",
+                        "card-dark": "#1c1c1c",
+                        "accent-silver": "#a1a1a1",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"],
+                        "sans": ["Inter", "system-ui", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Newsreader', serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .sans-label {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Header Navigation -->
+<nav class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_back_ios_new</span>
+</button>
+<div class="text-center">
+<h1 class="text-lg font-semibold tracking-tight">Performance Report</h1>
+<p class="sans-label text-[10px] uppercase tracking-[0.2em] text-primary font-bold">October 2023</p>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">ios_share</span>
+</button>
+</nav>
+<main class="px-5 py-6 space-y-6">
+<!-- Executive Summary Card -->
+<section class="relative overflow-hidden rounded-xl bg-card-dark border border-white/5 p-6 shadow-2xl">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl rounded-full -mr-16 -mt-16"></div>
+<div class="relative z-10">
+<p class="sans-label text-xs uppercase tracking-widest text-accent-silver mb-2">Executive Summary</p>
+<h2 class="text-4xl font-medium mb-1">$1,240,500</h2>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+<p class="sans-label text-sm text-primary font-medium">+12.5% <span class="text-accent-silver font-normal">vs last month</span></p>
+</div>
+<div class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/5">
+<div>
+<p class="sans-label text-[10px] uppercase tracking-wider text-accent-silver mb-1">AI Operational Efficiency</p>
+<p class="text-2xl font-medium text-primary">88%</p>
+</div>
+<div class="relative size-14">
+<svg class="size-full -rotate-90" viewbox="0 0 36 36">
+<circle class="stroke-white/10" cx="18" cy="18" fill="none" r="16" stroke-width="3"></circle>
+<circle class="stroke-primary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100" stroke-dashoffset="12" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xs">auto_awesome</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Metrics Grid -->
+<section class="grid grid-cols-1 gap-4">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-card-dark p-5 rounded-xl border border-white/5">
+<span class="material-symbols-outlined text-primary mb-3">ads_click</span>
+<p class="sans-label text-[10px] uppercase tracking-wider text-accent-silver mb-1">Marketing Reach</p>
+<p class="text-xl font-medium">42.8k <span class="text-xs text-primary font-sans">+4%</span></p>
+</div>
+<div class="bg-card-dark p-5 rounded-xl border border-white/5">
+<span class="material-symbols-outlined text-primary mb-3">speed</span>
+<p class="sans-label text-[10px] uppercase tracking-wider text-accent-silver mb-1">Inv. Velocity</p>
+<p class="text-xl font-medium">14 Days</p>
+</div>
+</div>
+<div class="bg-card-dark p-5 rounded-xl border border-white/5">
+<div class="flex justify-between items-end mb-4">
+<div>
+<p class="sans-label text-[10px] uppercase tracking-wider text-accent-silver mb-1">Lead Conversion Funnel</p>
+<p class="text-xl font-medium text-white">4.2% Rate</p>
+</div>
+<span class="material-symbols-outlined text-accent-silver">filter_alt</span>
+</div>
+<div class="space-y-3">
+<div class="relative h-2 bg-white/5 rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-primary rounded-full" style="width: 85%"></div>
+</div>
+<div class="flex justify-between sans-label text-[10px] text-accent-silver uppercase">
+<span>Leads (840)</span>
+<span>Sales (35)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Growth Chart Section -->
+<section class="bg-card-dark p-6 rounded-xl border border-white/5">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-lg font-medium">Revenue Growth</h3>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<div class="size-2 rounded-full bg-primary"></div>
+<span class="sans-label text-[10px] text-accent-silver">Current</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="size-2 rounded-full bg-white/10"></div>
+<span class="sans-label text-[10px] text-accent-silver">Projected</span>
+</div>
+</div>
+</div>
+<div class="flex items-end justify-between h-40 gap-2 mb-2">
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-white/5 rounded-t-sm h-[40%]"></div>
+<span class="sans-label text-[10px] text-accent-silver">Jun</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-white/5 rounded-t-sm h-[55%]"></div>
+<span class="sans-label text-[10px] text-accent-silver">Jul</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-white/5 rounded-t-sm h-[48%]"></div>
+<span class="sans-label text-[10px] text-accent-silver">Aug</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-white/10 rounded-t-sm h-[70%]"></div>
+<span class="sans-label text-[10px] text-accent-silver">Sep</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary rounded-t-sm h-[90%] shadow-[0_0_15px_rgba(242,185,13,0.3)]"></div>
+<span class="sans-label text-[10px] text-primary font-bold">Oct</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-white/5 border-t border-dashed border-white/20 h-[75%]"></div>
+<span class="sans-label text-[10px] text-accent-silver">Nov</span>
+</div>
+</div>
+</section>
+<!-- Top Performer -->
+<section class="bg-card-dark rounded-xl border border-white/5 overflow-hidden">
+<div class="p-5 flex items-center gap-4">
+<div class="relative">
+<div class="size-16 rounded-full overflow-hidden border-2 border-primary">
+<img alt="Sales Executive Profile" class="w-full h-full object-cover" data-alt="Professional headshot of a male sales executive" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAN6MiypYsTSTUe9qdZkgcAGayBS8bhhm8axkAuKGfnRbBoL0XeyPY29v52NpFVzZuVsGE5h8fQgmfZUG6eu2UInznlum5-EqG373vm7R16JPbHLUHfxjTwtnQvNYzYcxHVO1ZnRj9OAZZH2MqQNg4KJCL6Z1sK0i0kJlemeCRub_A6bXbq1DA9lYWuthoPU2GCdIato9pk4jyhKERdZSB20JltYecEH10GKNw1frDozOg3b5Xzb9AtizWoPPBGceBYNTu3oHd6fs"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-background-dark rounded-full p-1 border-2 border-card-dark">
+<span class="material-symbols-outlined text-[14px] font-bold">workspace_premium</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="sans-label text-[10px] uppercase tracking-widest text-primary font-bold mb-0.5">Top Sales Executive</p>
+<h4 class="text-xl font-medium text-white">Julian Vanderbilt</h4>
+<p class="sans-label text-xs text-accent-silver">$420k Revenue Generated</p>
+</div>
+<span class="material-symbols-outlined text-accent-silver/30">chevron_right</span>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-50">
+<div class="mx-auto max-w-md bg-background-dark/90 backdrop-blur-xl border-t border-white/5 px-6 pb-8 pt-3">
+<div class="flex items-center justify-between">
+<a class="flex flex-col items-center gap-1 text-accent-silver group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span class="sans-label text-[10px] font-medium tracking-tight">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-accent-silver group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">directions_car</span>
+<span class="sans-label text-[10px] font-medium tracking-tight">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">analytics</span>
+<span class="sans-label text-[10px] font-bold tracking-tight">Reports</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-accent-silver group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">group</span>
+<span class="sans-label text-[10px] font-medium tracking-tight">Leads</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-accent-silver group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="sans-label text-[10px] font-medium tracking-tight">Account</span>
+</a>
+</div>
+</div>
+</div>
+</body></html>

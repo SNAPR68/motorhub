@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premium Vehicle Showcase | Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#eebd2b",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#121212",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Newsreader', serif;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-gradient-to-b from-black/60 to-transparent">
+<button class="flex items-center justify-center size-10 rounded-full glass-effect text-white">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex gap-4">
+<button class="flex items-center justify-center size-10 rounded-full glass-effect text-white">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-full glass-effect text-white">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<main class="pb-32">
+<!-- Hero Section -->
+<section class="relative h-[60vh] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Side profile of a sleek red Ferrari Roma luxury sports car" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB0JBYeeoB8DXbVmSc2rch0SWJ-oR9taZuuruiGILMwcTqw2vAY_TuHApkHxTPxiLezLoetxphLdgnwHeOhV68kQP9adm2BQxvmXFBzS8UZqvswn6Zfe1_oYmoxxAL5aeZx9AkfBSphIkRvXD58WHaQ_kky22DTrwlMBnNiW19wI6vToW_Kl-jYWyWVAkNoKVUqgbKa5-6zQNTDL9isNXqhXjMcTFaE-Nlvo4jHo_h9LL5qxxmk0rUYwIhUUMD2YRUZ27nZqgmpN8U');">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+</div>
+<!-- 360 View Button -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2">
+<button class="flex items-center gap-2 px-6 py-2 rounded-full glass-effect border-primary/30 text-white hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-primary">360</span>
+<span class="text-sm font-medium tracking-widest uppercase">360° View</span>
+</button>
+</div>
+<!-- Image Pagination Indicators -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5">
+<div class="h-1 w-8 rounded-full bg-primary"></div>
+<div class="h-1 w-2 rounded-full bg-white/30"></div>
+<div class="h-1 w-2 rounded-full bg-white/30"></div>
+<div class="h-1 w-2 rounded-full bg-white/30"></div>
+</div>
+</section>
+<!-- Vehicle Details Header -->
+<section class="px-6 pt-8">
+<div class="flex flex-col gap-1">
+<span class="text-primary uppercase tracking-[0.2em] text-xs font-semibold">Limited Availability</span>
+<h1 class="text-5xl font-display leading-tight tracking-tight dark:text-slate-100">
+                    2023 Ferrari <br/>Roma V8
+                </h1>
+<div class="mt-4 flex items-end justify-between">
+<p class="text-3xl font-display text-primary">$245,000</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm italic">Est. $3,450/mo</p>
+</div>
+</div>
+</section>
+<!-- Divider -->
+<div class="px-6 py-8">
+<hr class="border-slate-200 dark:border-white/10"/>
+</div>
+<!-- Technical Specs Grid -->
+<section class="px-6 grid grid-cols-3 gap-8">
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary/80 font-light text-3xl">speed</span>
+<div class="text-center">
+<p class="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">0-60 MPH</p>
+<p class="text-lg font-medium">3.4s</p>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary/80 font-light text-3xl">bolt</span>
+<div class="text-center">
+<p class="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">Horsepower</p>
+<p class="text-lg font-medium">612 HP</p>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary/80 font-light text-3xl">settings_input_component</span>
+<div class="text-center">
+<p class="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">Engine</p>
+<p class="text-lg font-medium">3.9L V8</p>
+</div>
+</div>
+</section>
+<!-- AI Insights Section -->
+<section class="mt-12 px-6">
+<div class="rounded-xl p-6 bg-primary/5 border border-primary/20 relative overflow-hidden">
+<!-- Decorative AI Sparkle -->
+<div class="absolute -top-4 -right-4 size-24 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-xl">auto_awesome</span>
+<h3 class="text-sm font-bold uppercase tracking-widest text-primary">AI Insights</h3>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4">
+<div class="flex-1">
+<h4 class="text-lg font-display mb-1 italic">Market Performance</h4>
+<p class="text-sm text-slate-400 leading-relaxed">Currently valued 4% below local market average. High demand for Roma models in Blu Pozzi finish.</p>
+</div>
+</div>
+<div class="flex gap-4 border-t border-primary/10 pt-4">
+<div class="flex-1">
+<h4 class="text-lg font-display mb-1 italic">Condition Report</h4>
+<div class="flex items-center gap-2 mb-2">
+<div class="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[98%]"></div>
+</div>
+<span class="text-xs font-bold text-primary">98/100</span>
+</div>
+<p class="text-sm text-slate-400 leading-relaxed">Pristine exterior with zero reported incidents. Interior leather maintains factory-fresh matte finish.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- More Details Section -->
+<section class="mt-12 px-6">
+<h3 class="text-xs uppercase tracking-[0.3em] text-slate-500 mb-6">Gallery Highlights</h3>
+<div class="flex gap-4 overflow-x-auto no-scrollbar">
+<div class="shrink-0 w-48 h-32 rounded-lg bg-cover bg-center" data-alt="Luxurious tan leather interior dashboard of a Ferrari" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWRjmzfahBUO_ExDC3sjb8sIsMVm4Unj8bzIzqwFbbm7HOmCvamkZa-aG6oMyQF2JkWvhMZIm9IuKoThUFkU18egWXiAs4CMU-RwKdtwO1JN697KretUDdEjpIQzXXXZbQRSDJBQ4j8TG4gMQLhsJrIdhoZiAXJzgH_QCyQ1eLQQPwj-2UyuQvl2rZG33r3ozKgKYMD42CGp4sRGMp7urXAnHZ3DTNvTqzyfMaz17nn4QhRb4IRlYASTmGfAnctOcMOyvftWay4g0');"></div>
+<div class="shrink-0 w-48 h-32 rounded-lg bg-cover bg-center" data-alt="Close up of a Ferrari wheel and carbon ceramic brakes" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAaku819-MIJmCi3MfJukL2q0phQ--SX7uukvO9m7vZkotr4c9hmLrb3IZuRXk1lhLYCtUfE4m-2lpTrYjKnspmvcmyKes1NQkUrQrtY-gxa4xOhC04a4L8TKAh2miCf9nsD84ZgcvomdwOF4xG6EyXWaugWhLUB9gh0iyFViB_ad__g3A2qb81xGKeH7ZmgnWwvjFKLzk_amhGARrMnPAAs4NTK8vZEwbLiv-sIe448ntqGUD-8lMaacp1d6nEACFPoRcHMkWM68U');"></div>
+<div class="shrink-0 w-48 h-32 rounded-lg bg-cover bg-center" data-alt="Rear view of a Ferrari Roma showing quad exhausts" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOwGYfIVndV2sYfz2qMy1nG8YvS4onFVll-RlmSpIF34kf_iULUt9Y2n1zDdXAGdYWBTKMyAz6x7TyOzqrraKhL_Ya4RamYfGQyrsmw8wQsWT_6rgbmJ6lvMSIRaA5TSCtNRW9ovAzLB-CwwSqEEZYDokkL39OkWh5v5_d7W0QqRjwKwVSGvH8eC8Jd7F8nLJgw14xYjCGbc2x2Uk7M3cauBTC4bJmCArTZRDpL2lOcxW8uAWsm5Edra6YrpCbS9LYsv_gcq_CKzw');"></div>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-50 p-6 bg-gradient-to-t from-background-dark via-background-dark/95 to-transparent">
+<div class="flex gap-3">
+<button class="flex-1 h-14 rounded-xl border border-primary/40 flex items-center justify-center gap-2 text-primary font-bold tracking-wide glass-effect active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">campaign</span>
+                PROMOTE WITH AI
+            </button>
+<button class="flex-[1.2] h-14 rounded-xl bg-primary text-background-dark font-extrabold tracking-widest flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-[0_8px_30px_rgb(238,189,43,0.3)]">
+<span class="material-symbols-outlined">chat_bubble</span>
+                CONTACT LEAD
+            </button>
+</div>
+<!-- iOS Home Indicator Spacing -->
+<div class="h-4"></div>
+</div>
+<!-- Bottom Nav Bar Component Template Style -->
+<!-- (Optional: Only if needed for main app navigation, otherwise the action bar handles page context) -->
+</body></html>

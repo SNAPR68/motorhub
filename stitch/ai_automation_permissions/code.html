@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Permission Settings | Autovinci</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#1754cf",
+            "background-light": "#f6f6f8",
+            "background-dark": "#0a0c10", // Deeper dark for premium feel
+            "card-dark": "#161b26",
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    /* Custom Glow Effect for Active Toggles */
+    .glow-active:has(:checked) {
+      box-shadow: 0 0 15px rgba(23, 84, 207, 0.4);
+    }
+    body {
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col items-center">
+<!-- iOS Status Bar Spacer (Mock) -->
+<div class="h-12 w-full"></div>
+<!-- Main Container (Phone Form Factor) -->
+<main class="w-full max-w-[430px] flex flex-col px-6 pb-10">
+<!-- Top Navigation -->
+<nav class="flex items-center justify-between mb-8">
+<button class="w-10 h-10 flex items-center justify-start text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-2xl">arrow_back_ios</span>
+</button>
+<div class="flex flex-col items-center gap-1">
+<span class="text-[10px] uppercase tracking-widest font-bold text-primary">Onboarding</span>
+<div class="flex gap-1">
+<div class="h-1 w-4 rounded-full bg-primary"></div>
+<div class="h-1 w-4 rounded-full bg-primary"></div>
+<div class="h-1 w-4 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+</div>
+</div>
+<div class="w-10"></div> <!-- Spacer for symmetry -->
+</nav>
+<!-- Header Section -->
+<header class="mb-10">
+<h1 class="text-4xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-slate-500 bg-clip-text text-transparent">
+        AI Power-Up
+      </h1>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed text-base">
+        Grant Autovinci permission to streamline your workflow across your selected social platforms.
+      </p>
+</header>
+<!-- Permissions List -->
+<div class="flex flex-col gap-4 mb-12">
+<!-- Permission Card 1: Post Automatically -->
+<div class="group relative flex items-center justify-between p-5 rounded-xl bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 transition-all duration-300">
+<div class="flex gap-4 items-start">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-2xl">auto_awesome</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-bold text-lg mb-1">Automated Posting</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-snug max-w-[200px]">
+              Autovinci will schedule and post listings based on inventory updates.
+            </p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="glow-active relative flex h-[32px] w-[54px] cursor-pointer items-center rounded-full border-2 border-transparent bg-slate-200 dark:bg-slate-800 p-0.5 transition-colors duration-300 has-[:checked]:bg-primary">
+<div class="h-full w-[24px] rounded-full bg-white shadow-md transition-transform duration-300 transform translate-x-0 group-has-[:checked]:translate-x-[22px]"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- Permission Card 2: Sync Inventory -->
+<div class="group relative flex items-center justify-between p-5 rounded-xl bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 transition-all duration-300">
+<div class="flex gap-4 items-start">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-2xl">sync_saved_locally</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-bold text-lg mb-1">Media Sync</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-snug max-w-[200px]">
+              Securely pull high-res vehicle images from cloud storage to social drafts.
+            </p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="glow-active relative flex h-[32px] w-[54px] cursor-pointer items-center rounded-full border-2 border-transparent bg-slate-200 dark:bg-slate-800 p-0.5 transition-colors duration-300 has-[:checked]:bg-primary">
+<div class="h-full w-[24px] rounded-full bg-white shadow-md transition-transform duration-300 transform translate-x-0 group-has-[:checked]:translate-x-[22px]"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- Permission Card 3: AI Comments -->
+<div class="group relative flex items-center justify-between p-5 rounded-xl bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 transition-all duration-300">
+<div class="flex gap-4 items-start">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-2xl">forum</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-bold text-lg mb-1">Smart Engagement</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-snug max-w-[200px]">
+              Enable AI to draft and post professional responses to inquiries.
+            </p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="glow-active relative flex h-[32px] w-[54px] cursor-pointer items-center rounded-full border-2 border-transparent bg-slate-200 dark:bg-slate-800 p-0.5 transition-colors duration-300 has-[:checked]:bg-primary">
+<div class="h-full w-[24px] rounded-full bg-white shadow-md transition-transform duration-300 transform translate-x-0 group-has-[:checked]:translate-x-[22px]"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<!-- Privacy Info -->
+<div class="flex flex-col items-center text-center gap-4 mb-8">
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-sm text-primary">lock</span>
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400">Your data is end-to-end encrypted.</span>
+</div>
+<p class="text-xs text-slate-400 dark:text-slate-500 px-8">
+        You can revoke these permissions or customize AI behavior anytime in the Dashboard settings.
+      </p>
+</div>
+<!-- Footer Action -->
+<div class="mt-auto">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-5 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
+        Continue to Dashboard
+      </button>
+</div>
+</main>
+<!-- Visual Accent: Bottom Blur -->
+<div class="fixed bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent pointer-events-none"></div>
+</body></html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premium Dealer Plans</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f4c025",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#221e10",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden pb-24">
+<!-- Header -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between">
+<div class="text-slate-900 dark:text-slate-100 flex size-12 shrink-0 items-center justify-start cursor-pointer">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-12">Dealer Plans</h2>
+</div>
+<!-- Billing Toggle -->
+<div class="px-4 py-6">
+<div class="flex h-12 flex-1 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/5 p-1 border border-primary/20">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 has-[:checked]:bg-primary has-[:checked]:text-background-dark text-primary text-sm font-semibold transition-all">
+<span class="truncate">Monthly</span>
+<input class="invisible w-0" name="billing_cycle" type="radio" value="Monthly"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 has-[:checked]:bg-primary has-[:checked]:text-background-dark text-primary text-sm font-semibold transition-all relative">
+<span class="truncate">Annual</span>
+<span class="absolute -top-1 -right-1 bg-primary text-[8px] px-1.5 py-0.5 rounded-full text-background-dark font-bold uppercase tracking-wider">2 Mo Free</span>
+<input checked="" class="invisible w-0" name="billing_cycle" type="radio" value="Annual"/>
+</label>
+</div>
+</div>
+<!-- Plans Content -->
+<div class="flex flex-col gap-6 px-4 py-3">
+<!-- Silver Plan -->
+<div class="flex flex-col gap-4 rounded-xl border border-primary/10 bg-slate-900/50 dark:bg-white/5 p-6 backdrop-blur-sm">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest leading-tight">Starter</h3>
+<span class="bg-slate-700/50 text-[10px] px-2 py-1 rounded text-slate-300 font-medium">Current Plan</span>
+</div>
+<h1 class="text-slate-900 dark:text-white text-2xl font-bold">Silver</h1>
+<p class="flex items-baseline gap-1">
+<span class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">$199</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">/mo</span>
+</p>
+</div>
+<div class="flex flex-col gap-3 pt-4 border-t border-white/10">
+<div class="text-[13px] font-normal leading-normal flex gap-3 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        10 Vehicle Slots
+                    </div>
+<div class="text-[13px] font-normal leading-normal flex gap-3 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        Standard Marketing Tools
+                    </div>
+<div class="text-[13px] font-normal leading-normal flex gap-3 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        Basic Lead Analytics
+                    </div>
+</div>
+<button class="w-full mt-2 py-3 px-4 rounded-lg bg-slate-800 text-slate-400 text-sm font-bold opacity-50 cursor-not-allowed">
+                    Current Plan
+                </button>
+</div>
+<!-- Platinum Plan (Highlighted) -->
+<div class="flex flex-col gap-4 rounded-xl border-2 border-primary bg-primary/5 p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0">
+<div class="bg-primary text-background-dark text-[10px] font-black px-4 py-1 rotate-45 translate-x-3 translate-y-2 w-32 text-center uppercase">Executive</div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-primary text-xs font-bold uppercase tracking-widest leading-tight">Full Concierge</h3>
+<h1 class="text-slate-900 dark:text-white text-2xl font-bold flex items-center gap-2">
+                        Platinum 
+                        <span class="material-symbols-outlined text-primary text-base">workspace_premium</span>
+</h1>
+<p class="flex items-baseline gap-1">
+<span class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">$899</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">/mo</span>
+</p>
+</div>
+<div class="flex flex-col gap-3 pt-4 border-t border-primary/20">
+<div class="text-[13px] font-normal leading-normal flex gap-3 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-primary text-lg">verified</span>
+                        Unlimited Vehicle Slots
+                    </div>
+<div class="text-[13px] font-normal leading-normal flex gap-3 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-primary text-lg">verified</span>
+                        Full AI-Automation Engine
+                    </div>
+<div class="text-[13px] font-normal leading-normal flex gap-3 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-primary text-lg">verified</span>
+                        Personal Concierge Manager
+                    </div>
+<div class="text-[13px] font-normal leading-normal flex gap-3 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-primary text-lg">verified</span>
+                        24/7 Priority VIP Support
+                    </div>
+</div>
+<button class="w-full mt-2 py-3 px-4 rounded-lg bg-primary text-background-dark text-sm font-bold shadow-lg shadow-primary/20">
+                    Upgrade to Platinum
+                </button>
+</div>
+<!-- Gold Plan -->
+<div class="flex flex-col gap-4 rounded-xl border border-primary/10 bg-slate-900/50 dark:bg-white/5 p-6 backdrop-blur-sm">
+<div class="flex flex-col gap-1">
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest leading-tight">Advanced</h3>
+<h1 class="text-slate-900 dark:text-white text-2xl font-bold">Gold</h1>
+<p class="flex items-baseline gap-1">
+<span class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">$499</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">/mo</span>
+</p>
+</div>
+<div class="flex flex-col gap-3 pt-4 border-t border-white/10">
+<div class="text-[13px] font-normal leading-normal flex gap-3 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        50 Vehicle Slots
+                    </div>
+<div class="text-[13px] font-normal leading-normal flex gap-3 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        AI-Generated Descriptions
+                    </div>
+<div class="text-[13px] font-normal leading-normal flex gap-3 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        Advanced Market Analytics
+                    </div>
+</div>
+<button class="w-full mt-2 py-3 px-4 rounded-lg bg-primary/20 text-primary text-sm font-bold border border-primary/30">
+                    Select Gold
+                </button>
+</div>
+</div>
+<!-- Comparison Link -->
+<div class="px-4 py-8 text-center">
+<a class="text-primary text-sm font-medium flex items-center justify-center gap-2" href="#">
+                View all feature comparisons
+                <span class="material-symbols-outlined text-sm">keyboard_arrow_right</span>
+</a>
+</div>
+<!-- Navigation Bottom -->
+<div class="fixed bottom-0 left-0 right-0 z-50 flex gap-2 border-t border-primary/20 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4 pb-6 pt-3">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Inventory</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Leads</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Plans</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Analytics</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Profile</p>
+</a>
+</div>
+</div>
+</body></html>

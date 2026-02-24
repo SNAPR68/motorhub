@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#1773cf",
+            "background-light": "#f6f7f8",
+            "background-dark": "#0a0c10",
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<title>Autovinci - Concierge Discovery</title>
+<style>
+    body { font-family: 'Manrope', sans-serif; }
+    .glass { background: rgba(23, 115, 207, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-screen w-full flex-col overflow-hidden max-w-[430px] mx-auto bg-background-light dark:bg-background-dark border-x border-slate-200 dark:border-slate-800 shadow-2xl">
+<!-- Header Navigation -->
+<header class="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 pt-12 pb-4 bg-gradient-to-b from-black/60 to-transparent">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex flex-col items-center">
+<h2 class="text-sm font-bold uppercase tracking-widest text-white/90">Concierge</h2>
+<div class="flex items-center gap-1.5">
+<div class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-[10px] font-medium text-white/70">VINCI AI ACTIVE</span>
+</div>
+</div>
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</header>
+<!-- Top Visual (1/3 of screen) -->
+<section class="relative h-[38%] w-full shrink-0 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105" data-alt="Modern silver Porsche 911 GT3 in studio lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBcsXxYHKo_Ag2v78aTHLq_HF6aatBBiWB8D8-iJDhYcdV0bl8SpYsphhDTBJbdsi25GRqIM4vh1XJP45_hUwaxMD7A_bFXiX1Eg-co4ScSuXXnmX9Ph8uRQ0YS9he-3TGQZzh_Qk1CnzoKY-gFNQeQMrkqv6_AzFZBP_rvUJOYoJy_fvzsXlhFoF9D8QG2tCRPw_pc-DJRK08zB5Sp4xgMsJ9uVq37oN33vllWn6rMoC-AxRyEgsky_TiCEIc2h0ePx96ShJ1z7eE');">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+</div>
+<!-- Car Metadata Overlay -->
+<div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+<div>
+<span class="inline-block px-2 py-0.5 mb-2 rounded bg-primary text-[10px] font-bold text-white uppercase tracking-wider">Available</span>
+<h1 class="text-2xl font-extrabold text-white leading-none">2023 Porsche 911 GT3</h1>
+<p class="text-sm text-white/60 font-medium">Chassis No. WP0ZZZ99ZPS2</p>
+</div>
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined">view_in_ar</span>
+</div>
+</div>
+</section>
+<!-- Main Chat Area (2/3 of screen) -->
+<main class="relative flex-1 flex flex-col overflow-hidden bg-background-light dark:bg-background-dark rounded-t-xl -mt-4 z-10">
+<div class="flex-1 overflow-y-auto px-4 pt-6 pb-24 hide-scrollbar">
+<!-- User Initial Query -->
+<div class="flex flex-col items-end mb-6">
+<div class="max-w-[85%] rounded-2xl rounded-tr-none bg-slate-200 dark:bg-slate-800 px-4 py-3">
+<p class="text-sm leading-relaxed text-slate-800 dark:text-slate-200">
+              Tell me about the provenance of this GT3. Is the market value holding steady?
+            </p>
+</div>
+<span class="mt-1 text-[10px] text-slate-400 font-medium uppercase tracking-tighter">11:04 AM</span>
+</div>
+<!-- AI Response (Expert Insight) -->
+<div class="flex gap-3 mb-6">
+<div class="flex-shrink-0 mt-1">
+<div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white text-[18px]">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 max-w-[85%]">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-primary tracking-wide">EXPERT INSIGHT</span>
+<span class="h-1 w-1 rounded-full bg-slate-400"></span>
+<span class="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Vinci AI</span>
+</div>
+<!-- Insight Bubble -->
+<div class="rounded-2xl rounded-tl-none bg-primary/5 dark:bg-primary/10 border border-primary/20 p-4">
+<p class="text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
+                This specific chassis shows a remarkable provenance. It has been serviced exclusively at <span class="text-primary font-semibold">Porsche Zentrum, Stuttgart</span> and retains 100% original factory paint.
+              </p>
+<!-- Market Data Card -->
+<div class="mt-4 p-3 rounded-xl bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Market Valuation</p>
+<p class="text-lg font-extrabold text-primary">$214,500 <span class="text-[10px] text-green-500 font-bold ml-1">↑ 4.2%</span></p>
+</div>
+<span class="material-symbols-outlined text-slate-300">trending_up</span>
+</div>
+<div class="h-12 w-full flex items-end gap-1 px-1">
+<div class="h-[40%] flex-1 bg-primary/20 rounded-t-sm"></div>
+<div class="h-[45%] flex-1 bg-primary/20 rounded-t-sm"></div>
+<div class="h-[35%] flex-1 bg-primary/20 rounded-t-sm"></div>
+<div class="h-[60%] flex-1 bg-primary/20 rounded-t-sm"></div>
+<div class="h-[55%] flex-1 bg-primary/20 rounded-t-sm"></div>
+<div class="h-[80%] flex-1 bg-primary/20 rounded-t-sm"></div>
+<div class="h-[100%] flex-1 bg-primary rounded-t-sm"></div>
+</div>
+<p class="mt-2 text-[11px] text-slate-500 text-center italic leading-tight">Last 12 months appreciation for GT3 Touring configurations</p>
+</div>
+</div>
+<div class="rounded-2xl rounded-tl-none bg-primary/5 dark:bg-primary/10 border border-primary/20 px-4 py-3">
+<p class="text-[14px] leading-relaxed text-slate-700 dark:text-slate-300">
+                Would you like me to request a high-definition video walkthrough of the undercarriage or verify the DME over-rev report?
+              </p>
+</div>
+</div>
+</div>
+<!-- Placeholder for typing -->
+<div class="flex items-center gap-1 ml-11 text-slate-400">
+<div class="flex gap-1">
+<div class="h-1 w-1 rounded-full bg-primary/40 animate-bounce"></div>
+<div class="h-1 w-1 rounded-full bg-primary/40 animate-bounce [animation-delay:-.3s]"></div>
+<div class="h-1 w-1 rounded-full bg-primary/40 animate-bounce [animation-delay:-.5s]"></div>
+</div>
+</div>
+</div>
+<!-- Quick Action Bar -->
+<div class="absolute bottom-20 left-0 right-0 z-20 overflow-x-auto hide-scrollbar whitespace-nowrap px-4 py-2 bg-gradient-to-t from-background-dark/80 to-transparent">
+<div class="flex gap-2">
+<button class="px-5 py-2.5 rounded-full bg-primary text-white text-xs font-bold shadow-lg shadow-primary/20 transition-transform active:scale-95">
+            Request Video Walkthrough
+          </button>
+<button class="px-5 py-2.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold transition-transform active:scale-95 border border-slate-300 dark:border-slate-700">
+            Verify Condition
+          </button>
+<button class="px-5 py-2.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold transition-transform active:scale-95 border border-slate-300 dark:border-slate-700">
+            Speak to Dealer
+          </button>
+</div>
+</div>
+<!-- Bottom Navigation / Input -->
+<div class="absolute bottom-0 left-0 right-0 bg-white/80 dark:bg-slate-900/90 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 p-4 pb-8 flex items-center gap-3">
+<button class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500">
+<span class="material-symbols-outlined">add</span>
+</button>
+<div class="relative flex-1">
+<input class="w-full h-11 rounded-full border-none bg-slate-100 dark:bg-slate-800 px-5 text-sm focus:ring-1 focus:ring-primary dark:text-white" placeholder="Ask your assistant..." type="text"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-primary">
+<span class="material-symbols-outlined">mic</span>
+</button>
+</div>
+<button class="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white shadow-md">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</main>
+<!-- OS Status Bar Spacer (Simulated for iOS) -->
+<div class="absolute top-0 w-full h-10 pointer-events-none bg-black/20 z-30"></div>
+<!-- Persistent Bottom Nav Tabs -->
+<nav class="absolute bottom-0 w-full bg-slate-900/40 backdrop-blur-md hidden">
+<!-- Hidden as this screen is a focused chat view, but component structure preserved -->
+</nav>
+</div>
+</body></html>

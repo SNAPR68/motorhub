@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VIP Personalized Preferences</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1754cf",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0F0F0F",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .silver-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1) 50%, transparent);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 pt-12 pb-4 flex items-center justify-between">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+</button>
+<span class="text-sm font-bold uppercase tracking-widest text-primary">Autovinci VIP</span>
+<div class="w-10"></div> <!-- Spacer for symmetry -->
+</header>
+<main class="flex-1 px-6 pb-32">
+<!-- Progress Header -->
+<div class="mt-4 mb-8">
+<div class="flex justify-between items-end mb-2">
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Step 2 of 3</span>
+<span class="text-xs font-bold text-primary">Registration</span>
+</div>
+<div class="h-1 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[66%] rounded-full"></div>
+</div>
+</div>
+<!-- Title Section -->
+<section class="mb-10">
+<h1 class="text-4xl font-extrabold tracking-tight mb-3">Curate Your <br/>Portfolio</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed">Select the categories that define your automotive passion.</p>
+</section>
+<!-- Interest Cards Grid -->
+<section class="grid grid-cols-2 gap-4 mb-12">
+<!-- Card 1 (Selected) -->
+<div class="relative group aspect-square rounded-xl overflow-hidden border-2 border-primary bg-slate-900 shadow-xl shadow-primary/10">
+<img alt="Vintage silver porsche classic car" class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="Vintage silver porsche classic car" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB14ELJfDjnsZ1xBi3O28NhOk0ABeOAlHtJlNVs6zT60PgX1l0pETNbOEcVd75eXyi25R6bLBjJvdNXJW6-nJGrOpofF6dsL0Z4Z6O_U8VnVw4s7ZD2ib7dj7YzdyGFqrK7mn9GNngPL0h6g6fau0sV9E5Da2R-JTRPkbMFFWtFW66X2qF9y2vqq7-8UWPVFP4KY-skTtI2Q0K8urqHAZM2RUQEPzXUGaxQvWte6l79y5OT8Aa18MFepc4n9e0XuXFN8ra7rbEAqi4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<p class="text-white font-bold text-sm leading-tight">Vintage Classics</p>
+</div>
+<div class="absolute top-3 right-3 bg-primary text-white rounded-full p-1 shadow-lg">
+<span class="material-symbols-outlined text-sm block">check</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="relative group aspect-square rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900">
+<img alt="Modern dark blue hypercar design" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Modern dark blue hypercar design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxmeETg8tIlVgkiC_4Li_5hKR0mFndcxhOBTAF5eq82ELFWGZsdi-8kXhtnAEyS8fqfXp8z9rTe02zycGFeDx--jkVf9rHEXxPaeqmPW7wAOabOin2JMkRbuTIPvXEmyf3Set4GmgQ6cTDbX7bd6Yp5lLZu6YXfvEwL1FyfoIDMW8a3hA3jzWuYwt-w8f95obIeE43xunQa4IbneYnuNSCiVl-ml9SpsueS-9GTODDmyObtPukCNfjX3xL9GbloUTqmuundCdX7HY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<p class="text-white font-bold text-sm leading-tight">Modern Hypercars</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="relative group aspect-square rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900">
+<img alt="Luxury black SUV in desert" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Luxury black SUV in desert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMTKSE8AXH2jI9BZTtuwQjMeYX5iFAK79RxDk_Fu0EO4r_3weWRHyi3rZBY43OYNty7-VFK6BZoeYQJlKgysq92mNoyWw7Q9vS48qrko5vDLON0-9s5K86eBqTKnRkHXuFetOygHyux7YbYKIv-XQ2Sb-wB7DDQImmSzRx5kqq075qBrrkuGUd8OrXj4d3B3JFbgZRZB5QxDxiEgU7xFfL9yjzZRhLxfPudwQHpfJ_yv71mSp0gr-SOwqFW0d4PYXKaGwIQaRcq9Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<p class="text-white font-bold text-sm leading-tight">Luxury SUVs</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="relative group aspect-square rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900">
+<img alt="Race track curve with car" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Race track curve with car" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSQIBgBa8ps_zVtQi8Ezj8sc9-uQw-FZUj8CqQPQVOcrfxROc3xFVy8dKdSggrzue3DCFS5pH_U2B49Lkgnxr72SJup9K43UDKx3EXChipV0gsRGJ1mhd8izE3plWRGkeMV6lcawZ_LgVfI1MZWITL0qcnLgW_xVvUvspPI7DTnFVDXyrIz20lHuxfXX12nBQ08EmEptg7amqbZMCMM3Shhq2IM7YYudYLxe50xBft1aH4YOamyQs2jCSKg3k83-uRFA4Xb3D1Ei4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<p class="text-white font-bold text-sm leading-tight">Track-Focused</p>
+</div>
+</div>
+</section>
+<div class="silver-divider mb-12"></div>
+<!-- Concierge Tone Selector -->
+<section class="mb-12">
+<h3 class="text-xl font-bold mb-2">Concierge Tone</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-6">Choose how our specialists communicate with you.</p>
+<div class="space-y-3">
+<!-- Tone Option 1 (Selected) -->
+<div class="flex items-center p-4 rounded-xl border-2 border-primary bg-primary/5 dark:bg-primary/10">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white mr-4">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Storyteller</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Narrative-rich and historical.</p>
+</div>
+<span class="material-symbols-outlined text-primary">radio_button_checked</span>
+</div>
+<!-- Tone Option 2 -->
+<div class="flex items-center p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 mr-4">
+<span class="material-symbols-outlined">work</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Formal</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Professional and traditional.</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700">radio_button_unchecked</span>
+</div>
+<!-- Tone Option 3 -->
+<div class="flex items-center p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 mr-4">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Direct</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Brief and data-driven.</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700">radio_button_unchecked</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar -->
+<footer class="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background-light dark:from-background-dark via-background-light dark:via-background-dark to-transparent pt-10">
+<div class="max-w-md mx-auto">
+<button class="w-full bg-primary py-4 rounded-xl text-white font-bold text-lg shadow-2xl shadow-primary/30 flex items-center justify-center gap-2 hover:bg-blue-600 active:scale-[0.98] transition-all">
+                Continue to Verification
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<!-- iOS Home Indicator Spacing -->
+<div class="h-4"></div>
+</div>
+</footer>
+</body></html>

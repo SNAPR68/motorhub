@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci AI Lead CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2b90d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#0a0a0a",
+                        "card-dark": "#161616",
+                        "border-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .kardeco-line {
+            background: linear-gradient(to bottom, transparent, #f2b90d, transparent);
+        }
+        .glass-header {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+<!-- Top Status Bar (iOS Style Placeholder) -->
+<div class="h-10 w-full flex justify-between items-center px-6 pt-2">
+<span class="text-xs font-bold tracking-tight">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<!-- Header Section -->
+<header class="sticky top-0 z-20 glass-header border-b border-border-dark/50 px-6 py-4">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+</div>
+<div>
+<h1 class="text-xl font-extrabold tracking-tight uppercase italic leading-none">Autovinci</h1>
+<p class="text-[10px] text-primary tracking-[0.2em] uppercase font-medium">AI Intelligence</p>
+</div>
+</div>
+<button class="size-10 rounded-full border border-border-dark flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">notifications</span>
+</button>
+</div>
+<!-- Horizontal Filter Tabs -->
+<div class="flex gap-6 overflow-x-auto no-scrollbar">
+<button class="relative pb-2 text-sm font-bold text-primary">
+                Hot Leads
+                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full"></span>
+</button>
+<button class="pb-2 text-sm font-semibold text-slate-500 hover:text-slate-300">Warm</button>
+<button class="pb-2 text-sm font-semibold text-slate-500 hover:text-slate-300">Follow-up</button>
+<button class="pb-2 text-sm font-semibold text-slate-500 hover:text-slate-300">Closed</button>
+</div>
+</header>
+<!-- Main Content: Lead List -->
+<main class="flex-1 px-4 py-6 space-y-4">
+<!-- Search Bar -->
+<div class="relative px-2 mb-6">
+<span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 text-xl">search</span>
+<input class="w-full bg-card-dark border border-border-dark rounded-xl py-3 pl-12 pr-4 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-slate-600" placeholder="Search premium inventory or names..." type="text"/>
+</div>
+<!-- Hot Lead Card 1 -->
+<div class="relative group">
+<!-- Kardeco Decorative Line -->
+<div class="absolute left-0 top-4 bottom-4 w-[2px] kardeco-line rounded-full opacity-70"></div>
+<div class="bg-card-dark border border-border-dark rounded-xl p-4 ml-3 shadow-xl">
+<div class="flex justify-between items-start mb-3">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary text-background-dark">Hot Sentiment</span>
+<span class="text-[10px] text-slate-500 font-medium">2m ago</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight">Julian Rossi</h2>
+<p class="text-sm text-slate-400 font-medium">911 Carrera GTS • <span class="text-primary/80">$162,000</span></p>
+</div>
+<div class="size-12 rounded-lg bg-cover bg-center border border-border-dark" data-alt="Rear view of a silver Porsche 911" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBTDy1FNfefMCTHYryKoUBO9j1e5AGOhdPWSCNZb3-xd1tiEH8U8QKkm2E4RdHkK01zEngCe1zqn-PE_06HcWzRETiqi7FP1QP-mlaJcfxRAh916cG1h1zJlm-uBYDBULNCEoxrfkcPqH0f9qXB6BeGNQZpg5tUmPispFcZ3xVdpYD2LWv0tbmQhFcguL5dBrYhMMTyYNieIwPtqoetKHajYsYPm0nVS_SxWGDKNQqTF1f04vMRj9kmJWmu2HY9pTHA58byYErKXmo')"></div>
+</div>
+<div class="bg-primary/5 border-l-2 border-primary p-3 rounded-r-lg mb-4">
+<p class="text-xs italic text-slate-300 leading-relaxed">
+<span class="font-bold text-primary">AI INSIGHT:</span> High intent behavior detected. User viewed the financing page 4 times in the last hour.
+                    </p>
+</div>
+<div class="flex items-center justify-between gap-3">
+<div class="flex gap-2">
+<button class="size-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-300 border border-border-dark hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-xl">call</span>
+</button>
+<button class="size-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-300 border border-border-dark hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-xl">chat</span>
+</button>
+</div>
+<button class="flex-1 bg-primary hover:bg-primary/90 text-background-dark font-bold py-2.5 px-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-lg">auto_fix</span>
+                        AI Draft Reply
+                    </button>
+</div>
+</div>
+</div>
+<!-- Hot Lead Card 2 -->
+<div class="relative group">
+<div class="absolute left-0 top-4 bottom-4 w-[2px] kardeco-line rounded-full opacity-70"></div>
+<div class="bg-card-dark border border-border-dark rounded-xl p-4 ml-3 shadow-xl">
+<div class="flex justify-between items-start mb-3">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary text-background-dark">Hot Sentiment</span>
+<span class="text-[10px] text-slate-500 font-medium">14m ago</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight">Elena Moretti</h2>
+<p class="text-sm text-slate-400 font-medium">G-Wagon G63 • <span class="text-primary/80">$179,000</span></p>
+</div>
+<div class="size-12 rounded-lg bg-cover bg-center border border-border-dark" data-alt="Front view of a black luxury SUV" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDiAgJvevbNPc-iCf0LLV3yhNVETqPP4M_YzUcGwMylx__p2YlFacn0ArPP0UsRB60evwC9qPm34ZD5NBZcpbljNcQC-2yUjE6lpxYWkV8Cw9zYILdVzMk96hLHvlcqz0nIgxrGdsBju_2xSuw-fFuQORrLkUC0kPN6l8kvFc78Hn5n0bhM8oWb8CkTPu81U1T3-hOxGdBIONzSvHho4pBHK-2U0U74R-h9ZCqi1xyfbFB6aobYShQcZaGJMNY2EZuB54XGE4fvZ9g')"></div>
+</div>
+<div class="bg-primary/5 border-l-2 border-primary p-3 rounded-r-lg mb-4">
+<p class="text-xs italic text-slate-300 leading-relaxed">
+<span class="font-bold text-primary">AI INSIGHT:</span> Requested trade-in appraisal for 2021 Range Rover. Very likely to close this weekend.
+                    </p>
+</div>
+<div class="flex items-center justify-between gap-3">
+<div class="flex gap-2">
+<button class="size-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-300 border border-border-dark">
+<span class="material-symbols-outlined text-xl">call</span>
+</button>
+<button class="size-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-300 border border-border-dark">
+<span class="material-symbols-outlined text-xl">chat</span>
+</button>
+</div>
+<button class="flex-1 bg-primary text-background-dark font-bold py-2.5 px-4 rounded-lg text-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">auto_fix</span>
+                        AI Draft Reply
+                    </button>
+</div>
+</div>
+</div>
+<!-- Warm Lead Card -->
+<div class="relative group">
+<div class="bg-card-dark border border-border-dark rounded-xl p-4 ml-3 opacity-80">
+<div class="flex justify-between items-start mb-3">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-700 text-slate-200">Warm Sentiment</span>
+<span class="text-[10px] text-slate-500 font-medium">1h ago</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight text-slate-300">Marcus Thorne</h2>
+<p class="text-sm text-slate-500 font-medium">Roma Spider • <span class="text-slate-400">$243,000</span></p>
+</div>
+<div class="size-12 rounded-lg bg-cover bg-center border border-border-dark opacity-50" data-alt="Sleek red Italian sports car" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBtXVgz1i7qlVhh4X_m9E4IzRmOxHNFXdz1sW2XfcLIQcax1qA1GTJ6uy8jO4K_THbZuCCx9U4OO_9e-NfubqAev3aG2hXjFgLmQgiqKUIV0tPiHxklLhUvGyrHGSqdj4-9474jcwn_GGa85nPZ51w7TES83QnX6scnAyydPHjegBKqV4NUqV3Q-bZNfH9v9Jy-xuf-vujZQp-lfeu2A3kadrcxkIEsJfi1WxDl0vnN3qbWOP6kLqIF-wztXRRNKZK-K4UyRnPVb28')"></div>
+</div>
+<div class="flex items-center justify-between gap-3 pt-2">
+<div class="flex gap-2">
+<button class="size-10 rounded-full bg-slate-800/30 flex items-center justify-center text-slate-500 border border-border-dark">
+<span class="material-symbols-outlined text-xl">call</span>
+</button>
+</div>
+<button class="flex-1 bg-slate-800 text-slate-300 font-bold py-2.5 px-4 rounded-lg text-sm flex items-center justify-center gap-2 border border-border-dark">
+                        Continue Nurturing
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="sticky bottom-0 z-30 bg-background-dark/90 backdrop-blur-xl border-t border-border-dark px-6 pb-8 pt-3">
+<div class="flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">dashboard</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Leads</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Insights</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<div class="size-12 -mt-8 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/20 border-4 border-background-dark">
+<span class="material-symbols-outlined text-background-dark text-2xl font-bold">add</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest">New</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">directions_car</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Stock</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Account</span>
+</a>
+</div>
+</nav>
+<!-- AI Notification Toast (Floating) -->
+<div class="fixed bottom-28 left-1/2 -translate-x-1/2 w-[90%] z-40">
+<div class="bg-primary/95 text-background-dark p-3 rounded-xl shadow-2xl flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined animate-pulse">auto_awesome</span>
+<p class="text-xs font-bold leading-tight">AI generated 4 new follow-up drafts for your Hot Leads.</p>
+</div>
+<button class="material-symbols-outlined text-xl">chevron_right</button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dealer Team Management - Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1754cf",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "charcoal": "#121212",
+                        "charcoal-light": "#1E1E1E",
+                        "silver": "#C0C0C0",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+        }
+        .font-display {
+            font-family: 'Noto Serif', serif;
+        }
+        /* Custom thin scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111621;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E1E1E;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header Navigation -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 py-4 flex items-center justify-between">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_back_ios</span>
+</button>
+<h1 class="font-display text-xl font-bold tracking-tight">Team Management</h1>
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">search</span>
+</button>
+</header>
+<main class="flex-1 overflow-y-auto px-4 pb-24">
+<!-- Summary Card -->
+<div class="mt-6 mb-8 p-6 rounded-xl bg-charcoal-light border border-silver/20 shadow-xl relative overflow-hidden group">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex flex-col">
+<span class="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-1">Dealership Overview</span>
+<h2 class="font-display text-3xl font-bold text-slate-100">Total Members: 14</h2>
+</div>
+<p class="text-slate-400 text-sm leading-relaxed max-w-[240px]">
+                    Manage your elite dealership workforce and granular access control.
+                </p>
+<button class="flex items-center justify-center gap-2 bg-transparent border border-silver/40 hover:border-primary hover:bg-primary/10 text-white font-medium py-3 px-6 rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-primary text-xl">person_add</span>
+<span class="font-sans text-sm tracking-wide">+ Invite Member</span>
+</button>
+</div>
+</div>
+<!-- Section Title -->
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-display text-lg font-bold text-slate-100">Active Staff</h3>
+<span class="text-xs text-slate-500 font-sans">Role Hierarchy: High</span>
+</div>
+<!-- Team Members List -->
+<div class="space-y-4">
+<!-- Member 1: Admin -->
+<div class="bg-charcoal-light rounded-xl border border-primary/10 overflow-hidden">
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-full border-2 border-primary/30 p-0.5">
+<img alt="Julian Vanderbilt" class="w-full h-full rounded-full object-cover" data-alt="Professional headshot of a male executive" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpBFgJVgepNgd6XKbgYfjuvrlcLNTVwWy3nSII_3ET5SGh7oDDIu19cGIh5ppDEkGWutoVr56diKcyy6zHYExZOFQ3g3snH2LA_BsyqPjHnf3EzENpHsy5057UqgtdFNWfTA-5geLBHvzvLj9MA1OtffrQuibd_eMm5lMv_GcgRFwEgkp-bclmZIo-R3qsUFAiADI-p3swQFODiAV_um86Arp3N7zE0Pwchnq7kt06pSMZZ8BeHNmyInYYjzaxqVLb0Zi9qZpM-wA"/>
+</div>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-charcoal-light rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<h4 class="font-display text-base font-bold text-slate-100">Julian Vanderbilt</h4>
+<div class="flex items-center gap-2">
+<span class="text-xs font-medium text-amber-500/90 bg-amber-500/10 px-2 py-0.5 rounded uppercase tracking-wider">Admin</span>
+<span class="text-xs text-slate-500">• Sales Executive</span>
+</div>
+</div>
+</div>
+<button class="text-primary hover:bg-primary/10 p-2 rounded-lg transition-colors flex flex-col items-center">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span class="text-[10px] font-bold uppercase mt-1">Perms</span>
+</button>
+</div>
+<!-- Permission Drawer (Expanded for visualization) -->
+<div class="bg-black/20 border-t border-primary/5 p-4 space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm text-slate-300">Manage Inventory</span>
+<div class="w-10 h-5 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-slate-300">View Leads</span>
+<div class="w-10 h-5 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between opacity-60">
+<span class="text-sm text-slate-300">Edit AI Templates</span>
+<div class="w-10 h-5 bg-slate-700 rounded-full relative">
+<div class="absolute left-1 top-1 w-3 h-3 bg-slate-400 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-slate-300">Access Financials</span>
+<div class="w-10 h-5 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Member 2 -->
+<div class="bg-charcoal-light rounded-xl border border-primary/5 overflow-hidden">
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-full border border-slate-700 p-0.5">
+<img alt="Elena Moretti" class="w-full h-full rounded-full object-cover grayscale hover:grayscale-0 transition-all" data-alt="Professional headshot of a female marketing manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEheWjcgCqKl-7QazFOM7oD6z0lFkrVvzlL_jKJI5k5jMYy3I5o5Qoo3l5JEoRsp7AEYgK8RmLazW2H3k6qImH1lVBZHGeZAj-LmdE6f2yeIxCNfu_BOS5LlJAgJZ62xiGGoPEWNw1n_5KYRIb388zKD2t_DSm_M_aT7pDkSf1rTt7eMKekGR2dEsxNqq4kcSENGh_wIPRWEO9L2LVI8rYBB2wV15RVbvXUTPv_dyYeuS7uleWY3Mqv7RWfeTGQ768encFaqF8iRc"/>
+</div>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-slate-500 border-2 border-charcoal-light rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<h4 class="font-display text-base font-bold text-slate-100">Elena Moretti</h4>
+<div class="flex items-center gap-2">
+<span class="text-xs font-medium text-primary/90 bg-primary/10 px-2 py-0.5 rounded uppercase tracking-wider">Standard</span>
+<span class="text-xs text-slate-500">• Marketing Manager</span>
+</div>
+</div>
+</div>
+<button class="text-slate-500 hover:bg-primary/10 p-2 rounded-lg transition-colors flex flex-col items-center">
+<span class="material-symbols-outlined">tune</span>
+<span class="text-[10px] font-bold uppercase mt-1">Perms</span>
+</button>
+</div>
+</div>
+<!-- Member 3 -->
+<div class="bg-charcoal-light rounded-xl border border-primary/5 overflow-hidden">
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-full border border-slate-700 p-0.5">
+<img alt="Marcus Thorne" class="w-full h-full rounded-full object-cover" data-alt="Professional headshot of a male service advisor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkQ1GnUUat8Fx8W1LaMs9xXdD9c--V-Ag6oUE9vBwcqVcTVx5VH3iIYFcZvOcafyr_QVaP587wM2Pw8Yb14i6sO-ug08ATMdLPeoGloeRoIW7E9ckXwIlpYAR0ddS4vkrD4pSv3m0WMZ_KfaWoJ95PRGX--APAxhvcIMTehdtuR670Th_Y4oHWUYSkQDtTfp2Hbbj1umfcKrsEVlLEXwIqS7yxEYldHLHVk_yd_jgRsIGL8nx1LVChwYptTeDOnaAkQ5yg3tiL2aA"/>
+</div>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-charcoal-light rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<h4 class="font-display text-base font-bold text-slate-100">Marcus Thorne</h4>
+<div class="flex items-center gap-2">
+<span class="text-xs font-medium text-primary/90 bg-primary/10 px-2 py-0.5 rounded uppercase tracking-wider">Standard</span>
+<span class="text-xs text-slate-500">• Inventory Analyst</span>
+</div>
+</div>
+</div>
+<button class="text-slate-500 hover:bg-primary/10 p-2 rounded-lg transition-colors flex flex-col items-center">
+<span class="material-symbols-outlined">tune</span>
+<span class="text-[10px] font-bold uppercase mt-1">Perms</span>
+</button>
+</div>
+</div>
+<!-- Member 4 -->
+<div class="bg-charcoal-light rounded-xl border border-primary/5 overflow-hidden opacity-70">
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-full border border-slate-800 p-0.5 bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500">pending</span>
+</div>
+</div>
+<div class="flex flex-col">
+<h4 class="font-display text-base font-bold text-slate-400 italic">Invitation Pending</h4>
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-600">sarah.j@autovinci-dealers.com</span>
+</div>
+</div>
+</div>
+<button class="text-slate-600 p-2 rounded-lg transition-colors flex flex-col items-center">
+<span class="material-symbols-outlined">mail</span>
+<span class="text-[10px] font-bold uppercase mt-1">Resend</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-dark border-t border-primary/10 px-2 pb-6 pt-2 flex justify-around items-end z-50">
+<a class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors py-1 px-3" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Inventory</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors py-1 px-3" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Leads</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary transition-colors py-1 px-3 border-t-2 border-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">badge</span>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Team</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors py-1 px-3" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Reports</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors py-1 px-3" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Settings</p>
+</a>
+</nav>
+</body></html>

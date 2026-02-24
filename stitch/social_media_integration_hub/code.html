@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Social Media Integration Hub - Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Noto+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+        }
+        .serif-font {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation & Progress Bar -->
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center p-4 justify-between">
+<button class="text-slate-900 dark:text-slate-100 flex size-10 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<div class="flex-1 px-4">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-semibold uppercase tracking-widest text-primary">Onboarding</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Step 2 of 4</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 50%;"></div>
+</div>
+</div>
+<div class="size-10"></div> <!-- Spacer for symmetry -->
+</div>
+</header>
+<main class="flex-1 px-6 pt-4 pb-24 overflow-y-auto">
+<!-- Hero Section -->
+<div class="text-center mb-10">
+<h1 class="serif-font text-3xl font-bold mb-3 tracking-tight text-slate-900 dark:text-slate-100">
+                Connect Your Network
+            </h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-xs mx-auto">
+                Enable AI-powered marketing across your social channels to reach premium buyers instantly.
+            </p>
+</div>
+<!-- Connection Cards Grid -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Instagram Card -->
+<div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-primary/50 transition-all group">
+<div class="size-14 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center text-white shrink-0 shadow-lg">
+<span class="material-symbols-outlined text-3xl">photo_camera</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-slate-900 dark:text-slate-100">Instagram</h3>
+<p class="text-xs text-primary font-medium flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                        AI Reel Sync
+                    </p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all">
+                    Connect
+                </button>
+</div>
+<!-- Facebook Card -->
+<div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-primary/50 transition-all group">
+<div class="size-14 rounded-full bg-[#1877F2] flex items-center justify-center text-white shrink-0 shadow-lg">
+<span class="material-symbols-outlined text-3xl">social_leaderboard</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-slate-900 dark:text-slate-100">Facebook</h3>
+<p class="text-xs text-primary font-medium flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+                        Marketplace Auto-Post
+                    </p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all">
+                    Connect
+                </button>
+</div>
+<!-- TikTok Card -->
+<div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-primary/50 transition-all group">
+<div class="size-14 rounded-full bg-black flex items-center justify-center text-white shrink-0 shadow-lg ring-1 ring-slate-700">
+<span class="material-symbols-outlined text-3xl">play_circle</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-slate-900 dark:text-slate-100">TikTok</h3>
+<p class="text-xs text-primary font-medium flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+                        Smart Distribution
+                    </p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all">
+                    Connect
+                </button>
+</div>
+<!-- WhatsApp Card -->
+<div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-primary/50 transition-all group">
+<div class="size-14 rounded-full bg-[#25D366] flex items-center justify-center text-white shrink-0 shadow-lg">
+<span class="material-symbols-outlined text-3xl">chat</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-slate-900 dark:text-slate-100">WhatsApp</h3>
+<p class="text-xs text-primary font-medium flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">support_agent</span>
+                        24/7 AI Concierge
+                    </p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all">
+                    Connect
+                </button>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="mt-12 flex flex-col items-center gap-6">
+<button class="w-full py-4 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl font-bold tracking-wide opacity-50 cursor-not-allowed">
+                Continue
+            </button>
+<a class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+                Skip for Now
+            </a>
+</div>
+</main>
+<!-- Bottom Navbar -->
+<nav class="fixed bottom-0 left-0 right-0 z-20 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 pb-8 pt-2">
+<div class="flex justify-around items-center px-4 max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 p-2 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">home</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">search</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">favorite</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</div>
+</nav>
+<!-- Background Decoration -->
+<div class="fixed inset-0 -z-10 pointer-events-none opacity-20 overflow-hidden">
+<div class="absolute top-[-10%] right-[-10%] size-96 bg-primary/20 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-5%] left-[-5%] size-80 bg-slate-800/30 blur-[100px] rounded-full"></div>
+</div>
+</body></html>

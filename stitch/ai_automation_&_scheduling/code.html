@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Automation &amp; Scheduling</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .ios-toggle:checked + .ios-toggle-bg { background-color: #137fec; }
+        .ios-toggle:checked + .ios-toggle-bg .ios-toggle-circle { transform: translateX(20px); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header / Navigation Bar -->
+<header class="sticky top-0 z-10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between px-4 h-14">
+<button class="flex items-center text-primary">
+<span class="material-symbols-outlined text-[28px]">chevron_left</span>
+<span class="text-lg">Settings</span>
+</button>
+<h1 class="text-lg font-semibold absolute left-1/2 -translate-x-1/2">AI Automation</h1>
+<button class="text-primary font-medium">Save</button>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Section: Automation Triggers -->
+<div class="px-4 py-6">
+<h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">Automation Triggers</h2>
+<div class="space-y-4">
+<!-- Rule 1: Auto-Enhance Photos -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex items-start justify-between mb-3">
+<div class="flex gap-3">
+<div class="bg-primary/10 text-primary p-2 rounded-lg">
+<span class="material-symbols-outlined">auto_fix_high</span>
+</div>
+<div>
+<h3 class="font-bold text-base">Auto-Enhance Photos</h3>
+<p class="text-sm text-slate-500">Trigger: On upload</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full ios-toggle-bg transition-colors">
+<div class="absolute left-[2px] top-[2px] bg-white w-5 h-5 rounded-full ios-toggle-circle transition-transform shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-800">
+<span class="text-sm font-medium">Processing delay: <span class="text-primary">Instant</span></span>
+<button class="text-xs font-semibold bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg">Adjust Delay</button>
+</div>
+</div>
+<!-- Rule 2: Auto-Post to Facebook -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex items-start justify-between mb-3">
+<div class="flex gap-3">
+<div class="bg-blue-600/10 text-blue-600 p-2 rounded-lg">
+<span class="material-symbols-outlined">share</span>
+</div>
+<div>
+<h3 class="font-bold text-base">Auto-Post to Facebook</h3>
+<p class="text-sm text-slate-500">Trigger: After AI enhancement</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full ios-toggle-bg transition-colors">
+<div class="absolute left-[2px] top-[2px] bg-white w-5 h-5 rounded-full ios-toggle-circle transition-transform shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-800">
+<span class="text-sm font-medium">Schedule: <span class="text-primary">Smart Optimization</span></span>
+<button class="text-xs font-semibold bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg">Set Time</button>
+</div>
+</div>
+<!-- Rule 3: Instant AI Lead Reply -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex items-start justify-between mb-3">
+<div class="flex gap-3">
+<div class="bg-green-600/10 text-green-600 p-2 rounded-lg">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<div>
+<h3 class="font-bold text-base">Instant AI Lead Reply</h3>
+<p class="text-sm text-slate-500">Trigger: New inquiry</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full ios-toggle-bg transition-colors">
+<div class="absolute left-[2px] top-[2px] bg-white w-5 h-5 rounded-full ios-toggle-circle transition-transform shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-800">
+<span class="text-sm font-medium">Reply within: <span class="text-primary">5 mins</span></span>
+<button class="text-xs font-semibold bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg">Edit Delay</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Weekly Social Media Calendar -->
+<div class="px-4 py-2">
+<h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">Weekly Social Media Calendar</h2>
+<div class="bg-white dark:bg-slate-900 rounded-xl p-5 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-center mb-6">
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400">Scheduled Posts for Oct 21 - Oct 27</p>
+<div class="flex gap-1">
+<span class="size-2 rounded-full bg-primary"></span>
+<span class="size-2 rounded-full bg-primary/30"></span>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-2">
+<!-- Monday -->
+<div class="flex flex-col items-center gap-2">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Mon</span>
+<div class="w-full aspect-square rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-blue-600 text-lg">social_leaderboard</span>
+<div class="absolute -top-1 -right-1 size-3 bg-primary rounded-full border-2 border-white dark:border-slate-900"></div>
+</div>
+</div>
+<!-- Tuesday -->
+<div class="flex flex-col items-center gap-2">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Tue</span>
+<div class="w-full aspect-square rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700 text-lg">add</span>
+</div>
+</div>
+<!-- Wednesday -->
+<div class="flex flex-col items-center gap-2">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Wed</span>
+<div class="w-full aspect-square rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center border-2 border-primary">
+<span class="material-symbols-outlined text-blue-600 text-lg">social_leaderboard</span>
+</div>
+</div>
+<!-- Thursday -->
+<div class="flex flex-col items-center gap-2">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Thu</span>
+<div class="w-full aspect-square rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700 text-lg">add</span>
+</div>
+</div>
+<!-- Friday -->
+<div class="flex flex-col items-center gap-2">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Fri</span>
+<div class="w-full aspect-square rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-600 text-lg">social_leaderboard</span>
+</div>
+</div>
+<!-- Saturday -->
+<div class="flex flex-col items-center gap-2">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Sat</span>
+<div class="w-full aspect-square rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700 text-lg">add</span>
+</div>
+</div>
+<!-- Sunday -->
+<div class="flex flex-col items-center gap-2">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Sun</span>
+<div class="w-full aspect-square rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700 text-lg">add</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex items-center gap-3 p-3 bg-primary/5 rounded-lg border border-primary/10">
+<span class="material-symbols-outlined text-primary text-xl">info</span>
+<p class="text-xs text-primary leading-tight">AI has scheduled 3 posts this week based on peak engagement times for car buyers in your area.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 safe-area-bottom">
+<div class="flex justify-around items-center px-2 py-2">
+<a class="flex flex-col items-center gap-1 text-slate-400 px-3" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-[10px] font-medium">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 px-3" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-[10px] font-medium">Marketing</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary px-3" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">smart_toy</span>
+<span class="text-[10px] font-medium">AI Rules</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 px-3" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-[10px] font-medium">Leads</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 px-3" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</a>
+</div>
+<div class="h-6 w-full"></div> <!-- Spacing for iOS Home Indicator -->
+</nav>
+</body></html>

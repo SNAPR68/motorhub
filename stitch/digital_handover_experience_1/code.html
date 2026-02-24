@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Handover Experience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ecc813",
+                        "background-light": "#f8f8f6",
+                        "background-dark": "#0a0a0a",
+                        "matte-black": "#141414",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .gold-leaf-border {
+            position: relative;
+            background: linear-gradient(#141414, #141414) padding-box,
+                        linear-gradient(135deg, #ecc813 0%, #fff 50%, #ecc813 100%) border-box;
+            border: 1px solid transparent;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(236, 200, 19, 0.1), transparent);
+            background-size: 200% 100%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col max-w-[430px] mx-auto bg-background-dark shadow-2xl">
+<!-- Header / Status Bar Area -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center gap-2">
+<span class="text-primary font-bold tracking-widest text-xs uppercase">Autovinci</span>
+</div>
+<button class="text-slate-100 opacity-60 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<!-- Cinematic Video Hero -->
+<section class="relative w-full aspect-[9/12] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent z-10"></div>
+<div class="absolute inset-0 bg-black/20 z-10"></div>
+<!-- Video Placeholder Representation -->
+<div class="w-full h-full bg-cover bg-center" data-alt="Close up of luxury car headlights glowing in a dark studio" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4WTDJxeETdcKgo13JedypqTW5HERT-WG_b7_SnOolEsQ6DO_emOQp9bGyGHfHK3cY0-jbEgQEHzoJGU5j-ZGK4L1L8b6bgRR5o3EF4BTDVNQgWIfiguUO89tZbWpbo6WURv668_dE6RI8JYpZPeOmAdU2maoBbua3ebE2aF9DImBHUfHEF7BkunGR9eTgVMYxVHMzoa620iTti9WJixW8Oe39Ux7aVuwKugzRWxVdaFEM25ziMfXsDETdehaxhPGyO3G2QXt816Q');">
+<div class="absolute inset-0 flex flex-col items-center justify-center z-20 px-8 text-center">
+<h1 class="font-serif italic text-4xl md:text-5xl text-white mb-4 drop-shadow-lg">Welcome to the Journey</h1>
+<p class="text-slate-300 text-sm tracking-[0.2em] uppercase font-light">Edition 01 / 2024</p>
+</div>
+</div>
+</section>
+<!-- Digital Ownership Certificate -->
+<section class="px-6 -mt-32 relative z-30">
+<div class="gold-leaf-border rounded-xl p-1 shadow-2xl">
+<div class="bg-matte-black rounded-lg p-6 flex flex-col items-center text-center space-y-6">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined text-4xl">verified_user</span>
+</div>
+<div class="space-y-2">
+<h2 class="text-primary tracking-widest text-xs uppercase font-semibold">Ownership Certificate</h2>
+<h3 class="text-2xl font-serif text-white">2024 Grand Tourer S</h3>
+</div>
+<div class="w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+<div class="grid grid-cols-2 gap-8 w-full">
+<div class="text-left">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 mb-1">Acquisition Date</p>
+<p class="text-sm font-medium text-slate-200">Oct 24, 2023</p>
+</div>
+<div class="text-left">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 mb-1">Status</p>
+<p class="text-sm font-medium text-primary flex items-center gap-1">
+<span class="size-1.5 rounded-full bg-primary animate-pulse"></span> Secured
+                            </p>
+</div>
+</div>
+<div class="w-full bg-black/40 rounded p-3 border border-white/5">
+<p class="text-[10px] uppercase tracking-widest text-slate-500 mb-1 text-left">Vehicle Identification Number</p>
+<p class="text-xs font-mono text-slate-300 tracking-widest">1FA6P8CF5L5XXXXXX</p>
+</div>
+<div class="flex items-center gap-2 text-[10px] text-slate-500 italic">
+<span class="material-symbols-outlined text-xs">shield</span>
+                        Digitally Encrypted &amp; Verified by Autovinci
+                    </div>
+</div>
+</div>
+</section>
+<!-- Minimalist Action Cards -->
+<section class="px-6 pt-10 pb-24 space-y-3">
+<h4 class="text-[10px] uppercase tracking-[0.3em] text-slate-500 font-bold mb-4 px-1">Your Next Steps</h4>
+<!-- Action Card 1 -->
+<button class="w-full glass-card hover:bg-white/10 transition-all rounded-xl p-4 flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<div class="text-left">
+<p class="text-sm font-semibold text-white">Schedule Delivery</p>
+<p class="text-xs text-slate-500">Choose your preferred arrival window</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+<!-- Action Card 2 -->
+<button class="w-full glass-card hover:bg-white/10 transition-all rounded-xl p-4 flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-lg bg-slate-100/10 text-slate-300 flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="text-left">
+<p class="text-sm font-semibold text-white">Download Documentation</p>
+<p class="text-xs text-slate-500">Legal titles and insurance (PDF, 2.4MB)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">download</span>
+</button>
+<!-- Action Card 3 -->
+<button class="w-full glass-card hover:bg-white/10 transition-all rounded-xl p-4 flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 shimmer"></div>
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div class="text-left">
+<p class="text-sm font-semibold text-white">Meet Your Concierge</p>
+<p class="text-xs text-slate-500">Personalized assistance for your new drive</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors">contact_support</span>
+</button>
+</section>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto z-50">
+<div class="flex gap-2 border-t border-white/5 bg-matte-black/95 backdrop-blur-xl px-6 pb-6 pt-3">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">home</span>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">directions_car</span>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Showroom</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">stars</span>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Garage</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">chat_bubble</span>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Concierge</p>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Marketing Suite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #2563EB;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-secondary: #64748B;
+            --divider: #E2E8F0;
+            --accent: #7C3AED;
+            --success: #10B981;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+        }
+        h1, h2, h3, .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="max-w-[430px] mx-auto min-h-screen shadow-2xl bg-white overflow-x-hidden">
+<div class="h-12 w-full bg-white flex items-center justify-between px-8 sticky top-0 z-50 ios-blur bg-white/80">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-symbols-outlined text-[18px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[18px]">wifi</span>
+<span class="material-symbols-outlined text-[18px] rotate-90">battery_full</span>
+</div>
+</div>
+<header class="px-5 py-4 flex items-center justify-between bg-white border-b border-[var(--divider)] sticky top-12 z-40 ios-blur bg-white/80">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full active:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight">AI Marketing Suite</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-[var(--primary)] active:bg-blue-50">
+<span class="material-symbols-outlined">auto_awesome</span>
+</button>
+</header>
+<main class="pb-32">
+<section class="p-5 flex items-center gap-4">
+<img alt="Car" class="w-20 h-20 rounded-2xl object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz2G42hXiJ9AuM006Wp16V4I0yDca-pKqr8ia29tf0rHmALlwrQsLfJ0szsAYAwjNUL3pFm_eBPeR5_KLFWDjWsja5LajWD8u18C1Qff6Zejk3iaPRKqeMATkq6-bn47Kz3ht6qMd9Z2yYf9syzbXmUjnMIBHaT2HyS2NLx67DuKqVzOnl1-Uhbi6uS7OfoLOPCPDbV5GI4fKGN4HCSIIXUMq0wFwwuVjv6Q20VrBYNs73O-RFkqtqMUQqrP6DTSqbZuGvCXWaMJc"/>
+<div>
+<h2 class="text-lg font-bold leading-tight">2023 Luxury Sedan</h2>
+<p class="text-[var(--text-secondary)] text-sm mb-1">Stock ID: AV-9042 • Black Metallic</p>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-blue-50 text-[var(--primary)] text-[11px] font-bold rounded-full uppercase tracking-wider">AI Enhanced</span>
+<span class="px-2 py-0.5 bg-purple-50 text-[var(--accent)] text-[11px] font-bold rounded-full uppercase tracking-wider">3 Assets Ready</span>
+</div>
+</div>
+</section>
+<section class="px-5 mb-8">
+<div class="bg-[var(--surface)] border border-[var(--divider)] rounded-3xl p-5 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[var(--accent)]">graphic_eq</span>
+<h3 class="font-bold">AI Voiceover &amp; Music</h3>
+</div>
+<span class="text-xs font-medium text-[var(--text-secondary)] uppercase">Auto-Generated</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+<button class="w-12 h-12 bg-[var(--primary)] text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</button>
+<div class="flex-1">
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-semibold">"Professional Luxury Narrative"</span>
+<span class="text-xs text-[var(--text-secondary)]">0:30 / 0:45</span>
+</div>
+<div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-[var(--primary)] w-2/3 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-4">
+<div class="flex flex-col gap-1">
+<label class="text-[11px] font-bold text-[var(--text-secondary)] uppercase ml-1">Voice Style</label>
+<select class="w-full bg-white border border-[var(--divider)] rounded-xl text-sm py-2 px-3 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none">
+<option>Premium Professional</option>
+<option>Exciting Sales</option>
+<option>Minimal Calm</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[11px] font-bold text-[var(--text-secondary)] uppercase ml-1">Background Music</label>
+<select class="w-full bg-white border border-[var(--divider)] rounded-xl text-sm py-2 px-3 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none">
+<option>Corporate Uplifting</option>
+<option>Lo-Fi Beats</option>
+<option>Modern High-Energy</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<div class="px-5 mb-4">
+<h3 class="text-sm font-bold text-[var(--text-secondary)] uppercase tracking-widest">Platform Previews</h3>
+</div>
+<div class="space-y-6 px-5">
+<article class="bg-white border border-[var(--divider)] rounded-3xl overflow-hidden shadow-md">
+<div class="p-4 flex items-center justify-between border-b border-slate-50">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 flex items-center justify-center p-[2px]">
+<div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-purple-600">photo_camera</span>
+</div>
+</div>
+<span class="text-sm font-bold">Instagram Preview</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">more_horiz</span>
+</div>
+<img alt="Instagram Post" class="w-full aspect-square object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD1AQO3OPE6Ge9i5VHVTylmFBXu1DZ2jxpGtJUYROAr_4puoCFKqsX1JufKYikG7YnoWNo-9jl66LQXa6z0QX7SPEayRyrgEWbs6rlRaIYMVi97w3tQRrp6tUHozxW0yCBrBQjvGUNfxQpmxeEGdyytfhcv3NAwpw47jjEj96x--DHy0dPVu-UfVQxQT4MkmjE-Tg0MG26DW4d25uRaB5q7k6JchhWrV9ALboYTeXufu7Ihdr5Od-sCpG5qv-SvTJODRlRgXkGk7k"/>
+<div class="p-4">
+<div class="flex gap-4 mb-3">
+<span class="material-symbols-outlined">favorite</span>
+<span class="material-symbols-outlined">mode_comment</span>
+<span class="material-symbols-outlined">send</span>
+</div>
+<div class="bg-slate-50 p-3 rounded-xl mb-4 border border-slate-100">
+<p class="text-sm text-[var(--text-primary)] leading-relaxed">
+<span class="font-bold">Malhotra_Luxury_Auto</span> Just landed! Experience sheer elegance with our latest 2023 Luxury Sedan. 🏁 Pristine condition, AI-verified, and ready for its new home. 
+                        </p>
+<p class="text-sm text-blue-600 mt-2 font-medium">#LuxuryCars #UsedCarsMumbai #CarDealers #EliteCars #AutoVinci</p>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 bg-[var(--primary)] text-white font-bold rounded-2xl flex items-center justify-center gap-2 active:scale-95 transition-all">
+                            Post Now
+                        </button>
+<button class="flex-1 py-3 px-4 bg-slate-100 text-[var(--text-primary)] font-bold rounded-2xl flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                            Schedule
+                        </button>
+</div>
+</div>
+</article>
+<article class="bg-white border border-[var(--divider)] rounded-3xl overflow-hidden shadow-md">
+<div class="p-4 flex items-center justify-between border-b border-slate-50">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white">
+<span class="text-xs font-bold">f</span>
+</div>
+<span class="text-sm font-bold">Facebook Preview</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">more_horiz</span>
+</div>
+<div class="px-4 py-3">
+<p class="text-sm mb-3">Drive the future today. Our AI-inspected 2023 Sedan offers unmatched comfort and performance. Special dealer pricing available for this week only! 💸</p>
+<p class="text-sm text-blue-600">#AutoVinciDeals #LuxurySedan #BestPrices</p>
+</div>
+<img alt="FB Asset" class="w-full aspect-video object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXEtugSUgXJ-aZc0Oge9wVELFzInKZhxcCwj2PqVkBbRqwbVrh8fdI7A22hEqnkikIruu_ek9_GWFVIvNIJ3t1X3e6A_C6gZu60zst1UYFfjIRQc_CWGZFGyOD-fKqdNy37EXw-xbkyNj_M41ymsfYgBPdx4EvqoPTqiQ0XMty3d9LAYBUhHKoWihWpT65vizXhgyrE0F-H6pWPo9XNYJJW_ZMMMg13GUEHT_I-vYV9uWZrewQBnWU84idhxv1gP1DySql5w9QJfM"/>
+<div class="p-4 bg-slate-50 flex items-center justify-between border-t border-slate-100">
+<div>
+<p class="text-[11px] text-[var(--text-secondary)] uppercase font-bold tracking-tight">Price starting at</p>
+<p class="text-lg font-bold">₹45.5 Lakhs</p>
+</div>
+<button class="px-6 py-2 bg-white border border-[var(--divider)] rounded-xl font-bold text-sm shadow-sm active:bg-slate-50">
+                        Edit Offer
+                    </button>
+</div>
+<div class="p-4 flex gap-3 bg-white">
+<button class="flex-1 py-3 px-4 bg-[var(--primary)] text-white font-bold rounded-2xl flex items-center justify-center gap-2 active:scale-95 transition-all">
+                        Post Now
+                    </button>
+<button class="flex-1 py-3 px-4 bg-slate-100 text-[var(--text-primary)] font-bold rounded-2xl flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                        Schedule
+                    </button>
+</div>
+</article>
+<article class="bg-white border border-[var(--divider)] rounded-3xl overflow-hidden shadow-md mb-8">
+<div class="p-4 flex items-center justify-between border-b border-slate-50">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</div>
+<span class="text-sm font-bold">WhatsApp Broadcast</span>
+</div>
+<span class="text-xs font-medium text-[var(--success)]">AI Optimization: High</span>
+</div>
+<div class="p-4">
+<div class="bg-[#DCF8C6] p-3 rounded-2xl relative mb-4">
+<div class="flex items-center gap-3 mb-2">
+<img class="w-12 h-12 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYwHmjroFYMlwSHhgvOf8K90qdPCLxI5HhXRzJ-_5OOUaplLYf06JNkkZjb-37QEVZIm_mbMPqHkTPe_hkSZvPQvwbb-UverFgRoZoRtsp4aDuz0p_ux3-qN52wHcAxjcD4cJuHZXw6Tucbu917mPSGQk6UbtM9K64WsCWVA3jmqupQoFR8Cusdj1YIVMzBOo8rWW903W0J20w2xvju3xEonQaDpapyXBSkiEthB5d0fKPr467OM-jy-XTgSrr1Sge3kzxl7qQKXk"/>
+<div class="flex-1">
+<p class="text-[10px] font-bold text-green-800 uppercase">New Listing Alert</p>
+<p class="text-sm font-bold">2023 Premium Sedan</p>
+</div>
+</div>
+<p class="text-sm">Hello from Malhotra Luxury! 🚗 Check out our newest arrival. Fully serviced &amp; AI-certified. Tap below for 360° view!</p>
+<div class="mt-2 py-2 border-t border-green-200/50 flex justify-between items-center">
+<span class="text-[10px] text-green-700 font-medium">AutoVinci AI Catalog</span>
+<span class="text-[10px] text-green-700">12:30 PM</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex-[2] py-3 px-4 bg-[var(--success)] text-white font-bold rounded-2xl flex items-center justify-center gap-2 active:scale-95 transition-all">
+                            Send to 842 Leads
+                        </button>
+<button class="flex-1 py-3 px-4 bg-slate-100 text-[var(--text-primary)] font-bold rounded-2xl flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto bg-white/80 ios-blur border-t border-[var(--divider)] px-8 pt-3 pb-8 flex justify-between items-center z-50">
+<div class="flex flex-col items-center gap-1 text-[var(--text-secondary)]">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-[10px] font-medium">Inventory</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-[var(--primary)]">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-[10px] font-bold">Marketing</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-[var(--text-secondary)]">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-medium">Performance</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-[var(--text-secondary)]">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</div>
+</nav>
+
+</body></html>

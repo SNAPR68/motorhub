@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci Owner's Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#dab80b",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#16150d",
+                        "card-dark": "#221f10",
+                        "border-dark": "#342f18",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-effect {
+            background: rgba(52, 47, 24, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(218, 184, 11, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation / Header -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 pt-12 pb-4">
+<div class="flex items-center justify-between max-w-lg mx-auto">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-12 rounded-full border-2 border-primary/30 p-0.5">
+<img alt="User Profile" class="size-full rounded-full object-cover" data-alt="Professional headshot of a luxury car owner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW0M02mcug3jM7vLM1EMEbtE9xJyrgV8szLc_WA4ful_XF15_PcqSqicCRsNt6VChVm6nemW8CKosZyftzH2eGau11wji60ZLK6JjIe8VAjHMcvuBbgmusBgiMGEzGevP66VUQv3WHaR3_Kxxt24R4MvLaoWiQasvUxSZcTXW1XEzj0OQ-lubLbIAGJf7lzUeLgHpX2A3_6zbLMlpSeQUkMM0fe3U0Ni-JgGR9UBUAFPbDj9Vamfn2_CU9CFHZBWLykLR5-VC2pZQ"/>
+</div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-background-dark rounded-full"></div>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-primary/60 uppercase tracking-widest font-bold">Member Since 2022</p>
+<h1 class="text-xl font-bold tracking-tight">Welcome back, Alex</h1>
+</div>
+</div>
+<button class="size-10 flex items-center justify-center rounded-full bg-card-dark border border-border-dark text-primary">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+</div>
+</header>
+<main class="flex-1 w-full max-w-lg mx-auto px-6 pb-24">
+<!-- Hero Vehicle Card -->
+<section class="mt-6">
+<div class="relative overflow-hidden rounded-2xl bg-card-dark border border-border-dark shadow-2xl group">
+<div class="absolute top-4 right-4 z-10">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-background-dark text-[10px] font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">verified</span>
+                        Service Status: Perfect
+                    </span>
+</div>
+<div class="aspect-[16/10] w-full">
+<img alt="Porsche 911 GT3" class="w-full h-full object-cover" data-alt="Side profile of a dark grey Porsche 911 GT3 in a studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB326xvwhEaRD-AB8ZSAga1MxBJbLEV8gi1nLun9SCwWi87GiH3NLlfzvQ1mVtfVXjWY9dqRqlnHwUbfDJTfXpXrjgBBTN3iJ6kC9t3LM4_Xkc_S37SbYw40iQSWKZnBNhxIPsv1ZY4Vm5jBYkbbzF2KdsmbE5cHPzXpaX-e9M6J3LnWnk1WsxkuNhV_kaAVigdWRq8DqsOuunvig7VkzBeZAOCW6avdbX6bUyzDW1tcYgJV58zZyGVJqglqyBMxMXFvlvJCA9fqkk"/>
+</div>
+<div class="p-5 bg-gradient-to-t from-background-dark to-transparent">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-2xl font-bold text-white tracking-tight">2024 Porsche 911 GT3</h2>
+<p class="text-primary/80 font-mono text-sm mt-1">VIN: WP0AC2A98RS10245</p>
+</div>
+<button class="size-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">settings_input_component</span>
+</button>
+</div>
+<!-- Quick Stats Grid -->
+<div class="grid grid-cols-3 gap-4 mt-6 pt-4 border-t border-border-dark">
+<div class="text-center">
+<p class="text-[10px] uppercase text-slate-500 tracking-tighter">Fuel Level</p>
+<p class="text-lg font-bold">84%</p>
+</div>
+<div class="text-center border-x border-border-dark">
+<p class="text-[10px] uppercase text-slate-500 tracking-tighter">Odometer</p>
+<p class="text-lg font-bold">1,248 <span class="text-[10px] text-slate-500">mi</span></p>
+</div>
+<div class="text-center">
+<p class="text-[10px] uppercase text-slate-500 tracking-tighter">Tire PSI</p>
+<p class="text-lg font-bold text-primary">32.0</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Maintenance Assistant -->
+<section class="mt-8">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold tracking-tight">AI Maintenance Insight</h3>
+<span class="text-xs text-primary font-medium px-2 py-0.5 bg-primary/10 rounded">BETA</span>
+</div>
+<div class="p-5 rounded-2xl glass-effect border-l-4 border-l-primary flex items-center gap-5">
+<div class="relative size-16 flex-shrink-0">
+<svg class="size-full -rotate-90" viewbox="0 0 36 36">
+<circle class="stroke-border-dark" cx="18" cy="18" fill="none" r="16" stroke-width="3"></circle>
+<circle class="stroke-primary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100" stroke-dashoffset="25" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xs font-bold">45</span>
+<span class="text-[8px] uppercase text-slate-500">Days</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium leading-relaxed">
+                        Based on your aggressive driving patterns, we predict a <span class="text-primary font-bold">Brake Pad Check</span> in 45 days.
+                    </p>
+<button class="mt-2 text-primary text-xs font-bold uppercase tracking-wider flex items-center gap-1">
+                        Schedule early access <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Documents Vault -->
+<section class="mt-10">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold tracking-tight">Documents Vault</h3>
+<button class="text-xs text-primary font-bold">Manage All</button>
+</div>
+<div class="flex overflow-x-auto gap-4 pb-4 -mx-6 px-6 no-scrollbar">
+<!-- Title Card -->
+<div class="flex-none w-40 bg-card-dark border border-border-dark rounded-xl p-4 flex flex-col gap-3">
+<div class="size-10 rounded-lg bg-background-dark border border-border-dark flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">description</span>
+</div>
+<div>
+<p class="text-sm font-bold">Title</p>
+<p class="text-[10px] text-slate-500 mt-0.5">Digital Certified Copy</p>
+</div>
+<button class="mt-2 w-full py-2 bg-primary/10 rounded-lg text-primary text-[10px] font-bold uppercase tracking-widest">Open</button>
+</div>
+<!-- Insurance Card -->
+<div class="flex-none w-40 bg-card-dark border border-border-dark rounded-xl p-4 flex flex-col gap-3">
+<div class="size-10 rounded-lg bg-background-dark border border-border-dark flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">shield</span>
+</div>
+<div>
+<p class="text-sm font-bold">Insurance</p>
+<p class="text-[10px] text-slate-500 mt-0.5">Policy Ends Dec 2024</p>
+</div>
+<button class="mt-2 w-full py-2 bg-primary/10 rounded-lg text-primary text-[10px] font-bold uppercase tracking-widest">Open</button>
+</div>
+<!-- Service History Card -->
+<div class="flex-none w-40 bg-card-dark border border-border-dark rounded-xl p-4 flex flex-col gap-3">
+<div class="size-10 rounded-lg bg-background-dark border border-border-dark flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">history</span>
+</div>
+<div>
+<p class="text-sm font-bold">Service Log</p>
+<p class="text-[10px] text-slate-500 mt-0.5">12 Digital Records</p>
+</div>
+<button class="mt-2 w-full py-2 bg-primary/10 rounded-lg text-primary text-[10px] font-bold uppercase tracking-widest">Open</button>
+</div>
+</div>
+</section>
+<!-- Additional Services -->
+<section class="mt-8 mb-10">
+<h3 class="text-lg font-bold tracking-tight mb-4">Premium Services</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-card-dark border border-border-dark rounded-2xl p-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">support_agent</span>
+<span class="text-sm font-medium">Concierge</span>
+</div>
+<div class="bg-card-dark border border-border-dark rounded-2xl p-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">local_car_wash</span>
+<span class="text-sm font-medium">Valet Detail</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-dark/90 backdrop-blur-xl border-t border-border-dark px-6 pt-3 pb-8 z-[100]">
+<div class="max-w-lg mx-auto flex items-center justify-between">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">house</span>
+<span class="text-[10px] font-bold tracking-wide">HOME</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">garage</span>
+<span class="text-[10px] font-bold tracking-wide">GARAGE</span>
+</a>
+<div class="relative -mt-10">
+<button class="size-14 rounded-full bg-primary text-background-dark shadow-xl shadow-primary/20 flex items-center justify-center border-4 border-background-dark">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold tracking-wide">INSIGHTS</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold tracking-wide">PROFILE</span>
+</a>
+</div>
+</nav>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Service Logistics | Autovinci Luxury Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#dab80b",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#0a0a0a",
+                        "card-dark": "#161616",
+                        "border-dark": "#2a2a2a"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(22, 22, 22, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(218, 184, 11, 0.1);
+        }
+        .map-gradient-overlay {
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.8) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display selection:bg-primary/30">
+<div class="relative flex h-screen max-w-md mx-auto flex-col overflow-hidden shadow-2xl bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="flex items-center justify-between px-6 pt-12 pb-4">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-200 dark:bg-border-dark text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-[20px]">arrow_back_ios_new</span>
+</button>
+<div class="text-center">
+<h1 class="text-lg font-bold tracking-tight">Service Logistics</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-primary font-medium">Step 3 of 4</p>
+</div>
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-200 dark:bg-border-dark text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+</button>
+</header>
+<!-- Main Content Scroll Area -->
+<main class="flex-1 overflow-y-auto px-6 pb-32">
+<!-- Stepper Progress -->
+<div class="flex w-full items-center justify-center gap-2 py-6">
+<div class="h-1 w-8 rounded-full bg-primary"></div>
+<div class="h-1 w-8 rounded-full bg-primary"></div>
+<div class="h-1 w-12 rounded-full bg-primary shadow-[0_0_10px_rgba(218,184,11,0.5)]"></div>
+<div class="h-1 w-8 rounded-full bg-slate-300 dark:bg-border-dark"></div>
+</div>
+<!-- Logistics Toggle -->
+<div class="mb-8">
+<div class="flex h-12 w-full items-center gap-1 rounded-xl bg-slate-200 dark:bg-card-dark p-1 border border-slate-300 dark:border-border-dark">
+<label class="flex h-full flex-1 cursor-pointer items-center justify-center rounded-lg px-2 transition-all has-[:checked]:bg-primary has-[:checked]:text-background-dark text-slate-500 dark:text-slate-400">
+<input checked="" class="hidden" name="logistics" type="radio"/>
+<span class="text-sm font-semibold tracking-wide">Valet Pick-up</span>
+</label>
+<label class="flex h-full flex-1 cursor-pointer items-center justify-center rounded-lg px-2 transition-all has-[:checked]:bg-primary has-[:checked]:text-background-dark text-slate-500 dark:text-slate-400">
+<input class="hidden" name="logistics" type="radio"/>
+<span class="text-sm font-semibold tracking-wide">Self Drop-off</span>
+</label>
+</div>
+<p class="mt-3 text-center text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">Our concierge will handle the details of your vehicle recovery.</p>
+</div>
+<!-- Map Module -->
+<div class="relative mb-8 overflow-hidden rounded-2xl border border-slate-300 dark:border-border-dark aspect-[4/3]">
+<div class="absolute inset-0 bg-center bg-cover" data-alt="Dark themed map with custom gold route and location pins" data-location="Los Angeles" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCBTaU7EJVcOnmv7HP_3-W7Jx6niytn5JWwBIdKnll65XpvLSkd0hRyj_vTtMUJGsoFgP7en2BJUNsfUfyp-xPE6YLWeKl10Up2wFnrfXComLjoMBXPLXRGvvRKGmqjZ5sKtL1tyHrUkfsiP07tPEl2X1d3uBh4cftLiq2ty4K7TpLw2BcKeOWWyBB2ufAkghgQYfWR2w2UurXOv22iBeFKTd4sh_U8Rwag5J-tPI86FCsKBZ-X6V0Wpp-80g8tBF1YQtnOfsR-KsA');"></div>
+<div class="absolute inset-0 map-gradient-overlay"></div>
+<!-- Map Overlays -->
+<div class="absolute top-4 left-4 right-4 flex justify-between items-start">
+<div class="glass-panel p-3 rounded-xl flex items-center gap-3">
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-[18px]">home</span>
+</div>
+<div>
+<p class="text-[10px] uppercase text-slate-400 font-bold tracking-wider">Origin</p>
+<p class="text-xs font-semibold">124 Bel Air Rd</p>
+</div>
+</div>
+</div>
+<div class="absolute bottom-4 left-4 right-4 glass-panel p-4 rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-xs font-medium text-primary uppercase tracking-widest">Live Estimate</span>
+</div>
+<span class="text-xs font-bold">14 Mins Away</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold">Autovinci Beverly Hills</h4>
+<p class="text-[11px] text-slate-400">Certified Master Technicians</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Concierge Notes -->
+<div class="mb-12">
+<div class="flex items-center justify-between mb-3 px-1">
+<label class="text-sm font-bold uppercase tracking-widest text-slate-400">Concierge Notes</label>
+<span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+</div>
+<div class="relative">
+<textarea class="w-full h-32 rounded-xl bg-slate-200 dark:bg-card-dark border border-slate-300 dark:border-border-dark p-4 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-slate-500 dark:placeholder:text-slate-600 resize-none" placeholder="Specify any special requests for our master technicians (e.g., 'Check brake noise', 'Detail interior')..."></textarea>
+</div>
+</div>
+</main>
+<!-- Bottom Slider Action -->
+<div class="absolute bottom-0 left-0 right-0 p-6 pb-10 bg-gradient-to-t from-background-light dark:from-background-dark via-background-light dark:via-background-dark to-transparent">
+<div class="relative flex h-16 w-full items-center overflow-hidden rounded-full bg-slate-200 dark:bg-card-dark border border-slate-300 dark:border-border-dark p-1">
+<!-- Track Text -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="text-sm font-bold uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500 pl-8">Slide to Confirm</span>
+</div>
+<!-- Slider Knob -->
+<div class="relative z-10 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-primary text-background-dark shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined font-bold">keyboard_double_arrow_right</span>
+</div>
+</div>
+</div>
+<!-- iOS Bottom Bar Component (Repurposed for Navigation) -->
+<nav class="absolute bottom-0 left-0 right-0 z-20 flex border-t border-slate-200 dark:border-border-dark bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 pb-4 pt-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Inventory</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">build</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Service</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Alerts</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Account</p>
+</a>
+</nav>
+</div>
+</body></html>

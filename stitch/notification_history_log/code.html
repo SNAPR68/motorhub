@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notification History Log | Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "matte-black": "#0a0c10",
+                        "silver": "#cbd5e1"
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"],
+                        "sans": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, #232f48 10%, #232f48 90%, transparent);
+        }
+        .glossy-card {
+            background: linear-gradient(145deg, rgba(25, 34, 51, 0.8) 0%, rgba(16, 22, 34, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .silver-text {
+            color: #e2e8f0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-matte-black dark group/design-root overflow-x-hidden max-w-md mx-auto shadow-2xl">
+<!-- Header -->
+<div class="sticky top-0 z-50 bg-matte-black/80 backdrop-blur-md border-b border-white/5">
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="text-silver flex size-10 shrink-0 items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</div>
+<h2 class="text-white text-xl font-display font-semibold leading-tight tracking-tight flex-1 text-center">History Log</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="text-silver">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="px-4 py-3">
+<label class="flex flex-col min-w-40 h-11 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-900/50 border border-white/10 overflow-hidden">
+<div class="text-slate-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:outline-0 focus:ring-0 text-slate-100 placeholder:text-slate-500 text-sm font-sans" placeholder="Search recipient or car model..." value=""/>
+</div>
+</label>
+</div>
+<!-- Filters -->
+<div class="px-4 pb-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-[10px] uppercase tracking-widest text-slate-500 font-sans font-bold">Filter Channel</span>
+<span class="text-[10px] uppercase tracking-widest text-slate-500 font-sans font-bold">Filter Type</span>
+</div>
+<div class="flex justify-between gap-4">
+<div class="flex gap-2">
+<div class="flex h-8 items-center justify-center gap-2 rounded-full bg-primary/10 border border-primary/30 px-3 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary text-sm">chat_bubble</span>
+<p class="text-primary text-xs font-medium font-sans">WhatsApp</p>
+</div>
+<div class="flex h-8 items-center justify-center gap-2 rounded-full bg-slate-800/50 border border-white/5 px-3 transition-all cursor-pointer opacity-60">
+<span class="material-symbols-outlined text-white text-sm">mail</span>
+<p class="text-white text-xs font-medium font-sans">Email</p>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="flex h-8 items-center justify-center rounded-full bg-primary/20 border border-primary/50 px-3 cursor-pointer">
+<p class="text-primary text-xs font-medium font-sans">Lead</p>
+</div>
+<div class="flex h-8 items-center justify-center rounded-full bg-slate-800/50 border border-white/5 px-3 cursor-pointer opacity-60">
+<p class="text-white text-xs font-medium font-sans">System</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline Content -->
+<div class="relative flex-1 px-4 py-6 timeline-line">
+<!-- Entry 1: Expanded -->
+<div class="relative pl-10 mb-8">
+<!-- Timeline Dot -->
+<div class="absolute left-[13px] top-1 size-4 rounded-full bg-primary shadow-[0_0_10px_#135bec] border-4 border-matte-black z-10"></div>
+<div class="glossy-card rounded-xl p-4 shadow-xl">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-slate-100 font-display text-lg font-bold">Julian Thorne</h3>
+<p class="text-slate-400 text-xs font-sans">2023 Porsche 911 GT3 RS</p>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-slate-500 text-[10px] font-sans">2m ago</span>
+<span class="px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 text-[10px] font-bold uppercase tracking-tighter border border-green-500/20">Replied</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5">
+<div class="flex items-center gap-3 mb-3">
+<div class="size-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">chat_bubble</span>
+</div>
+<div class="flex-1">
+<p class="text-slate-300 text-sm leading-relaxed font-sans italic">"Hello Julian, we just received the allocation for the GT3 RS in Shark Blue. Are you still interested?"</p>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-sans font-bold py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors">
+                            View Lead Profile
+                            <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="relative pl-10 mb-8">
+<div class="absolute left-[13px] top-1 size-4 rounded-full bg-slate-700 border-4 border-matte-black z-10"></div>
+<div class="glossy-card rounded-xl p-4 opacity-80">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-slate-200 font-display text-lg font-bold">Eleanor Vance</h3>
+<p class="text-slate-500 text-xs font-sans">2024 Range Rover Autobiography</p>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-slate-500 text-[10px] font-sans">14:30 PM</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">done_all</span>
+<span class="text-slate-400 text-[10px] font-bold uppercase">Read</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Entry 3 -->
+<div class="relative pl-10 mb-8">
+<div class="absolute left-[13px] top-1 size-4 rounded-full bg-slate-700 border-4 border-matte-black z-10"></div>
+<div class="glossy-card rounded-xl p-4 opacity-80">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-slate-200 font-display text-lg font-bold">Marcus Sterling</h3>
+<p class="text-slate-500 text-xs font-sans">2022 Ferrari SF90 Stradale</p>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-slate-500 text-[10px] font-sans">11:15 AM</span>
+<span class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 text-[10px] font-bold uppercase border border-white/5">Delivered</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Entry 4 -->
+<div class="relative pl-10 mb-8">
+<div class="absolute left-[13px] top-1 size-4 rounded-full bg-slate-700 border-4 border-matte-black z-10"></div>
+<div class="glossy-card rounded-xl p-4 opacity-60">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-slate-200 font-display text-lg font-bold">System Alert</h3>
+<p class="text-slate-500 text-xs font-sans">Inventory Sync Completed</p>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-slate-500 text-[10px] font-sans">09:00 AM</span>
+<span class="material-symbols-outlined text-sm text-slate-500">settings_suggest</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Entry 5 -->
+<div class="relative pl-10 mb-8">
+<div class="absolute left-[13px] top-1 size-4 rounded-full bg-red-500/50 border-4 border-matte-black z-10"></div>
+<div class="glossy-card rounded-xl p-4 border-red-500/20">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-slate-200 font-display text-lg font-bold">Silas Thorne</h3>
+<p class="text-slate-500 text-xs font-sans">2023 Lamborghini Huracán Tecnica</p>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-slate-500 text-[10px] font-sans">Yesterday</span>
+<span class="text-red-400 text-[10px] font-bold uppercase">Bounced</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Space for Scroll Bottom Padding -->
+<div class="h-24"></div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50">
+<div class="flex gap-2 border-t border-white/5 bg-matte-black/95 backdrop-blur-xl px-4 pb-8 pt-3 shadow-2xl">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 transition-colors hover:text-white" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">directions_car</span>
+</div>
+<p class="text-[10px] font-medium leading-normal uppercase tracking-wider font-sans">Inventory</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 transition-colors hover:text-white" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">group</span>
+</div>
+<p class="text-[10px] font-medium leading-normal uppercase tracking-wider font-sans">Leads</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">history</span>
+</div>
+<p class="text-[10px] font-medium leading-normal uppercase tracking-wider font-sans">History</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 transition-colors hover:text-white" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<p class="text-[10px] font-medium leading-normal uppercase tracking-wider font-sans">Market</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 transition-colors hover:text-white" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</div>
+<p class="text-[10px] font-medium leading-normal uppercase tracking-wider font-sans">Settings</p>
+</a>
+</div>
+</div>
+</div>
+</body></html>

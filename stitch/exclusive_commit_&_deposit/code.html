@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Exclusive Commit &amp; Deposit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d73c9",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0a0c10",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .slider-track {
+            background: linear-gradient(90deg, rgba(29, 115, 201, 0.1) 0%, rgba(29, 115, 201, 0.05) 100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Main Container (Mobile Viewport) -->
+<div class="relative flex h-screen w-full flex-col overflow-hidden max-w-md mx-auto border-x border-slate-200 dark:border-slate-800">
+<!-- Header -->
+<header class="flex items-center justify-between px-6 pt-12 pb-6">
+<button class="flex items-center justify-center size-10 rounded-full bg-slate-100 dark:bg-slate-800/50">
+<span class="material-symbols-outlined text-[20px]">arrow_back_ios_new</span>
+</button>
+<h1 class="text-sm font-semibold tracking-[0.2em] uppercase">Commit &amp; Deposit</h1>
+<div class="size-10"></div> <!-- Spacer for symmetry -->
+</header>
+<main class="flex-1 overflow-y-auto hide-scrollbar px-6 pb-32">
+<!-- Reservation Status Timeline -->
+<div class="mt-4 mb-10">
+<div class="flex items-center justify-between relative">
+<!-- Progress Line Background -->
+<div class="absolute top-[11px] left-0 w-full h-[1px] bg-slate-200 dark:bg-slate-800"></div>
+<!-- Active Progress Line -->
+<div class="absolute top-[11px] left-0 w-1/2 h-[1px] bg-primary"></div>
+<!-- Steps -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="size-[22px] rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[14px] font-bold">check</span>
+</div>
+<span class="text-[10px] uppercase tracking-widest font-medium text-slate-400">Selection</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="size-[22px] rounded-full bg-background-dark border-2 border-primary flex items-center justify-center">
+<div class="size-1.5 rounded-full bg-primary"></div>
+</div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-primary">Deposit</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="size-[22px] rounded-full bg-background-dark border border-slate-700 flex items-center justify-center">
+</div>
+<span class="text-[10px] uppercase tracking-widest font-medium text-slate-500">Handover</span>
+</div>
+</div>
+</div>
+<!-- Hero Image Section -->
+<div class="relative group rounded-xl overflow-hidden aspect-[4/5] mb-12 shadow-2xl">
+<img alt="Premium sports car profile" class="w-full h-full object-cover" data-alt="Side profile of a dark luxury sports car in a studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVvvMTuZK0MSYYQZpoTOomS_jSNRZv4fZvUGWlNi7dzgYfUCChGLTEHCr0Y3iS86pfRycGdrVfmVd0EFYliP7aKERDcI1uNUEhWH6YKDlH-kmuhRNk6pn3rCH0_VBJyB6OzGJ8j5-DxP_3Fc-OhrINDaEPAIbNIkfvE0ryUUm3k0Qw7VHaELHL9VLi3aooCcyAIMvV6ikbzZcm0-hlp95w-6NrCvju8tyX-xMJjDmfYdsZpH33hxM5sQ1uXFuo_hFXF9W9XPqTExk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<p class="text-[10px] uppercase tracking-[0.3em] text-primary font-bold mb-1">Available Now</p>
+<h2 class="text-2xl font-light tracking-tight">2024 Vinci GT-S Limited</h2>
+</div>
+</div>
+<!-- Summary of Fees (Minimalist Table) -->
+<div class="space-y-8">
+<h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400">Financial Summary</h3>
+<div class="space-y-5">
+<div class="flex justify-between items-baseline">
+<span class="text-sm font-light text-slate-400">Vehicle Base Price</span>
+<span class="text-sm font-medium tracking-tight">$184,500.00</span>
+</div>
+<div class="flex justify-between items-baseline">
+<span class="text-sm font-light text-slate-400">Exclusive Option Pack</span>
+<span class="text-sm font-medium tracking-tight">$12,400.00</span>
+</div>
+<div class="flex justify-between items-baseline">
+<span class="text-sm font-light text-slate-400">Documentation &amp; Logistics</span>
+<span class="text-sm font-medium tracking-tight">$1,250.00</span>
+</div>
+<div class="pt-5 border-t border-slate-800 flex justify-between items-baseline">
+<span class="text-base font-light">Total Commitment</span>
+<span class="text-xl font-bold tracking-tighter">$198,150.00</span>
+</div>
+<div class="flex justify-between items-baseline py-4 px-4 rounded-lg bg-primary/5 border border-primary/20">
+<span class="text-sm font-medium text-primary">Required Deposit</span>
+<span class="text-lg font-bold text-primary tracking-tighter">$5,000.00</span>
+</div>
+</div>
+<!-- Private Consultation Checkbox -->
+<label class="flex items-center gap-4 p-5 rounded-xl border border-slate-800 bg-slate-900/20 cursor-pointer group transition-all hover:bg-slate-900/40">
+<div class="relative flex items-center">
+<input class="peer appearance-none size-5 rounded border border-slate-700 bg-transparent checked:bg-primary checked:border-primary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-white text-[16px] left-0.5 opacity-0 peer-checked:opacity-100 transition-opacity">check</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium leading-none mb-1">Request Private Consultation</p>
+<p class="text-[11px] text-slate-500 font-light">A dedicated specialist will contact you within 2 hours.</p>
+</div>
+</label>
+</div>
+<div class="mt-10 p-4 rounded-lg bg-slate-900/40 border border-slate-800/50">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">info</span>
+<p class="text-[11px] leading-relaxed text-slate-400 font-light">
+                        Deposits are fully refundable within 48 hours of commitment. Final verification and contract signing will occur during your personalized handover.
+                    </p>
+</div>
+</div>
+</main>
+<!-- Fixed Action Zone -->
+<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-background-dark via-background-dark/95 to-transparent pt-10">
+<!-- Haptic Feedback Slider -->
+<div class="relative h-16 w-full rounded-full bg-slate-900 border border-slate-800 overflow-hidden flex items-center p-1.5 slider-track">
+<!-- Track Label -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="text-[12px] font-bold uppercase tracking-[0.3em] text-slate-500 pl-8">Slide to Commit</span>
+</div>
+<!-- Slider Handle -->
+<div class="h-full aspect-square rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/20 z-10 cursor-grab active:cursor-grabbing">
+<span class="material-symbols-outlined text-white text-[24px]">double_arrow</span>
+</div>
+<!-- Subtle Animated Particles (Placeholder for visual flair) -->
+<div class="absolute right-6 opacity-20">
+<div class="flex gap-1">
+<div class="size-1 rounded-full bg-primary"></div>
+<div class="size-1 rounded-full bg-primary/60"></div>
+<div class="size-1 rounded-full bg-primary/30"></div>
+</div>
+</div>
+</div>
+<!-- Home Indicator (iOS Style) -->
+<div class="w-32 h-1 bg-slate-800 rounded-full mx-auto mt-8"></div>
+</div>
+</div>
+<!-- Bottom Navigation Bar Overlay -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md hidden">
+<div class="flex gap-2 border-t border-slate-800 bg-background-dark px-4 pb-8 pt-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">home</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">search</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">garage</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">notifications</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</div>
+</nav>
+</body></html>

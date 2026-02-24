@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Buyer Alert Preferences - Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#dab80b",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#0a0a0a",
+                        "surface-dark": "#161616",
+                        "border-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display selection:bg-primary/30">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden max-w-[430px] mx-auto bg-background-light dark:bg-background-dark shadow-2xl">
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 border-b border-slate-200 dark:border-border-dark">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">arrow_back_ios_new</span>
+</button>
+<h1 class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">VIP Alert Settings</h1>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</button>
+</header>
+<main class="flex-1 overflow-y-auto custom-scrollbar pb-32">
+<!-- Hero Description -->
+<div class="px-6 pt-8 pb-4">
+<h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">Tailored Intelligence</h2>
+<p class="mt-2 text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Customize your concierge experience. Get real-time updates on rare inventory and market movements.</p>
+</div>
+<!-- Email Briefings Section -->
+<section class="mt-6 px-4">
+<div class="flex items-center gap-2 px-2 mb-4">
+<span class="material-symbols-outlined text-primary text-xl">mail</span>
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400">Email Briefings</h3>
+</div>
+<div class="space-y-3">
+<!-- Toggle 1 -->
+<div class="group flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-surface-dark border border-slate-100 dark:border-border-dark transition-all">
+<div class="flex flex-col gap-1 pr-4">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-100">New Arrivals in My Collection</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Immediate notifications for bookmarked marques.</span>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<div class="peer h-6 w-11 rounded-full bg-slate-200 dark:bg-slate-800 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white focus:outline-none"></div>
+</label>
+</div>
+<!-- Toggle 2 -->
+<div class="group flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-surface-dark border border-slate-100 dark:border-border-dark transition-all">
+<div class="flex flex-col gap-1 pr-4">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-100">Price Change Alerts</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Instant updates on value shifts for watchlisted vehicles.</span>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input class="peer sr-only" type="checkbox"/>
+<div class="peer h-6 w-11 rounded-full bg-slate-200 dark:bg-slate-800 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white focus:outline-none"></div>
+</label>
+</div>
+<!-- Frequency Selector -->
+<div class="p-4 rounded-2xl bg-white dark:bg-surface-dark border border-slate-100 dark:border-border-dark transition-all">
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-100">Delivery Frequency</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">How often should we reach out?</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-slate-100 dark:bg-border-dark text-xs font-bold text-primary px-4 py-2 pr-8 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary border-none">
+<option>Instant</option>
+<option selected="">Daily Digest</option>
+<option>Weekly Report</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-xs pointer-events-none text-primary">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- WhatsApp Concierge Section -->
+<section class="mt-10 px-4">
+<div class="flex items-center gap-2 px-2 mb-4">
+<span class="material-symbols-outlined text-green-500 text-xl">chat</span>
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400">WhatsApp Concierge</h3>
+</div>
+<div class="space-y-3">
+<div class="group flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-surface-dark border border-slate-100 dark:border-border-dark transition-all">
+<div class="flex flex-col gap-1 pr-4">
+<div class="flex items-center gap-2">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-100">Concierge Personal Responses</span>
+<span class="flex size-2 rounded-full bg-green-500 animate-pulse"></span>
+</div>
+<span class="text-xs text-slate-500 dark:text-slate-400">Direct 1-on-1 access to our procurement team.</span>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<div class="peer h-6 w-11 rounded-full bg-slate-200 dark:bg-slate-800 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white focus:outline-none"></div>
+</label>
+</div>
+<div class="group flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-surface-dark border border-slate-100 dark:border-border-dark transition-all">
+<div class="flex flex-col gap-1 pr-4">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-100">Urgent Inventory Alerts</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Exclusive early-access to off-market listings.</span>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<div class="peer h-6 w-11 rounded-full bg-slate-200 dark:bg-slate-800 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white focus:outline-none"></div>
+</label>
+</div>
+<div class="flex items-center gap-3 p-4 rounded-2xl bg-primary/5 dark:bg-primary/10 border border-primary/20">
+<span class="material-symbols-outlined text-primary">phone_iphone</span>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-primary tracking-wider">Connected Account</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">+1 (555) •••• 8802</span>
+</div>
+<button class="ml-auto text-xs font-bold text-primary hover:underline">Edit</button>
+</div>
+</div>
+</section>
+<!-- Global Settings -->
+<section class="mt-10 px-4 mb-10">
+<div class="flex items-center gap-2 px-2 mb-4">
+<span class="material-symbols-outlined text-slate-400 text-xl">settings</span>
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400">Preferences</h3>
+</div>
+<div class="space-y-1">
+<button class="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors">
+<div class="flex flex-col text-left">
+<span class="text-sm font-semibold">Quiet Hours</span>
+<span class="text-xs text-slate-500">Currently: 22:00 — 07:00</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors">
+<div class="flex flex-col text-left">
+<span class="text-sm font-semibold">Timezone</span>
+<span class="text-xs text-slate-500">Eastern Standard Time (GMT-5)</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation / Save Button Area -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] p-6 bg-gradient-to-t from-background-light dark:from-background-dark via-background-light/95 dark:via-background-dark/95 to-transparent backdrop-blur-sm">
+<button class="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 rounded-2xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
+                Save Preferences
+            </button>
+</div>
+<!-- IOS Indicator -->
+<div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-300 dark:bg-border-dark rounded-full"></div>
+</div>
+</body></html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Access Roles &amp; Permissions - Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2b90d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#121210",
+                        "card-dark": "#1c1c18",
+                        "border-dark": "#2d2a1e",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-effect {
+            background: rgba(28, 28, 24, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display selection:bg-primary/30">
+<!-- Main Container (Phone Form Factor) -->
+<div class="relative mx-auto min-h-screen max-w-[430px] flex flex-col overflow-hidden shadow-2xl border-x border-border-dark/50">
+<!-- Header -->
+<header class="sticky top-0 z-30 glass-effect border-b border-border-dark/50 px-4 py-4 flex items-center justify-between">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-slate-100">arrow_back_ios_new</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight text-slate-100 uppercase letter-spacing-[0.05em]">Role Configuration</h1>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-primary">info</span>
+</button>
+</header>
+<!-- Content -->
+<main class="flex-1 overflow-y-auto no-scrollbar pb-32">
+<!-- Section: Premium Roles Carousel -->
+<section class="mt-6">
+<div class="px-4 mb-4 flex justify-between items-end">
+<h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-500">Select Access Tier</h2>
+<span class="text-[10px] font-bold text-primary px-2 py-0.5 border border-primary/30 rounded-full bg-primary/5 uppercase">Premium Suite</span>
+</div>
+<div class="flex overflow-x-auto gap-4 px-4 no-scrollbar snap-x snap-mandatory">
+<!-- The Director Role -->
+<div class="snap-center shrink-0 w-72 group">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden border-2 border-primary bg-card-dark p-6 flex flex-col justify-end shadow-[0_0_20px_rgba(242,185,13,0.15)] transition-all duration-300">
+<img class="absolute inset-0 size-full object-cover opacity-40 mix-blend-luminosity group-hover:scale-110 transition-transform duration-700" data-alt="Modern high-end luxury office interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVZkYTSsONXetiVL3fXk4p2hNiKJA16DHwAG0wBJeR7x5c3mD-Y2k0ho5c8cqWsslzcvAhEBUZYriExa3nEnxlIIzwaWrxreKbPwxKVPtva_2vVrRzgSipONmzlekbvXfDVHbwuSS-R2cc2uQ9Dbjxk018FR4Cc3SpDczLir77jqMaZKgDH5CVve-sEXnphg_hB4ew9Rs0h-LzgpCZ4V_-0cngil04Ksmb7RgqaRPclxTpr7uDk3MK1byDLz52xzk9t_Mrcn1VGWs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/40 to-transparent"></div>
+<div class="relative z-10">
+<span class="bg-primary text-background-dark px-2 py-1 text-[10px] font-black uppercase rounded mb-2 inline-block">Tier 1</span>
+<h3 class="text-2xl font-extrabold text-slate-100">The Director</h3>
+<p class="text-slate-400 text-sm mt-1 leading-relaxed">Supreme oversight with global administrative control and AI strategy.</p>
+</div>
+</div>
+</div>
+<!-- The Closer Role -->
+<div class="snap-center shrink-0 w-72 group">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden border border-border-dark bg-card-dark p-6 flex flex-col justify-end transition-all duration-300">
+<img class="absolute inset-0 size-full object-cover opacity-30 mix-blend-luminosity group-hover:scale-110 transition-transform duration-700" data-alt="Luxury car dashboard detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKvi4vcFlnUlezvoM8-lNpWfSJrFDAfIzr3wZcm9Cwaz9HckBLXwJfwaP2pFd9cfngv5E5CwYpyGSnDaIN-Bf4rtdThUz5iYxqqnr2s2LYPb9tuLWE89BSdbWoSf5U7DbRFi9awjga07kwUk7s3utfAJaw83KKhYYS2uUBxeC8_Lk51w89w-BVzkRodl-PnFpstl_rqjOZmPv0V51pBAV4-mcz89WsBm2ivivEkCHR1wHO6cjRAa-3Ar-7JvjStKSipX5cUA1VtEA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/60 to-transparent"></div>
+<div class="relative z-10">
+<span class="bg-slate-700 text-slate-200 px-2 py-1 text-[10px] font-black uppercase rounded mb-2 inline-block">Tier 2</span>
+<h3 class="text-2xl font-extrabold text-slate-100">The Closer</h3>
+<p class="text-slate-400 text-sm mt-1 leading-relaxed">Optimized for sales conversion, lead management, and negotiation.</p>
+</div>
+</div>
+</div>
+<!-- The Creative Role -->
+<div class="snap-center shrink-0 w-72 group">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden border border-border-dark bg-card-dark p-6 flex flex-col justify-end transition-all duration-300">
+<img class="absolute inset-0 size-full object-cover opacity-30 mix-blend-luminosity group-hover:scale-110 transition-transform duration-700" data-alt="High tech design studio workstation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkCN0qzQuDwbjFNbeyxlkmfjUQnCeFDXoiDLSXE3yi7FGG_VUKg7kad6mezd5pozxnmTFT3XZY70z4lT_yqTrTAURr1Uh8TfAhuh6vH8hWdAhvHLhrKkLAVUMJ3fLF7liG63htsa6Pw0ubqlUC-e2qpZw1Chvx28bC7seqIxpVObcFBQv5UJ8ZZ5ltGZ2Ppu9AFEEb84F-Ej4teDioBp4KW2c_TdemqpkCs7CaDqka99S99uQfNEKw11OOMTruC9hE-kVhSu-owr8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/60 to-transparent"></div>
+<div class="relative z-10">
+<span class="bg-slate-700 text-slate-200 px-2 py-1 text-[10px] font-black uppercase rounded mb-2 inline-block">Tier 2</span>
+<h3 class="text-2xl font-extrabold text-slate-100">The Creative</h3>
+<p class="text-slate-400 text-sm mt-1 leading-relaxed">Content engine focus: marketing assets, listing polish, and ads.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: AI Capabilities -->
+<section class="mt-8 px-4">
+<h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-500 mb-4">AI-Powered Capabilities</h2>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-4 rounded-xl border border-primary/20 bg-primary/5">
+<div class="size-12 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">auto_graph</span>
+</div>
+<div class="flex-1">
+<h4 class="text-slate-100 font-bold text-sm">Predictive Inventory Forecasting</h4>
+<p class="text-slate-400 text-xs">Proprietary AI analyzes market trends to suggest stock buys.</p>
+</div>
+<span class="material-symbols-outlined text-primary/40">verified</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl border border-border-dark bg-card-dark">
+<div class="size-12 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-slate-400">monitoring</span>
+</div>
+<div class="flex-1">
+<h4 class="text-slate-100 font-bold text-sm">Financial Oversight &amp; P&amp;L</h4>
+<p class="text-slate-400 text-xs">Real-time reporting on dealership profitability and margins.</p>
+</div>
+<span class="material-symbols-outlined text-slate-600">lock</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl border border-border-dark bg-card-dark">
+<div class="size-12 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-slate-400">neurology</span>
+</div>
+<div class="flex-1">
+<h4 class="text-slate-100 font-bold text-sm">Smart Lead Routing</h4>
+<p class="text-slate-400 text-xs">Automated distribution of inquiries based on closer performance.</p>
+</div>
+<span class="material-symbols-outlined text-slate-600">lock</span>
+</div>
+</div>
+</section>
+<!-- Section: Permissions Toggle -->
+<section class="mt-8 px-4">
+<h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-500 mb-4">Granular Permissions</h2>
+<div class="divide-y divide-border-dark bg-card-dark rounded-xl border border-border-dark overflow-hidden">
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">directions_car</span>
+<span class="text-sm font-medium text-slate-200">Inventory Management</span>
+</div>
+<div class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-primary transition-colors duration-200 ease-in-out">
+<span class="translate-x-5 pointer-events-none inline-block size-5 transform rounded-full bg-background-dark shadow ring-0 transition duration-200 ease-in-out"></span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">payments</span>
+<span class="text-sm font-medium text-slate-200">Pricing Controls</span>
+</div>
+<div class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-primary transition-colors duration-200 ease-in-out">
+<span class="translate-x-5 pointer-events-none inline-block size-5 transform rounded-full bg-background-dark shadow ring-0 transition duration-200 ease-in-out"></span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 opacity-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">campaign</span>
+<span class="text-sm font-medium text-slate-200">Ad Campaign Creation</span>
+</div>
+<div class="relative inline-flex h-6 w-11 shrink-0 cursor-not-allowed rounded-full border-2 border-transparent bg-slate-700 transition-colors duration-200 ease-in-out">
+<span class="translate-x-0 pointer-events-none inline-block size-5 transform rounded-full bg-background-dark shadow ring-0 transition duration-200 ease-in-out"></span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Bar: Add User -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40">
+<!-- Navigation -->
+<nav class="flex items-center justify-around glass-effect border-t border-border-dark px-4 py-3">
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined fill-[1]">group</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Team</span>
+</a>
+<div class="relative -top-8 size-14 rounded-full bg-primary flex items-center justify-center shadow-[0_4px_20px_rgba(242,185,13,0.4)] border-4 border-background-dark">
+<span class="material-symbols-outlined text-background-dark font-black text-3xl">add</span>
+</div>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Insights</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Config</span>
+</a>
+</nav>
+<!-- Search/Add User Flyout (Partially Visible) -->
+<div class="bg-card-dark p-4 border-t border-border-dark flex items-center gap-3">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">mail</span>
+<input class="w-full bg-background-dark border-border-dark rounded-lg py-3 pl-10 pr-4 text-slate-100 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Add member by email..." type="email"/>
+</div>
+<button class="bg-primary text-background-dark px-4 py-3 rounded-lg font-bold text-sm uppercase tracking-wide">
+                    Invite
+                </button>
+</div>
+</div>
+</div>
+</body></html>

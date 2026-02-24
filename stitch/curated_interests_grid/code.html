@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Curated Interests Grid - Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0a0c10",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col max-w-[430px] mx-auto bg-background-light dark:bg-background-dark shadow-2xl overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/50">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[24px]">arrow_back_ios_new</span>
+</button>
+<h1 class="text-sm font-bold tracking-[0.2em] uppercase">Saved Collection</h1>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[24px]">share</span>
+</button>
+</header>
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Grid Title -->
+<div class="px-6 pt-8 pb-4 flex justify-between items-end">
+<div>
+<p class="text-[10px] font-bold text-primary tracking-[0.3em] uppercase mb-1">Portfolio</p>
+<h2 class="text-2xl font-light tracking-tight">Curated Grid</h2>
+</div>
+<span class="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-widest">4 Items</span>
+</div>
+<!-- 2x2 Interest Grid -->
+<div class="grid grid-cols-2 gap-3 px-6 pb-10">
+<!-- Grid Card 1 -->
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Sleek black Porsche 911 silhouette background" style='background-image: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuC-wK8nFCwlwg2HQvpzU7MeZ3SFPHZObWmfC9GUoI0FG4bXAFkv0gayAdqM-pTmXPu8xa2yJMJtG8Y0s3jjReq9jykrRUSZRKxtoVPm8FQPUATAkehNJJfEsDUBeTPpo4NwX6UeZckWF7k-lFoYLd5Do02b58UMJSHpzoeEvfsOAmRxn6Hr6oBufgzc4RkTxYQFjZJZEih1UQZWWksZLbYCyMTv86inOzAUSwAVKcLPq6QBksqyFvIYw6uyJIbUBbDoo_SGTbPlo7Q");'>
+</div>
+<div class="absolute bottom-3 left-3">
+<p class="text-[10px] font-bold tracking-widest uppercase text-white/90">911 GT3</p>
+</div>
+</div>
+<!-- Grid Card 2 -->
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Red Ferrari Roma front profile view" style='background-image: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBvIiYZ4z76exIXpdH4PfyZUpbVjuPS91tPDdcLP6fKpBCm9HhET3i3dxXjmWr9-4W2Jj3XY-gZoAO9L68jEy955kTeGe64tEfRGGwKVtTPZcBMmR0Xv1_OXz0YGhIX_WBCHclnfLNMvaLrZ-HswJri-poClOOQgBnR0WhfT1cYBiDpiLvVLyDaPcbkawY7ZofPsLObuaupx0e6VCjTFdWDUb9x-fDevnbgCH_BfuxQ6CMInHUkW5gAxj0pxJyxrdQxpoN1Le-wui0");'>
+</div>
+<div class="absolute bottom-3 left-3">
+<p class="text-[10px] font-bold tracking-widest uppercase text-white/90">Roma</p>
+</div>
+</div>
+<!-- Grid Card 3 -->
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Lamborghini Huracan profile against dark backdrop" style='background-image: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuB7XkIMRdjUtX8ukuvwH9c-tLEUudKGgJ9q0OTHCK3SXqK4Bur0a9jrBldGeLkuJRlpEb9Y8rjbLh-35XxxIiwZorY86Na3SeokMUOYS8fDnrDFTX1SEWukIRlgUAQy2h3uKy0EaQlEogWlscd6ID6Y-ltp1Pavp_X0dgO8NBydPpTjEC-Tatk2y6nu7HOh2mKuqKz2JWhS3993Xer8veKfGoJ-5_VgY7mQUcMkE0dMLO65awVGCWJHQRgD4x1Lnm2MslIe4WAqI-o");'>
+</div>
+<div class="absolute bottom-3 left-3">
+<p class="text-[10px] font-bold tracking-widest uppercase text-white/90">Huracán</p>
+</div>
+</div>
+<!-- Grid Card 4 -->
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="BMW M8 dark metallic finish detail" style='background-image: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBv2jgFFS0dhHusiWjCAJW-6DP5K6eutlKnsN33LnkCShIe1Bhzki93dAZEtCXj02xaY7OJCM1P7oBgbmfBeo5ZU6lFQHKD8NUDnwBXjR2obVzYyWz5kD-bn4DHFhyaJVkOgGHmbrDjRpeflJMafj5c2c2tPtqzsJfeCEZ3QFHNnzerKdjmeLSvTG6AGF5hJZBxZr7YKAQFBOaMHnBTyCh81x3auDle_Wwri1NuF0DNU9PPnYnhorZjrpE5Q18UxCezr8EyE5wJtEA");'>
+</div>
+<div class="absolute bottom-3 left-3">
+<p class="text-[10px] font-bold tracking-widest uppercase text-white/90">M8 Comp</p>
+</div>
+</div>
+</div>
+<!-- AI Concierge Section -->
+<div class="pt-8 border-t border-slate-200 dark:border-slate-800/60">
+<div class="px-6 flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary text-[20px] fill-1">auto_awesome</span>
+<h3 class="text-sm font-bold tracking-[0.1em] uppercase">Recommended by AI Concierge</h3>
+</div>
+<!-- Horizontal Scroll -->
+<div class="flex gap-4 overflow-x-auto px-6 hide-scrollbar pb-4">
+<!-- Recommendation Card 1 -->
+<div class="flex-none w-[280px] group">
+<div class="relative h-[180px] rounded-xl overflow-hidden mb-3 bg-slate-900 border border-slate-800">
+<div class="absolute top-3 left-3 z-10">
+<span class="bg-primary/20 backdrop-blur-md text-primary text-[10px] font-bold px-2 py-1 rounded border border-primary/30 tracking-wider">98% MATCH</span>
+</div>
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Silver Aston Martin DBS side view" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBl-fRtl3TPVCmwiK7SNE3mcwG4TaeQwHfWaqLqW5JjC6vT1Cionmq3otTE5HqPCF8pnRMcXFCGBreP9tvlnHg08yM6r11Zvp8FqJbJ7LEPwKn0oYfnkeIrxpu5WU3dBeOlYrb8wnZ7oxJFuU43_I9rFI7VZLh_aSOPtkI8uDei7CLh3AJfPTSkG8CT15YM8PM3zmadBljq3qwyAasjNKUuyVmiYr-TLlm1JdBQc7-Zdh8nTNqGC8CuRhI9ZbcJYR4XcfXoyEYaGD0");'>
+</div>
+</div>
+<h4 class="text-sm font-bold tracking-tight">Aston Martin DBS</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">V12 Bi-Turbo • 2023</p>
+</div>
+<!-- Recommendation Card 2 -->
+<div class="flex-none w-[280px] group">
+<div class="relative h-[180px] rounded-xl overflow-hidden mb-3 bg-slate-900 border border-slate-800">
+<div class="absolute top-3 left-3 z-10">
+<span class="bg-primary/20 backdrop-blur-md text-primary text-[10px] font-bold px-2 py-1 rounded border border-primary/30 tracking-wider">94% MATCH</span>
+</div>
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Black McLaren 720S dramatic lighting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCCBTScUb3sF-LBWqds5qsZOejSYqMif8aJpSciO5c_SA44GSP4az2JyVxEGSQnVVXV9sSZQkBmz-Dag3kz2tfl60dmrdN0fYvFzFCqbgMNwnS34h_TWK4HUXjTjnImynywgUsSgbf2khy4x83p17YVnMs6HvoZ9bEnAC1CTxLW3Q7Pf-A9tKJgIXZkpM12_T6groTUKAGUFt3q_sDqfJKB95egJyQo60wmhYzdqlmjWUeV8bnm_eRAYt8WPTD79PDXvym095Yvokk");'>
+</div>
+</div>
+<h4 class="text-sm font-bold tracking-tight">McLaren 720S</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">Performance Pack • 2022</p>
+</div>
+</div>
+<div class="px-6 mt-8">
+<button class="w-full py-4 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors">
+                        View Full Inventory
+                    </button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-background-light/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800/80 px-6 pt-3 pb-8 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-[26px]">home</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-[26px]">search</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Search</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[26px] fill-1">grid_view</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Collection</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-[26px]">smart_toy</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Concierge</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-[26px]">person</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Profile</span>
+</a>
+</nav>
+<!-- iOS Home Indicator Overlay -->
+<div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-900/20 dark:bg-white/20 rounded-full z-[60]"></div>
+</div>
+</body></html>

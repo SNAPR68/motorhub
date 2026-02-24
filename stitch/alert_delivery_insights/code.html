@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alert Delivery Insights | Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#128ce2",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101b22",
+                        "luxury-gold": "#D4AF37",
+                        "luxury-cyan": "#00CED1",
+                        "border-subtle": "rgba(255,255,255,0.1)"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            scrollbar-width: none;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        .thin-border-bottom {
+            border-bottom: 0.5px solid rgba(255,255,255,0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-screen w-full flex-col overflow-hidden max-w-[430px] mx-auto bg-background-dark border-x border-border-subtle">
+<header class="flex items-center justify-between px-6 pt-12 pb-6 sticky top-0 bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-10 rounded-full bg-slate-800/40 text-slate-100 hover:bg-slate-700/60 transition-colors">
+<span class="material-symbols-outlined text-[20px]">arrow_back_ios_new</span>
+</button>
+<div>
+<h1 class="text-xl font-bold tracking-tight">Delivery Insights</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-primary font-bold">Premium Analytics</p>
+</div>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[22px]">ios_share</span>
+</button>
+</header>
+<main class="flex-1 overflow-y-auto px-6 pb-24">
+<div class="flex gap-4 mt-4">
+<div class="flex flex-1 flex-col gap-3 rounded-xl p-5 border border-border-subtle bg-slate-800/20 backdrop-blur-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-400 text-xs font-medium uppercase tracking-wider">Total Sent</p>
+<span class="material-symbols-outlined text-slate-500 text-sm">outbox</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-extrabold tracking-tight text-white">1,240</p>
+<p class="text-[#0bda5b] text-xs font-bold leading-normal">+12%</p>
+</div>
+<div class="h-1 w-full bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%]"></div>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-3 rounded-xl p-5 border border-border-subtle bg-slate-800/20 backdrop-blur-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-400 text-xs font-medium uppercase tracking-wider">Read Rate %</p>
+<span class="material-symbols-outlined text-slate-500 text-sm">visibility</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-extrabold tracking-tight text-white">88.4%</p>
+<p class="text-[#0bda5b] text-xs font-bold leading-normal">+3.2%</p>
+</div>
+<div class="h-1 w-full bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-luxury-cyan w-[88%] shadow-[0_0_8px_rgba(0,206,209,0.5)]"></div>
+</div>
+</div>
+</div>
+<div class="mt-10 mb-4 flex items-center justify-between">
+<h2 class="text-lg font-bold tracking-tight">Delivery Log</h2>
+<button class="text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg border border-primary/30 bg-primary/5">
+                    Bulk Actions
+                </button>
+</div>
+<div class="mb-6">
+<div class="relative group">
+<span class="absolute inset-y-0 left-4 flex items-center text-slate-500 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</span>
+<input class="w-full bg-slate-800/30 border border-border-subtle rounded-xl py-3.5 pl-12 pr-4 text-sm focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-slate-600 outline-none" placeholder="Search vehicles or leads..." type="text"/>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between py-4 thin-border-bottom group hover:bg-slate-800/10 transition-colors cursor-pointer rounded-lg px-2 -mx-2">
+<div class="flex gap-4 items-center">
+<div class="size-10 rounded-lg bg-luxury-gold/10 flex items-center justify-center border border-luxury-gold/30">
+<span class="material-symbols-outlined text-luxury-gold text-[20px]">workspace_premium</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-white">Porsche 911 GT3 - Inquiry</span>
+<span class="text-[11px] text-slate-500">Recipient: Julian V. • via SMS</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1.5">
+<span class="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest border border-luxury-gold text-luxury-gold bg-luxury-gold/5 shadow-[0_0_10px_rgba(212,175,55,0.1)]">VIP REPLY</span>
+<span class="text-[10px] text-slate-500 font-medium tracking-tighter">2m ago</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-4 thin-border-bottom group hover:bg-slate-800/10 transition-colors cursor-pointer rounded-lg px-2 -mx-2">
+<div class="flex gap-4 items-center">
+<div class="size-10 rounded-lg bg-luxury-cyan/10 flex items-center justify-center border border-luxury-cyan/30">
+<span class="material-symbols-outlined text-luxury-cyan text-[20px]">auto_awesome</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-white">Weekly Inventory Update</span>
+<span class="text-[11px] text-slate-500">Recipient: 182 Leads • Campaign</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1.5">
+<span class="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest border border-luxury-cyan text-luxury-cyan bg-luxury-cyan/5">SUCCESS</span>
+<span class="text-[10px] text-slate-500 font-medium tracking-tighter">1h ago</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-4 thin-border-bottom group hover:bg-slate-800/10 transition-colors cursor-pointer rounded-lg px-2 -mx-2">
+<div class="flex gap-4 items-center">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary text-[20px]">notifications_active</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-white">Price Drop: Ferrari Roma</span>
+<span class="text-[11px] text-slate-500">Recipient: 12 Watchers • Alert</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1.5">
+<span class="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest border border-primary text-primary bg-primary/5">SENT</span>
+<span class="text-[10px] text-slate-500 font-medium tracking-tighter">4h ago</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-4 thin-border-bottom group hover:bg-slate-800/10 transition-colors cursor-pointer rounded-lg px-2 -mx-2">
+<div class="flex gap-4 items-center">
+<div class="size-10 rounded-lg bg-luxury-cyan/10 flex items-center justify-center border border-luxury-cyan/30">
+<span class="material-symbols-outlined text-luxury-cyan text-[20px]">mail</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-white">Trade-In Valuation Ready</span>
+<span class="text-[11px] text-slate-500">Recipient: Marcus G. • via Email</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1.5">
+<span class="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest border border-luxury-cyan text-luxury-cyan bg-luxury-cyan/5">SUCCESS</span>
+<span class="text-[10px] text-slate-500 font-medium tracking-tighter">Yesterday</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-4 thin-border-bottom group hover:bg-slate-800/10 transition-colors cursor-pointer rounded-lg px-2 -mx-2">
+<div class="flex gap-4 items-center">
+<div class="size-10 rounded-lg bg-slate-800/40 flex items-center justify-center border border-slate-700">
+<span class="material-symbols-outlined text-slate-500 text-[20px]">block</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-slate-400">Monthly Newsletter</span>
+<span class="text-[11px] text-slate-600">Recipient: Unsubscribed • Campaign</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1.5">
+<span class="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest border border-slate-700 text-slate-600 bg-slate-800/10">SKIPPED</span>
+<span class="text-[10px] text-slate-600 font-medium tracking-tighter">Mar 12</span>
+</div>
+</div>
+</div>
+</main>
+<nav class="absolute bottom-0 w-full flex bg-slate-900/90 backdrop-blur-xl px-6 pb-8 pt-4 border-t border-border-subtle">
+<a class="flex flex-1 flex-col items-center justify-center gap-1.5 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">directions_car</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Inventory</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1.5 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1">bar_chart_4_bars</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Insights</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1.5 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Alerts</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1.5 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Settings</span>
+</a>
+</nav>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-20 pointer-events-none"></div>
+</div>
+</body></html>

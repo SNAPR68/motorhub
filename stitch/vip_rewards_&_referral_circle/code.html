@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VIP Rewards &amp; Referral Circle</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2b90d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#12110a",
+                        "card-dark": "#1c1a0e",
+                        "accent-gold": "#f2b90d",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header Navigation -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-primary/10">
+<div class="flex items-center justify-between p-4 max-w-md mx-auto w-full">
+<button class="text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-[28px]">chevron_left</span>
+</button>
+<h1 class="text-sm font-bold tracking-[0.2em] uppercase text-primary">VIP Circle</h1>
+<button class="text-slate-900 dark:text-slate-100 relative">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-primary ring-2 ring-background-dark"></span>
+</button>
+</div>
+</header>
+<main class="flex-1 max-w-md mx-auto w-full pb-24 overflow-y-auto">
+<!-- Profile & Status Card -->
+<section class="p-6">
+<div class="flex flex-col items-center mb-8">
+<div class="relative mb-4">
+<div class="size-24 rounded-full border-2 border-primary p-1">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Portrait of a sophisticated male car collector" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrurefZpaHykfBy8dRWbyueBauAnokZbmj-H-H4ytsQgOLEB4cRFpB5Q2T3O77rreh__51KYf3OvflpKgqusT1o9HeuyPCHjry3PDq4HxfDPV5G5ZY79FEMAhcMQb5e3dILY4QeNldFjnlfVMq8n1IT4XKpoV0eiiLtndtxytltI3LHCSr4hxemBNaTkc372UfJDVK8ochD4qqL9-ZA1bh8kjjAmO4AZd_naVWJT-T6OSkERCgQm-BohGzhg_obawuOvJDvjfYTMw')"></div>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-background-dark size-7 rounded-full flex items-center justify-center border-2 border-background-dark">
+<span class="material-symbols-outlined text-[16px] font-bold">verified</span>
+</div>
+</div>
+<h2 class="text-2xl font-extrabold tracking-tight">Julian Sterling</h2>
+<p class="text-primary text-xs font-semibold tracking-widest uppercase mt-1">Platinum Member</p>
+</div>
+<!-- Digital Black Card -->
+<div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#2a2614] to-card-dark border border-primary/30 p-6 shadow-2xl">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-[80px]">workspace_premium</span>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-8">
+<div>
+<p class="text-[10px] uppercase tracking-[0.2em] text-primary/70 mb-1">Status</p>
+<p class="text-xl font-bold italic tracking-wider">PLATINUM</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] uppercase tracking-[0.2em] text-primary/70 mb-1">Points</p>
+<p class="text-xl font-bold tracking-tight">12,500</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<p class="text-xs text-slate-400">Progress to Diamond Elite</p>
+<p class="text-xs font-bold text-primary">83%</p>
+</div>
+<div class="h-[3px] w-full bg-primary/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary shadow-[0_0_8px_rgba(242,185,13,0.6)]" style="width: 83%"></div>
+</div>
+<p class="text-[10px] text-primary/60 uppercase tracking-widest">2,500 pts remaining</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Refer a Peer Section -->
+<section class="px-6 py-4">
+<div class="bg-card-dark border border-white/5 rounded-xl p-6">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">group_add</span>
+<h3 class="text-sm font-bold uppercase tracking-widest">Refer a Peer</h3>
+</div>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    Extend the circle. Invite a fellow collector to Autovinci and both receive 1,000 bonus points upon their first acquisition.
+                </p>
+<div class="flex items-center gap-2">
+<div class="flex-1 bg-black/40 border border-primary/20 rounded-lg p-3 flex items-center justify-between">
+<span class="font-mono text-primary font-bold tracking-[0.3em]">AV-STERLING-7X</span>
+<button class="text-primary/60 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+</div>
+<button class="bg-primary text-background-dark font-bold px-4 py-3 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Exclusive Rewards Section -->
+<section class="px-6 py-8">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-sm font-bold uppercase tracking-widest">Exclusive Rewards</h3>
+<a class="text-primary text-[10px] font-bold uppercase tracking-widest border-b border-primary/30 pb-0.5" href="#">View All</a>
+</div>
+<div class="grid gap-6">
+<!-- Reward Card 1 -->
+<div class="group relative aspect-[16/9] rounded-xl overflow-hidden shadow-xl">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="High speed blur of a luxury supercar on a race track" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYQ0AzrTgLHzfm0S9k99n46Xw32Lc1SArGmD4UWyVPaLfL9yMjuq6oamwc_X_AXym42fjTCikaWuJj8mn8FJuXKOPI7K8oW2JEnxf4mlvCCSJJtg9LUftY6pxM_t36vyIvCgwjadcyHUw3hvJlpfD7vC1nAGb2qP7mUON5t5xOj_HQK9SWQiUus3BbH8wRiqGd-yYZ4HVuAilyIM0XUN7VzkHzPck6tuqjkWUtsFQbGcH125LbUGPgXV2xDM024PMsJDWcFHTKH3g')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+<div class="absolute top-4 right-4 bg-primary/90 text-background-dark text-[10px] font-black px-2 py-1 rounded tracking-tighter uppercase">Available</div>
+<div class="absolute bottom-0 left-0 p-5">
+<p class="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Platinum Event</p>
+<h4 class="text-lg font-bold leading-tight mb-2">Private Track Day: Nürburgring</h4>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 text-[10px] text-slate-300">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Oct 14-16
+                            </div>
+<div class="flex items-center gap-1 text-[10px] text-slate-300">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                                Germany
+                            </div>
+</div>
+</div>
+</div>
+<!-- Reward Card 2 -->
+<div class="group relative aspect-[16/9] rounded-xl overflow-hidden shadow-xl grayscale-[0.5] opacity-80">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Silhouette of a covered luxury vehicle in a studio" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsC2NCkKiO2vnaQEDHZVDN6061euOpabh6npoiZcktK7fbmEnmKj34IQCcS8z6gjU5NhFcBnTzL8QTn-W6xTHxNIuCvElPrutMGRpf38VL6JHMHHEuB7yMFU-IlOSbmt5g5goyqAePr2f8fBqjHtiu9eNROJJ5KO7vymwu5e6Wy3V6TPJ1o4Z-kpOjzuWFeF8jV--3miFu8vFf3Bio5AoXUMUB_PdaUfyGbAx_1X_4D2Sj2UiD-LTTG5jEf_1uqfeJ4qV2IPMAeaE')"></div>
+<div class="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+<span class="material-symbols-outlined text-primary text-[32px] mb-2">lock</span>
+<h4 class="text-lg font-bold mb-1">Early Access: Project Nebula</h4>
+<p class="text-xs text-primary/80 tracking-widest uppercase">Unlocks at Diamond Tier</p>
+</div>
+</div>
+<!-- Reward Card 3 -->
+<div class="group relative aspect-[16/9] rounded-xl overflow-hidden shadow-xl">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Close up of premium hand-stitched leather car interior" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB72dV0w7KB10Gu-Qo2Md9aXZ-_xw77oqeEP_FrNrc6DTROWn4xylRSqF32c_FhgHzgACh-wwePH13mqaknN1_HsLrqJQzqSNk6E6shOK2kHgsRGCrFZJueeaidefUKbdh2lao1H0WUl7F5GeyPRGRI-XqjLm3ZqxUtPEpF_1lkQnA2Y04s2afeqN7otNaGaS1mLs2Vgp5nFp-47OkxT0WmbYnY6aqux7qvTo9xH5rIzstFBQRtP1u-OCtKpFQmfdn8lMrvBTEZvSk')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded tracking-tighter uppercase border border-white/10">Coming Soon</div>
+<div class="absolute bottom-0 left-0 p-5">
+<p class="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Lifestyle Perks</p>
+<h4 class="text-lg font-bold leading-tight">Bespoke Concierge Service</h4>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-primary/10 px-4 pb-8 pt-3">
+<div class="max-w-md mx-auto flex justify-around items-center">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[24px]">garage</span>
+<span class="text-[10px] font-medium tracking-tight">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[24px]">storefront</span>
+<span class="text-[10px] font-medium tracking-tight">Showroom</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<div class="relative">
+<span class="material-symbols-outlined text-[28px] fill-[1]">workspace_premium</span>
+<div class="absolute -top-1 -right-1 size-2 bg-primary rounded-full"></div>
+</div>
+<span class="text-[10px] font-bold tracking-tight">VIP</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[24px]">chat_bubble_outline</span>
+<span class="text-[10px] font-medium tracking-tight">Messages</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[24px]">account_circle</span>
+<span class="text-[10px] font-medium tracking-tight">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

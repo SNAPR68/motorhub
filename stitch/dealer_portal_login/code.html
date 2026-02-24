@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci | Dealer Portal Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d73c9",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0a0d10",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1)
+    }
+.silver-glow {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05), inset 0 0 1px rgba(255, 255, 255, 0.2)
+    }
+.bg-showroom {
+    background-image: linear-gradient(to bottom, rgba(10, 13, 16, 0.7), rgba(10, 13, 16, 0.95)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuDuaAQIv-Hgd-DL7YwqAczbQx7CyqTxG_IBPA1HPZD2JBYv5Q3MBmYi8VzZXiwDmTvgu4rVIiDabHxdSJwTqZODrEXImVlyhwkVY02KQh5PdNA_ZTzEtmxNfAh0iZHaY4xAMB6co2kfMZlc9py5_Et7Lj66U31ZONLkwCYJ6Hq02k6-0NIglStE9DBy6fkZVc6GKAujuyLP8kbD-iNiL2ss7TBe9KDZJ0N-7g_ICir49cd-UmofEpSwdHzkPrtDHeB7Fze7eVmS80Q);
+    background-size: cover;
+    background-position: center
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<!-- Main Container (iOS Phone Aspect) -->
+<div class="relative flex h-screen w-full flex-col bg-showroom overflow-hidden">
+<!-- Logo Section -->
+<div class="flex flex-col items-center pt-20 pb-12">
+<h1 class="text-3xl font-extralight tracking-[0.3em] uppercase text-white">
+                Autovinci
+            </h1>
+<div class="h-[1px] w-12 bg-white/30 mt-4"></div>
+</div>
+<!-- Login Form Container -->
+<div class="flex-1 px-8 flex flex-col justify-start">
+<div class="glass-panel rounded-xl p-8 w-full max-w-sm mx-auto">
+<div class="mb-8">
+<h2 class="text-xl font-light tracking-wide text-white/90">Dealer Portal</h2>
+<p class="text-xs font-medium text-white/40 uppercase tracking-widest mt-1">Authorized Personnel Only</p>
+</div>
+<form class="space-y-6">
+<!-- Email Input -->
+<div class="space-y-1.5">
+<label class="text-[10px] uppercase tracking-widest text-white/50 font-semibold ml-1">Identity</label>
+<div class="relative">
+<input class="w-full bg-transparent border-0 border-b border-white/20 focus:border-primary focus:ring-0 text-white placeholder:text-white/20 py-3 px-1 transition-all duration-300" placeholder="Dealer ID or Email" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-end">
+<label class="text-[10px] uppercase tracking-widest text-white/50 font-semibold ml-1">Security</label>
+<a class="text-[10px] uppercase tracking-tighter text-white/30 hover:text-white transition-colors pb-1" href="#">Forgot?</a>
+</div>
+<div class="relative flex items-center">
+<input class="w-full bg-transparent border-0 border-b border-white/20 focus:border-primary focus:ring-0 text-white placeholder:text-white/20 py-3 px-1 transition-all duration-300" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-2 text-white/30 text-lg cursor-pointer hover:text-white/60">
+                                visibility
+                            </span>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-6">
+<button class="w-full bg-[#1a1c1e] silver-glow text-white font-medium tracking-widest py-4 rounded-lg border border-white/10 hover:bg-[#25282c] transition-all active:scale-[0.98] uppercase text-sm">
+                            Dealer Sign In
+                        </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="pb-16 flex flex-col items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="h-[1px] w-8 bg-white/10"></div>
+<span class="text-[10px] text-white/20 uppercase tracking-[0.2em]">External Access</span>
+<div class="h-[1px] w-8 bg-white/10"></div>
+</div>
+<a class="font-serif italic text-lg text-white/70 hover:text-white transition-all group" href="#">
+                Switch to <span class="border-b border-white/20 group-hover:border-white">Buyer Portal</span>
+</a>
+<!-- iOS Indicator Spacer -->
+<div class="h-2"></div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+<div class="absolute top-1/4 -left-20 w-64 h-64 bg-primary/5 blur-[100px] rounded-full"></div>
+<div class="absolute bottom-1/4 -right-20 w-64 h-64 bg-white/5 blur-[100px] rounded-full"></div>
+</div>
+</div>
+<!-- Background Image Alt Reference -->
+<div data-alt="A dark luxury car showroom with soft spotlighting and polished floors." style="display:none;"></div>
+</body></html>

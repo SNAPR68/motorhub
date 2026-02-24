@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Handover Experience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#050505",
+                        "gold": "#d4af37",
+                        "card-dark": "#120b1a",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .gold-leaf-border {
+            position: relative;
+            background: linear-gradient(#120b1a, #120b1a) padding-box,
+                        linear-gradient(135deg, #d4af37 0%, #f9e29c 50%, #d4af37 100%) border-box;
+            border: 2px solid transparent;
+        }
+        .glass-panel {
+            background: rgba(25, 16, 34, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .art-deco-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(115, 17, 212, 0.15) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col max-w-[430px] mx-auto bg-background-dark shadow-2xl overflow-hidden">
+<!-- Cinematic Hero Header -->
+<div class="relative w-full aspect-[9/10] overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center scale-110" data-alt="Close up of luxury car headlights glowing purple in dark garage" style="background-image: linear-gradient(to bottom, transparent 60%, #050505 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAaE3ML7Mu0lek4GAPpvVQgDpiV1YFyZZeDZtsfBMHc-ckGIm0v5JfVVJ5yM7SbT51SLqw5br4LdVyBcIFrXkRKy1PBAXTXUG92ovb2g8T6CRiBUHGYSQpxw4D4DMIHMttXUYWbsj9Dwcr3Sy8ELyzjCn3vbb8Vnk-0Uf1rS0QHKPvN79Iwo7BhzOPez0ZoHD65_PIcmJeiEQ_slH75jLAz0DJNAY-cux5oNuqKhJXQX257Dy0TVpKzdej3IEIm1tComYZuveyuUHU');">
+</div>
+<!-- Video Play Overlay / Status -->
+<div class="absolute inset-0 flex flex-col justify-between p-6">
+<div class="flex items-center justify-between mt-8">
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
+<span class="size-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-bold tracking-widest uppercase text-white/80">Authenticating</span>
+</div>
+<button class="size-10 flex items-center justify-center rounded-full bg-black/40 backdrop-blur-md text-white border border-white/10">
+<span class="material-symbols-outlined text-xl">share</span>
+</button>
+</div>
+<div class="mb-12">
+<h1 class="text-4xl font-bold tracking-tighter text-white drop-shadow-lg">
+                        911 GT3 <span class="text-primary">RS</span>
+</h1>
+<p class="text-sm font-medium text-white/60 tracking-widest uppercase mt-1">Vin: WP0AB2A9XLS2024</p>
+</div>
+</div>
+</div>
+<!-- Content Area -->
+<div class="relative -mt-10 px-6 flex flex-col gap-8 pb-32 art-deco-pattern">
+<!-- Welcome Text -->
+<div class="text-center space-y-2">
+<h2 class="text-2xl font-bold tracking-tight dark:text-slate-100">Your masterpiece awaits.</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-[280px] mx-auto">
+                    The digital twins have synced. Your Autovinci journey begins today.
+                </p>
+</div>
+<!-- Ownership Certificate Card -->
+<div class="gold-leaf-border rounded-xl p-6 shadow-2xl relative group overflow-hidden">
+<!-- Subtle Gradient Glow -->
+<div class="absolute -top-24 -right-24 size-48 bg-primary/20 blur-[60px] rounded-full"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="size-16 mb-4 flex items-center justify-center rounded-full bg-primary/10 border border-primary/30">
+<span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+</div>
+<p class="text-[10px] font-bold tracking-[0.2em] text-gold uppercase mb-1">Official Document</p>
+<h3 class="text-xl font-bold dark:text-slate-100 mb-4">Ownership Certificate</h3>
+<div class="w-full h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent mb-6"></div>
+<div class="space-y-4 w-full">
+<div class="flex justify-between items-center text-left">
+<div>
+<p class="text-[9px] uppercase tracking-wider text-slate-500">Certified Owner</p>
+<p class="text-sm font-medium dark:text-slate-200">Alexander Thorne</p>
+</div>
+<div class="text-right">
+<p class="text-[9px] uppercase tracking-wider text-slate-500">Issue Date</p>
+<p class="text-sm font-medium dark:text-slate-200">Oct 24, 2024</p>
+</div>
+</div>
+<div class="bg-primary/5 rounded-lg p-3 border border-primary/10">
+<p class="text-[9px] uppercase tracking-wider text-primary font-bold mb-1">AI Authentication Seal</p>
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg">auto_awesome</span>
+</div>
+<div class="flex-1">
+<div class="h-1.5 w-full bg-primary/20 rounded-full overflow-hidden">
+<div class="h-full w-full bg-primary origin-left scale-x-[0.98]"></div>
+</div>
+<p class="text-[10px] mt-1 text-slate-400">Security hash verified via Autovinci AI</p>
+</div>
+</div>
+</div>
+</div>
+<button class="mt-6 flex items-center gap-2 text-xs font-bold text-gold uppercase tracking-widest hover:text-white transition-colors">
+<span>View Smart Contract</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-3">
+<button class="group relative flex h-14 w-full items-center justify-center overflow-hidden rounded-xl bg-primary text-white font-bold tracking-wide shadow-[0_10px_20px_-5px_rgba(115,17,212,0.4)] transition-all active:scale-[0.98]">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined">calendar_month</span>
+                        Schedule Delivery
+                    </span>
+<div class="absolute inset-0 translate-y-full bg-white/10 transition-transform group-hover:translate-y-0"></div>
+</button>
+<button class="flex h-14 w-full items-center justify-center rounded-xl border border-slate-700/50 dark:border-slate-800 bg-transparent text-slate-900 dark:text-slate-100 font-bold tracking-wide transition-all hover:bg-white/5 active:scale-[0.98]">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">support_agent</span>
+                        Meet Your Concierge
+                    </span>
+</button>
+</div>
+</div>
+<!-- Bottom Navigation (Customized for iOS feel) -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] glass-panel border-t border-white/5 px-8 pt-4 pb-8 flex items-center justify-between z-50">
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">directions_car</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">notifications</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+</a>
+</div>
+<!-- iOS Home Indicator -->
+<div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-[60]"></div>
+</div>
+</body></html>

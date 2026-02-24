@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci - Premium AI Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0a0a0a",
+                        "card-dark": "#161616",
+                        "border-dark": "#262626"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 glass-panel border-b border-border-dark px-4 py-3 flex items-center justify-between">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined text-slate-100">arrow_back_ios_new</span>
+</button>
+<h1 class="text-sm font-semibold tracking-wide uppercase text-slate-100">AI Studio Enhancer</h1>
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined text-slate-100">more_horiz</span>
+</button>
+</header>
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Immersive Media Canvas -->
+<section class="relative w-full aspect-[4/5] @container">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Dark grey luxury sports car in a studio setting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDu8ifEzYuNWY3jlb20CI2F6L2Tpo8ITG8BJ8hVCV5CTXNz0Y05H2dIb9RlxMMCbZA_2waEyhH0TYttU8l48yCaMFYsmtec62AiuJlclPGbeYTxloZKkcrJdF1Yzyl_U0QUB3qi3kqNgLB2nqq6EiqHSmuurvjcowg3nc_eKY6qaaqfncTKaGrwIJmSNBa2Go6mJy-v3_jFr3nlhNN3-qsm7BSuMzjyHHU877Le5sh-HHohidO2Y4nzOVzWWFN8g2kw1bvdl6S_xnI');">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+</div>
+<!-- AI Control Overlay -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] glass-panel rounded-2xl p-1 flex border border-white/10 shadow-2xl">
+<button class="flex-1 flex items-center justify-center gap-2 py-3 px-2 rounded-xl transition-all bg-primary text-white shadow-lg">
+<span class="material-symbols-outlined text-sm">auto_videocam</span>
+<span class="text-xs font-semibold whitespace-nowrap">Background Remov.</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-2 py-3 px-2 rounded-xl transition-all text-slate-300 hover:text-white">
+<span class="material-symbols-outlined text-sm">light_mode</span>
+<span class="text-xs font-semibold whitespace-nowrap">Studio Lighting</span>
+</button>
+</div>
+<!-- Status Indicator -->
+<div class="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 glass-panel rounded-full border border-white/20">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">Live AI Preview</span>
+</div>
+</section>
+<!-- Vehicle Details Section -->
+<section class="px-6 py-8">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-white mb-1">Porsche 911 Carrera</h2>
+<p class="text-slate-400 font-medium">2024 • Chalk Grey Edition</p>
+</div>
+<div class="text-right">
+<p class="text-primary text-2xl font-bold">$142,500</p>
+<p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">MSRP Estimate</p>
+</div>
+</div>
+<!-- Specs Grid -->
+<div class="grid grid-cols-3 gap-4 mb-10">
+<div class="bg-card-dark border border-border-dark rounded-xl p-4 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-2">speed</span>
+<span class="text-xs text-slate-400 mb-0.5">Top Speed</span>
+<span class="text-sm font-bold">182 mph</span>
+</div>
+<div class="bg-card-dark border border-border-dark rounded-xl p-4 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-2">bolt</span>
+<span class="text-xs text-slate-400 mb-0.5">0-60 mph</span>
+<span class="text-sm font-bold">4.0 s</span>
+</div>
+<div class="bg-card-dark border border-border-dark rounded-xl p-4 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-2">settings_input_component</span>
+<span class="text-xs text-slate-400 mb-0.5">Engine</span>
+<span class="text-sm font-bold">3.0L Flat-6</span>
+</div>
+</div>
+<!-- Social Sync Preview Section -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+                        Social Sync Preview
+                    </h3>
+<span class="text-xs font-medium text-primary">Edit Template</span>
+</div>
+<div class="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-card-dark border border-border-dark group">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Vertical mobile preview of a silver Porsche 911" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBGMOzaJQLfXzsslo-0so-s-NuT6MBrXBeeirKITssrNGqpq04ZzMpQpzN_5f8oMGfrWCfiWekyfdYURD6_Ya9ehMHhxM0H7Bkz6-ZJ2RKMhvIi-1XjkzaepQ71AB-UwqUpyzPqxKIzD51VAXJ1gpxbTPXoWFytS5ShaEI81C2hlTeT8spbEHSPYg2-BsvJNbDv6DoK7fzOeP8K4Di3kRD0LwCY7xQ5HKzi2Hrm50j1LOAThfIBp-lxAT4DQaPuxw071fgZ35HkCLY');">
+<!-- Video Overlays -->
+<div class="absolute inset-0 bg-black/20"></div>
+<div class="absolute top-6 left-6 right-6">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center backdrop-blur-md">
+<span class="material-symbols-outlined text-white text-sm">stars</span>
+</div>
+<span class="text-xs font-bold text-white drop-shadow-md">AUTOVINCI AI</span>
+</div>
+<h4 class="text-2xl font-black italic text-white leading-tight drop-shadow-lg">UNMATCHED<br/>PRECISION.</h4>
+</div>
+<div class="absolute bottom-6 left-6 flex items-center gap-2">
+<div class="w-10 h-10 rounded-full border-2 border-white/30 overflow-hidden">
+<div class="w-full h-full bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">play_circle</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-white/70 uppercase tracking-widest">Reel Transition</span>
+<span class="text-xs font-bold text-white">Cinematic Reveal</span>
+</div>
+</div>
+<!-- Center Play Button -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center border border-white/20">
+<span class="material-symbols-outlined text-white text-4xl leading-none ml-1">play_arrow</span>
+</div>
+</div>
+</div>
+</div>
+<p class="text-xs text-center text-slate-500 mt-4 italic">AI-generated reels sync automatically with your inventory music preferences.</p>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action Bar -->
+<nav class="fixed bottom-0 left-0 right-0 glass-panel border-t border-border-dark p-4 pb-8 flex items-center gap-4">
+<button class="w-14 h-14 rounded-2xl border border-border-dark flex items-center justify-center bg-card-dark text-slate-300">
+<span class="material-symbols-outlined">save</span>
+</button>
+<button class="flex-1 h-14 rounded-2xl bg-primary text-white font-bold flex items-center justify-center gap-2 shadow-[0_8px_20px_-4px_rgba(19,127,236,0.4)]">
+<span class="material-symbols-outlined">share_windows</span>
+            Export to Socials
+        </button>
+</nav>
+<!-- Bottom Navigation Component (Internal for Navigation) -->
+<div class="fixed bottom-4 left-4 right-4 h-16 bg-card-dark/80 backdrop-blur-xl rounded-full border border-border-dark hidden md:flex items-center justify-around px-4">
+<a class="text-primary flex flex-col items-center" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-[10px] font-bold uppercase mt-1">Inventory</span>
+</a>
+<a class="text-slate-500 flex flex-col items-center" href="#">
+<span class="material-symbols-outlined">magic_button</span>
+<span class="text-[10px] font-bold uppercase mt-1">Studio</span>
+</a>
+<a class="text-slate-500 flex flex-col items-center" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-[10px] font-bold uppercase mt-1">Marketing</span>
+</a>
+<a class="text-slate-500 flex flex-col items-center" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-bold uppercase mt-1">Profile</span>
+</a>
+</div>
+</body></html>

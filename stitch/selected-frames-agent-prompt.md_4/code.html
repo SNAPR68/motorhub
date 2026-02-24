@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vehicle Preview &amp; Insights</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #2563EB;
+            --secondary: #0F172A;
+            --accent: #7C3AED;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --on-surface: #1E293B;
+            --primary-text: #0F172A;
+            --secondary-text: #64748B;
+            --divider: #E2E8F0;
+            --success: #10B981;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--primary-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-plus-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="max-w-[430px] mx-auto min-h-screen pb-24 relative">
+<nav class="fixed top-0 left-0 right-0 z-50 px-4 py-3 bg-white/80 ios-blur border-b border-[var(--divider)] max-w-[430px] mx-auto">
+<div class="flex items-center justify-between">
+<button class="p-2 -ml-2">
+<span class="material-symbols-outlined text-[var(--primary-text)]">arrow_back_ios_new</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="text-xs font-bold uppercase tracking-widest text-[var(--primary)] font-plus-jakarta">Preview Mode</span>
+<span class="text-sm font-semibold">2023 Mercedes-Benz C-Class</span>
+</div>
+<button class="p-2 -mr-2">
+<span class="material-symbols-outlined text-[var(--primary-text)]">more_horiz</span>
+</button>
+</div>
+</nav>
+<main class="pt-16">
+<section class="relative bg-black h-[280px] w-full overflow-hidden">
+<img alt="Mercedes-Benz C-Class" class="w-full h-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7qMV6ZSzVirIujtbD7ygYXTQT9Mfglc_aJ0OZVSHc86GkKb5N5fk3ISgSX_zpEd3J-Uk8PtPXxh1f4WWzZVUHCq-K6wmGdyWeIy88JresTuWjiHoCGO1Zfe104QKVrutVVqQ6jg5xMDXrFgBSHZ4xoHNalCwtT8wJIHIWbYz_i62n1mEhsBagKBJ0WNI1ZEQmTifoHwEHsUyp4b98PkRlYYiCBFqTf58EMhEeTFAxEv9kUrtI7z_Ay6DrivfMo6UOESt8bVyk7Tg"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<div class="bg-white/10 ios-blur rounded-full p-4 border border-white/20 mb-2">
+<span class="material-symbols-outlined text-white text-4xl">360</span>
+</div>
+<p class="text-white text-xs font-medium tracking-wide uppercase shadow-sm">Rotate to Explore Interior</p>
+</div>
+<div class="absolute bottom-4 left-0 right-0 px-4 flex justify-between items-end pointer-events-none">
+<div class="flex gap-2">
+<div class="bg-black/50 ios-blur px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-1.5">
+<span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+<span class="text-white text-[10px] font-bold uppercase tracking-tight">Live Preview</span>
+</div>
+</div>
+<div class="flex gap-2 pointer-events-auto">
+<button class="w-10 h-10 bg-white/10 ios-blur rounded-full border border-white/20 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">fullscreen</span>
+</button>
+</div>
+</div>
+</section>
+<section class="px-5 py-6 bg-[var(--surface)]">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h1 class="text-2xl font-800 font-plus-jakarta leading-tight tracking-tight">Mercedes-Benz C-Class</h1>
+<p class="text-[var(--secondary-text)] text-sm">C 300 AMG Line Premium Plus</p>
+</div>
+<div class="text-right">
+<span class="text-2xl font-800 font-plus-jakarta text-[var(--primary)]">₹65.4L</span>
+<p class="text-[var(--secondary-text)] text-[10px] uppercase font-bold tracking-wider">Estimated Value</p>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-3 mt-6">
+<div class="flex flex-col items-center p-3 bg-[var(--background)] rounded-2xl border border-[var(--divider)]">
+<span class="material-symbols-outlined text-[var(--primary)] mb-1">speed</span>
+<span class="text-[11px] font-bold font-plus-jakarta uppercase tracking-tight">12.5k</span>
+<span class="text-[9px] text-[var(--secondary-text)]">KM</span>
+</div>
+<div class="flex flex-col items-center p-3 bg-[var(--background)] rounded-2xl border border-[var(--divider)]">
+<span class="material-symbols-outlined text-[var(--primary)] mb-1">local_gas_station</span>
+<span class="text-[11px] font-bold font-plus-jakarta uppercase tracking-tight">Petrol</span>
+<span class="text-[9px] text-[var(--secondary-text)]">Fuel</span>
+</div>
+<div class="flex flex-col items-center p-3 bg-[var(--background)] rounded-2xl border border-[var(--divider)]">
+<span class="material-symbols-outlined text-[var(--primary)] mb-1">settings_input_component</span>
+<span class="text-[11px] font-bold font-plus-jakarta uppercase tracking-tight">Auto</span>
+<span class="text-[9px] text-[var(--secondary-text)]">Trans</span>
+</div>
+<div class="flex flex-col items-center p-3 bg-[var(--background)] rounded-2xl border border-[var(--divider)]">
+<span class="material-symbols-outlined text-[var(--primary)] mb-1">calendar_today</span>
+<span class="text-[11px] font-bold font-plus-jakarta uppercase tracking-tight">2023</span>
+<span class="text-[9px] text-[var(--secondary-text)]">Year</span>
+</div>
+</div>
+</section>
+<section class="mt-2 px-5 py-6 bg-[var(--surface)]">
+<div class="flex items-center gap-2 mb-4">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-[var(--primary)] to-[var(--accent)] flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">auto_awesome</span>
+</div>
+<div>
+<h2 class="text-lg font-bold font-plus-jakarta leading-none">AI Health Insights</h2>
+<p class="text-xs text-[var(--secondary-text)]">Vision Analysis Complete</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
+<div class="flex justify-between items-center mb-3">
+<span class="text-xs font-bold text-blue-800 uppercase tracking-wider">Exterior Condition</span>
+<div class="flex gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-blue-200"></span>
+</div>
+</div>
+<p class="text-sm text-slate-700 leading-relaxed italic">
+                        "Visual analysis indicates 98% paint original. Minor scuff detected on rear left fender (approx 2cm). All panels aligned to factory specs."
+                    </p>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<div class="flex items-start gap-3 p-3 rounded-xl bg-[var(--background)] border border-[var(--divider)]">
+<span class="material-symbols-outlined text-[var(--success)]">check_circle</span>
+<div>
+<p class="text-sm font-semibold">Tire Tread Analysis</p>
+<p class="text-xs text-[var(--secondary-text)]">Approx. 75% life remaining (Continental SportContact)</p>
+</div>
+</div>
+<div class="flex items-start gap-3 p-3 rounded-xl bg-[var(--background)] border border-[var(--divider)]">
+<span class="material-symbols-outlined text-[var(--success)]">check_circle</span>
+<div>
+<p class="text-sm font-semibold">Upholstery Scan</p>
+<p class="text-xs text-[var(--secondary-text)]">Zero stains or tears detected in Nappa leather seats.</p>
+</div>
+</div>
+<div class="flex items-start gap-3 p-3 rounded-xl bg-[var(--background)] border border-[var(--divider)]">
+<span class="material-symbols-outlined text-amber-500">info</span>
+<div>
+<p class="text-sm font-semibold">Service Log Correlation</p>
+<p class="text-xs text-[var(--secondary-text)]">AI suggests next service due in 2,400 KM based on usage.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="mt-2 px-5 py-6 bg-[var(--surface)] mb-8">
+<h2 class="text-lg font-bold font-plus-jakarta mb-4">Auto-Generated Marketing</h2>
+<div class="space-y-4">
+<div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-pink-600">retweet</span>
+<span class="text-xs font-bold text-slate-500">Suggested Instagram Post</span>
+</div>
+<p class="text-sm text-slate-600 mb-3">
+                        Elevate your drive with this pristine 2023 Mercedes-Benz C-Class. 🌟 AMG Styling, Intelligent Drive, and pure luxury. 
+                        #MercedesBenz #LuxuryCars #AutoVinciVerified #CClass
+                    </p>
+<button class="w-full py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-[var(--primary)]">Copy Caption</button>
+</div>
+</div>
+</section>
+</main>
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-white/90 ios-blur border-t border-[var(--divider)] z-50 max-w-[430px] mx-auto">
+<div class="flex gap-3">
+<button class="flex-1 flex items-center justify-center gap-2 bg-[var(--secondary)] text-white py-4 rounded-2xl font-bold font-plus-jakarta shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">publish</span>
+                Publish Listing
+            </button>
+<button class="w-16 flex items-center justify-center bg-[var(--background)] border border-[var(--divider)] py-4 rounded-2xl text-[var(--primary-text)] active:scale-95 transition-transform">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+<button class="fixed bottom-28 right-6 w-14 h-14 bg-[var(--primary)] text-white rounded-full flex items-center justify-center shadow-xl z-40 ring-4 ring-white">
+<span class="material-symbols-outlined">smart_toy</span>
+</button>
+
+</body></html>

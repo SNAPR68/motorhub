@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci - Multi-Store Global Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df2f2",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#102222",
+                        "matte-black": "#0a0f0f",
+                        "silver": "#cbd5e1",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(34, 73, 73, 0.2);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(13, 242, 242, 0.1);
+        }
+        .map-glow {
+            filter: drop-shadow(0 0 8px rgba(13, 242, 242, 0.6));
+        }
+        body {
+            background-color: #0a0f0f;
+            color: #f5f8f8;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 glass-panel border-b border-white/5">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-gradient-to-tr from-primary to-emerald-400 p-[2px]">
+<div class="bg-matte-black w-full h-full rounded-full flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Professional dealership group manager profile portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFhoMHPm9CeltbcxxEg0OjVPhk6FRMiMsXGqOBbvGDyIvgoHNOtL7qt9sDCVM_5gNUeNyuzSxR84QP10Hd2H5njJq8-UpGGRdxYvPdmNFYifkUoJally0SvJmnHDAO-GtAT2ykdM7ktcQKcQqR6Ao6P-RsjEix8hWT23lZGGiYXTLURoH6BXXKyYin_Tcva3U-Qp1aBPmlZetgMBpswsmCeJcEw7N3HtdY_a0Ej64ClcB-CbHeHiKERNTy-jf21l7W7OVdeAJIzKc"/>
+</div>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-bold leading-none">Autovinci</p>
+<h1 class="text-slate-900 dark:text-slate-100 font-extrabold text-sm tracking-tight">Executive Portal</h1>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="size-10 flex items-center justify-center rounded-full bg-white/5 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-full bg-white/5 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[20px]">add_business</span>
+</button>
+</div>
+</header>
+<!-- Global Search -->
+<div class="px-6 py-4">
+<label class="relative flex items-center w-full group">
+<div class="absolute left-4 text-primary/60 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full h-14 pl-12 pr-4 bg-white/5 border border-white/10 rounded-xl focus:ring-1 focus:ring-primary focus:border-primary outline-none text-slate-100 placeholder:text-silver/30 text-sm transition-all shadow-inner" placeholder="Search 1,240+ vehicles in global inventory..." type="text"/>
+</label>
+</div>
+<!-- Interactive Map Section -->
+<section class="px-4 mb-6">
+<div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+<!-- Map Placeholder Image -->
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Dark stylized world map showing global dealership hotspots" data-location="Global" style="background-image: url('https://placeholder.pics/svg/300')">
+<div class="absolute inset-0 bg-matte-black/60 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+</div>
+<!-- Floating Map Pins -->
+<!-- London -->
+<div class="absolute top-1/4 left-1/3 flex flex-col items-center gap-1 group">
+<div class="w-3 h-3 bg-primary rounded-full map-glow animate-pulse"></div>
+<div class="px-2 py-1 bg-matte-black/80 border border-primary/30 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">London</div>
+</div>
+<!-- Dubai -->
+<div class="absolute top-1/2 right-1/4 flex flex-col items-center gap-1 group">
+<div class="w-3 h-3 bg-primary rounded-full map-glow"></div>
+<div class="px-2 py-1 bg-matte-black/80 border border-primary/30 rounded text-[10px] text-white opacity-100">Dubai</div>
+</div>
+<!-- Monaco -->
+<div class="absolute top-1/3 left-1/2 flex flex-col items-center gap-1 group">
+<div class="w-3 h-3 bg-primary rounded-full map-glow"></div>
+<div class="px-2 py-1 bg-matte-black/80 border border-primary/30 rounded text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">Monaco</div>
+</div>
+<!-- Map Overlay Controls -->
+<div class="absolute bottom-4 left-4 flex gap-2">
+<span class="px-3 py-1 bg-primary/20 border border-primary/40 rounded-full text-[10px] font-bold text-primary backdrop-blur-md">LIVE NETWORK</span>
+</div>
+</div>
+</section>
+<!-- Global Insights Title -->
+<div class="px-6 pb-4 flex justify-between items-end">
+<div>
+<h2 class="text-white text-xl font-bold tracking-tight">Showroom Performance</h2>
+<p class="text-silver/50 text-xs">Real-time data from 3 locations</p>
+</div>
+<button class="text-primary text-xs font-bold flex items-center gap-1">
+            VIEW ALL <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Location Cards List -->
+<main class="flex-1 px-6 pb-24 space-y-4">
+<!-- Dubai Location Card -->
+<div class="glass-panel p-5 rounded-2xl border-l-4 border-l-primary relative overflow-hidden group">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-white font-bold text-lg leading-tight">Dubai Flagship</h3>
+<p class="text-silver/50 text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Sheikh Zayed Rd
+                    </p>
+</div>
+<div class="bg-primary/10 px-3 py-1 rounded-full flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+<span class="text-primary text-[10px] font-bold uppercase tracking-wider">Operational</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="space-y-1">
+<p class="text-silver/40 text-[10px] font-bold uppercase">Inventory</p>
+<p class="text-white font-extrabold text-sm">$45.2M</p>
+</div>
+<div class="space-y-1">
+<p class="text-silver/40 text-[10px] font-bold uppercase">Leads</p>
+<p class="text-white font-extrabold text-sm">124 <span class="text-primary text-[10px] font-normal text-emerald-400">↑ 12%</span></p>
+</div>
+<div class="space-y-1">
+<p class="text-silver/40 text-[10px] font-bold uppercase">AI Score</p>
+<div class="flex items-center gap-1.5">
+<p class="text-primary font-extrabold text-sm">98%</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5 flex gap-2 overflow-x-auto no-scrollbar">
+<div class="shrink-0 size-12 rounded-lg bg-white/5 border border-white/10 overflow-hidden">
+<img alt="Car" class="w-full h-full object-cover" data-alt="Luxury sports car in dubai showroom" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXGESEl9UdkCpMKH-oB9bduX6P4yHPtlTe2IIrQpxearwuOs40TSMcXw9WIdYLYvOiOTaNTPrYZyHUClTk-uYE2LIfHkxsC8yKuhu8x7NnAZBXyfeDyT-VgZZA6_qc43Fgn4ySRwX09Nxio6wkv3LfT2D55Us-2gIM4FxrE4ntD74V-Oi9evC7HToxkmflboioRKZHAPOcVhWn6sfV1sPSn6oiFg0WF_eovq-wRoLEYnc8_3fgmxlgeJoDMXsywHtd7a_wj-8c9nA"/>
+</div>
+<div class="shrink-0 size-12 rounded-lg bg-white/5 border border-white/10 overflow-hidden">
+<img alt="Car" class="w-full h-full object-cover" data-alt="High-end exotic vehicle interior detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrpuQPVhg3qIWkQezUPYbd8oC4cY9m0_hw9KF4oUM22FxIcE274E8sqDCpLxh1Fy-lahX7Rt6Jjy6WRtxGiIQv8O2_SD565fIGWBS8S5ZxqJBC3ZE9rtJ8isKJ5HeMKscg3BtgFNXfTWOsAn24ywdmC0KCPkDubWMCw-zjy1zVsbBFWEmkZwQl-AZPH4CK4HJkqe3L9tRUTWlfGXHrgs2C5q-q292hmoisXQOkFXvaA0jo5dFq5IXZNpsVIF4h93aSH61WrbBvsnE"/>
+</div>
+<div class="shrink-0 size-12 rounded-lg bg-white/5 border border-white/10 overflow-hidden">
+<img alt="Car" class="w-full h-full object-cover" data-alt="Matte finished sports car front profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRm3iBhTbcRD9TnksGyuYpg0F7wMYf0F-m-hEAWeaWqDPRXXPlwZJWivV25OavBKI-VnzqThb8mA3j0RGrHFx9A4cL_Ds1Gi8TqWugG0NAdaI7Y4rxHj82OJOOKhVWxkyoqKeY4y7dkikeibG3Aqo8iCdc8g9dRqpHb778JuIT7m1Leooga3myRZUc-iEz2XHO0mM7Zc7-r8_PYggxpSMN3B47e80sG3E3_hrClV2utQ1kSU-4EQe8_Nu6EDZUYPX7AJiYCBqcXNQ"/>
+</div>
+</div>
+</div>
+<!-- London Location Card -->
+<div class="glass-panel p-5 rounded-2xl border-l-4 border-l-silver/40 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-white font-bold text-lg leading-tight">London Mayfair</h3>
+<p class="text-silver/50 text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Park Lane
+                    </p>
+</div>
+<div class="bg-silver/10 px-3 py-1 rounded-full flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-silver/60 rounded-full"></span>
+<span class="text-silver/60 text-[10px] font-bold uppercase tracking-wider">After Hours</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="space-y-1">
+<p class="text-silver/40 text-[10px] font-bold uppercase">Inventory</p>
+<p class="text-white font-extrabold text-sm">$32.8M</p>
+</div>
+<div class="space-y-1">
+<p class="text-silver/40 text-[10px] font-bold uppercase">Leads</p>
+<p class="text-white font-extrabold text-sm">89</p>
+</div>
+<div class="space-y-1">
+<p class="text-silver/40 text-[10px] font-bold uppercase">AI Score</p>
+<p class="text-primary font-extrabold text-sm">92%</p>
+</div>
+</div>
+</div>
+<!-- Monaco Location Card -->
+<div class="glass-panel p-5 rounded-2xl border-l-4 border-l-emerald-400 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-white font-bold text-lg leading-tight">Monaco Marina</h3>
+<p class="text-silver/50 text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Port Hercules
+                    </p>
+</div>
+<div class="bg-emerald-400/10 px-3 py-1 rounded-full flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
+<span class="text-emerald-400 text-[10px] font-bold uppercase tracking-wider">High Volume</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="space-y-1">
+<p class="text-silver/40 text-[10px] font-bold uppercase">Inventory</p>
+<p class="text-white font-extrabold text-sm">$67.1M</p>
+</div>
+<div class="space-y-1">
+<p class="text-silver/40 text-[10px] font-bold uppercase">Leads</p>
+<p class="text-white font-extrabold text-sm">45</p>
+</div>
+<div class="space-y-1">
+<p class="text-silver/40 text-[10px] font-bold uppercase">AI Score</p>
+<p class="text-primary font-extrabold text-sm">95%</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 inset-x-0 bg-matte-black/90 backdrop-blur-xl border-t border-white/10 px-6 pt-3 pb-8 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1">dashboard</span>
+</div>
+<p class="text-[10px] font-bold tracking-wider text-primary">DASHBOARD</p>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="text-silver/40 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">directions_car</span>
+</div>
+<p class="text-[10px] font-bold tracking-wider text-silver/40">FLEET</p>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="text-silver/40 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">group</span>
+</div>
+<p class="text-[10px] font-bold tracking-wider text-silver/40">LEADS</p>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="text-silver/40 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">analytics</span>
+</div>
+<p class="text-[10px] font-bold tracking-wider text-silver/40">AI INSIGHTS</p>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="text-silver/40 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">settings</span>
+</div>
+<p class="text-[10px] font-bold tracking-wider text-silver/40">CONFIG</p>
+</a>
+</nav>
+<!-- Global Floating Action -->
+<button class="fixed right-6 bottom-28 size-14 rounded-full bg-primary text-background-dark shadow-lg shadow-primary/20 flex items-center justify-center z-40 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[32px] font-bold">add</span>
+</button>
+</body></html>

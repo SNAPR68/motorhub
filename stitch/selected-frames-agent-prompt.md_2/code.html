@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Vehicle Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #2563EB;
+            --primary-light: #EFF6FF;
+            --accent: #7C3AED;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --on-surface: #1E293B;
+            --primary-text: #0F172A;
+            --secondary-text: #64748B;
+            --divider: #E2E8F0;
+            --success: #10B981;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--primary-text);
+        }
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+        .ios-toggle:checked + .ios-toggle-label {
+            background-color: var(--success);
+        }
+        .ios-toggle:checked + .ios-toggle-label::after {
+            transform: translateX(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="max-w-md mx-auto min-h-screen pb-24">
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[var(--divider)] px-4 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full active:bg-gray-100">
+<span class="material-symbols-outlined text-[var(--primary-text)]">arrow_back_ios_new</span>
+</button>
+<h1 class="font-jakarta text-lg font-bold">AI Vehicle Studio</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full active:bg-gray-100">
+<span class="material-symbols-outlined text-[var(--primary)]">info</span>
+</button>
+</header>
+<main class="p-4 space-y-6">
+<section>
+<div class="flex items-center justify-between mb-3">
+<h2 class="font-jakarta text-sm font-bold text-[var(--secondary-text)] uppercase tracking-wider">Original Photos</h2>
+<span class="text-xs font-semibold px-2 py-1 bg-gray-100 rounded text-[var(--secondary-text)]">8 Photos</span>
+</div>
+<div class="grid grid-cols-4 gap-2">
+<div class="aspect-square rounded-lg overflow-hidden bg-gray-200 border border-[var(--divider)] relative">
+<img alt="Car exterior" class="w-full h-full object-cover grayscale-[0.5]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-hqsIorXAw8nOhNbF_o2vjnuGuGbBz8Q1zVpQ3RRSOWUOAVud9x5GV4W4Bfp9aeuICZOcpginktiJk1TxPg0o7XbI76fWqc0Kzi4a_TxTOiEw1WKYJ67TAqALlzS6fwbA_g6rPuN1__5ij_W_A0CKNqsozSJ0y5skRmSBsBai5OMmR3MYI_i3c2AcUxNudGchXbMWmycv-fNClJ77ijajkw9dnSqzwgZ5FOrK0H09Z9_WLlfKXoe5KmyMals9z7vxMcMEbRXb-Mo"/>
+</div>
+<div class="aspect-square rounded-lg overflow-hidden bg-gray-200 border border-[var(--divider)]">
+<img alt="Car front" class="w-full h-full object-cover grayscale-[0.5]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ3I7P-p5_hw5VfDNCfympJkKEDkyd3XW7a-WiICobuPffZoYfNXYcEMgZRl1Ac9BxRlMqM7mBS_ZcV8gkHgKNLrPqPEGWzvFjMHRLRvRORwNo9bRsgxdsnJFAWaoaoT4eyJO04micB5ZRM6vKiKCqgeAZJ80HWcRY0wbsvheec4vr8jXC6EBPzUVyYqUAj1aK7j1PawIZ0MQYaVsaYfsaUeIbt7bZQYu6M3JxSgu-DTi0g-AVGFvjIKmGXLYV3suAXMHf9EC7oao"/>
+</div>
+<div class="aspect-square rounded-lg overflow-hidden bg-gray-200 border border-[var(--divider)]">
+<img alt="Car wheel" class="w-full h-full object-cover grayscale-[0.5]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEfZJfC-ycE1Z-jZJY6sKm0HjhG9hTEL8XR3bKRdjc9jgCpwtzS6yalJolWkMwO8lhMdzrfT1hBTturHzzOwXq5rNcooKfA88y7qGu0aglUhatPAu5gFMDfTUnS-RCFl2zveq2S2mg6sntvqECU81rRWnA0gQsEDiRFv51OwfxD1PXYhMJtPIXFufgc81mBT_Rl8yPqmlDqRw65BgVtwQEyx26eA6oigFAayyRIyH-gfm9laNYRNgF5GfyzC5PNI8mqbURVCFg3io"/>
+</div>
+<div class="aspect-square rounded-lg overflow-hidden bg-gray-200 border border-[var(--divider)] flex items-center justify-center">
+<span class="material-symbols-outlined text-gray-400">add_a_photo</span>
+</div>
+</div>
+</section>
+<section class="bg-white rounded-2xl p-5 shadow-sm border border-[var(--divider)]">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h3 class="font-jakarta font-bold text-lg flex items-center gap-2">
+                        AI Magic at Work
+                        <span class="inline-block w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+</h3>
+<p class="text-sm text-[var(--secondary-text)] mt-1">Enhancing lighting and cleaning backgrounds...</p>
+</div>
+<div class="bg-[var(--primary-light)] text-[var(--primary)] text-xs font-bold px-2 py-1 rounded-full">
+                    65%
+                </div>
+</div>
+<div class="w-full bg-gray-100 h-2.5 rounded-full overflow-hidden">
+<div class="bg-[var(--primary)] h-full w-[65%] rounded-full relative">
+<div class="absolute inset-0 bg-white/20 animate-shimmer"></div>
+</div>
+</div>
+<div class="mt-4 flex gap-4 text-xs font-medium text-[var(--secondary-text)]">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[var(--success)] text-base">check_circle</span>
+                    Denoising
+                </div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[var(--success)] text-base">check_circle</span>
+                    Upscaling
+                </div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[var(--primary)] text-base animate-spin">refresh</span>
+                    Relighting
+                </div>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-3">
+<h2 class="font-jakarta text-sm font-bold text-[var(--secondary-text)] uppercase tracking-wider">AI Enhanced Preview</h2>
+<button class="text-[var(--primary)] text-sm font-semibold">Compare</button>
+</div>
+<div class="relative rounded-2xl overflow-hidden border-2 border-[var(--primary)] shadow-lg bg-white">
+<img alt="Enhanced car" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOP_IvtEt-kT3Z-MR7jB1KuIb0gPwWVj9URFTQ7RXjpKfqhClJNxwRxYwO0MP44cRkh2XOJXLAWav7by8h8pShin63utxs_ryUgwLpcb-AluFspRy6Ff-TEmgmk-t5vLCnAwoUfPd_M5ZvtOYDynjxeJFCDXUroAtHaZFAP6aaF-lBXq1ShdPwX7mSh-eemmq3bjQqeZJFOJvN8letbmKz3kYRUZheFY6-eWjkWJoXF6UrywLJV20vu1vyGhxosg2yxRwrcd3RkxU"/>
+<div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded tracking-widest">ENHANCED</div>
+<div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+<p class="text-white text-sm font-medium">Showroom Lighting Applied • Background Replaced</p>
+</div>
+<div class="absolute inset-y-0 left-1/2 w-0.5 bg-white shadow-xl flex items-center justify-center">
+<div class="w-8 h-8 rounded-full bg-white shadow-lg flex items-center justify-center -ml-px">
+<span class="material-symbols-outlined text-[var(--primary)] text-xl">unfold_more</span>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white rounded-2xl border border-[var(--divider)] overflow-hidden">
+<div class="p-4 border-b border-[var(--divider)] flex items-center justify-between bg-gray-50/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[var(--primary-light)] text-[var(--primary)] flex items-center justify-center">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Smart Publish Settings</h4>
+<p class="text-[10px] text-[var(--secondary-text)] uppercase font-bold">Auto-generation Suite</p>
+</div>
+</div>
+</div>
+<div class="divide-y divide-[var(--divider)]">
+<div class="p-4 flex items-center justify-between bg-white">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-[var(--primary-text)]">360° View Generation</span>
+<span class="text-xs text-[var(--secondary-text)]">AI-stitched interior &amp; exterior tour</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 rounded-full ios-toggle-label transition-colors duration-200 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+<div class="p-4 flex items-center justify-between bg-white">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-[var(--primary-text)]">Auto-caption</span>
+<span class="text-xs text-[var(--secondary-text)]">Generate catchy specs &amp; hashtags</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 rounded-full ios-toggle-label transition-colors duration-200 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+<div class="p-4 flex items-center justify-between bg-white">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-[var(--primary-text)]">Social Media Sync</span>
+<span class="text-xs text-[var(--secondary-text)]">Post to IG, FB &amp; WhatsApp Business</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only ios-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 rounded-full ios-toggle-label transition-colors duration-200 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+</div>
+</section>
+</main>
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-4 bg-white/90 backdrop-blur-lg border-t border-[var(--divider)] flex gap-3">
+<button class="flex-1 py-4 px-6 bg-gray-100 text-[var(--primary-text)] font-bold rounded-2xl active:scale-95 transition-transform">
+            Save Draft
+        </button>
+<button class="flex-[2] py-4 px-6 bg-[var(--primary)] text-white font-bold rounded-2xl shadow-lg shadow-blue-200 active:scale-95 transition-transform flex items-center justify-center gap-2">
+            Finish Studio Processing
+            <span class="material-symbols-outlined text-xl">auto_fix_high</span>
+</button>
+</div>
+<button class="fixed bottom-24 right-4 w-14 h-14 bg-[var(--accent)] text-white rounded-full shadow-xl flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl">electric_bolt</span>
+</button>
+
+</body></html>

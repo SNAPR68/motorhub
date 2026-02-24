@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci | AI Lead CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(115, 17, 212, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(115, 17, 212, 0.2);
+        }
+        .sentiment-hot {
+            background: linear-gradient(135deg, #7311d4 0%, #a855f7 100%);
+            box-shadow: 0 0 15px rgba(115, 17, 212, 0.4);
+        }
+        .sentiment-warm {
+            background: rgba(115, 17, 212, 0.2);
+            border: 1px solid rgba(115, 17, 212, 0.4);
+        }
+        .kardeco-gradient {
+            background: linear-gradient(180deg, rgba(25, 16, 34, 0) 0%, rgba(25, 16, 34, 1) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header Section -->
+<header class="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 justify-between border-b border-primary/10">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-2xl">account_circle</span>
+</div>
+<div class="flex flex-col items-center">
+<h1 class="text-slate-900 dark:text-slate-100 text-lg font-bold tracking-tight uppercase">Autovinci</h1>
+<p class="text-[10px] text-primary font-medium tracking-[0.2em] uppercase leading-none">AI Intelligence</p>
+</div>
+<div class="flex size-10 items-center justify-end">
+<button class="relative text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<span class="absolute top-0 right-0 size-2 bg-primary rounded-full border-2 border-background-dark"></span>
+</button>
+</div>
+</header>
+<!-- Search & Filter -->
+<div class="px-4 py-4 space-y-4">
+<label class="flex flex-col w-full">
+<div class="flex w-full items-stretch rounded-xl h-12 bg-slate-200/50 dark:bg-primary/10 border border-primary/5">
+<div class="text-slate-500 dark:text-primary/60 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-primary/40 text-sm font-normal px-3" placeholder="Search premium inventory or leads..."/>
+</div>
+</label>
+<!-- Quick Filters -->
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-4 text-white text-xs font-semibold uppercase tracking-wider">
+                    All Leads
+                </button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-lg bg-slate-200 dark:bg-primary/20 px-4 text-slate-700 dark:text-slate-100 text-xs font-semibold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm text-primary">local_fire_department</span>
+                    Hot
+                </button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-lg bg-slate-200 dark:bg-primary/20 px-4 text-slate-700 dark:text-slate-100 text-xs font-semibold uppercase tracking-wider">
+                    Recently Active
+                </button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-lg bg-slate-200 dark:bg-primary/20 px-4 text-slate-700 dark:text-slate-100 text-xs font-semibold uppercase tracking-wider">
+                    Unassigned
+                </button>
+</div>
+</div>
+<!-- Leads Content -->
+<main class="flex-1 px-4 space-y-4 pb-24">
+<div class="flex items-center justify-between py-2">
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold tracking-tight">Priority Leads</h2>
+<span class="text-primary text-xs font-medium uppercase tracking-widest">3 New Today</span>
+</div>
+<!-- Lead Card 1: Hot -->
+<div class="glass-card rounded-2xl p-4 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="relative">
+<img class="size-12 rounded-xl object-cover grayscale brightness-110 border border-primary/20" data-alt="Portrait of a luxury car buyer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5qz187K1xYBI5tymjgPYG4vS1xNjw8LY9NopINpROtI52yZm8HtuYDMOgi6rytU7V1PU93Gwg0fW3laXWGsXI3kWlF_AlgZZyvAUDS0OrxYJPk2oqSrWoT6AJXkntOJtkNSD6EnumCto65qZLOLGYBAsHlDyFEF2cqdEDa9hDCcbLtm8VpNK2hoZr6uaqK6Jt2k02nuaJ000_Nva5cuL2UdVOSqwl6vtWMEcKZttWY23BAWHdryQXC1GGxvCVo2DzDmeTSEue8dU"/>
+<span class="absolute -bottom-1 -right-1 flex size-4 items-center justify-center bg-primary rounded-full ring-2 ring-background-dark">
+<span class="material-symbols-outlined text-[10px] text-white">bolt</span>
+</span>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 font-bold text-base leading-none">Julian Sterling</h3>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1">2024 Porsche 911 GT3 RS</p>
+</div>
+</div>
+<div class="sentiment-hot px-2.5 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-tighter">
+                        Hot Sentiment
+                    </div>
+</div>
+<div class="flex items-center gap-2 py-2 border-y border-primary/5">
+<span class="material-symbols-outlined text-primary text-sm">auto_awesome</span>
+<p class="text-slate-600 dark:text-slate-300 text-xs italic leading-snug">"Client showed high engagement with performance specs. Ready for test drive offer."</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 flex items-center justify-center h-10 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2">
+<span class="material-symbols-outlined text-lg">call</span>
+</button>
+<button class="flex-1 flex items-center justify-center h-10 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+<button class="flex-[2] flex items-center justify-center h-10 rounded-lg bg-primary text-white text-xs font-bold uppercase tracking-widest gap-2">
+<span class="material-symbols-outlined text-lg">magic_button</span>
+                        AI Draft
+                    </button>
+</div>
+</div>
+<!-- Lead Card 2: Warm -->
+<div class="glass-card rounded-2xl p-4 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="relative">
+<img class="size-12 rounded-xl object-cover grayscale brightness-110 border border-primary/20" data-alt="Portrait of a professional woman interested in high-end SUVs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5ajIky9LD7usLRcDldMjqz6dmIZ-_EmsRHh5-NDDXxUey0y4RVeteMvBiElZCca3L_Oj1VMnXO4EXxHHDGzuA-0WLD1OWWX38UHaMTvTJIJ2963kdlmO3pfm8190r7euDU_7N_b-f67r28-y_RvTDPlOweF0-SvnNNc_sDOPPlcKltAcq_-3d77j_ovxZfizJiMOF0j7h82jHYjDTcPQV-faxpgdwAZZOAsLv-p9HWRfVa3hryIukViNRZqv5lWAHINdaRWoHnR4"/>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 font-bold text-base leading-none">Eleanor Vane</h3>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1">2025 Range Rover SV</p>
+</div>
+</div>
+<div class="sentiment-warm px-2.5 py-1 rounded-full text-[10px] font-bold text-primary uppercase tracking-tighter">
+                        Warm Sentiment
+                    </div>
+</div>
+<div class="flex items-center gap-2 py-2 border-y border-primary/5">
+<span class="material-symbols-outlined text-primary/60 text-sm">auto_awesome</span>
+<p class="text-slate-600 dark:text-slate-300 text-xs italic leading-snug">"Comparing custom interior options. Interested in bespoke cognac leather."</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 flex items-center justify-center h-10 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2">
+<span class="material-symbols-outlined text-lg">call</span>
+</button>
+<button class="flex-1 flex items-center justify-center h-10 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+<button class="flex-[2] flex items-center justify-center h-10 rounded-lg bg-primary text-white text-xs font-bold uppercase tracking-widest gap-2">
+<span class="material-symbols-outlined text-lg">magic_button</span>
+                        AI Draft
+                    </button>
+</div>
+</div>
+<!-- Lead Card 3 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="relative">
+<div class="size-12 rounded-xl bg-primary/20 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 font-bold text-base leading-none">Marcus Thorne</h3>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1">2024 Ferrari Purosangue</p>
+</div>
+</div>
+<div class="sentiment-hot px-2.5 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-tighter">
+                        Hot Sentiment
+                    </div>
+</div>
+<div class="flex items-center gap-2 py-2 border-y border-primary/5">
+<span class="material-symbols-outlined text-primary text-sm">auto_awesome</span>
+<p class="text-slate-600 dark:text-slate-300 text-xs italic leading-snug">"Waitlist inquiry. Previous V12 owner. High probability for immediate deposit."</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 flex items-center justify-center h-10 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2">
+<span class="material-symbols-outlined text-lg">call</span>
+</button>
+<button class="flex-1 flex items-center justify-center h-10 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 gap-2">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+<button class="flex-[2] flex items-center justify-center h-10 rounded-lg bg-primary text-white text-xs font-bold uppercase tracking-widest gap-2">
+<span class="material-symbols-outlined text-lg">magic_button</span>
+                        AI Draft
+                    </button>
+</div>
+</div>
+</main>
+<!-- Navigation Bar -->
+<nav class="fixed bottom-0 w-full bg-background-light dark:bg-background-dark border-t border-primary/10 px-4 pb-6 pt-2">
+<div class="flex items-center justify-between gap-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">group</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Leads</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-primary/40" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Analytics</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-primary/40" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Inventory</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-primary/40" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Settings</p>
+</a>
+</div>
+</nav>
+<!-- Subtle Art Deco Gradient Overlay -->
+<div class="pointer-events-none fixed inset-0 z-[-1] opacity-20">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-primary blur-[160px] rounded-full -translate-x-1/2 translate-y-1/2"></div>
+</div>
+</div>
+</body></html>

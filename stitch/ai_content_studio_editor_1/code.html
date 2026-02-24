@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Content Studio Editor - Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .kardeco-border {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
+        }
+        .glass-panel {
+            background: rgba(16, 22, 34, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .slider-handle {
+            box-shadow: 0 0 15px rgba(43, 108, 238, 0.5);
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<div class="relative flex h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-hidden">
+<!-- Header / Status Bar Area -->
+<header class="flex items-center justify-between px-5 pt-12 pb-4 z-20">
+<button class="flex items-center justify-center size-10 rounded-full bg-slate-200/50 dark:bg-slate-800/50 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<div class="text-center">
+<h1 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-900 dark:text-slate-100">AI Studio</h1>
+<p class="text-[10px] font-medium text-slate-500 dark:text-slate-400 tracking-wider">2024 GRAND TOURER</p>
+</div>
+<button class="px-5 py-2 bg-primary text-white rounded-full text-xs font-bold uppercase tracking-wider shadow-lg shadow-primary/20">
+                Export
+            </button>
+</header>
+<!-- Main Editor Stage -->
+<main class="relative flex-1 w-full px-4 py-2 flex flex-col items-center justify-center">
+<!-- Comparison Slider Container -->
+<div class="relative w-full aspect-[3/4] rounded-xl overflow-hidden kardeco-border group">
+<!-- After Image (Background) -->
+<div class="absolute inset-0 bg-cover bg-center" data-alt="High-end luxury sports car in a professional dark studio setting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCBoCucAgFW7Sc0KVowXYYkR3gzHZQCsx02oX-x98xEfpZkpiXV3yQi5tbupXDgV0QVAAUKhXf-zxZ2LiIq-UCH88Q-NpSNpwDYqIIS5FlNt3d7XZeoYz7auJ_IVQIpRzhKLeBUa0xbqxAVAg7s6AFiraRMO_9No6NZooJs_MTdO-lh77ZuJ6Uua_7baxCMp_hVI2tvi8KFRN8C1YA8dCqWv3Xil1nMhuOofdKiLcJ4qcqg6Umo4bBrMEHPQQghJgVP70XSm5srJ8U');">
+</div>
+<!-- Before Image (Overlay with Clip) -->
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Unedited photo of a sports car in a casual outdoor parking lot" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD4ulrgCjA0kZ3l727fWvc3w1f0BGMO56RI6kjcfIp4IoxEwP6YYTMnnOnWwKYqJZy6Uxe4I1ppOMsBuM6NoltWwYwon_8-Fi1WOUHMH_0-XrEKzLD1Hhat01zs6kVm16yN9WL3_gcGf4CU8FGcOy8rzkLc3H5m6Y2nFhrlgxIwxncz-s0WRCnHcVuHFTojORe0RQv14s0u36-Km-GTxG7npJvTF33GpIHCYG7YqOjTCMMRmpQIaD3AgEGgnNU30VSGlOKUIturoJU'); clip-path: inset(0 40% 0 0);">
+</div>
+<!-- Labels -->
+<div class="absolute top-4 left-4 px-2 py-1 bg-black/40 backdrop-blur-md rounded border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">Original</div>
+<div class="absolute top-4 right-4 px-2 py-1 bg-primary/80 backdrop-blur-md rounded border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">Enhanced</div>
+<!-- Slider Handle -->
+<div class="absolute inset-y-0 left-[60%] w-0.5 bg-primary/60 slider-handle z-10">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8 bg-white rounded-full flex items-center justify-center shadow-xl border-4 border-primary">
+<span class="material-symbols-outlined text-primary text-lg font-bold">unfold_more</span>
+</div>
+</div>
+<!-- AI Processing Line (Subtle Glow) -->
+<div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-40"></div>
+</div>
+<!-- Undo/Redo Floating Actions -->
+<div class="flex gap-4 mt-6">
+<button class="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">undo</span>
+</button>
+<div class="w-[1px] h-4 bg-slate-800"></div>
+<button class="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">redo</span>
+</button>
+</div>
+</main>
+<!-- Tools Bottom Section -->
+<section class="glass-panel border-t border-slate-200 dark:border-slate-800 px-6 pt-6 pb-12 rounded-t-[2.5rem] z-30">
+<!-- Active Tool Slider (e.g., Lighting Intensity) -->
+<div class="mb-8">
+<div class="flex justify-between items-center mb-4">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Studio Lighting</span>
+<span class="text-xs font-bold text-primary">85%</span>
+</div>
+<div class="relative w-full h-1 bg-slate-200 dark:bg-slate-800 rounded-full">
+<div class="absolute top-0 left-0 h-full w-[85%] bg-primary rounded-full"></div>
+<div class="absolute top-1/2 left-[85%] -translate-x-1/2 -translate-y-1/2 size-4 bg-white rounded-full border-2 border-primary shadow-lg"></div>
+</div>
+</div>
+<!-- Tool Selection Grid -->
+<div class="grid grid-cols-3 gap-4">
+<button class="flex flex-col items-center gap-3 p-4 rounded-xl bg-primary/10 border border-primary/30 text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">wb_iridescent</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Lighting</span>
+</button>
+<button class="flex flex-col items-center gap-3 p-4 rounded-xl bg-slate-100 dark:bg-slate-800/50 border border-transparent text-slate-500 dark:text-slate-400 hover:border-slate-700 transition-all">
+<span class="material-symbols-outlined text-2xl">background_replace</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Studio BG</span>
+</button>
+<button class="flex flex-col items-center gap-3 p-4 rounded-xl bg-slate-100 dark:bg-slate-800/50 border border-transparent text-slate-500 dark:text-slate-400 hover:border-slate-700 transition-all">
+<span class="material-symbols-outlined text-2xl">palette</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Color Grade</span>
+</button>
+</div>
+</section>
+<!-- iOS Home Indicator Spacing -->
+<div class="h-6 bg-background-light dark:bg-background-dark"></div>
+<!-- Navigation Placeholder (Matches BottomNavBar component style) -->
+<nav class="fixed bottom-0 left-0 w-full flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pb-6 pt-2 z-40">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">auto_fix_high</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Editor</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Assets</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">filter_list</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Presets</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person_outline</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Profile</p>
+</a>
+</nav>
+</div>
+</body></html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci - AI Enhancements &amp; Billing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1754cf",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "slate-custom": "#1a2232",
+                        "slate-border": "#243047",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            background-color: rgba(17, 22, 33, 0.8);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+<!-- iOS Status Bar Spacer -->
+<div class="h-12 w-full bg-background-light dark:bg-background-dark sticky top-0 z-50"></div>
+<!-- Header Navigation -->
+<header class="sticky top-12 z-50 glass-effect border-b border-slate-200 dark:border-slate-border px-4 py-4 flex items-center justify-between">
+<button class="flex items-center justify-center p-2 hover:bg-slate-200 dark:hover:bg-slate-custom rounded-full transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">arrow_back_ios</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">AI Enhancements</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="max-w-md mx-auto pb-32">
+<!-- Current Plan Summary Section -->
+<section class="p-6">
+<h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-4">Current Plan</h2>
+<div class="bg-white dark:bg-slate-custom border border-slate-200 dark:border-slate-border rounded-xl p-5 shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<div>
+<p class="text-primary text-xs font-bold mb-1 tracking-wide">ACTIVE</p>
+<h3 class="text-xl font-extrabold">Pro Dealer Tier</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Next billing: Oct 12, 2024</p>
+</div>
+<div class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold">
+                        Annual
+                    </div>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-slate-600 dark:text-slate-300">360° Rendering Slots</span>
+<span class="font-bold">16 / 20</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-border h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 80%;"></div>
+</div>
+<p class="text-[10px] text-slate-500 mt-2 italic">80% capacity reached</p>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border border-slate-200 dark:border-slate-border rounded-lg text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-border/50 transition-colors">
+                    Manage Subscription
+                </button>
+</div>
+</section>
+<!-- Premium Add-ons Section -->
+<section class="px-6 py-2">
+<h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-6">Premium AI Add-ons</h2>
+<div class="space-y-4">
+<!-- Add-on 1 -->
+<div class="bg-white dark:bg-slate-custom/40 border border-slate-200 dark:border-slate-border rounded-xl p-5 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-xl">view_in_ar</span>
+<h3 class="font-bold text-base">Extra 360° Slots</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">
+                                Add 10 additional high-resolution rendering slots to your monthly inventory limit.
+                            </p>
+</div>
+<div class="text-right">
+<p class="font-bold text-lg">$49</p>
+<p class="text-[10px] text-slate-400">/mo</p>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 active:scale-[0.98] transition-all">
+                        Add to Plan
+                    </button>
+</div>
+<!-- Add-on 2 -->
+<div class="bg-white dark:bg-slate-custom/40 border border-slate-200 dark:border-slate-border rounded-xl p-5 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-xl">bolt</span>
+<h3 class="font-bold text-base">Priority AI Response</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">
+                                Bypass the queue during peak hours. Instant generation for backgrounds and descriptions.
+                            </p>
+</div>
+<div class="text-right">
+<p class="font-bold text-lg">$25</p>
+<p class="text-[10px] text-slate-400">/mo</p>
+</div>
+</div>
+<button class="w-full py-2.5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-lg text-sm font-bold active:scale-[0.98] transition-all">
+                        Add to Plan
+                    </button>
+</div>
+<!-- Add-on 3 -->
+<div class="bg-white dark:bg-slate-custom/40 border border-slate-200 dark:border-slate-border rounded-xl p-5 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-xl">psychology</span>
+<h3 class="font-bold text-base">Custom Brand Voice</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">
+                                Train our AI on your past marketing copy to perfectly match your dealership's unique tone.
+                            </p>
+</div>
+<div class="text-right">
+<p class="font-bold text-lg">$99</p>
+<p class="text-[10px] text-slate-400">one-time</p>
+</div>
+</div>
+<button class="w-full py-2.5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-lg text-sm font-bold active:scale-[0.98] transition-all">
+                        Add to Plan
+                    </button>
+</div>
+</div>
+</section>
+<!-- Footer Link -->
+<footer class="mt-12 mb-8 text-center px-6">
+<a class="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors py-2 group" href="#">
+<span class="text-sm font-medium border-b border-transparent group-hover:border-primary">View Billing History &amp; Invoices</span>
+<span class="material-symbols-outlined text-sm">receipt_long</span>
+</a>
+</footer>
+</main>
+<!-- Bottom Navigation Bar (Fixed) -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 glass-effect border-t border-slate-200 dark:border-slate-border pb-8 pt-3 px-6">
+<div class="max-w-md mx-auto flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Marketing</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">auto_awesome</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">AI Tools</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Account</span>
+</a>
+</div>
+</nav>
+<!-- Background Decoration -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 opacity-20 dark:opacity-30 overflow-hidden">
+<div class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary/20 blur-[100px]"></div>
+<div class="absolute bottom-[10%] -right-[10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]"></div>
+</div>
+</body></html>

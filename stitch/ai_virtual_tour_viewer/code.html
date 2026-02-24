@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Virtual Tour Viewer - Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-overlay {
+            background: rgba(25, 16, 34, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(115, 17, 212, 0.2);
+        }
+        .hotspot-pulse {
+            box-shadow: 0 0 0 0 rgba(115, 17, 212, 0.7);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(115, 17, 212, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(115, 17, 212, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(115, 17, 212, 0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<!-- Main Container (Full Screen Mobile View) -->
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<!-- 360 Interior Background Image -->
+<div class="absolute inset-0 z-0 bg-cover bg-center" data-alt="Luxurious high-resolution 360 degree car interior panorama" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpZJ1sPeRofYZ1yn36O594qIfvsPgTGrkO8goX_4o9AaLEtpg_O19IGyxAnfDvYpXMlMA4uHXAfCsyozQIzwnq4gpmY5Yvm6GE4xysF6XVbZHF28KdO3Y8MHqlX_OCzv9PmexanOVMs1u7FPfg3ydLiCTCvTvWQ9lLdSJcTzGeMJIgJ-5TCaugSehg1Ru_rAZrY-ZiU2HY7EpeswD4hBptqtAGuK9ZmPq3N-JCeMBSCr90yhXXYBZPUQqzi8VybVtBuwlbACFSTss');">
+<!-- Dark Vignette Overlay -->
+<div class="absolute inset-0 bg-gradient-to-b from-background-dark/40 via-transparent to-background-dark/60"></div>
+</div>
+<!-- Header / Navigation Bar -->
+<header class="relative z-10 flex items-center justify-between px-4 pt-12 pb-4">
+<button class="flex size-10 items-center justify-center rounded-full glass-overlay text-slate-100">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="text-sm font-semibold tracking-widest uppercase text-white/90">Autovinci</h1>
+<p class="text-[10px] text-primary font-medium uppercase tracking-[0.2em]">Interior Experience</p>
+</div>
+<button class="flex size-10 items-center justify-center rounded-full glass-overlay text-slate-100">
+<span class="material-symbols-outlined">share</span>
+</button>
+</header>
+<!-- Interactive Hotspots (Example Placements) -->
+<div class="relative flex-1 z-10 pointer-events-none">
+<!-- Dashboard Hotspot -->
+<div class="absolute top-[40%] left-[30%] pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<div class="size-6 bg-primary rounded-full hotspot-pulse border-2 border-white/50"></div>
+<div class="absolute left-8 glass-overlay rounded-lg px-3 py-2 min-w-[140px]">
+<p class="text-[10px] text-primary font-bold uppercase">Dashboard</p>
+<p class="text-xs text-white">4K OLED Display</p>
+</div>
+</div>
+</div>
+<!-- Steering Wheel Hotspot -->
+<div class="absolute top-[55%] left-[55%] pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<div class="size-6 bg-primary rounded-full hotspot-pulse border-2 border-white/50"></div>
+<div class="absolute top-8 glass-overlay rounded-lg px-3 py-2 min-w-[140px]">
+<p class="text-[10px] text-primary font-bold uppercase">Steering</p>
+<p class="text-xs text-white">Touch-Sensitive Controls</p>
+</div>
+</div>
+</div>
+<!-- Seat Hotspot -->
+<div class="absolute top-[65%] right-[20%] pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<div class="size-6 bg-primary rounded-full hotspot-pulse border-2 border-white/50"></div>
+<div class="absolute bottom-8 right-0 glass-overlay rounded-lg px-3 py-2 min-w-[150px]">
+<p class="text-[10px] text-primary font-bold uppercase">Upholstery</p>
+<p class="text-xs text-white">Hand-Stitched Nappa</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Controls: Orientation & Zoom -->
+<div class="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-10">
+<div class="flex flex-col rounded-xl overflow-hidden glass-overlay">
+<button class="p-3 text-white hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<div class="h-px bg-white/10 mx-2"></div>
+<button class="p-3 text-white hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<button class="p-3 rounded-xl glass-overlay text-white">
+<span class="material-symbols-outlined">explore</span>
+</button>
+</div>
+<!-- Bottom UI Section -->
+<div class="relative z-10 mt-auto px-4 pb-8 space-y-4">
+<!-- Horizontal Tags / Chips -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+<div class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-full glass-overlay px-4 border-primary/40 bg-primary/20">
+<span class="material-symbols-outlined text-[18px] text-primary">info</span>
+<p class="text-white text-xs font-medium">Dashboard</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-full glass-overlay px-4">
+<span class="material-symbols-outlined text-[18px] text-slate-400">check_circle</span>
+<p class="text-white text-xs font-medium">Leather Quality</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-full glass-overlay px-4">
+<span class="material-symbols-outlined text-[18px] text-slate-400">surround_sound</span>
+<p class="text-white text-xs font-medium">Audio Setup</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-full glass-overlay px-4">
+<span class="material-symbols-outlined text-[18px] text-slate-400">lightbulb</span>
+<p class="text-white text-xs font-medium">Ambient Light</p>
+</div>
+</div>
+<!-- Floating AI Concierge Action -->
+<div class="flex items-center justify-between gap-4">
+<div class="flex-1 glass-overlay rounded-2xl p-4">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-green-500 animate-pulse"></div>
+<p class="text-xs text-slate-300 italic">"Explore the dashboard to see the AI integration..."</p>
+</div>
+</div>
+<button class="flex size-14 items-center justify-center rounded-full bg-primary text-white shadow-xl shadow-primary/30 active:scale-95 transition-transform ring-4 ring-primary/20">
+<span class="material-symbols-outlined text-[28px]">smart_toy</span>
+</button>
+</div>
+</div>
+<!-- Navigation Bar Component (IOS Style) -->
+<nav class="relative z-10 border-t border-white/5 bg-background-dark/80 backdrop-blur-xl px-6 pb-6 pt-3">
+<div class="flex items-center justify-between max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px] fill-[1]">360</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Tour</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">palette</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Design</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">precision_manufacturing</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Specs</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Profile</span>
+</a>
+</div>
+<!-- IOS Home Indicator -->
+<div class="mt-4 mx-auto w-32 h-1 bg-white/20 rounded-full"></div>
+</nav>
+</div>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

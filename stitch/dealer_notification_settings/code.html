@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dealer Notification Settings - Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#196ee6",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0a0a0a",
+                        "matte-black": "#111111",
+                        "silver-line": "rgba(192, 192, 192, 0.1)",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif {
+            font-family: 'Noto Serif', serif;
+        }
+        .glow-active:checked + .toggle-dot {
+            box-shadow: 0 0 12px 2px rgba(25, 110, 230, 0.6);
+        }
+        .silver-divider {
+            border-bottom: 0.5px solid rgba(192, 192, 192, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col max-w-md mx-auto overflow-x-hidden border-x border-silver-line">
+<!-- Header Section -->
+<header class="sticky top-0 z-10 bg-background-dark/95 backdrop-blur-md pt-12 pb-6 px-6 border-b border-silver-line">
+<div class="flex items-center justify-between mb-8">
+<button class="flex items-center text-slate-400">
+<span class="material-symbols-outlined text-[28px]">chevron_left</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl">settings</span>
+</div>
+</div>
+<h1 class="font-display text-3xl font-bold tracking-tight text-slate-100 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            Intelligence Alerts
+        </h1>
+<p class="text-slate-500 text-sm mt-2 font-medium">Configure your premium notification channels</p>
+</header>
+<!-- Column Headers -->
+<div class="grid grid-cols-12 px-6 pt-8 pb-3 silver-divider sticky top-[156px] bg-background-dark z-[5]">
+<div class="col-span-6">
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500">Alert Type</span>
+</div>
+<div class="col-span-3 text-center">
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500">WhatsApp</span>
+</div>
+<div class="col-span-3 text-center">
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500">Email</span>
+</div>
+</div>
+<!-- Notification List -->
+<main class="flex-1 pb-32">
+<!-- New VIP Lead -->
+<div class="grid grid-cols-12 items-center px-6 py-7 silver-divider">
+<div class="col-span-6 flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-base font-display font-semibold text-slate-100">New VIP Lead</span>
+<span class="material-symbols-outlined text-[14px] text-primary/60">info</span>
+</div>
+<p class="text-xs text-slate-500">High-priority inquiries</p>
+</div>
+<div class="col-span-3 flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer glow-active" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary toggle-dot"></div>
+</label>
+</div>
+<div class="col-span-3 flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer glow-active" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary toggle-dot"></div>
+</label>
+</div>
+</div>
+<!-- Market Price Drop -->
+<div class="grid grid-cols-12 items-center px-6 py-7 silver-divider">
+<div class="col-span-6 flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-base font-display font-semibold text-slate-100">Market Price Drop</span>
+<span class="material-symbols-outlined text-[14px] text-slate-600">info</span>
+</div>
+<p class="text-xs text-slate-500">Inventory value intelligence</p>
+</div>
+<div class="col-span-3 flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer glow-active" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary toggle-dot"></div>
+</label>
+</div>
+<div class="col-span-3 flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer glow-active" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary toggle-dot"></div>
+</label>
+</div>
+</div>
+<!-- Social Media Sync -->
+<div class="grid grid-cols-12 items-center px-6 py-7 silver-divider">
+<div class="col-span-6 flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-base font-display font-semibold text-slate-100">Social Media Sync</span>
+<span class="material-symbols-outlined text-[14px] text-slate-600">info</span>
+</div>
+<p class="text-xs text-slate-500">Automated marketing status</p>
+</div>
+<div class="col-span-3 flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer glow-active" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary toggle-dot"></div>
+</label>
+</div>
+<div class="col-span-3 flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer glow-active" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary toggle-dot"></div>
+</label>
+</div>
+</div>
+<!-- Test Drive Booking -->
+<div class="grid grid-cols-12 items-center px-6 py-7 silver-divider">
+<div class="col-span-6 flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-base font-display font-semibold text-slate-100">Test Drive Booking</span>
+<span class="material-symbols-outlined text-[14px] text-primary/60">info</span>
+</div>
+<p class="text-xs text-slate-500">Immediate client scheduling</p>
+</div>
+<div class="col-span-3 flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer glow-active" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary toggle-dot"></div>
+</label>
+</div>
+<div class="col-span-3 flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer glow-active" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary toggle-dot"></div>
+</label>
+</div>
+</div>
+<!-- Advanced Preferences Link -->
+<div class="px-6 py-8">
+<button class="w-full py-4 border border-silver-line rounded-lg flex items-center justify-between px-4 group active:scale-[0.98] transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">tune</span>
+<span class="text-sm font-medium text-slate-300">Advanced Delivery Timing</span>
+</div>
+<span class="material-symbols-outlined text-slate-500">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-background-dark/80 backdrop-blur-xl border-t border-silver-line px-6 pb-8 pt-4">
+<div class="flex items-center justify-between gap-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">directions_car</span>
+<p class="text-[10px] font-bold uppercase tracking-widest leading-normal">Inventory</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">group</span>
+<p class="text-[10px] font-bold uppercase tracking-widest leading-normal">Leads</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<div class="relative">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">notifications</span>
+<span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-primary rounded-full shadow-[0_0_8px_rgba(25,110,230,0.8)]"></span>
+</div>
+<p class="text-[10px] font-bold uppercase tracking-widest leading-normal">Alerts</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">account_circle</span>
+<p class="text-[10px] font-bold uppercase tracking-widest leading-normal">Profile</p>
+</a>
+</div>
+</nav>
+<!-- Visual Accent Element -->
+<div class="fixed top-0 right-0 w-64 h-64 bg-primary/5 blur-[120px] pointer-events-none rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<div class="fixed bottom-0 left-0 w-48 h-48 bg-primary/5 blur-[100px] pointer-events-none rounded-full translate-y-1/2 -translate-x-1/2"></div>
+</body></html>

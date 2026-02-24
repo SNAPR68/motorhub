@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci | Luxury Digital Showroom</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Noto+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1773cf",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0a0a0a",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .font-display {
+            font-family: 'Noto Serif', serif;
+        }
+        /* Custom scrollbar hide for horizontal collection */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary/30">
+<!-- Top Navigation -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5">
+<div class="flex items-center justify-between px-6 h-16 max-w-lg mx-auto">
+<div class="flex items-center gap-2">
+<span class="text-xl font-display font-bold tracking-tight text-white">Autovinci</span>
+</div>
+<div class="flex gap-6 items-center">
+<button class="text-white/60 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">search</span>
+</button>
+<button class="text-white/60 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+</div>
+</div>
+<!-- Sub Nav Tabs -->
+<div class="flex justify-center border-t border-white/5 bg-background-dark/40">
+<div class="flex gap-8 px-4 h-12 items-center">
+<a class="text-xs font-bold tracking-[0.1em] uppercase border-b-2 border-primary text-white h-full flex items-center" href="#">Showroom</a>
+<a class="text-xs font-bold tracking-[0.1em] uppercase border-b-2 border-transparent text-white/40 h-full flex items-center hover:text-white/70 transition-colors" href="#">Collections</a>
+<a class="text-xs font-bold tracking-[0.1em] uppercase border-b-2 border-transparent text-white/40 h-full flex items-center hover:text-white/70 transition-colors" href="#">Concierge</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Wrapper (Mobile Centered) -->
+<main class="max-w-lg mx-auto pt-28 pb-24 min-h-screen flex flex-col">
+<!-- Cinematic Hero Section -->
+<section class="relative w-full aspect-[4/5] md:aspect-video overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent z-10"></div>
+<div class="absolute inset-0 bg-black/20 z-10"></div>
+<!-- Hero Image Background (representing video) -->
+<div class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="Cinematic close-up of a sleek black luxury sports car headlight" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDFXa4ixY9dhsLSJL6lELpLmS8NzdOryyWncy08PpPUqrxVDOoERQjoz6tIblcvqUGA4k1WfgRjVgOb4CjzgzTkFB61irdSVgfO6_fAoNfkdE5_ogCqhZOFPun9tbuMHSPiZgTpYgJBrqMfOyZbF4duB1Cfu0OtnzP7IFs7UFItjO5cy6ln_r5NKQwlpILO9ogM_FGkIm6edqlyJYTh-lcu7ztJ4Lqv1KRqQndOH3aKVSqQGL_paMEIvYRhPPcgeTMAtKB4t3MroA8');">
+</div>
+<div class="absolute inset-0 z-20 flex flex-col items-center justify-center p-8 text-center">
+<h1 class="font-display text-4xl md:text-5xl text-white mb-4 drop-shadow-lg">The Visionary</h1>
+<p class="text-white/80 text-sm font-light tracking-widest uppercase mb-8">Redefining Automotive Excellence</p>
+<button class="group flex items-center gap-3 bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white hover:text-background-dark transition-all duration-300 px-8 py-4 rounded-full text-white font-bold tracking-wider text-sm">
+<span>ENTER EXPERIENCE</span>
+<span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward_ios</span>
+</button>
+</div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+<div class="flex gap-2">
+<span class="w-8 h-0.5 bg-primary"></span>
+<span class="w-8 h-0.5 bg-white/20"></span>
+<span class="w-8 h-0.5 bg-white/20"></span>
+</div>
+</div>
+</section>
+<!-- Curated Collection Header -->
+<section class="px-6 py-10">
+<div class="flex items-end justify-between mb-8">
+<div>
+<span class="text-primary text-xs font-bold tracking-[0.2em] uppercase mb-2 block">Available Now</span>
+<h2 class="font-display text-3xl text-white">Curated Collection</h2>
+</div>
+<a class="text-white/40 text-xs font-bold tracking-widest uppercase hover:text-primary transition-colors pb-1 border-b border-white/10" href="#">View All</a>
+</div>
+<!-- Horizontal Scroll Container -->
+<div class="flex overflow-x-auto gap-6 no-scrollbar -mx-6 px-6 snap-x snap-mandatory">
+<!-- Car Card 1 -->
+<div class="flex-none w-[85%] snap-start group relative">
+<div class="aspect-[3/4] rounded-xl overflow-hidden relative">
+<img alt="Grand Tourer" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Modern silver luxury sedan driving through a mountain pass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpWeEvcoDxnKG2Uf0Iz2VMxSIEbNj7cGFH9cBZemOommOs81Yijp2P5HAw71NAvyRfDXj4h9U-FsfDIgb7V05jwy1r4dnOHtBB9FqA8V68cBAGBV8qwfFaeU2X7J-YtUtWw6Mpd6Umoj222PA3B-W3ICiY_m9zkkwqxkH2ZB4W77L4RNsBqbAaAx0cGhL0qwstTUVxjdfW-EvUm4s-oIUmoAEW6IC89ZU-qUKSB-yG0vAcEAIzJF7V8CRybsSHWwnm7byZ85DVK24"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 space-y-4">
+<div>
+<h3 class="font-display text-2xl text-white">Grand Tourer VII</h3>
+<p class="text-white/60 text-xs tracking-widest uppercase">Performance &amp; Comfort</p>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-white text-background-dark text-xs font-bold py-3 rounded-lg hover:bg-primary hover:text-white transition-colors uppercase tracking-widest">Inquire</button>
+<button class="flex-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold py-3 rounded-lg hover:bg-white/20 transition-colors flex items-center justify-center gap-2 uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                    AI Tour
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Car Card 2 -->
+<div class="flex-none w-[85%] snap-start group relative">
+<div class="aspect-[3/4] rounded-xl overflow-hidden relative">
+<img alt="EV Concept" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Electric luxury SUV parked in front of a modern architectural building" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg8MnyfSTngH9GDbvDtY_W5BQA7rZfaQM3G9pfhdOaJViehl8dftf-sb8V-Qi0CooUXBY_YuZ2EYESD6ygIRS5KCSh-SWz3S4aja4vkh8xQ_BKbIWFl-pN0rB-PlIZdI0ZLWvA_8hVZi6NcT043Ou9LFxVEYuiguKqQoy69sAvZiAD3Jkx_UxZNywwjNgVAym8AKVaZSAF6FqYkp7Om2E-HyWB1LbOXqNZ-BUKB_CSn-4bXUyw_AkPrfvQaw2P_I1KLuHyLappvgw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 space-y-4">
+<div>
+<h3 class="font-display text-2xl text-white">Lumina EV</h3>
+<p class="text-white/60 text-xs tracking-widest uppercase">Pure Electric Luxury</p>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-white text-background-dark text-xs font-bold py-3 rounded-lg hover:bg-primary hover:text-white transition-colors uppercase tracking-widest">Inquire</button>
+<button class="flex-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold py-3 rounded-lg hover:bg-white/20 transition-colors flex items-center justify-center gap-2 uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                    AI Tour
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Car Card 3 -->
+<div class="flex-none w-[85%] snap-start group relative">
+<div class="aspect-[3/4] rounded-xl overflow-hidden relative">
+<img alt="Heritage Series" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Rear profile of a vintage restored classic luxury car" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVSZDGKyAm2td__MVPeWELDQ1gO2CmJahryGn-ghSS_ew1epEYKt0NM2cN2NY_Ek54Y2gZrLkcvZFlDipukJBkzSgL3uUIWKQBfenREhUWMEXEMkkVv3PAZN8oBM409D-WZ5Etm1Z_xe43G6BUW7ePT1LFXuVpepn9s0fwX_RVDeC50B3oCVU42u-kKATcWss28Ua55nHwb4pN5Xoj6qemTRfG6WqLNpqCL1Zq1O3uh3V1mHJVJDyAlFq1seMZMHHRol-THJ4SUXs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 space-y-4">
+<div>
+<h3 class="font-display text-2xl text-white">Classic S800</h3>
+<p class="text-white/60 text-xs tracking-widest uppercase">Heritage Restoration</p>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-white text-background-dark text-xs font-bold py-3 rounded-lg hover:bg-primary hover:text-white transition-colors uppercase tracking-widest">Inquire</button>
+<button class="flex-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold py-3 rounded-lg hover:bg-white/20 transition-colors flex items-center justify-center gap-2 uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                    AI Tour
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Luxury Concierge Teaser -->
+<section class="px-6 py-10 bg-white/[0.02] border-y border-white/5">
+<div class="flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">diamond</span>
+<h3 class="font-display text-2xl text-white mb-2">Bespoke Concierge</h3>
+<p class="text-white/50 text-sm max-w-[280px] mb-8 leading-relaxed">Personalized sourcing and management for the world's most discerning collectors.</p>
+<button class="border border-white/20 px-10 py-3 rounded-full text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-background-dark transition-all">
+                    Connect With Us
+                </button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (iOS Style) -->
+<div class="fixed bottom-0 left-0 w-full z-50 bg-background-dark/95 backdrop-blur-xl border-t border-white/5 pb-8 pt-3">
+<div class="max-w-lg mx-auto flex justify-around items-center px-4">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-primary fill-1">home</span>
+<span class="text-[10px] uppercase tracking-widest font-bold text-primary">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-white/40 group-hover:text-white transition-colors">garage</span>
+<span class="text-[10px] uppercase tracking-widest font-bold text-white/40 group-hover:text-white transition-colors">Garage</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-white/40 group-hover:text-white transition-colors">auto_awesome</span>
+<span class="text-[10px] uppercase tracking-widest font-bold text-white/40 group-hover:text-white transition-colors">AI Tour</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-white/40 group-hover:text-white transition-colors">person</span>
+<span class="text-[10px] uppercase tracking-widest font-bold text-white/40 group-hover:text-white transition-colors">Profile</span>
+</a>
+</div>
+<!-- iOS Home Indicator simulation -->
+<div class="mt-4 flex justify-center">
+<div class="w-32 h-1.5 bg-white/10 rounded-full"></div>
+</div>
+</div>
+</body></html>

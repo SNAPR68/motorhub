@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci | Dealer Executive Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2badee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101c22",
+                        "matte-black": "#0a1114",
+                        "silver": "#C0C0C0",
+                        "glass": "rgba(255, 255, 255, 0.03)",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .kardeco-border {
+            border: 1px solid rgba(192, 192, 192, 0.2);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(192, 192, 192, 0.1);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-matte-black text-slate-900 dark:text-slate-100 font-display">
+<!-- Main Container (iPhone Viewport Simulation) -->
+<div class="relative flex h-screen w-full max-w-[430px] mx-auto flex-col bg-background-light dark:bg-matte-black overflow-hidden border-x border-slate-200 dark:border-slate-800">
+<!-- Status Bar & Header -->
+<header class="pt-12 px-6 pb-4 flex items-center justify-between sticky top-0 bg-matte-black/80 backdrop-blur-md z-30">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full border border-silver/30 bg-cover bg-center overflow-hidden" data-alt="Close up portrait of an executive dealer profile" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBnkUj6NAUEA2Fmp0L49ObHNqm8MBLn-BBeS-3kelFb7ZDCvx-wmG5dxG56kw1PCVzeXYIUjCOinwQ40Pw19MyBMANiCwHOtP9k6iLd5yTXkqtFlSGsLx9hlZ7IVDx3sst_kIRuDDCe7ihYUrJ27PQslgXEbJwS3SIFmFpCgZq0shv4XRlQAzs4rHK3T5VSIGlJM_7HKgthAWSduqjyUM1nsVm81qWrh2WaFoxnmRY695w0Vs8-dhtSGxc1zFXeD31sgrIvRHgB3SY')">
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-semibold">Principal Dealer</p>
+<h1 class="text-lg font-bold leading-tight text-slate-100">Alex Sterling</h1>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="size-10 flex items-center justify-center rounded-full glass-panel text-silver">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto hide-scrollbar px-6 pb-32">
+<!-- AI Insight Banner -->
+<div class="mt-4 mb-8 p-4 rounded-xl border-l-4 border-primary glass-panel flex items-start gap-4">
+<div class="text-primary mt-1">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+</div>
+<div>
+<p class="text-xs font-medium text-primary uppercase tracking-wider mb-1">AI Priority Insight</p>
+<p class="text-sm text-silver/90 leading-relaxed">Inventory demand for <span class="text-white font-semibold">911 GT3</span> is up 18% this week. Consider optimizing active listings.</p>
+</div>
+</div>
+<!-- Executive Metrics Grid -->
+<section class="grid grid-cols-2 gap-4 mb-10">
+<div class="col-span-2 glass-panel p-5 rounded-xl flex items-center justify-between overflow-hidden relative">
+<div class="relative z-10">
+<p class="text-xs text-silver/50 font-medium tracking-widest uppercase mb-1">Total Portfolio Value</p>
+<p class="text-3xl font-bold text-white">$4.82M</p>
+<p class="text-xs text-emerald-400 flex items-center gap-1 mt-2">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+                            +5.2% from last month
+                        </p>
+</div>
+<div class="absolute right-0 bottom-0 opacity-10 translate-x-4 translate-y-4">
+<span class="material-symbols-outlined text-[120px]">account_balance_wallet</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl kardeco-border">
+<p class="text-[10px] text-silver/50 font-bold tracking-widest uppercase mb-2">Live Leads</p>
+<div class="flex items-end justify-between">
+<span class="text-2xl font-bold text-white">24</span>
+<span class="px-2 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-bold">HOT</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl kardeco-border">
+<p class="text-[10px] text-silver/50 font-bold tracking-widest uppercase mb-2">AI Tasks</p>
+<div class="flex items-end justify-between">
+<span class="text-2xl font-bold text-white">08</span>
+<span class="material-symbols-outlined text-primary text-xl">checklist</span>
+</div>
+</div>
+</section>
+<!-- Recent Listings Section -->
+<section class="mb-10">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold text-slate-100 tracking-tight">Recent Listings</h2>
+<a class="text-primary text-xs font-semibold flex items-center gap-1 uppercase tracking-widest" href="#">
+                        View All <span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar -mx-6 px-6">
+<!-- Listing Card 1 -->
+<div class="min-w-[280px] group">
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden mb-3 kardeco-border">
+<img alt="Sleek black Porsche 911 parked in a minimalist garage" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Luxury black sports car in high resolution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq5tB3OroPxzjQrSieW61KRpzkMDGjEim39-Mpo4u2gkmcaHfzjHm1DAV6HRaHy7pWUuhUA83O7wF7V3CskM5wgfQek38MeOUpYONOfHrZg-zn_X13Xgc0ijUWO1G2iPRFKz9_uXesDgtlLl2Dw4vllrhSUZsIDaVbmtQPz6fC7FSLr-8vL-uBxnywycofaH_w4OBBML7b9iQap692rexpOLOgLeqxNMUOUiqj0OTMaJH6Ik_UohlFQDlSbj_0tVwCZQlxFeHHjSg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<p class="text-primary text-lg font-bold">$182,400</p>
+<p class="text-white text-sm font-medium">2024 Porsche 911 Carrera T</p>
+</div>
+<div class="absolute top-4 right-4">
+<span class="bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/10">Active</span>
+</div>
+</div>
+</div>
+<!-- Listing Card 2 -->
+<div class="min-w-[280px] group">
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden mb-3 kardeco-border">
+<img alt="Silver Mercedes AMG detail shot" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Premium silver Mercedes-Benz AMG executive car" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCDCc6fThSMng4ChBOgvUi0GtNAS2GOcyjyFAhXrBOvHulULTP3D7BvXpcjZg1KRd-zz1-OPUDtAlAX9l-aku4QPKsx9og0Kv8C_Xpzrdc0Qh6X0rHMK0oiRwYp4pE2qSnPgTyC2UWGcASClYNozw-XQ662pDHPxa8KJcCO9Q6Skp23eOtkTD_rBIxT63xGzldBgm5hxniC5UrxmVScTx6oDX7wRKAw-GREbimUowlz_iQFYbNgOP68iKKhJgt3nGlKXGFMXMdrdE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<p class="text-primary text-lg font-bold">$145,000</p>
+<p class="text-white text-sm font-medium">2023 Mercedes-Benz S-Class</p>
+</div>
+<div class="absolute top-4 right-4">
+<span class="bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/10">Under Offer</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="mb-10">
+<h3 class="text-[10px] text-silver/50 font-bold tracking-widest uppercase mb-4">Quick Actions</h3>
+<div class="grid grid-cols-4 gap-4">
+<button class="flex flex-col items-center gap-2">
+<div class="size-14 rounded-xl glass-panel flex items-center justify-center text-silver hover:text-primary hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<span class="text-[10px] font-medium text-silver/80">Reports</span>
+</button>
+<button class="flex flex-col items-center gap-2">
+<div class="size-14 rounded-xl glass-panel flex items-center justify-center text-silver hover:text-primary hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<span class="text-[10px] font-medium text-silver/80">Messages</span>
+</button>
+<button class="flex flex-col items-center gap-2">
+<div class="size-14 rounded-xl glass-panel flex items-center justify-center text-silver hover:text-primary hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<span class="text-[10px] font-medium text-silver/80">Schedule</span>
+</button>
+<button class="flex flex-col items-center gap-2">
+<div class="size-14 rounded-xl glass-panel flex items-center justify-center text-silver hover:text-primary hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<span class="text-[10px] font-medium text-silver/80">Market</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Floating Add Button -->
+<div class="fixed bottom-28 right-6 z-40">
+<button class="h-14 w-14 rounded-full bg-primary flex items-center justify-center text-white shadow-2xl shadow-primary/40 group overflow-hidden relative">
+<div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+<!-- Tab Bar -->
+<nav class="absolute bottom-0 w-full bg-matte-black/90 backdrop-blur-xl border-t border-silver/10 px-6 pt-3 pb-8 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-primary transition-all scale-110">dashboard</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-tighter">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1 group text-silver/40" href="#">
+<span class="material-symbols-outlined group-hover:text-silver transition-colors">directions_car</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 group text-silver/40" href="#">
+<span class="material-symbols-outlined group-hover:text-silver transition-colors">group</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Leads</span>
+</a>
+<a class="flex flex-col items-center gap-1 group text-silver/40" href="#">
+<span class="material-symbols-outlined group-hover:text-silver transition-colors">settings_slow_motion</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">AI Tasks</span>
+</a>
+<a class="flex flex-col items-center gap-1 group text-silver/40" href="#">
+<span class="material-symbols-outlined group-hover:text-silver transition-colors">person</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Account</span>
+</a>
+</nav>
+<!-- Safe Area Home Indicator (Visual Only) -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-[60]"></div>
+</div>
+</body></html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Private Collection Wishlist - Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2cc0d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#0a0a0a",
+                        "surface-dark": "#1a1a1a",
+                        "neutral-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<!-- Main Container (Mobile Viewport) -->
+<div class="relative flex min-h-screen w-full max-w-md mx-auto flex-col bg-background-light dark:bg-background-dark shadow-2xl overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-neutral-dark px-4 pt-6 pb-4">
+<div class="flex items-center justify-between mb-6">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-neutral-dark transition-colors">
+<span class="material-symbols-outlined text-2xl">chevron_left</span>
+</button>
+<h1 class="font-serif text-xl font-bold tracking-tight">My Collection</h1>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-neutral-dark transition-colors">
+<span class="material-symbols-outlined text-2xl">search</span>
+</button>
+</div>
+<!-- Segmented Control -->
+<div class="flex p-1 bg-slate-100 dark:bg-neutral-dark rounded-xl">
+<button class="flex-1 py-2 text-sm font-medium rounded-lg bg-white dark:bg-background-dark shadow-sm text-slate-900 dark:text-primary transition-all">
+                    Active Interests
+                </button>
+<button class="flex-1 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-all">
+                    Past Viewed
+                </button>
+</div>
+</header>
+<!-- Wishlist Feed -->
+<main class="flex-1 px-4 py-6 space-y-8 pb-24">
+<!-- Car Card 1 -->
+<div class="group relative flex flex-col gap-4">
+<div class="relative aspect-[21/9] w-full overflow-hidden rounded-xl bg-neutral-dark shadow-lg">
+<img alt="Red Ferrari Roma" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Sleek red Ferrari Roma parked in a modern setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD49lDmwbThr-eGPc81q-4Qk5ssIvB527JJs6GxSSggy5ig_hUiQ6BtbKhfnTEj3jYCg9JNFDJK330ehe84LDP8KO7TCtYg2zN-58T5wcN8BidcaqFEncWgFTfySqeQ39-ht7WVScWJlGPj2RQtjZrai_B-A8hc9CBQLOrJDmCNU26t03W1rcoI0EDJ781dXK2LUaknUv-U06MReILFqD-i2YdjlhAQqxF9wknopHsNJPybHb3zxP6d0_k6QT0KG6iaL3_G4Ieojw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<!-- Wishlist Heart Overlay -->
+<button class="absolute top-3 right-3 z-10 size-10 flex items-center justify-center rounded-full bg-black/20 backdrop-blur-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">favorite</span>
+</button>
+<!-- AI Insight Pill -->
+<div class="absolute bottom-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/90 text-background-dark text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm">
+<span class="material-symbols-outlined text-xs">auto_awesome</span>
+                        Price Drop
+                    </div>
+</div>
+<div class="flex flex-col gap-1 px-1">
+<div class="flex items-baseline justify-between">
+<h2 class="font-serif text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">2023 Ferrari Roma</h2>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">NEW MATCH</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="font-serif italic">Market Value:</span>
+<span class="font-bold text-slate-700 dark:text-slate-200">$245,000</span>
+<span class="flex items-center text-emerald-500 font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                            Trending
+                        </span>
+</div>
+<p class="text-xs text-slate-400 dark:text-neutral-500 mt-1 uppercase tracking-widest font-semibold">Rare Spec • V8 Turbo • 612 HP</p>
+</div>
+</div>
+<!-- Car Card 2 -->
+<div class="group relative flex flex-col gap-4">
+<div class="relative aspect-[21/9] w-full overflow-hidden rounded-xl bg-neutral-dark shadow-lg">
+<img alt="Dark Porsche 911" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Silver Porsche 911 Turbo S cinematic shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBplvp6ilLLahQjTgZzmq3zSDjDkNo-54AnDOmXS-KTqcck0fvk0Z6IuYQCCn-QKsw-NdlpY5Di-G5d7Nq8co8hKDhlQ9XMEfA6SeVGdkntRHzCrEY495kjr2X75Tfa5ENGv0QMKmKZWlvXnfHhPMGucKzuOha7FawHMgiYTGio_hNjzbq8HpYEyaFvtEpA4WEgwlbcDwEqi87nX4nnn0tPsYqqUmOCm-4NDF4GXLsJMO4Y6CoKAqCbIP9fl35pmY9QSwnwQ-mmSZs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<button class="absolute top-3 right-3 z-10 size-10 flex items-center justify-center rounded-full bg-black/20 backdrop-blur-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">favorite</span>
+</button>
+<div class="absolute bottom-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white text-[10px] font-bold uppercase tracking-widest backdrop-blur-md border border-white/20">
+<span class="material-symbols-outlined text-xs">inventory_2</span>
+                        Low Stock
+                    </div>
+</div>
+<div class="flex flex-col gap-1 px-1">
+<div class="flex items-baseline justify-between">
+<h2 class="font-serif text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">2021 Porsche 911 Turbo S</h2>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="font-serif italic">Market Value:</span>
+<span class="font-bold text-slate-700 dark:text-slate-200">$215,000</span>
+<span class="flex items-center text-slate-400 font-medium">
+<span class="material-symbols-outlined text-sm mr-1">video_stable</span>
+                            Stable
+                        </span>
+</div>
+<p class="text-xs text-slate-400 dark:text-neutral-500 mt-1 uppercase tracking-widest font-semibold">AWD • Exclusive Design Wheels</p>
+</div>
+</div>
+<!-- Car Card 3 -->
+<div class="group relative flex flex-col gap-4">
+<div class="relative aspect-[21/9] w-full overflow-hidden rounded-xl bg-neutral-dark shadow-lg">
+<img alt="Aston Martin Vantage" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Dark green Aston Martin Vantage front view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwiE823f4aITdqfh8aMzCMqPVPMz7nuJ7O6H3wYMBjUJlRmwWS1p0MHnSwlYe_6QLI1NkAdDCHySXPqgpXMYD5BCOcZEzBZtSTu03U5fSjJ_P7PB3-xr9yw9vyB_KCa7n_xJXv-hM7zEnqCqJGDtRixdLT8plmTem4ToHUBzVV0EE0p0nlqUtnrLvIfe3_7HBW7sRE2rp9QjSCdtKu0dNZgcuvZjjNSCL3N7jEwiKgQhObds5-N1tlcSvWXOTbYqdyoQfQaZwHUtE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<button class="absolute top-3 right-3 z-10 size-10 flex items-center justify-center rounded-full bg-black/20 backdrop-blur-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">favorite</span>
+</button>
+<div class="absolute bottom-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/90 text-background-dark text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm">
+<span class="material-symbols-outlined text-xs">verified</span>
+                        Investment Grade
+                    </div>
+</div>
+<div class="flex flex-col gap-1 px-1">
+<div class="flex items-baseline justify-between">
+<h2 class="font-serif text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">2022 Aston Martin Vantage</h2>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="font-serif italic">Market Value:</span>
+<span class="font-bold text-slate-700 dark:text-slate-200">$178,000</span>
+<span class="flex items-center text-emerald-500 font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                            High Potential
+                        </span>
+</div>
+<p class="text-xs text-slate-400 dark:text-neutral-500 mt-1 uppercase tracking-widest font-semibold">Coupé • Onyx Black Interior</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-30 mx-auto max-w-md bg-white/95 dark:bg-background-dark/95 backdrop-blur-lg border-t border-slate-200 dark:border-neutral-dark px-6 pb-8 pt-3">
+<div class="flex items-center justify-between">
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">directions_car</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">favorite</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Collection</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">monitoring</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Insights</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Profile</span>
+</a>
+</div>
+</nav>
+<!-- Floating Action Button for View Details (Dynamic Example) -->
+<div class="fixed bottom-24 right-4 z-20">
+<button class="size-14 rounded-full bg-primary text-background-dark shadow-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl font-bold">add</span>
+</button>
+</div>
+</div>
+</body></html>

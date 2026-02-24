@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Autovinci - Premium Inventory Collection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0a0c10",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .text-gradient {
+            background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header / Dynamic Search -->
+<header class="sticky top-0 z-50 glass-panel border-b border-slate-800/50 px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl font-bold">blur_on</span>
+<h1 class="text-xl font-extrabold tracking-tight uppercase italic">Autovinci</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-400">search</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-400 text-2xl">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Premium Filter Bar -->
+<div class="px-6 py-6 flex gap-3 overflow-x-auto no-scrollbar">
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary px-6 transition-all shadow-lg shadow-primary/20">
+<p class="text-white text-sm font-semibold tracking-wide">Premium</p>
+<span class="material-symbols-outlined text-white text-lg">keyboard_arrow_down</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full glass-panel px-6 hover:bg-slate-800 transition-all">
+<p class="text-slate-300 text-sm font-medium">Newest</p>
+<span class="material-symbols-outlined text-slate-500 text-lg">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full glass-panel px-6 hover:bg-slate-800 transition-all">
+<p class="text-slate-300 text-sm font-medium">Status</p>
+<span class="material-symbols-outlined text-slate-500 text-lg">expand_more</span>
+</button>
+</div>
+<!-- Inventory List -->
+<div class="flex flex-col gap-8 px-6">
+<!-- Car Card 1 -->
+<div class="group relative flex flex-col rounded-xl overflow-hidden shadow-2xl transition-transform active:scale-[0.98]">
+<div class="relative aspect-[4/5] sm:aspect-video w-full overflow-hidden">
+<img alt="Silver Porsche 911 GT3 driving on high-end scenic road" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Sleek silver sports car cinematic shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG_dmMHd3-KSrne8GU_7BHwnSLlLHy25vjNAmkLb1uebbnRWEVH9AMNIqQ36GxOHKgsQwadfc6h9ezG37xbox7cJhSY49YOu2xIlQ1lC9mrksCFcrbTL80IH1sLHIZKJHqLXcDatMw04Crwmge9B5GAT-wyutqKBbdJ_wWbhKmtk29WmE-GhAFZ4BJI680cLRlHuCsXbtofqp7SDkxWdalYW1CfL_T8-nF3FIhVsTXaL2eFKyrVIcCQbo3Op-4TxqJqs_KSjjVOHc"/>
+<!-- Top Badges -->
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="glass-panel px-3 py-1 rounded-full text-[10px] font-bold tracking-widest text-primary uppercase border border-primary/30">
+                            AI Enhanced
+                        </span>
+<span class="bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold tracking-widest text-emerald-400 uppercase">
+                            Available
+                        </span>
+</div>
+<!-- Bottom Gradient Overlay -->
+<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<!-- Content Overlay -->
+<div class="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-1">
+<p class="text-slate-400 text-xs font-semibold tracking-[0.2em] uppercase">2024 Model</p>
+<h3 class="text-2xl font-bold text-gradient tracking-tight">Porsche 911 GT3</h3>
+<div class="flex items-center justify-between mt-4">
+<div class="flex flex-col">
+<span class="text-white text-xl font-light">$225,000</span>
+<span class="text-slate-500 text-[10px] font-medium tracking-wide">EST. MARKET PRICE</span>
+</div>
+<!-- AI Studio Action -->
+<button class="flex items-center justify-center gap-2 glass-panel border border-primary/40 bg-primary/10 px-5 py-2.5 rounded-xl hover:bg-primary/20 transition-all active:scale-95 group/btn">
+<span class="material-symbols-outlined text-primary text-xl">auto_fix_high</span>
+<span class="text-white text-xs font-bold tracking-wider uppercase">AI Studio</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Car Card 2 -->
+<div class="group relative flex flex-col rounded-xl overflow-hidden shadow-2xl transition-transform active:scale-[0.98]">
+<div class="relative aspect-[4/5] sm:aspect-video w-full overflow-hidden">
+<img alt="Modern white supercar parked in a minimalist studio environment" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Matte white luxury supercar studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD6Cu9if1482f71WjoWbaK4zMaarb8upnwZbuCAh71wb61mvmpLC_LcEWLqkdnN9YJPaoZuM5gFYjsvPRPKFA2YMCLpcaSjG8iTdkmhZEPjbBDH7x42kwRlAVZnY64M1Wg2HLduBK-zw8OR1opuaDtev6bdsJxDNcabMPc0-9CaLtgZDuFLFWmGusP_2xqmdAKVR64i1Nr92gZQ9iv_RZLcbvu9zgamcWnc0HkjGQmHQ_is1zRWIae6lIxf5k80w_ng7WZbhJ9RpI"/>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="glass-panel px-3 py-1 rounded-full text-[10px] font-bold tracking-widest text-primary uppercase border border-primary/30">
+                            AI Enhanced
+                        </span>
+<span class="bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold tracking-widest text-amber-400 uppercase">
+                            In Review
+                        </span>
+</div>
+<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-1">
+<p class="text-slate-400 text-xs font-semibold tracking-[0.2em] uppercase">2023 Model</p>
+<h3 class="text-2xl font-bold text-gradient tracking-tight">Lamborghini Huracán</h3>
+<div class="flex items-center justify-between mt-4">
+<div class="flex flex-col">
+<span class="text-white text-xl font-light">$310,000</span>
+<span class="text-slate-500 text-[10px] font-medium tracking-wide">EST. MARKET PRICE</span>
+</div>
+<button class="flex items-center justify-center gap-2 glass-panel border border-primary/40 bg-primary/10 px-5 py-2.5 rounded-xl hover:bg-primary/20 transition-all active:scale-95 group/btn">
+<span class="material-symbols-outlined text-primary text-xl">auto_fix_high</span>
+<span class="text-white text-xs font-bold tracking-wider uppercase">AI Studio</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Car Card 3 (Ferrari) -->
+<div class="group relative flex flex-col rounded-xl overflow-hidden shadow-2xl transition-transform active:scale-[0.98]">
+<div class="relative aspect-[4/5] sm:aspect-video w-full overflow-hidden">
+<img alt="Red Ferrari parked in a dark luxury garage" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Red italian sports car dark studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg6nx56CFu-esaJFwXv9CmCrqJxkppR_z745lu_9KwLFWEm63abVdOYjxBU96rspOGrRFq2TL42UP4xjFjfdV9f7gpZmOAXKD8B-CjZf8p_FSngjXqXPE-wtvOFGoisSviNhu7UDNiqc27LqogbGJQ8vxPlSZisx7xWhMrUcaoalOqzpA3-8NuM7lbEI70NiMqBTJSmEvY7wuyj_8GNANXBmQQLipeMqVFYzvYvTs8MeDxwLPqQSKMpYoww5-uz9cpQlBxEn6ao4U"/>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold tracking-widest text-emerald-400 uppercase">
+                            Available
+                        </span>
+</div>
+<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-1">
+<p class="text-slate-400 text-xs font-semibold tracking-[0.2em] uppercase">2024 Model</p>
+<h3 class="text-2xl font-bold text-gradient tracking-tight">Ferrari SF90 Stradale</h3>
+<div class="flex items-center justify-between mt-4">
+<div class="flex flex-col">
+<span class="text-white text-xl font-light">$525,000</span>
+<span class="text-slate-500 text-[10px] font-medium tracking-wide">EST. MARKET PRICE</span>
+</div>
+<button class="flex items-center justify-center gap-2 glass-panel border border-primary/40 bg-primary/10 px-5 py-2.5 rounded-xl hover:bg-primary/20 transition-all active:scale-95 group/btn">
+<span class="material-symbols-outlined text-primary text-xl">auto_fix_high</span>
+<span class="text-white text-xs font-bold tracking-wider uppercase">AI Studio</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (iOS Style) -->
+<nav class="fixed bottom-0 left-0 right-0 glass-panel border-t border-slate-800/50 pt-2 pb-8 px-6">
+<div class="flex justify-between items-center max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined font-variation-fill text-[28px]">directions_car</span>
+<span class="text-[10px] font-bold tracking-tight uppercase">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-[28px]">storefront</span>
+<span class="text-[10px] font-medium tracking-tight uppercase">Showcase</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-[28px]">auto_awesome</span>
+<span class="text-[10px] font-medium tracking-tight uppercase">Studio</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-[28px]">settings</span>
+<span class="text-[10px] font-medium tracking-tight uppercase">Settings</span>
+</a>
+</div>
+</nav>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .font-variation-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</body></html>

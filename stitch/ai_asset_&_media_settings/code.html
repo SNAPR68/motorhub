@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Asset &amp; Media Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#dab80b",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#0a0a0a",
+                        "surface-dark": "#161616",
+                        "border-gold": "#2a2614",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"],
+                        "sans": ["Inter", "system-ui", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .fine-line {
+            border-bottom: 0.5px solid rgba(218, 184, 11, 0.15);
+        }
+        .ios-toggle:checked ~ .toggle-dot {
+            transform: translateX(100%);
+            background-color: white;
+        }
+        .ios-toggle:checked ~ .toggle-bg {
+            background-color: #dab80b;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-sans antialiased">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-32">
+<!-- Sticky Header -->
+<header class="sticky top-0 z-20 flex items-center justify-between border-b border-border-gold bg-background-dark/80 px-4 py-4 backdrop-blur-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary cursor-pointer">arrow_back_ios</span>
+<h1 class="font-display text-xl font-semibold tracking-tight">Dynamic Assets</h1>
+</div>
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-white/5">
+<span class="material-symbols-outlined text-slate-400">more_horiz</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex flex-col">
+<!-- Section: Visuals -->
+<section class="mt-6">
+<div class="px-6 py-2">
+<h3 class="font-sans text-[10px] font-bold tracking-[0.2em] text-primary/60 uppercase">Visual Assets</h3>
+</div>
+<!-- Asset Item 1 -->
+<div class="fine-line flex flex-col gap-3 px-6 py-5">
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-0.5">
+<h4 class="font-display text-lg font-medium leading-tight">360° Interior View</h4>
+<p class="text-xs text-slate-500 font-normal">Interactive panoramic cabin showcase</p>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="ios-toggle sr-only" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-700 transition-colors duration-200"></div>
+<div class="toggle-dot absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200 shadow-sm"></div>
+</label>
+</div>
+<div class="flex">
+<button class="flex items-center gap-1.5 rounded-lg border border-border-gold px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/5">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                            Sample View
+                        </button>
+</div>
+</div>
+<!-- Asset Item 2 -->
+<div class="fine-line flex flex-col gap-3 px-6 py-5">
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-0.5">
+<h4 class="font-display text-lg font-medium leading-tight">Cinematic Reel</h4>
+<p class="text-xs text-slate-500 font-normal">AI-edited 15s highlight for social</p>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="ios-toggle sr-only" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-700 transition-colors duration-200"></div>
+<div class="toggle-dot absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200 shadow-sm"></div>
+</label>
+</div>
+<div class="flex">
+<button class="flex items-center gap-1.5 rounded-lg border border-border-gold px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/5">
+<span class="material-symbols-outlined text-sm">play_circle</span>
+                            Sample View
+                        </button>
+</div>
+</div>
+<!-- Asset Item 3 -->
+<div class="fine-line flex flex-col gap-3 px-6 py-5">
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-0.5">
+<h4 class="font-display text-lg font-medium leading-tight">Background Studio</h4>
+<p class="text-xs text-slate-500 font-normal">Replace inventory lot with studio bokeh</p>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input class="ios-toggle sr-only" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-700 transition-colors duration-200"></div>
+<div class="toggle-dot absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200 shadow-sm"></div>
+</label>
+</div>
+<div class="flex">
+<button class="flex items-center gap-1.5 rounded-lg border border-border-gold px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/5">
+<span class="material-symbols-outlined text-sm">auto_fix_high</span>
+                            Sample View
+                        </button>
+</div>
+</div>
+</section>
+<!-- Section: Data Analytics -->
+<section class="mt-8">
+<div class="px-6 py-2">
+<h3 class="font-sans text-[10px] font-bold tracking-[0.2em] text-primary/60 uppercase">Data Insights</h3>
+</div>
+<!-- Asset Item 4 -->
+<div class="fine-line flex flex-col gap-3 px-6 py-5">
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-0.5">
+<h4 class="font-display text-lg font-medium leading-tight">Market Trend Chart</h4>
+<p class="text-xs text-slate-500 font-normal">Real-time appreciation/depreciation graph</p>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="ios-toggle sr-only" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-700 transition-colors duration-200"></div>
+<div class="toggle-dot absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200 shadow-sm"></div>
+</label>
+</div>
+<div class="flex">
+<button class="flex items-center gap-1.5 rounded-lg border border-border-gold px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/5">
+<span class="material-symbols-outlined text-sm">show_chart</span>
+                            Sample View
+                        </button>
+</div>
+</div>
+<!-- Asset Item 5 -->
+<div class="fine-line flex flex-col gap-3 px-6 py-5">
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-0.5">
+<h4 class="font-display text-lg font-medium leading-tight">Luxury Index Comparison</h4>
+<p class="text-xs text-slate-500 font-normal">Relative scarcity index for local market</p>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input class="ios-toggle sr-only" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-700 transition-colors duration-200"></div>
+<div class="toggle-dot absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200 shadow-sm"></div>
+</label>
+</div>
+<div class="flex">
+<button class="flex items-center gap-1.5 rounded-lg border border-border-gold px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/5">
+<span class="material-symbols-outlined text-sm">bar_chart</span>
+                            Sample View
+                        </button>
+</div>
+</div>
+</section>
+<!-- Section: Communication -->
+<section class="mt-8">
+<div class="px-6 py-2">
+<h3 class="font-sans text-[10px] font-bold tracking-[0.2em] text-primary/60 uppercase">Communication</h3>
+</div>
+<!-- Asset Item 6 -->
+<div class="fine-line flex flex-col gap-3 px-6 py-5">
+<div class="flex items-center justify-between">
+<div class="flex flex-col gap-0.5">
+<h4 class="font-display text-lg font-medium leading-tight">Personalized Greeting</h4>
+<p class="text-xs text-slate-500 font-normal">AI voice-cloned custom intro</p>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="ios-toggle sr-only" type="checkbox"/>
+<div class="toggle-bg h-6 w-11 rounded-full bg-slate-700 transition-colors duration-200"></div>
+<div class="toggle-dot absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200 shadow-sm"></div>
+</label>
+</div>
+<div class="flex">
+<button class="flex items-center gap-1.5 rounded-lg border border-border-gold px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/5">
+<span class="material-symbols-outlined text-sm">record_voice_over</span>
+                            Sample View
+                        </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button Container -->
+<div class="fixed bottom-0 left-0 right-0 z-30 flex justify-center p-6">
+<button class="group relative flex w-full max-w-sm items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary py-4 text-sm font-bold tracking-wider text-background-dark shadow-[0_10px_40px_-10px_rgba(218,184,11,0.5)] transition-transform active:scale-95">
+<span class="material-symbols-outlined">auto_awesome</span>
+                SAVE AS GLOBAL TEMPLATE
+                <div class="absolute inset-0 -z-10 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500"></div>
+</button>
+</div>
+<!-- Tab Bar (iOS style) -->
+<nav class="fixed bottom-0 z-10 flex w-full border-t border-border-gold bg-background-dark/95 px-6 pb-8 pt-3 backdrop-blur-xl">
+<a class="flex flex-1 flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]">inventory_2</span>
+<span class="text-[10px] font-medium">Inventory</span>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">campaign</span>
+<span class="text-[10px] font-medium">Marketing</span>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">auto_videocam</span>
+<span class="text-[10px] font-medium">AI Tools</span>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</a>
+</nav>
+</div>
+</body></html>

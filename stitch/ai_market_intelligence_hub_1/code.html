@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Market Intelligence Hub | Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0dccf2",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#0a0a0a",
+                        "card-dark": "#161b1d",
+                        "silver": "#94a3b8",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glow-line {
+            filter: drop-shadow(0 0 4px #0dccf2);
+        }
+        .glass-card {
+            background: linear-gradient(145deg, rgba(22, 27, 29, 1) 0%, rgba(10, 10, 10, 1) 100%);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .dial-gradient {
+            background: conic-gradient(from 180deg at 50% 50%, #0dccf2 0deg, rgba(13, 204, 242, 0.1) 180deg, transparent 360deg);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark font-bold">auto_awesome</span>
+</div>
+<h1 class="text-xl font-extrabold tracking-tight">Market <span class="text-primary">Intelligence</span></h1>
+</div>
+<div class="flex gap-3">
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-silver">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary/30 p-0.5">
+<img alt="Profile avatar" class="w-full h-full rounded-full object-cover" data-alt="Close up of a professional male dealer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGrpJY5uefAfHXzvBcTiHRyT48ved_NdZ3ueI00BIXOA92QBOcPnY8q1Xv7gEcJeaf9cR5xF4IZWC4LYcTJC_zjg8wCFxgeEP_imNoyVEoCSoym-meBcrMW83juAqs98U5tLlweBdWAwy1xd32EpGTm9zciNsztZYV3xfStciaEKd5Qtq2QhTXc540ipc71RNtbvJUnJ3W0G8x3pT6krweeV-SFkw3Xy85UVee6phqe2-_kVrF6bDNBX73fJZabREU3P5nOlOYmRw"/>
+</div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto px-4 pb-32">
+<div class="py-6">
+<label class="relative block group">
+<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-silver group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</span>
+<input class="block w-full bg-card-dark border border-white/10 rounded-xl py-4 pl-12 pr-4 text-slate-100 placeholder:text-silver/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-xl" placeholder="Search model (e.g., Porsche 911 GT3)" type="text" value="Porsche 911 GT3"/>
+</label>
+</div>
+<section class="glass-card rounded-2xl p-5 mb-6">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h2 class="text-silver text-sm font-semibold uppercase tracking-widest mb-1">Market Value Trend</h2>
+<div class="flex items-baseline gap-3">
+<span class="text-3xl font-extrabold">$245,800</span>
+<span class="text-emerald-400 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-xs">trending_up</span> 12.4%
+                        </span>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="flex items-center gap-1.5 text-[10px] font-bold text-primary px-2 py-1 rounded-full bg-primary/10 border border-primary/20">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span> AVG
+                    </div>
+<div class="flex items-center gap-1.5 text-[10px] font-bold text-silver px-2 py-1 rounded-full bg-white/5 border border-white/10">
+<span class="w-2 h-2 rounded-full border border-silver border-dashed"></span> AI PREDICTED
+                    </div>
+</div>
+</div>
+<div class="relative h-48 w-full">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 400 150">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#0dccf2" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#0dccf2" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path class="glow-line" d="M0,120 Q50,110 80,80 T160,90 T240,40 T320,60 T400,20" fill="transparent" stroke="#0dccf2" stroke-width="3"></path>
+<path d="M0,120 Q50,110 80,80 T160,90 T240,40 T320,60 T400,20 L400,150 L0,150 Z" fill="url(#chartGradient)"></path>
+<path d="M0,130 Q60,120 100,100 T180,110 T260,70 T340,90 T400,50" fill="transparent" opacity="0.5" stroke="#94a3b8" stroke-dasharray="6,4" stroke-width="2"></path>
+</svg>
+<div class="absolute inset-0 flex justify-between items-end pb-1 px-1">
+<span class="text-[10px] text-silver font-bold">JAN</span>
+<span class="text-[10px] text-silver font-bold">MAR</span>
+<span class="text-[10px] text-silver font-bold">MAY</span>
+<span class="text-[10px] text-silver font-bold">JUL</span>
+<span class="text-[10px] text-silver font-bold">SEP</span>
+<span class="text-[10px] text-silver font-bold">NOV</span>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-2 gap-4 mb-6">
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+<h3 class="text-silver text-[10px] font-bold uppercase tracking-widest mb-4">Volatility Index</h3>
+<div class="relative w-24 h-24 flex items-center justify-center">
+<div class="absolute inset-0 rounded-full border-4 border-white/5"></div>
+<div class="absolute inset-0 rounded-full border-4 border-primary border-t-transparent border-r-transparent -rotate-45"></div>
+<div class="flex flex-col items-center">
+<span class="text-2xl font-black text-primary">L-2</span>
+<span class="text-[8px] font-bold text-silver">STABLE</span>
+</div>
+</div>
+<div class="mt-4 flex gap-1">
+<span class="w-1 h-3 rounded-full bg-primary"></span>
+<span class="w-1 h-3 rounded-full bg-primary"></span>
+<span class="w-1 h-3 rounded-full bg-white/10"></span>
+<span class="w-1 h-3 rounded-full bg-white/10"></span>
+<span class="w-1 h-3 rounded-full bg-white/10"></span>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+<h3 class="text-silver text-[10px] font-bold uppercase tracking-widest mb-4">Demand Score</h3>
+<div class="relative w-24 h-24 flex items-center justify-center">
+<div class="absolute inset-0 rounded-full border-4 border-white/5"></div>
+<div class="absolute inset-0 rounded-full border-4 border-primary border-l-transparent -rotate-12"></div>
+<div class="flex flex-col items-center">
+<span class="text-2xl font-black text-primary">94</span>
+<span class="text-[8px] font-bold text-silver">HOT</span>
+</div>
+</div>
+<div class="mt-4 flex gap-1">
+<span class="w-1 h-3 rounded-full bg-primary"></span>
+<span class="w-1 h-3 rounded-full bg-primary"></span>
+<span class="w-1 h-3 rounded-full bg-primary"></span>
+<span class="w-1 h-3 rounded-full bg-primary"></span>
+<span class="w-1 h-3 rounded-full bg-white/10"></span>
+</div>
+</div>
+</section>
+<section class="mb-6">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">Recent Auctions</h2>
+<button class="text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+                    View All <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<div class="space-y-3">
+<div class="glass-card rounded-xl p-3 flex gap-4 items-center">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 border border-white/5">
+<img alt="Auction car" class="w-full h-full object-cover" data-alt="Dark gray Porsche 911 GT3 on a road" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZEMYfVGbXqgqRiHz48_aSE0CVryiBpAeA4Aiz0iV76h67wfpQVIaAJRCnDgp7rn6Rq8LX_YtD9EQei2FlV8c_lTxE7B5hqzFbG0DB1P0jL3nUZDktCUjUagrk8ZnYPr5cr7ZBjXA3Weg4KPf0UKBkyx7xdVK9sMwGul47HByK_ML6H92w5sXAVyOd81C_RlC2RbIDNLAHxJj4Owt0qNhXJ9vt7dy9LsEMls0vqYZUgy-aA6m3WUEktYbSACf_lwZhSlXWbtYuxDw"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-sm">2023 Porsche 911 GT3</h4>
+<p class="text-silver text-[10px] font-medium tracking-tight">BRING A TRAILER • 2 DAYS AGO</p>
+</div>
+<span class="material-symbols-outlined text-silver text-sm">verified</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-lg font-extrabold text-primary">$252,500</span>
+<span class="text-[10px] text-silver line-through">$245,000</span>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-xl p-3 flex gap-4 items-center opacity-90">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 border border-white/5">
+<img alt="Auction car" class="w-full h-full object-cover" data-alt="Front view of white sports car in studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJLX3wR2Km7Trc6W7oiTNmPQOoPHma4Nv3uuBCtX-P611Lv1SsbxPVNF8RRE8X9pX9mBggycIUYEikJiIb0Kgt3vUWiMHBOoumzv9LFPsphSTLZVDFZIpw_wEZu7sDZv4zT2tfh4okX4HaxqydHrARSRjfwurwoc4jy57-mWeoeyFayky3L8hzUOyEy5T0C-NQSVq_RoNerhnofDDhjtNEx-IeDXwa_KxLPDO1_5zzo5wgpVUsZU-SRTIsH3XVynSIoXSeXj037Jg"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-sm">2022 Porsche 911 GT3</h4>
+<p class="text-silver text-[10px] font-medium tracking-tight">RM SOTHEBY'S • 5 DAYS AGO</p>
+</div>
+<span class="material-symbols-outlined text-silver text-sm">verified</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-lg font-extrabold text-primary">$238,000</span>
+<span class="text-[10px] text-silver">RESERVE MET</span>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-xl p-3 flex gap-4 items-center opacity-80">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 border border-white/5">
+<img alt="Auction car" class="w-full h-full object-cover" data-alt="Yellow luxury sports car profile view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn1x9Zxp_60HElkiOGDX9bxjx9ALyBMaE3y56sh_XTULWzUhEBBag4WMqSS95Nd6DT9Sly7vq1f_0LNnHjsD38LlRbBDWDaMdWN3lw5tc_gb3-ZQOW2CfVWBXtdWcESAtp77i3VWLbe5cSyqYGyVsEk4RuEZtgUczGr0IDjNB7s2s-yS5Jy2Hrr-UR-a7yr6434udHjlkKFDnCjle-6XkaagB2E_DdDuva1cmVg-_-7paYlYdO1AH2Q1ZZFjym2bQpf45DLD-zmTY"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-sm">2023 Porsche 911 GT3 (PDK)</h4>
+<p class="text-silver text-[10px] font-medium tracking-tight">COLLECTING CARS • 1 WEEK AGO</p>
+</div>
+<span class="material-symbols-outlined text-silver text-sm">verified</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-lg font-extrabold text-primary">$244,900</span>
+<span class="text-[10px] text-emerald-400 font-bold">TOP SPEC</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<nav class="fixed bottom-0 inset-x-0 bg-background-dark/90 backdrop-blur-xl border-t border-white/5 pb-8 pt-2 px-6 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-silver group-hover:text-primary transition-colors">directions_car</span>
+<span class="text-[10px] font-bold text-silver group-hover:text-primary tracking-widest uppercase">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 relative" href="#">
+<div class="absolute -top-12 bg-primary w-14 h-14 rounded-2xl flex items-center justify-center shadow-[0_8px_20px_rgba(13,204,242,0.4)] border-4 border-background-dark rotate-45">
+<span class="material-symbols-outlined text-background-dark font-bold -rotate-45">query_stats</span>
+</div>
+<span class="text-[10px] font-black text-primary tracking-widest uppercase mt-4">Insights</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-silver group-hover:text-primary transition-colors">description</span>
+<span class="text-[10px] font-bold text-silver group-hover:text-primary tracking-widest uppercase">Reports</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-silver group-hover:text-primary transition-colors">account_circle</span>
+<span class="text-[10px] font-bold text-silver group-hover:text-primary tracking-widest uppercase">Settings</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Elite AI Concierge Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1773cf",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Newsreader', serif;
+        }
+        .chat-container {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .chat-container::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-screen w-full max-w-[450px] mx-auto flex-col bg-background-light dark:bg-background-dark overflow-hidden border-x border-slate-200 dark:border-slate-800">
+<!-- Header -->
+<header class="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden border border-primary/20">
+<img alt="AI Concierge Avatar" class="w-full h-full object-cover" data-alt="Professional minimalist portrait of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYH_3QfXGegljXyshgkCHmacArqRT_1nejPuNw1vRaYwH1K_Db41R_45kKDmfzHCJzWGuNRX83RKlI1_DVpe30QSo5MGs_vVgoJqo2XCWIwzGODmsJL9kEI04MWwYwBMClR96hcK2UeyhiYBVClML-a3U7lnHA6sINO5BE8DVsUHrxfLanjPTv74GzBtkHE9o0lILedPtC0ePej18btWxvHxXSeQnAIm1UFGcDbYwJYV_Q_b1aZfRXuUJgU7CYYjKtiaocCIlwUgI"/>
+</div>
+<span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white dark:ring-background-dark"></span>
+</div>
+<div>
+<h1 class="text-lg font-semibold leading-none tracking-tight">Autovinci Concierge</h1>
+<p class="text-[11px] uppercase tracking-widest text-primary font-medium mt-1">Active Now</p>
+</div>
+</div>
+<button class="text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<!-- Chat Area -->
+<main class="flex-1 overflow-y-auto chat-container p-4 space-y-6">
+<!-- AI Message -->
+<div class="flex items-start gap-3">
+<div class="flex flex-col gap-1 items-start max-w-[85%]">
+<div class="rounded-xl px-4 py-3 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-base leading-relaxed">
+                        Good evening. I have curated a selection of elite vehicles based on your recent interest in performance grand tourers. Would you like to explore the 2024 Grand Tourer?
+                    </div>
+<span class="text-[10px] text-slate-400 ml-1">8:42 PM</span>
+</div>
+</div>
+<!-- Vehicle Card -->
+<div class="w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
+<div class="flex flex-col rounded-xl overflow-hidden bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-xl">
+<div class="relative aspect-[16/9] w-full overflow-hidden">
+<img alt="2024 Grand Tourer" class="w-full h-full object-cover" data-alt="Cinematic shot of a luxury dark blue sports car" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS2SnEfb-9zcRZfYlOKrobkDKr5ZhUUVpQVqp-gdA7ZOiDIDNdsG2jikbubBmmprciRaHAhTvWF32v7mYIgne1Em51xUqFf14O3sAg98uMj4oU1XBDYRrQO4vRACiQYxMh4HapMEOrQjhkn79dD4MuojMlLSXpJMbzenjcspO57IQxZvlpuHX-vvCma-IEbe11jcK8SQszaL03tMiISBX8N0f_lzXJNdGYcz3PRO1eo4rOq1qlnLwHolIJnITUO5FhMdlzY3SlMpg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-primary px-2 py-1 rounded text-[10px] font-bold text-white uppercase tracking-tighter">Available Now</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-xl font-bold">2024 Grand Tourer</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">V12 Twin-Turbo · 715 HP</p>
+</div>
+<span class="text-lg font-semibold text-primary">$195,000</span>
+</div>
+<button class="w-full mt-4 bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span>View Details</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex items-start justify-end gap-3">
+<div class="flex flex-col gap-1 items-end max-w-[85%]">
+<div class="rounded-xl px-4 py-3 border border-slate-300 dark:border-slate-600 bg-transparent text-slate-900 dark:text-slate-100 text-base leading-relaxed">
+                        That looks stunning. What are the financing options available for this model?
+                    </div>
+<span class="text-[10px] text-slate-400 mr-1 italic">Delivered</span>
+</div>
+</div>
+<!-- AI Typing Indicator (Subtle) -->
+<div class="flex items-start gap-3 opacity-60">
+<div class="flex gap-1 py-2 px-4 bg-slate-200 dark:bg-slate-800 rounded-full">
+<span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></span>
+<span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+<span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+</div>
+</div>
+</main>
+<!-- Bottom Input & Quick Actions -->
+<footer class="p-4 bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 space-y-4">
+<!-- Quick Actions Scroll -->
+<div class="flex gap-2 overflow-x-auto chat-container pb-1">
+<button class="whitespace-nowrap px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/40 text-xs font-medium hover:border-primary transition-colors">
+                    Schedule a Viewing
+                </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/40 text-xs font-medium hover:border-primary transition-colors">
+                    Request Specs
+                </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/40 text-xs font-medium hover:border-primary transition-colors">
+                    Trade-in Value
+                </button>
+</div>
+<!-- Input Bar -->
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-xl">magic_button</span>
+</button>
+<div class="relative flex-1">
+<input class="w-full bg-slate-100 dark:bg-slate-900 border-none rounded-full px-5 py-3 text-sm focus:ring-1 focus:ring-primary placeholder:text-slate-500" placeholder="Ask about financing or specs..." type="text"/>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full bg-primary text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-xl">send</span>
+</button>
+</div>
+<!-- Bottom Nav (Context Component) -->
+<div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark pt-3 pb-2 -mx-4 -mb-4 px-4">
+<a class="flex flex-1 flex-col items-center justify-center text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center text-slate-400" href="#">
+<span class="material-symbols-outlined">search</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">chat_bubble</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center text-slate-400" href="#">
+<span class="material-symbols-outlined">favorite</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</div>
+</footer>
+</div>
+</body></html>

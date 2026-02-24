@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VIP Membership Confirmation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2cc0d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#0a0a0a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .vip-card-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .vip-card-gradient::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 0%,
+                rgba(242, 204, 13, 0.05) 45%,
+                rgba(242, 204, 13, 0.1) 50%,
+                rgba(242, 204, 13, 0.05) 55%,
+                transparent 100%
+            );
+            transform: rotate(30deg);
+        }
+        .gold-glow {
+            box-shadow: 0 0 40px -10px rgba(242, 204, 13, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<div class="relative flex h-full min-h-screen w-full flex-col bg-background-dark overflow-x-hidden max-w-md mx-auto border-x border-white/5">
+<!-- Header -->
+<div class="flex items-center p-6 justify-between">
+<div class="text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-full glass-effect">
+<span class="material-symbols-outlined text-xl">close</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-primary text-xs font-bold tracking-[0.2em] uppercase">Status: Active</span>
+</div>
+<div class="size-10"></div> <!-- Spacer -->
+</div>
+<!-- Main Content -->
+<div class="flex-1 flex flex-col items-center px-6 pt-4">
+<h1 class="text-white tracking-tight text-4xl font-extrabold leading-tight text-center mb-3">
+                Welcome to <br/>the Circle
+            </h1>
+<p class="text-slate-400 text-sm font-light leading-relaxed text-center max-w-[280px] mb-10">
+                Your exclusive access to the world's most prestigious automotive inventory is now active.
+            </p>
+<!-- VIP Digital Card -->
+<div class="w-full perspective-1000">
+<div class="vip-card-gradient rounded-xl p-8 gold-glow border border-primary/20 aspect-[1.586/1] flex flex-col justify-between relative">
+<!-- Texture Overlay -->
+<div class="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" data-alt="Carbon fiber texture pattern"></div>
+<div class="flex justify-between items-start relative z-10">
+<div class="flex flex-col">
+<span class="text-primary text-[10px] font-black tracking-[0.3em] uppercase mb-1">Autovinci</span>
+<span class="text-white/40 text-[9px] font-medium tracking-widest uppercase">Member Since 2024</span>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl">verified</span>
+</div>
+<div class="relative z-10">
+<p class="text-primary tracking-[0.2em] text-xs font-bold mb-1">VIP MEMBER</p>
+<h2 class="text-white text-2xl font-bold tracking-tight uppercase">Alexander Vincenzo</h2>
+</div>
+<div class="flex justify-between items-end relative z-10">
+<div class="px-3 py-1.5 rounded-lg glass-effect border-white/10">
+<span class="text-white/80 text-[10px] font-mono tracking-wider">ID: AV-8829-VIP</span>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex -space-x-2">
+<div class="size-6 rounded-full border border-background-dark bg-slate-800 flex items-center justify-center text-[8px] font-bold">V</div>
+<div class="size-6 rounded-full border border-background-dark bg-slate-700 flex items-center justify-center text-[8px] font-bold">I</div>
+<div class="size-6 rounded-full border border-background-dark bg-primary text-background-dark flex items-center justify-center text-[8px] font-bold">P</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Start Menu -->
+<div class="w-full mt-12 space-y-3">
+<p class="text-slate-500 text-[10px] font-bold tracking-[0.2em] uppercase px-1 mb-4">Quick-start menu</p>
+<button class="w-full flex items-center gap-4 p-4 rounded-xl bg-primary text-background-dark font-bold transition-all active:scale-[0.98]">
+<div class="size-10 rounded-lg bg-background-dark/10 flex items-center justify-center">
+<span class="material-symbols-outlined">explore</span>
+</div>
+<span class="flex-1 text-left text-sm tracking-tight">Explore Private Collection</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<button class="w-full flex items-center gap-4 p-4 rounded-xl glass-effect text-white font-semibold transition-all active:scale-[0.98]">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+</div>
+<span class="flex-1 text-left text-sm tracking-tight">Meet Your AI Concierge</span>
+<span class="material-symbols-outlined text-slate-500 text-sm">chevron_right</span>
+</button>
+<button class="w-full flex items-center gap-4 p-4 rounded-xl glass-effect text-white font-semibold transition-all active:scale-[0.98]">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+</div>
+<span class="flex-1 text-left text-sm tracking-tight">Schedule a Consultation</span>
+<span class="material-symbols-outlined text-slate-500 text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="p-6 mt-4">
+<a class="w-full flex flex-col items-center gap-1 group" href="#">
+<span class="text-slate-500 text-xs font-medium group-hover:text-primary transition-colors">Go to Dashboard</span>
+<div class="h-0.5 w-8 bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full w-0 group-hover:w-full bg-primary transition-all duration-300"></div>
+</div>
+</a>
+</div>
+<!-- iOS Home Indicator (Visual Only) -->
+<div class="flex justify-center pb-2">
+<div class="w-32 h-1 bg-white/10 rounded-full"></div>
+</div>
+<!-- Standard Bottom Nav for context (Modified for VIP) -->
+<div class="flex gap-2 border-t border-white/5 bg-background-dark/80 backdrop-blur-xl px-4 pb-8 pt-4">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined fill-current">home</span>
+</div>
+<p class="text-[10px] font-bold leading-normal tracking-wider uppercase">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">directions_car</span>
+</div>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Collection</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Concierge</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">apartment</span>
+</div>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Showroom</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">person</span>
+</div>
+<p class="text-[10px] font-medium leading-normal tracking-wider uppercase">Profile</p>
+</a>
+</div>
+</div>
+</body></html>

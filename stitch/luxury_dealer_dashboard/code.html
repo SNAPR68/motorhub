@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Luxury Dealer Dashboard - Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0a0c10",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .chart-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s linear forwards;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary text-2xl">directions_car</span>
+</div>
+<div>
+<h1 class="text-lg font-bold tracking-tight uppercase">Autovinci</h1>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] font-medium leading-none">Luxury Elite</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full border-2 border-background-dark"></span>
+</button>
+<div class="size-9 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
+<img class="w-full h-full object-cover" data-alt="Dealer profile headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM7lkJ3LL1UbCjQV3qukvkDRowmE8dZbzj5X1iXRebdlN0WQKrvhCQFyUfaCf7KmVTaLshPp7DGlUnMA2S6bTNkh776KVuXNrbHxKURtNRr6sVNjc8HsU6K1hl8GQvZECSznZh4URTa_pdqAXmifs8oY-NHhJFg-7SE31yOtozGWhiJ95U3q3nR7STyuqsLdMUFU1jmDobjqyuqU4YMOzmhfq7FbuvEmwDkIg9N5yFx1KtDzGP6-CsPqPiRHEWRcFDEopg7AIKlag"/>
+</div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pb-32">
+<!-- Active Inventory Section -->
+<section class="mt-4">
+<div class="px-6 flex items-end justify-between mb-4">
+<h2 class="text-2xl font-bold tracking-tight">Active Inventory</h2>
+<a class="text-primary text-sm font-medium" href="#">View All</a>
+</div>
+<div class="flex gap-4 overflow-x-auto px-6 hide-scrollbar snap-x snap-mandatory">
+<!-- Inventory Card 1 -->
+<div class="snap-start flex-none w-[85%] group">
+<div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Red Ferrari SF90 Stradale front view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWbWhiypVHbxo2CswMDwIhteMAEvimDNWV4tGOVDy1LAekaJrn98WzKvmedatekJhUqiSN4emmOQ3hDmCUxnGriHEECDqrokHErH7ow7hWvoycBnTcCKjgqJKDXp1m_Q5-nhgJEF9ZfZs-E3SuWQpKdL39g6ORLKbj8R-Yaf1V8dyZEvz5FzJF9yvYR1EcSzcqhRwwSqvjbZ0N0pPKlkWWLekTIKTD62rbtaVrksm0ihU0aueanC4erfzAF5LP-m8HQZYsG2oHKlM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-white shadow-lg shadow-primary/30">Live Market Value</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<p class="text-white/70 text-xs font-medium uppercase tracking-widest mb-1">Stradale Edition</p>
+<h3 class="text-white text-xl font-bold">Ferrari SF90</h3>
+</div>
+<div class="absolute bottom-4 right-4 text-right">
+<p class="text-primary text-lg font-bold">$512,000</p>
+<p class="text-emerald-400 text-[10px] font-medium flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +2.4%
+                            </p>
+</div>
+</div>
+</div>
+<!-- Inventory Card 2 -->
+<div class="snap-start flex-none w-[85%] group">
+<div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Lamborghini Revuelto in striking orange" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeW67Jq2jgJHeyoUHlaKJIbs8zlMaDKnF4rgG_TRQUd9Zx3mq3OV5cE8a0RBpoWT7hMPz-gwr0VhlACwWnEdV_T44zVF-DP7WK4ZeWrvB2BwjqVOYUekIp3-nGrOVBhMahWW6bc9jMWSOyVjOSuvx6C6qCXgYUeFnLdLEpPqvGLtJqdNbhUDVXegFzq0olIRUscZqLThYiPDVNP3lYwaQCcxamgWSL0Ia2HBAvnK3-TQZ5MMvYszrHJ52nus0RlKt64sO0YdKTPZk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-white shadow-lg shadow-primary/30">Live Market Value</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<p class="text-white/70 text-xs font-medium uppercase tracking-widest mb-1">V12 Hybrid</p>
+<h3 class="text-white text-xl font-bold">Lamborghini Revuelto</h3>
+</div>
+<div class="absolute bottom-4 right-4 text-right">
+<p class="text-primary text-lg font-bold">$605,000</p>
+<p class="text-emerald-400 text-[10px] font-medium flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +1.8%
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Marketing Performance Section -->
+<section class="mt-10 px-6">
+<h2 class="text-xl font-bold tracking-tight mb-6">Marketing Performance</h2>
+<div class="glass-panel rounded-xl p-6 mb-4">
+<div class="flex items-center justify-between mb-8">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-widest mb-1">Total Impressions</p>
+<h4 class="text-3xl font-bold tracking-tight">142.8K</h4>
+</div>
+<div class="text-right">
+<span class="text-emerald-400 text-sm font-bold">+12% vs LW</span>
+<div class="flex gap-1 mt-2">
+<div class="h-1 w-8 bg-primary rounded-full"></div>
+<div class="h-1 w-4 bg-primary/30 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Simple Thin-line Chart Placeholder -->
+<div class="w-full h-32 relative flex items-end justify-between">
+<svg class="absolute inset-0 w-full h-full overflow-visible" preserveaspectratio="none">
+<path class="chart-line fill-none stroke-primary stroke-[1.5]" d="M0,100 Q50,80 100,90 T200,40 T300,60 T400,20 T500,50" vector-effect="non-scaling-stroke"></path>
+<path class="fill-primary/5" d="M0,100 Q50,80 100,90 T200,40 T300,60 T400,20 T500,50 L500,120 L0,120 Z"></path>
+</svg>
+<!-- Chart Labels -->
+<div class="w-full flex justify-between text-[10px] text-slate-500 dark:text-slate-500 font-medium absolute -bottom-6">
+<span>MON</span>
+<span>WED</span>
+<span>FRI</span>
+<span>SUN</span>
+</div>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 gap-4 mt-12">
+<div class="glass-panel rounded-xl p-4">
+<span class="material-symbols-outlined text-primary mb-2">touch_app</span>
+<p class="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase tracking-widest">Leads Generated</p>
+<p class="text-xl font-bold mt-1">42</p>
+</div>
+<div class="glass-panel rounded-xl p-4">
+<span class="material-symbols-outlined text-primary mb-2">share</span>
+<p class="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase tracking-widest">Social Reach</p>
+<p class="text-xl font-bold mt-1">12.5K</p>
+</div>
+</div>
+</section>
+<!-- Quick Insights -->
+<section class="mt-10 px-6 pb-10">
+<h2 class="text-xl font-bold tracking-tight mb-4">Quick Insights</h2>
+<div class="space-y-3">
+<div class="flex items-center gap-4 glass-panel p-4 rounded-xl">
+<div class="size-12 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-500">bolt</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Hot Market Alert</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Demand for Porsche 911 GT3 RS up 15%</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 glass-panel p-4 rounded-xl">
+<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Listing Optimization</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Add 3 more interior shots to Ferrari SF90</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<div class="fixed bottom-24 right-6 z-50">
+<button class="bg-primary hover:bg-primary/90 text-white flex items-center gap-2 px-6 py-4 rounded-full shadow-2xl shadow-primary/40 transition-transform active:scale-95">
+<span class="material-symbols-outlined font-bold">add</span>
+<span class="font-bold tracking-tight">AI Auto-List</span>
+</button>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 inset-x-0 bg-background-light/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 px-6 py-3 pb-8 flex justify-between items-center z-40">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">dashboard</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Analytics</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Market</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Settings</span>
+</a>
+</nav>
+</body></html>

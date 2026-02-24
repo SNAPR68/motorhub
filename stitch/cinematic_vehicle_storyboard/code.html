@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cinematic Vehicle Storyboard | Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1773cf",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0b0f14",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .parallax-bg {
+            background-attachment: scroll;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display selection:bg-primary selection:text-white">
+<!-- Sticky Header -->
+<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 bg-gradient-to-b from-black/80 to-transparent transition-all duration-300">
+<button class="flex items-center justify-center size-10 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-semibold">Autovinci</span>
+<h1 class="text-sm font-bold tracking-widest uppercase text-white">911 Turbo S</h1>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white">
+<span class="material-symbols-outlined text-2xl">more_vert</span>
+</button>
+</header>
+<!-- Floating Social Button -->
+<div class="fixed bottom-24 right-6 z-50">
+<button class="flex items-center justify-center size-14 rounded-full bg-primary text-white shadow-lg shadow-primary/30 ring-4 ring-background-dark/50">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+<!-- Vertical Progress Indicator -->
+<div class="fixed right-4 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-3">
+<div class="w-0.5 h-4 bg-primary rounded-full"></div>
+<div class="w-0.5 h-2 bg-white/20 rounded-full"></div>
+<div class="w-0.5 h-2 bg-white/20 rounded-full"></div>
+<div class="w-0.5 h-2 bg-white/20 rounded-full"></div>
+<div class="w-0.5 h-2 bg-white/20 rounded-full"></div>
+</div>
+<!-- Main Scrollable Storyboard -->
+<main class="relative h-screen overflow-y-auto snap-y snap-mandatory hide-scrollbar">
+<!-- Section 1: The Hero -->
+<section class="relative h-screen w-full snap-start overflow-hidden flex flex-col justify-end pb-20">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full parallax-bg" data-alt="Front view of a sleek Porsche 911 headlights" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBA3QV1jGFxMFcZhSEVd98-7-cz2dsuyuHstbgzRFLS5p7bOWjnLJMfXAxyhdEBmExT2TT4r0S_UVKQrY0AJBfPhvLbcZ6VRwqarJh4La-DAhjmpaQlCFdwehg_UD4OBplEXO6aAEiuEPussfzO0Gc83_6vbARU9-GrbP7rYqCtkXPxqZMBTMQ-OoUgHk86XwIqXEy5ROHDKGI0-JpSCmqWc06Q6hZP6vF3ky8DD7r9YZjGGPkXEIdKp95cFnrGoEwaaW0qnHqrmdQ');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-black/40"></div>
+</div>
+<div class="relative z-10 px-8">
+<h2 class="text-5xl font-extrabold tracking-tighter text-white mb-2 leading-none uppercase">Pure<br/>Evolution</h2>
+<p class="text-slate-400 text-lg font-light tracking-wide max-w-xs">Performance refined through decades of engineering excellence.</p>
+</div>
+</section>
+<!-- Section 2: Interior Detail -->
+<section class="relative h-screen w-full snap-start overflow-hidden flex items-center justify-center px-8">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full parallax-bg" data-alt="Close up of luxury car leather stitching and dashboard" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCxDxQoR2pQFp2rYaE_WrE82gdoEnw_nusJz-mORT1uGK-F_qp7CYbklEGk5p3LKyQvRyfUcEzgNJX4mlG-EZ21w97ewM0XIxhZAoT646RqFPJdrPbU_l2tIlIApr_4xuWdf8OSNF45TZt9Q3lY3FHQbnqdGIt_8U9C09k2f0UhCtUjGwhIImPdBuy3ePM2usjwUQhvcTCkCP0HAJ3rUTiWbkViKSJ13OdR8Znz2-2Uy6nek-9LQhPjqZwm6_opdzpeV62i3dy7-Zk');"></div>
+<div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+</div>
+<div class="relative z-10 text-center space-y-4">
+<span class="text-primary uppercase tracking-[0.4em] text-xs font-bold">The Cabin</span>
+<h2 class="text-3xl font-light text-white tracking-tight">Premium Leather Interior</h2>
+<div class="w-12 h-px bg-primary mx-auto"></div>
+<p class="text-slate-300 text-sm font-normal max-w-xs leading-relaxed">Hand-stitched Nappa leather meets brushed aluminum for an sensory experience that matches the drive.</p>
+</div>
+</section>
+<!-- Section 3: Lighting Tech -->
+<section class="relative h-screen w-full snap-start overflow-hidden flex flex-col justify-center">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full parallax-bg" data-alt="Detailed view of high-tech LED car headlights at night" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCh51XyQy_2tLmGpSKbVWRJEoloU7kaHOZ6OhgCQux4idQWoX-VioIRcslw7iV1W3fOs5JQZgVAz4T_xoVbRdZumY809ZxQaAI-IOX0i85-GFrD4U4kQnNCGIc5l1WD5IgwQ6kQ6riL9rZ0MLlKYxDAgAKEQIvV2OTtgRFwem-juOwwyF1ggrIMyl3AnFB8bOqUaK_vLkprpAxBbkTJJZo7Gx_cnugEUW75NbCPzmpcSxMI9Ifnrn1Nf28AwXqypd1mr6izlXnpv1E');"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background-dark/90 via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 px-10 max-w-md">
+<h3 class="text-primary font-bold text-xs uppercase tracking-widest mb-4">Innovation</h3>
+<h2 class="text-4xl font-bold text-white leading-tight mb-4">AI-Optimized Lighting</h2>
+<p class="text-slate-400 text-base font-light leading-relaxed">Adaptive matrix beam technology that anticipates the road ahead, ensuring perfect visibility without dazzling others.</p>
+</div>
+</section>
+<!-- Section 4: Silhouette -->
+<section class="relative h-screen w-full snap-start overflow-hidden flex flex-col justify-end pb-32">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full parallax-bg" data-alt="Side profile silhouette of a Porsche 911 in a dark studio" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAbezurT3FACekvVEhJjvRuzLRfYqgS2wpkBwleV1hgA0alCwVLNaQQMcnvxHu4MlUmbE7yBHS9CLUvJL-nhZs48yqo37CW-AhkfPQPSGyk5o-9YXkpdfOZ_TZU_AYFnAMlWsdYGV4pvF4q-w3e7kx0LmVtcOFTPMoB3E2Vi84QeqHhUpObR_Gk95dOTsWkGRteaaow3y3wnRpU_e2mbHU57NHMcxViE-KFAyiqIMCBugTOma3SfGqYeOC31AoAnfM2NCRHRwSeasI');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 px-8 text-right ml-auto">
+<h2 class="text-4xl font-extralight text-white tracking-tighter uppercase italic leading-none mb-2">Sculpted<br/><span class="font-black not-italic text-primary">Aerodynamics</span></h2>
+<p class="text-slate-400 text-sm max-w-[240px] ml-auto">Every curve serves a purpose. Engineered for stability at speeds up to 330 km/h.</p>
+</div>
+</section>
+<!-- Section 5: The Closing / CTA -->
+<section class="relative h-screen w-full snap-start bg-background-dark flex flex-col items-center justify-center px-8 text-center">
+<div class="mb-12">
+<div class="size-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 mx-auto">
+<span class="material-symbols-outlined text-primary text-4xl">verified</span>
+</div>
+<h2 class="text-3xl font-bold text-white mb-2">Own the Legend</h2>
+<p class="text-slate-400">Porsche 911 Turbo S (992)</p>
+<div class="mt-4 text-2xl font-light text-slate-100">$216,100</div>
+</div>
+<div class="w-full space-y-4 max-w-sm">
+<button class="w-full py-5 bg-primary text-white font-bold rounded-xl tracking-wide uppercase text-sm shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">
+                    Book a Private Viewing
+                </button>
+<button class="w-full py-5 bg-white/5 border border-white/10 text-white font-bold rounded-xl tracking-wide uppercase text-sm hover:bg-white/10 transition-colors">
+                    View Full Specifications
+                </button>
+</div>
+<div class="mt-16 flex flex-col items-center opacity-40">
+<div class="h-12 w-px bg-gradient-to-b from-white to-transparent mb-4"></div>
+<span class="text-[10px] uppercase tracking-[0.5em] text-white">Autovinci Inventory</span>
+</div>
+</section>
+</main>
+<!-- Navigation / Bottom Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-background-dark/80 backdrop-blur-xl border-t border-white/5 safe-area-pb">
+<div class="flex items-center justify-around h-20 px-4">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-[1]">auto_stories</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Story</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Specs</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Dealer</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Inquire</span>
+</a>
+</div>
+</nav>
+<!-- Background Gradient Fills for consistency -->
+<div class="fixed inset-0 -z-10 bg-background-dark pointer-events-none"></div>
+</body></html>

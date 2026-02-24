@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Smart Reply Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .ai-glow {
+            box-shadow: 0 0 15px rgba(19, 127, 236, 0.15);
+        }
+        .ai-card-active {
+            border: 2px solid #137fec;
+            box-shadow: 0 0 20px rgba(19, 127, 236, 0.25);
+        }
+        /* Custom scrollbar for a cleaner mobile look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-900 font-display">
+<!-- iOS Simulation Wrapper -->
+<div class="relative mx-auto flex h-[844px] w-[390px] flex-col overflow-hidden bg-background-light shadow-2xl">
+<!-- Background Content (Dealers Inventory Preview) -->
+<div class="absolute inset-0 z-0 opacity-40 grayscale-[0.5]">
+<div class="p-4 space-y-4">
+<div class="h-40 w-full rounded-xl bg-slate-200"></div>
+<div class="h-6 w-3/4 rounded bg-slate-200"></div>
+<div class="h-4 w-1/2 rounded bg-slate-200"></div>
+</div>
+</div>
+<!-- Overlay Backdrop Blur -->
+<div class="absolute inset-0 z-10 bg-black/20 backdrop-blur-sm"></div>
+<!-- AI Smart Reply Bottom Sheet -->
+<div class="absolute bottom-0 left-0 right-0 z-20 flex max-h-[92%] flex-col rounded-t-[2.5rem] bg-white shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
+<!-- BottomSheetHandle -->
+<div class="flex h-8 w-full items-center justify-center">
+<div class="h-1.5 w-12 rounded-full bg-slate-300"></div>
+</div>
+<!-- Header -->
+<div class="flex items-center justify-between px-6 pb-2 pt-2">
+<button class="flex size-10 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="flex flex-col items-center">
+<h2 class="text-lg font-bold text-slate-900">AI Smart Reply</h2>
+<div class="flex items-center gap-1">
+<span class="size-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-semibold uppercase tracking-wider text-primary">Assistant Active</span>
+</div>
+</div>
+<button class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[22px]">auto_awesome</span>
+</button>
+</div>
+<div class="no-scrollbar overflow-y-auto px-6 pb-24">
+<!-- Last Message Received Section -->
+<div class="mt-6">
+<h3 class="mb-3 text-xs font-bold uppercase tracking-widest text-slate-500">Last Message Received</h3>
+<div class="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+<div class="flex items-start gap-3">
+<div class="h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-slate-200">
+<img class="h-full w-full object-cover" data-alt="Modern luxury BMW X5 side profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-OhDPrZhcdjYtNEvuWVZ3EH2rlFLBy6Px5EenZ8VRT-0PHu9E_r_mq-VDWb2B6G7NYkrOZzsq74hCt0gUdqXg8umjk85yk7sNf55iO0n6aveIEAQVP2jL94HTw_rXWvC2lhHFV0xcWPjZtVchdWzLfMkKHZJaeusZe6uPmJqhGSm5W-QNn47SUHhZ-lgXVVNnMTQn6t-0PXE315iM2MH_i6DtmTx8A1RwRxkDLVEDXx86kTk9VCq2-_tq6ccv0ZzoD1zEODLEgsk"/>
+</div>
+<div class="flex-1">
+<p class="text-[10px] font-bold text-primary">2022 BMW X5 • $54,900</p>
+<p class="text-sm font-bold text-slate-900">Lead: Johnathan Smith</p>
+<p class="mt-1 text-sm leading-relaxed text-slate-600 italic">
+                                    "Is the 2022 BMW X5 still available for financing? I'd like to come see it tomorrow if possible."
+                                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Suggestions Section -->
+<div class="mt-8">
+<div class="mb-4 flex items-center justify-between">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500">AI Generated Suggestions</h3>
+<span class="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary">3 OPTIONS</span>
+</div>
+<div class="space-y-4">
+<!-- Suggestion 1: Professional (Active/Selected) -->
+<div class="ai-card-active relative cursor-pointer rounded-2xl bg-white p-5 transition-all">
+<div class="mb-3 flex items-center justify-between">
+<span class="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
+<span class="material-symbols-outlined text-sm">business_center</span>
+                                    Professional
+                                </span>
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+<p class="text-[15px] leading-relaxed text-slate-700">
+                                "Hi Johnathan, thank you for your inquiry! Yes, the 2022 BMW X5 is still available. We have several flexible financing options starting at 3.9% APR. Would 11:00 AM tomorrow work for your visit?"
+                            </p>
+<div class="mt-4 flex gap-2 border-t border-slate-50 pt-3">
+<button class="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary py-3 text-sm font-bold text-white shadow-lg shadow-primary/25">
+<span class="material-symbols-outlined text-lg">send</span>
+                                    Send Now
+                                </button>
+<button class="flex items-center justify-center rounded-lg bg-slate-50 px-3 text-slate-400">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+<!-- Suggestion 2: Friendly -->
+<div class="ai-glow cursor-pointer rounded-2xl border border-slate-100 bg-white p-5 transition-all hover:border-primary/30">
+<div class="mb-3">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-600">
+<span class="material-symbols-outlined text-sm">mood</span>
+                                    Friendly
+                                </span>
+</div>
+<p class="text-[15px] leading-relaxed text-slate-600">
+                                "Hi Johnathan! Great choice with the X5—it's a fantastic ride. It's definitely still here, and we can get you sorted with financing in no time. I'd love to show you around tomorrow. What time fits your schedule?"
+                            </p>
+</div>
+<!-- Suggestion 3: Urgency -->
+<div class="ai-glow cursor-pointer rounded-2xl border border-slate-100 bg-white p-5 transition-all hover:border-primary/30">
+<div class="mb-3">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-orange-50 px-3 py-1 text-xs font-bold text-orange-600">
+<span class="material-symbols-outlined text-sm">bolt</span>
+                                    Urgency-driven
+                                </span>
+</div>
+<p class="text-[15px] leading-relaxed text-slate-600">
+                                "Hi Johnathan, the X5 is still available but getting lots of interest today. Financing is ready to go for qualified buyers. If you want to secure it, let's meet tomorrow morning. Does 9:30 AM work for you?"
+                            </p>
+</div>
+</div>
+</div>
+<!-- Regenerate Button -->
+<div class="mt-8 flex justify-center">
+<button class="flex items-center gap-2 rounded-full border border-primary/30 bg-white px-6 py-3 text-sm font-bold text-primary shadow-sm hover:bg-slate-50">
+<span class="material-symbols-outlined text-xl">magic_button</span>
+                        Regenerate Suggestions
+                    </button>
+</div>
+</div>
+<!-- Sticky Bottom Action Bar -->
+<div class="absolute bottom-0 left-0 right-0 border-t border-slate-100 bg-white/80 p-4 backdrop-blur-md">
+<div class="flex gap-3">
+<button class="flex h-14 flex-1 items-center justify-center gap-3 rounded-xl bg-[#25D366] font-bold text-white shadow-lg shadow-emerald-200">
+<svg class="size-6 fill-current" viewbox="0 0 24 24">
+<path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.522-2.961-2.638-.087-.117-.708-.941-.708-1.793 0-.852.448-1.271.607-1.442.159-.171.347-.214.463-.214.116 0 .231.002.332.006.106.004.25-.039.391.299.144.347.491 1.2.535 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289-.087.101-.183.226-.261.304-.087.087-.177.182-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.088.275.073.376-.043.101-.117.434-.506.549-.68.116-.174.232-.145.391-.087.159.058 1.012.477 1.185.564.174.087.289.13.332.202.043.073.043.419-.101.824z"></path>
+<path d="M12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.954-1.298C8.411 21.503 10.138 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.634 0-3.159-.444-4.468-1.213l-.321-.189-2.354.617.628-2.293-.209-.333C4.482 15.318 4 13.716 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"></path>
+</svg>
+                        WhatsApp
+                    </button>
+<button class="flex h-14 flex-1 items-center justify-center gap-3 rounded-xl bg-slate-900 font-bold text-white shadow-lg">
+<span class="material-symbols-outlined">mail</span>
+                        Email
+                    </button>
+</div>
+</div>
+</div>
+<!-- iOS Home Indicator -->
+<div class="absolute bottom-1 left-0 right-0 flex justify-center z-30">
+<div class="h-1.5 w-32 rounded-full bg-slate-200"></div>
+</div>
+</div>
+</body></html>

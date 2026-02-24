@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lead Conversion Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .funnel-trapezoid {
+            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Main Container (Mobile Viewport) -->
+<div class="relative mx-auto min-h-screen max-w-md bg-white dark:bg-slate-900 shadow-2xl flex flex-col pb-20">
+<!-- Header -->
+<header class="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-6 pt-12 pb-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
+<div class="flex flex-col">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">Performance</span>
+<h1 class="text-2xl font-bold tracking-tight">Lead Analytics</h1>
+</div>
+<div class="flex gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="User profile avatar image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7YFVNN0bMsR868UeJ7CfSTkB3BOsochF_ls1ssaUq5OTiGfGr0IQ78m1P_UQqeRikUhVEYsE_r-2VOSkT-1Nn7oQky4qaD5GaU4yi7JKy207JlBl_l7iLgSBj_4ZkZ049nP8WG9JHMbvcIBv6PAxhO1bB2pBhLGY6sIzA0vPB87hOA3VrqN6X95opbvnWO35NqX3-iJgwAzhaa-v0o5O7Od9e2UMjA9crx5HluaPYwu202TwVCKVtdRyQCD18-3OR9aiUdV4jCds"/>
+</div>
+</div>
+</header>
+<!-- Timeframe Toggle -->
+<div class="px-6 py-6">
+<div class="flex p-1 bg-slate-100 dark:bg-slate-800 rounded-xl">
+<button class="flex-1 py-2 text-sm font-semibold rounded-lg bg-white dark:bg-slate-700 shadow-sm text-primary transition-all">Weekly</button>
+<button class="flex-1 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 transition-all">Monthly</button>
+</div>
+</div>
+<!-- Sales Funnel Visualization -->
+<section class="px-6 pb-8">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-lg font-bold">Sales Funnel</h2>
+<div class="flex items-center gap-1 text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                    +8.4%
+                </div>
+</div>
+<div class="space-y-2">
+<!-- Funnel Stage: Inquiry -->
+<div class="relative">
+<div class="flex justify-between items-center mb-1 px-1">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Inquiry</span>
+<span class="text-sm font-bold">2,480</span>
+</div>
+<div class="h-14 w-full bg-primary/10 rounded-xl overflow-hidden relative group">
+<div class="absolute inset-y-0 left-0 bg-primary/20 w-full transition-all duration-700"></div>
+<div class="absolute inset-0 flex items-center px-4">
+<span class="material-symbols-outlined text-primary/60 mr-2">contact_page</span>
+<span class="text-xs font-semibold text-primary">Baseline Traffic</span>
+</div>
+</div>
+</div>
+<!-- Funnel Stage: AI Interaction -->
+<div class="relative">
+<div class="flex justify-between items-center mb-1 px-1">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">AI Interaction</span>
+<span class="text-sm font-bold">1,860</span>
+</div>
+<div class="h-14 w-[90%] mx-auto bg-primary/20 rounded-xl overflow-hidden relative">
+<div class="absolute inset-y-0 left-0 bg-primary/30 w-full"></div>
+<div class="absolute inset-0 flex items-center px-4">
+<span class="material-symbols-outlined text-primary/70 mr-2">smart_toy</span>
+<span class="text-xs font-semibold text-primary">75% Conversion</span>
+</div>
+</div>
+</div>
+<!-- Funnel Stage: Test Drive -->
+<div class="relative">
+<div class="flex justify-between items-center mb-1 px-1">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Test Drive</span>
+<span class="text-sm font-bold">420</span>
+</div>
+<div class="h-14 w-[80%] mx-auto bg-primary/40 rounded-xl overflow-hidden relative">
+<div class="absolute inset-y-0 left-0 bg-primary/50 w-full"></div>
+<div class="absolute inset-0 flex items-center px-4">
+<span class="material-symbols-outlined text-white/90 mr-2">directions_car</span>
+<span class="text-xs font-semibold text-white">22% Conversion</span>
+</div>
+</div>
+</div>
+<!-- Funnel Stage: Closed -->
+<div class="relative">
+<div class="flex justify-between items-center mb-1 px-1">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Closed Deals</span>
+<span class="text-sm font-bold">128</span>
+</div>
+<div class="h-14 w-[70%] mx-auto bg-primary rounded-xl shadow-lg shadow-primary/20 overflow-hidden relative">
+<div class="absolute inset-0 flex items-center px-4">
+<span class="material-symbols-outlined text-white mr-2">verified</span>
+<span class="text-xs font-bold text-white uppercase tracking-wider">Final Sale: 30%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Sentiment Trends -->
+<section class="px-6 py-6 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h2 class="text-lg font-bold">AI Sentiment Trends</h2>
+<p class="text-xs text-slate-500">Lead emotional analysis</p>
+</div>
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- Trend Item 1 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined">mood</span>
+</div>
+<div>
+<p class="text-sm font-bold">Purchase Intent</p>
+<p class="text-xs text-slate-400">Rising urgency</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-emerald-600">+12%</p>
+<div class="w-16 h-4 flex items-end gap-0.5">
+<div class="bg-emerald-200 h-1 flex-1 rounded-full"></div>
+<div class="bg-emerald-200 h-2 flex-1 rounded-full"></div>
+<div class="bg-emerald-300 h-1.5 flex-1 rounded-full"></div>
+<div class="bg-emerald-400 h-3 flex-1 rounded-full"></div>
+<div class="bg-emerald-500 h-4 flex-1 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Trend Item 2 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="text-sm font-bold">Price Sensitivity</p>
+<p class="text-xs text-slate-400">Negotiation focus</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-amber-600">-4%</p>
+<div class="w-16 h-4 flex items-end gap-0.5">
+<div class="bg-amber-400 h-4 flex-1 rounded-full"></div>
+<div class="bg-amber-300 h-3 flex-1 rounded-full"></div>
+<div class="bg-amber-200 h-3.5 flex-1 rounded-full"></div>
+<div class="bg-amber-200 h-2 flex-1 rounded-full"></div>
+<div class="bg-amber-100 h-1.5 flex-1 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Trend Item 3 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/5 dark:bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div>
+<p class="text-sm font-bold">Brand Trust</p>
+<p class="text-xs text-slate-400">AI rapport score</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">+21%</p>
+<div class="w-16 h-4 flex items-end gap-0.5">
+<div class="bg-primary/20 h-1 flex-1 rounded-full"></div>
+<div class="bg-primary/30 h-2 flex-1 rounded-full"></div>
+<div class="bg-primary/40 h-2.5 flex-1 rounded-full"></div>
+<div class="bg-primary/60 h-3.5 flex-1 rounded-full"></div>
+<div class="bg-primary h-4 flex-1 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Insight Card -->
+<div class="mt-6 p-4 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/10">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl mt-0.5">lightbulb</span>
+<p class="text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+<span class="font-bold text-slate-900 dark:text-white">AI Insight:</span> Sentiment is up 5% this week. Leads are responding positively to immediate automated valuations of their trade-ins.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-100 dark:border-slate-800 px-6 pt-3 pb-8 flex items-center justify-between z-50">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">directions_car</span>
+<span class="text-[10px] font-bold text-slate-400 group-hover:text-primary uppercase tracking-tighter">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">campaign</span>
+<span class="text-[10px] font-bold text-slate-400 group-hover:text-primary uppercase tracking-tighter">Marketing</span>
+</a>
+<a class="flex flex-col items-center gap-1" href="#">
+<div class="relative">
+<span class="material-symbols-outlined text-primary fill-1">analytics</span>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"></div>
+</div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-tighter">Analytics</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">grid_view</span>
+<span class="text-[10px] font-bold text-slate-400 group-hover:text-primary uppercase tracking-tighter">Dashboard</span>
+</a>
+</nav>
+<!-- Status Bar Mimic -->
+<div class="absolute top-0 inset-x-0 h-10 px-6 flex items-center justify-between text-[11px] font-bold z-50 pointer-events-none">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-sm">wifi</span>
+<span class="material-symbols-outlined text-sm">battery_full</span>
+</div>
+</div>
+</div>
+</body></html>

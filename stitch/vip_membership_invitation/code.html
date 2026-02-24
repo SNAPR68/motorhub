@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VIP Membership Invitation | Autovinci</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1754cf",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Newsreader', serif;
+        }
+        .cinematic-overlay {
+            background: linear-gradient(to bottom, rgba(17, 22, 33, 0.4) 0%, rgba(17, 22, 33, 0.8) 60%, rgba(17, 22, 33, 1) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<!-- Background Cinematic Image -->
+<div class="absolute inset-0 z-0 h-full w-full bg-cover bg-center" data-alt="Luxury car interior with detailed leather stitching and dashboard" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDY2I9CAr97REbZg-mlrZXIl5l3NApW9VCC9RjYqPamczh5Xzx8VYACLrs0n9xk0tnpT2GyQOIdIXGYBd21DSjwf8jRDZemd1tsKOpV9DohklEWuqJyrk8nNWM1jwKe0x1IOcl0FCaxY1VYIdsayRK1ne5J9U9xFQo8Kk2uhW074sjpm6RfUNfIONYyV1ibdXu1dfwploAfhk7zCcUaefajTTloA_Q8gk__FQMzlWpderYKb94gkjhc0n0sQsFuy_crfbbF1b60sGI');">
+<div class="absolute inset-0 cinematic-overlay"></div>
+</div>
+<!-- Top Navigation Bar -->
+<div class="relative z-10 flex items-center justify-between p-6">
+<div class="flex items-center gap-2">
+<span class="text-primary font-bold text-xl tracking-tighter uppercase">Autovinci</span>
+</div>
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-white/20 transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Main Content Wrapper -->
+<div class="relative z-10 flex flex-1 flex-col justify-end px-8 pb-16">
+<div class="max-w-md mx-auto w-full">
+<!-- Branding/Tagline -->
+<div class="mb-4 inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary ring-1 ring-inset ring-primary/30">
+                    Exclusive Invitation
+                </div>
+<!-- Main Title -->
+<h1 class="font-display text-5xl font-medium leading-[1.1] text-white mb-6">
+                    Apply for VIP Membership
+                </h1>
+<!-- Description -->
+<p class="text-slate-300 text-lg leading-relaxed mb-10 font-light">
+                    Experience the pinnacle of automotive acquisition. Early access, bespoke concierge, and private viewings for the discerning collector.
+                </p>
+<!-- Value Props List -->
+<div class="space-y-4 mb-12">
+<div class="flex items-center gap-4">
+<div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-primary/50 text-primary">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+</div>
+<p class="text-sm font-medium tracking-wide text-slate-200">Early access to rare inventory</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-primary/50 text-primary">
+<span class="material-symbols-outlined text-[16px]">support_agent</span>
+</div>
+<p class="text-sm font-medium tracking-wide text-slate-200">Bespoke concierge services</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-primary/50 text-primary">
+<span class="material-symbols-outlined text-[16px]">visibility_off</span>
+</div>
+<p class="text-sm font-medium tracking-wide text-slate-200">Private off-market viewings</p>
+</div>
+</div>
+<!-- CTA Button -->
+<button class="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-primary px-8 py-5 text-lg font-bold text-white shadow-2xl transition-all active:scale-[0.98]">
+<span class="relative z-10">Begin Application</span>
+<span class="material-symbols-outlined relative z-10 transition-transform group-hover:translate-x-1">arrow_forward</span>
+<div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</button>
+<!-- Footer Link -->
+<div class="mt-8 text-center">
+<button class="text-slate-500 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">
+                        Learn more about tiers
+                    </button>
+</div>
+</div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-30"></div>
+</div>
+</body></html>

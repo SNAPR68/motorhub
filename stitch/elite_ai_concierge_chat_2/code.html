@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Elite AI Concierge Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#0a0a0c", // Deep matte charcoal
+                        "surface-dark": "#16161a",
+                        "border-dark": "#2a2a32"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.25rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-panel {
+            background: rgba(22, 22, 26, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(115, 17, 212, 0.1);
+        }
+        .kardeco-grid {
+            background-image: radial-gradient(circle at 2px 2px, rgba(115, 17, 212, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .magic-glow {
+            box-shadow: 0 0 15px rgba(115, 17, 212, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display selection:bg-primary/30">
+<div class="relative flex h-screen max-w-md mx-auto flex-col overflow-hidden bg-background-light dark:bg-background-dark shadow-2xl">
+<!-- Header -->
+<header class="z-20 flex items-center justify-between px-6 pt-12 pb-4 glass-panel border-b border-white/5">
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<div class="flex flex-col">
+<h1 class="text-sm font-bold tracking-widest uppercase text-slate-100">Autovinci</h1>
+<div class="flex items-center gap-1.5">
+<span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-[11px] font-medium text-slate-400 uppercase tracking-tighter">Elite Concierge</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-10 rounded-full border border-primary/30 p-0.5">
+<img alt="Concierge Avatar" class="size-full rounded-full object-cover" data-alt="Professional luxury concierge female portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlcjnvCDl8OPSKTNM-801_UxjXj2l2BfJos7FPlwAsDUBaX9LOvOAievo7IvdpiDj0uEWahvmdOdiZypCli8M-b2Ntg1bWG-AxSnNundC_xtH8DWD1uI3zEUbXupoJHT-tdY9HM2-6DRsy-qIHJeu2g_99-BQ16Vru6l2IH1KiniF4zAkTdir-zhO2itKrztGEkVdVPI01QarcnAJpTDd5U-gXrq9rdVwAg5KVt2GllpEKugeWDviFl5rA_qU1VqQZ-jS1OMFonpo"/>
+</div>
+</div>
+</header>
+<!-- Chat Area -->
+<main class="flex-1 overflow-y-auto p-4 space-y-6 kardeco-grid custom-scrollbar">
+<!-- Timestamp -->
+<div class="flex justify-center">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-500 bg-surface-dark px-3 py-1 rounded-full border border-border-dark">Today 8:42 PM</span>
+</div>
+<!-- AI Message -->
+<div class="flex gap-3 max-w-[85%]">
+<div class="flex flex-col gap-2">
+<div class="bg-surface-dark border border-border-dark p-4 rounded-xl rounded-tl-none shadow-sm">
+<p class="text-sm leading-relaxed text-slate-300">
+                            Good evening. I have finished the deep provenance audit for the <span class="text-primary font-bold">1967 Ferrari 275 GTB/4</span>. This example is truly exceptional.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Vehicle Card (Rich Media Message) -->
+<div class="flex flex-col gap-3 max-w-[95%] mx-auto">
+<div class="bg-surface-dark border border-primary/20 rounded-2xl overflow-hidden shadow-2xl relative group">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/90 via-transparent to-transparent z-10"></div>
+<div class="h-48 w-full bg-center bg-cover" data-alt="Classic red vintage Ferrari 275 GTB" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAQRnlh-trhGNHgW6tdZWNMxTVmwpsbyd1bY9vg4jDRCfjD-InWkh88hLSMM4FGC4clC7GZp-reN9DZKkOHnZG6Zx6LX5fwAlE2nuZgXnmsmMwxgLL1g_k10QHtE8usAjK7p3PJWWXdM0Rqvh4-fofD2bHg6dS_MELKhahK-Aup81hB0z9GkRmDE47Z4xpYctVRDROR82i0t_FTMwJd7AHD7tW2A3Ge9Njr8ncfoi7TcXLALcEIvWyjSwDF52sZxovl__YSiRseLHI');"></div>
+<div class="p-5 relative z-20 -mt-12">
+<div class="flex justify-between items-end mb-4">
+<div>
+<h3 class="text-xl font-extrabold text-white tracking-tight">1967 Ferrari 275 GTB/4</h3>
+<p class="text-xs text-primary font-bold tracking-widest uppercase">Chassis #10451 • Rosso Corsa</p>
+</div>
+<div class="bg-primary/20 backdrop-blur-md px-3 py-1 rounded-lg border border-primary/40">
+<span class="text-xs font-bold text-primary">LOT #42</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<div class="bg-background-dark/50 p-3 rounded-xl border border-border-dark">
+<p class="text-[10px] uppercase text-slate-500 font-bold mb-1">Engine</p>
+<p class="text-xs font-medium text-slate-200">3.3L V12 4-Cam</p>
+</div>
+<div class="bg-background-dark/50 p-3 rounded-xl border border-border-dark">
+<p class="text-[10px] uppercase text-slate-500 font-bold mb-1">Mileage</p>
+<p class="text-xs font-medium text-slate-200">42,108 Documented</p>
+</div>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed mb-4 italic">
+                            "One of only 330 produced. Features the highly desirable 'Long Nose' bodywork by Scaglietti. Original interior leather preserved."
+                        </p>
+<button class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-xl font-bold text-sm tracking-wide transition-all magic-glow flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+                            VIEW FULL DOSSIER
+                        </button>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex justify-end gap-3 ml-auto max-w-[85%]">
+<div class="flex flex-col gap-1 items-end">
+<div class="bg-primary text-white p-4 rounded-xl rounded-tr-none shadow-lg">
+<p class="text-sm leading-relaxed">Does the dossier include the original toolkit and Marcel Massini report?</p>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase px-1">Read 8:45 PM</span>
+</div>
+</div>
+<!-- AI Message -->
+<div class="flex gap-3 max-w-[85%]">
+<div class="flex flex-col gap-2">
+<div class="bg-surface-dark border border-border-dark p-4 rounded-xl rounded-tl-none shadow-sm">
+<p class="text-sm leading-relaxed text-slate-300">
+                            Yes, both are present. The tool roll is complete with its original briefcase. I also have high-resolution scans of the Massini report showing its Swiss delivery history in '67.
+                        </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Quick Actions (Magic Wand Buttons) -->
+<div class="px-4 pb-2 z-10">
+<div class="flex gap-2 overflow-x-auto no-scrollbar py-2">
+<button class="flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-full bg-surface-dark border border-primary/40 text-primary text-xs font-bold tracking-tight whitespace-nowrap magic-glow">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+                    Schedule Viewing
+                </button>
+<button class="flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-full bg-surface-dark border border-border-dark text-slate-300 text-xs font-bold tracking-tight whitespace-nowrap">
+<span class="material-symbols-outlined text-base">history_edu</span>
+                    Request Title
+                </button>
+<button class="flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-full bg-surface-dark border border-border-dark text-slate-300 text-xs font-bold tracking-tight whitespace-nowrap">
+<span class="material-symbols-outlined text-base">call</span>
+                    Talk to Specialist
+                </button>
+</div>
+</div>
+<!-- Input Bar -->
+<footer class="p-4 bg-background-dark border-t border-border-dark pb-8">
+<div class="relative flex items-center gap-3 bg-surface-dark rounded-2xl border border-border-dark px-4 py-3 shadow-inner">
+<button class="text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">magic_button</span>
+</button>
+<input class="flex-1 bg-transparent border-none text-sm text-slate-100 placeholder:text-slate-600 focus:ring-0" placeholder="Ask about provenance..." type="text"/>
+<button class="size-9 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</div>
+</footer>
+<!-- Bottom Tab Bar (iOS style) -->
+<div class="flex gap-2 border-t border-border-dark bg-background-dark/80 backdrop-blur-md px-6 pb-6 pt-2 h-20 shrink-0">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-600" href="#">
+<span class="material-symbols-outlined">home</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-600" href="#">
+<span class="material-symbols-outlined">explore</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-600" href="#">
+<span class="material-symbols-outlined">favorite</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-600" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</div>
+</div>
+</body></html>

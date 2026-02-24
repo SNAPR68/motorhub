@@ -14,6 +14,7 @@ import type { Vehicle } from "@/lib/types";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 import { SkeletonCard } from "@/components/ui/Skeleton";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ImageUploader } from "@/components/ImageUploader";
 
 /* Stitch: premium_inventory_collection
    Tokens: primary=#137fec, font=Manrope, bg=#0a0c10
@@ -34,6 +35,7 @@ const INITIAL_VEHICLE = {
   km: "",
   location: "",
   owner: "1st",
+  images: [] as string[],
 };
 
 export default function InventoryPage() {
@@ -56,7 +58,7 @@ export default function InventoryPage() {
           ...vehicle,
           price: Number(vehicle.price),
           mileage: vehicle.mileage || "N/A",
-          images: [],
+          images: vehicle.images,
         }),
       });
       if (!res.ok) throw new Error(await res.text());
@@ -343,6 +345,14 @@ export default function InventoryPage() {
                 <option value="3rd">3rd Owner</option>
               </select>
             </div>
+          </div>
+          <div>
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Photos</label>
+            <ImageUploader
+              images={newVehicle.images}
+              onChange={(imgs) => setNewVehicle(v => ({ ...v, images: imgs }))}
+              max={10}
+            />
           </div>
           <div className="flex gap-3 pt-2">
             <button type="button" onClick={() => { setAddOpen(false); setNewVehicle(INITIAL_VEHICLE); }} className="flex-1 rounded-lg border border-slate-600 py-3 text-sm font-bold text-slate-300">

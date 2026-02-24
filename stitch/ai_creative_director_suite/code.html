@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Creative Director Suite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1773cf",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0a0c10",
+                        "charcoal": "#12171d",
+                        "silver": "#94a3b8"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-2xl">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between px-6 pt-12 pb-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-30">
+<button class="flex items-center justify-center size-10 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-xl">arrow_back_ios_new</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="text-sm font-bold tracking-[0.2em] uppercase text-primary">Autovinci</h1>
+<p class="text-[10px] text-silver font-medium uppercase tracking-wider">AI Creative Director</p>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full bg-primary text-white">
+<span class="material-symbols-outlined text-xl">share</span>
+</button>
+</header>
+<!-- Main Content Scroll Area -->
+<main class="flex-1 overflow-y-auto hide-scrollbar pb-32">
+<!-- Ad Preview Section -->
+<div class="px-6 py-4">
+<div class="relative group aspect-[9/16] w-full overflow-hidden rounded-xl bg-charcoal shadow-2xl border border-white/5">
+<!-- Base Image -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Luxury sports car in a high-contrast dark studio setting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAa7jtl0d7Xsj65DaPo0hBnHgjQbTaTNYcEHAVZazV-7yVK6Cc3WV45gpWCWk_tf7J7zG8E-WqGROVPQQVK64GBeSW5iBBoSeb4RNOBWWPaVEo6pXuQGY_fVwnLzHZK-SrG1e_Gvw-M3ug1xm-0NK8DHYGt0i5FAS2fvDp6WfgI3d8imN2LhC-_zOvVRQMCUZ7rKyFCCowRZobRYgIIcyU8RllU8afVUePJ401XCkrPnr1yvW0PRYjnE5HiuylGoxzszUhWR7SjQso");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
+</div>
+<!-- Luxury Overlays: Brand/Typography -->
+<div class="absolute inset-x-0 top-12 flex flex-col items-center px-8">
+<div class="w-12 h-0.5 bg-primary/60 mb-4"></div>
+<h2 class="text-2xl font-extralight tracking-[0.3em] uppercase text-white/90">Echelon</h2>
+<p class="text-[10px] tracking-widest uppercase text-white/50 mt-1">2024 Collection</p>
+</div>
+<div class="absolute inset-x-0 bottom-12 flex flex-col items-center px-8 text-center">
+<h3 class="text-4xl font-bold leading-tight text-white mb-2">Redefining Motion</h3>
+<p class="text-sm text-white/70 max-w-[240px]">Experience the peak of automotive engineering through AI vision.</p>
+<button class="mt-6 px-6 py-2 border border-white/30 rounded-full text-xs font-bold tracking-widest uppercase text-white backdrop-blur-sm">
+                            Discover More
+                        </button>
+</div>
+<!-- Floating Badges -->
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
+<span class="material-symbols-outlined text-primary text-[14px]">auto_awesome</span>
+<span class="text-[10px] font-bold text-white uppercase tracking-wider">Luxury Overlay</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
+<span class="material-symbols-outlined text-primary text-[14px]">movie_filter</span>
+<span class="text-[10px] font-bold text-white uppercase tracking-wider">Cinematic Bloom</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Campaign Moods Header -->
+<div class="px-6 pt-6 pb-2">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold tracking-tight">Campaign Moods</h3>
+<span class="text-xs font-semibold text-primary">View All</span>
+</div>
+<p class="text-xs text-silver mt-1">AI-suggested artistic directions for your campaign</p>
+</div>
+<!-- Mood Carousel -->
+<div class="flex gap-4 px-6 overflow-x-auto hide-scrollbar py-4">
+<!-- Mood 1 (Active) -->
+<div class="flex-shrink-0 w-32 group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden border-2 border-primary p-0.5">
+<div class="w-full h-full rounded-[calc(0.5rem-2px)] bg-cover bg-center" data-alt="Dark aesthetic luxury car moody lighting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCKT4DhsNhiNLmeIj3pkG8_UwldlQHA4A8YC2KD6SuJnc6m7bw9Tqx_7KZAowln7XaNTG6gRsDhUDLhoLTR858O7TJgaBnarZhpZggHXAkioFvzcv_77JfXlSV9uHUX8V2uLZC6m3nthS8LaAoZqecqrsOp4tIs86rGScRkdRKg9xEvJ_07-fEEh00U76L3KAG-GtmuR5NbgmO6DhWIClcsmvDaaFLE65jDU_uB0j1qxzUlMBgvBDerapZ7jksmH1wL-JMhrNFH1gY");'></div>
+<div class="absolute inset-0 bg-primary/20"></div>
+</div>
+<p class="mt-2 text-xs font-bold text-primary text-center">Midnight Elegance</p>
+</div>
+<!-- Mood 2 -->
+<div class="flex-shrink-0 w-32 group cursor-pointer opacity-60">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden border border-white/10">
+<div class="w-full h-full bg-cover bg-center" data-alt="Blurred car in motion city neon lights" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDwAlnDvEroJXpvSvTpICJpH4ojFbiMTnVtyFDVW4-XSODi3kiDsH7mvPyToOwIdmEiLLDBvaUpE8YyHcEqbzBsFnAijl5z_dKQsrlW-zLiEO2h8F-XIt7M6wbmqdUdJgqnXTw-hBoRP5QMKho4NbAvXlhb07G9veiYCYmVElD2z1i5Av_h2gxOCSWK-D0IoKSqQ2KB4r9MldQGoUZ66qugDXJ3lkfwTsF8TeflXykH6y0TD-zL0zxV_D7okaPzfB9URAzonDEbdHY");'></div>
+</div>
+<p class="mt-2 text-xs font-medium text-silver text-center">Urban Speed</p>
+</div>
+<!-- Mood 3 -->
+<div class="flex-shrink-0 w-32 group cursor-pointer opacity-60">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden border border-white/10">
+<div class="w-full h-full bg-cover bg-center" data-alt="Gold hour sunset reflecting on luxury car" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJ0nWTw4zdUamrTK12GGixRmDFLQ81T29Krmxvb2YTiry_qFUNSnRTQRIRHQNueWk-WLUyYpdpRjaGtlO4JfeNuArAh5AO9AKyLH8YVu_XMdhfYIjy_ff_msxZz6Yz36O0JW9p1R-3xdr-VQJuZbAc-g041A9FK4EK4HQWfwLPF3mWkC22io97CWY1MFnb8P17m2qtKcMDEq0IngB0q_ScEAJdHnXlcZ56FfKk-P64aCuvDD2DHAextNhAi8mLDmEGPMJImTyoSRg");'></div>
+</div>
+<p class="mt-2 text-xs font-medium text-silver text-center">Golden Horizon</p>
+</div>
+<!-- Mood 4 -->
+<div class="flex-shrink-0 w-32 group cursor-pointer opacity-60">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden border border-white/10">
+<div class="w-full h-full bg-cover bg-center" data-alt="Minimalist clean studio car shot white background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDV-SfpATmLVCH668YwJlSpyiD7tCHDiqRBAdFxQdTbps95IUSv0VgRV44eHZV6cSFvlTN67dds1NycQnno0o2HMJAkVh1uQYLHIBRazzC8JU7xCpDANJulcuYj6PhCwHIrqoztLM4p316AWxNCHvP55qLibxrtS6QJcRGmqc7rLMlxg-AvPkxwZ7N5y2JW-vDhHnK5uCmM10N7LpdjpyuRmFAVmxYKewPeRoQu2gb5E2f3IlRqcivyK48qB63CY60thoSt0IljJgM");'></div>
+</div>
+<p class="mt-2 text-xs font-medium text-silver text-center">Pure Studio</p>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar & Navigation -->
+<footer class="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40">
+<!-- AI Controls -->
+<div class="px-6 py-4 bg-gradient-to-t from-background-dark to-transparent">
+<div class="flex items-center gap-3 bg-charcoal/90 border border-white/10 backdrop-blur-xl rounded-2xl p-3 shadow-2xl">
+<button class="flex-1 flex items-center justify-center gap-2 py-3 bg-slate-800 rounded-xl text-white font-bold text-sm">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                        Regenerate
+                    </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-3 bg-primary rounded-xl text-white font-bold text-sm">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                        Apply
+                    </button>
+</div>
+</div>
+<!-- Global Bottom Nav -->
+<div class="flex justify-around items-center bg-charcoal border-t border-white/5 px-6 pb-8 pt-4">
+<a class="flex flex-col items-center gap-1 text-silver" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-silver" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Marketing</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined !fill-1">psychology</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">AI Suite</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-silver" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Settings</span>
+</a>
+</div>
+</footer>
+</div>
+</body></html>
