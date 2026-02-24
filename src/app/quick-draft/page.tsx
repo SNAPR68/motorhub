@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { Suspense, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
@@ -13,7 +13,7 @@ const INTENTS = [
   { icon: "currency_exchange", label: "Trade-In" },
 ];
 
-export default function QuickDraftPage() {
+function QuickDraftContent() {
   const searchParams = useSearchParams();
   const buyerName = searchParams.get("buyer") ?? "Priya Sharma";
   const vehicleName = searchParams.get("vehicle") ?? "2023 Hyundai Creta SX(O)";
@@ -247,5 +247,13 @@ export default function QuickDraftPage() {
         ))}
       </nav>
     </div>
+  );
+}
+
+export default function QuickDraftPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#f6f7f8] flex items-center justify-center"><div className="w-8 h-8 rounded-full border-2 border-[#137fec] border-t-transparent animate-spin" /></div>}>
+      <QuickDraftContent />
+    </Suspense>
   );
 }

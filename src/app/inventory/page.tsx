@@ -15,6 +15,7 @@ import { BLUR_DATA_URL } from "@/lib/car-images";
 import { SkeletonCard } from "@/components/ui/Skeleton";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { ImageUploader } from "@/components/ImageUploader";
+import { useCompare } from "@/context/CompareContext";
 
 /* Stitch: premium_inventory_collection
    Tokens: primary=#137fec, font=Manrope, bg=#0a0c10
@@ -269,6 +270,8 @@ export default function InventoryPage() {
         <MaterialIcon name="add" className="text-[30px]" />
       </button>
 
+      <CompareTray />
+
       {/* Add Vehicle Bottom Sheet */}
       <BottomSheet open={addOpen} onClose={() => setAddOpen(false)} title="Add Vehicle">
         <div className="space-y-4">
@@ -376,6 +379,8 @@ export default function InventoryPage() {
 /* Card matching stitch: 4:5 aspect, text-gradient name, AI Studio button */
 function InventoryCard({ vehicle }: { vehicle: Vehicle }) {
   const status = STATUS_DISPLAY[vehicle.status];
+  const { isInCompare, addToCompare, removeFromCompare, isFull } = useCompare();
+  const inCompare = isInCompare(vehicle.id);
 
   return (
     <div className="group relative flex flex-col rounded-xl overflow-hidden shadow-2xl transition-transform active:scale-[0.98]">
@@ -399,6 +404,26 @@ function InventoryCard({ vehicle }: { vehicle: Vehicle }) {
             <Badge variant="status" label={status.label} color={status.color} dotColor={status.dot} />
           )}
         </div>
+
+        {/* Compare toggle */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            inCompare ? removeFromCompare(vehicle.id) : addToCompare(vehicle.id);
+          }}
+          className={`absolute top-4 right-4 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-90 ${
+            inCompare
+              ? "bg-[#137fec] shadow-lg shadow-[#137fec]/40"
+              : isFull
+              ? "bg-white/10 opacity-40 cursor-not-allowed"
+              : "bg-black/40 backdrop-blur-md hover:bg-[#137fec]/40"
+          }`}
+          disabled={!inCompare && isFull}
+          title={inCompare ? "Remove from compare" : "Add to compare"}
+        >
+          <MaterialIcon name="compare_arrows" className="text-white text-[18px]" />
+        </button>
 
         {/* Bottom gradient */}
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -429,6 +454,44 @@ function InventoryCard({ vehicle }: { vehicle: Vehicle }) {
           </div>
         </div>
       </Link>
+    </div>
+  );
+}
+
+/* Sticky compare tray — appears when ≥1 car is selected */
+function CompareTray() {
+  const { compareCount, clearCompare } = useCompare();
+  if (compareCount === 0) return null;
+
+  return (
+    <div className="fixed left-1/2 -translate-x-1/2 bottom-24 z-50 w-[calc(100%-3rem)] max-w-sm">
+      <div
+        className="flex items-center justify-between gap-3 rounded-2xl px-4 py-3"
+        style={{ background: "#0f1623", border: "1px solid rgba(19,127,236,0.4)", boxShadow: "0 8px 32px rgba(0,0,0,0.5)" }}
+      >
+        <div className="flex items-center gap-2">
+          <MaterialIcon name="compare_arrows" className="text-[#137fec]" />
+          <span className="text-white text-sm font-bold">
+            {compareCount} car{compareCount > 1 ? "s" : ""} selected
+          </span>
+          {compareCount < 2 && (
+            <span className="text-slate-400 text-xs">— add 1 more</span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <button onClick={clearCompare} className="text-slate-400 text-xs hover:text-white">
+            Clear
+          </button>
+          {compareCount >= 2 && (
+            <Link
+              href="/compare"
+              className="bg-[#137fec] text-white text-xs font-bold px-4 py-2 rounded-xl"
+            >
+              Compare Now
+            </Link>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

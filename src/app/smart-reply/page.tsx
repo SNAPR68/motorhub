@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { Suspense, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -15,7 +15,7 @@ interface Suggestion {
   text: string;
 }
 
-export default function SmartReplyPage() {
+function SmartReplyContent() {
   const searchParams = useSearchParams();
   const leadMessage = searchParams.get("message") ?? "Is the 2023 Hyundai Creta SX(O) still available for financing? I'd like to come see it tomorrow if possible.";
   const vehicleName = searchParams.get("vehicle") ?? "2023 Hyundai Creta SX(O)";
@@ -237,5 +237,13 @@ export default function SmartReplyPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SmartReplyPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#f6f7f8] flex items-center justify-center"><div className="w-8 h-8 rounded-full border-2 border-[#137fec] border-t-transparent animate-spin" /></div>}>
+      <SmartReplyContent />
+    </Suspense>
   );
 }
