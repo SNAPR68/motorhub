@@ -4,48 +4,45 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { BLUR_DATA_URL } from "@/lib/car-images";
+import { BLUR_DATA_URL, CRETA, SWIFT, NEXON_EV, XUV700, FORTUNER, SEDAN, KIA, BREZZA } from "@/lib/car-images";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle } from "@/lib/api";
 import { VEHICLE_CATEGORIES } from "@/lib/constants";
 
-const BRANDS = [
-  { name: "Maruti", initial: "M", color: "#1565C0" },
-  { name: "Hyundai", initial: "H", color: "#0D47A1" },
-  { name: "Tata", initial: "T", color: "#283593" },
-  { name: "Mahindra", initial: "M", color: "#B71C1C" },
-  { name: "Honda", initial: "H", color: "#C62828" },
-  { name: "Toyota", initial: "T", color: "#E65100" },
-  { name: "Kia", initial: "K", color: "#1B5E20" },
-  { name: "MG", initial: "MG", color: "#4A148C" },
-  { name: "Renault", initial: "R", color: "#880E4F" },
-  { name: "Skoda", initial: "S", color: "#33691E" },
+const POPULAR_BRANDS = [
+  { name: "Maruti", initial: "M", color: "#1152d4" },
+  { name: "Hyundai", initial: "H", color: "#137fec" },
+  { name: "Tata", initial: "T", color: "#1152d4" },
+  { name: "Mahindra", initial: "M", color: "#137fec" },
+  { name: "Honda", initial: "H", color: "#1152d4" },
+  { name: "Toyota", initial: "T", color: "#137fec" },
+  { name: "Kia", initial: "K", color: "#1152d4" },
+  { name: "MG", initial: "MG", color: "#137fec" },
 ];
 
 const BUDGETS = [
-  { label: "Under ₹3 Lakh", range: "0-300000", bg: "#FFF3E0", accent: "#E65100" },
-  { label: "₹3 – 5 Lakh", range: "300000-500000", bg: "#E8F5E9", accent: "#2E7D32" },
-  { label: "₹5 – 10 Lakh", range: "500000-1000000", bg: "#E3F2FD", accent: "#1565C0" },
-  { label: "₹10 – 20 Lakh", range: "1000000-2000000", bg: "#FCE4EC", accent: "#C62828" },
-  { label: "₹20 – 50 Lakh", range: "2000000-5000000", bg: "#F3E5F5", accent: "#6A1B9A" },
-  { label: "Above ₹50 Lakh", range: "5000000-99999999", bg: "#E0F7FA", accent: "#00695C" },
+  { label: "Under ₹5L", value: "0-500000" },
+  { label: "₹5L – 10L", value: "500000-1000000" },
+  { label: "₹10L – 20L", value: "1000000-2000000" },
+  { label: "₹20L+", value: "2000000-99999999" },
 ];
 
 const TRUST_STATS = [
   { value: "50,000+", label: "Verified Cars" },
-  { value: "2,500+", label: "Dealers" },
+  { value: "2,500+", label: "Trusted Dealers" },
   { value: "15+", label: "Cities" },
   { value: "4.8★", label: "Rating" },
 ];
 
-const CAR_TABS = ["Used Cars", "New Cars", "Electric"] as const;
+// Hero carousel images
+const HERO_IMAGES = [CRETA, SWIFT, XUV700, FORTUNER];
 
 export default function Home() {
   const router = useRouter();
   const [search, setSearch] = useState("");
-  const [activeTab, setActiveTab] = useState<(typeof CAR_TABS)[number]>("Used Cars");
+  const [heroIdx, setHeroIdx] = useState(0);
 
   const { data } = useApi(() => fetchVehicles({ limit: 8, status: "AVAILABLE" }), []);
   const vehicles = (data?.vehicles ?? []).map(adaptVehicle);
@@ -59,292 +56,331 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-dvh w-full max-w-lg mx-auto pb-32" style={{ background: "#F5F5F5", fontFamily: "'Noto Sans', sans-serif" }}>
-
+    <div
+      className="min-h-dvh w-full max-w-lg mx-auto pb-32"
+      style={{ background: "#0a0c10", fontFamily: "'Noto Sans', sans-serif", color: "#e2e8f0" }}
+    >
       {/* ── HEADER ── */}
-      <header style={{ background: "#C62828" }} className="sticky top-0 z-50 shadow-md">
-        <div className="flex items-center justify-between px-4 h-14">
-          <div className="flex items-center gap-2">
-            <MaterialIcon name="token" className="text-[26px] text-white" />
-            <span className="text-lg font-bold text-white tracking-tight" style={{ fontFamily: "'Noto Serif', serif" }}>
-              Autovinci
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Link href="/concierge" className="flex items-center gap-1 bg-white/20 rounded-full px-3 py-1.5">
-              <MaterialIcon name="smart_toy" className="text-[16px] text-white" />
-              <span className="text-xs font-bold text-white">AI Help</span>
-            </Link>
-            <Link href="/login/buyer" className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20">
-              <MaterialIcon name="person" className="text-[20px] text-white" />
-            </Link>
-          </div>
+      <header
+        className="sticky top-0 z-50 flex items-center justify-between px-5 h-14 border-b border-white/5"
+        style={{ background: "rgba(10,12,16,0.92)", backdropFilter: "blur(16px)" }}
+      >
+        <div className="flex items-center gap-2">
+          <MaterialIcon name="token" className="text-[26px]" style={{ color: "#1152d4" }} />
+          <span className="text-lg font-bold text-white tracking-tight" style={{ fontFamily: "'Noto Serif', serif" }}>
+            Autovinci
+          </span>
         </div>
-
-        {/* Search Bar */}
-        <div className="px-4 pb-4 pt-1">
-          <div className="flex items-center gap-2 bg-white rounded-lg px-3 py-2.5 shadow-sm">
-            <MaterialIcon name="search" className="text-[22px] text-gray-400 shrink-0" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              placeholder="Search car name, brand, model..."
-              className="flex-1 bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400"
+        <div className="flex items-center gap-2">
+          <Link
+            href="/concierge"
+            className="relative flex h-9 w-9 items-center justify-center rounded-full"
+            style={{ background: "rgba(255,255,255,0.05)" }}
+          >
+            <MaterialIcon name="smart_toy" className="text-[20px] text-slate-300" />
+            <span
+              className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2"
+              style={{ background: "#10B981", borderColor: "#0a0c10" }}
             />
-            {search ? (
-              <button onClick={() => setSearch("")} className="text-gray-400 hover:text-gray-600">
-                <MaterialIcon name="close" className="text-[18px]" />
-              </button>
-            ) : null}
-            <button
-              onClick={handleSearch}
-              style={{ background: "#C62828" }}
-              className="flex items-center justify-center h-8 w-8 rounded-md text-white shrink-0 active:scale-95 transition-transform"
-            >
-              <MaterialIcon name="arrow_forward" className="text-[16px]" />
-            </button>
-          </div>
+          </Link>
+          <Link
+            href="/login/buyer"
+            className="flex h-9 w-9 items-center justify-center rounded-full"
+            style={{ background: "rgba(255,255,255,0.05)" }}
+          >
+            <MaterialIcon name="person" className="text-[20px] text-slate-300" />
+          </Link>
         </div>
       </header>
 
-      {/* ── TRUST STRIP ── */}
-      <div style={{ background: "#B71C1C" }} className="px-4 py-2.5">
-        <div className="grid grid-cols-4 gap-1">
-          {TRUST_STATS.map((s) => (
-            <div key={s.label} className="text-center">
-              <p className="text-sm font-bold text-white leading-tight">{s.value}</p>
-              <p className="text-[9px] text-red-200 mt-0.5">{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* ── HERO SECTION ── */}
+      <section className="relative h-72 overflow-hidden">
+        <Image
+          src={HERO_IMAGES[heroIdx]}
+          alt="Featured car"
+          fill
+          className="object-cover transition-all duration-700"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
+          priority
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #0a0c10 0%, rgba(10,12,16,0.4) 60%, rgba(10,12,16,0.2) 100%)" }} />
 
-      {/* ── QUICK POPULAR TAGS ── */}
-      <div className="px-4 pt-3 pb-2">
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-          {["Creta", "Swift", "Nexon EV", "XUV700", "Brezza", "City", "Seltos"].map((car) => (
+        {/* Hero content */}
+        <div className="absolute bottom-0 left-0 right-0 px-5 pb-5">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] mb-1" style={{ color: "#1152d4" }}>
+            Intelligence &amp; Elegance
+          </p>
+          <h1 className="text-2xl font-bold text-white leading-snug mb-3" style={{ fontFamily: "'Noto Serif', serif" }}>
+            Find your perfect<br />used car in India
+          </h1>
+
+          {/* Dot nav */}
+          <div className="flex gap-1.5 mb-4">
+            {HERO_IMAGES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setHeroIdx(i)}
+                className="h-1.5 rounded-full transition-all"
+                style={{
+                  width: i === heroIdx ? "20px" : "6px",
+                  background: i === heroIdx ? "#1152d4" : "rgba(255,255,255,0.3)",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SEARCH BAR ── */}
+      <section className="px-5 -mt-4 relative z-10 pb-5">
+        <div
+          className="flex items-center gap-3 rounded-xl px-4 py-3.5 border"
+          style={{
+            background: "rgba(255,255,255,0.06)",
+            backdropFilter: "blur(12px)",
+            borderColor: "rgba(255,255,255,0.1)",
+          }}
+        >
+          <MaterialIcon name="search" className="text-[20px] text-slate-500 shrink-0" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            placeholder="Search by car name, brand..."
+            className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
+          />
+          {search && (
+            <button onClick={() => setSearch("")} className="text-slate-500 hover:text-white">
+              <MaterialIcon name="close" className="text-[18px]" />
+            </button>
+          )}
+          <button
+            onClick={handleSearch}
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-white shrink-0 active:scale-95 transition-transform"
+            style={{ background: "#1152d4" }}
+          >
+            <MaterialIcon name="arrow_forward" className="text-[18px]" />
+          </button>
+        </div>
+
+        {/* Quick tags */}
+        <div className="flex items-center gap-2 mt-3 overflow-x-auto no-scrollbar">
+          <span className="text-xs text-slate-500 shrink-0">Popular:</span>
+          {["Creta", "Swift", "Nexon EV", "XUV700", "Brezza"].map((car) => (
             <Link
               key={car}
               href={`/showroom?q=${car}`}
-              className="shrink-0 rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 hover:border-red-300 hover:text-red-700 transition-colors shadow-sm"
+              className="shrink-0 rounded-full px-3 py-1 text-xs text-slate-400 hover:text-white transition-colors border"
+              style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)" }}
             >
               {car}
             </Link>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* ── BROWSE BRANDS ── */}
-      <section className="px-4 pt-4 pb-5">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-base font-bold text-gray-900">Browse by Brand</h2>
-          <Link href="/showroom" className="text-xs font-semibold" style={{ color: "#C62828" }}>
-            View all
-          </Link>
+      {/* ── TRUST STRIP ── */}
+      <section className="mx-5 mb-6 rounded-xl px-4 py-3 border" style={{ background: "rgba(17,82,212,0.06)", borderColor: "rgba(17,82,212,0.15)" }}>
+        <div className="grid grid-cols-4 gap-1">
+          {TRUST_STATS.map((s) => (
+            <div key={s.label} className="text-center">
+              <p className="text-sm font-bold text-white">{s.value}</p>
+              <p className="text-[10px] text-slate-500 mt-0.5">{s.label}</p>
+            </div>
+          ))}
         </div>
-        <div className="flex gap-4 overflow-x-auto no-scrollbar pb-1">
-          {BRANDS.map((brand) => (
+      </section>
+
+      {/* ── CATEGORY GRID ── */}
+      <section className="px-5 mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-sm font-bold text-white">Browse by Type</h2>
+          <Link href="/showroom" className="text-xs font-semibold" style={{ color: "#1152d4" }}>View all</Link>
+        </div>
+        <div className="grid grid-cols-4 gap-3">
+          {VEHICLE_CATEGORIES.map((cat) => (
             <Link
-              key={brand.name}
-              href={`/showroom?q=${brand.name}`}
-              className="shrink-0 flex flex-col items-center gap-2 active:scale-95 transition-transform"
+              key={cat.value}
+              href={`/showroom?category=${cat.value}`}
+              className="flex flex-col items-center gap-2 rounded-xl p-3 border transition-all active:scale-95 hover:border-blue-500/30"
+              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.06)" }}
             >
-              <div
-                className="h-14 w-14 rounded-full flex items-center justify-center shadow-md"
-                style={{ background: brand.color }}
-              >
-                <span className="text-white font-black text-lg leading-none">{brand.initial}</span>
-              </div>
-              <span className="text-[11px] font-semibold text-gray-700">{brand.name}</span>
+              <span className="text-2xl">{cat.icon}</span>
+              <span className="text-[11px] font-semibold text-slate-300">{cat.label}</span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ── DIVIDER ── */}
-      <div className="h-2 bg-gray-200" />
-
-      {/* ── CAR TYPE TABS + LISTINGS ── */}
-      <section className="bg-white pt-4 pb-5">
-        <div className="flex items-center gap-0 px-4 mb-4 border-b border-gray-100">
-          {CAR_TABS.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className="relative pb-3 mr-6 text-sm font-bold transition-colors"
-              style={{ color: activeTab === tab ? "#C62828" : "#6B7280" }}
-            >
-              {tab}
-              {activeTab === tab && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full" style={{ background: "#C62828" }} />
-              )}
-            </button>
-          ))}
-        </div>
-
-        {/* Category pills */}
-        <div className="flex gap-2 overflow-x-auto no-scrollbar px-4 mb-4">
-          {VEHICLE_CATEGORIES.map((cat) => (
-            <Link
-              key={cat.value}
-              href={`/showroom?category=${cat.value}`}
-              className="shrink-0 flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-700 hover:border-red-300 hover:bg-red-50 hover:text-red-700 transition-colors"
-            >
-              <span>{cat.icon}</span>
-              <span>{cat.label}</span>
-            </Link>
-          ))}
-          <Link
-            href="/showroom?q=luxury"
-            className="shrink-0 flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-700 hover:border-red-300 hover:bg-red-50 hover:text-red-700 transition-colors"
-          >
-            <span>👑</span><span>Luxury</span>
+      {/* ── FEATURED CARS ── */}
+      <section className="mb-6">
+        <div className="flex items-center justify-between px-5 mb-3">
+          <div>
+            <h2 className="text-sm font-bold text-white">Featured Cars</h2>
+            <p className="text-[11px] text-slate-500 mt-0.5">Hand-picked by our AI</p>
+          </div>
+          <Link href="/showroom" className="text-xs font-semibold flex items-center gap-0.5" style={{ color: "#1152d4" }}>
+            See all <MaterialIcon name="chevron_right" className="text-[15px]" />
           </Link>
         </div>
 
-        {/* Cars horizontal scroll */}
-        <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory">
+        <div className="flex gap-3 overflow-x-auto no-scrollbar px-5 snap-x snap-mandatory">
           {vehicles.length > 0
             ? vehicles.map((v) => (
-                <div key={v.id} className="w-[200px] shrink-0 snap-start">
+                <div key={v.id} className="w-[220px] shrink-0 snap-start">
                   <CarCard vehicle={v} />
                 </div>
               ))
-            : [1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-[200px] shrink-0 snap-start">
-                  <div className="rounded-xl overflow-hidden border border-gray-100 bg-gray-50">
-                    <div className="aspect-[4/3] bg-gray-200 animate-pulse" />
+            : [1, 2, 3].map((i) => (
+                <div key={i} className="w-[220px] shrink-0">
+                  <div className="rounded-xl overflow-hidden" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <div className="aspect-[4/3] animate-pulse" style={{ background: "rgba(255,255,255,0.06)" }} />
                     <div className="p-3 space-y-2">
-                      <div className="h-3.5 w-3/4 rounded bg-gray-200 animate-pulse" />
-                      <div className="h-3 w-1/2 rounded bg-gray-200 animate-pulse" />
-                      <div className="h-4 w-2/3 rounded bg-gray-200 animate-pulse" />
+                      <div className="h-3.5 w-3/4 rounded animate-pulse" style={{ background: "rgba(255,255,255,0.06)" }} />
+                      <div className="h-3 w-1/2 rounded animate-pulse" style={{ background: "rgba(255,255,255,0.06)" }} />
+                      <div className="h-4 w-2/3 rounded animate-pulse" style={{ background: "rgba(255,255,255,0.06)" }} />
                     </div>
                   </div>
                 </div>
               ))}
         </div>
-
-        <div className="px-4 mt-4">
-          <Link
-            href="/showroom"
-            className="flex items-center justify-center gap-2 w-full h-11 rounded-lg border-2 text-sm font-bold transition-colors"
-            style={{ borderColor: "#C62828", color: "#C62828" }}
-          >
-            View All Cars
-            <MaterialIcon name="arrow_forward" className="text-[16px]" />
-          </Link>
-        </div>
       </section>
 
-      {/* ── DIVIDER ── */}
-      <div className="h-2 bg-gray-200" />
-
-      {/* ── SHOP BY BUDGET ── */}
-      <section className="bg-white pt-4 pb-5">
-        <div className="flex items-center justify-between px-4 mb-3">
-          <h2 className="text-base font-bold text-gray-900">Shop by Budget</h2>
-          <Link href="/showroom" className="text-xs font-semibold" style={{ color: "#C62828" }}>
-            See all
-          </Link>
+      {/* ── BRANDS ── */}
+      <section className="px-5 mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-sm font-bold text-white">Popular Brands</h2>
         </div>
-        <div className="grid grid-cols-2 gap-3 px-4">
-          {BUDGETS.map((b) => (
+        <div className="grid grid-cols-4 gap-3">
+          {POPULAR_BRANDS.map((brand) => (
             <Link
-              key={b.range}
-              href={`/showroom?price=${b.range}`}
-              className="rounded-xl p-4 flex items-center gap-3 active:scale-95 transition-transform shadow-sm border border-gray-100"
-              style={{ background: b.bg }}
+              key={brand.name}
+              href={`/showroom?q=${brand.name}`}
+              className="flex flex-col items-center gap-2 rounded-xl p-3 border transition-all active:scale-95 hover:border-blue-500/30"
+              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.06)" }}
             >
               <div
-                className="h-9 w-9 rounded-lg flex items-center justify-center shrink-0"
-                style={{ background: b.accent }}
+                className="h-10 w-10 rounded-full flex items-center justify-center"
+                style={{ background: "rgba(17,82,212,0.15)", border: "1px solid rgba(17,82,212,0.3)" }}
               >
-                <MaterialIcon name="currency_rupee" className="text-[18px] text-white" />
+                <span className="text-sm font-black" style={{ color: "#137fec" }}>{brand.initial}</span>
               </div>
-              <span className="text-xs font-bold text-gray-800 leading-snug">{b.label}</span>
+              <span className="text-[10px] font-semibold text-slate-400">{brand.name}</span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ── DIVIDER ── */}
-      <div className="h-2 bg-gray-200" />
+      {/* ── BUDGET ── */}
+      <section className="px-5 mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-sm font-bold text-white">Shop by Budget</h2>
+          <Link href="/showroom" className="text-xs font-semibold" style={{ color: "#1152d4" }}>See all</Link>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {BUDGETS.map((b) => (
+            <Link
+              key={b.value}
+              href={`/showroom?price=${b.value}`}
+              className="flex items-center gap-3 rounded-xl p-4 border transition-all active:scale-95 hover:border-blue-500/30"
+              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.06)" }}
+            >
+              <div
+                className="flex h-9 w-9 items-center justify-center rounded-lg shrink-0"
+                style={{ background: "rgba(17,82,212,0.15)" }}
+              >
+                <MaterialIcon name="currency_rupee" className="text-[18px]" style={{ color: "#1152d4" }} />
+              </div>
+              <span className="text-xs font-bold text-slate-200">{b.label}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
-      {/* ── AI CONCIERGE BANNER ── */}
-      <section className="px-4 py-4 bg-white">
+      {/* ── AI CONCIERGE ── */}
+      <section className="px-5 mb-6">
         <Link
           href="/concierge"
-          className="flex items-center gap-4 rounded-xl p-4 border border-blue-100 shadow-sm active:scale-[0.99] transition-transform"
-          style={{ background: "linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)" }}
+          className="flex items-start gap-4 rounded-2xl p-5 border transition-all active:scale-[0.99]"
+          style={{
+            background: "linear-gradient(135deg, rgba(17,82,212,0.12) 0%, rgba(19,127,236,0.06) 100%)",
+            borderColor: "rgba(17,82,212,0.25)",
+          }}
         >
-          <div className="h-12 w-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: "#1565C0" }}>
-            <MaterialIcon name="smart_toy" className="text-[26px] text-white" />
+          <div
+            className="flex h-12 w-12 items-center justify-center rounded-xl shrink-0"
+            style={{ background: "rgba(17,82,212,0.2)" }}
+          >
+            <MaterialIcon name="smart_toy" className="text-[26px]" style={{ color: "#1152d4" }} />
           </div>
           <div className="flex-1">
-            <p className="text-sm font-bold text-gray-900">AI Car Concierge</p>
-            <p className="text-xs text-gray-600 mt-0.5 leading-relaxed">
-              Tell us your budget & city — AI finds your best match
+            <h3 className="text-sm font-bold text-white mb-1">AI Car Concierge</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Tell us your budget, city &amp; needs — AI finds your perfect match instantly.
             </p>
+            <div className="flex items-center gap-1 mt-3 text-sm font-semibold" style={{ color: "#1152d4" }}>
+              <span>Chat now</span>
+              <MaterialIcon name="arrow_forward" className="text-[15px]" />
+            </div>
           </div>
-          <MaterialIcon name="chevron_right" className="text-[22px] text-blue-600 shrink-0" />
         </Link>
       </section>
 
-      {/* ── DIVIDER ── */}
-      <div className="h-2 bg-gray-200" />
-
-      {/* ── SELL / DEALER CTA ── */}
-      <section className="bg-white px-4 py-4">
-        <h2 className="text-base font-bold text-gray-900 mb-3">Are You a Dealer?</h2>
-        <div className="grid grid-cols-2 gap-3">
-          <Link
-            href="/login/dealer"
-            className="flex flex-col items-center gap-2 rounded-xl p-4 shadow-sm border border-gray-100 active:scale-95 transition-transform"
-            style={{ background: "#FFF3E0" }}
-          >
-            <div className="h-10 w-10 rounded-lg flex items-center justify-center" style={{ background: "#E65100" }}>
-              <MaterialIcon name="storefront" className="text-[22px] text-white" />
+      {/* ── DEALER / SELL CTA ── */}
+      <section className="px-5 mb-6">
+        <div
+          className="rounded-2xl p-5 border"
+          style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.07)" }}
+        >
+          <div className="flex items-start gap-4 mb-5">
+            <div
+              className="flex h-12 w-12 items-center justify-center rounded-xl shrink-0"
+              style={{ background: "rgba(16,185,129,0.1)" }}
+            >
+              <MaterialIcon name="sell" className="text-[26px] text-emerald-400" />
             </div>
-            <span className="text-xs font-bold text-gray-800 text-center">Dealer Portal</span>
-            <span className="text-[10px] text-gray-500 text-center">Manage inventory & leads</span>
-          </Link>
-          <Link
-            href="/login/buyer"
-            className="flex flex-col items-center gap-2 rounded-xl p-4 shadow-sm border border-gray-100 active:scale-95 transition-transform"
-            style={{ background: "#E8F5E9" }}
-          >
-            <div className="h-10 w-10 rounded-lg flex items-center justify-center" style={{ background: "#2E7D32" }}>
-              <MaterialIcon name="sell" className="text-[22px] text-white" />
+            <div>
+              <h3 className="text-sm font-bold text-white mb-1">Sell Your Car</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Free listing, AI-enhanced photos, instant valuation &amp; thousands of buyers.
+              </p>
             </div>
-            <span className="text-xs font-bold text-gray-800 text-center">Sell Your Car</span>
-            <span className="text-[10px] text-gray-500 text-center">Free listing, AI photos</span>
-          </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <Link
+              href="/login/dealer"
+              className="flex items-center justify-center gap-2 h-11 rounded-xl text-white font-bold text-sm transition-all active:scale-95"
+              style={{ background: "#1152d4" }}
+            >
+              <MaterialIcon name="storefront" className="text-[18px]" />
+              Dealer
+            </Link>
+            <Link
+              href="/login/buyer"
+              className="flex items-center justify-center gap-2 h-11 rounded-xl font-bold text-sm transition-all active:scale-95 border"
+              style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)", color: "#e2e8f0" }}
+            >
+              <MaterialIcon name="person" className="text-[18px]" />
+              Seller
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* ── DIVIDER ── */}
-      <div className="h-2 bg-gray-200" />
-
       {/* ── FOOTER ── */}
-      <footer className="bg-white px-4 py-6 text-center">
+      <footer className="px-5 pb-6 text-center">
         <div className="flex items-center justify-center gap-2 mb-3">
-          <MaterialIcon name="token" className="text-[18px]" style={{ color: "#C62828" }} />
-          <span className="text-sm font-bold text-gray-700">Autovinci</span>
+          <MaterialIcon name="token" className="text-[18px]" style={{ color: "rgba(17,82,212,0.6)" }} />
+          <span className="text-sm font-bold text-slate-500">Autovinci</span>
         </div>
         <div className="flex justify-center gap-4 mb-3">
-          {[
-            { label: "Privacy", href: "/privacy" },
-            { label: "Terms", href: "/terms" },
-            { label: "Dealer Login", href: "/login/dealer" },
-          ].map((l) => (
-            <Link key={l.href} href={l.href} className="text-xs text-gray-500 hover:text-gray-800 transition-colors">
-              {l.label}
-            </Link>
+          {[{ label: "Privacy", href: "/privacy" }, { label: "Terms", href: "/terms" }, { label: "Dealer Portal", href: "/dashboard" }].map((l) => (
+            <Link key={l.href} href={l.href} className="text-xs text-slate-600 hover:text-slate-400 transition-colors">{l.label}</Link>
           ))}
         </div>
-        <p className="text-[10px] text-gray-400">
+        <p className="text-[10px] text-slate-700">
           © 2026 Autovinci Technologies Pvt. Ltd. · Bengaluru, India
         </p>
       </footer>
@@ -359,39 +395,48 @@ function CarCard({ vehicle }: { vehicle: ReturnType<typeof adaptVehicle> }) {
   return (
     <Link
       href={`/vehicle/${vehicle.id}`}
-      className="block rounded-xl overflow-hidden border border-gray-100 bg-white shadow-sm transition-all active:scale-[0.98] hover:shadow-md"
+      className="block rounded-xl overflow-hidden transition-all active:scale-[0.98]"
+      style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+      <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={vehicle.image}
           alt={vehicle.name}
           fill
-          sizes="200px"
+          sizes="220px"
           className="object-cover"
           placeholder="blur"
           blurDataURL={BLUR_DATA_URL}
         />
+        <div className="absolute inset-x-0 bottom-0 h-1/2" style={{ background: "linear-gradient(to top, rgba(10,12,16,0.9) 0%, transparent 100%)" }} />
         {vehicle.aiTag && (
-          <div className="absolute top-2 left-2 flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-bold text-white" style={{ background: "#C62828" }}>
-            <MaterialIcon name="verified" className="text-[10px]" />
+          <div
+            className="absolute top-2.5 left-2.5 flex items-center gap-1 rounded-full px-2.5 py-1 text-[9px] font-bold text-white"
+            style={{ background: "rgba(17,82,212,0.85)", backdropFilter: "blur(8px)", border: "1px solid rgba(17,82,212,0.4)" }}
+          >
+            <MaterialIcon name="auto_awesome" className="text-[10px]" />
             AI Verified
           </div>
         )}
         {vehicle.badge && (
-          <div className="absolute top-2 right-2 rounded-full bg-emerald-500 px-2 py-0.5 text-[9px] font-bold text-white">
+          <div className="absolute top-2.5 right-2.5 rounded-full px-2.5 py-1 text-[9px] font-bold text-white" style={{ background: "rgba(16,185,129,0.85)", backdropFilter: "blur(8px)" }}>
             {vehicle.badge}
           </div>
         )}
       </div>
       <div className="p-3">
-        <h3 className="text-sm font-bold text-gray-900 truncate">{vehicle.name}</h3>
-        <p className="text-[10px] text-gray-500 mt-0.5 truncate">
+        <p className="text-[10px] font-semibold uppercase tracking-wider mb-1 text-slate-500">
           {vehicle.year} · {vehicle.km} km · {vehicle.fuel}
         </p>
-        <p className="text-sm font-black mt-1.5" style={{ color: "#C62828" }}>
-          {vehicle.price}
-        </p>
-        <p className="text-[10px] text-gray-400 mt-0.5">
+        <h3 className="text-sm font-bold text-white truncate">{vehicle.name}</h3>
+        <div className="flex items-center justify-between mt-2">
+          <span className="text-sm font-bold text-white">{vehicle.price}</span>
+          <span className="flex items-center gap-0.5 text-[10px] text-emerald-400 font-semibold">
+            <MaterialIcon name="verified" className="text-[11px]" />
+            {vehicle.aiScore}
+          </span>
+        </div>
+        <p className="text-[10px] text-slate-500 mt-1.5 truncate">
           <MaterialIcon name="location_on" className="text-[11px] align-text-bottom" /> {vehicle.location}
         </p>
       </div>
