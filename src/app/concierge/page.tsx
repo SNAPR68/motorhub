@@ -148,12 +148,8 @@ export default function ConciergePage() {
             {msg.vehicles && msg.vehicles.length > 0 && (
               <div className="mt-3 space-y-3">
                 {msg.vehicles.map((car) => (
-                  <Link
-                    key={car.id}
-                    href={`/vehicle/${car.id}`}
-                    className="block"
-                  >
-                    <div className="flex flex-col rounded-xl overflow-hidden bg-slate-800/50 border border-slate-700 shadow-xl">
+                  <div key={car.id} className="flex flex-col rounded-xl overflow-hidden bg-slate-800/50 border border-slate-700 shadow-xl">
+                    <Link href={`/vehicle/${car.id}`} className="block flex-1">
                       {car.image && (
                         <div className="relative aspect-[16/9] w-full overflow-hidden">
                           <Image
@@ -193,8 +189,14 @@ export default function ConciergePage() {
                           />
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                    <Link
+                      href={`/concierge/dossier?vehicleId=${car.id}`}
+                      className="mx-4 mb-4 py-2 rounded-lg border border-slate-600 text-slate-300 text-xs font-bold uppercase tracking-wider text-center hover:bg-slate-700/50 transition-colors"
+                    >
+                      View Dossier
+                    </Link>
+                  </div>
                 ))}
               </div>
             )}

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchVehicles, fetchDashboard, adaptVehicle } from "@/lib/api";
+import { fetchVehicles, fetchDashboard, fetchDealerProfile, adaptVehicle } from "@/lib/api";
 
 /* Stitch: dealer_executive_dashboard_1
    Tokens: primary=#2badee, font=Inter, bg=#0a1114
@@ -16,12 +16,23 @@ const QUICK_ACTIONS = [
   { icon: "mail", label: "Messages", href: "/leads" },
   { icon: "calendar_today", label: "Schedule", href: "/appointments" },
   { icon: "campaign", label: "Market", href: "/marketing" },
+  { icon: "insights", label: "Intelligence", href: "/intelligence" },
+  { icon: "bar_chart", label: "Analytics", href: "/analytics" },
+  { icon: "share", label: "Social Hub", href: "/social-hub" },
 ];
 
 export default function Dashboard() {
   const { data } = useApi(() => fetchVehicles({ limit: 3 }), []);
   const { data: dashData } = useApi(() => fetchDashboard(), []);
+  const { data: profileData } = useApi(() => fetchDealerProfile(), []);
   const RECENT_LISTINGS = (data?.vehicles ?? []).map(adaptVehicle);
+
+  const dealerName = (profileData?.user as Record<string, unknown>)?.name as string | undefined;
+  const dealershipName = (profileData?.profile as Record<string, unknown>)?.dealershipName as string | undefined;
+  const logoUrl = (profileData?.user as Record<string, unknown>)?.avatar as string | undefined;
+  const initials = dealerName
+    ? dealerName.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
+    : "DL";
 
   const stats = (dashData?.stats ?? {}) as Record<string, unknown>;
   const portfolioValue = typeof stats.revenue === "string" ? stats.revenue : "₹0";
@@ -41,15 +52,19 @@ export default function Dashboard() {
       {/* Header */}
       <header className="pt-12 px-6 pb-4 flex items-center justify-between sticky top-0 bg-[#0a1114]/80 backdrop-blur-md z-30">
         <div className="flex items-center gap-3">
-          <div
-            className="size-10 rounded-full border border-[#C0C0C0]/30 bg-cover bg-center overflow-hidden bg-slate-700"
-          />
+          <div className="size-10 rounded-full border border-[#C0C0C0]/30 overflow-hidden bg-slate-700 flex items-center justify-center shrink-0">
+            {logoUrl ? (
+              <Image src={logoUrl} alt={dealerName ?? "Dealer"} width={40} height={40} className="object-cover w-full h-full" />
+            ) : (
+              <span className="text-[13px] font-bold text-slate-300">{initials}</span>
+            )}
+          </div>
           <div>
             <p className="text-[10px] uppercase tracking-[0.2em] text-[#C0C0C0]/60 font-semibold">
-              Principal Dealer
+              {dealershipName ?? "Principal Dealer"}
             </p>
             <h1 className="text-lg font-bold leading-tight text-slate-100">
-              Alex Sterling
+              {dealerName ?? "Welcome back"}
             </h1>
           </div>
         </div>
@@ -185,7 +200,7 @@ export default function Dashboard() {
           <h3 className="text-[10px] text-[#C0C0C0]/50 font-bold tracking-widest uppercase mb-4">
             Quick Actions
           </h3>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-4 gap-3">
             {QUICK_ACTIONS.map((action) => (
               <Link href={action.href} key={action.label} className="flex flex-col items-center gap-2">
                 <div className="size-14 rounded-xl glass-panel flex items-center justify-center text-[#C0C0C0] hover:text-[#2badee] hover:border-[#2badee]/50 transition-colors">
@@ -227,7 +242,7 @@ export default function Dashboard() {
           <MaterialIcon name="settings_slow_motion" className="text-[24px]" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">AI Tasks</span>
         </Link>
-        <Link href="/login/dealer" className="flex flex-col items-center gap-1 text-[#C0C0C0]/40 hover:text-[#C0C0C0] transition-colors">
+        <Link href="/settings" className="flex flex-col items-center gap-1 text-[#C0C0C0]/40 hover:text-[#C0C0C0] transition-colors">
           <MaterialIcon name="person" className="text-[24px]" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Account</span>
         </Link>

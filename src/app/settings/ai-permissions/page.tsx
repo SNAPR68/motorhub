@@ -41,7 +41,7 @@ export default function AIPermissionsPage() {
       {/* Header */}
       <header className="px-6 pt-12 pb-4">
         <div className="flex items-center justify-between mb-6">
-          <Link href="/onboarding/social" className="p-2 rounded-full hover:bg-white/5">
+          <Link href="/settings" className="p-2 rounded-full hover:bg-white/5">
             <MaterialIcon name="arrow_back" className="text-slate-400" />
           </Link>
           <div className="flex gap-1.5">

@@ -1,19 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchVehicles, adaptVehicle } from "@/lib/api";
+import { fetchVehicle, fetchVehicles, adaptVehicle } from "@/lib/api";
+import type { DbVehicle } from "@/lib/api";
 
 /* Stitch: secure_luxury_reservation — #f4c025, Manrope + Playfair Display, #0a0a0a */
 
-export default function ReservationPage() {
+function ReservationContent() {
+  const searchParams = useSearchParams();
+  const vehicleId = searchParams.get("vehicleId");
   const [refundable, setRefundable] = useState(true);
-  const { data } = useApi(() => fetchVehicles({ limit: 1 }), []);
-  const vehicle = data?.vehicles?.[0] ? adaptVehicle(data.vehicles[0]) : null;
+
+  const fetcher = () =>
+    vehicleId ? fetchVehicle(vehicleId) : fetchVehicles({ limit: 1 }).then((r) => ({ vehicle: r.vehicles[0] ?? null }));
+  const { data } = useApi(fetcher, [vehicleId ?? ""]);
+  const rawVehicle = (data as { vehicle?: DbVehicle })?.vehicle;
+  const vehicle = rawVehicle ? adaptVehicle(rawVehicle) : null;
 
   if (!vehicle) {
     return (
@@ -242,14 +250,24 @@ export default function ReservationPage() {
             By clicking confirm, you agree to our{" "}
             <span className="text-[#f4c025] underline">Terms of Reservation</span>
           </p>
-          <button className="w-full h-14 bg-slate-900 border border-[#2a2a2a] text-white rounded-xl font-bold tracking-[0.1em] uppercase flex items-center justify-center gap-2 group hover:bg-black transition-all"
+          <Link
+            href={vehicle ? `/reservation/commit?vehicleId=${vehicle.id}` : "/reservation/commit"}
+            className="w-full h-14 bg-slate-900 border border-[#2a2a2a] text-white rounded-xl font-bold tracking-[0.1em] uppercase flex items-center justify-center gap-2 group hover:bg-black transition-all"
             style={{ boxShadow: "0 0 15px rgba(244,192,37,0.15)" }}
           >
             Confirm Reservation
             <MaterialIcon name="arrow_forward" className="group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ReservationPage() {
+  return (
+    <Suspense fallback={<div className="min-h-dvh flex items-center justify-center bg-[#0a0a0a] text-white"><div className="w-8 h-8 rounded-full border-2 border-[#f4c025] border-t-transparent animate-spin" /></div>}>
+      <ReservationContent />
+    </Suspense>
   );
 }

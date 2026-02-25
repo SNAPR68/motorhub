@@ -9,7 +9,7 @@ import { BottomSheet } from "@/components/ui/BottomSheet";
 import { STATUS_DISPLAY, INVENTORY_FILTERS, SORT_OPTIONS } from "@/lib/constants";
 import { useApi } from "@/lib/hooks/use-api";
 import { useApiMutation } from "@/lib/hooks/use-api-mutation";
-import { fetchVehicles, adaptVehicle } from "@/lib/api";
+import { fetchVehicles, adaptVehicle, setPanoramaImage } from "@/lib/api";
 import type { Vehicle } from "@/lib/types";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 import { SkeletonCard } from "@/components/ui/Skeleton";
@@ -37,6 +37,7 @@ const INITIAL_VEHICLE = {
   location: "",
   owner: "1st",
   images: [] as string[],
+  panoramaImageIdx: null as number | null,
 };
 
 export default function InventoryPage() {
@@ -60,10 +61,16 @@ export default function InventoryPage() {
           price: Number(vehicle.price),
           mileage: vehicle.mileage || "N/A",
           images: vehicle.images,
+          panoramaImageIdx: vehicle.panoramaImageIdx,
         }),
       });
       if (!res.ok) throw new Error(await res.text());
-      return res.json();
+      const data = await res.json();
+      // If a panoramic image was selected, persist it via the dedicated PATCH route
+      if (vehicle.panoramaImageIdx !== null && data.vehicle?.id) {
+        await setPanoramaImage(data.vehicle.id, vehicle.panoramaImageIdx).catch(() => {});
+      }
+      return data;
     },
     successMessage: "Vehicle added to inventory",
     errorMessage: "Failed to add vehicle",
@@ -355,6 +362,8 @@ export default function InventoryPage() {
               images={newVehicle.images}
               onChange={(imgs) => setNewVehicle(v => ({ ...v, images: imgs }))}
               max={10}
+              panoramaImageIdx={newVehicle.panoramaImageIdx}
+              onPanoramaChange={(idx) => setNewVehicle(v => ({ ...v, panoramaImageIdx: idx }))}
             />
           </div>
           <div className="flex gap-3 pt-2">
@@ -405,6 +414,19 @@ function InventoryCard({ vehicle }: { vehicle: Vehicle }) {
           )}
         </div>
 
+        {/* 360° Tour badge — shown when a panoramic image is marked */}
+        {vehicle.panoramaImageIdx !== null && (
+          <Link
+            href={`/virtual-tour/${vehicle.id}`}
+            onClick={(e) => e.stopPropagation()}
+            className="absolute bottom-20 right-4 z-10 flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider text-white transition-transform active:scale-95"
+            style={{ background: "rgba(19,127,236,0.88)", backdropFilter: "blur(8px)", border: "1px solid rgba(19,127,236,0.6)" }}
+          >
+            <MaterialIcon name="360" className="text-[14px]" />
+            Tour
+          </Link>
+        )}
+
         {/* Compare toggle */}
         <button
           type="button"
@@ -443,14 +465,14 @@ function InventoryCard({ vehicle }: { vehicle: Vehicle }) {
                 {vehicle.km} km &bull; {vehicle.fuel}
               </span>
             </div>
-            <button
-              type="button"
-              onClick={(e) => e.preventDefault()}
+            <Link
+              href={`/content-studio?vehicleId=${vehicle.id}`}
+              onClick={(e) => e.stopPropagation()}
               className="flex items-center justify-center gap-2 glass-panel border border-[#137fec]/40 bg-[#137fec]/10 px-5 py-2.5 rounded-xl hover:bg-[#137fec]/20 transition-all active:scale-95"
             >
               <MaterialIcon name="auto_fix_high" className="text-[20px] text-[#137fec]" />
               <span className="text-white text-xs font-bold tracking-wider uppercase">AI Studio</span>
-            </button>
+            </Link>
           </div>
         </div>
       </Link>

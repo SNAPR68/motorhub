@@ -148,14 +148,31 @@ export default function LeadProfilePage({
                   {lead.email}
                 </p>
               )}
-              <div className="flex gap-2 mt-3">
-                <button
-                  className="flex-1 text-white font-semibold py-2 rounded-lg text-sm flex items-center justify-center gap-2"
+              <div className="flex flex-wrap gap-2 mt-3">
+                <Link
+                  href={(() => {
+                    const params = new URLSearchParams({
+                      leadId: id,
+                      buyer: lead.buyerName,
+                      message: (timeline.find((m) => m.role === "USER")?.text ?? lead.message ?? "Inquiry") as string,
+                      vehicle: lead.vehicle?.name ?? "Vehicle",
+                      price: lead.vehicle?.priceDisplay ?? "",
+                      phone: lead.phone ?? "",
+                    });
+                    return `/smart-reply?${params.toString()}`;
+                  })()}
+                  className="flex-1 min-w-[100px] text-white font-semibold py-2 rounded-lg text-sm flex items-center justify-center gap-2"
                   style={{ background: "#137fec" }}
+                >
+                  <MaterialIcon name="smart_toy" className="text-sm" /> AI Reply
+                </Link>
+                <button
+                  className="flex-1 min-w-[80px] text-white font-semibold py-2 rounded-lg text-sm flex items-center justify-center gap-2"
+                  style={{ background: "#25D366" }}
                 >
                   <MaterialIcon name="call" className="text-sm" /> Call
                 </button>
-                <button className="flex-1 bg-slate-100 font-semibold py-2 rounded-lg text-sm flex items-center justify-center gap-2 border border-slate-200">
+                <button className="flex-1 min-w-[80px] bg-slate-100 font-semibold py-2 rounded-lg text-sm flex items-center justify-center gap-2 border border-slate-200">
                   <MaterialIcon name="mail" className="text-sm" /> Email
                 </button>
               </div>

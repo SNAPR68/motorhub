@@ -2,8 +2,12 @@
 
 import { Suspense, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchVehicles, adaptVehicle } from "@/lib/api";
+import { BLUR_DATA_URL } from "@/lib/car-images";
 
 const INTENTS = [
   { icon: "check_circle", label: "Availability" },
@@ -15,11 +19,21 @@ const INTENTS = [
 
 function QuickDraftContent() {
   const searchParams = useSearchParams();
+  const [vehicleName, setVehicleName] = useState(searchParams.get("vehicle") ?? "2023 Hyundai Creta SX(O)");
+  const [vehiclePrice, setVehiclePrice] = useState(searchParams.get("price") ?? "₹14.5L");
   const buyerName = searchParams.get("buyer") ?? "Priya Sharma";
-  const vehicleName = searchParams.get("vehicle") ?? "2023 Hyundai Creta SX(O)";
-  const vehiclePrice = searchParams.get("price") ?? "₹14.5L";
   const buyerMessage = searchParams.get("message") ?? "Is this still available? I'm looking to trade in my 2020 Swift. Does the price include the tech package?";
   const leadId = searchParams.get("leadId") ?? "";
+
+  const { data: vehiclesData } = useApi(() => fetchVehicles({ limit: 20, status: "AVAILABLE" }), []);
+  const vehicles = (vehiclesData?.vehicles ?? []).map(adaptVehicle);
+
+  useEffect(() => {
+    const v = searchParams.get("vehicle");
+    const p = searchParams.get("price");
+    if (v) setVehicleName(v);
+    if (p) setVehiclePrice(p);
+  }, [searchParams]);
 
   const [selectedIntent, setSelectedIntent] = useState(0);
   const [tone, setTone] = useState(50);
@@ -101,8 +115,34 @@ function QuickDraftContent() {
         </button>
       </header>
 
-      {/* Chat Context */}
+      {/* Vehicle picker / Context */}
       <section className="p-4" style={{ background: "rgba(241,245,249,0.5)" }}>
+        <details className="mb-3">
+          <summary className="text-xs font-bold text-slate-500 uppercase tracking-wider cursor-pointer flex items-center gap-2 mb-2">
+            <MaterialIcon name="directions_car" className="text-sm" /> Select vehicle from inventory
+          </summary>
+          <div className="mt-2 max-h-40 overflow-y-auto space-y-2">
+            {vehicles.length === 0 && <p className="text-xs text-slate-400">Loading...</p>}
+            {vehicles.map((v) => (
+              <button
+                key={v.id}
+                onClick={() => {
+                  setVehicleName(`${v.year} ${v.name}`);
+                  setVehiclePrice(v.price);
+                }}
+                className="w-full flex items-center gap-3 p-2 rounded-lg bg-white border border-slate-200 text-left hover:border-[#137fec]/50 transition-colors"
+              >
+                <div className="relative w-12 h-9 rounded overflow-hidden shrink-0 bg-slate-100">
+                  <Image src={v.image} alt="" fill className="object-cover" sizes="48px" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-semibold text-slate-900 truncate">{v.year} {v.name}</p>
+                  <p className="text-xs font-bold text-[#137fec]">{v.price}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </details>
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "rgba(19,127,236,0.1)" }}>
             <MaterialIcon name="person" style={{ color: "#137fec" }} />

@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchDealerProfile, fetchDashboard } from "@/lib/api";
 
 /* ── design tokens: ai_enhancements_&_billing ── */
 // primary: #1754cf, font: Manrope, bg: #111621, card: #1a2232, border: #243047
@@ -37,6 +39,29 @@ const ADDONS = [
 ];
 
 export default function BillingPage() {
+  const { data: profileData } = useApi(() => fetchDealerProfile(), []);
+  const { data: dashData } = useApi(() => fetchDashboard(), []);
+
+  const profile = profileData?.profile as Record<string, unknown> | undefined;
+  const stats = dashData?.stats as Record<string, unknown> | undefined;
+  const totalVehicles = (stats?.totalVehicles as number) ?? 0;
+
+  // Subscription info from profile
+  const subscriptions = (profile?.subscriptions as Array<Record<string, unknown>> | undefined) ?? [];
+  const activeSub = subscriptions[0];
+  const planTier = activeSub?.plan
+    ? String(activeSub.plan).replace(/_/g, " ")
+    : "Pro Dealer Tier";
+  const nextBilling = activeSub?.currentPeriodEnd
+    ? new Date(activeSub.currentPeriodEnd as string).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
+    : "Mar 15, 2026";
+  const billingCycle = activeSub?.interval ? String(activeSub.interval) : "Annual";
+
+  // Slot usage from total vehicles
+  const slotLimit = 20;
+  const slotUsed = Math.min(totalVehicles, slotLimit);
+  const slotPct = Math.round((slotUsed / slotLimit) * 100);
+
   return (
     <div
       className="min-h-screen max-w-md mx-auto flex flex-col pb-24"
@@ -83,14 +108,14 @@ export default function BillingPage() {
                 <p className="text-xs font-bold mb-1 tracking-wide" style={{ color: "#1754cf" }}>
                   ACTIVE
                 </p>
-                <h3 className="text-xl font-extrabold text-white">Pro Dealer Tier</h3>
-                <p className="text-sm mt-1 text-slate-400">Next billing: Mar 15, 2026</p>
+                <h3 className="text-xl font-extrabold text-white capitalize">{planTier}</h3>
+                <p className="text-sm mt-1 text-slate-400">Next billing: {nextBilling}</p>
               </div>
               <div
-                className="px-3 py-1 rounded-full text-xs font-bold"
+                className="px-3 py-1 rounded-full text-xs font-bold capitalize"
                 style={{ background: "rgba(23,84,207,0.1)", color: "#1754cf" }}
               >
-                Annual
+                {billingCycle}
               </div>
             </div>
 
@@ -98,7 +123,7 @@ export default function BillingPage() {
               <div>
                 <div className="flex justify-between text-sm mb-2">
                   <span className="text-slate-300">360&deg; Rendering Slots</span>
-                  <span className="font-bold text-white">16 / 20</span>
+                  <span className="font-bold text-white">{slotUsed} / {slotLimit}</span>
                 </div>
                 <div
                   className="w-full h-2 rounded-full overflow-hidden"
@@ -106,10 +131,10 @@ export default function BillingPage() {
                 >
                   <div
                     className="h-full rounded-full"
-                    style={{ width: "80%", background: "#1754cf" }}
+                    style={{ width: `${slotPct}%`, background: "#1754cf" }}
                   />
                 </div>
-                <p className="text-[10px] text-slate-500 mt-2 italic">80% capacity reached</p>
+                <p className="text-[10px] text-slate-500 mt-2 italic">{slotPct}% capacity reached</p>
               </div>
             </div>
 

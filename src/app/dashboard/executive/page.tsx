@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchDealerProfile } from "@/lib/api";
 
 /* Stitch: dealer_executive_dashboard_2 — #7311d4, Plus Jakarta Sans, #101622 */
 
@@ -25,6 +27,12 @@ const QUICK_ACTIONS = [
 ];
 
 export default function DashboardExecutivePage() {
+  const { data: profileData } = useApi(() => fetchDealerProfile(), []);
+  const dealerName = (profileData?.user as Record<string, unknown>)?.name as string | undefined;
+  const initials = dealerName
+    ? dealerName.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
+    : "AV";
+
   return (
     <div
       className="min-h-dvh w-full flex flex-col max-w-md mx-auto text-slate-100 pb-24"
@@ -34,10 +42,10 @@ export default function DashboardExecutivePage() {
       <header className="sticky top-0 z-30 px-4 py-4 flex items-center justify-between border-b"
         style={{ background: "rgba(16,22,34,0.8)", backdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.05)" }}>
         <div className="flex items-center gap-3">
-          <div className="size-10 rounded-full bg-[#7311d4]/20 border border-[#7311d4]/30 flex items-center justify-center text-[#7311d4] font-bold text-sm">AV</div>
+          <div className="size-10 rounded-full bg-[#7311d4]/20 border border-[#7311d4]/30 flex items-center justify-center text-[#7311d4] font-bold text-sm">{initials}</div>
           <div>
             <p className="text-[10px] uppercase tracking-widest text-slate-500">Good Morning</p>
-            <h1 className="text-lg font-bold">Alex Sterling</h1>
+            <h1 className="text-lg font-bold">{dealerName ?? "Welcome back"}</h1>
           </div>
         </div>
         <button className="size-10 rounded-full bg-white/5 flex items-center justify-center relative">

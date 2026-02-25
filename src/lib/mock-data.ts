@@ -56,6 +56,7 @@ export const VEHICLES: Vehicle[] = [
       { key: "airPurifier", label: "Air Purifier", available: false },
     ],
     gallery: [CRETA, INTERIOR],
+    panoramaImageIdx: null,
   },
   {
     id: "swift-zxi-2023",
@@ -87,6 +88,7 @@ export const VEHICLES: Vehicle[] = [
       { key: "airPurifier", label: "Air Purifier", available: false },
     ],
     gallery: [SWIFT, INTERIOR],
+    panoramaImageIdx: null,
   },
   {
     id: "nexon-xza-2022",
@@ -118,6 +120,7 @@ export const VEHICLES: Vehicle[] = [
       { key: "airPurifier", label: "Air Purifier", available: true },
     ],
     gallery: [NEXON, INTERIOR],
+    panoramaImageIdx: null,
   },
   {
     id: "xuv700-ax7l-2023",
@@ -149,6 +152,7 @@ export const VEHICLES: Vehicle[] = [
       { key: "airPurifier", label: "Air Purifier", available: true },
     ],
     gallery: [XUV700, INTERIOR],
+    panoramaImageIdx: null,
   },
   {
     id: "fortuner-legender-2021",
@@ -180,6 +184,7 @@ export const VEHICLES: Vehicle[] = [
       { key: "airPurifier", label: "Air Purifier", available: false },
     ],
     gallery: [FORTUNER, INTERIOR],
+    panoramaImageIdx: null,
   },
   {
     id: "honda-city-2023",
@@ -211,6 +216,7 @@ export const VEHICLES: Vehicle[] = [
       { key: "airPurifier", label: "Air Purifier", available: false },
     ],
     gallery: [SEDAN, INTERIOR],
+    panoramaImageIdx: null,
   },
   {
     id: "kia-seltos-2024",
@@ -242,6 +248,7 @@ export const VEHICLES: Vehicle[] = [
       { key: "airPurifier", label: "Air Purifier", available: true },
     ],
     gallery: [KIA, INTERIOR],
+    panoramaImageIdx: null,
   },
   {
     id: "nexon-ev-2023",
@@ -273,6 +280,7 @@ export const VEHICLES: Vehicle[] = [
       { key: "airPurifier", label: "Air Purifier", available: true },
     ],
     gallery: [NEXON_EV, INTERIOR],
+    panoramaImageIdx: null,
   },
   {
     id: "brezza-zxi-2022",
@@ -304,6 +312,7 @@ export const VEHICLES: Vehicle[] = [
       { key: "airPurifier", label: "Air Purifier", available: false },
     ],
     gallery: [BREZZA, INTERIOR],
+    panoramaImageIdx: null,
   },
 ];
 

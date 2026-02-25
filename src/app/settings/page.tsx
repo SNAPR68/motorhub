@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchDealerProfile } from "@/lib/api";
 
 /* ── design tokens: settings hub (matches billing stitch tokens) ── */
 // primary: #1754cf, font: Manrope, bg: #111621, card: #1a2232, border: #243047
@@ -10,6 +12,7 @@ const SECTIONS = [
   {
     title: "AI & Automation",
     items: [
+      { icon: "shield", label: "AI Permissions", desc: "Smart posting, media sync, engagement toggles", href: "/settings/ai-permissions" },
       { icon: "auto_awesome", label: "AI Automation Settings", desc: "Auto-enhance, scheduling, smart replies", href: "/settings/automation" },
       { icon: "image", label: "AI Asset & Media", desc: "Resolution, watermark, export format", href: "/settings/assets" },
       { icon: "palette", label: "AI Brand Voice", desc: "Tone, style, and content preferences", href: "/settings/brand-voice" },
@@ -39,6 +42,15 @@ const SECTIONS = [
 ];
 
 export default function SettingsPage() {
+  const { data: profileData } = useApi(() => fetchDealerProfile(), []);
+  const dealerName = (profileData?.user as Record<string, unknown>)?.name as string | undefined;
+  const profile = (profileData?.profile ?? {}) as Record<string, unknown>;
+  const dealershipName = profile.dealershipName as string | undefined;
+  const city = profile.city as string | undefined;
+  const initials = dealerName
+    ? dealerName.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
+    : "DL";
+
   return (
     <div
       className="min-h-screen max-w-md mx-auto flex flex-col pb-24"
@@ -67,11 +79,11 @@ export default function SettingsPage() {
             className="w-14 h-14 rounded-full flex items-center justify-center text-white text-xl font-bold"
             style={{ background: "#1754cf" }}
           >
-            RK
+            {initials}
           </div>
           <div className="flex-1">
-            <h2 className="font-bold text-base text-white">Rohit Kapoor</h2>
-            <p className="text-xs text-slate-400">Malhotra Auto &bull; Delhi NCR</p>
+            <h2 className="font-bold text-base text-white">{dealerName ?? "Dealer"}</h2>
+            <p className="text-xs text-slate-400">{dealershipName ?? "Your Dealership"}{city ? ` \u2022 ${city}` : ""}</p>
             <span
               className="text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block"
               style={{ background: "rgba(23,84,207,0.15)", color: "#1754cf" }}

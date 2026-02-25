@@ -55,6 +55,12 @@ const DAYS = [
 
 export default function AutomationPage() {
   const [toggles, setToggles] = useState(RULES.map((r) => r.enabled));
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = () => {
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
 
   return (
     <div
@@ -78,8 +84,8 @@ export default function AutomationPage() {
           <h1 className="text-lg font-semibold absolute left-1/2 -translate-x-1/2 text-white">
             AI Automation
           </h1>
-          <button className="font-medium" style={{ color: "#137fec" }}>
-            Save
+          <button onClick={handleSave} className="font-medium transition-colors" style={{ color: saved ? "#16a34a" : "#137fec" }}>
+            {saved ? "Saved ✓" : "Save"}
           </button>
         </div>
       </header>

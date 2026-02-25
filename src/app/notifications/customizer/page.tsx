@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CRETA, BLUR_DATA_URL } from "@/lib/car-images";
@@ -18,6 +18,24 @@ export default function NotificationCustomizerPage() {
   const [channel, setChannel] = useState<"whatsapp" | "email">("whatsapp");
   const [selectedVoice, setSelectedVoice] = useState("Sophisticated");
   const [message, setMessage] = useState("Hi {name}, a stunning 2023 Hyundai Creta SX(O) just arrived at our showroom. With only 32,000 km and priced at ₹14.5L, this won't last long. Book your viewing today!");
+  const [enhancing, setEnhancing] = useState(false);
+
+  const handleEnhance = useCallback(async () => {
+    setEnhancing(true);
+    try {
+      const res = await fetch("/api/ai/notification-enhance", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, voice: selectedVoice, channel }),
+      });
+      const data = await res.json();
+      if (data.enhanced) setMessage(data.enhanced);
+    } catch {
+      // Keep original on error
+    } finally {
+      setEnhancing(false);
+    }
+  }, [message, selectedVoice, channel]);
 
   return (
     <div
@@ -31,7 +49,12 @@ export default function NotificationCustomizerPage() {
           <MaterialIcon name="arrow_back" className="text-slate-400" />
         </Link>
         <h1 className="text-sm font-bold uppercase tracking-[0.15em] text-[#f97316]">AI Customizer</h1>
-        <button className="px-4 py-1.5 rounded-full text-xs font-bold bg-[#f97316] text-white">Save</button>
+        <button
+          onClick={() => {}}
+          className="px-4 py-1.5 rounded-full text-xs font-bold bg-[#f97316] text-white hover:opacity-90"
+        >
+          Save
+        </button>
       </header>
 
       <main className="flex-1 overflow-y-auto px-4 pb-8">
@@ -114,9 +137,14 @@ export default function NotificationCustomizerPage() {
             />
             <div className="flex items-center justify-between mt-3 pt-3 border-t" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
               <span className="text-[10px] text-slate-500">{message.length} characters</span>
-              <button className="px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1"
-                style={{ background: "rgba(249,115,22,0.15)", color: "#f97316", border: "1px solid rgba(249,115,22,0.3)" }}>
-                <MaterialIcon name="auto_awesome" className="text-sm" /> Enhance
+              <button
+                onClick={handleEnhance}
+                disabled={enhancing}
+                className="px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1 disabled:opacity-50"
+                style={{ background: "rgba(249,115,22,0.15)", color: "#f97316", border: "1px solid rgba(249,115,22,0.3)" }}
+              >
+                {enhancing ? <MaterialIcon name="hourglass_empty" className="text-sm animate-spin" /> : <MaterialIcon name="auto_awesome" className="text-sm" />}
+                {enhancing ? "Enhancing..." : "Enhance"}
               </button>
             </div>
           </div>

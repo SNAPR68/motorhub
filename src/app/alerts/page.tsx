@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 
@@ -37,6 +37,8 @@ const WA_PREFS = [
   },
 ];
 
+const STORAGE_KEY = "autovinci_alert_prefs";
+
 export default function AlertsPage() {
   const [emailPrefs, setEmailPrefs] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(EMAIL_PREFS.map((p) => [p.key, p.on]))
@@ -45,6 +47,39 @@ export default function AlertsPage() {
     Object.fromEntries(WA_PREFS.map((p) => [p.key, p.on]))
   );
   const [frequency, setFrequency] = useState("daily");
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  // Load saved prefs from localStorage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.emailPrefs) setEmailPrefs(parsed.emailPrefs);
+        if (parsed.waPrefs) setWaPrefs(parsed.waPrefs);
+        if (parsed.frequency) setFrequency(parsed.frequency);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const handleSave = async () => {
+    setSaving(true);
+    // Persist to localStorage
+    const prefs = { emailPrefs, waPrefs, frequency };
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+      // Simulate API call (300ms)
+      await new Promise((r) => setTimeout(r, 300));
+    } catch {
+      // ignore
+    }
+    setSaving(false);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
+  };
 
   return (
     <div
@@ -54,7 +89,7 @@ export default function AlertsPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 flex items-center justify-between bg-[#0a0a0a]/80 backdrop-blur-md px-4 py-4 border-b border-[#2a2a2a]">
         <Link
-          href="/my-cars"
+          href="/leads"
           className="flex items-center justify-center size-10 rounded-full hover:bg-[#161616] transition-colors"
         >
           <MaterialIcon name="arrow_back_ios_new" className="text-slate-400" />
@@ -115,12 +150,8 @@ export default function AlertsPage() {
             <div className="p-4 rounded-2xl bg-[#161616] border border-[#2a2a2a]">
               <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-1">
-                  <span className="text-sm font-semibold">
-                    Delivery Frequency
-                  </span>
-                  <span className="text-xs text-slate-400">
-                    How often should we reach out?
-                  </span>
+                  <span className="text-sm font-semibold">Delivery Frequency</span>
+                  <span className="text-xs text-slate-400">How often should we reach out?</span>
                 </div>
                 <div className="relative">
                   <select
@@ -207,18 +238,14 @@ export default function AlertsPage() {
             <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-[#161616] transition-colors">
               <div className="flex flex-col text-left">
                 <span className="text-sm font-semibold">Quiet Hours</span>
-                <span className="text-xs text-slate-500">
-                  Currently: 22:00 — 07:00
-                </span>
+                <span className="text-xs text-slate-500">Currently: 22:00 — 07:00</span>
               </div>
               <MaterialIcon name="chevron_right" className="text-slate-400" />
             </button>
             <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-[#161616] transition-colors">
               <div className="flex flex-col text-left">
                 <span className="text-sm font-semibold">Timezone</span>
-                <span className="text-xs text-slate-500">
-                  India Standard Time (GMT+5:30)
-                </span>
+                <span className="text-xs text-slate-500">India Standard Time (GMT+5:30)</span>
               </div>
               <MaterialIcon name="chevron_right" className="text-slate-400" />
             </button>
@@ -228,8 +255,32 @@ export default function AlertsPage() {
 
       {/* Bottom Save Button */}
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] p-6 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/95 to-transparent backdrop-blur-sm">
-        <button className="w-full bg-[#dab80b] hover:bg-[#dab80b]/90 text-[#0a0a0a] font-bold py-4 rounded-2xl shadow-lg shadow-[#dab80b]/20 transition-all active:scale-[0.98]">
-          Save Preferences
+        {/* Toast */}
+        {saved && (
+          <div className="mb-3 flex items-center gap-2 bg-[#1a2a0a] border border-green-500/30 text-green-400 text-sm font-semibold px-4 py-3 rounded-xl">
+            <MaterialIcon name="check_circle" className="text-green-400" />
+            Preferences saved successfully!
+          </div>
+        )}
+        <button
+          onClick={handleSave}
+          disabled={saving}
+          className="w-full text-[#0a0a0a] font-bold py-4 rounded-2xl shadow-lg shadow-[#dab80b]/20 transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-2"
+          style={{ background: "#dab80b" }}
+        >
+          {saving ? (
+            <>
+              <MaterialIcon name="sync" className="animate-spin" />
+              Saving…
+            </>
+          ) : saved ? (
+            <>
+              <MaterialIcon name="check_circle" />
+              Saved!
+            </>
+          ) : (
+            "Save Preferences"
+          )}
         </button>
       </div>
     </div>

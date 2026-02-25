@@ -179,6 +179,31 @@ export async function fetchAppointments(status?: string) {
   );
 }
 
+// ── AI Description Generator ──
+
+export async function generateVehicleDescription(vehicleId: string) {
+  return apiFetch<{ description: string; generated: boolean }>(
+    "/api/ai/description",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ vehicleId }),
+    }
+  );
+}
+
+// ── Panorama / Virtual Tour ──
+
+export async function setPanoramaImage(vehicleId: string, panoramaImageIdx: number | null) {
+  return apiFetch<{ vehicle: { id: string; panoramaImageIdx: number | null }; panoramaImageIdx: number | null }>(
+    `/api/vehicles/${vehicleId}/panorama`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({ panoramaImageIdx }),
+    }
+  );
+}
+
 // ── Notifications API ──
 
 export async function fetchNotifications() {
@@ -229,6 +254,7 @@ export interface DbVehicle {
   owner: string;
   badge: string | null;
   aiScore: number | null;
+  panoramaImageIdx: number | null;
   images: string[];
   features: Array<{ key: string; label: string; available: boolean }> | null;
   createdAt: string;
@@ -371,6 +397,7 @@ export function adaptVehicle(v: DbVehicle): Vehicle {
     category: v.category.toLowerCase() as Vehicle["category"],
     features: v.features ?? [],
     gallery: v.images.length > 0 ? v.images : [v.images[0] || ""],
+    panoramaImageIdx: v.panoramaImageIdx ?? null,
   };
 }
 

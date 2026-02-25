@@ -2,18 +2,40 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { CRETA, SWIFT, NEXON, BLUR_DATA_URL } from "@/lib/car-images";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchVehicles } from "@/lib/api";
 
 /* Stitch: vip_digital_showroom — #dab80b (gold), Space Grotesk, #0a0a0a */
 
-const VEHICLES = [
-  { name: "Hyundai Creta SX(O)", tag: "Limited Edition", price: "₹18.5L", year: "2025", image: CRETA, desc: "Turbo Knight Edition • 1 of 500" },
-  { name: "Tata Nexon EV Max", tag: "VIP Exclusive", price: "₹21.2L", year: "2025", image: NEXON, desc: "Dark Edition • Long Range • 437km" },
-  { name: "Maruti Swift ZXi+", tag: "Pre-Launch", price: "₹9.8L", year: "2026", image: SWIFT, desc: "Next-Gen Hybrid • Carbon Accents" },
-];
+const VIP_TAGS = ["Limited Edition", "VIP Exclusive", "Pre-Launch", "Hot Deal", "AI Pick"];
 
 export default function VIPShowroomPage() {
+  const { data, isLoading } = useApi(() => fetchVehicles({ limit: 5 }), []);
+  const vehicles = data?.vehicles ?? [];
+
+  // Show skeleton while loading
+  if (isLoading) {
+    return (
+      <div className="relative h-dvh w-full max-w-md mx-auto overflow-hidden flex items-center justify-center" style={{ background: "#0a0a0a" }}>
+        <div className="flex flex-col items-center gap-3">
+          <div className="size-10 rounded-full animate-pulse" style={{ background: "rgba(218,184,11,0.2)" }} />
+          <span className="text-[#dab80b] text-sm font-bold tracking-widest uppercase animate-pulse">Loading VIP Showroom…</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (vehicles.length === 0) {
+    return (
+      <div className="relative h-dvh w-full max-w-md mx-auto overflow-hidden flex flex-col items-center justify-center gap-4" style={{ background: "#0a0a0a" }}>
+        <MaterialIcon name="diamond" className="text-5xl text-[#dab80b]/30" />
+        <p className="text-slate-400 text-sm">No VIP vehicles available</p>
+        <Link href="/inventory" className="text-[#dab80b] font-bold text-sm">Browse Inventory →</Link>
+      </div>
+    );
+  }
+
   return (
     <div
       className="relative h-dvh w-full max-w-md mx-auto overflow-hidden"
@@ -32,11 +54,17 @@ export default function VIPShowroomPage() {
 
       {/* Snap Scroll Sections */}
       <div className="h-full overflow-y-auto snap-y snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {VEHICLES.map((car, i) => (
-          <section key={car.name} className="relative h-dvh w-full snap-start snap-always flex flex-col">
+        {vehicles.map((car, i) => (
+          <section key={car.id} className="relative h-dvh w-full snap-start snap-always flex flex-col">
             {/* Full-bleed Image */}
             <div className="absolute inset-0">
-              <Image src={car.image} alt={car.name} fill className="object-cover" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+              {car.images[0] ? (
+                <Image src={car.images[0]} alt={car.name} fill className="object-cover" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center" style={{ background: "#161616" }}>
+                  <MaterialIcon name="directions_car" className="text-8xl text-slate-800" />
+                </div>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent" />
             </div>
 
@@ -44,23 +72,29 @@ export default function VIPShowroomPage() {
             <div className="relative z-10 mt-auto px-6 pb-40">
               <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full mb-4 text-[10px] font-bold uppercase tracking-widest"
                 style={{ background: "rgba(218,184,11,0.15)", color: "#dab80b", border: "1px solid rgba(218,184,11,0.3)" }}>
-                <MaterialIcon name="diamond" className="text-xs" /> {car.tag}
+                <MaterialIcon name="diamond" className="text-xs" />
+                {car.aiScore && car.aiScore >= 90 ? "AI Top Pick" : VIP_TAGS[i % VIP_TAGS.length]}
               </div>
               <h2 className="text-3xl font-bold text-white leading-tight">{car.year} {car.name}</h2>
-              <p className="text-sm text-slate-400 mt-1">{car.desc}</p>
-              <p className="text-2xl font-bold text-[#dab80b] mt-3">{car.price}</p>
+              <p className="text-sm text-slate-400 mt-1">
+                {car.fuel} · {car.km} km · {car.location}
+              </p>
+              <p className="text-2xl font-bold text-[#dab80b] mt-3">{car.priceDisplay}</p>
 
               <div className="flex gap-3 mt-6">
                 <Link
-                  href={`/virtual-tour/vip-${i}`}
+                  href={`/virtual-tour/vip-${car.id}`}
                   className="flex-1 py-3.5 rounded-xl flex items-center justify-center gap-2 font-bold text-sm text-white"
                   style={{ background: "rgba(218,184,11,0.15)", border: "1px solid rgba(218,184,11,0.3)" }}
                 >
                   <MaterialIcon name="360" className="text-[#dab80b]" /> AI Virtual Tour
                 </Link>
-                <button className="flex-1 bg-[#dab80b] text-[#0a0a0a] py-3.5 rounded-xl flex items-center justify-center gap-2 font-bold text-sm shadow-lg shadow-[#dab80b]/20">
+                <Link
+                  href={`/showcase/${car.id}`}
+                  className="flex-1 bg-[#dab80b] text-[#0a0a0a] py-3.5 rounded-xl flex items-center justify-center gap-2 font-bold text-sm shadow-lg shadow-[#dab80b]/20"
+                >
                   <MaterialIcon name="lock" /> Private Inquiry
-                </button>
+                </Link>
               </div>
             </div>
           </section>
@@ -69,7 +103,7 @@ export default function VIPShowroomPage() {
 
       {/* Side Progress Dots */}
       <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
-        {VEHICLES.map((_, i) => (
+        {vehicles.map((_, i) => (
           <div key={i} className={`w-2 rounded-full transition-all ${i === 0 ? "h-6 bg-[#dab80b]" : "h-2 bg-white/30"}`} />
         ))}
       </div>
@@ -94,7 +128,7 @@ export default function VIPShowroomPage() {
             <MaterialIcon name="smart_toy" />
             <span className="text-[10px] font-bold uppercase">Concierge</span>
           </Link>
-          <Link href="/login/buyer" className="flex flex-col items-center gap-1 text-slate-500">
+          <Link href="/settings" className="flex flex-col items-center gap-1 text-slate-500">
             <MaterialIcon name="person" />
             <span className="text-[10px] font-bold uppercase">Profile</span>
           </Link>

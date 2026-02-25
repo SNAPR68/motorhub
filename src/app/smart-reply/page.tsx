@@ -55,21 +55,35 @@ function SmartReplyContent() {
   const handleSend = async (channel: "whatsapp" | "email") => {
     if (!suggestions[selected]) return;
     setSending(true);
+    const text = suggestions[selected].text;
     try {
-      // Save message to lead timeline
       await fetch(`/api/leads/${leadId}/messages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: suggestions[selected].text, role: "USER", type: "MANUAL" }),
+        body: JSON.stringify({ text, role: "USER", type: "MANUAL" }),
       });
       setSent(true);
+
       if (channel === "whatsapp") {
         const phone = searchParams.get("phone") ?? "";
-        const text = encodeURIComponent(suggestions[selected].text);
-        window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
+        if (phone) {
+          const res = await fetch("/api/whatsapp/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ to: phone, text }),
+          });
+          const json = await res.json();
+          if (res.ok && json.success) return;
+          // API failed or not configured — open wa.me as fallback
+        }
+        if (phone) window.open(`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`, "_blank");
       }
     } catch (err) {
       console.error(err);
+      if (channel === "whatsapp") {
+        const phone = searchParams.get("phone") ?? "";
+        if (phone) window.open(`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`, "_blank");
+      }
     } finally {
       setSending(false);
     }

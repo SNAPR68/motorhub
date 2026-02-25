@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchVehicles, adaptVehicle } from "@/lib/api";
 
-/* Stitch: ai_studio_content_editor — #f97316, Manrope, #1a1008 */
+/* Stitch: ai_studio_content_editor — AI Script, TTS narrator, timeline */
 
 const TOOLS = [
   { name: "ColorGrade", icon: "palette", active: true },
@@ -19,9 +21,74 @@ const TIMELINE_CLIPS = [
   { color: "#8b5cf6", width: "25%", label: "Drive" },
 ];
 
+const VOICE_MAP = { Male: "onyx", Female: "nova" };
+
 export default function StudioEditorPage() {
   const [activeTool, setActiveTool] = useState("ColorGrade");
   const [voice, setVoice] = useState<"Male" | "Female">("Male");
+  const [script, setScript] = useState("");
+  const [scriptLoading, setScriptLoading] = useState(true);
+  const [ttsLoading, setTtsLoading] = useState(false);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const { data: vehiclesData } = useApi(() => fetchVehicles({ limit: 10 }), []);
+  const vehicles = (vehiclesData?.vehicles ?? []).map(adaptVehicle);
+  const vehicle = vehicles[0];
+
+  const generateScript = useCallback(async () => {
+    setScriptLoading(true);
+    try {
+      const res = await fetch("/api/ai/reel/script", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          vehicleId: vehicle?.id,
+          vehicleName: vehicle ? `${vehicle.year} ${vehicle.name}` : undefined,
+          specs: vehicle ? `${vehicle.engine} • ${vehicle.fuel} • ${vehicle.km} km` : undefined,
+          tone: "luxury",
+        }),
+      });
+      const json = await res.json();
+      if (json.script) setScript(json.script);
+    } catch {
+      setScript("Introducing the 2023 Hyundai Creta SX(O) — where power meets elegance. With a 1.5L turbocharged engine delivering 138 BHP, this SUV redefines city driving.");
+    } finally {
+      setScriptLoading(false);
+    }
+  }, [vehicle]);
+
+  useEffect(() => {
+    generateScript();
+  }, [generateScript]);
+
+  const generateTts = useCallback(async () => {
+    if (!script.trim()) return;
+    setTtsLoading(true);
+    setAudioUrl(null);
+    try {
+      const res = await fetch("/api/ai/reel/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: script, voice: VOICE_MAP[voice] }),
+      });
+      const json = await res.json();
+      if (json.audio) setAudioUrl(json.audio);
+    } catch {
+      // TTS failed
+    } finally {
+      setTtsLoading(false);
+    }
+  }, [script, voice]);
+
+  const handleExport = useCallback(() => {
+    if (audioUrl) {
+      const a = document.createElement("a");
+      a.href = audioUrl;
+      a.download = `autovinci-narration-${Date.now()}.mp3`;
+      a.click();
+    }
+  }, [audioUrl]);
 
   return (
     <div
@@ -35,7 +102,13 @@ export default function StudioEditorPage() {
           <MaterialIcon name="arrow_back" className="text-slate-400" />
         </Link>
         <h1 className="text-sm font-bold uppercase tracking-[0.15em] text-[#f97316]">Video Editor</h1>
-        <button className="px-4 py-1.5 rounded-full text-xs font-bold bg-[#f97316] text-white">Export</button>
+        <button
+          onClick={handleExport}
+          disabled={!audioUrl}
+          className="px-4 py-1.5 rounded-full text-xs font-bold bg-[#f97316] text-white disabled:opacity-50"
+        >
+          Export
+        </button>
       </header>
 
       <main className="flex-1 overflow-y-auto pb-8">
@@ -61,13 +134,23 @@ export default function StudioEditorPage() {
         <section className="px-4 py-4">
           <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">AI Script Generator</h3>
           <div className="rounded-xl p-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(249,115,22,0.1)" }}>
-            <p className="text-xs text-slate-400 leading-relaxed italic mb-3">
-              &ldquo;Introducing the 2023 Hyundai Creta SX(O) — where power meets elegance. With a 1.5L turbocharged engine delivering 138 BHP, this SUV redefines city driving...&rdquo;
-            </p>
-            <button className="w-full py-2.5 rounded-lg border flex items-center justify-center gap-2 text-xs font-bold text-[#f97316]"
-              style={{ borderColor: "rgba(249,115,22,0.3)", background: "rgba(249,115,22,0.05)" }}>
-              <MaterialIcon name="auto_awesome" className="text-sm" /> Regenerate Script
-            </button>
+            {scriptLoading ? (
+              <div className="h-16 flex items-center justify-center text-slate-500 text-xs">Generating script...</div>
+            ) : (
+              <>
+                <p className="text-xs text-slate-400 leading-relaxed italic mb-3">
+                  &ldquo;{script || "Click Regenerate to create a script."}&rdquo;
+                </p>
+                <button
+                  onClick={generateScript}
+                  disabled={scriptLoading}
+                  className="w-full py-2.5 rounded-lg border flex items-center justify-center gap-2 text-xs font-bold text-[#f97316] disabled:opacity-50"
+                  style={{ borderColor: "rgba(249,115,22,0.3)", background: "rgba(249,115,22,0.05)" }}
+                >
+                  <MaterialIcon name="auto_awesome" className="text-sm" /> Regenerate Script
+                </button>
+              </>
+            )}
           </div>
         </section>
 
@@ -111,10 +194,18 @@ export default function StudioEditorPage() {
               </button>
             ))}
           </div>
-          <button className="w-full py-2.5 rounded-lg flex items-center justify-center gap-2 text-xs font-bold"
-            style={{ background: "rgba(249,115,22,0.05)", border: "1px solid rgba(249,115,22,0.2)", color: "#f97316" }}>
-            <MaterialIcon name="play_circle" className="text-sm" /> Preview Narration
+          <button
+            onClick={generateTts}
+            disabled={ttsLoading || !script.trim()}
+            className="w-full py-2.5 rounded-lg flex items-center justify-center gap-2 text-xs font-bold disabled:opacity-50"
+            style={{ background: "rgba(249,115,22,0.05)", border: "1px solid rgba(249,115,22,0.2)", color: "#f97316" }}
+          >
+            {ttsLoading ? <MaterialIcon name="hourglass_empty" className="text-sm animate-spin" /> : <MaterialIcon name="play_circle" className="text-sm" />}
+            {ttsLoading ? "Generating..." : "Preview Narration"}
           </button>
+          {audioUrl && (
+            <audio ref={audioRef} src={audioUrl} controls className="w-full mt-2 h-10" />
+          )}
         </section>
 
         {/* Timeline */}

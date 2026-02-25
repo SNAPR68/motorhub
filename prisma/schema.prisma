@@ -228,6 +228,7 @@ model Vehicle {
   owner           String          // e.g. "1st Owner"
   badge           String?         // e.g. "Premium", "Trending", "Low KM"
   aiScore         Int?            @map("ai_score") // 0-100
+  panoramaImageIdx Int?           @map("panorama_image_idx") // index into images[] marked as 360° panoramic
   images          String[]        // Array of image URLs
   features        Json?           // JSON array of { key, label, available }
   createdAt       DateTime        @default(now()) @map("created_at")

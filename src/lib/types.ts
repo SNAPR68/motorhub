@@ -39,6 +39,8 @@ export interface Vehicle {
   category: "suv" | "sedan" | "hatchback" | "ev" | "luxury";
   features: VehicleFeature[];
   gallery: string[];
+  /** Index into gallery[] that the dealer marked as the 360° panoramic image. null = none set. */
+  panoramaImageIdx: number | null;
 }
 
 // ── Lead ──

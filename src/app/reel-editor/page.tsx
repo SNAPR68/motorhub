@@ -1,15 +1,16 @@
 "use client";
 
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CRETA, BLUR_DATA_URL } from "@/lib/car-images";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchVehicles, adaptVehicle } from "@/lib/api";
 
-/* ── design tokens: ai_cinematic_reel_editor ── */
-// primary: #1773cf, font: Manrope, bg: #0a0e12
+/* AI Cinematic Reel Editor — script gen, TTS, vehicle picker, export */
 
-const WAVEFORM_BARS = [2, 4, 6, 3, 8, 5, 7, 4, 2, 4, 6, 3, 8, 5, 7, 4, 2, 4, 6, 3, 8, 5, 7, 4];
-
+const WAVEFORM_BARS = [2, 4, 6, 3, 8, 5, 7, 4, 2, 4, 6, 3, 8, 5, 7, 4];
 const TOOL_BUTTONS = [
   { icon: "magic_button", label: "Enhance" },
   { icon: "music_note", label: "Audio" },
@@ -17,6 +18,71 @@ const TOOL_BUTTONS = [
 ];
 
 export default function ReelEditorPage() {
+  const [script, setScript] = useState("");
+  const [scriptLoading, setScriptLoading] = useState(true);
+  const [ttsLoading, setTtsLoading] = useState(false);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [mood, setMood] = useState("Midnight");
+
+  const { data: vehiclesData } = useApi(() => fetchVehicles({ limit: 10 }), []);
+  const vehicles = (vehiclesData?.vehicles ?? []).map(adaptVehicle);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const vehicle = vehicles[selectedIndex] ?? vehicles[0];
+
+  const generateScript = useCallback(async () => {
+    setScriptLoading(true);
+    try {
+      const res = await fetch("/api/ai/reel/script", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          vehicleId: vehicle?.id,
+          vehicleName: vehicle ? `${vehicle.year} ${vehicle.name}` : undefined,
+          specs: vehicle ? `${vehicle.engine} • ${vehicle.fuel}` : undefined,
+          tone: "cinematic",
+        }),
+      });
+      const json = await res.json();
+      if (json.script) setScript(json.script);
+    } catch {
+      setScript("The new Creta SX(O). Power. Elegance. Redefined.");
+    } finally {
+      setScriptLoading(false);
+    }
+  }, [vehicle]);
+
+  useEffect(() => {
+    generateScript();
+  }, [generateScript]);
+
+  const generateTts = useCallback(async () => {
+    if (!script.trim()) return;
+    setTtsLoading(true);
+    setAudioUrl(null);
+    try {
+      const res = await fetch("/api/ai/reel/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: script, voice: "onyx" }),
+      });
+      const json = await res.json();
+      if (json.audio) setAudioUrl(json.audio);
+    } catch {
+      // TTS failed
+    } finally {
+      setTtsLoading(false);
+    }
+  }, [script]);
+
+  const handleExport = useCallback(() => {
+    if (audioUrl) {
+      const a = document.createElement("a");
+      a.href = audioUrl;
+      a.download = `autovinci-reel-${Date.now()}.mp3`;
+      a.click();
+    }
+  }, [audioUrl]);
+
   return (
     <div
       className="relative flex min-h-screen max-w-md mx-auto flex-col overflow-hidden"
@@ -35,15 +101,38 @@ export default function ReelEditorPage() {
           <span className="text-[10px] uppercase font-bold text-slate-400" style={{ letterSpacing: "0.2em" }}>
             Project
           </span>
-          <h1 className="text-sm font-bold tracking-tight text-white">Creta Showcase.mp4</h1>
+          <h1 className="text-sm font-bold tracking-tight text-white">
+            {vehicle ? `${vehicle.name} Showcase` : "Reel"}.mp4
+          </h1>
         </div>
         <button
-          className="px-4 py-2 text-white text-xs font-bold rounded-full"
+          onClick={handleExport}
+          disabled={!audioUrl}
+          className="px-4 py-2 text-white text-xs font-bold rounded-full disabled:opacity-50"
           style={{ background: "#1773cf", boxShadow: "0 4px 12px rgba(23,115,207,0.2)" }}
         >
           EXPORT
         </button>
       </header>
+
+      {/* Vehicle Picker */}
+      {vehicles.length > 1 && (
+        <div className="flex gap-2 overflow-x-auto px-4 py-2 scrollbar-hide">
+          {vehicles.map((v, i) => (
+            <button
+              key={v.id}
+              onClick={() => setSelectedIndex(i)}
+              className="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 transition-colors"
+              style={{
+                borderColor: selectedIndex === i ? "#1773cf" : "rgba(255,255,255,0.2)",
+                boxShadow: selectedIndex === i ? "0 0 0 2px rgba(23,115,207,0.3)" : undefined,
+              }}
+            >
+              <Image src={v.image || CRETA} alt={v.name} width={56} height={56} className="object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* ── Main Workspace (9:16 Video Canvas) ── */}
       <main className="flex-1 relative px-4 pb-6 flex flex-col items-center justify-center">
@@ -56,7 +145,7 @@ export default function ReelEditorPage() {
           }}
         >
           {/* Background */}
-          <Image src={CRETA} alt="" fill className="absolute inset-0 object-cover" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+          <Image src={vehicle?.image || CRETA} alt="" fill className="absolute inset-0 object-cover" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
 
           {/* Video gradient overlay */}
           <div
@@ -70,19 +159,19 @@ export default function ReelEditorPage() {
           {/* Text Overlay */}
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
             <h2 className="text-3xl font-extrabold text-white text-center px-8 opacity-90" style={{ letterSpacing: "-0.05em" }}>
-              THE NEW<br />
-              <span style={{ color: "#1773cf" }}>CRETA SX(O)</span>
+              {scriptLoading ? "..." : script.split(".")[0]?.slice(0, 40) || "THE NEW"}
+              {vehicle && <><br /><span style={{ color: "#1773cf" }}>{vehicle.name.toUpperCase()}</span></>}
             </h2>
           </div>
 
           {/* Template Sidebar */}
           <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-20">
             {[
-              { label: "Midnight", active: true },
-              { label: "Golden", active: false },
-              { label: "Pulse", active: false },
+              { label: "Midnight", active: mood === "Midnight" },
+              { label: "Golden", active: mood === "Golden" },
+              { label: "Pulse", active: mood === "Pulse" },
             ].map((preset) => (
-              <div key={preset.label} className="flex flex-col items-center gap-1 cursor-pointer" style={{ opacity: preset.active ? 1 : 0.6 }}>
+              <div key={preset.label} onClick={() => setMood(preset.label)} className="flex flex-col items-center gap-1 cursor-pointer" style={{ opacity: preset.active ? 1 : 0.6 }}>
                 <div
                   className="w-12 h-12 rounded-lg overflow-hidden border-2"
                   style={{
@@ -185,6 +274,13 @@ export default function ReelEditorPage() {
           </div>
         </div>
 
+        {/* Narration / Audio Preview */}
+        {audioUrl && (
+          <div className="flex items-center gap-3">
+            <audio src={audioUrl} controls className="flex-1 h-10 max-h-10" />
+          </div>
+        )}
+
         {/* Toolbar Actions */}
         <div className="flex items-center justify-between gap-2">
           <div className="flex gap-2">
@@ -203,14 +299,13 @@ export default function ReelEditorPage() {
             ))}
           </div>
           <button
-            className="flex-1 h-12 flex items-center justify-center gap-2 rounded-xl font-bold text-sm text-white"
-            style={{
-              background: "#1773cf",
-              boxShadow: "0 8px 20px rgba(23,115,207,0.1)",
-            }}
+            onClick={generateTts}
+            disabled={ttsLoading || !script.trim()}
+            className="flex-1 h-12 flex items-center justify-center gap-2 rounded-xl font-bold text-sm text-white disabled:opacity-50"
+            style={{ background: "#1773cf", boxShadow: "0 8px 20px rgba(23,115,207,0.1)" }}
           >
-            <MaterialIcon name="auto_awesome" className="text-[18px]" />
-            <span>AI AUTO-SYNC</span>
+            {ttsLoading ? <MaterialIcon name="hourglass_empty" className="text-[18px] animate-spin" /> : <MaterialIcon name="auto_awesome" className="text-[18px]" />}
+            <span>{ttsLoading ? "GENERATING..." : "AI AUTO-SYNC"}</span>
           </button>
         </div>
       </div>

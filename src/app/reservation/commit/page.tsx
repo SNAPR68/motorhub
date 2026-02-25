@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { CRETA, BLUR_DATA_URL } from "@/lib/car-images";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchVehicle, adaptVehicle } from "@/lib/api";
+import type { DbVehicle } from "@/lib/api";
 
 /* Stitch: exclusive_commit_&_deposit — #7311d4, Work Sans, #050505 */
 
@@ -21,9 +25,20 @@ const DOCS = [
   { label: "Income Documentation", checked: false },
 ];
 
-export default function ReservationCommitPage() {
+function CommitContent() {
+  const searchParams = useSearchParams();
+  const vehicleId = searchParams.get("vehicleId");
   const [deposit, setDeposit] = useState(50000);
   const [refundable, setRefundable] = useState(true);
+
+  const fetcher = async (): Promise<{ vehicle: DbVehicle | null }> =>
+    vehicleId ? await fetchVehicle(vehicleId) : { vehicle: null };
+  const { data } = useApi(fetcher, [vehicleId]);
+  const vehicle = data?.vehicle ? adaptVehicle(data.vehicle) : null;
+
+  const img = vehicle?.image ?? CRETA;
+  const name = vehicle ? `${vehicle.year} ${vehicle.name}` : "2023 Hyundai Creta SX(O)";
+  const specs = vehicle ? `${vehicle.engine} • ${vehicle.transmission} • ${vehicle.km} km` : "1.5L Turbo • Automatic • 18,300 km";
 
   return (
     <div
@@ -44,11 +59,11 @@ export default function ReservationCommitPage() {
       <main className="flex-1 overflow-y-auto pb-32">
         {/* Vehicle Hero */}
         <div className="relative aspect-[16/9] w-full overflow-hidden">
-          <Image src={CRETA} alt="Hyundai Creta" fill className="object-cover" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+          <Image src={img} alt={name} fill className="object-cover" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
           <div className="absolute bottom-4 left-4">
-            <h2 className="text-xl font-bold text-white">2023 Hyundai Creta SX(O)</h2>
-            <p className="text-sm text-slate-400">1.5L Turbo • Automatic • Polar White</p>
+            <h2 className="text-xl font-bold text-white">{name}</h2>
+            <p className="text-sm text-slate-400">{specs}</p>
           </div>
         </div>
 
@@ -150,5 +165,13 @@ export default function ReservationCommitPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function ReservationCommitPage() {
+  return (
+    <Suspense fallback={<div className="min-h-dvh flex items-center justify-center bg-[#050505] text-white"><div className="w-8 h-8 rounded-full border-2 border-[#7311d4] border-t-transparent animate-spin" /></div>}>
+      <CommitContent />
+    </Suspense>
   );
 }

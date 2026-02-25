@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { MY_CAR } from "@/lib/mock-data";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchWishlist, fetchVehicle, adaptVehicle } from "@/lib/api";
 
 /* Stitch: luxury_service_selection — #2bdeee, Space Grotesk, #0a0a0a */
 
@@ -50,9 +52,32 @@ const PACKAGES = [
   },
 ];
 
-export default function ServicePage() {
+function ServicePageInner() {
   const [selectedDate, setSelectedDate] = useState(24);
   const [selectedTime, setSelectedTime] = useState("11:30 AM");
+  const searchParams = useSearchParams();
+  const vehicleId = searchParams.get("vehicleId");
+
+  // If vehicleId passed, fetch that specific vehicle; otherwise use first wishlist vehicle
+  const { data: specificData } = useApi(
+    () => (vehicleId ? fetchVehicle(vehicleId) : Promise.resolve(null)),
+    [vehicleId]
+  );
+  const { data: wishlistData } = useApi(
+    () => (!vehicleId ? fetchWishlist() : Promise.resolve(null)),
+    [vehicleId]
+  );
+
+  const carData = vehicleId
+    ? specificData?.vehicle
+      ? adaptVehicle(specificData.vehicle)
+      : null
+    : wishlistData?.vehicles?.[0]
+    ? adaptVehicle(wishlistData.vehicles[0])
+    : null;
+
+  const carName = carData?.name ?? "Your Vehicle";
+  const carSubtitle = carName.split(" ").slice(1).join(" ") || carName;
 
   return (
     <div
@@ -73,7 +98,7 @@ export default function ServicePage() {
               Service Booking
             </h1>
             <p className="text-[10px] text-[#2bdeee] font-medium tracking-widest uppercase">
-              {MY_CAR.name.split(" ").slice(1).join(" ")}
+              {carSubtitle}
             </p>
           </div>
           <button className="w-10 h-10 flex items-center justify-end">
@@ -166,7 +191,7 @@ export default function ServicePage() {
         {/* AI Diagnostic Summary */}
         <section className="mt-8 px-4">
           <div
-            className="rounded-xl p-5 border-l-4 border-l-[#2bdeee] relative overflow-hidden"
+            className="rounded-xl p-5 relative overflow-hidden"
             style={{
               background: "rgba(255,255,255,0.03)",
               backdropFilter: "blur(10px)",
@@ -182,8 +207,8 @@ export default function ServicePage() {
             </div>
             <p className="text-[#c0c0c0] text-sm leading-relaxed mb-4">
               Telemetry analysis indicates your{" "}
-              <span className="text-white font-medium">{MY_CAR.name.split(" ").slice(1).join(" ")}</span>{" "}
-              (VIN: ...{MY_CAR.vin.slice(-5)}) requires a{" "}
+              <span className="text-white font-medium">{carSubtitle}</span>{" "}
+              requires a{" "}
               <span className="text-white font-medium">brake fluid flush</span> and a{" "}
               <span className="text-white font-medium">
                 cooling system inspection
@@ -279,7 +304,7 @@ export default function ServicePage() {
             </span>
           </div>
           <Link
-            href="/service/logistics"
+            href={`/service/logistics${vehicleId ? `?vehicleId=${vehicleId}` : ""}`}
             className="flex-1 bg-[#2bdeee] text-[#0a0a0a] font-black uppercase tracking-widest py-4 rounded-xl shadow-lg shadow-[#2bdeee]/20 active:scale-95 transition-transform flex items-center justify-center gap-2"
           >
             Continue
@@ -288,5 +313,17 @@ export default function ServicePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ServicePage() {
+  return (
+    <Suspense fallback={
+      <div className="flex min-h-dvh items-center justify-center bg-[#0a0a0a]">
+        <div className="w-8 h-8 border-2 border-[#2bdeee] border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <ServicePageInner />
+    </Suspense>
   );
 }

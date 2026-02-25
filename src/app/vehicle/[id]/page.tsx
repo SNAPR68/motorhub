@@ -98,16 +98,24 @@ export default function VehiclePage({
             <p className="text-white/80 text-sm font-light tracking-widest uppercase mb-8">
               {vehicle.engine} &bull; {vehicle.fuel} &bull; {vehicle.transmission}
             </p>
-            <Link
-              href={`/virtual-tour/${vehicle.id}`}
-              className="group/btn flex items-center gap-3 bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white hover:text-[#0a0a0a] transition-all duration-300 px-8 py-4 rounded-full text-white font-bold tracking-wider text-sm"
-            >
-              <span>ENTER EXPERIENCE</span>
-              <MaterialIcon
-                name="arrow_forward_ios"
-                className="text-sm transition-transform group-hover/btn:translate-x-1"
-              />
-            </Link>
+            <div className="flex flex-col items-center gap-3">
+              <Link
+                href={`/virtual-tour/${vehicle.id}`}
+                className="group/btn flex items-center gap-3 bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white hover:text-[#0a0a0a] transition-all duration-300 px-8 py-4 rounded-full text-white font-bold tracking-wider text-sm"
+              >
+                <span>ENTER EXPERIENCE</span>
+                <MaterialIcon
+                  name="arrow_forward_ios"
+                  className="text-sm transition-transform group-hover/btn:translate-x-1"
+                />
+              </Link>
+              <Link
+                href={`/concierge/dossier?vehicleId=${vehicle.id}`}
+                className="text-white/70 hover:text-white text-xs font-semibold tracking-widest uppercase flex items-center gap-1"
+              >
+                <MaterialIcon name="description" className="text-sm" /> View Full Dossier
+              </Link>
+            </div>
           </div>
           {/* Carousel indicators */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
