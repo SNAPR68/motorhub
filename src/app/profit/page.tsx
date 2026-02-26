@@ -208,7 +208,7 @@ export default function ProfitPage() {
       </main>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 pb-8 pt-2 px-6 flex justify-between items-center border-t" style={{ background: "rgba(18,17,8,0.9)", backdropFilter: "blur(16px)", borderColor: "#36321b" }}>
+      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 pb-8 pt-2 px-6 flex justify-between items-center border-t md:hidden" style={{ background: "rgba(18,17,8,0.9)", backdropFilter: "blur(16px)", borderColor: "#36321b" }}>
         {[
           { icon: "directions_car", label: "Inventory", href: "/inventory" },
           { icon: "public", label: "Market", href: "/analytics" },

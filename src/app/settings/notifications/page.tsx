@@ -1,11 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchNotifications } from "@/lib/api";
 
 /* ── design tokens: dealer_notification_settings ── */
 // primary: #196ee6, font: Noto Serif (headings) + Noto Sans (body), bg: #0a0a0a
+
+const STORAGE_KEY = "av_notif_prefs";
 
 type ToggleState = { whatsapp: boolean; email: boolean };
 
@@ -16,15 +20,38 @@ const ALERTS: { name: string; desc: string; whatsapp: boolean; email: boolean; h
   { name: "Test Drive Booking", desc: "Immediate client scheduling", whatsapp: true, email: true, highlight: true },
 ];
 
+const DEFAULT_TOGGLES: ToggleState[] = ALERTS.map((a) => ({ whatsapp: a.whatsapp, email: a.email }));
+
+function loadPrefs(): ToggleState[] {
+  if (typeof window === "undefined") return DEFAULT_TOGGLES;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return JSON.parse(stored) as ToggleState[];
+  } catch {}
+  return DEFAULT_TOGGLES;
+}
+
 export default function NotificationsPage() {
-  const [toggles, setToggles] = useState<ToggleState[]>(
-    ALERTS.map((a) => ({ whatsapp: a.whatsapp, email: a.email }))
-  );
+  const [toggles, setToggles] = useState<ToggleState[]>(DEFAULT_TOGGLES);
+  const [saved, setSaved] = useState(false);
+  const { data: notifData } = useApi(() => fetchNotifications(), []);
+  const unreadCount = (notifData as { unreadCount?: number } | undefined)?.unreadCount ?? 0;
+
+  // Load persisted prefs on mount
+  useEffect(() => {
+    setToggles(loadPrefs());
+  }, []);
 
   const toggle = (idx: number, channel: "whatsapp" | "email") => {
     const next = [...toggles];
     next[idx] = { ...next[idx], [channel]: !next[idx][channel] };
     setToggles(next);
+  };
+
+  const handleSave = () => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
   };
 
   return (
@@ -51,11 +78,19 @@ export default function NotificationsPage() {
           <Link href="/settings" className="flex items-center text-slate-400">
             <MaterialIcon name="chevron_left" className="text-[28px]" />
           </Link>
-          <div
-            className="h-8 w-8 rounded-full flex items-center justify-center"
-            style={{ background: "rgba(25,110,230,0.1)" }}
-          >
-            <MaterialIcon name="settings" className="text-xl text-[#196ee6]" />
+          <div className="flex items-center gap-3">
+            {unreadCount > 0 && (
+              <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(25,110,230,0.15)", color: "#196ee6" }}>
+                {unreadCount} unread
+              </span>
+            )}
+            <button
+              onClick={handleSave}
+              className="text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors"
+              style={{ background: saved ? "rgba(34,197,94,0.15)" : "rgba(25,110,230,0.1)", color: saved ? "#22c55e" : "#196ee6" }}
+            >
+              {saved ? "Saved ✓" : "Save"}
+            </button>
           </div>
         </div>
         <h1
@@ -173,7 +208,7 @@ export default function NotificationsPage() {
 
       {/* ── Bottom Nav ── */}
       <nav
-        className="fixed bottom-0 left-0 right-0 max-w-md mx-auto px-6 pb-8 pt-4 border-t"
+        className="fixed bottom-0 left-0 right-0 max-w-md mx-auto px-6 pb-8 pt-4 border-t md:hidden"
         style={{
           background: "rgba(10,10,10,0.8)",
           backdropFilter: "blur(16px)",

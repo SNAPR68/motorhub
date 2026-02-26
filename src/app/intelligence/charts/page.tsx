@@ -3,19 +3,30 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchVehicles } from "@/lib/api";
 
 /* Stitch: ai_market_intelligence_hub_2 — #0dccf2, Manrope, #0a0a0a */
 
 const TIMEFRAMES = ["1W", "2W", "1M", "3M", "6M", "1Y"];
 
-const MODELS = [
-  { name: "Hyundai Creta SX(O)", price: "₹14.5L", trend: "+2.8%", signal: "BULLISH", signalColor: "#10b981" },
-  { name: "Maruti Swift ZXi+", price: "₹7.8L", trend: "-1.2%", signal: "BEARISH", signalColor: "#ef4444" },
-  { name: "Tata Nexon EV Max", price: "₹16.2L", trend: "+5.4%", signal: "BULLISH", signalColor: "#10b981" },
-];
+function signalFromScore(score: number | null): { trend: string; signal: string; signalColor: string } {
+  const s = score ?? 50;
+  if (s >= 70) return { trend: `+${((s - 50) / 10).toFixed(1)}%`, signal: "BULLISH", signalColor: "#10b981" };
+  if (s <= 40) return { trend: `-${((50 - s) / 10).toFixed(1)}%`, signal: "BEARISH", signalColor: "#ef4444" };
+  return { trend: "0.0%", signal: "NEUTRAL", signalColor: "#f59e0b" };
+}
 
 export default function IntelligenceChartsPage() {
   const [selectedTF, setSelectedTF] = useState("1M");
+  const { data: vehiclesData } = useApi(() => fetchVehicles({ status: "AVAILABLE", limit: 6 }), []);
+  const vehicles = vehiclesData?.vehicles ?? [];
+  const signalVehicles = vehicles.slice(0, 3).map((v) => ({
+    name: v.name,
+    price: v.priceDisplay,
+    ...signalFromScore(v.aiScore),
+  }));
+  const featuredVehicle = vehicles[0];
 
   return (
     <div
@@ -62,12 +73,19 @@ export default function IntelligenceChartsPage() {
           style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
           <div className="flex justify-between items-start mb-4">
             <div>
-              <h2 className="text-sm font-semibold uppercase tracking-widest text-[#94a3b8] mb-1">Creta SX(O) Price</h2>
+              <h2 className="text-sm font-semibold uppercase tracking-widest text-[#94a3b8] mb-1">
+                {featuredVehicle ? featuredVehicle.name : "Market Price"} Trend
+              </h2>
               <div className="flex items-baseline gap-3">
-                <span className="text-3xl font-extrabold">₹14.5L</span>
-                <span className="text-sm font-bold flex items-center text-[#10b981]">
-                  <MaterialIcon name="trending_up" className="text-xs" /> +2.8%
-                </span>
+                <span className="text-3xl font-extrabold">{featuredVehicle?.priceDisplay ?? "—"}</span>
+                {featuredVehicle && (() => {
+                  const s = signalFromScore(featuredVehicle.aiScore);
+                  return (
+                    <span className="text-sm font-bold flex items-center" style={{ color: s.signalColor }}>
+                      <MaterialIcon name={s.signal === "BULLISH" ? "trending_up" : s.signal === "BEARISH" ? "trending_down" : "trending_flat"} className="text-xs" /> {s.trend}
+                    </span>
+                  );
+                })()}
               </div>
             </div>
           </div>
@@ -96,7 +114,9 @@ export default function IntelligenceChartsPage() {
             <MaterialIcon name="show_chart" className="text-sm text-[#0dccf2]" /> Market Signals
           </h2>
           <div className="space-y-3">
-            {MODELS.map((m) => (
+            {(signalVehicles.length > 0 ? signalVehicles : [
+              { name: "No vehicles listed", price: "—", trend: "—", signal: "NEUTRAL", signalColor: "#f59e0b" },
+            ]).map((m) => (
               <div key={m.name} className="rounded-xl p-4 flex items-center justify-between"
                 style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
                 <div>
@@ -128,7 +148,7 @@ export default function IntelligenceChartsPage() {
       </main>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 pb-8 pt-2 px-6 flex justify-between items-center border-t"
+      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 pb-8 pt-2 px-6 flex justify-between items-center border-t md:hidden"
         style={{ background: "rgba(10,10,10,0.9)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}>
         <Link href="/inventory" className="flex flex-col items-center gap-1">
           <MaterialIcon name="directions_car" className="text-[#94a3b8]" />

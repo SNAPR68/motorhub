@@ -204,7 +204,7 @@ export default function StudioPage() {
 
       {/* ── Bottom Action Bar ── */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-50 p-4 pb-8 flex items-center gap-4 border-t max-w-md mx-auto"
+        className="fixed bottom-0 left-0 right-0 z-50 p-4 pb-8 flex items-center gap-4 border-t max-w-md mx-auto md:hidden"
         style={{ background: "rgba(26,26,26,0.7)", backdropFilter: "blur(12px)", borderColor: "#262626" }}
       >
         <div className="max-w-md mx-auto flex items-center gap-4 w-full">

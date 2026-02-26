@@ -204,7 +204,7 @@ export default function PerformancePage() {
       </main>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 px-4 pb-6 pt-3 border-t" style={{ background: "rgba(11,14,20,0.9)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}>
+      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 px-4 pb-6 pt-3 border-t md:hidden" style={{ background: "rgba(11,14,20,0.9)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}>
         <div className="flex items-center justify-around max-w-md mx-auto">
           {[
             { icon: "directions_car", label: "Inventory", href: "/inventory" },

@@ -294,7 +294,7 @@ export default function AnalyticsPage() {
 
       {/* ── Bottom Nav ── */}
       <nav
-        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md border-t border-slate-100 px-6 pt-3 pb-8 flex items-center justify-between z-50"
+        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md border-t border-slate-100 px-6 pt-3 pb-8 flex items-center justify-between z-50 md:hidden"
         style={{ background: "rgba(255,255,255,0.95)", backdropFilter: "blur(16px)" }}
       >
         {[

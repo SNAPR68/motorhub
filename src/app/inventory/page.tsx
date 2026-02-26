@@ -184,7 +184,7 @@ export default function InventoryPage() {
       </main>
 
       {/* Bottom Nav — Inventory, Showcase, Studio, Settings */}
-      <nav className="fixed bottom-0 left-0 right-0 glass-panel border-t border-slate-800/50 pt-2 pb-8 px-6 z-50 max-w-md mx-auto">
+      <nav className="fixed bottom-0 left-0 right-0 glass-panel border-t border-slate-800/50 pt-2 pb-8 px-6 z-50 max-w-md mx-auto md:hidden">
         <div className="flex justify-between items-center max-w-md mx-auto">
           <Link href="/inventory" className="flex flex-col items-center gap-1 text-[#137fec]">
             <MaterialIcon name="directions_car" fill className="text-[28px]" />

@@ -112,6 +112,27 @@ body {
   -webkit-backdrop-filter: blur(20px);
 }
 
+/* ── Desktop dealer layout: override mobile max-width constraints ── */
+@media (min-width: 768px) {
+  .dealer-desktop > *,
+  .dealer-desktop .max-w-md,
+  .dealer-desktop .max-w-lg {
+    max-width: none !important;
+  }
+  .dealer-desktop .max-w-md,
+  .dealer-desktop .max-w-lg {
+    width: 100% !important;
+  }
+  /* Remove fixed bottom nav padding on desktop */
+  .dealer-desktop .pb-24 {
+    padding-bottom: 2rem !important;
+  }
+  /* Widen horizontal scroll sections into grids on desktop */
+  .dealer-desktop .overflow-x-auto.hide-scrollbar {
+    overflow-x: visible;
+  }
+}
+
 /* ── Toggle switch ── */
 .toggle-switch {
   position: relative;

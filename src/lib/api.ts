@@ -232,6 +232,39 @@ export async function fetchDealerTeam() {
   }>("/api/dealer/team");
 }
 
+// ── Analytics Performance ──
+
+export interface PerformanceData {
+  inventory: { total: number; sold: number; available: number; reserved: number; soldRate: number };
+  leads: { total: number; closedWon: number; hot: number; warm: number; cool: number; conversionRate: number };
+  revenue: { total: number; display: string; avgPrice: number; avgPriceDisplay: string };
+  ai: { repliesSent: number };
+  topVehicles: Array<{ id: string; name: string; price: number; priceDisplay: string; status: string; aiScore: number | null; image: string | null }>;
+}
+
+export async function fetchPerformance() {
+  return apiFetch<PerformanceData>("/api/analytics/performance");
+}
+
+// ── Analytics Reports ──
+
+export interface ReportsData {
+  period: { month: string; year: number };
+  summary: {
+    leads: number; leadGrowth: number;
+    salesVolume: number; salesGrowth: number;
+    conversionRate: number; conversionGrowth: number;
+    revenue: string; totalRevenue: string;
+    totalVehicles: number;
+  };
+  breakdown: { sources: Record<string, number>; statuses: Record<string, number> };
+  activities: DbActivity[];
+}
+
+export async function fetchReports() {
+  return apiFetch<ReportsData>("/api/analytics/reports");
+}
+
 // ═══════════════════════════════════════════════
 // DB RECORD TYPES (what the API returns)
 // ═══════════════════════════════════════════════

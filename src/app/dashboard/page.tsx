@@ -225,7 +225,7 @@ export default function Dashboard() {
       </div>
 
       {/* Bottom Tab Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-lg mx-auto bg-[#0a1114]/90 backdrop-blur-xl border-t border-[#C0C0C0]/10 px-6 pt-3 pb-8 flex justify-between items-center z-50">
+      <nav className="fixed bottom-0 left-0 right-0 max-w-lg mx-auto bg-[#0a1114]/90 backdrop-blur-xl border-t border-[#C0C0C0]/10 px-6 pt-3 pb-8 flex justify-between items-center z-50 md:hidden">
         <Link href="/dashboard" className="flex flex-col items-center gap-1">
           <MaterialIcon name="dashboard" className="text-[24px] text-[#2badee] scale-110" />
           <span className="text-[10px] font-bold text-[#2badee] uppercase tracking-tighter">Dashboard</span>

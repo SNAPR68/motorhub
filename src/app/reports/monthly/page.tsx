@@ -3,38 +3,44 @@
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchDashboard, fetchVehicles } from "@/lib/api";
+import { fetchReports, fetchVehicles } from "@/lib/api";
 import { SkeletonCard } from "@/components/ui/Skeleton";
 
 /* ── design tokens: dealer_monthly_performance_report ── */
 // primary: #f2b90d (gold), font: Newsreader (serif), bg: #121212, card: #1c1c1c, accent-silver: #a1a1a1
 
-const MONTHS = ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb"];
+const MONTH_LABELS = ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb"];
 
 export default function MonthlyReportPage() {
-  const { data: dashData, isLoading } = useApi(() => fetchDashboard(), []);
+  const { data: reportsData, isLoading } = useApi(() => fetchReports(), []);
   const { data: vehiclesData } = useApi(() => fetchVehicles({ limit: 1, status: "SOLD" }), []);
 
-  const stats = dashData?.stats as Record<string, unknown> | undefined;
-  const revenue = (stats?.revenue as string) ?? "₹0";
-  const conversionRate = (stats?.conversionRate as string) ?? "0%";
-  const activeLeads = (stats?.activeLeads as number) ?? 0;
-  const monthlySales = (stats?.monthlySales as number) ?? 0;
-  const totalVehicles = (stats?.totalVehicles as number) ?? 0;
-  const convNum = parseInt(conversionRate) || 0;
+  const summary = reportsData?.summary;
+  const period = reportsData?.period;
 
-  // Derive efficiency from conversion
-  const efficiency = Math.min(99, 60 + convNum);
+  const revenue = summary?.revenue ?? "₹0";
+  const totalRevenue = summary?.totalRevenue ?? "₹0";
+  const conversionRate = summary ? `${summary.conversionRate}%` : "0%";
+  const activeLeads = summary?.leads ?? 0;
+  const monthlySales = summary?.salesVolume ?? 0;
+  const leadGrowth = summary?.leadGrowth ?? 0;
+  const salesGrowth = summary?.salesGrowth ?? 0;
+  const conversionGrowth = summary?.conversionGrowth ?? 0;
+  const totalVehicles = summary?.totalVehicles ?? 0;
+  const periodLabel = period ? `${period.month} ${period.year}` : "Loading...";
+  const convNum = summary?.conversionRate ?? 0;
 
   // Top performer from vehicles
   const topVehicle = vehiclesData?.vehicles?.[0];
 
-  // Revenue bars — last bar is current (Feb)
-  const revenueBars = MONTHS.map((month, i) => ({
+  // Derive efficiency from conversion
+  const efficiency = Math.min(99, 60 + convNum);
+
+  // Revenue bars — last bar is current month
+  const revenueBars = MONTH_LABELS.map((month, i) => ({
     month,
-    // Scale heights somewhat realistically from past, peak at current
-    height: i === MONTHS.length - 1 ? "95%" : `${Math.max(30, 40 + i * 7)}%`,
-    active: i === MONTHS.length - 1,
+    height: i === MONTH_LABELS.length - 1 ? "95%" : `${Math.max(30, 40 + i * 7)}%`,
+    active: i === MONTH_LABELS.length - 1,
   }));
 
   return (
@@ -53,7 +59,7 @@ export default function MonthlyReportPage() {
         <div className="text-center">
           <h1 className="text-lg font-semibold tracking-tight text-white">Performance Report</h1>
           <p className="text-[10px] uppercase font-bold" style={{ letterSpacing: "0.2em", color: "#f2b90d", fontFamily: "system-ui, sans-serif" }}>
-            February 2026
+            {periodLabel}
           </p>
         </div>
         <button className="flex items-center justify-center w-10 h-10 rounded-full">
@@ -79,12 +85,17 @@ export default function MonthlyReportPage() {
                 <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#a1a1a1", fontFamily: "system-ui, sans-serif" }}>
                   Executive Summary
                 </p>
-                <h2 className="text-4xl font-medium text-white mb-1">{revenue}</h2>
+                <h2 className="text-4xl font-medium text-white mb-1">{totalRevenue}</h2>
                 <div className="flex items-center gap-2 mb-6">
-                  <MaterialIcon name="trending_up" className="text-sm text-[#f2b90d]" />
+                  <MaterialIcon name={salesGrowth >= 0 ? "trending_up" : "trending_down"} className="text-sm text-[#f2b90d]" />
                   <p className="text-sm font-medium" style={{ fontFamily: "system-ui, sans-serif" }}>
                     <span style={{ color: "#f2b90d" }}>{monthlySales} sold</span>{" "}
                     <span style={{ color: "#a1a1a1" }}>· {conversionRate} conv. rate</span>
+                    {salesGrowth !== 0 && (
+                      <span style={{ color: salesGrowth > 0 ? "#22c55e" : "#ef4444", marginLeft: "6px" }}>
+                        {salesGrowth > 0 ? "+" : ""}{salesGrowth}%
+                      </span>
+                    )}
                   </p>
                 </div>
                 <div
@@ -147,9 +158,21 @@ export default function MonthlyReportPage() {
                     </p>
                     <p className="text-xl font-medium text-white">{conversionRate} Rate</p>
                   </div>
-                  <span style={{ color: "rgba(161,161,161,0.5)" }}>
-                    <MaterialIcon name="filter_alt" />
-                  </span>
+                  <div className="text-right">
+                    <span style={{ color: "rgba(161,161,161,0.5)" }}>
+                      <MaterialIcon name="filter_alt" />
+                    </span>
+                    {conversionGrowth !== 0 && (
+                      <p className="text-[10px] font-bold" style={{ color: conversionGrowth > 0 ? "#22c55e" : "#ef4444" }}>
+                        {conversionGrowth > 0 ? "+" : ""}{conversionGrowth}% vs last mo.
+                      </p>
+                    )}
+                    {leadGrowth !== 0 && (
+                      <p className="text-[10px]" style={{ color: "#a1a1a1" }}>
+                        Leads {leadGrowth > 0 ? "+" : ""}{leadGrowth}%
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <div className="space-y-3">
                   <div className="relative h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
@@ -242,7 +265,7 @@ export default function MonthlyReportPage() {
       </main>
 
       {/* ── Bottom Nav ── */}
-      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50">
+      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 md:hidden">
         <div
           className="mx-auto max-w-md px-6 pb-8 pt-3 border-t"
           style={{ background: "rgba(18,18,18,0.9)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}

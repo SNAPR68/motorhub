@@ -3,18 +3,25 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchDealerProfile } from "@/lib/api";
 
 /* ── design tokens: premium_dealer_plans ── */
 // primary: #f4c025 (gold), font: Manrope, bg: #221e10
 
-const PLANS = [
+// Maps DB enum → display tier key
+const PLAN_KEY_MAP: Record<string, string> = {
+  STARTER: "Silver",
+  GROWTH: "Gold",
+  ENTERPRISE: "Platinum",
+};
+
+const BASE_PLANS = [
   {
+    dbKey: "STARTER",
     tier: "Starter",
     name: "Silver",
-    price: "\u20b914,999",
-    tag: "Current Plan",
-    tagBg: "rgba(51,65,85,0.5)",
-    tagColor: "#cbd5e1",
+    price: "₹14,999",
     features: [
       { icon: "check_circle", text: "10 Vehicle Slots" },
       { icon: "check_circle", text: "Standard Marketing Tools" },
@@ -22,17 +29,15 @@ const PLANS = [
     ],
     featureColor: "#94a3b8",
     ctaText: "Current Plan",
-    ctaBg: "#1e293b",
-    ctaColor: "#94a3b8",
-    disabled: true,
     border: "rgba(244,192,37,0.1)",
     bg: "rgba(255,255,255,0.05)",
     highlight: false,
   },
   {
+    dbKey: "ENTERPRISE",
     tier: "Full Concierge",
     name: "Platinum",
-    price: "\u20b969,999",
+    price: "₹69,999",
     ribbon: "Executive",
     features: [
       { icon: "verified", text: "Unlimited Vehicle Slots" },
@@ -42,17 +47,15 @@ const PLANS = [
     ],
     featureColor: "#f1f5f9",
     ctaText: "Upgrade to Platinum",
-    ctaBg: "#f4c025",
-    ctaColor: "#221e10",
-    disabled: false,
     border: "#f4c025",
     bg: "rgba(244,192,37,0.05)",
     highlight: true,
   },
   {
+    dbKey: "GROWTH",
     tier: "Advanced",
     name: "Gold",
-    price: "\u20b939,999",
+    price: "₹39,999",
     features: [
       { icon: "check_circle", text: "50 Vehicle Slots" },
       { icon: "check_circle", text: "AI-Generated Descriptions" },
@@ -60,10 +63,6 @@ const PLANS = [
     ],
     featureColor: "#94a3b8",
     ctaText: "Select Gold",
-    ctaBg: "rgba(244,192,37,0.2)",
-    ctaColor: "#f4c025",
-    ctaBorder: "rgba(244,192,37,0.3)",
-    disabled: false,
     border: "rgba(244,192,37,0.1)",
     bg: "rgba(255,255,255,0.05)",
     highlight: false,
@@ -72,6 +71,9 @@ const PLANS = [
 
 export default function PlansPage() {
   const [billing, setBilling] = useState<"annual" | "monthly">("annual");
+  const { data: profileData } = useApi(() => fetchDealerProfile(), []);
+  const currentPlan = (profileData?.profile as { plan?: string } | undefined)?.plan ?? "STARTER";
+  const currentPlanName = PLAN_KEY_MAP[currentPlan] ?? "Silver";
 
   return (
     <div
@@ -130,91 +132,92 @@ export default function PlansPage() {
 
       {/* ── Plans Content ── */}
       <div className="flex flex-col gap-6 px-4 py-3">
-        {PLANS.map((plan) => (
-          <div
-            key={plan.name}
-            className="flex flex-col gap-4 rounded-xl p-6 relative overflow-hidden backdrop-blur-sm"
-            style={{
-              background: plan.bg,
-              border: plan.highlight ? `2px solid ${plan.border}` : `1px solid ${plan.border}`,
-            }}
-          >
-            {/* Executive Ribbon */}
-            {plan.ribbon && (
-              <div className="absolute top-0 right-0">
-                <div
-                  className="text-[10px] font-black px-4 py-1 rotate-45 translate-x-3 translate-y-2 w-32 text-center uppercase"
-                  style={{ background: "#f4c025", color: "#221e10" }}
-                >
-                  {plan.ribbon}
-                </div>
-              </div>
-            )}
-
-            <div className="flex flex-col gap-1">
-              <div className="flex justify-between items-center">
-                <h3
-                  className="text-xs font-bold uppercase tracking-widest leading-tight"
-                  style={{ color: plan.highlight ? "#f4c025" : "#94a3b8" }}
-                >
-                  {plan.tier}
-                </h3>
-                {plan.tag && (
-                  <span
-                    className="text-[10px] px-2 py-1 rounded font-medium"
-                    style={{ background: plan.tagBg, color: plan.tagColor }}
-                  >
-                    {plan.tag}
-                  </span>
-                )}
-              </div>
-              <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-                {plan.name}
-                {plan.highlight && (
-                  <MaterialIcon name="workspace_premium" className="text-base text-[#f4c025]" />
-                )}
-              </h1>
-              <p className="flex items-baseline gap-1">
-                <span className="text-4xl font-black leading-tight tracking-tight text-white">
-                  {plan.price}
-                </span>
-                <span className="text-sm font-medium text-slate-400">/mo</span>
-              </p>
-            </div>
-
+        {BASE_PLANS.map((plan) => {
+          const isCurrent = plan.name === currentPlanName;
+          return (
             <div
-              className="flex flex-col gap-3 pt-4 border-t"
-              style={{ borderColor: plan.highlight ? "rgba(244,192,37,0.2)" : "rgba(255,255,255,0.1)" }}
-            >
-              {plan.features.map((f) => (
-                <div
-                  key={f.text}
-                  className="text-[13px] font-normal leading-normal flex gap-3"
-                  style={{ color: plan.featureColor }}
-                >
-                  <MaterialIcon name={f.icon} className="text-lg text-[#f4c025]" />
-                  {f.text}
-                </div>
-              ))}
-            </div>
-
-            <button
-              className="w-full mt-2 py-3 px-4 rounded-lg text-sm font-bold"
-              disabled={plan.disabled}
+              key={plan.name}
+              className="flex flex-col gap-4 rounded-xl p-6 relative overflow-hidden backdrop-blur-sm"
               style={{
-                background: plan.ctaBg,
-                color: plan.ctaColor,
-                ...(plan.ctaBorder ? { border: `1px solid ${plan.ctaBorder}` } : {}),
-                ...(plan.disabled ? { opacity: 0.5, cursor: "not-allowed" } : {}),
-                ...(plan.highlight
-                  ? { boxShadow: "0 4px 16px rgba(244,192,37,0.2)" }
-                  : {}),
+                background: plan.bg,
+                border: plan.highlight ? `2px solid ${plan.border}` : `1px solid ${plan.border}`,
               }}
             >
-              {plan.ctaText}
-            </button>
-          </div>
-        ))}
+              {/* Executive Ribbon */}
+              {"ribbon" in plan && plan.ribbon && (
+                <div className="absolute top-0 right-0">
+                  <div
+                    className="text-[10px] font-black px-4 py-1 rotate-45 translate-x-3 translate-y-2 w-32 text-center uppercase"
+                    style={{ background: "#f4c025", color: "#221e10" }}
+                  >
+                    {plan.ribbon}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex flex-col gap-1">
+                <div className="flex justify-between items-center">
+                  <h3
+                    className="text-xs font-bold uppercase tracking-widest leading-tight"
+                    style={{ color: plan.highlight ? "#f4c025" : "#94a3b8" }}
+                  >
+                    {plan.tier}
+                  </h3>
+                  {isCurrent && (
+                    <span
+                      className="text-[10px] px-2 py-1 rounded font-medium"
+                      style={{ background: "rgba(51,65,85,0.5)", color: "#cbd5e1" }}
+                    >
+                      Current Plan
+                    </span>
+                  )}
+                </div>
+                <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+                  {plan.name}
+                  {plan.highlight && (
+                    <MaterialIcon name="workspace_premium" className="text-base text-[#f4c025]" />
+                  )}
+                </h1>
+                <p className="flex items-baseline gap-1">
+                  <span className="text-4xl font-black leading-tight tracking-tight text-white">
+                    {plan.price}
+                  </span>
+                  <span className="text-sm font-medium text-slate-400">/mo</span>
+                </p>
+              </div>
+
+              <div
+                className="flex flex-col gap-3 pt-4 border-t"
+                style={{ borderColor: plan.highlight ? "rgba(244,192,37,0.2)" : "rgba(255,255,255,0.1)" }}
+              >
+                {plan.features.map((f) => (
+                  <div
+                    key={f.text}
+                    className="text-[13px] font-normal leading-normal flex gap-3"
+                    style={{ color: plan.featureColor }}
+                  >
+                    <MaterialIcon name={f.icon} className="text-lg text-[#f4c025]" />
+                    {f.text}
+                  </div>
+                ))}
+              </div>
+
+              <button
+                className="w-full mt-2 py-3 px-4 rounded-lg text-sm font-bold"
+                disabled={isCurrent}
+                style={{
+                  background: isCurrent ? "#1e293b" : plan.highlight ? "#f4c025" : "rgba(244,192,37,0.2)",
+                  color: isCurrent ? "#94a3b8" : plan.highlight ? "#221e10" : "#f4c025",
+                  ...(!isCurrent && !plan.highlight ? { border: "1px solid rgba(244,192,37,0.3)" } : {}),
+                  ...(isCurrent ? { opacity: 0.5, cursor: "not-allowed" } : {}),
+                  ...(plan.highlight && !isCurrent ? { boxShadow: "0 4px 16px rgba(244,192,37,0.2)" } : {}),
+                }}
+              >
+                {isCurrent ? "Current Plan" : plan.ctaText}
+              </button>
+            </div>
+          );
+        })}
       </div>
 
       {/* ── Comparison Link ── */}
@@ -231,7 +234,7 @@ export default function PlansPage() {
 
       {/* ── Bottom Nav ── */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-50 flex gap-2 border-t px-4 pb-6 pt-3 backdrop-blur-md max-w-md mx-auto"
+        className="fixed bottom-0 left-0 right-0 z-50 flex gap-2 border-t px-4 pb-6 pt-3 backdrop-blur-md max-w-md mx-auto md:hidden"
         style={{
           background: "rgba(34,30,16,0.95)",
           borderColor: "rgba(244,192,37,0.2)",

@@ -231,7 +231,7 @@ export default function LeadsPage() {
 
       {/* ── Bottom Nav ── */}
       <nav
-        className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 border-t border-slate-200 px-6 py-3 pb-8"
+        className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 border-t border-slate-200 px-6 py-3 pb-8 md:hidden"
         style={{ background: "rgba(255,255,255,0.95)", backdropFilter: "blur(12px)" }}
       >
         <div className="flex justify-between items-center max-w-sm mx-auto">

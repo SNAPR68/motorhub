@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchDealerProfile } from "@/lib/api";
 
 /* ── design tokens: social_media_integration_hub ── */
 // primary: #135bec, font: Noto Serif (hero) + Noto Sans (body), bg: #101622
@@ -13,6 +15,7 @@ const PLATFORMS = [
     gradient: "linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7)",
     subtitle: "AI Reel Sync",
     subtitleIcon: "auto_awesome",
+    source: "INSTAGRAM",
   },
   {
     name: "Facebook",
@@ -20,6 +23,7 @@ const PLATFORMS = [
     gradient: "#1877F2",
     subtitle: "Marketplace Auto-Post",
     subtitleIcon: "storefront",
+    source: "FACEBOOK",
   },
   {
     name: "YouTube",
@@ -28,6 +32,7 @@ const PLATFORMS = [
     ring: true,
     subtitle: "Smart Distribution",
     subtitleIcon: "bolt",
+    source: null,
   },
   {
     name: "WhatsApp",
@@ -35,10 +40,18 @@ const PLATFORMS = [
     gradient: "#25D366",
     subtitle: "24/7 AI Concierge",
     subtitleIcon: "support_agent",
+    source: "WHATSAPP",
   },
 ];
 
 export default function SocialHubPage() {
+  const { data: profileData } = useApi(() => fetchDealerProfile(), []);
+  const dealerName = (profileData?.user as { name?: string } | undefined)?.name ?? "";
+  const dealershipName = (profileData?.profile as { dealershipName?: string } | undefined)?.dealershipName ?? "Your Dealership";
+  const initials = dealerName
+    ? dealerName.split(" ").map((w: string) => w[0]).slice(0, 2).join("").toUpperCase()
+    : "AV";
+
   return (
     <div
       className="min-h-screen max-w-md mx-auto flex flex-col pb-24"
@@ -119,7 +132,8 @@ export default function SocialHubPage() {
             Connect Your Network
           </h1>
           <p className="text-slate-400 text-sm leading-relaxed max-w-xs mx-auto">
-            Enable AI-powered marketing across your social channels to reach buyers instantly.
+            Enable AI-powered marketing for{" "}
+            <span className="text-white font-semibold">{dealershipName}</span> across your social channels to reach buyers instantly.
           </p>
         </div>
 
@@ -138,14 +152,17 @@ export default function SocialHubPage() {
                 className="w-14 h-14 rounded-full flex items-center justify-center text-white shrink-0"
                 style={{
                   background: p.gradient,
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-                  ...(p.ring ? { boxShadow: "0 4px 12px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(100,116,139,0.5)" } : {}),
+                  boxShadow: p.ring
+                    ? "0 4px 12px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(100,116,139,0.5)"
+                    : "0 4px 12px rgba(0,0,0,0.3)",
                 }}
               >
                 <MaterialIcon name={p.icon} className="text-3xl" />
               </div>
               <div className="flex-1">
-                <h3 className="font-bold text-white">{p.name}</h3>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-bold text-white">{p.name}</h3>
+                </div>
                 <p className="text-xs font-medium flex items-center gap-1 mt-0.5" style={{ color: "#135bec" }}>
                   <MaterialIcon name={p.subtitleIcon} className="text-[14px]" />
                   {p.subtitle}
@@ -180,7 +197,7 @@ export default function SocialHubPage() {
 
       {/* ── Bottom Nav ── */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-50 border-t pb-8 pt-2 max-w-md mx-auto"
+        className="fixed bottom-0 left-0 right-0 z-50 border-t pb-8 pt-2 max-w-md mx-auto md:hidden"
         style={{
           background: "rgba(15,23,42,0.9)",
           backdropFilter: "blur(16px)",

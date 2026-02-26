@@ -314,7 +314,7 @@ export default function LeadProfilePage({
 
       {/* ── Sticky Bottom: AI Suggest + Input ── */}
       <div
-        className="fixed bottom-0 left-0 right-0 max-w-md mx-auto border-t border-slate-200 pb-8 pt-3 px-4 z-50"
+        className="fixed bottom-0 left-0 right-0 max-w-md mx-auto border-t border-slate-200 pb-8 pt-3 px-4 z-50 md:hidden"
         style={{
           background: "rgba(255,255,255,0.8)",
           backdropFilter: "blur(12px)",
