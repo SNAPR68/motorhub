@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { INTERIOR } from "@/lib/car-images";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchVehicle } from "@/lib/api";
 
 /* Stitch: ai_virtual_tour_viewer — #7311d4, Work Sans, #191022 */
 
@@ -21,7 +24,24 @@ const TAGS = [
 ];
 
 export default function VirtualTourViewerPage() {
+  const { id } = useParams<{ id: string }>();
   const [activeHotspot, setActiveHotspot] = useState<number | null>(null);
+  const [activeImg, setActiveImg] = useState(0);
+
+  const { data: vehicleData } = useApi(() => fetchVehicle(id), [id]);
+  const vehicle = vehicleData?.vehicle;
+
+  // Prefer panoramaImageIdx as the first shown, then all images, fallback to INTERIOR
+  const rawImages: string[] = vehicle?.images?.length ? vehicle.images : [INTERIOR];
+  const panoramaIdx = vehicle?.panoramaImageIdx ?? null;
+  const images: string[] =
+    panoramaIdx !== null && rawImages[panoramaIdx]
+      ? [rawImages[panoramaIdx], ...rawImages.filter((_, i) => i !== panoramaIdx)]
+      : rawImages;
+
+  const bgImage = images[activeImg] ?? INTERIOR;
+  const vehicleName = vehicle?.name ?? "Interior Experience";
+  const backHref = `/virtual-tour/${id}`;
 
   return (
     <div
@@ -30,8 +50,8 @@ export default function VirtualTourViewerPage() {
     >
       {/* 360 Interior Background */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{ backgroundImage: `url('${INTERIOR}')` }}
+        className="absolute inset-0 z-0 bg-cover bg-center transition-all duration-700"
+        style={{ backgroundImage: `url('${bgImage}')` }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#191022]/40 via-transparent to-[#191022]/60" />
       </div>
@@ -39,14 +59,16 @@ export default function VirtualTourViewerPage() {
       {/* Header */}
       <header className="relative z-10 flex items-center justify-between px-4 pt-12 pb-4">
         <Link
-          href="/virtual-tour/creta-sxo"
+          href={backHref}
           className="flex size-10 items-center justify-center rounded-full text-slate-100"
           style={{ background: "rgba(25,16,34,0.6)", backdropFilter: "blur(12px)", border: "1px solid rgba(115,17,212,0.2)" }}
         >
           <MaterialIcon name="arrow_back" />
         </Link>
         <div className="flex flex-col items-center">
-          <h1 className="text-sm font-semibold tracking-widest uppercase text-white/90">Autovinci</h1>
+          <h1 className="text-sm font-semibold tracking-widest uppercase text-white/90 truncate max-w-[180px]">
+            {vehicleName}
+          </h1>
           <p className="text-[10px] text-[#7311d4] font-medium uppercase tracking-[0.2em]">Interior Experience</p>
         </div>
         <button
@@ -70,7 +92,6 @@ export default function VirtualTourViewerPage() {
                 onClick={() => setActiveHotspot(activeHotspot === i ? null : i)}
                 className="size-6 bg-[#7311d4] rounded-full border-2 border-white/50"
                 style={{
-                  boxShadow: activeHotspot === i ? "0 0 0 10px rgba(115,17,212,0)" : undefined,
                   animation: activeHotspot !== i ? "hotspot-pulse 2s infinite" : "none",
                 }}
               />
@@ -110,6 +131,22 @@ export default function VirtualTourViewerPage() {
         </button>
       </div>
 
+      {/* Photo thumbnail switcher — right rail */}
+      {images.length > 1 && (
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10">
+          {images.slice(0, 4).map((img, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveImg(i)}
+              className="w-10 h-10 rounded-lg overflow-hidden border-2 transition-all"
+              style={{ borderColor: activeImg === i ? "#7311d4" : "rgba(255,255,255,0.2)" }}
+            >
+              <img src={img} alt="" className="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Bottom UI */}
       <div className="relative z-10 mt-auto px-4 pb-8 space-y-4">
         {/* Tags */}
@@ -138,7 +175,12 @@ export default function VirtualTourViewerPage() {
           >
             <div className="flex items-center gap-3">
               <div className="size-2 rounded-full bg-green-500 animate-pulse" />
-              <p className="text-xs text-slate-300 italic">&ldquo;Explore the dashboard to see the AI integration...&rdquo;</p>
+              <p className="text-xs text-slate-300 italic">
+                &ldquo;{vehicle
+                  ? `Explore the ${vehicle.name} interior in detail...`
+                  : "Explore the dashboard to see the AI integration..."
+                }&rdquo;
+              </p>
             </div>
           </div>
           <Link
@@ -156,7 +198,7 @@ export default function VirtualTourViewerPage() {
         style={{ background: "rgba(25,16,34,0.8)", backdropFilter: "blur(16px)" }}
       >
         <div className="flex items-center justify-between max-w-md mx-auto">
-          <Link href="/virtual-tour/creta-sxo" className="flex flex-col items-center gap-1 text-[#7311d4]">
+          <Link href={backHref} className="flex flex-col items-center gap-1 text-[#7311d4]">
             <MaterialIcon name="360" fill className="text-[24px]" />
             <span className="text-[10px] font-medium uppercase tracking-tighter">Tour</span>
           </Link>

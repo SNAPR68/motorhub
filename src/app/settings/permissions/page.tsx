@@ -3,9 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchDealerProfile } from "@/lib/api";
 
 /* ── design tokens: access_roles_&_permissions ── */
 // primary: #f2b90d (gold), font: Manrope, bg: #121210, card: #1c1c18, border: #2d2a1e
+
+const PLAN_TIER_MAP: Record<string, string> = {
+  STARTER: "Silver",
+  GROWTH: "Gold",
+  ENTERPRISE: "Platinum",
+};
 
 const ROLES = [
   {
@@ -14,7 +22,6 @@ const ROLES = [
     tierColor: "#121210",
     name: "The Director",
     desc: "Supreme oversight with global administrative control and AI strategy.",
-    active: true,
   },
   {
     tier: "Tier 2",
@@ -22,7 +29,6 @@ const ROLES = [
     tierColor: "#e2e8f0",
     name: "The Closer",
     desc: "Optimized for sales conversion, lead management, and negotiation.",
-    active: false,
   },
   {
     tier: "Tier 2",
@@ -30,7 +36,6 @@ const ROLES = [
     tierColor: "#e2e8f0",
     name: "The Creative",
     desc: "Content engine focus: marketing assets, listing polish, and ads.",
-    active: false,
   },
 ];
 
@@ -49,6 +54,17 @@ const PERMISSIONS_LIST = [
 export default function PermissionsPage() {
   const [selectedRole, setSelectedRole] = useState(0);
   const [perms, setPerms] = useState(PERMISSIONS_LIST.map((p) => p.enabled));
+
+  const { data: profileData } = useApi(() => fetchDealerProfile(), []);
+  const plan = (profileData?.profile as { plan?: string } | undefined)?.plan ?? "STARTER";
+  const planTier = PLAN_TIER_MAP[plan] ?? "Silver";
+  const dealershipName = (profileData?.profile as { dealershipName?: string } | undefined)?.dealershipName ?? "Your Dealership";
+
+  // ENTERPRISE unlocks all AI capabilities
+  const resolvedCapabilities = AI_CAPABILITIES.map((cap, i) => ({
+    ...cap,
+    unlocked: plan === "ENTERPRISE" ? true : i === 0,
+  }));
 
   return (
     <div
@@ -73,12 +89,20 @@ export default function PermissionsPage() {
         <Link href="/settings" className="flex items-center justify-center w-10 h-10 rounded-full">
           <MaterialIcon name="arrow_back_ios_new" className="text-slate-100" />
         </Link>
-        <h1 className="text-lg font-bold tracking-tight text-slate-100 uppercase" style={{ letterSpacing: "0.05em" }}>
-          Role Configuration
-        </h1>
-        <button className="flex items-center justify-center w-10 h-10 rounded-full">
-          <MaterialIcon name="info" className="text-[#f2b90d]" />
-        </button>
+        <div className="flex flex-col items-center">
+          <h1 className="text-lg font-bold tracking-tight text-slate-100 uppercase" style={{ letterSpacing: "0.05em" }}>
+            Role Configuration
+          </h1>
+          {dealershipName && (
+            <p className="text-[10px] text-slate-500 font-medium">{dealershipName}</p>
+          )}
+        </div>
+        <span
+          className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase"
+          style={{ color: "#f2b90d", border: "1px solid rgba(242,185,13,0.3)", background: "rgba(242,185,13,0.05)" }}
+        >
+          {planTier}
+        </span>
       </header>
 
       <main className="flex-1 overflow-y-auto pb-8" style={{ scrollbarWidth: "none" }}>
@@ -96,7 +120,7 @@ export default function PermissionsPage() {
                 background: "rgba(242,185,13,0.05)",
               }}
             >
-              Premium Suite
+              {planTier} Suite
             </span>
           </div>
 
@@ -115,7 +139,6 @@ export default function PermissionsPage() {
                     boxShadow: i === selectedRole ? "0 0 20px rgba(242,185,13,0.15)" : "none",
                   }}
                 >
-                  {/* Gradient overlay */}
                   <div
                     className="absolute inset-0"
                     style={{
@@ -144,7 +167,7 @@ export default function PermissionsPage() {
             AI-Powered Capabilities
           </h2>
           <div className="space-y-3">
-            {AI_CAPABILITIES.map((cap) => (
+            {resolvedCapabilities.map((cap) => (
               <div
                 key={cap.name}
                 className="flex items-center gap-4 p-4 rounded-xl"
@@ -253,7 +276,7 @@ export default function PermissionsPage() {
 
       {/* ── Bottom Nav ── */}
       <nav
-        className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 flex items-center justify-around px-4 py-3 border-t"
+        className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 flex items-center justify-around px-4 py-3 border-t md:hidden"
         style={{
           background: "rgba(28,28,24,0.8)",
           backdropFilter: "blur(12px)",

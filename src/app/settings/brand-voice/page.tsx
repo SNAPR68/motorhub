@@ -1,29 +1,53 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchDealerProfile } from "@/lib/api";
 
 /* ── design tokens: ai_brand_voice_setup ── */
 // primary: #7311d4 (purple), font: Manrope, bg: #0a070d
+
+const STORAGE_KEY = "av_brand_voice_persona";
 
 const PERSONAS = [
   {
     name: "The Sophisticate",
     desc: "Refined, eloquent, and highly detailed automotive expertise.",
+    preview: "Good evening. We have curated a bespoke selection of premium vehicles for your private review. Each element has been refined to meet your standards of excellence.",
   },
   {
     name: "The Minimalist",
     desc: "Direct, efficient, and modern. No-nonsense communication.",
+    preview: "New stock available. 3 vehicles match your criteria. Prices from ₹8.5L. Inspect now.",
   },
   {
     name: "The Visionary",
     desc: "Inspiring, bold, and forward-thinking industry perspective.",
+    preview: "The future of mobility is here. These aren't just cars — they're statements. Discover what drives tomorrow, today.",
   },
 ];
 
 export default function BrandVoicePage() {
   const [selected, setSelected] = useState(0);
+  const [saved, setSaved] = useState(false);
+
+  const { data: profileData } = useApi(() => fetchDealerProfile(), []);
+  const dealershipName = (profileData?.profile as { dealershipName?: string } | undefined)?.dealershipName ?? "";
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored !== null) setSelected(parseInt(stored, 10) || 0);
+    } catch {}
+  }, []);
+
+  const handleConfirm = () => {
+    try { localStorage.setItem(STORAGE_KEY, String(selected)); } catch {}
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
 
   return (
     <div
@@ -58,9 +82,9 @@ export default function BrandVoicePage() {
               className="text-[10px] uppercase font-bold"
               style={{ letterSpacing: "0.3em", color: "#7311d4" }}
             >
-              Autovinci
+              {dealershipName || "Autovinci"}
             </span>
-            <h1 className="text-sm font-semibold tracking-tight text-slate-400">Step 2 of 4</h1>
+            <h1 className="text-sm font-semibold tracking-tight text-slate-400">AI Brand Voice</h1>
           </div>
           <div className="w-10 h-10 flex items-center justify-center">
             <MaterialIcon name="more_horiz" className="text-slate-400" />
@@ -73,8 +97,9 @@ export default function BrandVoicePage() {
           style={{ background: "#1e293b" }}
         >
           <div
-            className="h-full w-1/2 rounded-full"
+            className="h-full rounded-full transition-all duration-500"
             style={{
+              width: `${((selected + 1) / PERSONAS.length) * 100}%`,
               background: "#7311d4",
               boxShadow: "0 0 8px rgba(115,17,212,0.6)",
             }}
@@ -121,7 +146,7 @@ export default function BrandVoicePage() {
                 <p className="text-xs text-slate-400 leading-normal">{p.desc}</p>
               </div>
               <div
-                className="w-5 h-5 rounded-full flex items-center justify-center"
+                className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
                 style={{
                   border: `2px solid ${i === selected ? "#7311d4" : "#334155"}`,
                 }}
@@ -155,7 +180,7 @@ export default function BrandVoicePage() {
                 />
               </span>
               <span className="text-[10px] font-medium" style={{ color: "#7311d4" }}>
-                AI Generating...
+                {PERSONAS[selected].name}
               </span>
             </div>
           </div>
@@ -186,14 +211,12 @@ export default function BrandVoicePage() {
               </div>
               <div className="space-y-3">
                 <p className="text-[13px] leading-relaxed italic text-slate-300">
-                  &ldquo;Good evening. We have curated a bespoke selection of premium vehicles for
-                  your private review. Each element has been refined to meet your standards of
-                  excellence.&rdquo;
+                  &ldquo;{PERSONAS[selected].preview}&rdquo;
                 </p>
                 <div className="flex items-center gap-2">
                   <div className="h-px flex-1" style={{ background: "#1e293b" }} />
                   <span className="text-[10px] text-slate-500 font-mono">
-                    ENHANCED BY AUTOVINCI
+                    {dealershipName ? `${dealershipName.toUpperCase()} · ` : ""}ENHANCED BY AUTOVINCI
                   </span>
                 </div>
               </div>
@@ -210,14 +233,19 @@ export default function BrandVoicePage() {
         }}
       >
         <button
-          className="w-full h-14 rounded-full flex items-center justify-center gap-2 text-white font-bold text-base active:scale-95 transition-transform"
+          onClick={handleConfirm}
+          className="w-full h-14 rounded-full flex items-center justify-center gap-2 text-white font-bold text-base active:scale-95 transition-all"
           style={{
-            background: "linear-gradient(135deg, #7311d4 0%, #4a0a8a 100%)",
-            boxShadow: "0 10px 30px -10px rgba(115,17,212,0.5)",
+            background: saved
+              ? "linear-gradient(135deg, #16a34a 0%, #15803d 100%)"
+              : "linear-gradient(135deg, #7311d4 0%, #4a0a8a 100%)",
+            boxShadow: saved
+              ? "0 10px 30px -10px rgba(22,163,74,0.5)"
+              : "0 10px 30px -10px rgba(115,17,212,0.5)",
           }}
         >
-          <span>Confirm AI Persona</span>
-          <MaterialIcon name="arrow_forward" className="text-lg" />
+          <span>{saved ? "Persona Saved ✓" : "Confirm AI Persona"}</span>
+          {!saved && <MaterialIcon name="arrow_forward" className="text-lg" />}
         </button>
         <p className="text-center mt-4 text-[11px] text-slate-500 font-medium">
           You can fine-tune these settings later in the Dashboard.

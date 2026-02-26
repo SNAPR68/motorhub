@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 
 /* ── design tokens: ai_automation_&_scheduling ── */
 // primary: #137fec, font: Inter, bg: #101922 (dark), light card: #0f172a
+
+const STORAGE_KEY = "av_automation_prefs";
 
 const RULES = [
   {
@@ -17,7 +19,6 @@ const RULES = [
     setting: "Processing delay:",
     value: "Instant",
     btn: "Adjust Delay",
-    enabled: true,
   },
   {
     icon: "share",
@@ -28,7 +29,6 @@ const RULES = [
     setting: "Schedule:",
     value: "Smart Optimization",
     btn: "Set Time",
-    enabled: true,
   },
   {
     icon: "bolt",
@@ -39,9 +39,10 @@ const RULES = [
     setting: "Reply within:",
     value: "5 mins",
     btn: "Edit Delay",
-    enabled: false,
   },
 ];
+
+const DEFAULT_TOGGLES = [true, true, false];
 
 const DAYS = [
   { day: "Mon", hasPost: true, scheduled: true },
@@ -53,11 +54,25 @@ const DAYS = [
   { day: "Sun", hasPost: false, scheduled: false },
 ];
 
+function loadPrefs(): boolean[] {
+  if (typeof window === "undefined") return DEFAULT_TOGGLES;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return JSON.parse(stored) as boolean[];
+  } catch {}
+  return DEFAULT_TOGGLES;
+}
+
 export default function AutomationPage() {
-  const [toggles, setToggles] = useState(RULES.map((r) => r.enabled));
+  const [toggles, setToggles] = useState<boolean[]>(DEFAULT_TOGGLES);
   const [saved, setSaved] = useState(false);
 
+  useEffect(() => {
+    setToggles(loadPrefs());
+  }, []);
+
   const handleSave = () => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
@@ -223,7 +238,7 @@ export default function AutomationPage() {
 
       {/* ── Bottom Nav ── */}
       <nav
-        className="fixed bottom-0 left-0 right-0 border-t max-w-md mx-auto"
+        className="fixed bottom-0 left-0 right-0 border-t max-w-md mx-auto md:hidden"
         style={{
           background: "rgba(16,25,34,0.9)",
           backdropFilter: "blur(12px)",

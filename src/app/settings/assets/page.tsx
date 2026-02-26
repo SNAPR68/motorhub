@@ -1,17 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 
 /* ── design tokens: ai_asset_&_media_settings ── */
 // primary: #dab80b (gold), font: Newsreader (headings) + Inter (body), bg: #0a0a0a, surface: #161616, border: #2a2614
 
+const STORAGE_KEY = "av_assets_prefs";
+
 const SECTIONS = [
   {
     title: "Visual Assets",
     items: [
-      { name: "360\u00b0 Interior View", desc: "Interactive panoramic cabin showcase", icon: "visibility", enabled: true },
+      { name: "360° Interior View", desc: "Interactive panoramic cabin showcase", icon: "visibility", enabled: true },
       { name: "Cinematic Reel", desc: "AI-edited 15s highlight for social", icon: "play_circle", enabled: true },
       { name: "Background Studio", desc: "Replace inventory lot with studio bokeh", icon: "auto_fix_high", enabled: false },
     ],
@@ -31,10 +33,30 @@ const SECTIONS = [
   },
 ];
 
+const DEFAULT_TOGGLES = SECTIONS.flatMap((s) => s.items.map((i) => i.enabled));
+
+function loadPrefs(): boolean[] {
+  if (typeof window === "undefined") return DEFAULT_TOGGLES;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return JSON.parse(stored) as boolean[];
+  } catch {}
+  return DEFAULT_TOGGLES;
+}
+
 export default function AssetsPage() {
-  const [toggles, setToggles] = useState<boolean[]>(
-    SECTIONS.flatMap((s) => s.items.map((i) => i.enabled))
-  );
+  const [toggles, setToggles] = useState<boolean[]>(DEFAULT_TOGGLES);
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    setToggles(loadPrefs());
+  }, []);
+
+  const handleSave = () => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
 
   let globalIdx = 0;
 
@@ -63,8 +85,8 @@ export default function AssetsPage() {
             Dynamic Assets
           </h1>
         </div>
-        <button className="flex w-10 h-10 items-center justify-center rounded-full">
-          <MaterialIcon name="more_horiz" className="text-slate-400" />
+        <button onClick={handleSave} className="font-medium text-sm transition-colors" style={{ color: saved ? "#22c55e" : "#dab80b" }}>
+          {saved ? "Saved ✓" : "Save"}
         </button>
       </header>
 
@@ -134,21 +156,22 @@ export default function AssetsPage() {
       {/* ── Save Button ── */}
       <div className="fixed bottom-0 left-0 right-0 z-30 flex justify-center p-6 max-w-md mx-auto">
         <button
-          className="relative flex w-full max-w-sm items-center justify-center gap-2 overflow-hidden rounded-xl py-4 text-sm font-bold tracking-wider active:scale-95 transition-transform"
+          onClick={handleSave}
+          className="relative flex w-full max-w-sm items-center justify-center gap-2 overflow-hidden rounded-xl py-4 text-sm font-bold tracking-wider active:scale-95 transition-all"
           style={{
-            background: "#dab80b",
+            background: saved ? "#22c55e" : "#dab80b",
             color: "#0a0a0a",
-            boxShadow: "0 10px 40px -10px rgba(218,184,11,0.5)",
+            boxShadow: saved ? "0 10px 40px -10px rgba(34,197,94,0.5)" : "0 10px 40px -10px rgba(218,184,11,0.5)",
           }}
         >
-          <MaterialIcon name="auto_awesome" />
-          SAVE AS GLOBAL TEMPLATE
+          <MaterialIcon name={saved ? "check_circle" : "auto_awesome"} />
+          {saved ? "SAVED AS GLOBAL TEMPLATE" : "SAVE AS GLOBAL TEMPLATE"}
         </button>
       </div>
 
       {/* ── Bottom Nav (behind save button) ── */}
       <nav
-        className="fixed bottom-0 inset-x-0 z-10 flex w-full border-t px-6 pb-8 pt-3 backdrop-blur-xl max-w-md mx-auto"
+        className="fixed bottom-0 inset-x-0 z-10 flex w-full border-t px-6 pb-8 pt-3 backdrop-blur-xl max-w-md mx-auto md:hidden"
         style={{
           background: "rgba(10,10,10,0.95)",
           borderColor: "#2a2614",
