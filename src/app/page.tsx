@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -41,6 +41,13 @@ const QUICK_TOOLS = [
   { icon: "account_balance", label: "Car Loan", href: "/car-loan", color: "#06b6d4" },
 ];
 
+const HERO_SLIDES = [
+  { src: "/hero-1.jpg", alt: "Premium SUV", label: "Tata Harrier" },
+  { src: "/hero-2.webp", alt: "Hyundai Creta", label: "Hyundai Creta" },
+  { src: "/hero-3.webp", alt: "Mahindra XUV700", label: "Mahindra XUV700" },
+  { src: "/hero-4.jpg", alt: "Car on open road", label: "Tata Nexon" },
+];
+
 export default function HomePage() {
   const router = useRouter();
   const { user, isAuthenticated, checkAuth } = useAuthStore();
@@ -54,6 +61,17 @@ export default function HomePage() {
   const [usedCarsLoading, setUsedCarsLoading] = useState(true);
   const [popularBrands, setPopularBrands] = useState<ApiBrand[]>([]);
   const [popularModels, setPopularModels] = useState<ApiCarModel[]>([]);
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  // Auto-rotate hero carousel
+  const nextSlide = useCallback(() => {
+    setHeroIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 4000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
 
   // Check auth on mount
   useEffect(() => {
@@ -161,6 +179,105 @@ export default function HomePage() {
           )}
         </div>
       </header>
+
+      {/* ─── HERO CAROUSEL ─── */}
+      <section className="relative w-full overflow-hidden" style={{ height: "480px" }}>
+        {/* Carousel slides */}
+        {HERO_SLIDES.map((slide, i) => (
+          <div
+            key={slide.alt}
+            className="absolute inset-0 transition-opacity duration-1000"
+            style={{ opacity: heroIndex === i ? 1 : 0, zIndex: heroIndex === i ? 1 : 0 }}
+          >
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              sizes="(max-width: 768px) 100vw, 512px"
+              className="object-cover"
+              priority={i === 0}
+              unoptimized
+            />
+          </div>
+        ))}
+
+        {/* Overlays */}
+        <div className="absolute inset-0 bg-black/50 z-10" />
+        <div className="absolute inset-0 z-10" style={{ background: "radial-gradient(ellipse at 50% 80%, transparent 10%, rgba(8,10,15,0.9) 100%)" }} />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[200px] z-10 pointer-events-none" style={{ background: "radial-gradient(ellipse, rgba(17,82,212,0.15) 0%, transparent 70%)" }} />
+
+        {/* Content overlay */}
+        <div className="relative z-30 flex flex-col items-center justify-end h-full px-6 pb-6 text-center">
+          <div className="mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 border border-blue-500/20" style={{ background: "rgba(17,82,212,0.1)" }}>
+              <MaterialIcon name="auto_awesome" className="text-[12px]" style={{ color: "#60a5fa" }} />
+              <span className="text-[10px] uppercase tracking-[0.3em] font-semibold" style={{ color: "#60a5fa" }}>AI-Powered Marketplace</span>
+            </div>
+            <h2
+              className="text-[32px] font-bold leading-[1.15] mb-3 max-w-[300px] mx-auto text-white"
+              style={{ fontFamily: "'Noto Serif', serif" }}
+            >
+              Drive Smart. Buy Smarter.
+            </h2>
+            <p className="text-[13px] text-slate-400 max-w-[280px] mx-auto leading-relaxed">
+              AI-inspected, dealer-certified used cars across 50+ Indian cities
+            </p>
+          </div>
+
+          {/* Trust badges */}
+          <div className="flex items-center justify-center gap-4 mb-5">
+            {[
+              { icon: "verified_user", label: "200-Point Check" },
+              { icon: "shield", label: "1-Year Warranty" },
+              { icon: "swap_horiz", label: "Easy Returns" },
+            ].map((badge) => (
+              <div key={badge.label} className="flex items-center gap-1.5">
+                <MaterialIcon name={badge.icon} className="text-[13px]" style={{ color: "#10b981" }} />
+                <span className="text-[10px] font-semibold text-slate-400">{badge.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="w-full max-w-sm space-y-2.5">
+            <Link
+              href="/used-cars"
+              className="group relative flex w-full items-center justify-center gap-3 rounded-xl py-4 text-sm font-bold text-white transition-all active:scale-[0.98]"
+              style={{ background: "linear-gradient(135deg, #1152d4, #1a6bff)" }}
+            >
+              <MaterialIcon name="directions_car" className="text-[20px]" />
+              <span>Browse Used Cars</span>
+              <MaterialIcon name="arrow_forward" className="text-[18px] absolute right-4 opacity-60 group-hover:opacity-100 transition-opacity" />
+            </Link>
+            <Link
+              href="/sell-car"
+              className="group relative flex w-full items-center justify-center gap-3 rounded-xl py-3.5 text-sm font-bold text-white transition-all active:scale-[0.98]"
+              style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.12)" }}
+            >
+              <MaterialIcon name="sell" className="text-[18px]" />
+              <span>Sell Your Car — Get Instant Valuation</span>
+              <MaterialIcon name="arrow_forward" className="text-[18px] absolute right-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Carousel indicators + car label */}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1.5">
+          <span className="text-[10px] font-semibold text-white/60 transition-all">{HERO_SLIDES[heroIndex].label}</span>
+          <div className="flex gap-1.5">
+            {HERO_SLIDES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setHeroIndex(i)}
+                className="h-1.5 rounded-full transition-all"
+                style={{
+                  width: heroIndex === i ? "20px" : "6px",
+                  background: heroIndex === i ? "#1152d4" : "rgba(255,255,255,0.3)",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ─── CITY PICKER MODAL ─── */}
       {showCityPicker && (
