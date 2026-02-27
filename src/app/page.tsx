@@ -214,10 +214,10 @@ export default function HomePage() {
               <span className="text-[10px] uppercase tracking-[0.3em] font-semibold" style={{ color: "#60a5fa" }}>AI-Powered Marketplace</span>
             </div>
             <h2
-              className="text-[32px] font-bold leading-[1.15] mb-3 max-w-[300px] mx-auto text-white"
+              className="text-[26px] font-bold leading-[1.15] mb-3 whitespace-nowrap mx-auto text-white"
               style={{ fontFamily: "'Noto Serif', serif" }}
             >
-              Drive Smart. Buy Smarter.
+              Drive Smart. Buy&nbsp;Smarter.
             </h2>
             <p className="text-[13px] text-slate-400 max-w-[280px] mx-auto leading-relaxed">
               AI-inspected, dealer-certified used cars across 50+ Indian cities
