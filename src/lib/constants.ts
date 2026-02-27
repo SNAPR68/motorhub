@@ -6,10 +6,10 @@ import type { NavItem, FilterCategory } from "./types";
 
 export const BUYER_NAV_ITEMS: NavItem[] = [
   { icon: "home", label: "Home", href: "/" },
-  { icon: "directions_car", label: "Cars", href: "/inventory" },
-  { icon: "search", label: "Search", href: "/showroom" },
-  { icon: "verified_user", label: "Verified", href: "/concierge" },
-  { icon: "account_circle", label: "Profile", href: "/login/buyer" },
+  { icon: "fiber_new", label: "New Cars", href: "/new-cars" },
+  { icon: "directions_car", label: "Used Cars", href: "/used-cars" },
+  { icon: "compare_arrows", label: "Compare", href: "/compare" },
+  { icon: "account_circle", label: "My Account", href: "/my-account" },
 ];
 
 // ── Dealer Bottom Nav (matches stitch: dashboard, inventory, leads, ai_tasks, account) ──
