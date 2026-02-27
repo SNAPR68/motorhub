@@ -307,7 +307,7 @@ export default function MarketingPage() {
         </div>
         {/* Tab Bar */}
         <nav
-          className="border-t px-6 pb-6 pt-3 flex justify-between items-center max-w-md mx-auto"
+          className="border-t px-6 pb-6 pt-3 flex justify-between items-center max-w-md mx-auto md:hidden"
           style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}
         >
           {[

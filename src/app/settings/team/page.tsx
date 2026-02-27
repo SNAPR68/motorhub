@@ -372,7 +372,7 @@ export default function TeamPage() {
 
       {/* ── Bottom Nav ── */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-50 px-2 pb-6 pt-2 flex justify-around items-end border-t max-w-md mx-auto"
+        className="fixed bottom-0 left-0 right-0 z-50 px-2 pb-6 pt-2 flex justify-around items-end border-t max-w-md mx-auto md:hidden"
         style={{
           background: "#111621",
           borderColor: "rgba(23,84,207,0.1)",

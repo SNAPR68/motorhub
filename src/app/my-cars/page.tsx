@@ -256,7 +256,7 @@ export default function MyCarsPage() {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-lg mx-auto bg-[#16150d]/90 backdrop-blur-xl border-t border-[#342f18] px-6 pt-3 pb-8 z-[100]">
+      <nav className="fixed bottom-0 left-0 right-0 max-w-lg mx-auto bg-[#16150d]/90 backdrop-blur-xl border-t border-[#342f18] px-6 pt-3 pb-8 z-[100] md:hidden">
         <div className="max-w-lg mx-auto flex items-center justify-between">
           <Link
             href="/"

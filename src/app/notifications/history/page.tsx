@@ -231,7 +231,7 @@ export default function NotificationHistoryPage() {
       <div className="h-24" />
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 md:hidden">
         <div className="flex gap-2 border-t border-white/5 bg-[#0a0c10]/95 backdrop-blur-xl px-4 pb-8 pt-3 shadow-2xl">
           <Link href="/inventory" className="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 transition-colors hover:text-white">
             <div className="flex h-8 items-center justify-center">

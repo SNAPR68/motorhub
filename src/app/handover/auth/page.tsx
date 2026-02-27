@@ -115,7 +115,7 @@ export default function HandoverAuthPage() {
       </section>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50 border-t border-white/5 bg-[#141414]/95 backdrop-blur-xl px-6 pb-6 pt-3">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50 border-t border-white/5 bg-[#141414]/95 backdrop-blur-xl px-6 pb-6 pt-3 md:hidden">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex flex-col items-center gap-1 text-slate-500">
             <MaterialIcon name="home" className="text-2xl" />

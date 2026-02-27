@@ -229,7 +229,7 @@ export default function VehiclePage({
       </main>
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 inset-x-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-xl border-t border-white/5 pb-8 pt-3 max-w-lg mx-auto">
+      <div className="fixed bottom-0 inset-x-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-xl border-t border-white/5 pb-8 pt-3 max-w-lg mx-auto md:hidden">
         <div className="max-w-lg mx-auto flex justify-around items-center px-4">
           <Link
             href="/"

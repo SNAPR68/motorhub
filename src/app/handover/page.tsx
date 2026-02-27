@@ -193,7 +193,7 @@ export default function HandoverPage() {
       </section>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50 md:hidden">
         <div className="flex gap-2 border-t border-white/5 bg-[#141414]/95 backdrop-blur-xl px-6 pb-6 pt-3">
           <Link
             href="/"

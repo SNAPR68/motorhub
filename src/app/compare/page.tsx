@@ -305,7 +305,7 @@ export default function ComparePage() {
           </div>
         )}
         <nav
-          className="border-t border-white/10 px-6 py-2"
+          className="border-t border-white/10 px-6 py-2 md:hidden"
           style={{
             background: "rgba(5,5,5,0.8)",
             backdropFilter: "blur(12px)",

@@ -109,7 +109,7 @@ export default function VIPShowroomPage() {
       </div>
 
       {/* Bottom Nav */}
-      <nav className="absolute bottom-0 left-0 right-0 z-30 border-t px-6 pb-6 pt-3"
+      <nav className="absolute bottom-0 left-0 right-0 z-30 border-t px-6 pb-6 pt-3 md:hidden"
         style={{ background: "rgba(10,10,10,0.9)", backdropFilter: "blur(16px)", borderColor: "rgba(218,184,11,0.1)" }}>
         <div className="flex justify-between items-center">
           <Link href="/" className="flex flex-col items-center gap-1 text-slate-500">

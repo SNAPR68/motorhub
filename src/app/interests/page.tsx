@@ -123,7 +123,7 @@ export default function InterestsPage() {
       </main>
 
       {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-[#0a0c10]/95 backdrop-blur-xl border-t border-slate-800/80 px-6 pt-3 pb-8 flex justify-between items-center z-50">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-[#0a0c10]/95 backdrop-blur-xl border-t border-slate-800/80 px-6 pt-3 pb-8 flex justify-between items-center z-50 md:hidden">
         <Link href="/" className="flex flex-col items-center gap-1 text-slate-500">
           <MaterialIcon name="home" className="text-[26px]" />
           <span className="text-[9px] font-bold uppercase tracking-widest">Home</span>

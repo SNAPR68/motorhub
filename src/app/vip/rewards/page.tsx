@@ -284,7 +284,7 @@ export default function VIPRewardsPage() {
       </main>
 
       {/* Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 bg-[#12110a]/95 backdrop-blur-xl border-t border-[#f2b90d]/10 px-4 pb-8 pt-3">
+      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 bg-[#12110a]/95 backdrop-blur-xl border-t border-[#f2b90d]/10 px-4 pb-8 pt-3 md:hidden">
         <div className="max-w-md mx-auto flex justify-around items-center">
           <Link
             href="/inventory"

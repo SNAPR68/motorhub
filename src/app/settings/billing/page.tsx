@@ -214,7 +214,7 @@ export default function BillingPage() {
 
       {/* ── Bottom Nav ── */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-50 pb-8 pt-3 px-6 border-t max-w-md mx-auto"
+        className="fixed bottom-0 left-0 right-0 z-50 pb-8 pt-3 px-6 border-t max-w-md mx-auto md:hidden"
         style={{
           background: "rgba(17,22,33,0.8)",
           backdropFilter: "blur(12px)",

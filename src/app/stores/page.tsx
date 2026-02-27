@@ -252,7 +252,7 @@ export default function MultiStorePage() {
 
       {/* ── Bottom Nav ── */}
       <nav
-        className="fixed bottom-0 inset-x-0 z-50 px-6 pt-3 pb-8 flex justify-between items-center border-t max-w-md mx-auto"
+        className="fixed bottom-0 inset-x-0 z-50 px-6 pt-3 pb-8 flex justify-between items-center border-t max-w-md mx-auto md:hidden"
         style={{
           background: "rgba(10,15,15,0.9)",
           backdropFilter: "blur(16px)",

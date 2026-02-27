@@ -222,7 +222,7 @@ export default function StoryboardPage({
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50 bg-[#0b0f14]/80 backdrop-blur-xl border-t border-white/5">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50 bg-[#0b0f14]/80 backdrop-blur-xl border-t border-white/5 md:hidden">
         <div className="flex items-center justify-around h-20 px-4">
           <Link
             href={`/storyboard/${id}`}

@@ -190,7 +190,7 @@ export default function WishlistPage() {
       </div>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 z-30 mx-auto max-w-md bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-[#2a2a2a] px-6 pb-8 pt-3">
+      <nav className="fixed bottom-0 left-0 right-0 z-30 mx-auto max-w-md bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-[#2a2a2a] px-6 pb-8 pt-3 md:hidden">
         <div className="flex items-center justify-between">
           <Link
             href="/inventory"
