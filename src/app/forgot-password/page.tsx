@@ -4,16 +4,36 @@ import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { createClient } from "@/lib/supabase/client";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
+    if (!email.trim()) return;
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const supabase = createClient();
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(
+        email.trim(),
+        { redirectTo: `${window.location.origin}/login/buyer` }
+      );
+      if (resetError) {
+        setError(resetError.message);
+        setIsLoading(false);
+        return;
+      }
       setSent(true);
+    } catch {
+      setError("Network error. Please try again.");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -42,6 +62,12 @@ export default function ForgotPasswordPage() {
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
+              {error && (
+                <div className="rounded-lg border border-red-400/20 bg-red-400/10 px-4 py-3 text-xs text-red-400">
+                  {error}
+                </div>
+              )}
+
               <div>
                 <label className="block text-sm font-medium text-slate-400 mb-1.5">Email Address</label>
                 <div className="relative">
@@ -59,9 +85,10 @@ export default function ForgotPasswordPage() {
 
               <button
                 type="submit"
-                className="w-full bg-[#1152d4] hover:bg-[#1152d4]/90 text-white font-semibold py-3.5 rounded-xl transition"
+                disabled={isLoading}
+                className="w-full bg-[#1152d4] hover:bg-[#1152d4]/90 text-white font-semibold py-3.5 rounded-xl transition disabled:opacity-50"
               >
-                Send Reset Link
+                {isLoading ? "Sending..." : "Send Reset Link"}
               </button>
             </form>
 

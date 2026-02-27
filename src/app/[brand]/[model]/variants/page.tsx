@@ -1,16 +1,11 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
-import {
-  getModelBySlug,
-  getBrandBySlug,
-  getVariantsByModel,
-  formatEmi,
-  type CarVariant,
-} from "@/lib/car-catalog";
+import { fetchCarModel, type ApiCarModelDetail, type ApiCarVariant } from "@/lib/api";
+import { formatEmi } from "@/lib/car-catalog";
 
 /* ─── Variant highlight data (keyed by position) ─── */
 const VARIANT_HIGHLIGHTS: Record<string, string[]> = {
@@ -20,7 +15,7 @@ const VARIANT_HIGHLIGHTS: Record<string, string[]> = {
   default_auto: ["Paddle Shifters", "Ventilated Seats", "ADAS Level 2", "Head-Up Display", "Connected Car Tech"],
 };
 
-function getHighlights(variant: CarVariant, index: number, total: number): string[] {
+function getHighlights(variant: ApiCarVariant, index: number, total: number): string[] {
   if (index === 0) return VARIANT_HIGHLIGHTS.default_base;
   if (index === total - 1 && total > 2)
     return variant.transmission === "Automatic" || variant.transmission === "DCT"
@@ -31,7 +26,7 @@ function getHighlights(variant: CarVariant, index: number, total: number): strin
 }
 
 /* ─── Static specs for compare table ─── */
-function getVariantSpec(_variant: CarVariant, index: number, total: number) {
+function getVariantSpec(_variant: ApiCarVariant, index: number, total: number) {
   const isBase = index === 0;
   const isTop = index >= total - 2;
   return {
@@ -47,14 +42,37 @@ export default function VariantsPage({
   params: Promise<{ brand: string; model: string }>;
 }) {
   const { brand: brandSlug, model: modelSlug } = use(params);
-  const car = getModelBySlug(brandSlug, modelSlug);
-  const brand = getBrandBySlug(brandSlug);
-  const variants = getVariantsByModel(modelSlug);
-
+  const [car, setCar] = useState<ApiCarModelDetail | null>(null);
+  const [loading, setLoading] = useState(true);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    fetchCarModel(brandSlug, modelSlug)
+      .then((res) => {
+        if (!cancelled) setCar(res.model);
+      })
+      .catch(() => {
+        if (!cancelled) setCar(null);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [brandSlug, modelSlug]);
+
+  /* ── Loading state ── */
+  if (loading) {
+    return (
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+        <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
   /* ── 404 state ── */
-  if (!car || !brand) {
+  if (!car) {
     return (
       <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
         <div className="text-center px-6">
@@ -68,6 +86,8 @@ export default function VariantsPage({
     );
   }
 
+  const brand = car.brand;
+  const variants = car.variants;
   const hasVariants = variants.length > 0;
 
   return (

@@ -1,19 +1,12 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
-import {
-  getModelBySlug,
-  getBrandBySlug,
-  getVariantsByModel,
-  getModelsByBrand,
-  formatEmi,
-  formatPrice,
-  type CarVariant,
-} from "@/lib/car-catalog";
+import { formatEmi, formatPrice } from "@/lib/car-catalog";
+import { fetchCarModel, type ApiCarModelDetail, type ApiCarVariant } from "@/lib/api";
 import { computeTrueCost, formatCost } from "@/lib/true-cost";
 
 /* ─── New Car Model Overview Page ─── */
@@ -26,16 +19,37 @@ export default function ModelPage({
   params: Promise<{ brand: string; model: string }>;
 }) {
   const { brand: brandSlug, model: modelSlug } = use(params);
-  const car = getModelBySlug(brandSlug, modelSlug);
-  const brand = getBrandBySlug(brandSlug);
-  const variants = getVariantsByModel(modelSlug);
-  const otherModels = getModelsByBrand(brandSlug).filter((m) => m.slug !== modelSlug).slice(0, 4);
+  const [car, setCar] = useState<ApiCarModelDetail | null>(null);
+  const [relatedModels, setRelatedModels] = useState<Array<{
+    slug: string; name: string; fullName: string; image: string;
+    startingPriceDisplay: string; rating: number;
+  }>>([]);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
   const [activeTab, setActiveTab] = useState<typeof TABS[number]>("Overview");
   const [activeImg, setActiveImg] = useState(0);
   const [wishlisted, setWishlisted] = useState(false);
 
-  if (!car) {
+  useEffect(() => {
+    fetchCarModel(brandSlug, modelSlug)
+      .then((data) => {
+        setCar(data.model);
+        setRelatedModels(data.relatedModels);
+      })
+      .catch(() => setNotFound(true))
+      .finally(() => setLoading(false));
+  }, [brandSlug, modelSlug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+        <div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
+      </div>
+    );
+  }
+
+  if (notFound || !car) {
     return (
       <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
         <div className="text-center px-6">
@@ -61,7 +75,7 @@ export default function ModelPage({
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
           </Link>
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] text-slate-500 uppercase tracking-widest">{brand?.name ?? brandSlug}</p>
+            <p className="text-[10px] text-slate-500 uppercase tracking-widest">{car.brand.name}</p>
             <h1 className="text-sm font-bold text-white truncate leading-tight">{car.fullName}</h1>
           </div>
           <button
@@ -249,16 +263,16 @@ export default function ModelPage({
             </div>
 
             {/* Other models from this brand */}
-            {otherModels.length > 0 && (
+            {relatedModels.length > 0 && (
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">
-                  More from {brand?.name ?? brandSlug}
+                  More from {car.brand.name}
                 </p>
                 <div className="grid grid-cols-2 gap-3">
-                  {otherModels.map((m) => (
+                  {relatedModels.map((m) => (
                     <Link
                       key={m.slug}
-                      href={`/${m.brand}/${m.slug}`}
+                      href={`/${brandSlug}/${m.slug}`}
                       className="rounded-xl overflow-hidden border border-white/5 transition-all active:scale-95"
                       style={{ background: "rgba(255,255,255,0.03)" }}
                     >
@@ -280,9 +294,9 @@ export default function ModelPage({
         {/* ── Variants ── */}
         {activeTab === "Variants" && (
           <div className="space-y-2">
-            {variants.length > 0 ? (
-              variants.map((v: CarVariant) => (
-                <VariantCard key={v.name + v.fuel} variant={v} />
+            {car.variants.length > 0 ? (
+              car.variants.map((v: ApiCarVariant) => (
+                <VariantCard key={v.id} variant={v} />
               ))
             ) : (
               <div className="text-center py-12">
@@ -298,7 +312,7 @@ export default function ModelPage({
           const tc = computeTrueCost({
             price: car.startingPrice,
             fuel: car.fuelTypes[0],
-            category: car.category,
+            category: car.category.toLowerCase() as "suv" | "sedan" | "hatchback" | "ev" | "luxury" | "mpv",
             modelSlug: car.slug,
             year: car.year,
           });
@@ -409,7 +423,7 @@ export default function ModelPage({
   );
 }
 
-function VariantCard({ variant }: { variant: CarVariant }) {
+function VariantCard({ variant }: { variant: ApiCarVariant }) {
   return (
     <div className="rounded-2xl p-4 border border-white/5 flex items-center justify-between gap-3" style={{ background: "rgba(255,255,255,0.03)" }}>
       <div className="min-w-0">

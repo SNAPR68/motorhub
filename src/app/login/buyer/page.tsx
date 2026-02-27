@@ -173,10 +173,16 @@ function BuyerLoginInner() {
         </div>
 
         <div className="mt-8 space-y-4 text-center">
+          <Link
+            href="/forgot-password"
+            className="text-xs font-medium text-white/40 transition-colors hover:text-white/70"
+          >
+            Forgot Password?
+          </Link>
           <p className="text-sm font-medium text-slate-400">
             New to Autovinci?{" "}
             <Link
-              href="/login/buyer"
+              href="/register"
               className="ml-1 text-white underline underline-offset-4 transition-colors hover:text-[#1754cf]"
             >
               Become a Member
@@ -184,13 +190,13 @@ function BuyerLoginInner() {
           </p>
           <div className="flex justify-center gap-6 pt-4">
             <Link
-              href="/login/buyer"
+              href="/privacy-policy"
               className="text-[10px] uppercase tracking-widest text-white/30 transition-colors hover:text-white"
             >
               Privacy Policy
             </Link>
             <Link
-              href="/login/buyer"
+              href="/terms"
               className="text-[10px] uppercase tracking-widest text-white/30 transition-colors hover:text-white"
             >
               Terms of Service

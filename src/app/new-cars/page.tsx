@@ -1,19 +1,17 @@
 "use client";
 
-import { useState, useMemo, Suspense } from "react";
+import { useState, useEffect, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
 import {
-  CAR_MODELS,
-  BRANDS,
   BODY_TYPES,
   BUDGET_SEGMENTS,
   formatEmi,
-  type CarModel,
 } from "@/lib/car-catalog";
+import { fetchCarBrands, fetchCarModels, type ApiBrand, type ApiCarModel } from "@/lib/api";
 
 /* ─── New Cars Browse Page ─── */
 
@@ -38,17 +36,37 @@ function NewCarsInner() {
   const [maxPrice, setMaxPrice] = useState(Number(searchParams.get("maxPrice") ?? 999999999));
   const [showFilters, setShowFilters] = useState(false);
 
+  const [allModels, setAllModels] = useState<ApiCarModel[]>([]);
+  const [brands, setBrands] = useState<ApiBrand[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch all models + brands from DB on mount
+  useEffect(() => {
+    Promise.all([
+      fetchCarModels({ limit: 100 }),
+      fetchCarBrands(),
+    ])
+      .then(([modelsData, brandsData]) => {
+        setAllModels(modelsData.models);
+        setBrands(brandsData.brands);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Client-side filtering (dataset is small)
   const filtered = useMemo(() => {
-    return CAR_MODELS.filter((m) => {
+    return allModels.filter((m) => {
       if (search && !m.fullName.toLowerCase().includes(search.toLowerCase()) &&
-        !m.brand.toLowerCase().includes(search.toLowerCase())) return false;
-      if (activeBody !== "all" && m.category !== activeBody) return false;
-      if (activeBrand !== "all" && m.brand !== activeBrand) return false;
+        !m.brand.slug.toLowerCase().includes(search.toLowerCase()) &&
+        !m.brand.name.toLowerCase().includes(search.toLowerCase())) return false;
+      if (activeBody !== "all" && m.category.toLowerCase() !== activeBody) return false;
+      if (activeBrand !== "all" && m.brand.slug !== activeBrand) return false;
       if (activeFuel && !m.fuelTypes.some((f) => f.toLowerCase() === activeFuel.toLowerCase())) return false;
       if (m.startingPrice < minPrice || m.startingPrice > maxPrice) return false;
       return true;
     });
-  }, [search, activeBody, activeBrand, activeFuel, minPrice, maxPrice]);
+  }, [allModels, search, activeBody, activeBrand, activeFuel, minPrice, maxPrice]);
 
   const activeFilterCount = [
     activeBody !== "all",
@@ -175,7 +193,7 @@ function NewCarsInner() {
                   style={{ background: "rgba(255,255,255,0.06)" }}
                 >
                   <option value="all" style={{ background: "#080a0f" }}>All Brands</option>
-                  {BRANDS.map((b) => (
+                  {brands.map((b) => (
                     <option key={b.slug} value={b.slug} style={{ background: "#080a0f" }}>{b.name}</option>
                   ))}
                 </select>
@@ -196,7 +214,7 @@ function NewCarsInner() {
       <main className="max-w-lg mx-auto px-4 pt-4">
         <div className="flex items-center justify-between mb-4">
           <p className="text-xs text-slate-500">
-            <span className="text-white font-semibold">{filtered.length}</span> cars found
+            {loading ? "Loading..." : <><span className="text-white font-semibold">{filtered.length}</span> cars found</>}
           </p>
           {activeFilterCount > 0 && (
             <button onClick={clearAll} className="text-xs font-semibold flex items-center gap-1" style={{ color: "#1152d4" }}>
@@ -205,7 +223,7 @@ function NewCarsInner() {
           )}
         </div>
 
-        {filtered.length === 0 && (
+        {!loading && filtered.length === 0 && (
           <div className="flex flex-col items-center py-16 text-center">
             <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
             <p className="text-sm font-semibold text-slate-400">No cars found</p>
@@ -226,10 +244,10 @@ function NewCarsInner() {
   );
 }
 
-function NewCarCard({ car }: { car: CarModel }) {
+function NewCarCard({ car }: { car: ApiCarModel }) {
   return (
     <Link
-      href={`/${car.brand}/${car.slug}`}
+      href={`/${car.brand.slug}/${car.slug}`}
       className="flex rounded-2xl overflow-hidden border transition-all active:scale-[0.99] hover:border-white/12 block"
       style={{ background: "rgba(255,255,255,0.035)", borderColor: "rgba(255,255,255,0.07)" }}
     >
@@ -260,7 +278,7 @@ function NewCarCard({ car }: { car: CarModel }) {
       {/* Details */}
       <div className="flex-1 p-3 flex flex-col justify-between min-w-0">
         <div>
-          <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">{car.brand.toUpperCase()}</p>
+          <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">{car.brand.name.toUpperCase()}</p>
           <h3 className="text-[13px] font-bold text-white leading-tight">{car.name}</h3>
           <p className="text-[10px] text-slate-500 mt-0.5">{car.reviewCount.toLocaleString()} reviews</p>
         </div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useAuthStore } from "@/lib/stores";
 
 /* Stitch: dealer_signup — #1d73c9, Manrope + Playfair Display, #0a0d10 */
 
@@ -62,6 +63,7 @@ const PLANS: {
 
 export default function DealerSignupPage() {
   const router = useRouter();
+  const { loginWithGoogle } = useAuthStore();
 
   // Business Details
   const [dealershipName, setDealershipName] = useState("");
@@ -107,13 +109,47 @@ export default function DealerSignupPage() {
     return Object.keys(e).length === 0;
   };
 
+  const [apiError, setApiError] = useState("");
+  const [success, setSuccess] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    router.push("/onboarding/dealer");
+    setApiError("");
+
+    try {
+      const res = await fetch("/api/auth/dealer-signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim(),
+          password,
+          name: fullName.trim(),
+          dealershipName: dealershipName.trim(),
+          phone: phone.trim() || undefined,
+          gstin: gstNumber.trim() || undefined,
+          businessType: businessType || undefined,
+          city: city.trim() || undefined,
+          state: state || undefined,
+          plan: selectedPlan,
+        }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setApiError(data.error || "Signup failed. Please try again.");
+        setSubmitting(false);
+        return;
+      }
+
+      setSuccess(true);
+      setTimeout(() => router.push("/login/dealer"), 1500);
+    } catch {
+      setApiError("Network error. Please try again.");
+      setSubmitting(false);
+    }
   };
 
   const inputClass =
@@ -171,7 +207,20 @@ export default function DealerSignupPage() {
             </p>
           </div>
 
+          {success ? (
+            <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-5 py-8 text-center">
+              <MaterialIcon name="check_circle" className="text-4xl text-emerald-400 mb-2" />
+              <p className="text-sm font-semibold text-emerald-300">Dealer account created!</p>
+              <p className="text-xs text-white/40 mt-1">Check your email to verify, then sign in.</p>
+            </div>
+          ) : (
+          <>
           <form onSubmit={handleSubmit} className="space-y-10">
+            {apiError && (
+              <div className="rounded-lg border border-red-400/20 bg-red-400/10 px-4 py-3 text-xs text-red-400">
+                {apiError}
+              </div>
+            )}
             {/* ── Section 1: Business Details ── */}
             <div className="space-y-6">
               <div className="flex items-center gap-2">
@@ -514,6 +563,7 @@ export default function DealerSignupPage() {
 
           {/* Google Signup */}
           <button
+            onClick={() => loginWithGoogle("/dashboard")}
             disabled={submitting}
             className="flex h-12 w-full items-center justify-center gap-3 rounded-lg border border-white/10 bg-white/5 text-sm font-medium text-white/80 transition-all active:scale-[0.98] hover:bg-white/10 disabled:opacity-50"
           >
@@ -541,10 +591,16 @@ export default function DealerSignupPage() {
           {/* Terms */}
           <p className="mt-4 text-center text-[10px] text-white/25">
             By signing up, you agree to our{" "}
-            <span className="cursor-pointer text-white/40 underline underline-offset-2 transition-colors hover:text-white/60">
+            <Link href="/terms" className="text-white/40 underline underline-offset-2 transition-colors hover:text-white/60">
               Terms of Service
-            </span>
+            </Link>{" "}
+            and{" "}
+            <Link href="/privacy-policy" className="text-white/40 underline underline-offset-2 transition-colors hover:text-white/60">
+              Privacy Policy
+            </Link>
           </p>
+          </>
+          )}
         </div>
       </div>
 

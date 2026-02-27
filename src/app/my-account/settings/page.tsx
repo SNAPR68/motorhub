@@ -311,7 +311,7 @@ export default function AccountSettingsPage() {
               style={{ background: "rgba(255,255,255,0.05)" }}
             />
             <Link
-              href="/help"
+              href="/contact"
               className="w-full flex items-center justify-between py-2.5 group"
             >
               <span className="text-sm text-slate-400 group-hover:text-white transition-colors">

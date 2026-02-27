@@ -201,6 +201,36 @@ export default function VehiclePage({
           </div>
         </section>
 
+        {/* Vehicle Intelligence Tools */}
+        <section className="px-6 py-8">
+          <span className="text-[#1773cf] text-xs font-bold tracking-[0.2em] uppercase mb-4 block">
+            Intelligence
+          </span>
+          <div className="grid grid-cols-3 gap-3">
+            <Link
+              href={`/vehicle/${id}/true-cost`}
+              className="flex flex-col items-center gap-2 rounded-xl p-4 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all active:scale-95"
+            >
+              <MaterialIcon name="calculate" className="text-2xl text-emerald-400" />
+              <span className="text-[10px] font-bold text-white/70 text-center leading-tight">True Cost</span>
+            </Link>
+            <Link
+              href={`/vehicle/${id}/negotiate`}
+              className="flex flex-col items-center gap-2 rounded-xl p-4 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all active:scale-95"
+            >
+              <MaterialIcon name="gavel" className="text-2xl text-amber-400" />
+              <span className="text-[10px] font-bold text-white/70 text-center leading-tight">Negotiate</span>
+            </Link>
+            <Link
+              href={`/vehicle/passport/${id}`}
+              className="flex flex-col items-center gap-2 rounded-xl p-4 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all active:scale-95"
+            >
+              <MaterialIcon name="verified_user" className="text-2xl text-blue-400" />
+              <span className="text-[10px] font-bold text-white/70 text-center leading-tight">Passport</span>
+            </Link>
+          </div>
+        </section>
+
         {/* Concierge Teaser */}
         <section className="px-6 py-10 bg-white/[0.02] border-y border-white/5">
           <div className="flex flex-col items-center text-center">
@@ -250,7 +280,7 @@ export default function VehiclePage({
             </span>
           </Link>
           <Link
-            href="/virtual-tour/creta-sxo"
+            href={`/virtual-tour/${id}`}
             className="flex flex-col items-center gap-1 text-white/40 hover:text-white transition-colors"
           >
             <MaterialIcon name="auto_awesome" />

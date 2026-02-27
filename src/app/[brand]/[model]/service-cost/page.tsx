@@ -1,10 +1,11 @@
 "use client";
 
-import { use } from "react";
+import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
-import { getModelBySlug, getBrandBySlug, formatPrice } from "@/lib/car-catalog";
+import { fetchCarModel, type ApiCarModelDetail } from "@/lib/api";
+import { formatPrice } from "@/lib/car-catalog";
 
 /* ─── Service schedule data ─── */
 interface ServiceInterval {
@@ -60,11 +61,28 @@ export default function ServiceCostPage({
   params: Promise<{ brand: string; model: string }>;
 }) {
   const { brand: brandSlug, model: modelSlug } = use(params);
-  const car = getModelBySlug(brandSlug, modelSlug);
-  const brand = getBrandBySlug(brandSlug);
+  const [car, setCar] = useState<ApiCarModelDetail | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchCarModel(brandSlug, modelSlug)
+      .then((res) => { if (!cancelled) setCar(res.model); })
+      .catch(() => { if (!cancelled) setCar(null); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [brandSlug, modelSlug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+        <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   /* ── 404 state ── */
-  if (!car || !brand) {
+  if (!car) {
     return (
       <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
         <div className="text-center px-6">
@@ -91,7 +109,7 @@ export default function ServiceCostPage({
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
           </Link>
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] text-slate-500 uppercase tracking-widest">{brand.name}</p>
+            <p className="text-[10px] text-slate-500 uppercase tracking-widest">{car.brand.name}</p>
             <h1 className="text-sm font-bold text-white truncate leading-tight">{car.name} Service Cost</h1>
           </div>
         </div>

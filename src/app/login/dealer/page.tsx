@@ -117,12 +117,12 @@ function DealerLoginInner() {
                 <label className="ml-1 text-[10px] font-semibold uppercase tracking-widest text-white/50">
                   Security
                 </label>
-                <button
-                  type="button"
+                <Link
+                  href="/forgot-password"
                   className="pb-1 text-[10px] uppercase tracking-tighter text-white/30 transition-colors hover:text-white"
                 >
                   Forgot?
-                </button>
+                </Link>
               </div>
               <div className="relative flex items-center">
                 <input

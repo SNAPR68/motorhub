@@ -481,3 +481,102 @@ function timeAgo(dateStr: string): string {
   const days = Math.floor(hours / 24);
   return `${days}d ago`;
 }
+
+// ── New Car Catalog API ──
+
+export interface ApiBrand {
+  id: string;
+  slug: string;
+  name: string;
+  logo: string;
+  color: string;
+  popular: boolean;
+  modelCount: number;
+}
+
+export interface ApiCarModel {
+  id: string;
+  slug: string;
+  brand: { slug: string; name: string; logo: string; color: string };
+  name: string;
+  fullName: string;
+  category: string;
+  image: string;
+  startingPrice: number;
+  startingPriceDisplay: string;
+  rating: number;
+  reviewCount: number;
+  year: number;
+  fuelTypes: string[];
+  transmissions: string[];
+  mileage: string;
+  engine: string;
+  power: string;
+  seating: number;
+  bodyType: string;
+  popular: boolean;
+  tag: string | null;
+  variantCount: number;
+}
+
+export interface ApiCarModelDetail extends Omit<ApiCarModel, "variantCount"> {
+  gallery: string[];
+  pros: string[];
+  cons: string[];
+  variants: ApiCarVariant[];
+}
+
+export interface ApiCarVariant {
+  id: string;
+  name: string;
+  fuel: string;
+  transmission: string;
+  exShowroom: number;
+  exShowroomDisplay: string;
+}
+
+export async function fetchCarBrands() {
+  return apiFetch<{ brands: ApiBrand[] }>("/api/cars/brands");
+}
+
+export async function fetchCarModels(params?: {
+  brand?: string;
+  category?: string;
+  popular?: boolean;
+  minPrice?: number;
+  maxPrice?: number;
+  fuel?: string;
+  q?: string;
+  limit?: number;
+  offset?: number;
+}) {
+  const sp = new URLSearchParams();
+  if (params?.brand) sp.set("brand", params.brand);
+  if (params?.category) sp.set("category", params.category);
+  if (params?.popular) sp.set("popular", "true");
+  if (params?.minPrice) sp.set("minPrice", String(params.minPrice));
+  if (params?.maxPrice) sp.set("maxPrice", String(params.maxPrice));
+  if (params?.fuel) sp.set("fuel", params.fuel);
+  if (params?.q) sp.set("q", params.q);
+  if (params?.limit) sp.set("limit", String(params.limit));
+  if (params?.offset) sp.set("offset", String(params.offset));
+
+  const qs = sp.toString();
+  return apiFetch<{ models: ApiCarModel[]; total: number }>(
+    `/api/cars/models${qs ? `?${qs}` : ""}`
+  );
+}
+
+export async function fetchCarModel(brand: string, model: string) {
+  return apiFetch<{
+    model: ApiCarModelDetail;
+    relatedModels: Array<{
+      slug: string;
+      name: string;
+      fullName: string;
+      image: string;
+      startingPriceDisplay: string;
+      rating: number;
+    }>;
+  }>(`/api/cars/${brand}/${model}`);
+}

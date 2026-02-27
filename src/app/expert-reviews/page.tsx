@@ -131,7 +131,7 @@ export default function ExpertReviewsPage() {
       <main className="max-w-lg mx-auto px-4 pt-4 space-y-5">
         {/* Featured Review */}
         <Link
-          href="/expert-reviews/featured"
+          href="/expert-reviews/hyundai-creta-review"
           className="block rounded-2xl overflow-hidden border border-white/5 transition-all active:scale-[0.99]"
           style={{ background: "rgba(255,255,255,0.03)" }}
         >

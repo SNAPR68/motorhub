@@ -72,7 +72,7 @@ export default function AppointmentsPage() {
         style={{ background: "rgba(255,255,255,0.8)", backdropFilter: "blur(12px)" }}
       >
         <div className="flex items-center justify-between px-4 h-16">
-          <Link href="/leads/1" className="w-10 h-10 flex items-center justify-center rounded-full">
+          <Link href="/leads" className="w-10 h-10 flex items-center justify-center rounded-full">
             <MaterialIcon name="arrow_back_ios_new" className="text-slate-900" />
           </Link>
           <h1 className="text-lg font-bold tracking-tight text-slate-900">

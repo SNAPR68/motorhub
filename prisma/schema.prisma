@@ -134,6 +134,17 @@ enum StoreStatus {
   INACTIVE
 }
 
+enum BodyType {
+  SUV
+  SEDAN
+  HATCHBACK
+  EV
+  LUXURY
+  MPV
+  COUPE
+  PICKUP
+}
+
 // ─────────────────────────────────────────────
 // MODELS
 // ─────────────────────────────────────────────
@@ -411,4 +422,82 @@ model Activity {
   @@index([dealerProfileId])
   @@index([createdAt])
   @@map("activities")
+}
+
+// ─────────────────────────────────────────────
+// NEW CAR CATALOG (brands → models → variants)
+// ─────────────────────────────────────────────
+
+/// Car manufacturer / brand
+model CarBrand {
+  id      String  @id @default(cuid())
+  slug    String  @unique
+  name    String  // e.g. "Maruti Suzuki"
+  logo    String  // Initials fallback e.g. "MS"
+  color   String  // Brand color hex
+  popular Boolean @default(false)
+  order   Int     @default(0) // Display sort order
+
+  // Relations
+  models NewCarModel[]
+
+  @@map("car_brands")
+}
+
+/// New car model (e.g. Creta, Swift, Nexon)
+model NewCarModel {
+  id                  String   @id @default(cuid())
+  brandId             String   @map("brand_id")
+  slug                String   // e.g. "creta"
+  name                String   // e.g. "Creta"
+  fullName            String   @map("full_name") // e.g. "Hyundai Creta"
+  category            BodyType
+  image               String   // Primary image URL
+  gallery             String[] // Array of image URLs
+  startingPrice       Int      @map("starting_price") // Ex-showroom in INR
+  startingPriceDisplay String  @map("starting_price_display") // e.g. "₹11.0 L"
+  rating              Float    @default(0) // Out of 5
+  reviewCount         Int      @default(0) @map("review_count")
+  year                Int      // Model year
+  fuelTypes           String[] @map("fuel_types") // ["Petrol", "Diesel"]
+  transmissions       String[] // ["Manual", "Automatic"]
+  mileage             String   // ARAI best e.g. "17.4 km/l"
+  engine              String   // e.g. "1.5L Petrol / 1.5L Diesel"
+  power               String   // e.g. "115 bhp"
+  seating             Int      @default(5)
+  bodyType            String   @map("body_type") // Free-form e.g. "Micro SUV"
+  popular             Boolean  @default(false)
+  tag                 String?  // "Best Seller", "New Launch", etc.
+  pros                String[]
+  cons                String[]
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  brand    CarBrand       @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  variants NewCarVariant[]
+
+  @@unique([brandId, slug])
+  @@index([category])
+  @@index([popular])
+  @@index([startingPrice])
+  @@map("new_car_models")
+}
+
+/// Variant of a new car model (e.g. LXi, VXi, ZXi+)
+model NewCarVariant {
+  id                String @id @default(cuid())
+  modelId           String @map("model_id")
+  name              String // e.g. "LXi", "SX(O) DCT"
+  fuel              String // e.g. "Petrol", "Diesel"
+  transmission      String // e.g. "Manual", "Automatic"
+  exShowroom        Int    @map("ex_showroom") // Price in INR
+  exShowroomDisplay String @map("ex_showroom_display") // e.g. "₹7.99 L"
+  order             Int    @default(0) // Sort within model
+
+  // Relations
+  model NewCarModel @relation(fields: [modelId], references: [id], onDelete: Cascade)
+
+  @@index([modelId])
+  @@map("new_car_variants")
 }

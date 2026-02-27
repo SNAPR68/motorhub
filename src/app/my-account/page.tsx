@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchCurrentUser } from "@/lib/api";
+import { useAuthStore } from "@/lib/stores";
 
 /* ─── My Account — Buyer Dashboard ─── */
 
@@ -15,7 +17,17 @@ const MENU_SECTIONS = [
       { icon: "directions_car", label: "My Cars", sub: "Owned & watchlisted", href: "/my-cars" },
       { icon: "favorite", label: "Saved Cars", sub: "Your shortlisted cars", href: "/wishlist" },
       { icon: "compare_arrows", label: "Compare", sub: "Side-by-side comparison", href: "/compare" },
+      { icon: "calendar_month", label: "Bookings", sub: "Service & test drives", href: "/my-account/bookings" },
       { icon: "notifications", label: "Price Alerts", sub: "Get notified on drops", href: "/alerts" },
+    ],
+  },
+  {
+    title: "My Garage",
+    items: [
+      { icon: "garage", label: "Garage", sub: "Your registered vehicles", href: "/my-account/garage" },
+      { icon: "verified_user", label: "Warranty", sub: "Extended warranty plans", href: "/my-account/warranty" },
+      { icon: "description", label: "Documents", sub: "RC, insurance & more", href: "/my-account/documents" },
+      { icon: "sell", label: "Resale Value", sub: "Track depreciation", href: "/my-account/resale" },
     ],
   },
   {
@@ -23,22 +35,29 @@ const MENU_SECTIONS = [
     items: [
       { icon: "calculate", label: "EMI Calculator", sub: "Plan your loan", href: "/car-loan/emi-calculator" },
       { icon: "account_balance", label: "Loan Offers", sub: "Pre-approved offers", href: "/car-loan" },
+      { icon: "shield", label: "Insurance", sub: "Compare & buy", href: "/car-insurance" },
     ],
   },
   {
     title: "Account",
     items: [
-      { icon: "person", label: "My Profile", sub: "Edit personal details", href: "#" },
-      { icon: "location_on", label: "My City", sub: "Bengaluru", href: "#" },
-      { icon: "history", label: "Recently Viewed", sub: "Cars you've browsed", href: "#" },
-      { icon: "support_agent", label: "Help & Support", sub: "Chat with us", href: "#" },
+      { icon: "person", label: "My Profile", sub: "Edit personal details", href: "/my-account" },
+      { icon: "sell", label: "Sell My Car", sub: "Get instant valuation", href: "/sell-car" },
+      { icon: "support_agent", label: "Help & Support", sub: "Chat with us", href: "/contact" },
     ],
   },
 ];
 
 export default function MyAccountPage() {
+  const router = useRouter();
+  const { logout } = useAuthStore();
   const { data, isLoading: loading } = useApi(() => fetchCurrentUser(), []);
   const user = data?.user;
+
+  const handleLogout = async () => {
+    await logout();
+    router.push("/");
+  };
 
   const initials = user?.name
     ? user.name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
@@ -172,7 +191,11 @@ export default function MyAccountPage() {
 
         {/* Sign out */}
         {user && (
-          <button className="flex items-center justify-center gap-2 w-full h-11 rounded-2xl text-sm font-semibold border border-red-500/15 transition-all" style={{ background: "rgba(239,68,68,0.04)", color: "#f87171" }}>
+          <button
+            onClick={handleLogout}
+            className="flex items-center justify-center gap-2 w-full h-11 rounded-2xl text-sm font-semibold border border-red-500/15 transition-all active:scale-95"
+            style={{ background: "rgba(239,68,68,0.04)", color: "#f87171" }}
+          >
             <MaterialIcon name="logout" className="text-[18px]" />
             Sign Out
           </button>

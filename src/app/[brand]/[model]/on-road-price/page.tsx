@@ -1,15 +1,12 @@
 "use client";
 
-import { use, useState, useMemo } from "react";
+import { use, useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
-import {
-  getModelBySlug,
-  getBrandBySlug,
-  getVariantsByModel,
-  formatPrice,
-} from "@/lib/car-catalog";
+import { fetchCarModel } from "@/lib/api";
+import type { ApiCarModelDetail } from "@/lib/api";
+import { formatPrice } from "@/lib/car-catalog";
 
 /* ─── Cities ─── */
 const CITIES = [
@@ -36,16 +33,43 @@ export default function OnRoadPricePage({
   params: Promise<{ brand: string; model: string }>;
 }) {
   const { brand: brandSlug, model: modelSlug } = use(params);
-  const car = getModelBySlug(brandSlug, modelSlug);
-  const brand = getBrandBySlug(brandSlug);
-  const catalogVariants = getVariantsByModel(modelSlug);
 
+  const [car, setCar] = useState<ApiCarModelDetail | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
   const [selectedCity, setSelectedCity] = useState("Bengaluru");
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [cityOpen, setCityOpen] = useState(false);
 
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    fetchCarModel(brandSlug, modelSlug)
+      .then((res) => {
+        if (cancelled) return;
+        setCar(res.model);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setNotFound(true);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [brandSlug, modelSlug]);
+
+  /* ── Loading state ── */
+  if (loading) {
+    return (
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+        <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
   /* ── 404 state ── */
-  if (!car || !brand) {
+  if (notFound || !car) {
     return (
       <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
         <div className="text-center px-6">
@@ -59,9 +83,11 @@ export default function OnRoadPricePage({
     );
   }
 
-  /* Build variants list — use catalog data or fallback */
-  const variants = catalogVariants.length > 0
-    ? catalogVariants.map((v) => ({ name: v.name, exShowroom: v.exShowroom }))
+  const brand = car.brand;
+
+  /* Build variants list — use API data or fallback */
+  const variants = car.variants.length > 0
+    ? car.variants.map((v) => ({ name: v.name, exShowroom: v.exShowroom }))
     : DEFAULT_VARIANTS.map((v, i) => ({
         name: v.name,
         exShowroom: car.startingPrice + i * 150000,
