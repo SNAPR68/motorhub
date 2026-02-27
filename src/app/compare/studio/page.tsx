@@ -290,7 +290,7 @@ export default function CompareStudioV2Page() {
       )}
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#0a0c10]/95 backdrop-blur-xl border-t border-white/10 px-6 pb-6 pt-3 max-w-md mx-auto">
+      <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#0a0c10]/95 backdrop-blur-xl border-t border-white/10 px-6 pb-6 pt-3 max-w-md mx-auto md:hidden">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex flex-col items-center gap-1 text-slate-500">
             <MaterialIcon name="home" />

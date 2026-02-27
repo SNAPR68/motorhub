@@ -132,7 +132,7 @@ export default function MarketingCinemaPage() {
       </main>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 border-t px-6 pb-6 pt-3 flex justify-between items-center"
+      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 border-t px-6 pb-6 pt-3 flex justify-between items-center md:hidden"
         style={{ background: "rgba(11,20,38,0.95)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}>
         <Link href="/dashboard" className="flex flex-col items-center gap-1 text-slate-500">
           <MaterialIcon name="dashboard" />

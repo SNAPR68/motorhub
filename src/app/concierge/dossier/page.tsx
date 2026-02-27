@@ -139,7 +139,7 @@ function DossierContent() {
         </div>
       </main>
 
-      <div className="fixed bottom-0 left-0 right-0 max-w-[450px] mx-auto z-30 p-4 bg-[#111921]/95 backdrop-blur-md border-t border-slate-800">
+      <div className="fixed bottom-0 left-0 right-0 max-w-[450px] mx-auto z-30 p-4 bg-[#111921]/95 backdrop-blur-md border-t border-slate-800 md:hidden">
         <div className="flex gap-3">
           <Link
             href={vehicleId ? `/reservation?vehicleId=${vehicleId}` : "/reservation"}

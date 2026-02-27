@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 
 /* Stitch: ai_automation_permissions — #1754cf, Manrope, #0a0c10, card: #161b26 */
+
+const STORAGE_KEY = "av_ai_permissions";
 
 const PERMISSIONS = [
   {
@@ -32,6 +34,20 @@ const PERMISSIONS = [
 
 export default function AIPermissionsPage() {
   const [toggles, setToggles] = useState(PERMISSIONS.map((p) => p.defaultOn));
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) setToggles(JSON.parse(stored) as boolean[]);
+    } catch {}
+  }, []);
+
+  const handleSave = () => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
 
   return (
     <div
@@ -121,13 +137,14 @@ export default function AIPermissionsPage() {
 
       {/* CTA */}
       <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-30 p-6 bg-[#0a0c10]/95 backdrop-blur-md border-t border-white/5">
-        <Link
-          href="/dashboard"
-          className="w-full bg-[#1754cf] text-white py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-[#1754cf]/30 active:scale-[0.98] transition-transform"
+        <button
+          onClick={handleSave}
+          className="w-full py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all"
+          style={{ background: saved ? "#10b981" : "#1754cf", boxShadow: saved ? "0 10px 30px -10px rgba(16,185,129,0.4)" : "0 10px 30px -10px rgba(23,84,207,0.4)", color: "white" }}
         >
-          Continue to Dashboard
-          <MaterialIcon name="arrow_forward" />
-        </Link>
+          <MaterialIcon name={saved ? "check_circle" : "arrow_forward"} />
+          {saved ? "Saved!" : "Save Permissions"}
+        </button>
       </div>
     </div>
   );

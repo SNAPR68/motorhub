@@ -122,7 +122,7 @@ export default function ContentStudioAdvancedPage() {
       </main>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 border-t px-4 pb-6 pt-2 flex justify-around items-center"
+      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 border-t px-4 pb-6 pt-2 flex justify-around items-center md:hidden"
         style={{ background: "rgba(26,16,8,0.95)", backdropFilter: "blur(16px)", borderColor: "rgba(249,115,22,0.1)" }}>
         <Link href="/inventory" className="flex flex-col items-center gap-1 text-slate-500">
           <MaterialIcon name="directions_car" /><span className="text-[10px] font-bold">Inventory</span>
