@@ -1,235 +1,244 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
-import { VehicleCard } from "@/components/VehicleCard";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { SkeletonCard } from "@/components/ui/Skeleton";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle } from "@/lib/api";
-import { VEHICLE_CATEGORIES, SORT_OPTIONS, INVENTORY_FILTERS } from "@/lib/constants";
+import { VEHICLE_CATEGORIES, SORT_OPTIONS } from "@/lib/constants";
+import type { Vehicle } from "@/lib/types";
 
-/* Autovinci — Vehicle Search & Browse (Buyer-facing marketplace page) */
-
-const CATEGORIES = [
-  { label: "All", value: "all" },
-  ...VEHICLE_CATEGORIES.map((c) => ({ label: c.label, value: c.value })),
-];
+/* ─── Autovinci Showroom — CarDekho-level buyer search experience ─── */
 
 const PAGE_SIZE = 20;
+
+const CATEGORIES = [
+  { label: "All", value: "all", icon: "🚘" },
+  ...VEHICLE_CATEGORIES,
+];
+
+const FUEL_TYPES = ["Petrol", "Diesel", "Electric", "Hybrid", "CNG"];
+const TRANSMISSIONS = ["Manual", "Automatic"];
+
+const BUDGET_RANGES = [
+  { label: "Under ₹3L", value: "0-300000" },
+  { label: "₹3–5L", value: "300000-500000" },
+  { label: "₹5–8L", value: "500000-800000" },
+  { label: "₹8–12L", value: "800000-1200000" },
+  { label: "₹12–20L", value: "1200000-2000000" },
+  { label: "₹20L+", value: "2000000-99999999" },
+];
+
+/** Rough EMI: 7-year loan, 9% p.a., 80% LTV */
+function calcEmi(priceNumeric: number): string {
+  const principal = priceNumeric * 0.8;
+  const r = 0.09 / 12;
+  const n = 84;
+  const emi = (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  if (emi < 1000) return "";
+  return `₹${Math.round(emi / 1000)}k/mo`;
+}
 
 export default function ShowroomPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const searchRef = useRef<HTMLInputElement>(null);
 
-  // Read initial values from URL
   const initialQuery = searchParams.get("q") ?? "";
   const initialCategory = searchParams.get("category") ?? "all";
   const initialPrice = searchParams.get("price") ?? "";
   const initialSort = searchParams.get("sort") ?? "featured";
 
   const [search, setSearch] = useState(initialQuery);
-  const [activeCategory, setActiveCategory] = useState(
-    CATEGORIES.findIndex((c) => c.value === initialCategory) || 0
+  const [liveSearch, setLiveSearch] = useState(initialQuery);
+  const [activeCatIdx, setActiveCatIdx] = useState(
+    Math.max(0, CATEGORIES.findIndex((c) => c.value === initialCategory))
   );
   const [priceRange, setPriceRange] = useState(initialPrice);
   const [sort, setSort] = useState(initialSort);
+  const [fuel, setFuel] = useState("");
+  const [transmission, setTransmission] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+  const [wishlist, setWishlist] = useState<Set<string>>(new Set());
 
-  // Build API params
-  const category = CATEGORIES[activeCategory]?.value;
-  const apiParams = {
-    limit: PAGE_SIZE,
-    ...(category && category !== "all" ? { category: category.toUpperCase() } : {}),
-    ...(search ? { search } : {}),
-    ...(sort && sort !== "featured" ? { sort } : {}),
-    ...(priceRange ? {} : {}), // Price filtering handled client-side for now
-  };
+  const category = CATEGORIES[activeCatIdx]?.value;
 
-  const { data, isLoading, refetch } = useApi(
-    () => fetchVehicles(apiParams),
-    [category, search, sort]
+  const { data, isLoading } = useApi(
+    () =>
+      fetchVehicles({
+        limit: PAGE_SIZE,
+        status: "AVAILABLE",
+        ...(category && category !== "all" ? { category: category.toUpperCase() } : {}),
+        ...(liveSearch ? { search: liveSearch } : {}),
+        ...(sort && sort !== "featured" ? { sort } : {}),
+      }),
+    [category, liveSearch, sort]
   );
 
   const vehicles = (data?.vehicles ?? []).map(adaptVehicle);
   const total = data?.total ?? 0;
 
-  // Filter by price range client-side
-  const filteredVehicles = priceRange
-    ? vehicles.filter((v) => {
-        const [min, max] = priceRange.split("-").map(Number);
-        return v.priceNumeric >= min && v.priceNumeric <= max;
-      })
-    : vehicles;
+  const filtered = vehicles.filter((v) => {
+    if (priceRange) {
+      const [min, max] = priceRange.split("-").map(Number);
+      if (v.priceNumeric < min || v.priceNumeric > max) return false;
+    }
+    if (fuel && v.fuel.toLowerCase() !== fuel.toLowerCase()) return false;
+    if (transmission && v.transmission.toLowerCase() !== transmission.toLowerCase()) return false;
+    return true;
+  });
 
-  // Update URL when filters change
+  const activeFilterCount = [priceRange, fuel, transmission].filter(Boolean).length;
+  const hasFilters = !!(priceRange || fuel || transmission || liveSearch || activeCatIdx !== 0);
+
   const updateUrl = useCallback(
-    (params: Record<string, string>) => {
+    (p: Record<string, string>) => {
       const sp = new URLSearchParams();
-      if (params.q) sp.set("q", params.q);
-      if (params.category && params.category !== "all") sp.set("category", params.category);
-      if (params.price) sp.set("price", params.price);
-      if (params.sort && params.sort !== "featured") sp.set("sort", params.sort);
-      const qs = sp.toString();
-      router.replace(`/showroom${qs ? `?${qs}` : ""}`, { scroll: false });
+      if (p.q) sp.set("q", p.q);
+      if (p.category && p.category !== "all") sp.set("category", p.category);
+      if (p.price) sp.set("price", p.price);
+      if (p.sort && p.sort !== "featured") sp.set("sort", p.sort);
+      router.replace(`/showroom${sp.toString() ? `?${sp}` : ""}`, { scroll: false });
     },
     [router]
   );
 
-  const handleSearch = () => {
-    updateUrl({
-      q: search,
-      category: CATEGORIES[activeCategory]?.value ?? "all",
-      price: priceRange,
-      sort,
-    });
+  const commitSearch = () => {
+    setLiveSearch(search);
+    updateUrl({ q: search, category, price: priceRange, sort });
   };
 
-  const handleCategoryChange = (idx: number) => {
-    setActiveCategory(idx);
-    updateUrl({
-      q: search,
-      category: CATEGORIES[idx]?.value ?? "all",
-      price: priceRange,
-      sort,
+  const clearAll = () => {
+    setSearch(""); setLiveSearch(""); setActiveCatIdx(0);
+    setPriceRange(""); setFuel(""); setTransmission(""); setSort("featured");
+    router.replace("/showroom", { scroll: false });
+  };
+
+  const toggleWishlist = (id: string, e: React.MouseEvent) => {
+    e.preventDefault(); e.stopPropagation();
+    setWishlist((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
     });
   };
 
   return (
-    <div
-      className="min-h-dvh w-full pb-28"
-      style={{ background: "#0a0c10" }}
-    >
-      {/* ═══ STICKY HEADER WITH SEARCH ═══ */}
+    <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+
+      {/* ─── STICKY HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(10,12,16,0.92)", backdropFilter: "blur(16px)" }}
+        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
       >
-        <div className="max-w-lg mx-auto px-4 pt-3 pb-3">
+        <div className="max-w-lg mx-auto px-4 pt-3 pb-0">
+
           {/* Search row */}
-          <div className="flex items-center gap-2">
-            <Link href="/" className="flex items-center justify-center h-10 w-10 shrink-0">
-              <MaterialIcon name="arrow_back" className="text-[22px] text-slate-300" />
+          <div className="flex items-center gap-2 mb-3">
+            <Link href="/" className="flex h-9 w-9 items-center justify-center shrink-0 rounded-xl" style={{ background: "rgba(255,255,255,0.05)" }}>
+              <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
             </Link>
-            <div className="flex-1 flex items-center gap-2 rounded-xl bg-white/[0.06] border border-white/10 px-3 py-2.5 focus-within:border-primary/40">
+
+            <div
+              className="flex flex-1 items-center gap-2 rounded-xl px-3 py-2.5 border border-white/10 focus-within:border-blue-500/40 transition-colors"
+              style={{ background: "rgba(255,255,255,0.05)" }}
+            >
               <MaterialIcon name="search" className="text-[18px] text-slate-500 shrink-0" />
               <input
+                ref={searchRef}
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                placeholder="Search cars, brands..."
+                onKeyDown={(e) => e.key === "Enter" && commitSearch()}
+                placeholder="Search by name, brand, model..."
                 className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
               />
               {search && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSearch("");
-                    updateUrl({ q: "", category: CATEGORIES[activeCategory]?.value ?? "all", price: priceRange, sort });
-                  }}
-                  className="text-slate-500 hover:text-white"
-                >
+                <button onClick={() => { setSearch(""); setLiveSearch(""); updateUrl({ category, price: priceRange, sort }); }} className="text-slate-500 hover:text-slate-300">
                   <MaterialIcon name="close" className="text-[16px]" />
                 </button>
               )}
             </div>
+
             <button
-              type="button"
               onClick={() => setShowFilters(!showFilters)}
-              className={`flex h-10 w-10 items-center justify-center rounded-xl shrink-0 transition-colors ${
-                showFilters ? "bg-primary text-white" : "bg-white/[0.06] text-slate-400"
-              }`}
+              className="relative flex h-9 w-9 items-center justify-center rounded-xl shrink-0 transition-colors"
+              style={{ background: showFilters ? "#1152d4" : "rgba(255,255,255,0.05)", color: showFilters ? "#fff" : "#94a3b8" }}
             >
               <MaterialIcon name="tune" className="text-[20px]" />
+              {activeFilterCount > 0 && (
+                <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full text-[9px] font-bold text-white flex items-center justify-center" style={{ background: "#ef4444" }}>
+                  {activeFilterCount}
+                </span>
+              )}
             </button>
           </div>
 
           {/* Category pills */}
-          <div className="flex gap-2 overflow-x-auto no-scrollbar mt-3 -mx-1 px-1 pb-1">
+          <div className="flex gap-1.5 overflow-x-auto no-scrollbar pb-3">
             {CATEGORIES.map((cat, i) => (
               <button
                 key={cat.value}
-                type="button"
-                onClick={() => handleCategoryChange(i)}
-                className={`flex h-8 shrink-0 items-center justify-center rounded-full px-4 text-xs font-semibold transition-all ${
-                  i === activeCategory
-                    ? "bg-primary text-white shadow-lg shadow-primary/20"
-                    : "bg-white/[0.06] text-slate-400 hover:bg-white/[0.1]"
-                }`}
+                onClick={() => { setActiveCatIdx(i); updateUrl({ q: search, category: cat.value, price: priceRange, sort }); }}
+                className="flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3.5 text-xs font-semibold transition-all"
+                style={{
+                  background: i === activeCatIdx ? "#1152d4" : "rgba(255,255,255,0.05)",
+                  color: i === activeCatIdx ? "#fff" : "#94a3b8",
+                  boxShadow: i === activeCatIdx ? "0 4px 12px rgba(17,82,212,0.25)" : "none",
+                }}
               >
+                <span>{cat.icon}</span>
                 {cat.label}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Expandable filter panel */}
+        {/* ─── FILTER PANEL ─── */}
         {showFilters && (
-          <div className="max-w-lg mx-auto px-4 pb-4 border-t border-white/5 pt-3">
-            <div className="grid grid-cols-2 gap-3">
-              {/* Price Range */}
-              <div>
-                <label className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider mb-1.5 block">
-                  Price Range
-                </label>
-                <select
-                  value={priceRange}
-                  onChange={(e) => {
-                    setPriceRange(e.target.value);
-                    updateUrl({ q: search, category: CATEGORIES[activeCategory]?.value ?? "all", price: e.target.value, sort });
-                  }}
-                  className="w-full h-9 rounded-lg bg-white/[0.06] border border-white/10 text-white text-xs px-3 outline-none focus:border-primary/40"
-                >
-                  <option value="" className="bg-[#0a0c10]">All Prices</option>
-                  {INVENTORY_FILTERS.find((f) => f.key === "price")?.options
-                    .filter((o) => o.value)
-                    .map((o) => (
-                      <option key={o.value} value={o.value} className="bg-[#0a0c10]">
-                        {o.label}
-                      </option>
-                    ))}
-                </select>
+          <div className="max-w-lg mx-auto px-4 pb-4 border-t border-white/5 pt-4 space-y-4">
+            {/* Budget */}
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Budget</p>
+              <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                {BUDGET_RANGES.map((b) => (
+                  <button
+                    key={b.value}
+                    onClick={() => setPriceRange(priceRange === b.value ? "" : b.value)}
+                    className="shrink-0 h-7 px-3 rounded-full text-[11px] font-semibold transition-all border"
+                    style={{
+                      background: priceRange === b.value ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)",
+                      color: priceRange === b.value ? "#fff" : "#94a3b8",
+                      borderColor: priceRange === b.value ? "#1152d4" : "rgba(255,255,255,0.1)",
+                    }}
+                  >
+                    {b.label}
+                  </button>
+                ))}
               </div>
+            </div>
 
-              {/* Sort */}
-              <div>
-                <label className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider mb-1.5 block">
-                  Sort By
-                </label>
-                <select
-                  value={sort}
-                  onChange={(e) => {
-                    setSort(e.target.value);
-                    updateUrl({ q: search, category: CATEGORIES[activeCategory]?.value ?? "all", price: priceRange, sort: e.target.value });
-                  }}
-                  className="w-full h-9 rounded-lg bg-white/[0.06] border border-white/10 text-white text-xs px-3 outline-none focus:border-primary/40"
-                >
-                  {SORT_OPTIONS.map((o) => (
-                    <option key={o.value} value={o.value} className="bg-[#0a0c10]">
-                      {o.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
+            <div className="grid grid-cols-2 gap-4">
               {/* Fuel */}
               <div>
-                <label className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider mb-1.5 block">
-                  Fuel Type
-                </label>
-                <div className="flex gap-1.5 flex-wrap">
-                  {["All", "Petrol", "Diesel", "Electric"].map((fuel) => (
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Fuel</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {FUEL_TYPES.map((f) => (
                     <button
-                      key={fuel}
-                      type="button"
-                      className="h-7 px-3 rounded-full text-[10px] font-semibold bg-white/[0.06] text-slate-400 hover:bg-white/[0.1] transition-colors"
+                      key={f}
+                      onClick={() => setFuel(fuel === f ? "" : f)}
+                      className="h-7 px-2.5 rounded-full text-[11px] font-semibold transition-all border"
+                      style={{
+                        background: fuel === f ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)",
+                        color: fuel === f ? "#fff" : "#94a3b8",
+                        borderColor: fuel === f ? "#1152d4" : "rgba(255,255,255,0.1)",
+                      }}
                     >
-                      {fuel}
+                      {f}
                     </button>
                   ))}
                 </div>
@@ -237,118 +246,120 @@ export default function ShowroomPage() {
 
               {/* Transmission */}
               <div>
-                <label className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider mb-1.5 block">
-                  Transmission
-                </label>
-                <div className="flex gap-1.5 flex-wrap">
-                  {["All", "Manual", "Automatic"].map((trans) => (
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Gearbox</p>
+                <div className="flex flex-col gap-1.5">
+                  {TRANSMISSIONS.map((t) => (
                     <button
-                      key={trans}
-                      type="button"
-                      className="h-7 px-3 rounded-full text-[10px] font-semibold bg-white/[0.06] text-slate-400 hover:bg-white/[0.1] transition-colors"
+                      key={t}
+                      onClick={() => setTransmission(transmission === t ? "" : t)}
+                      className="h-7 px-2.5 rounded-full text-[11px] font-semibold transition-all border text-left"
+                      style={{
+                        background: transmission === t ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)",
+                        color: transmission === t ? "#fff" : "#94a3b8",
+                        borderColor: transmission === t ? "#1152d4" : "rgba(255,255,255,0.1)",
+                      }}
                     >
-                      {trans}
+                      {t}
                     </button>
                   ))}
                 </div>
               </div>
             </div>
+
+            {/* Sort + clear */}
+            <div className="flex items-end gap-3">
+              <div className="flex-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Sort by</p>
+                <select
+                  value={sort}
+                  onChange={(e) => { setSort(e.target.value); updateUrl({ q: search, category, price: priceRange, sort: e.target.value }); }}
+                  className="w-full h-9 rounded-xl text-white text-xs px-3 outline-none border border-white/10"
+                  style={{ background: "rgba(255,255,255,0.06)" }}
+                >
+                  {SORT_OPTIONS.map((o) => (
+                    <option key={o.value} value={o.value} style={{ background: "#080a0f" }}>{o.label}</option>
+                  ))}
+                </select>
+              </div>
+              {hasFilters && (
+                <button
+                  onClick={clearAll}
+                  className="flex h-9 items-center gap-1.5 px-4 rounded-xl text-xs font-semibold border border-red-500/20"
+                  style={{ background: "rgba(239,68,68,0.06)", color: "#f87171" }}
+                >
+                  <MaterialIcon name="close" className="text-[14px]" />
+                  Clear
+                </button>
+              )}
+            </div>
           </div>
         )}
       </header>
 
-      {/* ═══ RESULTS ═══ */}
+      {/* ─── RESULTS ─── */}
       <main className="max-w-lg mx-auto px-4 pt-4">
-        {/* Results count */}
+
+        {/* Count bar */}
         <div className="flex items-center justify-between mb-4">
           <p className="text-xs text-slate-500">
             {isLoading ? (
-              "Searching..."
+              <span className="animate-pulse text-slate-600">Searching...</span>
             ) : (
               <>
-                <span className="text-white font-semibold">{filteredVehicles.length}</span>{" "}
-                {filteredVehicles.length === 1 ? "car" : "cars"} found
-                {search && (
-                  <span>
-                    {" "}for &ldquo;<span className="text-primary">{search}</span>&rdquo;
-                  </span>
-                )}
+                <span className="text-white font-semibold">{filtered.length}</span>{" "}
+                {filtered.length === 1 ? "car" : "cars"}
+                {liveSearch && <> for <span className="text-blue-400">&ldquo;{liveSearch}&rdquo;</span></>}
               </>
             )}
           </p>
-          {(search || activeCategory !== 0 || priceRange) && (
-            <button
-              type="button"
-              onClick={() => {
-                setSearch("");
-                setActiveCategory(0);
-                setPriceRange("");
-                setSort("featured");
-                router.replace("/showroom", { scroll: false });
-              }}
-              className="text-xs text-primary font-semibold flex items-center gap-1"
-            >
-              Clear all <MaterialIcon name="close" className="text-[14px]" />
+          {hasFilters && (
+            <button onClick={clearAll} className="text-xs font-semibold flex items-center gap-1" style={{ color: "#1152d4" }}>
+              Clear all <MaterialIcon name="close" className="text-[13px]" />
             </button>
           )}
         </div>
 
-        {/* Loading state */}
+        {/* Skeletons */}
         {isLoading && (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="space-y-3">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i}>
-                <div className="aspect-[4/3] rounded-xl bg-white/5 animate-pulse" />
-                <div className="mt-2 space-y-1.5">
-                  <div className="h-3 w-3/4 rounded bg-white/5 animate-pulse" />
-                  <div className="h-4 w-1/2 rounded bg-white/5 animate-pulse" />
+              <div key={i} className="flex gap-0 rounded-2xl overflow-hidden border border-white/5 animate-pulse" style={{ background: "rgba(255,255,255,0.03)" }}>
+                <div className="h-28 w-36 shrink-0" style={{ background: "rgba(255,255,255,0.07)" }} />
+                <div className="flex-1 p-3 space-y-2">
+                  <div className="h-3.5 w-3/4 rounded" style={{ background: "rgba(255,255,255,0.07)" }} />
+                  <div className="h-3 w-1/2 rounded" style={{ background: "rgba(255,255,255,0.05)" }} />
+                  <div className="h-4 w-2/3 rounded" style={{ background: "rgba(255,255,255,0.07)" }} />
+                  <div className="h-3 w-full rounded" style={{ background: "rgba(255,255,255,0.04)" }} />
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        {/* Empty state */}
-        {!isLoading && filteredVehicles.length === 0 && (
+        {/* Empty */}
+        {!isLoading && filtered.length === 0 && (
           <EmptyState
             icon="search_off"
             title="No cars found"
-            description={
-              search
-                ? `No results for "${search}". Try a different search or browse all cars.`
-                : "No vehicles match your filters. Try adjusting your criteria."
-            }
-            action={{
-              label: "Browse All",
-              onClick: () => {
-                setSearch("");
-                setActiveCategory(0);
-                setPriceRange("");
-                router.replace("/showroom", { scroll: false });
-              },
-            }}
+            description={liveSearch ? `No results for "${liveSearch}". Try different keywords or clear filters.` : "Try adjusting your filters."}
+            action={{ label: "Browse All", onClick: clearAll }}
           />
         )}
 
-        {/* Vehicle grid */}
-        {!isLoading && filteredVehicles.length > 0 && (
-          <div className="grid grid-cols-2 gap-3">
-            {filteredVehicles.map((v) => (
-              <ShowroomCarCard key={v.id} vehicle={v} />
+        {/* ─── LIST ─── */}
+        {!isLoading && filtered.length > 0 && (
+          <div className="space-y-3">
+            {filtered.map((v) => (
+              <CarListCard key={v.id} vehicle={v} wishlisted={wishlist.has(v.id)} onWishlist={toggleWishlist} />
             ))}
           </div>
         )}
 
-        {/* Load more / total indicator */}
-        {!isLoading && filteredVehicles.length > 0 && total > PAGE_SIZE && (
-          <div className="text-center py-6">
-            <p className="text-xs text-slate-500 mb-3">
-              Showing {filteredVehicles.length} of {total} cars
-            </p>
-            <button
-              type="button"
-              className="inline-flex items-center gap-2 rounded-full bg-white/[0.06] border border-white/10 px-6 py-2.5 text-sm font-semibold text-white hover:bg-white/[0.1] transition-colors"
-            >
+        {/* Load more */}
+        {!isLoading && filtered.length > 0 && total > PAGE_SIZE && (
+          <div className="py-8 text-center">
+            <p className="text-xs text-slate-600 mb-3">Showing {filtered.length} of {total}</p>
+            <button className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-slate-300 border border-white/10 hover:border-white/20 transition-colors">
               <MaterialIcon name="expand_more" className="text-[18px]" />
               Load more
             </button>
@@ -356,46 +367,127 @@ export default function ShowroomPage() {
         )}
       </main>
 
-      {/* Bottom nav */}
       <BuyerBottomNav />
     </div>
   );
 }
 
-/* ── Compact car card for showroom grid ── */
-function ShowroomCarCard({ vehicle }: { vehicle: ReturnType<typeof adaptVehicle> }) {
+/* ─────────────────────────────────────────────────────────────────
+   CAR LIST CARD — horizontal card, CarDekho-level info density
+───────────────────────────────────────────────────────────────── */
+function CarListCard({
+  vehicle,
+  wishlisted,
+  onWishlist,
+}: {
+  vehicle: Vehicle;
+  wishlisted: boolean;
+  onWishlist: (id: string, e: React.MouseEvent) => void;
+}) {
+  const emi = calcEmi(vehicle.priceNumeric);
+
   return (
     <Link
       href={`/vehicle/${vehicle.id}`}
-      className="block rounded-xl overflow-hidden bg-white/[0.04] border border-white/5 transition-all hover:border-white/10 active:scale-[0.98]"
+      className="flex rounded-2xl overflow-hidden border transition-all active:scale-[0.99] hover:border-white/10 block"
+      style={{ background: "rgba(255,255,255,0.035)", borderColor: "rgba(255,255,255,0.07)" }}
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
+      {/* Image */}
+      <div className="relative w-36 shrink-0 min-h-[112px]">
         <Image
-          src={vehicle.image}
+          src={vehicle.image || "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400"}
           alt={vehicle.name}
           fill
-          sizes="(max-width: 430px) 50vw, 215px"
+          sizes="144px"
           className="object-cover"
         />
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, transparent 60%, rgba(0,0,0,0.3))" }} />
+
+        {/* Photo count */}
+        {vehicle.gallery.length > 1 && (
+          <div
+            className="absolute bottom-2 left-2 flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-bold text-white"
+            style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
+          >
+            <MaterialIcon name="photo_library" className="text-[9px]" />
+            {vehicle.gallery.length}
+          </div>
+        )}
+
+        {/* AI badge */}
         {vehicle.aiTag && (
-          <div className="absolute top-2 left-2 flex items-center gap-1 rounded-full bg-primary/90 px-2 py-0.5 text-[9px] font-bold text-white">
-            <MaterialIcon name="auto_awesome" className="text-[10px]" />
+          <div
+            className="absolute top-2 left-2 flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[9px] font-bold text-white"
+            style={{ background: "rgba(17,82,212,0.9)", backdropFilter: "blur(4px)" }}
+          >
+            <MaterialIcon name="verified" className="text-[9px]" />
             AI
           </div>
         )}
       </div>
-      <div className="p-3">
-        <p className="text-[9px] text-slate-500 font-semibold uppercase tracking-wider">
-          {vehicle.year} &bull; {vehicle.km} km
-        </p>
-        <h3 className="text-xs font-bold text-white truncate mt-0.5">{vehicle.name}</h3>
-        <div className="flex items-center justify-between mt-1.5">
-          <span className="text-sm font-bold text-white">{vehicle.price}</span>
+
+      {/* Details */}
+      <div className="flex-1 p-3 flex flex-col justify-between min-w-0">
+
+        {/* Name + wishlist */}
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <h3 className="text-[13px] font-bold text-white leading-tight truncate">{vehicle.name}</h3>
+            <p className="text-[10px] text-slate-500 mt-0.5">{vehicle.year} &bull; {vehicle.owner}</p>
+          </div>
+          <button onClick={(e) => onWishlist(vehicle.id, e)} className="shrink-0 mt-0.5 p-0.5">
+            <MaterialIcon
+              name="favorite"
+              fill={wishlisted}
+              className="text-[20px] transition-colors"
+              style={{ color: wishlisted ? "#ef4444" : "rgba(255,255,255,0.18)" }}
+            />
+          </button>
         </div>
-        <p className="text-[9px] text-slate-500 mt-1">
-          {vehicle.fuel} &bull; {vehicle.transmission}
-        </p>
+
+        {/* Spec chips */}
+        <div className="flex flex-wrap gap-1.5 my-2">
+          {[
+            { icon: "local_gas_station", val: vehicle.fuel },
+            { icon: "settings", val: vehicle.transmission },
+            { icon: "speed", val: `${vehicle.km} km` },
+          ].map(({ icon, val }) => (
+            <span
+              key={val}
+              className="flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold text-slate-400 border"
+              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}
+            >
+              <MaterialIcon name={icon} className="text-[10px]" />
+              {val}
+            </span>
+          ))}
+        </div>
+
+        {/* Price + EMI + location */}
+        <div>
+          <div className="flex items-baseline gap-2">
+            <span className="text-base font-black text-white">{vehicle.price}</span>
+            {emi && (
+              <span className="text-[11px] text-slate-500">
+                EMI <span className="text-slate-400 font-semibold">{emi}</span>
+              </span>
+            )}
+          </div>
+          <div className="flex items-center justify-between mt-1">
+            <span className="flex items-center gap-1 text-[10px] text-slate-500 truncate">
+              <MaterialIcon name="location_on" className="text-[11px] shrink-0" />
+              {vehicle.location}
+            </span>
+            {vehicle.badge && (
+              <span
+                className="shrink-0 text-[9px] font-bold px-2 py-0.5 rounded-full border"
+                style={{ color: "#34d399", background: "rgba(16,185,129,0.08)", borderColor: "rgba(16,185,129,0.25)" }}
+              >
+                {vehicle.badge}
+              </span>
+            )}
+          </div>
+        </div>
       </div>
     </Link>
   );
