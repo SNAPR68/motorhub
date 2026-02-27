@@ -125,16 +125,7 @@ function EmiCalculatorInner() {
           <div>
             <div className="flex justify-between items-center mb-2">
               <p className="text-xs font-semibold text-slate-300">Car Price</p>
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-slate-500">₹</span>
-                <input
-                  type="number"
-                  value={carPrice}
-                  onChange={(e) => setCarPrice(Math.max(100000, Math.min(20000000, Number(e.target.value))))}
-                  className="text-sm font-bold text-white bg-transparent outline-none w-24 text-right"
-                  style={{ border: "none" }}
-                />
-              </div>
+              <span className="text-sm font-bold text-white">{formatINR(carPrice)}</span>
             </div>
             <input type="range" min={200000} max={20000000} step={50000} value={carPrice}
               onChange={(e) => setCarPrice(Number(e.target.value))}
