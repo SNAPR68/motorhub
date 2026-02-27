@@ -191,6 +191,15 @@ function DealerLoginInner() {
 
       {/* Footer */}
       <div className="flex flex-col items-center gap-6 pb-16">
+        <Link
+          href="/dealer/signup"
+          className="group text-sm text-white/60 transition-all hover:text-white"
+        >
+          New dealer?{" "}
+          <span className="font-semibold text-[#1d73c9] group-hover:text-[#4a9ae8]">
+            Register here
+          </span>
+        </Link>
         <div className="flex items-center gap-3">
           <div className="h-[1px] w-8 bg-white/10" />
           <span className="text-[10px] uppercase tracking-[0.2em] text-white/20">
