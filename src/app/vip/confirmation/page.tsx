@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchCurrentUser } from "@/lib/api";
 
 /* Stitch: vip_membership_confirmation — #f2cc0d, Manrope, #0a0a0a */
 
@@ -27,6 +29,13 @@ const QUICK_MENU = [
 ];
 
 export default function VIPConfirmationPage() {
+  const { data: meData } = useApi(() => fetchCurrentUser(), []);
+  const userName = meData?.user?.name ?? "Autovinci Buyer";
+  // Generate member ID from user id or timestamp
+  const memberId = meData?.user?.id
+    ? `AV-${meData.user.id.slice(0, 4).toUpperCase()}-VIP`
+    : "AV-8829-VIP";
+
   return (
     <div
       className="relative flex h-dvh min-h-dvh w-full flex-col overflow-x-hidden max-w-md mx-auto border-x border-white/5 text-slate-100"
@@ -103,7 +112,7 @@ export default function VIPConfirmationPage() {
                 VIP MEMBER
               </p>
               <h2 className="text-white text-2xl font-bold tracking-tight uppercase">
-                Autovinci Buyer
+                {userName}
               </h2>
             </div>
             <div className="flex justify-between items-end relative z-10">
@@ -116,7 +125,7 @@ export default function VIPConfirmationPage() {
                 }}
               >
                 <span className="text-white/80 text-[10px] font-mono tracking-wider">
-                  ID: AV-8829-VIP
+                  ID: {memberId}
                 </span>
               </div>
               <div className="flex -space-x-2">

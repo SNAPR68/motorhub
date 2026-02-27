@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { INTERIOR, CRETA } from "@/lib/car-images";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchCurrentUser } from "@/lib/api";
 
 /* Stitch: vip_rewards_&_referral_circle — #f2b90d, Manrope, #12110a */
 
@@ -44,8 +46,24 @@ const REWARDS = [
 export default function VIPRewardsPage() {
   const [copied, setCopied] = useState(false);
 
+  const { data: meData } = useApi(() => fetchCurrentUser(), []);
+  const user = meData?.user;
+
+  // Derive display name and initials from real user data
+  const displayName = user?.name ?? "VIP Member";
+  const initials = displayName
+    .split(" ")
+    .slice(0, 2)
+    .map((w: string) => w[0])
+    .join("")
+    .toUpperCase();
+  // Generate a stable referral code from the user id or name
+  const referralCode = user?.id
+    ? `AV-${user.id.slice(0, 4).toUpperCase()}-VIP`
+    : "AV-VIP-XXXX";
+
   const handleCopy = () => {
-    navigator.clipboard.writeText("AV-STERLING-7X").catch(() => {});
+    navigator.clipboard.writeText(referralCode).catch(() => {});
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -78,7 +96,7 @@ export default function VIPRewardsPage() {
             <div className="relative mb-4">
               <div className="size-24 rounded-full border-2 border-[#f2b90d] p-1">
                 <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-600 to-slate-700 flex items-center justify-center text-2xl font-bold text-[#f2b90d]">
-                  JS
+                  {initials}
                 </div>
               </div>
               <div className="absolute -bottom-1 -right-1 bg-[#f2b90d] text-[#12110a] size-7 rounded-full flex items-center justify-center border-2 border-[#12110a]">
@@ -89,7 +107,7 @@ export default function VIPRewardsPage() {
               </div>
             </div>
             <h2 className="text-2xl font-extrabold tracking-tight">
-              Julian Sterling
+              {displayName}
             </h2>
             <p className="text-[#f2b90d] text-xs font-semibold tracking-widest uppercase mt-1">
               Platinum Member
@@ -161,7 +179,7 @@ export default function VIPRewardsPage() {
             <div className="flex items-center gap-2">
               <div className="flex-1 bg-black/40 border border-[#f2b90d]/20 rounded-lg p-3 flex items-center justify-between">
                 <span className="font-mono text-[#f2b90d] font-bold tracking-[0.3em]">
-                  AV-STERLING-7X
+                  {referralCode}
                 </span>
                 <button
                   onClick={handleCopy}

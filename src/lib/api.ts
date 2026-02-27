@@ -214,6 +214,24 @@ export async function fetchNotifications() {
   }>("/api/notifications");
 }
 
+// ── Current User (Buyer or Dealer) ──
+
+export interface CurrentUser {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  avatar: string | null;
+  dealershipName?: string;
+  dealershipId?: string;
+}
+
+export async function fetchCurrentUser() {
+  return apiFetch<{ user: CurrentUser; dealerProfile: Record<string, unknown> | null }>(
+    "/api/auth/me"
+  );
+}
+
 // ── Dealer Profile ──
 
 export async function fetchDealerProfile() {

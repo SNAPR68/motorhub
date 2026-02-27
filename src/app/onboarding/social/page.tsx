@@ -180,7 +180,7 @@ export default function SocialOnboardingPage() {
             "linear-gradient(to top, #191022 0%, #191022 60%, transparent 100%)",
         }}
       >
-        <Link href="/onboarding/social">
+        <Link href="/social-hub">
           <button
             className="w-full py-5 rounded-xl text-white font-bold text-sm uppercase active:scale-[0.98] transition-all"
             style={{
@@ -189,7 +189,7 @@ export default function SocialOnboardingPage() {
               letterSpacing: "0.2em",
             }}
           >
-            Continue to Step 2
+            Continue to Social Hub
           </button>
         </Link>
         <div className="h-6" />
