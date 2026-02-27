@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
@@ -31,6 +31,14 @@ function formatINR(n: number): string {
 }
 
 export default function EmiCalculatorPage() {
+  return (
+    <Suspense fallback={<div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}><div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" /></div>}>
+      <EmiCalculatorInner />
+    </Suspense>
+  );
+}
+
+function EmiCalculatorInner() {
   const searchParams = useSearchParams();
   const initialPrice = Number(searchParams.get("price") ?? 1000000);
 
