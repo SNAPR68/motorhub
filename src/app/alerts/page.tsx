@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchCurrentUser } from "@/lib/api";
 
 /* Stitch: buyer_alert_preferences — #dab80b, Manrope, #0a0a0a */
 
@@ -50,6 +52,13 @@ export default function AlertsPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
+  const { data: meData } = useApi(() => fetchCurrentUser(), []);
+  const userEmail = (meData?.user?.email as string | undefined) ?? null;
+  // Mask the email for display (e.g., "user@..." → "u***@...")
+  const maskedEmail = userEmail
+    ? userEmail.replace(/^(.{2})(.*)(@.*)$/, (_m, a, b, c) => `${a}${"●".repeat(Math.min(b.length, 4))}${c}`)
+    : null;
+
   // Load saved prefs from localStorage on mount
   useEffect(() => {
     try {
@@ -89,7 +98,7 @@ export default function AlertsPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 flex items-center justify-between bg-[#0a0a0a]/80 backdrop-blur-md px-4 py-4 border-b border-[#2a2a2a]">
         <Link
-          href="/leads"
+          href="/my-cars"
           className="flex items-center justify-center size-10 rounded-full hover:bg-[#161616] transition-colors"
         >
           <MaterialIcon name="arrow_back_ios_new" className="text-slate-400" />
@@ -216,7 +225,7 @@ export default function AlertsPage() {
                   Connected Account
                 </span>
                 <span className="text-sm font-medium text-slate-300">
-                  +91 98765 ●●●● 10
+                  {maskedEmail ?? "+91 ●●●●● ●●●● 10"}
                 </span>
               </div>
               <button className="ml-auto text-xs font-bold text-[#dab80b] hover:underline">
