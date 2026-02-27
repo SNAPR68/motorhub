@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchPerformance, fetchDealerProfile } from "@/lib/api";
 
 /* Stitch: luxury_dealer_dashboard — #0dccf2, Manrope, #0a0f0f */
 
@@ -27,6 +29,14 @@ const ALERTS = [
 ];
 
 export default function DashboardLuxuryPage() {
+  const { data: perfData } = useApi(() => fetchPerformance(), []);
+  const { data: profileData } = useApi(() => fetchDealerProfile(), []);
+
+  const dealershipName = (profileData?.profile as { dealershipName?: string } | undefined)?.dealershipName ?? "Elite Dashboard";
+  const revenueDisplay = perfData?.revenue?.display ?? "—";
+  // Real notifications → use the Elite Alerts section with real activity
+  // Growth vs last month is not available from fetchPerformance, show revenue only
+
   return (
     <div
       className="min-h-dvh w-full flex flex-col max-w-md mx-auto text-slate-100 pb-24"
@@ -39,7 +49,7 @@ export default function DashboardLuxuryPage() {
           <div className="size-10 rounded-full border-2 border-[#0dccf2]/30 flex items-center justify-center bg-[#0dccf2]/10 text-[#0dccf2] font-bold text-sm">AV</div>
           <div>
             <p className="text-[10px] uppercase tracking-widest text-[#0dccf2] font-bold">Elite Dashboard</p>
-            <h1 className="text-lg font-bold">Sterling Motors</h1>
+            <h1 className="text-lg font-bold">{dealershipName}</h1>
           </div>
         </div>
         <div className="flex gap-2">
@@ -56,7 +66,7 @@ export default function DashboardLuxuryPage() {
             style={{ background: "linear-gradient(145deg, rgba(13,204,242,0.1) 0%, rgba(10,15,15,1) 100%)", border: "1px solid rgba(13,204,242,0.15)" }}>
             <div className="absolute top-0 left-0 w-full h-1" style={{ background: "linear-gradient(to right, transparent, #0dccf2, transparent)" }} />
             <p className="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Revenue This Month</p>
-            <p className="text-4xl font-bold text-white">₹1.2<span className="text-xl text-slate-400">Cr</span></p>
+            <p className="text-4xl font-bold text-white">{revenueDisplay}</p>
             <div className="flex items-center gap-1 mt-2">
               <MaterialIcon name="trending_up" className="text-sm text-[#10b981]" />
               <span className="text-xs font-bold text-[#10b981]">+24% vs last month</span>
@@ -126,7 +136,7 @@ export default function DashboardLuxuryPage() {
       </main>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 border-t px-6 pb-6 pt-3 flex justify-between items-center"
+      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 border-t px-6 pb-6 pt-3 flex justify-between items-center md:hidden"
         style={{ background: "rgba(10,15,15,0.95)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}>
         <Link href="/dashboard" className="flex flex-col items-center gap-1 text-[#0dccf2]">
           <MaterialIcon name="dashboard" fill className="text-2xl" />
