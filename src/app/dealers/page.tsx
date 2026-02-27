@@ -255,7 +255,7 @@ export default function FindDealersPage() {
                   Call
                 </a>
                 <Link
-                  href={`/dealers/${dealer.id}`}
+                  href={`/dealers/profile/${dealer.id}`}
                   className="flex-1 rounded-xl py-2.5 text-sm font-medium flex items-center justify-center gap-1.5 text-white"
                   style={{ background: "#1152d4" }}
                 >
