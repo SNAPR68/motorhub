@@ -9,10 +9,11 @@ import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicle, adaptVehicle } from "@/lib/api";
 import { formatEmi } from "@/lib/car-catalog";
 import { computeTrueCost, formatCost } from "@/lib/true-cost";
+import { generatePassport, passportGradeColor, passportGradeLabel, type PassportFlag } from "@/lib/vehicle-passport";
 
 /* ─── Used Car Detail Page ─── */
 
-const TABS = ["Overview", "Specs", "EMI", "TrueCost", "Negotiate"] as const;
+const TABS = ["Overview", "Specs", "EMI", "TrueCost", "Negotiate", "Passport"] as const;
 
 export default function UsedCarDetailPage({
   params,
@@ -94,6 +95,34 @@ export default function UsedCarDetailPage({
   if (vehicle.year < 2020) negotiationPoints.push(`${2025 - vehicle.year} year old car — depreciation leverage`);
   if (trueCost.upcomingItems.some(i => i.urgency === "critical")) negotiationPoints.push(`Upcoming maintenance due — estimated ₹${trueCost.upcomingItems.filter(i => i.urgency === "critical").reduce((s, i) => s + i.cost, 0).toLocaleString("en-IN")} in repairs`);
   negotiationPoints.push(`Similar cars listed at ${formatCost(marketLow)}–${formatCost(marketHigh)} in your city`);
+
+  // VehiclePassport — deterministic from vehicleId
+  const passport = generatePassport({
+    vehicleId: id,
+    year: vehicle.year,
+    km: kmNum,
+    owner: vehicle.owner || "1st Owner",
+    name: vehicle.name,
+    fuel: vehicle.fuel,
+  });
+  const gradeColor = passportGradeColor(passport.grade);
+  const gradeLabel = passportGradeLabel(passport.grade);
+
+  const flagColors: Record<PassportFlag["level"], string> = {
+    green: "#10b981",
+    amber: "#f59e0b",
+    red: "#ef4444",
+  };
+  const flagBg: Record<PassportFlag["level"], string> = {
+    green: "rgba(16,185,129,0.08)",
+    amber: "rgba(245,158,11,0.08)",
+    red: "rgba(239,68,68,0.08)",
+  };
+  const flagIcon: Record<PassportFlag["level"], string> = {
+    green: "check_circle",
+    amber: "warning",
+    red: "cancel",
+  };
 
   return (
     <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
@@ -220,7 +249,7 @@ export default function UsedCarDetailPage({
                 color: activeTab === tab ? "#fff" : "#64748b",
               }}
             >
-              {tab === "TrueCost" ? "True Cost" : tab === "Negotiate" ? "Negotiate" : tab}
+              {tab === "TrueCost" ? "True Cost" : tab}
             </button>
           ))}
         </div>
@@ -465,6 +494,163 @@ export default function UsedCarDetailPage({
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {/* ── VehiclePassport ── */}
+        {activeTab === "Passport" && (
+          <div className="space-y-4 pb-4">
+
+            {/* Trust score ring */}
+            <div className="rounded-2xl p-5 border" style={{ background: "rgba(255,255,255,0.02)", borderColor: `${gradeColor}30` }}>
+              <div className="flex items-center gap-4">
+                {/* Score ring */}
+                <div className="relative shrink-0" style={{ width: 80, height: 80 }}>
+                  <svg width="80" height="80" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="7" />
+                    <circle
+                      cx="40" cy="40" r="34" fill="none"
+                      stroke={gradeColor} strokeWidth="7"
+                      strokeLinecap="round"
+                      strokeDasharray={`${2 * Math.PI * 34}`}
+                      strokeDashoffset={`${2 * Math.PI * 34 * (1 - passport.overallScore / 100)}`}
+                      transform="rotate(-90 40 40)"
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-xl font-black text-white">{passport.overallScore}</span>
+                    <span className="text-[9px] text-slate-500 -mt-0.5">/ 100</span>
+                  </div>
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-2xl font-black" style={{ color: gradeColor }}>Grade {passport.grade}</span>
+                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{ background: `${gradeColor}20`, color: gradeColor }}>{gradeLabel}</span>
+                  </div>
+                  <p className="text-xs text-slate-500">Report ID: <span className="text-slate-300 font-mono">{passport.reportId}</span></p>
+                  <div className="flex items-center gap-1.5 mt-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
+                    <span className="text-[10px] text-amber-400 font-semibold">AUTOVINCI COMPUTED</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Flags list */}
+            <div className="rounded-2xl border border-white/5 overflow-hidden" style={{ background: "rgba(255,255,255,0.02)" }}>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-4 pt-4 pb-2">Verification Flags</p>
+              <div className="divide-y divide-white/5">
+                {passport.flags.map((flag, i) => (
+                  <div key={i} className="flex items-start gap-3 px-4 py-3" style={{ background: i % 2 === 0 ? "transparent" : "rgba(255,255,255,0.01)" }}>
+                    <div className="h-6 w-6 rounded-full flex items-center justify-center shrink-0 mt-0.5" style={{ background: flagBg[flag.level] }}>
+                      <MaterialIcon name={flagIcon[flag.level]} className="text-[13px]" style={{ color: flagColors[flag.level] }} />
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed flex-1">{flag.message}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick stats row */}
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { label: "Owners", val: String(passport.ownership.totalOwners), icon: "person", good: passport.ownership.totalOwners === 1 },
+                { label: "Claims", val: String(passport.accidents.totalClaims), icon: "car_crash", good: passport.accidents.totalClaims === 0 },
+                { label: "Challans", val: String(passport.challans.pending), icon: "gavel", good: passport.challans.pending === 0 },
+              ].map(({ label, val, icon, good }) => (
+                <div key={label} className="rounded-xl p-3 border text-center border-white/5" style={{ background: "rgba(255,255,255,0.03)" }}>
+                  <MaterialIcon name={icon} className="text-[20px] mb-1" style={{ color: good ? "#10b981" : "#f59e0b" }} />
+                  <p className="text-lg font-black text-white">{val}</p>
+                  <p className="text-[9px] text-slate-500 uppercase tracking-wider">{label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* RC & Insurance status */}
+            <div className="rounded-2xl p-4 border border-white/5 space-y-3" style={{ background: "rgba(255,255,255,0.03)" }}>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">RC & Insurance</p>
+              {[
+                { label: "RC Status", ok: passport.rcStatus.valid, okText: "Valid", failText: "Expired" },
+                { label: "Insurance", ok: passport.rcStatus.insuranceActive, okText: `Active till ${passport.rcStatus.insuranceExpiry}`, failText: `Expired ${passport.rcStatus.insuranceExpiry}` },
+                { label: "Fitness", ok: passport.rcStatus.fitnessValid, okText: "Valid", failText: "Expired" },
+                { label: "Blacklist", ok: !passport.rcStatus.blacklisted, okText: "Clear", failText: "Flagged" },
+              ].map(({ label, ok, okText, failText }) => (
+                <div key={label} className="flex items-center justify-between">
+                  <span className="text-xs text-slate-400">{label}</span>
+                  <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{ background: ok ? "rgba(16,185,129,0.12)" : "rgba(239,68,68,0.12)", color: ok ? "#10b981" : "#ef4444" }}>
+                    {ok ? okText : failText}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Odometer verdict */}
+            <div className="rounded-2xl p-4 border border-white/5" style={{ background: "rgba(255,255,255,0.03)" }}>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Odometer Analysis</p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xl font-black text-white">{passport.odometer.avgKmPerYear.toLocaleString("en-IN")} <span className="text-xs font-normal text-slate-500">km/yr avg</span></p>
+                  <p className="text-xs text-slate-500 mt-0.5">Reading at sale: {passport.odometer.readingAtSale.toLocaleString("en-IN")} km</p>
+                </div>
+                <span
+                  className="text-xs font-bold px-3 py-1.5 rounded-full"
+                  style={{
+                    background: passport.odometer.verdict === "NORMAL" ? "rgba(16,185,129,0.12)" : passport.odometer.verdict === "SUSPICIOUS" ? "rgba(239,68,68,0.12)" : "rgba(245,158,11,0.12)",
+                    color: passport.odometer.verdict === "NORMAL" ? "#10b981" : passport.odometer.verdict === "SUSPICIOUS" ? "#ef4444" : "#f59e0b",
+                  }}
+                >
+                  {passport.odometer.verdict}
+                </span>
+              </div>
+            </div>
+
+            {/* Challan records (if any) */}
+            {passport.challans.records.length > 0 && (
+              <div className="rounded-2xl border border-white/5 overflow-hidden" style={{ background: "rgba(255,255,255,0.03)" }}>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-4 pt-4 pb-2">Challan History</p>
+                <div className="divide-y divide-white/5">
+                  {passport.challans.records.map((c, i) => (
+                    <div key={i} className="flex items-center justify-between px-4 py-3">
+                      <div>
+                        <p className="text-xs font-semibold text-white">{c.offence}</p>
+                        <p className="text-[10px] text-slate-500">{c.date}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs font-bold text-white">₹{c.amount.toLocaleString("en-IN")}</p>
+                        <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full" style={{ background: c.status === "PAID" ? "rgba(16,185,129,0.12)" : "rgba(239,68,68,0.12)", color: c.status === "PAID" ? "#10b981" : "#ef4444" }}>
+                          {c.status}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Flood / Fire */}
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { label: "Flood Damage", flagged: passport.floodFire.floodDamage, icon: "water" },
+                { label: "Fire Damage", flagged: passport.floodFire.fireDamage, icon: "local_fire_department" },
+              ].map(({ label, flagged, icon }) => (
+                <div key={label} className="rounded-xl p-3 border text-center" style={{ background: flagged ? "rgba(239,68,68,0.06)" : "rgba(16,185,129,0.04)", borderColor: flagged ? "rgba(239,68,68,0.2)" : "rgba(16,185,129,0.15)" }}>
+                  <MaterialIcon name={icon} className="text-[22px] mb-1" style={{ color: flagged ? "#ef4444" : "#10b981" }} />
+                  <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: flagged ? "#ef4444" : "#10b981" }}>{flagged ? "Detected" : "Clear"}</p>
+                  <p className="text-[9px] text-slate-500 mt-0.5">{label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Share CTA */}
+            <Link
+              href={`/vehicle/passport/${id}`}
+              className="flex items-center justify-center gap-2 h-11 rounded-xl text-sm font-semibold w-full border border-white/10"
+              style={{ background: "rgba(255,255,255,0.04)", color: "#94a3b8" }}
+            >
+              <MaterialIcon name="open_in_new" className="text-[16px]" />
+              View Full Passport Report
+            </Link>
           </div>
         )}
 
