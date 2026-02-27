@@ -14,10 +14,11 @@ import {
   formatPrice,
   type CarVariant,
 } from "@/lib/car-catalog";
+import { computeTrueCost, formatCost } from "@/lib/true-cost";
 
 /* ─── New Car Model Overview Page ─── */
 
-const TABS = ["Overview", "Variants", "Compare"] as const;
+const TABS = ["Overview", "Variants", "True Cost", "Compare"] as const;
 
 export default function ModelPage({
   params,
@@ -163,12 +164,12 @@ export default function ModelPage({
 
       {/* ─── TABS ─── */}
       <div className="sticky top-14 z-30 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
-        <div className="max-w-lg mx-auto flex">
+        <div className="max-w-lg mx-auto flex overflow-x-auto no-scrollbar">
           {TABS.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className="flex-1 py-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-all"
+              className="shrink-0 px-4 py-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-all whitespace-nowrap"
               style={{
                 borderColor: activeTab === tab ? "#1152d4" : "transparent",
                 color: activeTab === tab ? "#fff" : "#64748b",
@@ -291,6 +292,78 @@ export default function ModelPage({
             )}
           </div>
         )}
+
+        {/* ── True Cost ── */}
+        {activeTab === "True Cost" && (() => {
+          const tc = computeTrueCost({
+            price: car.startingPrice,
+            fuel: car.fuelTypes[0],
+            category: car.category,
+            modelSlug: car.slug,
+            year: car.year,
+          });
+          return (
+            <div className="space-y-4">
+              <div className="rounded-2xl p-5 border border-amber-500/20" style={{ background: "rgba(245,158,11,0.05)" }}>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-amber-400 mb-1">3-Year Total Cost</p>
+                <p className="text-3xl font-black text-white">{formatCost(tc.total3Year)}</p>
+                <p className="text-xs text-slate-500 mt-1">
+                  <span className="text-amber-400 font-semibold">{formatCost(tc.perMonth)}/mo</span> beyond your EMI
+                </p>
+                <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 10 }).map((_, i) => (
+                      <div key={i} className="h-1.5 w-3 rounded-full"
+                        style={{ background: i < Math.round(tc.reliabilityScore) ? "#10b981" : "rgba(255,255,255,0.1)" }} />
+                    ))}
+                  </div>
+                  <span className="text-xs text-slate-400">Reliability <span className="text-white font-bold">{tc.reliabilityScore}/10</span></span>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/5 overflow-hidden" style={{ background: "rgba(255,255,255,0.03)" }}>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-4 pt-4 pb-2">Annual Breakdown</p>
+                {[
+                  { label: "Insurance (est.)", val: tc.insurance, icon: "shield", color: "#3b82f6" },
+                  { label: "Fuel (15,000 km/yr)", val: tc.fuel, icon: "local_gas_station", color: "#f59e0b" },
+                  { label: "Maintenance", val: tc.maintenance, icon: "build", color: "#8b5cf6" },
+                  { label: "Depreciation (yr 1)", val: tc.depreciation, icon: "trending_down", color: "#ef4444" },
+                ].map(({ label, val, icon, color }, i) => {
+                  const annual = tc.insurance + tc.fuel + tc.maintenance + tc.depreciation;
+                  const pct = Math.round((val / annual) * 100);
+                  return (
+                    <div key={label} className={`flex items-center gap-3 px-4 py-3 ${i > 0 ? "border-t border-white/5" : ""}`}>
+                      <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: `${color}18` }}>
+                        <MaterialIcon name={icon} className="text-[16px]" style={{ color }} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-xs text-slate-300">{label}</span>
+                          <span className="text-xs font-bold text-white">{formatCost(val)}/yr</span>
+                        </div>
+                        <div className="h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+                          <div className="h-full rounded-full" style={{ width: `${pct}%`, background: color }} />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {tc.knownIssues.length > 0 && (
+                <div className="rounded-2xl p-4 border border-amber-500/15" style={{ background: "rgba(245,158,11,0.04)" }}>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-amber-500 mb-3">Known Issues</p>
+                  {tc.knownIssues.map((issue) => (
+                    <div key={issue} className="flex items-start gap-2 mb-2">
+                      <MaterialIcon name="warning" className="text-[13px] text-amber-500 mt-0.5 shrink-0" />
+                      <span className="text-xs text-slate-300">{issue}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })()}
 
         {/* ── Compare ── */}
         {activeTab === "Compare" && (
