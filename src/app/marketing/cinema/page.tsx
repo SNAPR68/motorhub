@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { fetchDealerPreferences, updateDealerPreferences } from "@/lib/api";
 
 /* Stitch: elite_marketing_studio_2 — #3366FF, Space Grotesk, #0B1426 */
 
@@ -22,6 +23,38 @@ export default function MarketingCinemaPage() {
   const [quality, setQuality] = useState("4K");
   const [selectedMood, setSelectedMood] = useState("Neon");
   const [selectedPlatform, setSelectedPlatform] = useState("Instagram Reel");
+  const [exporting, setExporting] = useState(false);
+  const [exported, setExported] = useState(false);
+
+  // Load saved cinema prefs from DB
+  const loadPrefs = useCallback(async () => {
+    try {
+      const prefs = await fetchDealerPreferences();
+      const cinema = prefs?.assets as unknown as Record<string, string> | undefined;
+      if (cinema?.cinemaQuality) setQuality(cinema.cinemaQuality);
+      if (cinema?.cinemaMood) setSelectedMood(cinema.cinemaMood);
+      if (cinema?.cinemaPlatform) setSelectedPlatform(cinema.cinemaPlatform);
+    } catch { /* use defaults */ }
+  }, []);
+
+  useEffect(() => { loadPrefs(); }, [loadPrefs]);
+
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      // Save cinema prefs to DB
+      await updateDealerPreferences({
+        assets: {
+          cinemaQuality: quality,
+          cinemaMood: selectedMood,
+          cinemaPlatform: selectedPlatform,
+        } as unknown as Record<string, boolean>,
+      });
+      setExported(true);
+      setTimeout(() => setExported(false), 3000);
+    } catch { /* ignore */ }
+    setExporting(false);
+  };
 
   return (
     <div
@@ -126,9 +159,25 @@ export default function MarketingCinemaPage() {
         </section>
 
         {/* Export CTA */}
-        <button className="w-full bg-[#3366FF] text-white py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#3366FF]/30 active:scale-[0.98] transition-transform">
-          <MaterialIcon name="movie" /> Export Cinema Reel
-        </button>
+        {exported ? (
+          <div className="w-full bg-emerald-500/10 border border-emerald-500/20 text-white py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+            <MaterialIcon name="check_circle" className="text-emerald-400" />
+            <span className="text-emerald-400">Reel Settings Saved</span>
+          </div>
+        ) : (
+          <button
+            onClick={handleExport}
+            disabled={exporting}
+            className="w-full bg-[#3366FF] text-white py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#3366FF]/30 active:scale-[0.98] transition-transform disabled:opacity-50"
+          >
+            {exporting ? (
+              <div className="h-5 w-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+            ) : (
+              <MaterialIcon name="movie" />
+            )}
+            {exporting ? "Exporting..." : "Export Cinema Reel"}
+          </button>
+        )}
       </main>
 
       {/* Bottom Nav */}

@@ -15,6 +15,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db as prisma } from "@/lib/db";
 import type { Prisma } from "@/generated/prisma/client";
+import { CAR_MODELS, BRANDS, getVariantsByModel } from "@/lib/car-catalog";
 
 export async function GET(request: NextRequest) {
   try {
@@ -70,6 +71,11 @@ export async function GET(request: NextRequest) {
       prisma.newCarModel.count({ where }),
     ]);
 
+    // If DB returned nothing, fall through to static
+    if (total === 0) {
+      return staticFallback(sp);
+    }
+
     return NextResponse.json({
       models: models.map((m) => ({
         id: m.id,
@@ -99,6 +105,59 @@ export async function GET(request: NextRequest) {
     });
   } catch (err) {
     console.error("GET /api/cars/models error:", err);
-    return NextResponse.json({ error: "Failed to fetch models" }, { status: 500 });
+    return staticFallback(request.nextUrl.searchParams);
   }
+}
+
+function staticFallback(sp: URLSearchParams) {
+  const brand = sp.get("brand");
+  const category = sp.get("category");
+  const popular = sp.get("popular");
+  const q = sp.get("q");
+  const limit = Math.min(Number(sp.get("limit")) || 50, 100);
+  const offset = Number(sp.get("offset")) || 0;
+
+  let filtered = [...CAR_MODELS];
+
+  if (brand) filtered = filtered.filter((m) => m.brand === brand);
+  if (category) filtered = filtered.filter((m) => m.category === category.toLowerCase());
+  if (popular === "true") filtered = filtered.filter((m) => m.popular);
+  if (q) {
+    const ql = q.toLowerCase();
+    filtered = filtered.filter((m) => m.name.toLowerCase().includes(ql) || m.fullName.toLowerCase().includes(ql));
+  }
+
+  const total = filtered.length;
+  const paged = filtered.slice(offset, offset + limit);
+
+  return NextResponse.json({
+    models: paged.map((m) => {
+      const brandObj = BRANDS.find((b) => b.slug === m.brand);
+      return {
+        id: m.slug,
+        slug: m.slug,
+        brand: brandObj ? { slug: brandObj.slug, name: brandObj.name, logo: brandObj.logo, color: brandObj.color } : null,
+        name: m.name,
+        fullName: m.fullName,
+        category: m.category.toUpperCase(),
+        image: m.image,
+        startingPrice: m.startingPrice,
+        startingPriceDisplay: m.startingPriceDisplay,
+        rating: m.rating,
+        reviewCount: m.reviewCount,
+        year: m.year,
+        fuelTypes: m.fuelTypes,
+        transmissions: m.transmissions,
+        mileage: m.mileage,
+        engine: m.engine,
+        power: m.power,
+        seating: m.seating,
+        bodyType: m.bodyType,
+        popular: m.popular,
+        tag: m.tag,
+        variantCount: getVariantsByModel(m.slug).length,
+      };
+    }),
+    total,
+  });
 }

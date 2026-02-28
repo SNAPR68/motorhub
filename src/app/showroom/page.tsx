@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchVehicles, adaptVehicle } from "@/lib/api";
+import { fetchVehicles, adaptVehicle, fetchWishlist, addToWishlist, removeFromWishlist } from "@/lib/api";
 import { VEHICLE_CATEGORIES, SORT_OPTIONS } from "@/lib/constants";
 import type { Vehicle } from "@/lib/types";
 
@@ -64,6 +64,15 @@ export default function ShowroomPage() {
   const [transmission, setTransmission] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [wishlist, setWishlist] = useState<Set<string>>(new Set());
+  const [wishlistLoading, setWishlistLoading] = useState<Set<string>>(new Set());
+
+  // Load wishlist from DB on mount
+  const { data: wishlistData } = useApi(() => fetchWishlist(), []);
+  useEffect(() => {
+    if (wishlistData?.vehicles) {
+      setWishlist(new Set(wishlistData.vehicles.map((v) => v.id)));
+    }
+  }, [wishlistData]);
 
   const category = CATEGORIES[activeCatIdx]?.value;
 
@@ -118,11 +127,37 @@ export default function ShowroomPage() {
     router.replace("/showroom", { scroll: false });
   };
 
-  const toggleWishlist = (id: string, e: React.MouseEvent) => {
+  const toggleWishlist = async (id: string, e: React.MouseEvent) => {
     e.preventDefault(); e.stopPropagation();
+    if (wishlistLoading.has(id)) return;
+
+    const isWishlisted = wishlist.has(id);
+
+    // Optimistic update
     setWishlist((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      isWishlisted ? next.delete(id) : next.add(id);
+      return next;
+    });
+
+    setWishlistLoading((prev) => new Set(prev).add(id));
+    try {
+      if (isWishlisted) {
+        await removeFromWishlist(id);
+      } else {
+        await addToWishlist(id);
+      }
+    } catch {
+      // Revert on failure
+      setWishlist((prev) => {
+        const next = new Set(prev);
+        isWishlisted ? next.add(id) : next.delete(id);
+        return next;
+      });
+    }
+    setWishlistLoading((prev) => {
+      const next = new Set(prev);
+      next.delete(id);
       return next;
     });
   };
