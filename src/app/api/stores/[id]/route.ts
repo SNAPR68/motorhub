@@ -6,11 +6,18 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
+import { requireDealerAuth } from "@/lib/auth-guard";
+import { parseBody, updateStoreSchema } from "@/lib/validation";
 
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const dealer = await requireDealerAuth();
+  if (!dealer) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { id } = await params;
 
   try {
@@ -56,14 +63,22 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const dealer = await requireDealerAuth();
+  if (!dealer) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { id } = await params;
 
   try {
-    const body = await request.json();
+    const result = await parseBody(request, updateStoreSchema);
+    if (result.error) {
+      return NextResponse.json({ error: result.error }, { status: 400 });
+    }
 
     const store = await db.storeLocation.update({
       where: { id },
-      data: body,
+      data: result.data!,
     });
 
     return NextResponse.json({ store });
@@ -80,6 +95,11 @@ export async function DELETE(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const dealer = await requireDealerAuth();
+  if (!dealer) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { id } = await params;
 
   try {

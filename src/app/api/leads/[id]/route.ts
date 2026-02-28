@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { requireDealerAuth } from "@/lib/auth-guard";
+import { parseBody, updateLeadSchema } from "@/lib/validation";
 
 export async function GET(
   _request: Request,
@@ -82,11 +83,14 @@ export async function PUT(
   const { id } = await params;
 
   try {
-    const body = await request.json();
+    const result = await parseBody(request, updateLeadSchema);
+    if (result.error) {
+      return NextResponse.json({ error: result.error }, { status: 400 });
+    }
 
     const lead = await db.lead.update({
       where: { id },
-      data: body,
+      data: result.data!,
       include: {
         vehicle: { select: { id: true, name: true, priceDisplay: true } },
       },

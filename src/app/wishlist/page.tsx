@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { useWishlist } from "@/context/WishlistContext";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchVehicles, adaptVehicle } from "@/lib/api";
+import { fetchVehicles, fetchWishlist, adaptVehicle } from "@/lib/api";
 
 /* Stitch: private_collection_wishlist — #f2cc0d (gold), Noto Sans + Noto Serif, #0a0a0a */
 
@@ -18,10 +18,15 @@ export default function WishlistPage() {
     useWishlist();
   const [activeTab, setActiveTab] = useState(0);
   const { data } = useApi(() => fetchVehicles({ limit: 100 }), []);
+  const { data: dbWishlist } = useApi(() => fetchWishlist(), []);
   const allVehicles = (data?.vehicles ?? []).map(adaptVehicle);
 
+  // Merge DB wishlist IDs with local wishlist context
+  const dbWishlistIds = (dbWishlist?.wishlists ?? []).map((w: { vehicle: { id: string } }) => w.vehicle.id);
+  const mergedIds = [...new Set([...wishlistIds, ...dbWishlistIds])];
+
   const wishlistedVehicles = allVehicles.filter((v) =>
-    wishlistIds.includes(v.id)
+    mergedIds.includes(v.id)
   );
 
   return (

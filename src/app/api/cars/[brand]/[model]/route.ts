@@ -2,6 +2,12 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { db as prisma } from "@/lib/db";
+import {
+  getBrandBySlug,
+  getModelBySlug,
+  getVariantsByModel,
+  getModelsByBrand,
+} from "@/lib/car-catalog";
 
 export async function GET(
   _request: NextRequest,
@@ -15,7 +21,8 @@ export async function GET(
     });
 
     if (!brand) {
-      return NextResponse.json({ error: "Brand not found" }, { status: 404 });
+      // Static fallback
+      return staticFallback(brandSlug, modelSlug);
     }
 
     const model = await prisma.newCarModel.findUnique({
@@ -27,7 +34,7 @@ export async function GET(
     });
 
     if (!model) {
-      return NextResponse.json({ error: "Model not found" }, { status: 404 });
+      return staticFallback(brandSlug, modelSlug);
     }
 
     // Also fetch other models from the same brand for "More from [brand]"
@@ -85,4 +92,67 @@ export async function GET(
     console.error("GET /api/cars/[brand]/[model] error:", err);
     return NextResponse.json({ error: "Failed to fetch model" }, { status: 500 });
   }
+}
+
+function staticFallback(brandSlug: string, modelSlug: string) {
+  const brand = getBrandBySlug(brandSlug);
+  if (!brand) {
+    return NextResponse.json({ error: "Brand not found" }, { status: 404 });
+  }
+
+  const model = getModelBySlug(brandSlug, modelSlug);
+  if (!model) {
+    return NextResponse.json({ error: "Model not found" }, { status: 404 });
+  }
+
+  const variants = getVariantsByModel(modelSlug);
+  const relatedModels = getModelsByBrand(brandSlug)
+    .filter((m) => m.slug !== modelSlug)
+    .slice(0, 4)
+    .map((m) => ({
+      slug: m.slug,
+      name: m.name,
+      fullName: m.fullName,
+      image: m.image,
+      startingPriceDisplay: m.startingPriceDisplay,
+      rating: m.rating,
+    }));
+
+  return NextResponse.json({
+    model: {
+      id: `static-${modelSlug}`,
+      slug: model.slug,
+      brand: { slug: brand.slug, name: brand.name, logo: brand.logo, color: brand.color },
+      name: model.name,
+      fullName: model.fullName,
+      category: model.category,
+      image: model.image,
+      gallery: model.gallery,
+      startingPrice: model.startingPrice,
+      startingPriceDisplay: model.startingPriceDisplay,
+      rating: model.rating,
+      reviewCount: model.reviewCount,
+      year: model.year,
+      fuelTypes: model.fuelTypes,
+      transmissions: model.transmissions,
+      mileage: model.mileage,
+      engine: model.engine,
+      power: model.power,
+      seating: model.seating,
+      bodyType: model.bodyType,
+      popular: model.popular,
+      tag: model.tag,
+      pros: model.pros,
+      cons: model.cons,
+      variants: variants.map((v) => ({
+        id: `static-${v.modelSlug}-${v.name}`,
+        name: v.name,
+        fuel: v.fuel,
+        transmission: v.transmission,
+        exShowroom: v.exShowroom,
+        exShowroomDisplay: v.exShowroomDisplay,
+      })),
+    },
+    relatedModels,
+  });
 }

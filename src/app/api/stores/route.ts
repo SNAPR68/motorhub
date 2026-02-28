@@ -5,8 +5,15 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
+import { requireDealerAuth } from "@/lib/auth-guard";
+import { parseBody, createStoreSchema } from "@/lib/validation";
 
 export async function GET() {
+  const dealer = await requireDealerAuth();
+  if (!dealer) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const stores = await db.storeLocation.findMany({
       orderBy: { createdAt: "asc" },
@@ -41,18 +48,26 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
+  const dealer = await requireDealerAuth();
+  if (!dealer) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
+  try {
+    const result = await parseBody(request, createStoreSchema);
+    if (result.error) {
+      return NextResponse.json({ error: result.error }, { status: 400 });
+    }
+
+    const validated = result.data!;
     const store = await db.storeLocation.create({
       data: {
-        dealerProfileId: body.dealerProfileId,
-        name: body.name,
-        address: body.address,
-        city: body.city,
-        phone: body.phone || null,
-        manager: body.manager || null,
-        status: body.status || "ACTIVE",
+        dealerProfileId: dealer.dealerProfileId,
+        name: validated.name,
+        address: validated.address,
+        city: validated.city,
+        phone: validated.phone || null,
+        manager: validated.manager || null,
       },
     });
 

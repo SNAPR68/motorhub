@@ -23,6 +23,9 @@ const PROTECTED_PREFIXES = [
   "/quick-draft",
   "/stores",
   "/onboarding",
+  "/analytics",
+  "/plans",
+  "/notifications",
 ];
 
 export async function updateSession(request: NextRequest) {

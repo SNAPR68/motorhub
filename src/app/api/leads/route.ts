@@ -9,6 +9,7 @@ import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { Prisma } from "@/generated/prisma/client";
 import { requireDealerAuth } from "@/lib/auth-guard";
+import { parseBody, createLeadSchema } from "@/lib/validation";
 
 export async function GET(request: NextRequest) {
   const dealer = await requireDealerAuth();
@@ -76,22 +77,25 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body = await request.json();
+    const result = await parseBody(request, createLeadSchema);
+    if (result.error) {
+      return NextResponse.json({ error: result.error }, { status: 400 });
+    }
 
+    const validated = result.data!;
     const lead = await db.lead.create({
       data: {
         dealerProfileId: dealer.dealerProfileId,
-        vehicleId: body.vehicleId || null,
-        buyerName: body.buyerName,
-        source: body.source || "WEBSITE",
-        sentiment: body.sentiment || 50,
-        sentimentLabel: body.sentimentLabel || "WARM",
-        message: body.message || null,
-        phone: body.phone || null,
-        email: body.email || null,
-        location: body.location || null,
-        budget: body.budget || null,
-        status: body.status || "NEW",
+        vehicleId: validated.vehicleId || null,
+        buyerName: validated.buyerName,
+        source: validated.source,
+        sentiment: validated.sentiment,
+        sentimentLabel: validated.sentimentLabel,
+        message: validated.message || null,
+        phone: validated.phone || null,
+        email: validated.email || null,
+        location: validated.location || null,
+        budget: validated.budget || null,
       },
       include: {
         vehicle: { select: { id: true, name: true, priceDisplay: true } },

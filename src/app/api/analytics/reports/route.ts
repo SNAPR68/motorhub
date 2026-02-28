@@ -2,8 +2,14 @@
 
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { requireDealerAuth } from "@/lib/auth-guard";
 
 export async function GET() {
+  const dealer = await requireDealerAuth();
+  if (!dealer) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     // Get current month bounds
     const now = new Date();

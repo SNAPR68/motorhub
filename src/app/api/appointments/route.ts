@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { requireDealerAuth } from "@/lib/auth-guard";
+import { parseBody, createAppointmentSchema } from "@/lib/validation";
 
 export async function GET(request: NextRequest) {
   const dealer = await requireDealerAuth();
@@ -60,20 +61,23 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body = await request.json();
+    const result = await parseBody(request, createAppointmentSchema);
+    if (result.error) {
+      return NextResponse.json({ error: result.error }, { status: 400 });
+    }
 
+    const validated = result.data!;
     const appointment = await db.appointment.create({
       data: {
         dealerProfileId: dealer.dealerProfileId,
-        leadId: body.leadId || null,
-        vehicleId: body.vehicleId || null,
-        buyerName: body.buyerName,
-        buyerPhone: body.buyerPhone || null,
-        scheduledAt: new Date(body.scheduledAt),
-        duration: body.duration || 60,
-        status: body.status || "SCHEDULED",
-        location: body.location || null,
-        notes: body.notes || null,
+        leadId: validated.leadId || null,
+        vehicleId: validated.vehicleId || null,
+        buyerName: validated.buyerName,
+        buyerPhone: validated.buyerPhone || null,
+        scheduledAt: new Date(validated.scheduledAt),
+        duration: validated.duration,
+        location: validated.location || null,
+        notes: validated.notes || null,
       },
       include: {
         vehicle: { select: { id: true, name: true } },
