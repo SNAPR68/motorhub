@@ -36,6 +36,7 @@ const INITIAL_VEHICLE = {
   km: "",
   location: "",
   owner: "1st",
+  description: "",
   images: [] as string[],
   panoramaImageIdx: null as number | null,
 };
@@ -48,6 +49,7 @@ export default function InventoryPage() {
   const [addOpen, setAddOpen] = useState(false);
   const [filters, setFilters] = useState<Record<string, string>>({});
   const [newVehicle, setNewVehicle] = useState(INITIAL_VEHICLE);
+  const [aiDescLoading, setAiDescLoading] = useState(false);
 
   const { data, isLoading, refetch } = useApi(() => fetchVehicles({ limit: 100 }), []);
 
@@ -60,6 +62,7 @@ export default function InventoryPage() {
           ...vehicle,
           price: Number(vehicle.price),
           mileage: vehicle.mileage || "N/A",
+          description: vehicle.description || undefined,
           images: vehicle.images,
           panoramaImageIdx: vehicle.panoramaImageIdx,
         }),
@@ -355,6 +358,55 @@ export default function InventoryPage() {
                 <option value="3rd">3rd Owner</option>
               </select>
             </div>
+          </div>
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Description</label>
+              <button
+                type="button"
+                disabled={!newVehicle.name.trim() || aiDescLoading}
+                onClick={async () => {
+                  setAiDescLoading(true);
+                  try {
+                    const res = await fetch("/api/ai/description", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        name: newVehicle.name,
+                        year: newVehicle.year,
+                        km: newVehicle.km,
+                        price: Number(newVehicle.price),
+                        fuel: newVehicle.fuel,
+                        transmission: newVehicle.transmission,
+                        engine: newVehicle.engine,
+                        power: newVehicle.power,
+                        mileage: newVehicle.mileage,
+                        location: newVehicle.location,
+                        owner: newVehicle.owner,
+                        category: newVehicle.category,
+                      }),
+                    });
+                    if (res.ok) {
+                      const data = await res.json();
+                      setNewVehicle((v) => ({ ...v, description: data.description }));
+                    }
+                  } catch { /* silent */ }
+                  setAiDescLoading(false);
+                }}
+                className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-[#137fec]/30 disabled:opacity-40"
+                style={{ color: "#137fec", background: "rgba(19,127,236,0.08)" }}
+              >
+                <MaterialIcon name="auto_awesome" className="text-[12px]" />
+                {aiDescLoading ? "Generating..." : "AI Generate"}
+              </button>
+            </div>
+            <textarea
+              value={newVehicle.description}
+              onChange={(e) => setNewVehicle((v) => ({ ...v, description: e.target.value }))}
+              placeholder="AI-generated or manual description..."
+              rows={3}
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50 resize-none"
+            />
           </div>
           <div>
             <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Photos</label>

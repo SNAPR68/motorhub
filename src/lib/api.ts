@@ -125,10 +125,13 @@ export interface ConciergeResponse {
   };
 }
 
-export async function sendConciergeMessage(message: string) {
+export async function sendConciergeMessage(
+  message: string,
+  history?: { role: "user" | "assistant"; content: string }[]
+) {
   return apiFetch<ConciergeResponse>("/api/concierge/chat", {
     method: "POST",
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ message, history }),
   });
 }
 
@@ -190,6 +193,57 @@ export async function generateVehicleDescription(vehicleId: string) {
       body: JSON.stringify({ vehicleId }),
     }
   );
+}
+
+// ── AI Valuation ──
+
+export interface ValuationResponse {
+  estimatedPrice: number;
+  low: number;
+  high: number;
+  marketLow: number;
+  marketHigh: number;
+  offer: number;
+  depreciationRate?: number;
+  marketDemand?: string;
+  factors?: { name: string; impact: string; positive: boolean }[];
+  generated?: boolean;
+}
+
+export async function getAIValuation(params: {
+  brand: string;
+  model: string;
+  year: string;
+  km: string;
+  fuel: string;
+  transmission: string;
+  owner: string;
+  city: string;
+  condition: string;
+}) {
+  return apiFetch<ValuationResponse>("/api/ai/valuation", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(params),
+  });
+}
+
+// ── AI Sentiment Analysis ──
+
+export interface SentimentResponse {
+  sentiment: "HOT" | "WARM" | "COOL";
+  confidence: number;
+  reasoning: string;
+  suggestedAction: string;
+  generated?: boolean;
+}
+
+export async function analyzeLeadSentiment(leadId: string) {
+  return apiFetch<SentimentResponse>("/api/ai/sentiment", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ leadId }),
+  });
 }
 
 // ── Panorama / Virtual Tour ──

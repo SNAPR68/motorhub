@@ -224,48 +224,89 @@ function ValuationPageInner() {
   const variants = isSuv ? SUV_VARIANTS : DEFAULT_VARIANTS;
   const dates = useMemo(() => getNext7Days(), []);
 
-  /* Valuation computation */
-  const valuation = useMemo(() => {
+  /* AI Valuation state */
+  const [aiValuation, setAiValuation] = useState<{
+    estimatedPrice: number; low: number; high: number;
+    marketLow: number; marketHigh: number; offer: number;
+    depreciationRate?: number; marketDemand?: string;
+    factors?: { name: string; impact: string; positive: boolean }[];
+    generated?: boolean;
+  } | null>(null);
+  const [valLoading, setValLoading] = useState(false);
+
+  /* Client-side fallback valuation */
+  const clientValuation = useMemo(() => {
     const base = BASE_PRICES[brand] ?? 5.0;
     const yf = yearFactor(parseInt(year) || 2020);
-    const basePrice = base * yf;
-
+    const basePrice = +(base * yf).toFixed(1);
     const kmNum = parseInt(km) || 30000;
     const kmOver = Math.max(0, kmNum - 30000);
-    const kmDeduction = (kmOver * 0.5) / 100000; // in lakhs
-
+    const kmDeduction = +((kmOver * 0.5) / 100000).toFixed(2);
     const condMultiplier = condition === "Excellent" ? 1.05 : condition === "Good" ? 1.0 : 0.9;
     const cityDemand = TOP_CITIES.some((c) => city.toLowerCase().includes(c.toLowerCase())) ? 1.03 : 1.0;
-
     const computed = (basePrice - kmDeduction) * condMultiplier * cityDemand;
     const recommended = Math.max(computed, 0.5);
-    const low = recommended * 0.93;
-    const high = recommended * 1.07;
-    const marketLow = recommended * 0.95;
-    const marketHigh = recommended * 1.08;
-    const offer = recommended * 1.02;
-
     return {
-      basePrice: +(basePrice).toFixed(2),
-      kmDeduction: +kmDeduction.toFixed(2),
+      estimatedPrice: +recommended.toFixed(1),
+      low: +(recommended * 0.93).toFixed(1),
+      high: +(recommended * 1.07).toFixed(1),
+      marketLow: +(recommended * 0.95).toFixed(1),
+      marketHigh: +(recommended * 1.08).toFixed(1),
+      offer: +(recommended * 1.02).toFixed(1),
+      basePrice,
+      kmDeduction,
       condMultiplier,
       cityDemand,
-      recommended: +recommended.toFixed(1),
-      low: +low.toFixed(1),
-      high: +high.toFixed(1),
-      marketLow: +marketLow.toFixed(1),
-      marketHigh: +marketHigh.toFixed(1),
-      offer: +offer.toFixed(1),
     };
   }, [brand, year, km, condition, city]);
+
+  /* Use AI valuation if available, else client fallback */
+  const valuation = useMemo(() => {
+    const v = aiValuation ?? clientValuation;
+    return {
+      recommended: v.estimatedPrice ?? (v as typeof clientValuation).estimatedPrice,
+      low: v.low,
+      high: v.high,
+      marketLow: v.marketLow,
+      marketHigh: v.marketHigh,
+      offer: v.offer,
+      factors: (v as typeof aiValuation)?.factors,
+      marketDemand: (v as typeof aiValuation)?.marketDemand,
+      generated: (v as typeof aiValuation)?.generated,
+      /* Client-side breakdown values (used when AI factors unavailable) */
+      basePrice: clientValuation.basePrice,
+      kmDeduction: clientValuation.kmDeduction,
+      condMultiplier: clientValuation.condMultiplier,
+      cityDemand: clientValuation.cityDemand,
+    };
+  }, [aiValuation, clientValuation]);
 
   const animatedValue = useCountUp(valuation.recommended, 1800, step === 1);
 
   /* Step navigation */
-  const goForward = useCallback(() => {
+  const goForward = useCallback(async () => {
+    // Trigger AI valuation when moving to step 1
+    if (step === 0) {
+      setValLoading(true);
+      setAnimDir("forward");
+      setStep(1);
+      try {
+        const res = await fetch("/api/ai/valuation", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ brand, model, year, km, fuel, transmission, owner: "1st Owner", city, condition }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setAiValuation(data);
+        }
+      } catch { /* fall back to client computation */ }
+      setValLoading(false);
+      return;
+    }
     setAnimDir("forward");
     setStep((s) => Math.min(s + 1, 2));
-  }, []);
+  }, [step, brand, model, year, km, fuel, transmission, city, condition]);
 
   const goBack = useCallback(() => {
     if (step === 0) {
@@ -485,54 +526,93 @@ function ValuationPageInner() {
 
               {/* Breakdown */}
               <div className="rounded-2xl p-4 border border-white/5 space-y-3" style={{ background: "rgba(255,255,255,0.03)" }}>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Valuation Breakdown</p>
+                <div className="flex items-center justify-between">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Valuation Breakdown</p>
+                  {valuation.generated && (
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-blue-400 flex items-center gap-1">
+                      <MaterialIcon name="auto_awesome" className="text-[10px]" /> AI Powered
+                    </span>
+                  )}
+                </div>
 
                 <div className="space-y-2.5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(17,82,212,0.15)" }}>
-                        <MaterialIcon name="directions_car" className="text-[14px]" style={{ color: "#1152d4" }} />
+                  {valuation.factors && valuation.factors.length > 0 ? (
+                    /* AI-generated factors */
+                    valuation.factors.map((f, i) => {
+                      const icons = ["directions_car", "speed", "star", "location_city", "trending_up", "local_gas_station"];
+                      const colors = [
+                        { bg: "rgba(17,82,212,0.15)", fg: "#1152d4" },
+                        { bg: "rgba(239,68,68,0.15)", fg: "#ef4444" },
+                        { bg: "rgba(245,158,11,0.15)", fg: "#f59e0b" },
+                        { bg: "rgba(139,92,246,0.15)", fg: "#8b5cf6" },
+                        { bg: "rgba(16,185,129,0.15)", fg: "#10b981" },
+                        { bg: "rgba(59,130,246,0.15)", fg: "#3b82f6" },
+                      ];
+                      const c = colors[i % colors.length];
+                      return (
+                        <div key={i} className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: c.bg }}>
+                              <MaterialIcon name={icons[i % icons.length]} className="text-[14px]" style={{ color: c.fg }} />
+                            </div>
+                            <span className="text-xs text-slate-400">{f.name}</span>
+                          </div>
+                          <span className="text-xs font-bold" style={{ color: f.positive ? "#10b981" : "#ef4444" }}>
+                            {f.impact}
+                          </span>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    /* Client-side fallback breakdown */
+                    <>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(17,82,212,0.15)" }}>
+                            <MaterialIcon name="directions_car" className="text-[14px]" style={{ color: "#1152d4" }} />
+                          </div>
+                          <span className="text-xs text-slate-400">Base value ({brand} {year})</span>
+                        </div>
+                        <span className="text-xs font-bold text-white">{formatLakhs(valuation.basePrice)}</span>
                       </div>
-                      <span className="text-xs text-slate-400">Base value ({brand} {year})</span>
-                    </div>
-                    <span className="text-xs font-bold text-white">{formatLakhs(valuation.basePrice)}</span>
-                  </div>
 
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(239,68,68,0.15)" }}>
-                        <MaterialIcon name="speed" className="text-[14px]" style={{ color: "#ef4444" }} />
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(239,68,68,0.15)" }}>
+                            <MaterialIcon name="speed" className="text-[14px]" style={{ color: "#ef4444" }} />
+                          </div>
+                          <span className="text-xs text-slate-400">KM adjustment</span>
+                        </div>
+                        <span className="text-xs font-bold" style={{ color: valuation.kmDeduction > 0 ? "#ef4444" : "#10b981" }}>
+                          {valuation.kmDeduction > 0 ? `-${formatLakhs(valuation.kmDeduction)}` : "No deduction"}
+                        </span>
                       </div>
-                      <span className="text-xs text-slate-400">KM adjustment</span>
-                    </div>
-                    <span className="text-xs font-bold" style={{ color: valuation.kmDeduction > 0 ? "#ef4444" : "#10b981" }}>
-                      {valuation.kmDeduction > 0 ? `-${formatLakhs(valuation.kmDeduction)}` : "No deduction"}
-                    </span>
-                  </div>
 
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(245,158,11,0.15)" }}>
-                        <MaterialIcon name="star" className="text-[14px]" style={{ color: "#f59e0b" }} />
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(245,158,11,0.15)" }}>
+                            <MaterialIcon name="star" className="text-[14px]" style={{ color: "#f59e0b" }} />
+                          </div>
+                          <span className="text-xs text-slate-400">Condition ({condition})</span>
+                        </div>
+                        <span className="text-xs font-bold" style={{ color: valuation.condMultiplier >= 1.0 ? "#10b981" : "#ef4444" }}>
+                          {valuation.condMultiplier > 1.0 ? `+${((valuation.condMultiplier - 1) * 100).toFixed(0)}%` : valuation.condMultiplier < 1.0 ? `-${((1 - valuation.condMultiplier) * 100).toFixed(0)}%` : "Baseline"}
+                        </span>
                       </div>
-                      <span className="text-xs text-slate-400">Condition ({condition})</span>
-                    </div>
-                    <span className="text-xs font-bold" style={{ color: valuation.condMultiplier >= 1.0 ? "#10b981" : "#ef4444" }}>
-                      {valuation.condMultiplier > 1.0 ? `+${((valuation.condMultiplier - 1) * 100).toFixed(0)}%` : valuation.condMultiplier < 1.0 ? `-${((1 - valuation.condMultiplier) * 100).toFixed(0)}%` : "Baseline"}
-                    </span>
-                  </div>
 
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(139,92,246,0.15)" }}>
-                        <MaterialIcon name="location_city" className="text-[14px]" style={{ color: "#8b5cf6" }} />
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(139,92,246,0.15)" }}>
+                            <MaterialIcon name="location_city" className="text-[14px]" style={{ color: "#8b5cf6" }} />
+                          </div>
+                          <span className="text-xs text-slate-400">City demand ({city})</span>
+                        </div>
+                        <span className="text-xs font-bold" style={{ color: valuation.cityDemand > 1.0 ? "#10b981" : "#94a3b8" }}>
+                          {valuation.cityDemand > 1.0 ? "+3% high demand" : "Standard"}
+                        </span>
                       </div>
-                      <span className="text-xs text-slate-400">City demand ({city})</span>
-                    </div>
-                    <span className="text-xs font-bold" style={{ color: valuation.cityDemand > 1.0 ? "#10b981" : "#94a3b8" }}>
-                      {valuation.cityDemand > 1.0 ? "+3% high demand" : "Standard"}
-                    </span>
-                  </div>
+                    </>
+                  )}
                 </div>
               </div>
 

@@ -242,6 +242,7 @@ model Vehicle {
   panoramaImageIdx Int?           @map("panorama_image_idx") // index into images[] marked as 360° panoramic
   images          String[]        // Array of image URLs
   features        Json?           // JSON array of { key, label, available }
+  description     String?         // AI-generated marketing description
   createdAt       DateTime        @default(now()) @map("created_at")
   updatedAt       DateTime        @updatedAt @map("updated_at")
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useCallback } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import Image from "next/image";
@@ -75,7 +75,28 @@ export default function LeadProfilePage({
     );
   }
 
-  const sentimentKey = lead.sentimentLabel?.toUpperCase() || "COOL";
+  const [sentimentOverride, setSentimentOverride] = useState<string | null>(null);
+  const [aiInsight, setAiInsight] = useState<{ reasoning: string; suggestedAction: string; confidence: number } | null>(null);
+  const [aiAnalyzing, setAiAnalyzing] = useState(false);
+
+  const analyzeSentiment = useCallback(async () => {
+    setAiAnalyzing(true);
+    try {
+      const res = await fetch("/api/ai/sentiment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ leadId: id }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setSentimentOverride(data.sentiment);
+        setAiInsight({ reasoning: data.reasoning, suggestedAction: data.suggestedAction, confidence: data.confidence });
+      }
+    } catch { /* silent */ }
+    setAiAnalyzing(false);
+  }, [id]);
+
+  const sentimentKey = (sentimentOverride || lead.sentimentLabel)?.toUpperCase() || "COOL";
   const sStyles = SENTIMENT_STYLES[sentimentKey] || SENTIMENT_STYLES.COOL;
   const initials = lead.buyerName
     .split(" ")
@@ -135,7 +156,22 @@ export default function LeadProfilePage({
                   />
                   {sStyles.label}
                 </span>
+                <button
+                  onClick={analyzeSentiment}
+                  disabled={aiAnalyzing}
+                  className="text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-0.5 uppercase tracking-wider border border-[#137fec]/20 disabled:opacity-50"
+                  style={{ color: "#137fec", background: "rgba(19,127,236,0.05)" }}
+                >
+                  <MaterialIcon name="auto_awesome" className="!text-[12px]" />
+                  {aiAnalyzing ? "..." : "AI"}
+                </button>
               </div>
+              {aiInsight && (
+                <div className="mt-2 px-3 py-2 rounded-lg text-xs" style={{ background: "rgba(19,127,236,0.05)", border: "1px solid rgba(19,127,236,0.1)" }}>
+                  <p className="text-slate-700"><span className="font-semibold" style={{ color: "#137fec" }}>AI Insight:</span> {aiInsight.reasoning}</p>
+                  <p className="text-slate-500 mt-1"><span className="font-semibold">Next step:</span> {aiInsight.suggestedAction}</p>
+                </div>
+              )}
               {lead.phone && (
                 <p className="text-slate-500 text-sm flex items-center gap-1">
                   <MaterialIcon name="call" className="text-sm" />

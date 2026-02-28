@@ -141,6 +141,14 @@ Write only the description paragraph. No preamble, no quotation marks.`;
     const json = await response.json();
     const description = json.choices?.[0]?.message?.content?.trim() ?? "";
 
+    // Persist description to vehicle if vehicleId was provided
+    if (body.vehicleId && description) {
+      await db.vehicle.update({
+        where: { id: body.vehicleId },
+        data: { description },
+      });
+    }
+
     return NextResponse.json({ description, generated: true });
   } catch (error) {
     console.error("POST /api/ai/description error:", error);

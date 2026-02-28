@@ -117,6 +117,7 @@ export async function POST(request: NextRequest) {
         km: validated.km,
         location: validated.location,
         owner: validated.owner,
+        description: validated.description ?? undefined,
         images: validated.images,
       },
     });

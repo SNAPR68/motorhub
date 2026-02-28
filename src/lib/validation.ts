@@ -17,6 +17,7 @@ export const createVehicleSchema = z.object({
   km: z.string().max(50).default("0"),
   location: z.string().max(200).default(""),
   owner: z.string().max(50).default("1st"),
+  description: z.string().max(2000).optional(),
   images: z.array(z.string().url()).max(20).default([]),
 });
 

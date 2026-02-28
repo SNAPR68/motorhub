@@ -54,7 +54,15 @@ export default function ConciergePage() {
     setTyping(true);
 
     try {
-      const data = await sendConciergeMessage(text.trim());
+      // Build conversation history for multi-turn context
+      const history = messages
+        .filter((m) => m.role === "user" || m.role === "ai")
+        .slice(-10)
+        .map((m) => ({
+          role: (m.role === "user" ? "user" : "assistant") as "user" | "assistant",
+          content: m.text,
+        }));
+      const data = await sendConciergeMessage(text.trim(), history);
       const aiMsg: Message = {
         id: Date.now() + 1,
         role: "ai",
