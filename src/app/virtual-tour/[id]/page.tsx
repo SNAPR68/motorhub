@@ -39,12 +39,13 @@ const HOTSPOT_MAP: Record<number, Array<{ label: string; category: string; desc:
 
 const SCAN_LINES_COUNT = 8;
 
-function usePanorama(totalImages: number) {
+function usePanorama(totalImages: number, gyroEnabled: boolean) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [offsetX, setOffsetX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [hasDragged, setHasDragged] = useState(false);
   const [activeImageIdx, setActiveImageIdx] = useState(0);
+  const [autoRotating, setAutoRotating] = useState(true);
 
   const dragStartX = useRef(0);
   const startOffsetX = useRef(0);
@@ -52,6 +53,8 @@ function usePanorama(totalImages: number) {
   const lastX = useRef(0);
   const lastTime = useRef(0);
   const rafRef = useRef<number | null>(null);
+  const autoRotateRef = useRef<number | null>(null);
+  const gyroBaseGamma = useRef<number | null>(null);
 
   const STRIP_MULTIPLIER = 3; // 300vw
   const getMaxOffset = useCallback(() => {
@@ -89,6 +92,8 @@ function usePanorama(totalImages: number) {
 
   const onPointerDown = useCallback((e: React.PointerEvent) => {
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    if (autoRotateRef.current) cancelAnimationFrame(autoRotateRef.current);
+    setAutoRotating(false);
     setIsDragging(true);
     dragStartX.current = e.clientX;
     startOffsetX.current = offsetX;
@@ -121,6 +126,8 @@ function usePanorama(totalImages: number) {
   const scrollToImage = useCallback((idx: number) => {
     if (!containerRef.current) return;
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    if (autoRotateRef.current) cancelAnimationFrame(autoRotateRef.current);
+    setAutoRotating(false);
     const vw = containerRef.current.offsetWidth;
     const segmentWidth = (vw * STRIP_MULTIPLIER) / totalImages;
     const target = clamp(-(segmentWidth * idx), getMaxOffset(), 0);
@@ -141,9 +148,57 @@ function usePanorama(totalImages: number) {
     rafRef.current = requestAnimationFrame(animate);
   }, [offsetX, totalImages, getMaxOffset]);
 
-  useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
+  // Auto-rotate: slow pan across all images on first load
+  useEffect(() => {
+    if (!autoRotating || isDragging) return;
+    const SPEED = -0.35; // px per frame (slow drift to the right)
+    const tick = () => {
+      setOffsetX((prev) => {
+        const maxOff = getMaxOffset();
+        const next = prev + SPEED;
+        // Stop at the end
+        if (next <= maxOff) {
+          setAutoRotating(false);
+          updateActiveIdx(maxOff);
+          return maxOff;
+        }
+        updateActiveIdx(next);
+        return next;
+      });
+      autoRotateRef.current = requestAnimationFrame(tick);
+    };
+    autoRotateRef.current = requestAnimationFrame(tick);
+    return () => { if (autoRotateRef.current) cancelAnimationFrame(autoRotateRef.current); };
+  }, [autoRotating, isDragging, getMaxOffset, updateActiveIdx]);
 
-  return { containerRef, offsetX, isDragging, hasDragged, activeImageIdx, onPointerDown, onPointerMove, onPointerUp, scrollToImage };
+  // Gyroscope-based panning
+  useEffect(() => {
+    if (!gyroEnabled) {
+      gyroBaseGamma.current = null;
+      return;
+    }
+    const handler = (e: DeviceOrientationEvent) => {
+      const gamma = e.gamma; // Left-right tilt: -90 to 90
+      if (gamma == null) return;
+      if (gyroBaseGamma.current === null) gyroBaseGamma.current = gamma;
+      const delta = gamma - gyroBaseGamma.current;
+      const sensitivity = 3;
+      setOffsetX((prev) => {
+        const next = clamp(prev - delta * sensitivity, getMaxOffset(), 0);
+        updateActiveIdx(next);
+        return next;
+      });
+    };
+    window.addEventListener("deviceorientation", handler);
+    return () => window.removeEventListener("deviceorientation", handler);
+  }, [gyroEnabled, getMaxOffset, updateActiveIdx]);
+
+  useEffect(() => () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    if (autoRotateRef.current) cancelAnimationFrame(autoRotateRef.current);
+  }, []);
+
+  return { containerRef, offsetX, isDragging, hasDragged, activeImageIdx, autoRotating, onPointerDown, onPointerMove, onPointerUp, scrollToImage };
 }
 
 // ── Loading skeleton ────────────────────────────────────────────
@@ -188,7 +243,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
   const rawVehicle = data?.vehicle ?? null;
   const images = vehicle?.gallery?.length ? vehicle.gallery : (vehicle?.image ? [vehicle.image] : []);
   const totalImages = Math.max(images.length, 1);
-  const pan = usePanorama(totalImages);
+  const pan = usePanorama(totalImages, gyroEnabled);
 
   // Auto-scroll to the dealer-marked panoramic image on first load
   useEffect(() => {
@@ -424,8 +479,8 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
         className="absolute z-20 left-1/2 -translate-x-1/2 transition-all duration-700 pointer-events-none"
         style={{
           bottom: "180px",
-          opacity: pan.hasDragged ? 0 : 1,
-          transform: `translateX(-50%) translateY(${pan.hasDragged ? "10px" : "0"})`,
+          opacity: pan.hasDragged || pan.autoRotating ? 0 : 1,
+          transform: `translateX(-50%) translateY(${pan.hasDragged || pan.autoRotating ? "10px" : "0"})`,
         }}
       >
         <div

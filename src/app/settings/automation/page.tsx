@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { fetchDealerPreferences, updateDealerPreferences } from "@/lib/api";
 
 /* ── design tokens: ai_automation_&_scheduling ── */
 // primary: #137fec, font: Inter, bg: #101922 (dark), light card: #0f172a
@@ -54,7 +55,9 @@ const DAYS = [
   { day: "Sun", hasPost: false, scheduled: false },
 ];
 
-function loadPrefs(): boolean[] {
+const RULE_KEYS = ["autoEnhancePhotos", "autoPostFacebook", "instantAiLeadReply"];
+
+function loadLocalPrefs(): boolean[] {
   if (typeof window === "undefined") return DEFAULT_TOGGLES;
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -63,16 +66,46 @@ function loadPrefs(): boolean[] {
   return DEFAULT_TOGGLES;
 }
 
+function togglesToMap(t: boolean[]): Record<string, boolean> {
+  const map: Record<string, boolean> = {};
+  RULE_KEYS.forEach((k, i) => { map[k] = t[i] ?? DEFAULT_TOGGLES[i]; });
+  return map;
+}
+
+function mapToToggles(m: Record<string, boolean>): boolean[] {
+  return RULE_KEYS.map((k, i) => m[k] ?? DEFAULT_TOGGLES[i]);
+}
+
 export default function AutomationPage() {
   const [toggles, setToggles] = useState<boolean[]>(DEFAULT_TOGGLES);
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    setToggles(loadPrefs());
+  const loadPrefs = useCallback(async () => {
+    try {
+      const prefs = await fetchDealerPreferences();
+      if (prefs?.automation && Object.keys(prefs.automation).length > 0) {
+        setToggles(mapToToggles(prefs.automation));
+        return;
+      }
+    } catch { /* fall through to localStorage */ }
+    setToggles(loadLocalPrefs());
   }, []);
 
-  const handleSave = () => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+  useEffect(() => {
+    loadPrefs();
+  }, [loadPrefs]);
+
+  const handleSave = async () => {
+    setSaving(true);
+    const automationMap = togglesToMap(toggles);
+    try {
+      await updateDealerPreferences({ automation: automationMap });
+    } catch {
+      // fallback to localStorage
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+    }
+    setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
@@ -99,8 +132,8 @@ export default function AutomationPage() {
           <h1 className="text-lg font-semibold absolute left-1/2 -translate-x-1/2 text-white">
             AI Automation
           </h1>
-          <button onClick={handleSave} className="font-medium transition-colors" style={{ color: saved ? "#16a34a" : "#137fec" }}>
-            {saved ? "Saved ✓" : "Save"}
+          <button onClick={handleSave} disabled={saving} className="font-medium transition-colors" style={{ color: saved ? "#16a34a" : "#137fec" }}>
+            {saving ? "Saving..." : saved ? "Saved" : "Save"}
           </button>
         </div>
       </header>

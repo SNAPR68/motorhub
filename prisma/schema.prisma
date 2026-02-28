@@ -162,9 +162,10 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   // Relations
-  dealerProfile DealerProfile?
-  wishlists     Wishlist[]
-  notifications Notification[]
+  dealerProfile   DealerProfile?
+  wishlists       Wishlist[]
+  notifications   Notification[]
+  serviceBookings ServiceBooking[]
 
   @@map("users")
 }
@@ -194,6 +195,7 @@ model DealerProfile {
   teamMembers   TeamMember[]
   subscriptions Subscription[]
   activities    Activity[]
+  preferences   DealerPreference?
 
   @@map("dealer_profiles")
 }
@@ -423,6 +425,66 @@ model Activity {
   @@index([dealerProfileId])
   @@index([createdAt])
   @@map("activities")
+}
+
+// ─────────────────────────────────────────────
+// SERVICE BOOKINGS (RC Transfer, Inspection, Swap, Cross-State)
+// ─────────────────────────────────────────────
+
+enum ServiceType {
+  RC_TRANSFER
+  INSPECTION
+  SWAP
+  CROSS_STATE
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+/// Unified service booking for all buyer services
+model ServiceBooking {
+  id          String        @id @default(cuid())
+  userId      String?       @map("user_id")
+  type        ServiceType
+  status      BookingStatus @default(PENDING)
+  plan        String?       // Plan tier: "basic", "express", "premium", etc.
+  amount      Int?          // Price in INR
+  details     Json          // Service-specific details (vehicle info, addresses, etc.)
+  scheduledAt DateTime?     @map("scheduled_at")
+  phone       String?
+  email       String?
+  city        String?
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([type])
+  @@index([status])
+  @@map("service_bookings")
+}
+
+/// Dealer automation & asset preferences (replaces localStorage)
+model DealerPreference {
+  id              String @id @default(cuid())
+  dealerProfileId String @unique @map("dealer_profile_id")
+  automation      Json   @default("{}") // { autoEnhancePhotos, autoPostFacebook, ... }
+  assets          Json   @default("{}") // { show360Interior, showCinematicReel, ... }
+  notifications   Json   @default("{}") // { emailAlerts, smsAlerts, pushAlerts, ... }
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id], onDelete: Cascade)
+
+  @@map("dealer_preferences")
 }
 
 // ─────────────────────────────────────────────

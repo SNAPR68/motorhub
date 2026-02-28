@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { createServiceBooking } from "@/lib/api";
 
 const states = [
   "Maharashtra",
@@ -112,6 +113,8 @@ export default function CrossStateExpressPage() {
     total: number;
   } | null>(null);
   const [selectedPkg, setSelectedPkg] = useState("express");
+  const [booking, setBooking] = useState(false);
+  const [booked, setBooked] = useState(false);
 
   function calculateCost() {
     const price = parseInt(carPrice.replace(/,/g, ""), 10);
@@ -125,6 +128,27 @@ export default function CrossStateExpressPage() {
 
     setCostBreakdown({ carPrice: price, roadTax, noc, reRegistration, transport, total });
   }
+
+  const handleBook = async () => {
+    setBooking(true);
+    try {
+      const pkg = packages.find((p) => p.id === selectedPkg);
+      await createServiceBooking({
+        type: "CROSS_STATE",
+        plan: selectedPkg,
+        amount: pkg?.price.replace(/,/g, ""),
+        details: {
+          packageName: pkg?.name,
+          fromState,
+          toState,
+          carPrice: carPrice ? parseInt(carPrice.replace(/,/g, ""), 10) : undefined,
+          costBreakdown: costBreakdown ?? undefined,
+        },
+      });
+      setBooked(true);
+    } catch { /* ignore */ }
+    setBooking(false);
+  };
 
   function formatCurrency(n: number) {
     return n.toLocaleString("en-IN");
@@ -366,16 +390,31 @@ export default function CrossStateExpressPage() {
 
       {/* CTA */}
       <section className="px-4 pt-6">
-        <Link
-          href="/cross-state/track"
-          className="w-full py-3.5 rounded-xl bg-[#1152d4] text-white font-semibold text-sm hover:bg-[#0e47b5] transition flex items-center justify-center gap-2"
-        >
-          <MaterialIcon name="rocket_launch" className="text-lg" />
-          Get Started &#8212; &#8377;{packages.find((p) => p.id === selectedPkg)?.price}
-        </Link>
-        <p className="text-center text-[11px] text-white/30 mt-2">
-          No payment until your car is picked up
-        </p>
+        {booked ? (
+          <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 text-center">
+            <MaterialIcon name="check_circle" className="text-3xl text-emerald-400" />
+            <p className="text-sm font-bold text-white mt-2">Booking Confirmed</p>
+            <p className="text-xs text-slate-400 mt-1">Our CrossState agent will contact you within 2 hours to begin the process.</p>
+          </div>
+        ) : (
+          <>
+            <button
+              onClick={handleBook}
+              disabled={booking}
+              className="w-full py-3.5 rounded-xl bg-[#1152d4] text-white font-semibold text-sm hover:bg-[#0e47b5] transition flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              {booking ? (
+                <div className="h-5 w-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+              ) : (
+                <MaterialIcon name="rocket_launch" className="text-lg" />
+              )}
+              {booking ? "Processing..." : `Get Started \u2014 \u20B9${packages.find((p) => p.id === selectedPkg)?.price}`}
+            </button>
+            <p className="text-center text-[11px] text-white/30 mt-2">
+              No payment until your car is picked up
+            </p>
+          </>
+        )}
       </section>
 
       {/* Trust Section */}

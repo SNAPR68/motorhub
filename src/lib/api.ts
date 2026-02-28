@@ -634,3 +634,52 @@ export async function fetchCarModel(brand: string, model: string) {
     }>;
   }>(`/api/cars/${brand}/${model}`);
 }
+
+// ── Service Bookings (RC Transfer, Inspection, Swap, Cross-State) ──
+
+export interface ServiceBookingResponse {
+  id: string;
+  type: string;
+  status: string;
+  plan: string | null;
+  createdAt: string;
+}
+
+export async function createServiceBooking(data: {
+  type: "RC_TRANSFER" | "INSPECTION" | "SWAP" | "CROSS_STATE";
+  plan?: string;
+  amount?: string;
+  details: Record<string, unknown>;
+  scheduledAt?: string;
+  phone?: string;
+  email?: string;
+  city?: string;
+}) {
+  return apiFetch<ServiceBookingResponse>("/api/services/book", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+}
+
+// ── Dealer Preferences (automation, assets, notifications) ──
+
+export interface DealerPreferences {
+  automation: Record<string, boolean>;
+  assets: Record<string, boolean>;
+  notifications: Record<string, boolean>;
+}
+
+export async function fetchDealerPreferences() {
+  return apiFetch<DealerPreferences>("/api/dealer/preferences");
+}
+
+export async function updateDealerPreferences(
+  data: Partial<DealerPreferences>,
+) {
+  return apiFetch<DealerPreferences>("/api/dealer/preferences", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+}

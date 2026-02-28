@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { createServiceBooking } from "@/lib/api";
 
 const packages = [
   {
@@ -83,6 +84,24 @@ export default function InspectionPage() {
   const [selectedTime, setSelectedTime] = useState("9:00 AM");
   const [expandedCheck, setExpandedCheck] = useState<number | null>(null);
   const [booked, setBooked] = useState(false);
+  const [bookingInProgress, setBookingInProgress] = useState(false);
+
+  const handleBook = async () => {
+    setBookingInProgress(true);
+    try {
+      const pkg = packages.find((p) => p.id === selectedPkg);
+      await createServiceBooking({
+        type: "INSPECTION",
+        plan: selectedPkg,
+        amount: pkg?.price.replace(/[^\d]/g, ""),
+        details: { packageName: pkg?.name, regNumber, vehicleName, inspector: "Vikram Singh" },
+        scheduledAt: `${selectedDate}T${selectedTime.includes("PM") ? (parseInt(selectedTime) + 12).toString().padStart(2, "0") : selectedTime.split(":")[0].padStart(2, "0")}:00:00`,
+        city,
+      });
+      setBooked(true);
+    } catch { /* ignore */ }
+    setBookingInProgress(false);
+  };
 
   if (booked) {
     return (
@@ -385,11 +404,16 @@ export default function InspectionPage() {
       {/* CTA */}
       <section className="px-4 pt-8">
         <button
-          onClick={() => setBooked(true)}
-          className="w-full py-3.5 rounded-xl bg-[#10b981] text-white font-semibold text-sm hover:bg-[#059669] transition flex items-center justify-center gap-2"
+          onClick={handleBook}
+          disabled={bookingInProgress}
+          className="w-full py-3.5 rounded-xl bg-[#10b981] text-white font-semibold text-sm hover:bg-[#059669] transition flex items-center justify-center gap-2 disabled:opacity-50"
         >
-          <MaterialIcon name="event_available" className="text-lg" />
-          Book Inspection — {packages.find((p) => p.id === selectedPkg)?.price}
+          {bookingInProgress ? (
+            <div className="h-5 w-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+          ) : (
+            <MaterialIcon name="event_available" className="text-lg" />
+          )}
+          {bookingInProgress ? "Booking..." : `Book Inspection — ${packages.find((p) => p.id === selectedPkg)?.price}`}
         </button>
         <p className="text-center text-[11px] text-white/30 mt-2">
           Free cancellation up to 2 hours before inspection

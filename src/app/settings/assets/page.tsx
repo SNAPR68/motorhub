@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { fetchDealerPreferences, updateDealerPreferences } from "@/lib/api";
 
 /* ── design tokens: ai_asset_&_media_settings ── */
 // primary: #dab80b (gold), font: Newsreader (headings) + Inter (body), bg: #0a0a0a, surface: #161616, border: #2a2614
@@ -35,7 +36,11 @@ const SECTIONS = [
 
 const DEFAULT_TOGGLES = SECTIONS.flatMap((s) => s.items.map((i) => i.enabled));
 
-function loadPrefs(): boolean[] {
+const ASSET_KEYS = SECTIONS.flatMap((s) =>
+  s.items.map((i) => i.name.toLowerCase().replace(/[^a-z0-9]+/g, "_"))
+);
+
+function loadLocalPrefs(): boolean[] {
   if (typeof window === "undefined") return DEFAULT_TOGGLES;
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -44,16 +49,45 @@ function loadPrefs(): boolean[] {
   return DEFAULT_TOGGLES;
 }
 
+function togglesToMap(t: boolean[]): Record<string, boolean> {
+  const map: Record<string, boolean> = {};
+  ASSET_KEYS.forEach((k, i) => { map[k] = t[i] ?? DEFAULT_TOGGLES[i]; });
+  return map;
+}
+
+function mapToToggles(m: Record<string, boolean>): boolean[] {
+  return ASSET_KEYS.map((k, i) => m[k] ?? DEFAULT_TOGGLES[i]);
+}
+
 export default function AssetsPage() {
   const [toggles, setToggles] = useState<boolean[]>(DEFAULT_TOGGLES);
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    setToggles(loadPrefs());
+  const loadPrefs = useCallback(async () => {
+    try {
+      const prefs = await fetchDealerPreferences();
+      if (prefs?.assets && Object.keys(prefs.assets).length > 0) {
+        setToggles(mapToToggles(prefs.assets));
+        return;
+      }
+    } catch { /* fall through to localStorage */ }
+    setToggles(loadLocalPrefs());
   }, []);
 
-  const handleSave = () => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+  useEffect(() => {
+    loadPrefs();
+  }, [loadPrefs]);
+
+  const handleSave = async () => {
+    setSaving(true);
+    const assetsMap = togglesToMap(toggles);
+    try {
+      await updateDealerPreferences({ assets: assetsMap });
+    } catch {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+    }
+    setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
@@ -85,8 +119,8 @@ export default function AssetsPage() {
             Dynamic Assets
           </h1>
         </div>
-        <button onClick={handleSave} className="font-medium text-sm transition-colors" style={{ color: saved ? "#22c55e" : "#dab80b" }}>
-          {saved ? "Saved ✓" : "Save"}
+        <button onClick={handleSave} disabled={saving} className="font-medium text-sm transition-colors" style={{ color: saved ? "#22c55e" : "#dab80b" }}>
+          {saving ? "Saving..." : saved ? "Saved" : "Save"}
         </button>
       </header>
 
@@ -157,15 +191,16 @@ export default function AssetsPage() {
       <div className="fixed bottom-0 left-0 right-0 z-30 flex justify-center p-6 max-w-md mx-auto">
         <button
           onClick={handleSave}
-          className="relative flex w-full max-w-sm items-center justify-center gap-2 overflow-hidden rounded-xl py-4 text-sm font-bold tracking-wider active:scale-95 transition-all"
+          disabled={saving}
+          className="relative flex w-full max-w-sm items-center justify-center gap-2 overflow-hidden rounded-xl py-4 text-sm font-bold tracking-wider active:scale-95 transition-all disabled:opacity-60"
           style={{
             background: saved ? "#22c55e" : "#dab80b",
             color: "#0a0a0a",
             boxShadow: saved ? "0 10px 40px -10px rgba(34,197,94,0.5)" : "0 10px 40px -10px rgba(218,184,11,0.5)",
           }}
         >
-          <MaterialIcon name={saved ? "check_circle" : "auto_awesome"} />
-          {saved ? "SAVED AS GLOBAL TEMPLATE" : "SAVE AS GLOBAL TEMPLATE"}
+          <MaterialIcon name={saving ? "sync" : saved ? "check_circle" : "auto_awesome"} />
+          {saving ? "SAVING..." : saved ? "SAVED AS GLOBAL TEMPLATE" : "SAVE AS GLOBAL TEMPLATE"}
         </button>
       </div>
 

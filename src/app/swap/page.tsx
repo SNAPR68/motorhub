@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { createServiceBooking } from "@/lib/api";
 
 /* ─── SwapDirect Hub — P2P Car Exchange ─── */
 
@@ -38,11 +40,29 @@ export default function SwapDirectPage() {
   const [wantYear, setWantYear] = useState("");
   const [wantModel, setWantModel] = useState("");
 
+  const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
+
   const canSearch = yourBrand && yourYear && wantBrand;
 
   const searchHref = canSearch
     ? `/swap/matches?yourBrand=${encodeURIComponent(yourBrand)}&yourYear=${yourYear}&yourModel=${encodeURIComponent(yourModel)}&yourKm=${yourKm}&wantBrand=${encodeURIComponent(wantBrand)}&wantYear=${wantYear}&wantModel=${encodeURIComponent(wantModel)}`
     : "#";
+
+  const handleSwapSearch = async () => {
+    if (!canSearch) return;
+    setSubmitting(true);
+    try {
+      await createServiceBooking({
+        type: "SWAP",
+        details: {
+          yourCar: { brand: yourBrand, year: yourYear, model: yourModel, km: yourKm },
+          wantedCar: { brand: wantBrand, year: wantYear, model: wantModel },
+        },
+      });
+    } catch { /* ignore */ }
+    router.push(searchHref);
+  };
 
   return (
     <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
@@ -192,14 +212,19 @@ export default function SwapDirectPage() {
         </div>
 
         {/* CTA */}
-        <Link
-          href={searchHref}
-          className={`flex items-center justify-center gap-2 h-13 rounded-2xl text-sm font-bold text-white w-full transition-all ${!canSearch ? "opacity-40 pointer-events-none" : ""}`}
+        <button
+          onClick={handleSwapSearch}
+          disabled={!canSearch || submitting}
+          className={`flex items-center justify-center gap-2 h-13 rounded-2xl text-sm font-bold text-white w-full transition-all ${!canSearch || submitting ? "opacity-40" : ""}`}
           style={{ background: "#1152d4" }}
         >
-          <MaterialIcon name="swap_horiz" className="text-[18px]" />
-          Find Swap Matches
-        </Link>
+          {submitting ? (
+            <div className="h-5 w-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+          ) : (
+            <MaterialIcon name="swap_horiz" className="text-[18px]" />
+          )}
+          {submitting ? "Finding Matches..." : "Find Swap Matches"}
+        </button>
 
         {/* How SwapDirect Works */}
         <div>
