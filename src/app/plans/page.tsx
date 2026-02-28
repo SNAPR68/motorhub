@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchDealerProfile } from "@/lib/api";
+import { fetchDealerProfile, createPaymentOrder, verifyPayment } from "@/lib/api";
 
 /* ── design tokens: premium_dealer_plans ── */
 // primary: #f4c025 (gold), font: Manrope, bg: #221e10
@@ -71,9 +72,84 @@ const BASE_PLANS = [
 
 export default function PlansPage() {
   const [billing, setBilling] = useState<"annual" | "monthly">("annual");
+  const [upgrading, setUpgrading] = useState<string | null>(null);
+  const [upgraded, setUpgraded] = useState(false);
+  const router = useRouter();
   const { data: profileData } = useApi(() => fetchDealerProfile(), []);
   const currentPlan = (profileData?.profile as { plan?: string } | undefined)?.plan ?? "STARTER";
   const currentPlanName = PLAN_KEY_MAP[currentPlan] ?? "Silver";
+
+  const handleUpgrade = useCallback(async (planDbKey: "GROWTH" | "ENTERPRISE") => {
+    setUpgrading(planDbKey);
+    try {
+      const order = await createPaymentOrder({ plan: planDbKey, billing });
+
+      // Demo mode (no Razorpay keys configured)
+      if (order.demo) {
+        const result = await verifyPayment({
+          razorpay_order_id: order.orderId,
+          razorpay_payment_id: `pay_demo_${Date.now()}`,
+          razorpay_signature: "demo",
+          plan: planDbKey,
+          billing,
+        });
+        if (result.verified) {
+          setUpgraded(true);
+          setTimeout(() => router.push("/settings"), 2000);
+        }
+        setUpgrading(null);
+        return;
+      }
+
+      // Real Razorpay checkout
+      const RazorpayCheckout = (window as unknown as Record<string, unknown>).Razorpay as
+        new (opts: Record<string, unknown>) => { open: () => void };
+
+      if (!RazorpayCheckout) {
+        // Load Razorpay script dynamically
+        await new Promise<void>((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = "https://checkout.razorpay.com/v1/checkout.js";
+          script.onload = () => resolve();
+          script.onerror = () => reject(new Error("Failed to load Razorpay"));
+          document.head.appendChild(script);
+        });
+      }
+
+      const Rp = (window as unknown as Record<string, unknown>).Razorpay as
+        new (opts: Record<string, unknown>) => { open: () => void };
+
+      const rzp = new Rp({
+        key: order.key,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Autovinci",
+        description: `${PLAN_KEY_MAP[planDbKey]} Plan - ${billing}`,
+        order_id: order.orderId,
+        handler: async (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
+          try {
+            const result = await verifyPayment({
+              ...response,
+              plan: planDbKey,
+              billing,
+            });
+            if (result.verified) {
+              setUpgraded(true);
+              setTimeout(() => router.push("/settings"), 2000);
+            }
+          } catch { /* ignore */ }
+          setUpgrading(null);
+        },
+        modal: {
+          ondismiss: () => setUpgrading(null),
+        },
+        theme: { color: "#f4c025" },
+      });
+      rzp.open();
+    } catch {
+      setUpgrading(null);
+    }
+  }, [billing, router]);
 
   return (
     <div
@@ -129,6 +205,18 @@ export default function PlansPage() {
           </button>
         </div>
       </div>
+
+      {/* ── Upgrade Success ── */}
+      {upgraded && (
+        <div className="mx-4 mb-2 p-4 rounded-xl flex items-center gap-3"
+          style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.2)" }}>
+          <MaterialIcon name="check_circle" className="text-emerald-400 text-2xl" />
+          <div>
+            <p className="text-sm font-bold text-emerald-400">Plan Upgraded</p>
+            <p className="text-xs text-slate-400">Redirecting to settings...</p>
+          </div>
+        </div>
+      )}
 
       {/* ── Plans Content ── */}
       <div className="flex flex-col gap-6 px-4 py-3">
@@ -203,8 +291,13 @@ export default function PlansPage() {
               </div>
 
               <button
-                className="w-full mt-2 py-3 px-4 rounded-lg text-sm font-bold"
-                disabled={isCurrent}
+                onClick={() => {
+                  if (!isCurrent && plan.dbKey !== "STARTER") {
+                    handleUpgrade(plan.dbKey as "GROWTH" | "ENTERPRISE");
+                  }
+                }}
+                className="w-full mt-2 py-3 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2"
+                disabled={isCurrent || upgrading === plan.dbKey}
                 style={{
                   background: isCurrent ? "#1e293b" : plan.highlight ? "#f4c025" : "rgba(244,192,37,0.2)",
                   color: isCurrent ? "#94a3b8" : plan.highlight ? "#221e10" : "#f4c025",
@@ -213,7 +306,10 @@ export default function PlansPage() {
                   ...(plan.highlight && !isCurrent ? { boxShadow: "0 4px 16px rgba(244,192,37,0.2)" } : {}),
                 }}
               >
-                {isCurrent ? "Current Plan" : plan.ctaText}
+                {upgrading === plan.dbKey ? (
+                  <div className="h-5 w-5 border-2 border-current/40 border-t-current rounded-full animate-spin" />
+                ) : null}
+                {isCurrent ? "Current Plan" : upgrading === plan.dbKey ? "Processing..." : plan.ctaText}
               </button>
             </div>
           );

@@ -683,3 +683,41 @@ export async function updateDealerPreferences(
     body: JSON.stringify(data),
   });
 }
+
+// ── Payments (Razorpay) ──
+
+export interface PaymentOrder {
+  orderId: string;
+  amount: number;
+  currency: string;
+  key: string;
+  plan: string;
+  billing: string;
+  demo?: boolean;
+}
+
+export async function createPaymentOrder(data: {
+  plan: "GROWTH" | "ENTERPRISE";
+  billing: "monthly" | "annual";
+}) {
+  return apiFetch<PaymentOrder>("/api/payments/create-order", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+}
+
+export async function verifyPayment(data: {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+  plan: "GROWTH" | "ENTERPRISE";
+  billing: "monthly" | "annual";
+}) {
+  return apiFetch<{ verified: boolean; plan: string; demo?: boolean }>(
+    "/api/payments/verify",
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+    }
+  );
+}
