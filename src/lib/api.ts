@@ -662,6 +662,27 @@ export async function createServiceBooking(data: {
   });
 }
 
+export async function fetchServiceBookings(type?: string) {
+  const qs = type ? `?type=${type}` : "";
+  return apiFetch<{
+    bookings: Array<{
+      id: string;
+      type: string;
+      status: string;
+      plan: string | null;
+      amount: number | null;
+      details: Record<string, unknown>;
+      scheduledAt: string | null;
+      phone: string | null;
+      email: string | null;
+      city: string | null;
+      createdAt: string;
+      updatedAt: string;
+    }>;
+    total: number;
+  }>(`/api/services/book${qs}`);
+}
+
 // ── Dealer Preferences (automation, assets, notifications) ──
 
 export interface DealerPreferences {

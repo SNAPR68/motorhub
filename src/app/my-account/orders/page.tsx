@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchServiceBookings } from "@/lib/api";
 
 type OrderFilter = "All" | "Active" | "Completed" | "Cancelled";
 type OrderStatus = "BOOKING_CONFIRMED" | "COMPLETED" | "CANCELLED" | "IN_TRANSIT";
@@ -18,26 +20,27 @@ interface Order {
   icon: string;
 }
 
-const ORDERS: Order[] = [
-  {
-    id: "ORD-20260215",
-    name: "Hyundai Creta SX(O) 2024",
-    type: "vehicle",
-    date: "15 Feb 2026",
-    status: "BOOKING_CONFIRMED",
-    amount: "₹50,000",
-    icon: "directions_car",
-  },
-  {
-    id: "ORD-20260110",
-    name: "Service Booking — Standard Maintenance",
-    type: "service",
-    date: "10 Jan 2026",
-    status: "COMPLETED",
-    amount: "₹4,200",
-    icon: "build",
-  },
-];
+const TYPE_LABELS: Record<string, string> = {
+  RC_TRANSFER: "RC Transfer",
+  INSPECTION: "Vehicle Inspection",
+  SWAP: "SwapDirect Exchange",
+  CROSS_STATE: "Cross-State Transfer",
+};
+
+const TYPE_ICONS: Record<string, string> = {
+  RC_TRANSFER: "description",
+  INSPECTION: "search",
+  SWAP: "swap_horiz",
+  CROSS_STATE: "local_shipping",
+};
+
+const STATUS_MAP: Record<string, OrderStatus> = {
+  PENDING: "BOOKING_CONFIRMED",
+  CONFIRMED: "BOOKING_CONFIRMED",
+  IN_PROGRESS: "IN_TRANSIT",
+  COMPLETED: "COMPLETED",
+  CANCELLED: "CANCELLED",
+};
 
 const STATUS_CONFIG: Record<OrderStatus, { bg: string; color: string; label: string }> = {
   BOOKING_CONFIRMED: { bg: "rgba(17,82,212,0.12)", color: "#60a5fa", label: "Booking Confirmed" },
@@ -57,6 +60,23 @@ const FILTERS: OrderFilter[] = ["All", "Active", "Completed", "Cancelled"];
 
 export default function MyOrdersPage() {
   const [activeFilter, setActiveFilter] = useState<OrderFilter>("All");
+  const { data } = useApi(() => fetchServiceBookings(), []);
+
+  // Map DB bookings to Order interface
+  const ORDERS: Order[] = (data?.bookings ?? []).map((b) => {
+    const details = (b.details ?? {}) as Record<string, unknown>;
+    return {
+      id: `ORD-${b.id.slice(0, 8).toUpperCase()}`,
+      name: details.plan
+        ? `${TYPE_LABELS[b.type] ?? b.type} — ${String(details.plan)}`
+        : TYPE_LABELS[b.type] ?? b.type,
+      type: "service" as const,
+      date: new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+      status: STATUS_MAP[b.status] ?? "BOOKING_CONFIRMED",
+      amount: b.amount ? `₹${b.amount.toLocaleString("en-IN")}` : "—",
+      icon: TYPE_ICONS[b.type] ?? "receipt_long",
+    };
+  });
 
   const filtered = ORDERS.filter(
     (o) => activeFilter === "All" || STATUS_FILTER_MAP[o.status] === activeFilter

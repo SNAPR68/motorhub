@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchWishlist } from "@/lib/api";
 
 /* ── static data ─────────────────────────────────────────────── */
 

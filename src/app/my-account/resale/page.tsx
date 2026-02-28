@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchWishlist } from "@/lib/api";
 
 /* ── static data ─────────────────────────────────────────────── */
 
@@ -68,6 +70,10 @@ const { points: polylinePoints, areaPath } = buildPolyline();
 /* ── page ─────────────────────────────────────────────────────── */
 
 export default function ResaleValuePage() {
+  const { data: wishlistData } = useApi(() => fetchWishlist(), []);
+  const firstCar = (wishlistData?.wishlists ?? [])[0]?.vehicle as { name?: string; year?: number } | undefined;
+  const carName = firstCar ? `${firstCar.name} ${firstCar.year ?? ""}`.trim() : "Maruti Brezza 2022";
+
   return (
     <div
       className="min-h-dvh w-full pb-32"
@@ -115,7 +121,7 @@ export default function ResaleValuePage() {
               Current Market Value
             </p>
             <h2 className="text-sm font-bold text-white mb-2">
-              2022 Maruti Suzuki Brezza ZXi
+              {carName}
             </h2>
             <p className="text-3xl font-black text-white leading-none">
               ₹8,45,000
@@ -317,7 +323,7 @@ export default function ResaleValuePage() {
               />
               <p className="text-xs text-slate-300 leading-relaxed">
                 <span className="font-bold text-white">
-                  Similar Brezzas in your area:
+                  Similar cars in your area:
                 </span>{" "}
                 ₹8.2L - ₹9.1L
               </p>

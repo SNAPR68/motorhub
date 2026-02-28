@@ -5,13 +5,15 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchVehicles, adaptVehicle } from "@/lib/api";
 
 /* ─── SwapDirect — Swap Matches Results ─── */
 
 const FILTERS = ["Best Match", "Lowest Gap", "Nearest"];
 
 interface MatchCard {
-  id: number;
+  id: string;
   ownerName: string;
   ownerCity: string;
   theirCar: string;
@@ -23,68 +25,8 @@ interface MatchCard {
   youPay: string;
 }
 
-const MATCHES: MatchCard[] = [
-  {
-    id: 1,
-    ownerName: "Priya S.",
-    ownerCity: "Andheri, Mumbai",
-    theirCar: "Tata Nexon EV",
-    theirYear: 2023,
-    theirKm: "18,200",
-    matchPct: 92,
-    yourValue: "₹4.8L",
-    theirValue: "₹8.2L",
-    youPay: "₹3.4L",
-  },
-  {
-    id: 2,
-    ownerName: "Rajesh K.",
-    ownerCity: "Powai, Mumbai",
-    theirCar: "Hyundai Verna",
-    theirYear: 2022,
-    theirKm: "32,500",
-    matchPct: 88,
-    yourValue: "₹4.8L",
-    theirValue: "₹7.1L",
-    youPay: "₹2.3L",
-  },
-  {
-    id: 3,
-    ownerName: "Sneha M.",
-    ownerCity: "Bandra, Mumbai",
-    theirCar: "Kia Seltos HTX",
-    theirYear: 2023,
-    theirKm: "22,800",
-    matchPct: 85,
-    yourValue: "₹4.8L",
-    theirValue: "₹9.5L",
-    youPay: "₹4.7L",
-  },
-  {
-    id: 4,
-    ownerName: "Vikram D.",
-    ownerCity: "Thane, Mumbai",
-    theirCar: "Mahindra XUV300",
-    theirYear: 2022,
-    theirKm: "41,000",
-    matchPct: 82,
-    yourValue: "₹4.8L",
-    theirValue: "₹6.8L",
-    youPay: "₹2.0L",
-  },
-  {
-    id: 5,
-    ownerName: "Amit P.",
-    ownerCity: "Navi Mumbai",
-    theirCar: "Toyota Urban Cruiser",
-    theirYear: 2021,
-    theirKm: "35,600",
-    matchPct: 79,
-    yourValue: "₹4.8L",
-    theirValue: "₹6.2L",
-    youPay: "₹1.4L",
-  },
-];
+const OWNER_NAMES = ["Priya S.", "Rajesh K.", "Sneha M.", "Vikram D.", "Amit P.", "Neha T.", "Kiran R.", "Sanjay B."];
+const CITY_AREAS = ["Andheri", "Powai", "Bandra", "Thane", "Navi Mumbai", "Juhu", "Worli", "Malad"];
 
 function matchColor(pct: number) {
   if (pct >= 90) return "#10b981";
@@ -93,19 +35,65 @@ function matchColor(pct: number) {
   return "#94a3b8";
 }
 
+function formatPrice(price: number): string {
+  if (price >= 10000000) return `₹${(price / 10000000).toFixed(1)}Cr`;
+  return `₹${(price / 100000).toFixed(1)}L`;
+}
+
 function MatchesContent() {
   const searchParams = useSearchParams();
   const yourBrand = searchParams.get("yourBrand") || "Your Car";
   const yourYear = searchParams.get("yourYear") || "";
+  const wantBrand = searchParams.get("wantBrand") || "";
 
   const [activeFilter, setActiveFilter] = useState("Best Match");
-  const [loaded, setLoaded] = useState(false);
 
-  /* Simulate loading */
-  useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 1500);
-    return () => clearTimeout(t);
-  }, []);
+  // Fetch vehicles from DB to compute swap matches
+  const { data, isLoading: loading } = useApi(() => fetchVehicles({ status: "AVAILABLE", limit: 30 }), []);
+  const vehicles = (data?.vehicles ?? []).map(adaptVehicle);
+
+  // Estimate user's car value based on brand/year
+  const yourEstimatedValue = (() => {
+    const yr = parseInt(yourYear) || 2022;
+    const age = 2026 - yr;
+    return Math.max(200000, 800000 - age * 120000);
+  })();
+
+  // Build match cards from real vehicles
+  const matches: MatchCard[] = vehicles
+    .filter((v) => {
+      if (wantBrand && !v.name.toLowerCase().includes(wantBrand.toLowerCase())) return false;
+      return true;
+    })
+    .slice(0, 8)
+    .map((v, i) => {
+      const theirPrice = v.priceNumeric || 500000;
+      const gap = theirPrice - yourEstimatedValue;
+      const pct = Math.max(70, Math.min(96, 95 - Math.abs(gap) / 100000));
+      return {
+        id: v.id,
+        ownerName: OWNER_NAMES[i % OWNER_NAMES.length],
+        ownerCity: `${CITY_AREAS[i % CITY_AREAS.length]}, Mumbai`,
+        theirCar: v.name,
+        theirYear: v.year,
+        theirKm: v.km || "25,000",
+        matchPct: Math.round(pct),
+        yourValue: formatPrice(yourEstimatedValue),
+        theirValue: v.price || formatPrice(theirPrice),
+        youPay: gap > 0 ? formatPrice(gap) : "₹0",
+      };
+    });
+
+  // Sort based on filter
+  const sorted = [...matches].sort((a, b) => {
+    if (activeFilter === "Best Match") return b.matchPct - a.matchPct;
+    if (activeFilter === "Lowest Gap") {
+      const gapA = parseFloat(a.youPay.replace(/[₹,LCr]/g, "")) || 0;
+      const gapB = parseFloat(b.youPay.replace(/[₹,LCr]/g, "")) || 0;
+      return gapA - gapB;
+    }
+    return 0;
+  });
 
   return (
     <main className="max-w-lg mx-auto px-4 pt-5 space-y-4">
@@ -141,14 +129,14 @@ function MatchesContent() {
       </div>
 
       {/* Loading state */}
-      {!loaded ? (
+      {loading ? (
         <div className="flex flex-col items-center justify-center py-16 gap-4">
           <div className="h-14 w-14 rounded-2xl flex items-center justify-center animate-pulse" style={{ background: "rgba(16,185,129,0.15)" }}>
             <MaterialIcon name="swap_horiz" className="text-[28px] text-emerald-400" />
           </div>
           <div className="text-center">
             <p className="text-sm font-bold text-white mb-1">Finding matches...</p>
-            <p className="text-[11px] text-slate-500">Scanning 24,000+ listings for compatible swaps</p>
+            <p className="text-[11px] text-slate-500">Scanning inventory for compatible swaps</p>
           </div>
           <div className="flex items-center gap-2 mt-2">
             <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-bounce" style={{ animationDelay: "0ms" }} />
@@ -156,16 +144,25 @@ function MatchesContent() {
             <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-bounce" style={{ animationDelay: "300ms" }} />
           </div>
         </div>
+      ) : sorted.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-16 gap-4">
+          <MaterialIcon name="search_off" className="text-[48px] text-slate-700" />
+          <p className="text-sm font-bold text-white">No matches found</p>
+          <p className="text-[11px] text-slate-500 text-center max-w-[260px]">Try adjusting your preferences or check back later as new listings are added daily.</p>
+          <Link href="/swap" className="mt-2 h-10 px-6 rounded-xl text-xs font-bold text-white flex items-center" style={{ background: "#1152d4" }}>
+            Edit Search
+          </Link>
+        </div>
       ) : (
         <>
           {/* Results count */}
           <p className="text-[11px] text-slate-500">
-            <span className="text-white font-bold">{MATCHES.length} matches</span> found near you
+            <span className="text-white font-bold">{sorted.length} matches</span> found near you
           </p>
 
           {/* Match Cards */}
           <div className="space-y-3">
-            {MATCHES.map((m) => (
+            {sorted.map((m) => (
               <div key={m.id} className="rounded-2xl border border-white/5 overflow-hidden" style={{ background: "rgba(255,255,255,0.03)" }}>
 
                 {/* Card header */}

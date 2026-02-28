@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchDealerProfile } from "@/lib/api";
+import { fetchDealerProfile, fetchDealerPreferences, updateDealerPreferences } from "@/lib/api";
 
 /* ── design tokens: ai_brand_voice_setup ── */
 // primary: #7311d4 (purple), font: Manrope, bg: #0a070d
@@ -32,19 +32,34 @@ const PERSONAS = [
 export default function BrandVoicePage() {
   const [selected, setSelected] = useState(0);
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   const { data: profileData } = useApi(() => fetchDealerProfile(), []);
+  const { data: prefsData } = useApi(() => fetchDealerPreferences(), []);
   const dealershipName = (profileData?.profile as { dealershipName?: string } | undefined)?.dealershipName ?? "";
 
+  // Load from API first, localStorage fallback
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored !== null) setSelected(parseInt(stored, 10) || 0);
-    } catch {}
-  }, []);
+    const assets = prefsData?.assets;
+    if (assets && typeof assets === "object" && "brandVoice" in assets) {
+      setSelected(Number((assets as Record<string, unknown>).brandVoice) || 0);
+    } else {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored !== null) setSelected(parseInt(stored, 10) || 0);
+      } catch {}
+    }
+  }, [prefsData]);
 
-  const handleConfirm = () => {
-    try { localStorage.setItem(STORAGE_KEY, String(selected)); } catch {}
+  const handleConfirm = async () => {
+    setSaving(true);
+    try {
+      const currentAssets = (prefsData?.assets as Record<string, unknown>) ?? {};
+      await updateDealerPreferences({ assets: { ...currentAssets, brandVoice: selected } as unknown as Record<string, boolean> });
+    } catch {
+      try { localStorage.setItem(STORAGE_KEY, String(selected)); } catch {}
+    }
+    setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };

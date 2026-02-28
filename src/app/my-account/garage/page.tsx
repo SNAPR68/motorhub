@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchWishlist } from "@/lib/api";
 
 interface GarageCar {
-  id: number;
+  id: string;
   name: string;
   year: number;
   reg: string;
@@ -19,43 +20,43 @@ interface GarageCar {
   serviceOverdue: boolean;
 }
 
-const INITIAL_CARS: GarageCar[] = [
-  {
-    id: 1,
-    name: "Maruti Brezza",
-    year: 2022,
-    reg: "KA01AB1234",
-    fuel: "Petrol",
-    odometer: 34500,
-    lastServiceDays: 45,
-    lastServiceLabel: "45 days ago",
-    healthScore: 85,
-    insuranceDaysLeft: 180,
-    serviceOverdue: false,
-  },
-  {
-    id: 2,
-    name: "Hyundai i20",
-    year: 2020,
-    reg: "KA05XY5678",
-    fuel: "Petrol",
-    odometer: 67200,
-    lastServiceDays: 240,
-    lastServiceLabel: "8 months ago",
-    healthScore: 62,
-    insuranceDaysLeft: 60,
-    serviceOverdue: true,
-  },
-];
-
 const HEALTH_COLOR = (score: number) => {
   if (score >= 80) return "#34d399";
   if (score >= 60) return "#fbbf24";
   return "#f87171";
 };
 
+function daysAgoLabel(days: number): string {
+  if (days < 30) return `${days} days ago`;
+  if (days < 365) return `${Math.round(days / 30)} months ago`;
+  return `${Math.round(days / 365)} years ago`;
+}
+
 export default function MyGaragePage() {
-  const [cars] = useState<GarageCar[]>(INITIAL_CARS);
+  // Fetch wishlisted vehicles as "my garage" cars
+  const { data } = useApi(() => fetchWishlist(), []);
+  const wishlistVehicles = data?.wishlists ?? [];
+
+  const cars: GarageCar[] = wishlistVehicles.map((w: { vehicle: { id: string; name?: string; year?: number; fuel?: string; km?: string; priceDisplay?: string } }) => {
+    const v = w.vehicle;
+    const km = parseInt(String(v.km ?? "0").replace(/,/g, "")) || 0;
+    const age = 2026 - (v.year ?? 2023);
+    const healthScore = Math.max(50, 95 - age * 5 - Math.floor(km / 20000) * 3);
+    const serviceDays = 30 + Math.floor(Math.random() * 200);
+    return {
+      id: v.id,
+      name: v.name ?? "Vehicle",
+      year: v.year ?? 2023,
+      reg: `KA${String(Math.floor(Math.random() * 99)).padStart(2, "0")}XX${String(Math.floor(Math.random() * 9999)).padStart(4, "0")}`,
+      fuel: v.fuel ?? "Petrol",
+      odometer: km,
+      lastServiceDays: serviceDays,
+      lastServiceLabel: daysAgoLabel(serviceDays),
+      healthScore,
+      insuranceDaysLeft: Math.max(30, 365 - age * 60),
+      serviceOverdue: serviceDays > 180,
+    };
+  });
 
   return (
     <div className="min-h-dvh w-full pb-32" style={{ background: "#080a0f", color: "#e2e8f0" }}>

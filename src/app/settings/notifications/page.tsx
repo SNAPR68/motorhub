@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchNotifications } from "@/lib/api";
+import { fetchNotifications, fetchDealerPreferences, updateDealerPreferences } from "@/lib/api";
 
 /* ── design tokens: dealer_notification_settings ── */
 // primary: #196ee6, font: Noto Serif (headings) + Noto Sans (body), bg: #0a0a0a
@@ -34,13 +34,24 @@ function loadPrefs(): ToggleState[] {
 export default function NotificationsPage() {
   const [toggles, setToggles] = useState<ToggleState[]>(DEFAULT_TOGGLES);
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
   const { data: notifData } = useApi(() => fetchNotifications(), []);
+  const { data: prefsData } = useApi(() => fetchDealerPreferences(), []);
   const unreadCount = (notifData as { unreadCount?: number } | undefined)?.unreadCount ?? 0;
 
-  // Load persisted prefs on mount
+  // Load persisted prefs — API first, localStorage fallback
   useEffect(() => {
-    setToggles(loadPrefs());
-  }, []);
+    const apiNotifs = prefsData?.notifications;
+    if (apiNotifs && typeof apiNotifs === "object" && Object.keys(apiNotifs).length > 0) {
+      const loaded = ALERTS.map((a, i) => ({
+        whatsapp: (apiNotifs as Record<string, boolean>)[`${i}_whatsapp`] ?? a.whatsapp,
+        email: (apiNotifs as Record<string, boolean>)[`${i}_email`] ?? a.email,
+      }));
+      setToggles(loaded);
+    } else {
+      setToggles(loadPrefs());
+    }
+  }, [prefsData]);
 
   const toggle = (idx: number, channel: "whatsapp" | "email") => {
     const next = [...toggles];
@@ -48,8 +59,21 @@ export default function NotificationsPage() {
     setToggles(next);
   };
 
-  const handleSave = () => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+  const handleSave = async () => {
+    setSaving(true);
+    // Build flat map for API persistence
+    const notifMap: Record<string, boolean> = {};
+    toggles.forEach((t, i) => {
+      notifMap[`${i}_whatsapp`] = t.whatsapp;
+      notifMap[`${i}_email`] = t.email;
+    });
+    try {
+      await updateDealerPreferences({ notifications: notifMap });
+    } catch {
+      // Fallback to localStorage
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+    }
+    setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
