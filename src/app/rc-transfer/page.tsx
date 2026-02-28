@@ -104,11 +104,14 @@ const badges = [
 export default function RCTransferPage() {
   const [selectedPlan, setSelectedPlan] = useState("express");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [phone, setPhone] = useState("");
   const [booking, setBooking] = useState(false);
   const [booked, setBooked] = useState(false);
+  const [error, setError] = useState("");
 
   const handleBook = async () => {
     setBooking(true);
+    setError("");
     try {
       const plan = plans.find((p) => p.id === selectedPlan);
       await createServiceBooking({
@@ -116,9 +119,12 @@ export default function RCTransferPage() {
         plan: selectedPlan,
         amount: plan?.price.replace(/[^\d]/g, ""),
         details: { planName: plan?.name, duration: plan?.duration, scope: plan?.scope },
+        phone: phone || undefined,
       });
       setBooked(true);
-    } catch { /* ignore */ }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    }
     setBooking(false);
   };
 
@@ -262,6 +268,18 @@ export default function RCTransferPage() {
         </div>
       </section>
 
+      {/* Phone */}
+      <section className="px-4 pt-6">
+        <label className="text-xs text-white/40 mb-1.5 block">Phone Number (optional)</label>
+        <input
+          type="tel"
+          placeholder="e.g. 98765 43210"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none focus:border-[#8b5cf6]/50 transition"
+        />
+      </section>
+
       {/* CTA */}
       <section className="px-4 pt-6">
         {booked ? (
@@ -272,6 +290,12 @@ export default function RCTransferPage() {
           </div>
         ) : (
           <>
+            {error && (
+              <div className="mb-3 rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-2.5 flex items-center gap-2">
+                <MaterialIcon name="error" className="text-lg text-red-400" />
+                <p className="text-xs text-red-400">{error}</p>
+              </div>
+            )}
             <button
               onClick={handleBook}
               disabled={booking}

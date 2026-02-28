@@ -113,8 +113,10 @@ export default function CrossStateExpressPage() {
     total: number;
   } | null>(null);
   const [selectedPkg, setSelectedPkg] = useState("express");
+  const [phone, setPhone] = useState("");
   const [booking, setBooking] = useState(false);
   const [booked, setBooked] = useState(false);
+  const [error, setError] = useState("");
 
   function calculateCost() {
     const price = parseInt(carPrice.replace(/,/g, ""), 10);
@@ -131,6 +133,7 @@ export default function CrossStateExpressPage() {
 
   const handleBook = async () => {
     setBooking(true);
+    setError("");
     try {
       const pkg = packages.find((p) => p.id === selectedPkg);
       await createServiceBooking({
@@ -144,9 +147,12 @@ export default function CrossStateExpressPage() {
           carPrice: carPrice ? parseInt(carPrice.replace(/,/g, ""), 10) : undefined,
           costBreakdown: costBreakdown ?? undefined,
         },
+        phone: phone || undefined,
       });
       setBooked(true);
-    } catch { /* ignore */ }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    }
     setBooking(false);
   };
 
@@ -388,6 +394,18 @@ export default function CrossStateExpressPage() {
         </div>
       </section>
 
+      {/* Phone */}
+      <section className="px-4 pt-6">
+        <label className="text-xs text-white/40 mb-1.5 block">Phone Number (optional)</label>
+        <input
+          type="tel"
+          placeholder="e.g. 98765 43210"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none focus:border-[#1152d4]/50 transition"
+        />
+      </section>
+
       {/* CTA */}
       <section className="px-4 pt-6">
         {booked ? (
@@ -398,6 +416,12 @@ export default function CrossStateExpressPage() {
           </div>
         ) : (
           <>
+            {error && (
+              <div className="mb-3 rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-2.5 flex items-center gap-2">
+                <MaterialIcon name="error" className="text-lg text-red-400" />
+                <p className="text-xs text-red-400">{error}</p>
+              </div>
+            )}
             <button
               onClick={handleBook}
               disabled={booking}

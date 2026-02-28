@@ -83,11 +83,14 @@ export default function InspectionPage() {
   const [selectedDate, setSelectedDate] = useState(days[0].date);
   const [selectedTime, setSelectedTime] = useState("9:00 AM");
   const [expandedCheck, setExpandedCheck] = useState<number | null>(null);
+  const [phone, setPhone] = useState("");
   const [booked, setBooked] = useState(false);
   const [bookingInProgress, setBookingInProgress] = useState(false);
+  const [error, setError] = useState("");
 
   const handleBook = async () => {
     setBookingInProgress(true);
+    setError("");
     try {
       const pkg = packages.find((p) => p.id === selectedPkg);
       await createServiceBooking({
@@ -97,9 +100,12 @@ export default function InspectionPage() {
         details: { packageName: pkg?.name, regNumber, vehicleName, inspector: "Vikram Singh" },
         scheduledAt: `${selectedDate}T${selectedTime.includes("PM") ? (parseInt(selectedTime) + 12).toString().padStart(2, "0") : selectedTime.split(":")[0].padStart(2, "0")}:00:00`,
         city,
+        phone: phone || undefined,
       });
       setBooked(true);
-    } catch { /* ignore */ }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    }
     setBookingInProgress(false);
   };
 
@@ -306,6 +312,16 @@ export default function InspectionPage() {
               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none focus:border-[#10b981]/50 transition"
             />
           </div>
+          <div>
+            <label className="text-xs text-white/40 mb-1.5 block">Phone Number (optional)</label>
+            <input
+              type="tel"
+              placeholder="e.g. 98765 43210"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none focus:border-[#10b981]/50 transition"
+            />
+          </div>
         </div>
       </section>
 
@@ -403,6 +419,12 @@ export default function InspectionPage() {
 
       {/* CTA */}
       <section className="px-4 pt-8">
+        {error && (
+          <div className="mb-3 rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-2.5 flex items-center gap-2">
+            <MaterialIcon name="error" className="text-lg text-red-400" />
+            <p className="text-xs text-red-400">{error}</p>
+          </div>
+        )}
         <button
           onClick={handleBook}
           disabled={bookingInProgress}
