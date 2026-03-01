@@ -45,7 +45,7 @@ function loadLocalPrefs(): boolean[] {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) return JSON.parse(stored) as boolean[];
-  } catch {}
+  } catch (e) { console.warn("localStorage read failed:", e); }
   return DEFAULT_TOGGLES;
 }
 
@@ -85,7 +85,7 @@ export default function AssetsPage() {
     try {
       await updateDealerPreferences({ assets: assetsMap });
     } catch {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch (e) { console.warn("localStorage write failed:", e); }
     }
     setSaving(false);
     setSaved(true);

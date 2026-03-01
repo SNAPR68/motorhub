@@ -67,7 +67,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
           // Also update localStorage
           try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(vehicleIds));
-          } catch {}
+          } catch (e) { console.warn("localStorage write failed:", e); }
         }
       } catch {
         // API failed (probably not logged in), use localStorage
@@ -79,7 +79,8 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
             } else {
               dispatch({ type: "MARK_SYNCED" });
             }
-          } catch {
+          } catch (e) {
+            console.warn("localStorage read failed:", e);
             dispatch({ type: "MARK_SYNCED" });
           }
         }
@@ -95,7 +96,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     if (!state.synced) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state.ids));
-    } catch {}
+    } catch (e) { console.warn("localStorage write failed:", e); }
   }, [state.ids, state.synced]);
 
   const isWishlisted = useCallback(

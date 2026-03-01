@@ -1,9 +1,10 @@
 "use client";
 
-import { use } from "react";
+import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { InquiryModal } from "@/components/InquiryModal";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicle, fetchVehicles, adaptVehicle } from "@/lib/api";
@@ -22,6 +23,7 @@ export default function VehiclePage({
   const { data: allData } = useApi(() => fetchVehicles({ limit: 6 }), []);
   const vehicle = vehicleData?.vehicle ? adaptVehicle(vehicleData.vehicle) : null;
   const otherVehicles = (allData?.vehicles ?? []).map(adaptVehicle).filter((v) => v.id !== id).slice(0, 3);
+  const [inquiryOpen, setInquiryOpen] = useState(false);
 
   if (!vehicle) {
     return (
@@ -180,12 +182,12 @@ export default function VehiclePage({
                       </p>
                     </div>
                     <div className="flex gap-3">
-                      <Link
-                        href={`/showcase/${v.id}`}
+                      <button
+                        onClick={() => setInquiryOpen(true)}
                         className="flex-1 bg-white text-[#0a0a0a] text-xs font-bold py-3 rounded-lg hover:bg-[#1773cf] hover:text-white transition-colors uppercase tracking-widest text-center"
                       >
                         Inquire
-                      </Link>
+                      </button>
                       <Link
                         href={`/virtual-tour/${v.id}`}
                         className="flex-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold py-3 rounded-lg hover:bg-white/20 transition-colors flex items-center justify-center gap-2 uppercase tracking-widest"
@@ -248,12 +250,12 @@ export default function VehiclePage({
               Personalized sourcing and management for the world&apos;s most
               discerning collectors.
             </p>
-            <Link
-              href="/concierge"
+            <button
+              onClick={() => setInquiryOpen(true)}
               className="border border-white/20 px-10 py-3 rounded-full text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-[#0a0a0a] transition-all"
             >
               Connect With Us
-            </Link>
+            </button>
           </div>
         </section>
       </main>
@@ -299,6 +301,15 @@ export default function VehiclePage({
           </Link>
         </div>
       </div>
+
+      {/* Inquiry Modal */}
+      <InquiryModal
+        open={inquiryOpen}
+        onClose={() => setInquiryOpen(false)}
+        vehicleId={id}
+        vehicleName={vehicle?.name}
+        type="GENERAL"
+      />
     </div>
   );
 }

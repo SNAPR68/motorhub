@@ -40,11 +40,11 @@ export default function AIPermissionsPage() {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) setToggles(JSON.parse(stored) as boolean[]);
-    } catch {}
+    } catch (e) { console.warn("localStorage read failed:", e); }
   }, []);
 
   const handleSave = () => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch {}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toggles)); } catch (e) { console.warn("localStorage write failed:", e); }
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };

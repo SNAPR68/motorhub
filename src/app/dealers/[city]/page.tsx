@@ -14,7 +14,6 @@ const SAMPLE_DEALERS = [
     rating: 4.5,
     reviews: 328,
     address: "Sector 18, Noida",
-    phone: "+91 98765 43210",
     openNow: true,
   },
   {
@@ -24,7 +23,6 @@ const SAMPLE_DEALERS = [
     rating: 4.3,
     reviews: 215,
     address: "MG Road, Camp Area",
-    phone: "+91 98765 43211",
     openNow: true,
   },
   {
@@ -34,7 +32,6 @@ const SAMPLE_DEALERS = [
     rating: 4.7,
     reviews: 512,
     address: "Hinjewadi Phase 2",
-    phone: "+91 98765 43212",
     openNow: false,
   },
   {
@@ -44,7 +41,6 @@ const SAMPLE_DEALERS = [
     rating: 4.8,
     reviews: 189,
     address: "Koregaon Park",
-    phone: "+91 98765 43213",
     openNow: true,
   },
 ];

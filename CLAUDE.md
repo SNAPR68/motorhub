@@ -82,11 +82,11 @@ GET  /api/wishlist                → buyer wishlist
 |---|---------|-------|--------|
 | 1 | VehiclePassport | /vehicle/passport/[id] | BUILT (real API data) |
 | 2 | TrueCost Engine | /vehicle/[id]/true-cost | BUILT (client-side computation) |
-| 3 | InstantRC | /rc-transfer | BUILT (static UI) |
+| 3 | InstantRC | /rc-transfer | BUILT (API-wired) |
 | 4 | DealerOS | /dashboard/* | BUILT (full API wiring) |
-| 5 | SwapDirect | /swap | BUILT (static UI) |
-| 6 | LiveCondition | /inspection | BUILT (static UI) |
-| 7 | CrossState Express | /cross-state | BUILT (static UI) |
+| 5 | SwapDirect | /swap | BUILT (API-wired) |
+| 6 | LiveCondition | /inspection | BUILT (API-wired) |
+| 7 | CrossState Express | /cross-state | BUILT (API-wired) |
 | 8 | PostPurchase Hub | /my-account/garage,warranty,documents | BUILT |
 | 9 | AI NegotiationCoach | /vehicle/[id]/negotiate | BUILT (client-side) |
 | 10 | DemandPulse | /intelligence/* | BUILT (6 sub-pages) |
@@ -107,8 +107,14 @@ npm run db:seed      # seed database
 npm run db:studio    # Prisma Studio GUI
 ```
 
-## Vercel Env Vars (required)
+## Vercel Env Vars
+**Required:**
 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `OPENAI_API_KEY`, `REPLICATE_API_TOKEN`, `DATABASE_URL`, `DIRECT_URL`, `NEXT_PUBLIC_APP_URL`
+
+**Optional (feature-specific):**
+- `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` — Razorpay payments (falls back to demo mode without these)
+- `WHATSAPP_ACCESS_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID` — WhatsApp messaging integration
+- `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` — PostHog analytics (disabled if absent)
 
 ## Key Conventions
 - Always read stitch design (`stitch/[name]/code.html`) before building a page

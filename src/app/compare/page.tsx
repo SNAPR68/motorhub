@@ -4,8 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { useCompare } from "@/context/CompareContext";
-import { COMPARISON_SPECS } from "@/lib/mock-data";
 import type { Vehicle } from "@/lib/types";
+
+const COMPARISON_SPECS = [
+  { key: "km", label: "Kilometers" },
+  { key: "fuel", label: "Fuel Type" },
+  { key: "transmission", label: "Transmission" },
+  { key: "engine", label: "Engine" },
+  { key: "power", label: "Power" },
+  { key: "mileage", label: "Mileage" },
+  { key: "aiScore", label: "AI Health Score" },
+] as const;
 import { BLUR_DATA_URL } from "@/lib/car-images";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle } from "@/lib/api";

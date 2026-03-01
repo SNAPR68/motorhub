@@ -9,7 +9,8 @@ import type { Vehicle, Lead } from "./types";
 
 // ── Base Fetch ──
 
-const BASE = process.env.NEXT_PUBLIC_APP_URL || "";
+const BASE =
+  typeof window !== "undefined" ? "" : process.env.NEXT_PUBLIC_APP_URL || "";
 
 async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${BASE}${path}`, {
@@ -633,6 +634,143 @@ export async function fetchCarModel(brand: string, model: string) {
       rating: number;
     }>;
   }>(`/api/cars/${brand}/${model}`);
+}
+
+// ── Admin Dashboard APIs ──
+
+export interface AdminDealer {
+  id: string;
+  dealershipName: string;
+  email: string;
+  ownerName: string;
+  city: string;
+  state: string;
+  plan: string;
+  vehicleCount: number;
+  leadCount: number;
+  closedWonCount: number;
+  createdAt: string;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchAdminOverview(): Promise<any> {
+  return apiFetch("/api/admin/overview");
+}
+
+export async function fetchAdminDealers(params?: { search?: string; plan?: string; city?: string }) {
+  const qs = new URLSearchParams();
+  if (params?.search) qs.set("search", params.search);
+  if (params?.plan) qs.set("plan", params.plan);
+  if (params?.city) qs.set("city", params.city);
+  const query = qs.toString();
+  return apiFetch<{ dealers: AdminDealer[]; total: number }>(`/api/admin/dealers${query ? `?${query}` : ""}`);
+}
+
+export async function updateDealerAdmin(dealerId: string, data: { plan?: string }) {
+  return apiFetch<{ dealer: AdminDealer }>("/api/admin/dealers", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ dealerId, ...data }),
+  });
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchAdminSubscriptions(): Promise<any> {
+  return apiFetch("/api/admin/subscriptions");
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchAdminServices(): Promise<any> {
+  return apiFetch("/api/admin/services");
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchAdminAnalytics(): Promise<any> {
+  return apiFetch("/api/admin/analytics");
+}
+
+export async function fetchAdminVehicleModeration(params?: { tab?: string; search?: string }) {
+  const qs = new URLSearchParams();
+  if (params?.tab) qs.set("tab", params.tab);
+  if (params?.search) qs.set("search", params.search);
+  const query = qs.toString();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return apiFetch<any>(`/api/admin/vehicles/moderation${query ? `?${query}` : ""}`);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function adminVehicleAction(vehicleId: string, action: string): Promise<any> {
+  return apiFetch("/api/admin/vehicles/moderation", {
+    method: "PATCH",
+    body: JSON.stringify({ vehicleId, action }),
+  });
+}
+
+export async function fetchAdminUsers(params?: { tab?: string; search?: string; limit?: number; offset?: number }) {
+  const qs = new URLSearchParams();
+  if (params?.tab) qs.set("tab", params.tab);
+  if (params?.search) qs.set("search", params.search);
+  if (params?.limit) qs.set("limit", String(params.limit));
+  if (params?.offset) qs.set("offset", String(params.offset));
+  const query = qs.toString();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return apiFetch<any>(`/api/admin/users${query ? `?${query}` : ""}`);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function reassignLead(leadId: string, newDealerProfileId: string): Promise<any> {
+  return apiFetch("/api/admin/users/leads", {
+    method: "PATCH",
+    body: JSON.stringify({ leadId, newDealerProfileId }),
+  });
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function sendAdminBroadcast(data: { title: string; message: string; targetPlan: string }): Promise<any> {
+  return apiFetch("/api/admin/broadcast", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function toggleDealerActive(dealerId: string, active: boolean): Promise<any> {
+  return apiFetch("/api/admin/dealers/toggle", {
+    method: "PATCH",
+    body: JSON.stringify({ dealerId, active }),
+  });
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchAdminQuality(params?: { tab?: string; limit?: number; offset?: number }): Promise<any> {
+  const qs = new URLSearchParams();
+  if (params?.tab) qs.set("tab", params.tab);
+  if (params?.limit) qs.set("limit", String(params.limit));
+  if (params?.offset) qs.set("offset", String(params.offset));
+  const query = qs.toString();
+  return apiFetch(`/api/admin/quality${query ? `?${query}` : ""}`);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchAdminAlerts(): Promise<any> {
+  return apiFetch("/api/admin/alerts");
+}
+
+// ── Buyer Inquiries (public, no auth required) ──
+
+export async function submitInquiry(data: {
+  vehicleId: string;
+  buyerName: string;
+  phone: string;
+  email?: string;
+  message?: string;
+  type?: "GENERAL" | "TEST_DRIVE" | "CALL_BACK";
+}) {
+  return apiFetch<{ success: boolean; inquiryId: string }>("/api/inquiries", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
 }
 
 // ── Service Bookings (RC Transfer, Inspection, Swap, Cross-State) ──

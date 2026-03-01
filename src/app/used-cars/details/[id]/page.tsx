@@ -3,6 +3,7 @@
 import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { InquiryModal } from "@/components/InquiryModal";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
 import { useApi } from "@/lib/hooks/use-api";
@@ -27,6 +28,7 @@ export default function UsedCarDetailPage({
   const [activeTab, setActiveTab] = useState<typeof TABS[number]>("Overview");
   const [activeImg, setActiveImg] = useState(0);
   const [wishlisted, setWishlisted] = useState(false);
+  const [inquiryType, setInquiryType] = useState<"GENERAL" | "TEST_DRIVE" | "CALL_BACK" | null>(null);
 
   // EMI state
   const [loanAmt, setLoanAmt] = useState(0);
@@ -744,6 +746,7 @@ export default function UsedCarDetailPage({
       <div className="fixed bottom-20 md:bottom-0 inset-x-0 z-40 max-w-lg mx-auto px-4 pb-3">
         <div className="flex gap-2">
           <button
+            onClick={() => setInquiryType("CALL_BACK")}
             className="flex-1 h-12 rounded-2xl font-bold text-sm border border-white/10 transition-all"
             style={{ background: "rgba(255,255,255,0.05)", color: "#94a3b8" }}
           >
@@ -753,6 +756,7 @@ export default function UsedCarDetailPage({
             </span>
           </button>
           <button
+            onClick={() => setInquiryType("TEST_DRIVE")}
             className="flex-1 h-12 rounded-2xl font-bold text-sm text-white transition-all"
             style={{ background: "#1152d4" }}
           >
@@ -763,6 +767,15 @@ export default function UsedCarDetailPage({
           </button>
         </div>
       </div>
+
+      {/* Inquiry Modal */}
+      <InquiryModal
+        open={inquiryType !== null}
+        onClose={() => setInquiryType(null)}
+        vehicleId={id}
+        vehicleName={vehicle?.name}
+        type={inquiryType ?? "GENERAL"}
+      />
 
       <BuyerBottomNav />
     </div>

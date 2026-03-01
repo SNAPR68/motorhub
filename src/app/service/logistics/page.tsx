@@ -4,6 +4,7 @@ import { useState, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { createServiceBooking } from "@/lib/api";
 
 /* Stitch: service_logistics_&_confirmation — #dab80b, Space Grotesk, #0a0a0a */
 
@@ -67,21 +68,19 @@ function ServiceLogisticsInner() {
     const scheduledAt = new Date(y, m - 1, d, hour, mm).toISOString();
 
     try {
-      const res = await fetch("/api/service/book", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const result = await createServiceBooking({
+        type: "INSPECTION",
+        plan: packageName,
+        amount: undefined,
+        details: {
           vehicleId: vehicleId ?? undefined,
-          buyerName: "Guest",
           scheduledAt,
           packageName,
           logistics,
           notes: notes || undefined,
-        }),
+        },
       });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error ?? "Booking failed");
-      setAppointmentId(json.appointment?.id ?? null);
+      setAppointmentId(result?.id ?? null);
       setConfirmed(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");

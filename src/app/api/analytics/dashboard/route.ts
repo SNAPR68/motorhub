@@ -43,6 +43,20 @@ export async function GET() {
       db.vehicle.count({ where: { status: "SOLD" } }),
     ]);
 
+    // Calculate average days to sell from vehicles that have been sold
+    const soldVehiclesForAvg = await db.vehicle.findMany({
+      where: { status: "SOLD" },
+      select: { createdAt: true, updatedAt: true },
+    });
+    let avgDaysToSell = 0;
+    if (soldVehiclesForAvg.length > 0) {
+      const totalDays = soldVehiclesForAvg.reduce((sum, v) => {
+        const days = Math.max(1, Math.round((v.updatedAt.getTime() - v.createdAt.getTime()) / (1000 * 60 * 60 * 24)));
+        return sum + days;
+      }, 0);
+      avgDaysToSell = Math.round(totalDays / soldVehiclesForAvg.length);
+    }
+
     // Calculate revenue from sold vehicles
     const revenueResult = await db.vehicle.aggregate({
       where: { status: "SOLD" },
@@ -72,7 +86,7 @@ export async function GET() {
       hotLeads,
       monthlySales: soldVehicles,
       revenue: revenueDisplay,
-      avgDaysToSell: 18, // TODO: calculate from actual sold dates
+      avgDaysToSell,
       conversionRate: `${conversionRate}%`,
       upcomingAppointments: appointments,
       aiRepliesSent: await db.leadMessage.count({ where: { type: "AUTO" } }),

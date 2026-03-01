@@ -47,7 +47,7 @@ export default function BrandVoicePage() {
       try {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored !== null) setSelected(parseInt(stored, 10) || 0);
-      } catch {}
+      } catch (e) { console.warn("localStorage read failed:", e); }
     }
   }, [prefsData]);
 
@@ -57,7 +57,7 @@ export default function BrandVoicePage() {
       const currentAssets = (prefsData?.assets as Record<string, unknown>) ?? {};
       await updateDealerPreferences({ assets: { ...currentAssets, brandVoice: selected } as unknown as Record<string, boolean> });
     } catch {
-      try { localStorage.setItem(STORAGE_KEY, String(selected)); } catch {}
+      try { localStorage.setItem(STORAGE_KEY, String(selected)); } catch (e) { console.warn("localStorage write failed:", e); }
     }
     setSaving(false);
     setSaved(true);

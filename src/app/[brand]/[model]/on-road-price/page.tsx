@@ -242,13 +242,14 @@ export default function OnRoadPricePage({
 
         {/* ─── CTAs ─── */}
         <div className="space-y-2 pb-4">
-          <button
+          <Link
+            href={`/showroom?search=${encodeURIComponent(car?.name || modelSlug)}`}
             className="w-full h-12 rounded-2xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
             style={{ background: "#1152d4" }}
           >
             <MaterialIcon name="directions_car" className="text-[18px]" />
-            Book Test Drive
-          </button>
+            Find & Test Drive
+          </Link>
           <Link
             href="/car-loan/eligibility"
             className="w-full h-12 rounded-2xl text-sm font-bold flex items-center justify-center gap-2 transition-all active:scale-[0.98] border border-white/10"

@@ -411,13 +411,14 @@ export default function DealerProfilePage({
         className="fixed bottom-0 left-0 right-0 z-40 max-w-lg mx-auto px-4 pb-24 pt-3 md:hidden"
         style={{ background: "linear-gradient(to top, #080a0f 60%, transparent)" }}
       >
-        <button
+        <Link
+          href="/showroom"
           className="w-full rounded-2xl py-4 text-white font-bold text-base flex items-center justify-center gap-2 transition-opacity hover:opacity-90 shadow-2xl"
           style={{ background: "#1152d4" }}
         >
           <MaterialIcon name="directions_car" fill className="text-[20px]" />
-          Book Test Drive
-        </button>
+          Browse Vehicles
+        </Link>
       </div>
 
       <BuyerBottomNav className="md:hidden" />

@@ -408,13 +408,14 @@ export default function ModelPage({
             <MaterialIcon name="calculate" className="text-[18px]" />
             EMI Calc
           </Link>
-          <button
+          <Link
+            href={`/showroom?search=${encodeURIComponent(car?.name || modelSlug)}`}
             className="flex-1 h-12 rounded-2xl font-bold text-sm text-white flex items-center justify-center gap-2 transition-all"
             style={{ background: "#1152d4" }}
           >
             <MaterialIcon name="directions_car" className="text-[18px]" />
-            Test Drive
-          </button>
+            Find & Test Drive
+          </Link>
         </div>
       </div>
 

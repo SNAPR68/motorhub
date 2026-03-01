@@ -54,9 +54,9 @@ function Toggle({
 }
 
 export default function AccountSettingsPage() {
-  const [name, setName] = useState("Rahul Sharma");
-  const [email, setEmail] = useState("rahul.sharma@gmail.com");
-  const [phone, setPhone] = useState("+91 98765 43210");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [city, setCity] = useState("Delhi NCR");
   const [showCityPicker, setShowCityPicker] = useState(false);
 

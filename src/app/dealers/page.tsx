@@ -246,14 +246,14 @@ export default function FindDealersPage() {
                   <MaterialIcon name="directions" className="text-[15px]" />
                   Directions
                 </a>
-                <a
-                  href="tel:+918001234567"
+                <Link
+                  href={`/dealers/profile/${dealer.id}`}
                   className="flex-1 rounded-xl py-2.5 text-sm font-medium flex items-center justify-center gap-1.5 border border-white/15 text-slate-300"
                   style={{ background: "#1a2235" }}
                 >
                   <MaterialIcon name="call" className="text-[15px]" />
-                  Call
-                </a>
+                  Contact
+                </Link>
                 <Link
                   href={`/dealers/profile/${dealer.id}`}
                   className="flex-1 rounded-xl py-2.5 text-sm font-medium flex items-center justify-center gap-1.5 text-white"

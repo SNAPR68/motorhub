@@ -1,25 +1,19 @@
 "use client";
 
 import { use, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchVehicles, adaptVehicle } from "@/lib/api";
+import { BLUR_DATA_URL } from "@/lib/car-images";
 
 /* ─── Filter options ─── */
 const BUDGET_OPTIONS = ["Under \u20B93L", "\u20B93L\u20136L", "\u20B96L\u201310L", "\u20B910L\u201315L", "\u20B915L+"];
 const BRAND_OPTIONS = ["Maruti", "Hyundai", "Tata", "Honda", "Toyota", "Kia", "Mahindra"];
 const FUEL_OPTIONS = ["Petrol", "Diesel", "CNG", "Electric"];
 const YEAR_OPTIONS = ["2024", "2023", "2022", "2021", "2020 & older"];
-
-/* ─── Sample used cars ─── */
-const SAMPLE_USED_CARS = [
-  { id: 1, name: "Maruti Swift VXi", price: "\u20B94.85 Lakh", km: "32,000 km", year: 2021, fuel: "Petrol", owner: "1st Owner", image: "" },
-  { id: 2, name: "Hyundai i20 Asta", price: "\u20B97.20 Lakh", km: "18,500 km", year: 2022, fuel: "Petrol", owner: "1st Owner", image: "" },
-  { id: 3, name: "Honda City ZX", price: "\u20B910.50 Lakh", km: "25,000 km", year: 2021, fuel: "Diesel", owner: "2nd Owner", image: "" },
-  { id: 4, name: "Tata Nexon XZ+", price: "\u20B99.75 Lakh", km: "15,200 km", year: 2023, fuel: "Petrol", owner: "1st Owner", image: "" },
-  { id: 5, name: "Kia Sonet HTX", price: "\u20B98.90 Lakh", km: "22,800 km", year: 2022, fuel: "Diesel", owner: "1st Owner", image: "" },
-  { id: 6, name: "Toyota Glanza V", price: "\u20B96.40 Lakh", km: "28,000 km", year: 2021, fuel: "Petrol", owner: "2nd Owner", image: "" },
-];
 
 function capitalize(s: string) {
   return s
@@ -40,6 +34,12 @@ export default function UsedCarsCityPage({
   const [activeBrand, setActiveBrand] = useState("");
   const [activeFuel, setActiveFuel] = useState("");
   const [activeYear, setActiveYear] = useState("");
+
+  const { data, isLoading } = useApi(
+    () => fetchVehicles({ status: "AVAILABLE", limit: 20 }),
+    []
+  );
+  const vehicles = (data?.vehicles ?? []).map(adaptVehicle);
 
   return (
     <div
@@ -71,7 +71,7 @@ export default function UsedCarsCityPage({
                 Used Cars in {cityName}
               </h1>
               <p className="text-[11px] text-slate-500">
-                {SAMPLE_USED_CARS.length} cars available
+                {isLoading ? "Loading..." : `${vehicles.length} cars available`}
               </p>
             </div>
           </div>
@@ -207,75 +207,111 @@ export default function UsedCarsCityPage({
 
       {/* ─── CAR LISTINGS ─── */}
       <main className="max-w-lg mx-auto px-4 pt-4">
-        <div className="space-y-3">
-          {SAMPLE_USED_CARS.map((car) => (
-            <Link
-              key={car.id}
-              href={`/used-cars/details/${car.id}`}
-              className="flex rounded-2xl overflow-hidden border transition-all active:scale-[0.99] hover:border-white/12"
-              style={{
-                background: "rgba(255,255,255,0.035)",
-                borderColor: "rgba(255,255,255,0.07)",
-              }}
-            >
-              {/* Image placeholder */}
+        {isLoading ? (
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
               <div
-                className="relative w-36 shrink-0 flex items-center justify-center"
+                key={i}
+                className="flex rounded-2xl overflow-hidden border animate-pulse"
                 style={{
-                  minHeight: "120px",
-                  background: "rgba(255,255,255,0.04)",
+                  background: "rgba(255,255,255,0.035)",
+                  borderColor: "rgba(255,255,255,0.07)",
+                  height: "120px",
+                }}
+              />
+            ))}
+          </div>
+        ) : vehicles.length === 0 ? (
+          <div className="text-center py-16">
+            <MaterialIcon name="directions_car" className="text-[48px] text-slate-600 mb-3" />
+            <p className="text-sm text-slate-400">No cars available in {cityName} right now.</p>
+            <Link href="/showroom" className="text-[#1152d4] text-sm font-semibold mt-2 inline-block">
+              Browse All Cars
+            </Link>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {vehicles.map((car) => (
+              <Link
+                key={car.id}
+                href={`/vehicle/${car.id}`}
+                className="flex rounded-2xl overflow-hidden border transition-all active:scale-[0.99] hover:border-white/12"
+                style={{
+                  background: "rgba(255,255,255,0.035)",
+                  borderColor: "rgba(255,255,255,0.07)",
                 }}
               >
-                <MaterialIcon
-                  name="directions_car"
-                  className="text-[36px] text-slate-700"
-                />
-                <span
-                  className="absolute top-2 left-2 text-[9px] font-bold px-1.5 py-0.5 rounded-full text-white"
-                  style={{ background: "rgba(16,185,129,0.9)" }}
+                {/* Image */}
+                <div
+                  className="relative w-36 shrink-0 flex items-center justify-center"
+                  style={{
+                    minHeight: "120px",
+                    background: "rgba(255,255,255,0.04)",
+                  }}
                 >
-                  {car.owner}
-                </span>
-              </div>
-
-              {/* Details */}
-              <div className="flex-1 p-3 flex flex-col justify-between min-w-0">
-                <div>
-                  <h3 className="text-[13px] font-bold text-white leading-tight truncate">
-                    {car.name}
-                  </h3>
-                  <p className="text-[10px] text-slate-500 mt-0.5">
-                    {car.year} &middot; {car.km}
-                  </p>
+                  {car.image ? (
+                    <Image
+                      src={car.image}
+                      alt={car.name}
+                      fill
+                      className="object-cover"
+                      sizes="144px"
+                      placeholder="blur"
+                      blurDataURL={BLUR_DATA_URL}
+                    />
+                  ) : (
+                    <MaterialIcon
+                      name="directions_car"
+                      className="text-[36px] text-slate-700"
+                    />
+                  )}
+                  <span
+                    className="absolute top-2 left-2 text-[9px] font-bold px-1.5 py-0.5 rounded-full text-white z-10"
+                    style={{ background: "rgba(16,185,129,0.9)" }}
+                  >
+                    {car.owner || "1st Owner"}
+                  </span>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5 my-2">
-                  {[car.fuel, car.owner, car.km].map((val) => (
-                    <span
-                      key={val}
-                      className="rounded-full px-2 py-0.5 text-[10px] font-semibold text-slate-400 border"
-                      style={{
-                        background: "rgba(255,255,255,0.04)",
-                        borderColor: "rgba(255,255,255,0.08)",
-                      }}
-                    >
-                      {val}
+                {/* Details */}
+                <div className="flex-1 p-3 flex flex-col justify-between min-w-0">
+                  <div>
+                    <h3 className="text-[13px] font-bold text-white leading-tight truncate">
+                      {car.name}
+                    </h3>
+                    <p className="text-[10px] text-slate-500 mt-0.5">
+                      {car.year} &middot; {car.km}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5 my-2">
+                    {[car.fuel, car.transmission, car.km].filter(Boolean).map((val) => (
+                      <span
+                        key={val}
+                        className="rounded-full px-2 py-0.5 text-[10px] font-semibold text-slate-400 border"
+                        style={{
+                          background: "rgba(255,255,255,0.04)",
+                          borderColor: "rgba(255,255,255,0.08)",
+                        }}
+                      >
+                        {val}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-sm font-black text-white">
+                      {car.price}
                     </span>
-                  ))}
+                    <span className="text-[10px] text-slate-500">
+                      {car.location || cityName}
+                    </span>
+                  </div>
                 </div>
-
-                <div className="flex items-baseline gap-2">
-                  <span className="text-sm font-black text-white">
-                    {car.price}
-                  </span>
-                  <span className="text-[10px] text-slate-500">
-                    {cityName}
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </main>
 
       <BuyerBottomNav />
