@@ -7,6 +7,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { db } from "@/lib/db";
+import { emitEvent } from "@/lib/events";
+import { handleApiError } from "@/lib/api-error";
 
 async function getUserId() {
   const supabase = await createClient();
@@ -61,11 +63,7 @@ export async function GET() {
       total: wishlists.length,
     });
   } catch (error) {
-    console.error("GET /api/wishlist error:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch wishlist" },
-      { status: 500 }
-    );
+    return handleApiError(error, "GET /api/wishlist");
   }
 }
 
@@ -89,13 +87,16 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    emitEvent({
+      type: "VEHICLE_WISHLISTED",
+      entityType: "Vehicle",
+      entityId: body.vehicleId,
+      userId,
+    });
+
     return NextResponse.json({ wishlist }, { status: 201 });
   } catch (error) {
-    console.error("POST /api/wishlist error:", error);
-    return NextResponse.json(
-      { error: "Failed to add to wishlist" },
-      { status: 500 }
-    );
+    return handleApiError(error, "POST /api/wishlist");
   }
 }
 
@@ -125,10 +126,6 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ deleted: true });
   } catch (error) {
-    console.error("DELETE /api/wishlist error:", error);
-    return NextResponse.json(
-      { error: "Failed to remove from wishlist" },
-      { status: 500 }
-    );
+    return handleApiError(error, "DELETE /api/wishlist");
   }
 }

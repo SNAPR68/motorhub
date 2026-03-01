@@ -3,6 +3,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { requireAdminAuth } from "@/lib/admin-guard";
+import { getAllCircuitStatuses } from "@/lib/ai-circuit-breaker";
 
 export async function GET() {
   const admin = await requireAdminAuth();
@@ -13,6 +14,7 @@ export async function GET() {
   const now = new Date();
   const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
   const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
   try {
     const [
@@ -45,6 +47,11 @@ export async function GET() {
       completedServices,
       autoReplies,
       totalMessages,
+      agentAutoRepliesToday,
+      agentSentimentsToday,
+      agentVehiclesScoredToday,
+      agentTrendingToday,
+      totalEventsToday,
       recentDealerSignups,
       recentLeads,
       recentServices,
@@ -85,6 +92,12 @@ export async function GET() {
       // AI activity
       db.leadMessage.count({ where: { type: "AUTO" } }),
       db.leadMessage.count(),
+      // Agent activity (from PlatformEvent)
+      db.platformEvent.count({ where: { type: "AUTO_REPLY_SENT", createdAt: { gte: todayStart } } }),
+      db.platformEvent.count({ where: { type: "SENTIMENT_ANALYZED", createdAt: { gte: todayStart } } }),
+      db.platformEvent.count({ where: { type: "VEHICLE_SCORED", createdAt: { gte: todayStart } } }),
+      db.platformEvent.count({ where: { type: "TRENDING_BADGE_SET", createdAt: { gte: todayStart } } }),
+      db.platformEvent.count({ where: { createdAt: { gte: todayStart } } }),
       // Recent activity
       db.dealerProfile.findMany({
         take: 5,
@@ -211,6 +224,16 @@ export async function GET() {
       aiActivity: {
         autoReplies,
         totalMessages,
+      },
+      agentActivity: {
+        autoRepliesToday: agentAutoRepliesToday,
+        sentimentsAnalyzedToday: agentSentimentsToday,
+        vehiclesScoredToday: agentVehiclesScoredToday,
+        trendingBadgesToday: agentTrendingToday,
+        totalEventsToday,
+      },
+      systemHealth: {
+        circuitBreakers: getAllCircuitStatuses(),
       },
       recent: {
         dealers: recentDealerSignups,

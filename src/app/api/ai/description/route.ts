@@ -7,6 +7,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { requireDealerAuth } from "@/lib/auth-guard";
+import { emitEvent } from "@/lib/events";
+import { handleApiError } from "@/lib/api-error";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
@@ -148,20 +150,25 @@ Write only the description paragraph. No preamble, no quotation marks.`;
     const description = json.choices?.[0]?.message?.content?.trim() ?? "";
 
     // Persist description to vehicle if vehicleId was provided
-    if (body.vehicleId && description) {
+    const persisted = !!(body.vehicleId && description);
+    if (persisted) {
       await db.vehicle.update({
         where: { id: body.vehicleId },
         data: { description },
       });
     }
 
+    emitEvent({
+      type: "DESCRIPTION_GENERATED",
+      entityType: "Vehicle",
+      entityId: body.vehicleId || "inline",
+      dealerProfileId: dealer.dealerProfileId,
+      metadata: { aiScore: json.usage?.total_tokens ?? null, persisted },
+    });
+
     return NextResponse.json({ description, generated: true });
   } catch (error) {
-    console.error("POST /api/ai/description error:", error);
-    return NextResponse.json(
-      { error: "Failed to generate description" },
-      { status: 500 }
-    );
+    return handleApiError(error, "POST /api/ai/description");
   }
 }
 

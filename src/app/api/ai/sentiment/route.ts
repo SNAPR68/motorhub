@@ -8,6 +8,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { createClient } from "@/lib/supabase/server";
+import { emitEvent } from "@/lib/events";
+import { handleApiError } from "@/lib/api-error";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
@@ -117,6 +119,14 @@ Rules:
           where: { id: leadId },
           data: { sentimentLabel: parsed.sentiment },
         });
+
+        emitEvent({
+          type: "SENTIMENT_ANALYZED",
+          entityType: "Lead",
+          entityId: leadId,
+          userId: user.id,
+          metadata: { label: parsed.sentiment, confidence: parsed.confidence, source: "AI" },
+        });
       }
 
       return NextResponse.json({ ...parsed, generated: true });
@@ -130,7 +140,6 @@ Rules:
       });
     }
   } catch (error) {
-    console.error("POST /api/ai/sentiment error:", error);
-    return NextResponse.json({ error: "Failed to analyze sentiment" }, { status: 500 });
+    return handleApiError(error, "POST /api/ai/sentiment");
   }
 }

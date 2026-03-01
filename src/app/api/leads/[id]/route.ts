@@ -8,6 +8,9 @@ import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { requireDealerAuth } from "@/lib/auth-guard";
 import { parseBody, updateLeadSchema } from "@/lib/validation";
+import { emitEvent } from "@/lib/events";
+import { handleApiError } from "@/lib/api-error";
+import { extractIntentSignals } from "@/lib/agents/intent-signals";
 
 export async function GET(
   _request: Request,
@@ -61,13 +64,14 @@ export async function GET(
       createdAt: m.createdAt,
     }));
 
-    return NextResponse.json({ lead, timeline });
-  } catch (error) {
-    console.error("GET /api/leads/[id] error:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch lead" },
-      { status: 500 }
+    // Extract intent signals from conversation
+    const intentSignals = extractIntentSignals(
+      lead.messages.map((m) => ({ text: m.text, role: m.role }))
     );
+
+    return NextResponse.json({ lead, timeline, intentSignals });
+  } catch (error) {
+    return handleApiError(error, "GET /api/leads/[id]");
   }
 }
 
@@ -88,6 +92,11 @@ export async function PUT(
       return NextResponse.json({ error: result.error }, { status: 400 });
     }
 
+    // Capture previous status before update for event emission
+    const previousLead = result.data!.status
+      ? await db.lead.findUnique({ where: { id }, select: { status: true } })
+      : null;
+
     const lead = await db.lead.update({
       where: { id },
       data: result.data!,
@@ -96,13 +105,20 @@ export async function PUT(
       },
     });
 
+    // Emit event on status change
+    if (result.data!.status && previousLead && previousLead.status !== result.data!.status) {
+      emitEvent({
+        type: "LEAD_STATUS_CHANGED",
+        entityType: "Lead",
+        entityId: id,
+        dealerProfileId: dealer.dealerProfileId,
+        metadata: { previous: previousLead.status, current: result.data!.status },
+      });
+    }
+
     return NextResponse.json({ lead });
   } catch (error) {
-    console.error("PUT /api/leads/[id] error:", error);
-    return NextResponse.json(
-      { error: "Failed to update lead" },
-      { status: 500 }
-    );
+    return handleApiError(error, "PUT /api/leads/[id]");
   }
 }
 
@@ -121,10 +137,6 @@ export async function DELETE(
     await db.lead.delete({ where: { id } });
     return NextResponse.json({ deleted: true });
   } catch (error) {
-    console.error("DELETE /api/leads/[id] error:", error);
-    return NextResponse.json(
-      { error: "Failed to delete lead" },
-      { status: 500 }
-    );
+    return handleApiError(error, "DELETE /api/leads/[id]");
   }
 }

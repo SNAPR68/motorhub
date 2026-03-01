@@ -74,6 +74,62 @@ export default function AdminAlertsPage() {
           </div>
         </div>
 
+        {/* System Health */}
+        {data.systemHealth && (
+          <div className="rounded-xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.02)" }}>
+            <div className="flex items-center gap-2 mb-4">
+              <MaterialIcon name="monitor_heart" className="text-[18px]" style={{ color: "#10b981" }} />
+              <h2 className="text-base font-bold text-white">System Health</h2>
+              <span className="text-xs text-slate-500 ml-auto">{data.systemHealth.eventsLastHour} events/hr</span>
+            </div>
+
+            {/* Circuit Breakers */}
+            <div className="mb-4">
+              <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">AI Circuit Breakers</h3>
+              {Object.keys(data.systemHealth.circuitBreakers as Record<string, { state: string; failures: number }>).length === 0 ? (
+                <div className="flex items-center gap-2 rounded-lg p-3" style={{ background: "rgba(16,185,129,0.08)" }}>
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#10b981" }} />
+                  <span className="text-xs text-slate-400">All circuits nominal</span>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {Object.entries(data.systemHealth.circuitBreakers as Record<string, { state: string; failures: number }>).map(([service, status]) => {
+                    const color = status.state === "CLOSED" ? "#10b981" : status.state === "OPEN" ? "#ef4444" : "#f59e0b";
+                    const severity = status.state === "OPEN" ? "high" : status.state === "HALF_OPEN" ? "medium" : "ok";
+                    return (
+                      <ThresholdRow
+                        key={service}
+                        icon={status.state === "CLOSED" ? "check_circle" : status.state === "OPEN" ? "error" : "warning"}
+                        label={`${service} Circuit`}
+                        detail={`State: ${status.state} | Failures: ${status.failures}`}
+                        severity={severity}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Recent Agent Events */}
+            <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Recent Platform Events</h3>
+            {(data.systemHealth.recentEvents as Array<{ id: string; type: string; entityType: string; createdAt: string }>).length === 0 ? (
+              <p className="text-xs text-slate-500">No events recorded today</p>
+            ) : (
+              <div className="space-y-1.5">
+                {(data.systemHealth.recentEvents as Array<{ id: string; type: string; entityType: string; createdAt: string }>).map((evt) => (
+                  <div key={evt.id} className="flex items-center justify-between py-1.5 border-b border-white/[0.04] last:border-0">
+                    <div className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#2badee" }} />
+                      <span className="text-xs text-white font-medium">{evt.type.replace(/_/g, " ")}</span>
+                    </div>
+                    <span className="text-[10px] text-slate-500">{new Date(evt.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Weekly Digest Preview */}
         <div className="rounded-xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.02)" }}>
           <div className="flex items-center gap-2 mb-4">

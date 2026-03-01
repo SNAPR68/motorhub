@@ -20,7 +20,16 @@ async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
       ...init?.headers,
     },
   });
-  if (!res.ok) throw new Error(`API ${path}: ${res.status}`);
+  if (!res.ok) {
+    // Pass JSON error body so useApi can extract error code
+    try {
+      const body = await res.json();
+      throw new Error(JSON.stringify(body));
+    } catch (e) {
+      if (e instanceof Error && e.message.startsWith("{")) throw e;
+      throw new Error(JSON.stringify({ error: `API ${path}: ${res.status}`, code: res.status >= 500 ? "INTERNAL_ERROR" : "UNKNOWN" }));
+    }
+  }
   return res.json();
 }
 
@@ -771,6 +780,22 @@ export async function submitInquiry(data: {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
+}
+
+// ── Dealer Health Score & Benchmarks (Switching Cost) ──
+
+export async function fetchHealthScore(): Promise<any> {
+  return apiFetch("/api/analytics/health-score");
+}
+
+export async function fetchBenchmarks(): Promise<any> {
+  return apiFetch("/api/analytics/benchmarks");
+}
+
+// ── Market Intelligence Feed ──
+
+export async function fetchMarketFeed(): Promise<any> {
+  return apiFetch("/api/intelligence/market-feed");
 }
 
 // ── Service Bookings (RC Transfer, Inspection, Swap, Cross-State) ──

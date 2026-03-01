@@ -216,6 +216,73 @@ export default function AdminOverviewPage() {
           </div>
         </div>
 
+        {/* AI Agent Activity + System Health */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+          {/* Agent Activity Today */}
+          {d.agentActivity && (
+            <div className="rounded-xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.02)" }}>
+              <div className="flex items-center gap-2 mb-4">
+                <MaterialIcon name="smart_toy" className="text-[18px]" style={{ color: "#8b5cf6" }} />
+                <h3 className="text-sm font-bold text-white">AI Agent Activity (Today)</h3>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { label: "Auto-Replies Sent", value: d.agentActivity.autoRepliesToday, color: "#8b5cf6" },
+                  { label: "Sentiments Analyzed", value: d.agentActivity.sentimentsAnalyzedToday, color: "#2badee" },
+                  { label: "Vehicles Scored", value: d.agentActivity.vehiclesScoredToday, color: "#10b981" },
+                  { label: "Trending Badges", value: d.agentActivity.trendingBadgesToday, color: "#f59e0b" },
+                ].map((stat) => (
+                  <div key={stat.label} className="rounded-lg p-3" style={{ background: `${stat.color}08`, border: `1px solid ${stat.color}15` }}>
+                    <p className="text-xl font-black text-white">{stat.value}</p>
+                    <p className="text-[10px] text-slate-500">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 pt-3 border-t border-white/[0.06] flex items-center justify-between">
+                <span className="text-xs text-slate-400">Total Events Today</span>
+                <span className="text-sm font-bold text-white">{d.agentActivity.totalEventsToday}</span>
+              </div>
+            </div>
+          )}
+
+          {/* System Health */}
+          {d.systemHealth && (
+            <div className="rounded-xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.02)" }}>
+              <div className="flex items-center gap-2 mb-4">
+                <MaterialIcon name="monitor_heart" className="text-[18px]" style={{ color: "#10b981" }} />
+                <h3 className="text-sm font-bold text-white">System Health</h3>
+              </div>
+              <div className="space-y-3">
+                <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Circuit Breakers</h4>
+                {Object.keys(d.systemHealth.circuitBreakers as Record<string, { state: string; failures: number }>).length === 0 ? (
+                  <div className="flex items-center gap-2 rounded-lg p-3" style={{ background: "rgba(16,185,129,0.08)" }}>
+                    <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#10b981" }} />
+                    <span className="text-xs text-slate-400">All circuits nominal (no AI calls yet)</span>
+                  </div>
+                ) : (
+                  Object.entries(d.systemHealth.circuitBreakers as Record<string, { state: string; failures: number }>).map(([service, status]) => {
+                    const stateColor = status.state === "CLOSED" ? "#10b981" : status.state === "OPEN" ? "#ef4444" : "#f59e0b";
+                    return (
+                      <div key={service} className="flex items-center justify-between rounded-lg p-3" style={{ background: `${stateColor}08` }}>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2.5 h-2.5 rounded-full" style={{ background: stateColor }} />
+                          <span className="text-xs font-medium text-white capitalize">{service}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full" style={{ background: `${stateColor}15`, color: stateColor }}>{status.state}</span>
+                          {status.failures > 0 && (
+                            <span className="text-[10px] text-slate-500">{status.failures} failures</span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Recent Activity */}
         <div className="rounded-xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.02)" }}>
           <h3 className="text-sm font-bold text-white mb-4">Recent Activity</h3>

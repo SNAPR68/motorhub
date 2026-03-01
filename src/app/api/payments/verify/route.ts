@@ -14,6 +14,8 @@ import { z } from "zod";
 import crypto from "crypto";
 import { db as prisma } from "@/lib/db";
 import { createClient } from "@/lib/supabase/server";
+import { emitEvent } from "@/lib/events";
+import { handleApiError } from "@/lib/api-error";
 
 const VerifySchema = z.object({
   razorpay_order_id: z.string(),
@@ -99,6 +101,15 @@ export async function POST(request: NextRequest) {
             currentPeriodEnd: periodEnd,
           },
         });
+
+        emitEvent({
+          type: "SUBSCRIPTION_ACTIVATED",
+          entityType: "DealerProfile",
+          entityId: dbUser.dealerProfile.id,
+          dealerProfileId: dbUser.dealerProfile.id,
+          userId: user.id,
+          metadata: { plan },
+        });
       }
     }
 
@@ -107,10 +118,6 @@ export async function POST(request: NextRequest) {
       plan,
     });
   } catch (err) {
-    console.error("POST /api/payments/verify error:", err);
-    return NextResponse.json(
-      { error: "Payment verification failed" },
-      { status: 500 }
-    );
+    return handleApiError(err, "POST /api/payments/verify");
   }
 }

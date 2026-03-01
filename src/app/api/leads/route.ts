@@ -10,6 +10,8 @@ import { db } from "@/lib/db";
 import { Prisma } from "@/generated/prisma/client";
 import { requireDealerAuth } from "@/lib/auth-guard";
 import { parseBody, createLeadSchema } from "@/lib/validation";
+import { emitEvent } from "@/lib/events";
+import { handleApiError } from "@/lib/api-error";
 
 export async function GET(request: NextRequest) {
   const dealer = await requireDealerAuth();
@@ -62,11 +64,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ leads, total });
   } catch (error) {
-    console.error("GET /api/leads error:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch leads" },
-      { status: 500 }
-    );
+    return handleApiError(error, "GET /api/leads");
   }
 }
 
@@ -102,12 +100,17 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Fire-and-forget event emission
+    emitEvent({
+      type: "LEAD_CREATED",
+      entityType: "Lead",
+      entityId: lead.id,
+      dealerProfileId: dealer.dealerProfileId,
+      metadata: { source: validated.source, sentimentLabel: validated.sentimentLabel },
+    });
+
     return NextResponse.json({ lead }, { status: 201 });
   } catch (error) {
-    console.error("POST /api/leads error:", error);
-    return NextResponse.json(
-      { error: "Failed to create lead" },
-      { status: 500 }
-    );
+    return handleApiError(error, "POST /api/leads");
   }
 }

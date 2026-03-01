@@ -487,6 +487,24 @@ model DealerPreference {
   @@map("dealer_preferences")
 }
 
+/// Immutable event log — every meaningful platform action becomes a row.
+/// Powers: benchmarks, agent triggers, audit trail, network effects.
+model PlatformEvent {
+  id              String   @id @default(cuid())
+  type            String   // LEAD_CREATED, SENTIMENT_ANALYZED, DESCRIPTION_GENERATED, etc.
+  entityType      String   @map("entity_type")  // Lead, Vehicle, User, Subscription
+  entityId        String   @map("entity_id")
+  dealerProfileId String?  @map("dealer_profile_id")
+  userId          String?  @map("user_id")
+  metadata        Json     @default("{}") // { previous: "WARM", current: "HOT", source: "AI" }
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@index([type, createdAt])
+  @@index([entityType, entityId])
+  @@index([dealerProfileId])
+  @@map("platform_events")
+}
+
 // ─────────────────────────────────────────────
 // NEW CAR CATALOG (brands → models → variants)
 // ─────────────────────────────────────────────

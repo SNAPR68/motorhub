@@ -3,6 +3,12 @@
   "framework": "nextjs",
   "buildCommand": "npx prisma generate && next build",
   "regions": ["bom1"],
+  "crons": [
+    {
+      "path": "/api/cron/nightly-scoring",
+      "schedule": "30 20 * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",

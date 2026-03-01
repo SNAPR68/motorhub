@@ -5,6 +5,7 @@
 import { NextResponse } from "next/server";
 import { requireAdminAuth } from "@/lib/admin-guard";
 import { db } from "@/lib/db";
+import { getAllCircuitStatuses } from "@/lib/ai-circuit-breaker";
 
 export async function GET() {
   const admin = await requireAdminAuth();
@@ -68,6 +69,17 @@ export async function GET() {
       ? Math.round(((cancelledThisMonth - cancelledLastMonth) / cancelledLastMonth) * 100)
       : cancelledThisMonth > 0 ? 100 : 0;
 
+    // System health: circuit breakers + recent event error rate
+    const [totalEventsLastHour, agentEventsToday] = await Promise.all([
+      db.platformEvent.count({ where: { createdAt: { gte: new Date(now.getTime() - 60 * 60 * 1000) } } }),
+      db.platformEvent.findMany({
+        where: { createdAt: { gte: todayStart } },
+        orderBy: { createdAt: "desc" },
+        take: 10,
+        select: { id: true, type: true, entityType: true, entityId: true, createdAt: true },
+      }),
+    ]);
+
     return NextResponse.json({
       today: {
         signups: signupsToday,
@@ -87,6 +99,11 @@ export async function GET() {
         newLeads: weeklyLeads,
         dealsWon: weeklyClosedWon,
         servicesBooked: weeklyServices,
+      },
+      systemHealth: {
+        circuitBreakers: getAllCircuitStatuses(),
+        eventsLastHour: totalEventsLastHour,
+        recentEvents: agentEventsToday,
       },
     });
   } catch (err) {

@@ -6,6 +6,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdminAuth } from "@/lib/admin-guard";
 import { db } from "@/lib/db";
+import { emitEvent } from "@/lib/events";
+import { handleApiError } from "@/lib/api-error";
 
 const VEHICLE_SELECT = {
   id: true, name: true, year: true,
@@ -66,8 +68,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ vehicles: [], tab });
   } catch (err) {
-    console.error("Admin vehicle moderation error:", err);
-    return NextResponse.json({ error: "Failed to fetch vehicles" }, { status: 500 });
+    return handleApiError(err, "GET /api/admin/vehicles/moderation");
   }
 }
 
@@ -99,9 +100,15 @@ export async function PATCH(req: NextRequest) {
       select: { id: true, name: true, status: true, badge: true },
     });
 
+    emitEvent({
+      type: "VEHICLE_MODERATED",
+      entityType: "Vehicle",
+      entityId: vehicleId,
+      metadata: { action },
+    });
+
     return NextResponse.json({ vehicle, action });
   } catch (err) {
-    console.error("Admin vehicle action error:", err);
-    return NextResponse.json({ error: "Failed to update vehicle" }, { status: 500 });
+    return handleApiError(err, "PATCH /api/admin/vehicles/moderation");
   }
 }
