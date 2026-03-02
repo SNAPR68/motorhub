@@ -4,7 +4,7 @@
  *   razorpay_order_id: string,
  *   razorpay_payment_id: string,
  *   razorpay_signature: string,
- *   plan: "GROWTH" | "ENTERPRISE",
+ *   plan: "STARTER" | "GROWTH" | "ENTERPRISE",
  *   billing: "monthly" | "annual",
  * }
  */
@@ -21,7 +21,7 @@ const VerifySchema = z.object({
   razorpay_order_id: z.string(),
   razorpay_payment_id: z.string(),
   razorpay_signature: z.string(),
-  plan: z.enum(["GROWTH", "ENTERPRISE"]),
+  plan: z.enum(["STARTER", "GROWTH", "ENTERPRISE"]),
   billing: z.enum(["monthly", "annual"]),
 });
 
@@ -47,8 +47,14 @@ export async function POST(request: NextRequest) {
 
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
-    // Demo mode — accept without verification
+    // Demo mode — only in development/preview, never in production
     if (!keySecret || razorpay_order_id.startsWith("order_demo_")) {
+      if (process.env.NODE_ENV === "production") {
+        return NextResponse.json(
+          { error: "Payment verification failed. Service not configured." },
+          { status: 503 }
+        );
+      }
       return NextResponse.json({
         verified: true,
         demo: true,
@@ -87,14 +93,14 @@ export async function POST(request: NextRequest) {
         // Update dealer plan
         await prisma.dealerProfile.update({
           where: { id: dbUser.dealerProfile.id },
-          data: { plan: plan as "GROWTH" | "ENTERPRISE" },
+          data: { plan: plan as "STARTER" | "GROWTH" | "ENTERPRISE" },
         });
 
         // Create subscription record
         await prisma.subscription.create({
           data: {
             dealerProfileId: dbUser.dealerProfile.id,
-            plan: plan as "GROWTH" | "ENTERPRISE",
+            plan: plan as "STARTER" | "GROWTH" | "ENTERPRISE",
             status: "ACTIVE",
             razorpaySubscriptionId: razorpay_payment_id,
             currentPeriodStart: periodStart,

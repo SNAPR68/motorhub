@@ -5,30 +5,7 @@
 
 import { db } from "@/lib/db";
 import { emitEvent } from "@/lib/events";
-import { withCircuitBreaker } from "@/lib/ai-circuit-breaker";
-
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-
-async function chatCompletion(
-  messages: Array<{ role: string; content: string }>,
-  opts?: { responseFormat?: "json_object"; maxTokens?: number }
-): Promise<string | null> {
-  if (!OPENAI_API_KEY) return null;
-
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${OPENAI_API_KEY}` },
-    body: JSON.stringify({
-      model: "gpt-4o-mini",
-      messages,
-      ...(opts?.responseFormat ? { response_format: { type: opts.responseFormat } } : {}),
-      max_tokens: opts?.maxTokens ?? 150,
-    }),
-  });
-  if (!res.ok) throw new Error(`OpenAI request failed: ${res.status}`);
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content?.trim() || null;
-}
+import { aiRequest } from "@/lib/ai-router";
 
 // ── Auto-Analyze Sentiment ──
 
@@ -45,18 +22,16 @@ export async function autoAnalyzeSentiment(leadId: string, dealerProfileId: stri
   let label: "HOT" | "WARM" | "COOL" = "COOL";
   let confidence = 60;
 
-  const aiResult = OPENAI_API_KEY
-    ? await withCircuitBreaker("openai", async () => {
-        const content = await chatCompletion(
-          [
-            { role: "system", content: "Classify this car buyer lead as HOT, WARM, or COOL. HOT = ready to buy within a week. WARM = interested but comparing. COOL = browsing. Respond with JSON: {\"label\":\"HOT|WARM|COOL\",\"confidence\":60-99}" },
-            { role: "user", content: `Buyer: ${lead.buyerName}\nVehicle: ${lead.vehicle?.name || "unknown"}\nMessage: ${lead.message || "none"}\nSource: ${lead.source}\nMessages: ${lead.messages.length}` },
-          ],
-          { responseFormat: "json_object", maxTokens: 50 }
-        );
-        return JSON.parse(content || "{}");
-      })
-    : null;
+  const sentimentResponse = await aiRequest({
+    messages: [
+      { role: "system", content: "Classify this car buyer lead as HOT, WARM, or COOL. HOT = ready to buy within a week. WARM = interested but comparing. COOL = browsing. Respond with JSON: {\"label\":\"HOT|WARM|COOL\",\"confidence\":60-99}" },
+      { role: "user", content: `Buyer: ${lead.buyerName}\nVehicle: ${lead.vehicle?.name || "unknown"}\nMessage: ${lead.message || "none"}\nSource: ${lead.source}\nMessages: ${lead.messages.length}` },
+    ],
+    complexity: "SIMPLE",
+    responseFormat: "json_object",
+    maxTokens: 50,
+  });
+  const aiResult = sentimentResponse.content ? (() => { try { return JSON.parse(sentimentResponse.content); } catch { return null; } })() : null;
 
   if (aiResult) {
     label = (["HOT", "WARM", "COOL"].includes(aiResult.label) ? aiResult.label : "COOL") as typeof label;
@@ -103,17 +78,15 @@ export async function autoReplyToLead(leadId: string, dealerProfileId: string): 
 
   let replyText: string;
 
-  const aiReply = OPENAI_API_KEY
-    ? await withCircuitBreaker("openai", async () => {
-        return chatCompletion(
-          [
-            { role: "system", content: `You are a helpful assistant for ${lead.dealerProfile?.dealershipName || "an auto dealer"}. Write a warm, professional first reply to a buyer inquiry about a used car. Keep it under 100 words. Be conversational, not salesy.` },
-            { role: "user", content: `Buyer: ${lead.buyerName}\nVehicle interest: ${lead.vehicle?.name || "general"} (${lead.vehicle?.priceDisplay || ""})\nTheir message: ${lead.message || "No message, just an inquiry"}\nSource: ${lead.source}` },
-          ],
-          { maxTokens: 150 }
-        );
-      })
-    : null;
+  const replyResponse = await aiRequest({
+    messages: [
+      { role: "system", content: `You are a helpful assistant for ${lead.dealerProfile?.dealershipName || "an auto dealer"}. Write a warm, professional first reply to a buyer inquiry about a used car. Keep it under 100 words. Be conversational, not salesy.` },
+      { role: "user", content: `Buyer: ${lead.buyerName}\nVehicle interest: ${lead.vehicle?.name || "general"} (${lead.vehicle?.priceDisplay || ""})\nTheir message: ${lead.message || "No message, just an inquiry"}\nSource: ${lead.source}` },
+    ],
+    complexity: "MODERATE",
+    maxTokens: 150,
+  });
+  const aiReply = replyResponse.content;
 
   if (aiReply) {
     replyText = aiReply;

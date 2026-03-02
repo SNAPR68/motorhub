@@ -257,9 +257,9 @@ export default function TechnicalComparisonPage() {
         className="fixed bottom-0 left-0 right-0 z-50 px-2 pb-6 pt-3 flex items-center justify-around max-w-md mx-auto border-t md:hidden"
         style={{ background: "rgba(28,28,24,0.95)", backdropFilter: "blur(16px)", borderColor: "#2d2d26" }}
       >
-        <Link href="/inventory" className="flex flex-col items-center gap-1 text-slate-400">
+        <Link href="/used-cars" className="flex flex-col items-center gap-1 text-slate-400">
           <MaterialIcon name="directions_car" />
-          <span className="text-[10px] font-bold uppercase tracking-tighter">Inventory</span>
+          <span className="text-[10px] font-bold uppercase tracking-tighter">Cars</span>
         </Link>
         <Link href="/compare/technical" className="flex flex-col items-center gap-1 text-[#ecc813]">
           <MaterialIcon name="compare_arrows" fill />
@@ -273,7 +273,7 @@ export default function TechnicalComparisonPage() {
           <MaterialIcon name="favorite" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Wishlist</span>
         </Link>
-        <Link href="/settings" className="flex flex-col items-center gap-1 text-slate-400">
+        <Link href="/my-account" className="flex flex-col items-center gap-1 text-slate-400">
           <MaterialIcon name="account_circle" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Profile</span>
         </Link>

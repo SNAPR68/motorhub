@@ -287,12 +287,12 @@ export default function VIPRewardsPage() {
       <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 bg-[#12110a]/95 backdrop-blur-xl border-t border-[#f2b90d]/10 px-4 pb-8 pt-3 md:hidden">
         <div className="max-w-md mx-auto flex justify-around items-center">
           <Link
-            href="/inventory"
+            href="/used-cars"
             className="flex flex-col items-center gap-1 text-slate-400"
           >
             <MaterialIcon name="garage" className="text-[24px]" />
             <span className="text-[10px] font-medium tracking-tight">
-              Inventory
+              Cars
             </span>
           </Link>
           <Link

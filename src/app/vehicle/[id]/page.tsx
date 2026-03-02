@@ -144,7 +144,7 @@ export default function VehiclePage({
               </h2>
             </div>
             <Link
-              href="/inventory"
+              href="/used-cars"
               className="text-white/40 text-xs font-bold tracking-widest uppercase hover:text-[#1773cf] transition-colors pb-1 border-b border-white/10"
             >
               View All

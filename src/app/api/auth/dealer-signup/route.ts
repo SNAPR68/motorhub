@@ -15,7 +15,7 @@ const dealerSignupSchema = z.object({
   businessType: z.string().max(50).optional(),
   city: z.string().max(100).optional(),
   state: z.string().max(100).optional(),
-  plan: z.enum(["STARTER", "GROWTH", "ENTERPRISE"]).default("STARTER"),
+  plan: z.enum(["FREE", "STARTER", "GROWTH", "ENTERPRISE"]).default("FREE"),
 });
 
 export async function POST(request: Request) {

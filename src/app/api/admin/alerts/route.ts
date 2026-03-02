@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import { requireAdminAuth } from "@/lib/admin-guard";
 import { db } from "@/lib/db";
 import { getAllCircuitStatuses } from "@/lib/ai-circuit-breaker";
+import { getErrorStats } from "@/lib/error-spike-detector";
 
 export async function GET() {
   const admin = await requireAdminAuth();
@@ -102,6 +103,7 @@ export async function GET() {
       },
       systemHealth: {
         circuitBreakers: getAllCircuitStatuses(),
+        errorRate: getErrorStats(),
         eventsLastHour: totalEventsLastHour,
         recentEvents: agentEventsToday,
       },

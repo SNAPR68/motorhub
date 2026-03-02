@@ -222,7 +222,7 @@ export default function VIPConfirmationPage() {
           </p>
         </Link>
         <Link
-          href="/inventory"
+          href="/used-cars"
           className="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500"
         >
           <div className="flex h-8 items-center justify-center">

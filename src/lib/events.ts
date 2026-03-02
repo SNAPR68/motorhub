@@ -10,14 +10,20 @@ import { processEvent } from "@/lib/agents/event-processor";
 export type EventType =
   | "LEAD_CREATED"
   | "LEAD_STATUS_CHANGED"
+  | "LEAD_MESSAGE_SENT"
   | "SENTIMENT_ANALYZED"
   | "DESCRIPTION_GENERATED"
+  | "VEHICLE_CREATED"
   | "VEHICLE_WISHLISTED"
   | "VEHICLE_MODERATED"
   | "SUBSCRIPTION_ACTIVATED"
   | "AUTO_REPLY_SENT"
   | "VEHICLE_SCORED"
-  | "TRENDING_BADGE_SET";
+  | "TRENDING_BADGE_SET"
+  | "CIRCUIT_BREAKER_OPEN"
+  | "API_ERROR"
+  | "FOLLOW_UP_SENT"
+  | "PRICE_ADJUSTED";
 
 interface EmitEventParams {
   type: EventType;

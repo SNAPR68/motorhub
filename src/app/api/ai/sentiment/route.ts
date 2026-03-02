@@ -10,8 +10,8 @@ import { db } from "@/lib/db";
 import { createClient } from "@/lib/supabase/server";
 import { emitEvent } from "@/lib/events";
 import { handleApiError } from "@/lib/api-error";
-
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+import { aiRequest } from "@/lib/ai-router";
+import { parseBody, aiSentimentSchema } from "@/lib/validation";
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,12 +22,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = await request.json();
-    const { leadId } = body;
-
-    if (!leadId) {
-      return NextResponse.json({ error: "leadId is required" }, { status: 400 });
+    const parsed = await parseBody(request, aiSentimentSchema);
+    if (parsed.error) {
+      return NextResponse.json({ error: parsed.error }, { status: 400 });
     }
+    const { leadId } = parsed.data!;
 
     // Fetch lead + messages
     const lead = await db.lead.findUnique({
@@ -74,9 +73,17 @@ Rules:
 - "COOL" = Early research, not ready to buy, unresponsive, or price-sensitive
 - confidence: 0-100 (how confident are you in this assessment)`;
 
-    // Fallback when no OpenAI key
-    if (!OPENAI_API_KEY) {
-      const msgCount = lead.messages.length;
+    const msgCount = lead.messages.length;
+
+    const result = await aiRequest({
+      messages: [{ role: "user", content: prompt }],
+      complexity: "MODERATE",
+      responseFormat: "json_object",
+      maxTokens: 200,
+    });
+
+    if (!result.content) {
+      // Fallback when AI unavailable
       const sentiment = msgCount >= 5 ? "HOT" : msgCount >= 2 ? "WARM" : "COOL";
       return NextResponse.json({
         sentiment,
@@ -87,29 +94,8 @@ Rules:
       });
     }
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 200,
-        temperature: 0.3,
-      }),
-    });
-
-    if (!response.ok) {
-      return NextResponse.json({ error: "AI analysis failed" }, { status: 502 });
-    }
-
-    const json = await response.json();
-    const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
-
     try {
-      const jsonStr = raw.replace(/```json?\s*/g, "").replace(/```/g, "").trim();
+      const jsonStr = result.content.replace(/```json?\s*/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(jsonStr);
 
       // Auto-update the lead sentiment in DB

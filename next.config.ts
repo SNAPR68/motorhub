@@ -28,6 +28,20 @@ const nextConfig: NextConfig = {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=(self), interest-cohort=()",
           },
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://js.sentry-cdn.com https://us-assets.i.posthog.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com",
+              "img-src 'self' data: blob: https://*.supabase.co https://images.unsplash.com https://upload.wikimedia.org https://lh3.googleusercontent.com https://replicate.delivery",
+              "connect-src 'self' https://*.supabase.co https://api.openai.com https://api.replicate.com https://*.sentry.io https://checkout.razorpay.com https://us.i.posthog.com",
+              "frame-src 'self' https://api.razorpay.com https://checkout.razorpay.com",
+              "object-src 'none'",
+              "base-uri 'self'",
+            ].join("; "),
+          },
         ],
       },
     ];

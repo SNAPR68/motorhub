@@ -80,8 +80,57 @@ export async function GET() {
     // ── Platform avg response time (estimated from events if available) ──
     const platformAvgResponseHours = 4.2; // Placeholder — would compute from all dealers' events at scale
 
+    // ── Cross-dealer ranking ──
+    // Compute percentile ranking: "You're in the top X% of [city] dealers"
+    const dealerProfile = await db.dealerProfile.findUnique({
+      where: { id: dpId },
+      select: { city: true },
+    });
+
+    let cityRanking: { percentile: number; city: string; totalInCity: number } | null = null;
+    if (dealerProfile?.city) {
+      const cityDealers = await db.dealerProfile.findMany({
+        where: { city: dealerProfile.city },
+        select: { id: true },
+      });
+      const cityDealerIds = cityDealers.map((d) => d.id);
+
+      if (cityDealerIds.length > 1) {
+        // Get conversion rates for all city dealers
+        const cityLeadCounts = await db.lead.groupBy({
+          by: ["dealerProfileId"],
+          where: { dealerProfileId: { in: cityDealerIds }, createdAt: { gte: thirtyDaysAgo } },
+          _count: true,
+        });
+        const cityWonCounts = await db.lead.groupBy({
+          by: ["dealerProfileId"],
+          where: { dealerProfileId: { in: cityDealerIds }, status: "CLOSED_WON", updatedAt: { gte: thirtyDaysAgo } },
+          _count: true,
+        });
+
+        const cityConversionRates = cityLeadCounts
+          .map((d) => {
+            const won = cityWonCounts.find((w) => w.dealerProfileId === d.dealerProfileId)?._count ?? 0;
+            return { id: d.dealerProfileId, rate: d._count > 0 ? won / d._count : 0 };
+          })
+          .sort((a, b) => b.rate - a.rate);
+
+        const myRank = cityConversionRates.findIndex((d) => d.id === dpId);
+        const percentile = myRank >= 0
+          ? Math.round(((myRank + 1) / cityConversionRates.length) * 100)
+          : 50;
+
+        cityRanking = {
+          percentile,
+          city: dealerProfile.city,
+          totalInCity: cityDealerIds.length,
+        };
+      }
+    }
+
     return NextResponse.json({
       dealerCount: totalDealers,
+      cityRanking,
       benchmarks: [
         {
           metric: "Conversion Rate",

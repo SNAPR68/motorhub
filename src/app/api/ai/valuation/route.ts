@@ -6,17 +6,16 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+import { aiRequest } from "@/lib/ai-router";
+import { parseBody, aiValuationSchema } from "@/lib/validation";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { brand, model, year, km, fuel, transmission, owner, city, condition } = body;
-
-    if (!brand || !model || !year) {
-      return NextResponse.json({ error: "Brand, model, and year are required" }, { status: 400 });
+    const parsed = await parseBody(request, aiValuationSchema);
+    if (parsed.error) {
+      return NextResponse.json({ error: parsed.error }, { status: 400 });
     }
+    const { brand, model, year, km, fuel, transmission, owner, city, condition } = parsed.data!;
 
     const prompt = `You are an expert Indian used car market analyst with deep knowledge of used car prices across all Indian cities.
 
@@ -53,41 +52,23 @@ Respond ONLY with a JSON object (no markdown, no explanation) in this exact form
 
 All prices must be in Lakhs (e.g., 8.5 means 8.5 Lakh). Be realistic based on actual Indian market prices for ${year} ${brand} ${model}. Factor in the city demand (metro cities have higher prices). Consider the condition and ownership history.`;
 
-    // Fallback computation when no API key
-    if (!OPENAI_API_KEY) {
-      const val = computeFallback({ brand, model, year, km, fuel, condition, city, owner });
-      return NextResponse.json({ ...val, generated: false });
-    }
-
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 400,
-        temperature: 0.3,
-      }),
+    const result = await aiRequest({
+      messages: [{ role: "user", content: prompt }],
+      complexity: "COMPLEX",
+      responseFormat: "json_object",
+      maxTokens: 400,
     });
 
-    if (!response.ok) {
+    if (!result.content) {
       const val = computeFallback({ brand, model, year, km, fuel, condition, city, owner });
       return NextResponse.json({ ...val, generated: false });
     }
 
-    const json = await response.json();
-    const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
-
     try {
-      // Extract JSON from response (handle potential markdown wrapping)
-      const jsonStr = raw.replace(/```json?\s*/g, "").replace(/```/g, "").trim();
+      const jsonStr = result.content.replace(/```json?\s*/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(jsonStr);
       return NextResponse.json({ ...parsed, generated: true });
     } catch {
-      // If JSON parsing fails, use fallback
       const val = computeFallback({ brand, model, year, km, fuel, condition, city, owner });
       return NextResponse.json({ ...val, generated: false });
     }

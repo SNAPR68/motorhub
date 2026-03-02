@@ -102,6 +102,7 @@ enum TeamMemberStatus {
 }
 
 enum SubscriptionPlan {
+  FREE
   STARTER
   GROWTH
   ENTERPRISE
@@ -182,7 +183,7 @@ model DealerProfile {
   city           String?
   state          String?
   logoUrl        String?          @map("logo_url")
-  plan           SubscriptionPlan @default(STARTER)
+  plan           SubscriptionPlan @default(FREE)
   createdAt      DateTime         @default(now()) @map("created_at")
   updatedAt      DateTime         @updatedAt @map("updated_at")
 
@@ -503,6 +504,90 @@ model PlatformEvent {
   @@index([entityType, entityId])
   @@index([dealerProfileId])
   @@map("platform_events")
+}
+
+// ─────────────────────────────────────────────
+// DEALER METRIC SNAPSHOTS (weekly trend storage)
+// ─────────────────────────────────────────────
+
+/// Weekly snapshot of dealer metrics for trend graphs and historical analysis.
+/// Computed by nightly cron, never edited. Powers "your conversion rate over 6 months."
+model DealerMetricSnapshot {
+  id              String   @id @default(cuid())
+  dealerProfileId String   @map("dealer_profile_id")
+  weekStart       DateTime @map("week_start") // Monday of the week
+  healthScore     Int      @default(0) // Composite 0-100
+  responseScore   Int      @default(0) @map("response_score") // 0-100
+  conversionScore Int      @default(0) @map("conversion_score") // 0-100
+  listingScore    Int      @default(0) @map("listing_score") // 0-100
+  aiScoreAvg      Int      @default(0) @map("ai_score_avg") // 0-100
+  totalLeads      Int      @default(0) @map("total_leads")
+  closedWon       Int      @default(0) @map("closed_won")
+  activeListings  Int      @default(0) @map("active_listings")
+  avgResponseHrs  Float    @default(0) @map("avg_response_hrs") // avg hours to first response
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@unique([dealerProfileId, weekStart])
+  @@index([dealerProfileId, weekStart])
+  @@map("dealer_metric_snapshots")
+}
+
+// ─────────────────────────────────────────────
+// FOLLOW-UP SCHEDULES (multi-step agent sequences)
+// ─────────────────────────────────────────────
+
+enum FollowUpStep {
+  FIRST_REPLY
+  THREE_DAY
+  SEVEN_DAY
+}
+
+enum FollowUpStatus {
+  SCHEDULED
+  SENT
+  SKIPPED
+  CANCELLED
+}
+
+/// Scheduled follow-up messages for leads. Created by agent processor.
+/// Multi-step: first reply → 3-day check-in → 7-day follow-up.
+model FollowUpSchedule {
+  id              String         @id @default(cuid())
+  leadId          String         @map("lead_id")
+  dealerProfileId String         @map("dealer_profile_id")
+  step            FollowUpStep
+  status          FollowUpStatus @default(SCHEDULED)
+  scheduledAt     DateTime       @map("scheduled_at")
+  sentAt          DateTime?      @map("sent_at")
+  createdAt       DateTime       @default(now()) @map("created_at")
+
+  @@unique([leadId, step])
+  @@index([status, scheduledAt])
+  @@index([dealerProfileId])
+  @@map("follow_up_schedules")
+}
+
+// ─────────────────────────────────────────────
+// AGENT MEMORY (template effectiveness tracking)
+// ─────────────────────────────────────────────
+
+/// Tracks which auto-reply approach got buyer responses per dealer.
+/// Used to adapt future auto-replies based on what works.
+model AgentMemory {
+  id              String   @id @default(cuid())
+  dealerProfileId String   @map("dealer_profile_id")
+  category        String   // "auto_reply", "follow_up_3day", "follow_up_7day"
+  templateKey     String   @map("template_key") // e.g. "warm_greeting", "price_inquiry", "test_drive_offer"
+  sentCount       Int      @default(0) @map("sent_count")
+  responseCount   Int      @default(0) @map("response_count") // buyer replied within 24h
+  responseRate    Float    @default(0) @map("response_rate") // responseCount/sentCount
+  lastUsed        DateTime @default(now()) @map("last_used")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@unique([dealerProfileId, category, templateKey])
+  @@index([dealerProfileId])
+  @@map("agent_memories")
 }
 
 // ─────────────────────────────────────────────

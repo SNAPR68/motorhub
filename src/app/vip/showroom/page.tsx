@@ -31,7 +31,7 @@ export default function VIPShowroomPage() {
       <div className="relative h-dvh w-full max-w-md mx-auto overflow-hidden flex flex-col items-center justify-center gap-4" style={{ background: "#0a0a0a" }}>
         <MaterialIcon name="diamond" className="text-5xl text-[#dab80b]/30" />
         <p className="text-slate-400 text-sm">No VIP vehicles available</p>
-        <Link href="/inventory" className="text-[#dab80b] font-bold text-sm">Browse Inventory →</Link>
+        <Link href="/used-cars" className="text-[#dab80b] font-bold text-sm">Browse Cars →</Link>
       </div>
     );
   }
@@ -116,7 +116,7 @@ export default function VIPShowroomPage() {
             <MaterialIcon name="home" />
             <span className="text-[10px] font-bold uppercase">Home</span>
           </Link>
-          <Link href="/inventory" className="flex flex-col items-center gap-1 text-slate-500">
+          <Link href="/used-cars" className="flex flex-col items-center gap-1 text-slate-500">
             <MaterialIcon name="directions_car" />
             <span className="text-[10px] font-bold uppercase">Cars</span>
           </Link>
@@ -128,7 +128,7 @@ export default function VIPShowroomPage() {
             <MaterialIcon name="smart_toy" />
             <span className="text-[10px] font-bold uppercase">Concierge</span>
           </Link>
-          <Link href="/settings" className="flex flex-col items-center gap-1 text-slate-500">
+          <Link href="/my-account" className="flex flex-col items-center gap-1 text-slate-500">
             <MaterialIcon name="person" />
             <span className="text-[10px] font-bold uppercase">Profile</span>
           </Link>

@@ -3,6 +3,26 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { aiRequest } from "@/lib/ai-router";
+import { parseBody, aiCreativeSuggestionsSchema } from "@/lib/validation";
+
+const FALLBACK_SUGGESTIONS = [
+  {
+    title: "Heritage Story",
+    desc: "Highlight the vehicle's lineage and evolution through generations. Perfect for iconic models with rich history.",
+    icon: "auto_stories",
+  },
+  {
+    title: "Performance Focus",
+    desc: "Emphasize power, speed, and driving dynamics with action shots. Ideal for sports and performance-oriented cars.",
+    icon: "speed",
+  },
+  {
+    title: "Lifestyle Integration",
+    desc: "Show the vehicle in aspirational lifestyle contexts — weekend getaways, city drives, family adventures.",
+    icon: "landscape",
+  },
+];
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,37 +30,9 @@ export async function POST(request: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const body = await request.json();
-    const { vehicleName, vehicleType, price, specs } = body as {
-      vehicleName?: string;
-      vehicleType?: string;
-      price?: string;
-      specs?: string;
-    };
-
-    const openaiKey = process.env.OPENAI_API_KEY;
-
-    const fallbackSuggestions = [
-      {
-        title: "Heritage Story",
-        desc: "Highlight the vehicle's lineage and evolution through generations. Perfect for iconic models with rich history.",
-        icon: "auto_stories",
-      },
-      {
-        title: "Performance Focus",
-        desc: "Emphasize power, speed, and driving dynamics with action shots. Ideal for sports and performance-oriented cars.",
-        icon: "speed",
-      },
-      {
-        title: "Lifestyle Integration",
-        desc: "Show the vehicle in aspirational lifestyle contexts — weekend getaways, city drives, family adventures.",
-        icon: "landscape",
-      },
-    ];
-
-    if (!openaiKey) {
-      return NextResponse.json({ suggestions: fallbackSuggestions });
-    }
+    const parsed = await parseBody(request, aiCreativeSuggestionsSchema);
+    if (parsed.error) return NextResponse.json({ error: parsed.error }, { status: 400 });
+    const { vehicleName, vehicleType, price, specs } = parsed.data!;
 
     const context = [
       vehicleName && `Vehicle: ${vehicleName}`,
@@ -59,37 +51,36 @@ Generate exactly 3 content angle suggestions for car dealership social media and
 - desc: One sentence explaining the angle and when to use it
 - icon: Material icon name (choose from: auto_stories, speed, landscape, local_florist, wb_twilight, dark_mode, shield, eco, home, groups)
 
-Return ONLY a valid JSON array of 3 objects with keys: title, desc, icon. No other text.`;
+Return ONLY a valid JSON object with a "suggestions" key containing an array of 3 objects with keys: title, desc, icon.`;
 
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${openaiKey}` },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 400,
-        temperature: 0.8,
-      }),
+    const result = await aiRequest({
+      messages: [{ role: "user", content: prompt }],
+      complexity: "MODERATE",
+      responseFormat: "json_object",
+      maxTokens: 400,
     });
 
-    if (!res.ok) throw new Error("OpenAI request failed");
-    const data = await res.json();
-    const content = data.choices?.[0]?.message?.content?.trim() ?? "[]";
-    let parsed: { title: string; desc: string; icon: string }[];
-    try {
-      parsed = JSON.parse(content);
-      if (!Array.isArray(parsed) || parsed.length < 3) throw new Error("Invalid format");
-    } catch {
-      return NextResponse.json({ suggestions: fallbackSuggestions });
+    if (!result.content) {
+      return NextResponse.json({ suggestions: FALLBACK_SUGGESTIONS });
     }
 
-    return NextResponse.json({
-      suggestions: parsed.slice(0, 3).map((s) => ({
-        title: s.title || "Content Angle",
-        desc: s.desc || "",
-        icon: s.icon || "auto_awesome",
-      })),
-    });
+    try {
+      const parsed = JSON.parse(result.content);
+      const suggestions = Array.isArray(parsed) ? parsed : (parsed.suggestions ?? []);
+      if (!Array.isArray(suggestions) || suggestions.length < 3) {
+        return NextResponse.json({ suggestions: FALLBACK_SUGGESTIONS });
+      }
+
+      return NextResponse.json({
+        suggestions: suggestions.slice(0, 3).map((s: { title?: string; desc?: string; icon?: string }) => ({
+          title: s.title || "Content Angle",
+          desc: s.desc || "",
+          icon: s.icon || "auto_awesome",
+        })),
+      });
+    } catch {
+      return NextResponse.json({ suggestions: FALLBACK_SUGGESTIONS });
+    }
   } catch (error) {
     console.error("POST /api/ai/creative/suggestions error:", error);
     return NextResponse.json({ suggestions: [] }, { status: 500 });

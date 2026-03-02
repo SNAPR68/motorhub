@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
+import { AuthGuard } from "@/components/AuthGuard";
 
 const NAV_ITEMS = [
   { href: "/dashboard", icon: "dashboard", label: "Dashboard" },
@@ -26,6 +27,7 @@ export default function DealerAppShell({ children }: { children: React.ReactNode
   const pathname = usePathname();
 
   return (
+    <AuthGuard requiredRole="dealer">
     <div className="min-h-screen bg-[#0a0c10] flex">
 
       {/* ── Desktop Sidebar ── */}
@@ -151,5 +153,6 @@ export default function DealerAppShell({ children }: { children: React.ReactNode
         </div>
       </div>
     </div>
+    </AuthGuard>
   );
 }

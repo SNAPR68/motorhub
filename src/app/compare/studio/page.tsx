@@ -112,10 +112,10 @@ export default function CompareStudioV2Page() {
               Select at least 2 vehicles from inventory to start your Technical Duel.
             </p>
             <Link
-              href="/inventory"
+              href="/used-cars"
               className="inline-flex items-center gap-2 rounded-full bg-[#1269e2] px-6 py-3 text-sm font-bold text-white"
             >
-              Browse Inventory
+              Browse Cars
             </Link>
           </div>
         )}

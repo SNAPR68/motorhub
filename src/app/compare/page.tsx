@@ -47,7 +47,7 @@ export default function ComparePage() {
       >
         <div className="flex items-center justify-between max-w-lg mx-auto w-full">
           <Link
-            href="/inventory"
+            href="/used-cars"
             className="flex items-center justify-center size-10 rounded-full hover:bg-white/5 transition-colors"
           >
             <MaterialIcon name="arrow_back_ios_new" className="text-slate-100" />
@@ -118,10 +118,10 @@ export default function ComparePage() {
               comparison with AI verdict.
             </p>
             <Link
-              href="/inventory"
+              href="/used-cars"
               className="inline-flex items-center gap-2 rounded-lg bg-[#1466b8] px-6 py-3 text-sm font-bold text-white"
             >
-              Browse Inventory
+              Browse Cars
             </Link>
           </div>
         )}
@@ -322,12 +322,12 @@ export default function ComparePage() {
         >
           <div className="flex justify-between items-center max-w-lg mx-auto">
             <Link
-              href="/inventory"
+              href="/used-cars"
               className="flex flex-col items-center gap-1 py-1 text-slate-400"
             >
               <MaterialIcon name="garage" className="text-[24px]" />
               <span className="text-[10px] uppercase tracking-widest font-bold">
-                Inventory
+                Cars
               </span>
             </Link>
             <Link
@@ -344,12 +344,12 @@ export default function ComparePage() {
               </span>
             </Link>
             <Link
-              href="/dashboard"
+              href="/"
               className="flex flex-col items-center gap-1 py-1 text-slate-400"
             >
-              <MaterialIcon name="monitoring" className="text-[24px]" />
+              <MaterialIcon name="home" className="text-[24px]" />
               <span className="text-[10px] uppercase tracking-widest font-bold">
-                Insights
+                Home
               </span>
             </Link>
             <Link

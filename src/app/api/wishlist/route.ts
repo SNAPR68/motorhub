@@ -5,10 +5,15 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { db } from "@/lib/db";
 import { emitEvent } from "@/lib/events";
 import { handleApiError } from "@/lib/api-error";
+
+const WishlistSchema = z.object({
+  vehicleId: z.string().cuid(),
+}).strict();
 
 async function getUserId() {
   const supabase = await createClient();
@@ -76,11 +81,19 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+    const parsed = WishlistSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "Validation failed", details: parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`) },
+        { status: 400 }
+      );
+    }
 
     const wishlist = await db.wishlist.create({
       data: {
         userId,
-        vehicleId: body.vehicleId,
+        vehicleId: parsed.data.vehicleId,
       },
       include: {
         vehicle: { select: { id: true, name: true, priceDisplay: true } },
@@ -90,7 +103,7 @@ export async function POST(request: NextRequest) {
     emitEvent({
       type: "VEHICLE_WISHLISTED",
       entityType: "Vehicle",
-      entityId: body.vehicleId,
+      entityId: parsed.data.vehicleId,
       userId,
     });
 

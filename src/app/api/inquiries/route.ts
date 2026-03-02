@@ -7,6 +7,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
+import { emitEvent } from "@/lib/events";
+import { checkRateLimit, rateLimitHeaders } from "@/lib/rate-limit";
 
 const InquirySchema = z.object({
   vehicleId: z.string().min(1, "Vehicle ID is required"),
@@ -18,6 +20,16 @@ const InquirySchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  // Rate limit: 10 inquiries per minute per IP
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
+  const rl = checkRateLimit(`inquiry:${ip}`, { maxRequests: 10, windowMs: 60_000 });
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429, headers: rateLimitHeaders(rl) }
+    );
+  }
+
   try {
     const body = await request.json();
     const parsed = InquirySchema.safeParse(body);
@@ -70,6 +82,15 @@ export async function POST(request: NextRequest) {
         message: leadMessage,
         status: "NEW",
       },
+    });
+
+    // Fire-and-forget event emission (triggers auto-reply + sentiment analysis)
+    emitEvent({
+      type: "LEAD_CREATED",
+      entityType: "Lead",
+      entityId: lead.id,
+      dealerProfileId: vehicle.dealerProfileId,
+      metadata: { source: "WEBSITE", type, sentimentLabel: type === "TEST_DRIVE" ? "HOT" : "WARM" },
     });
 
     return NextResponse.json(

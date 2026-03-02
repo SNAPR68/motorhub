@@ -9,8 +9,8 @@ import { db } from "@/lib/db";
 import { requireDealerAuth } from "@/lib/auth-guard";
 import { emitEvent } from "@/lib/events";
 import { handleApiError } from "@/lib/api-error";
-
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+import { aiRequest } from "@/lib/ai-router";
+import { parseBody, aiDescriptionSchema } from "@/lib/validation";
 
 export async function POST(request: NextRequest) {
   const dealer = await requireDealerAuth();
@@ -19,10 +19,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body = await request.json();
+    const parsed = await parseBody(request, aiDescriptionSchema);
+    if (parsed.error) {
+      return NextResponse.json({ error: parsed.error }, { status: 400 });
+    }
+    const body = parsed.data!;
 
     // Support passing vehicleId OR raw fields
-    let vehicleData: Record<string, unknown> = body;
+    let vehicleData: Record<string, unknown> = body as Record<string, unknown>;
     if (body.vehicleId) {
       const vehicle = await db.vehicle.findUnique({
         where: { id: body.vehicleId },
@@ -103,51 +107,29 @@ ${featureList ? `- Key Features: ${featureList}` : ""}
 
 Write only the description paragraph. No preamble, no quotation marks.`;
 
-    // If no OpenAI key, return a smart fallback
-    if (!OPENAI_API_KEY) {
-      const fallback = buildFallback({
-        name: String(name || ""),
-        year: Number(year) || 2023,
-        km: String(km || "0"),
-        priceDisplay,
-        fuel: String(fuel || "Petrol"),
-        transmission: String(transmission || "Manual"),
-        location: String(location || "India"),
-        owner: String(owner || "1st owner"),
-      });
-      return NextResponse.json({ description: fallback, generated: false });
-    }
+    const fallbackData = {
+      name: String(name || ""),
+      year: Number(year) || 2023,
+      km: String(km || "0"),
+      priceDisplay,
+      fuel: String(fuel || "Petrol"),
+      transmission: String(transmission || "Manual"),
+      location: String(location || "India"),
+      owner: String(owner || "1st owner"),
+    };
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 200,
-        temperature: 0.75,
-      }),
+    const result = await aiRequest({
+      messages: [{ role: "user", content: prompt }],
+      complexity: "MODERATE",
+      maxTokens: 200,
     });
 
-    if (!response.ok) {
-      const fallback = buildFallback({
-        name: String(name || ""),
-        year: Number(year) || 2023,
-        km: String(km || "0"),
-        priceDisplay,
-        fuel: String(fuel || "Petrol"),
-        transmission: String(transmission || "Manual"),
-        location: String(location || "India"),
-        owner: String(owner || "1st owner"),
-      });
+    const description = result.content ?? "";
+
+    if (!description) {
+      const fallback = buildFallback(fallbackData);
       return NextResponse.json({ description: fallback, generated: false });
     }
-
-    const json = await response.json();
-    const description = json.choices?.[0]?.message?.content?.trim() ?? "";
 
     // Persist description to vehicle if vehicleId was provided
     const persisted = !!(body.vehicleId && description);
@@ -163,7 +145,7 @@ Write only the description paragraph. No preamble, no quotation marks.`;
       entityType: "Vehicle",
       entityId: body.vehicleId || "inline",
       dealerProfileId: dealer.dealerProfileId,
-      metadata: { aiScore: json.usage?.total_tokens ?? null, persisted },
+      metadata: { tokensUsed: result.tokensUsed, persisted },
     });
 
     return NextResponse.json({ description, generated: true });

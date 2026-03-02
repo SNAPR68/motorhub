@@ -31,7 +31,7 @@ const BUSINESS_TYPES = [
   "LLP",
 ] as const;
 
-type Plan = "STARTER" | "GROWTH" | "ENTERPRISE";
+type Plan = "FREE" | "STARTER" | "GROWTH" | "ENTERPRISE";
 
 const PLANS: {
   key: Plan;
@@ -41,23 +41,29 @@ const PLANS: {
   popular?: boolean;
 }[] = [
   {
+    key: "FREE",
+    name: "Free",
+    price: "Free",
+    features: "5 listings, 20 leads/mo, Basic dashboard",
+  },
+  {
     key: "STARTER",
     name: "Starter",
-    price: "Free",
-    features: "Up to 10 listings, Basic analytics",
+    price: "\u20B91,999/mo",
+    features: "25 listings, Sentiment analysis, Photo studio",
   },
   {
     key: "GROWTH",
     name: "Growth",
-    price: "\u20B92,999/mo",
-    features: "50 listings, AI pricing, Lead scoring",
+    price: "\u20B94,999/mo",
+    features: "100 listings, Full AI suite, WhatsApp, Benchmarks",
     popular: true,
   },
   {
     key: "ENTERPRISE",
     name: "Enterprise",
-    price: "\u20B99,999/mo",
-    features: "Unlimited, Full AI suite, Priority support",
+    price: "\u20B914,999/mo",
+    features: "Unlimited, Full Intelligence, Dedicated AM",
   },
 ];
 
@@ -84,7 +90,7 @@ export default function DealerSignupPage() {
   const [showConfirmPw, setShowConfirmPw] = useState(false);
 
   // Plan
-  const [selectedPlan, setSelectedPlan] = useState<Plan>("GROWTH");
+  const [selectedPlan, setSelectedPlan] = useState<Plan>("FREE");
 
   // Form state
   const [submitting, setSubmitting] = useState(false);
@@ -145,7 +151,7 @@ export default function DealerSignupPage() {
       }
 
       setSuccess(true);
-      setTimeout(() => router.push("/login/dealer"), 1500);
+      setTimeout(() => router.push("/login/dealer?onboard=1"), 1500);
     } catch {
       setApiError("Network error. Please try again.");
       setSubmitting(false);

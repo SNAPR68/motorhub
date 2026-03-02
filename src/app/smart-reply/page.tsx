@@ -43,8 +43,8 @@ function SmartReplyContent() {
         setSuggestions(data.suggestions);
         setSelected(0);
       }
-    } catch (err) {
-      console.error(err);
+    } catch {
+      // Suggestion generation failed — UI stays in non-loading state with empty suggestions
     } finally {
       setLoading(false);
     }
@@ -78,8 +78,7 @@ function SmartReplyContent() {
         }
         if (phone) window.open(`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`, "_blank");
       }
-    } catch (err) {
-      console.error(err);
+    } catch {
       if (channel === "whatsapp") {
         const phone = searchParams.get("phone") ?? "";
         if (phone) window.open(`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`, "_blank");

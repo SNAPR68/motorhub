@@ -5,8 +5,16 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { z } from "zod";
 import { db } from "@/lib/db";
 import { requireDealerAuth } from "@/lib/auth-guard";
+
+const TeamMemberSchema = z.object({
+  name: z.string().min(1).max(100),
+  role: z.string().min(1).max(100),
+  email: z.string().email(),
+  avatarUrl: z.string().url().nullable().optional(),
+}).strict();
 
 export async function GET() {
   try {
@@ -38,14 +46,22 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+    const parsed = TeamMemberSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "Validation failed", details: parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`) },
+        { status: 400 }
+      );
+    }
 
     const member = await db.teamMember.create({
       data: {
         dealerProfileId: dealer.dealerProfileId,
-        name: body.name,
-        role: body.role,
-        email: body.email,
-        avatarUrl: body.avatarUrl || null,
+        name: parsed.data.name,
+        role: parsed.data.role,
+        email: parsed.data.email,
+        avatarUrl: parsed.data.avatarUrl || null,
         status: "INVITED",
       },
     });

@@ -5,8 +5,15 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { z } from "zod";
 import { db } from "@/lib/db";
 import { createClient } from "@/lib/supabase/server";
+
+const PreferencesSchema = z.object({
+  automation: z.record(z.string(), z.boolean()).optional(),
+  assets: z.record(z.string(), z.boolean()).optional(),
+  notifications: z.record(z.string(), z.boolean()).optional(),
+}).strict();
 
 async function getDealerProfileId() {
   const supabase = await createClient();
@@ -55,7 +62,16 @@ export async function PUT(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { automation, assets, notifications } = body;
+    const parsed = PreferencesSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "Validation failed", details: parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`) },
+        { status: 400 }
+      );
+    }
+
+    const { automation, assets, notifications } = parsed.data;
 
     const data: Record<string, unknown> = {};
     if (automation !== undefined) data.automation = automation;

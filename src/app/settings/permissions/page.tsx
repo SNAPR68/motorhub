@@ -5,14 +5,22 @@ import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchDealerProfile } from "@/lib/api";
+import {
+  getFeatures,
+  getLimits,
+  minimumPlanFor,
+  type PlanKey,
+  type PlanFeatures,
+} from "@/lib/plan-limits";
 
 /* ── design tokens: access_roles_&_permissions ── */
 // primary: #f2b90d (gold), font: Manrope, bg: #121210, card: #1c1c18, border: #2d2a1e
 
 const PLAN_TIER_MAP: Record<string, string> = {
-  STARTER: "Silver",
-  GROWTH: "Gold",
-  ENTERPRISE: "Platinum",
+  FREE: "Free",
+  STARTER: "Starter",
+  GROWTH: "Growth",
+  ENTERPRISE: "Enterprise",
 };
 
 const ROLES = [
@@ -39,32 +47,83 @@ const ROLES = [
   },
 ];
 
-const AI_CAPABILITIES = [
-  { icon: "auto_graph", name: "Predictive Inventory Forecasting", desc: "Proprietary AI analyzes market trends to suggest stock buys.", unlocked: true },
-  { icon: "monitoring", name: "Financial Oversight & P&L", desc: "Real-time reporting on dealership profitability and margins.", unlocked: false },
-  { icon: "neurology", name: "Smart Lead Routing", desc: "Automated distribution of inquiries based on closer performance.", unlocked: false },
+/* ── AI capabilities mapped to plan feature flags ── */
+interface AICapability {
+  icon: string;
+  name: string;
+  desc: string;
+  featureKey: keyof PlanFeatures;
+}
+
+const AI_CAPABILITIES: AICapability[] = [
+  {
+    icon: "auto_fix_high",
+    name: "AI Descriptions & Drafts",
+    desc: "Auto-generate vehicle listings and quick content drafts.",
+    featureKey: "aiDescriptions",
+  },
+  {
+    icon: "psychology",
+    name: "Lead Sentiment Analysis",
+    desc: "AI classifies leads as Hot, Warm, or Cool based on messages.",
+    featureKey: "aiSentiment",
+  },
+  {
+    icon: "smart_toy",
+    name: "Smart Reply & Auto-Reply",
+    desc: "AI-powered responses to lead inquiries, fully automated.",
+    featureKey: "aiAutoReply",
+  },
+  {
+    icon: "auto_graph",
+    name: "Predictive Inventory Forecasting",
+    desc: "AI analyzes market trends to suggest optimal stock buys.",
+    featureKey: "intelligenceBasic",
+  },
+  {
+    icon: "monitoring",
+    name: "Benchmarks & Health Score",
+    desc: "Cross-dealer comparison and public dealership trust score.",
+    featureKey: "benchmarks",
+  },
+  {
+    icon: "neurology",
+    name: "Full DemandPulse Intelligence",
+    desc: "Depreciation forecasting, acquisition signals, market pricing.",
+    featureKey: "intelligenceFull",
+  },
 ];
 
-const PERMISSIONS_LIST = [
-  { icon: "directions_car", label: "Inventory Management", enabled: true },
-  { icon: "payments", label: "Pricing Controls", enabled: true },
-  { icon: "campaign", label: "Ad Campaign Creation", enabled: false },
+/* ── Granular permissions mapped to plan feature flags ── */
+interface Permission {
+  icon: string;
+  label: string;
+  featureKey: keyof PlanFeatures;
+}
+
+const PERMISSIONS_LIST: Permission[] = [
+  { icon: "directions_car", label: "Inventory Management", featureKey: "aiDescriptions" },
+  { icon: "payments", label: "Pricing Controls", featureKey: "aiDescriptions" },
+  { icon: "campaign", label: "Ad Campaign Creation", featureKey: "campaignTools" },
+  { icon: "photo_camera", label: "Photo Studio", featureKey: "photoBackgroundRemoval" },
+  { icon: "videocam", label: "Video & Reel Tools", featureKey: "reelScriptGeneration" },
+  { icon: "chat", label: "WhatsApp Integration", featureKey: "whatsappIntegration" },
+  { icon: "hub", label: "Social Hub & Marketing", featureKey: "socialHub" },
+  { icon: "store", label: "Multi-Store Management", featureKey: "multiStore" },
+  { icon: "api", label: "API Access", featureKey: "apiAccess" },
+  { icon: "download", label: "Data Export (CSV/PDF)", featureKey: "dataExport" },
 ];
 
 export default function PermissionsPage() {
   const [selectedRole, setSelectedRole] = useState(0);
-  const [perms, setPerms] = useState(PERMISSIONS_LIST.map((p) => p.enabled));
 
   const { data: profileData } = useApi(() => fetchDealerProfile(), []);
-  const plan = (profileData?.profile as { plan?: string } | undefined)?.plan ?? "STARTER";
-  const planTier = PLAN_TIER_MAP[plan] ?? "Silver";
+  const plan = ((profileData?.profile as { plan?: string } | undefined)?.plan ?? "FREE") as PlanKey;
+  const planTier = PLAN_TIER_MAP[plan] ?? "Free";
   const dealershipName = (profileData?.profile as { dealershipName?: string } | undefined)?.dealershipName ?? "Your Dealership";
 
-  // ENTERPRISE unlocks all AI capabilities
-  const resolvedCapabilities = AI_CAPABILITIES.map((cap, i) => ({
-    ...cap,
-    unlocked: plan === "ENTERPRISE" ? true : i === 0,
-  }));
+  const features = getFeatures(plan);
+  const limits = getLimits(plan);
 
   return (
     <div
@@ -106,8 +165,37 @@ export default function PermissionsPage() {
       </header>
 
       <main className="flex-1 overflow-y-auto pb-8" style={{ scrollbarWidth: "none" }}>
+        {/* ── Plan Quotas ── */}
+        <section className="mt-6 px-4">
+          <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-500 mb-4">
+            Plan Quotas
+          </h2>
+          <div
+            className="grid grid-cols-3 gap-3"
+          >
+            {[
+              { label: "Vehicles", value: limits.vehicles === -1 ? "Unlimited" : String(limits.vehicles), icon: "directions_car" },
+              { label: "Leads/mo", value: limits.leadsPerMonth === -1 ? "Unlimited" : String(limits.leadsPerMonth), icon: "people" },
+              { label: "AI Calls/mo", value: limits.aiCallsPerMonth === -1 ? "Unlimited" : String(limits.aiCallsPerMonth), icon: "auto_awesome" },
+              { label: "Photo Edits/mo", value: limits.photoEditsPerMonth === -1 ? "Unlimited" : limits.photoEditsPerMonth === 0 ? "N/A" : String(limits.photoEditsPerMonth), icon: "photo_camera" },
+              { label: "Team Members", value: limits.teamMembers === -1 ? "Unlimited" : String(limits.teamMembers), icon: "group" },
+              { label: "Analytics", value: limits.analyticsRetentionDays === -1 ? "Unlimited" : `${limits.analyticsRetentionDays}d`, icon: "analytics" },
+            ].map((q) => (
+              <div
+                key={q.label}
+                className="flex flex-col items-center gap-1 p-3 rounded-xl"
+                style={{ background: "#1c1c18", border: "1px solid #2d2a1e" }}
+              >
+                <MaterialIcon name={q.icon} className="text-[#f2b90d] text-lg" />
+                <span className="text-lg font-black text-slate-100">{q.value}</span>
+                <span className="text-[9px] font-bold uppercase tracking-wide text-slate-500">{q.label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* ── Role Carousel ── */}
-        <section className="mt-6">
+        <section className="mt-8">
           <div className="px-4 mb-4 flex justify-between items-end">
             <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-500">
               Select Access Tier
@@ -167,34 +255,44 @@ export default function PermissionsPage() {
             AI-Powered Capabilities
           </h2>
           <div className="space-y-3">
-            {resolvedCapabilities.map((cap) => (
-              <div
-                key={cap.name}
-                className="flex items-center gap-4 p-4 rounded-xl"
-                style={{
-                  background: cap.unlocked ? "rgba(242,185,13,0.05)" : "#1c1c18",
-                  border: cap.unlocked ? "1px solid rgba(242,185,13,0.2)" : "1px solid #2d2a1e",
-                }}
-              >
+            {AI_CAPABILITIES.map((cap) => {
+              const unlocked = features[cap.featureKey] === true;
+              const requiredPlan = !unlocked ? PLAN_TIER_MAP[minimumPlanFor(cap.featureKey)] : null;
+
+              return (
                 <div
-                  className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
-                  style={{ background: cap.unlocked ? "rgba(242,185,13,0.2)" : "#1e293b" }}
+                  key={cap.name}
+                  className="flex items-center gap-4 p-4 rounded-xl"
+                  style={{
+                    background: unlocked ? "rgba(242,185,13,0.05)" : "#1c1c18",
+                    border: unlocked ? "1px solid rgba(242,185,13,0.2)" : "1px solid #2d2a1e",
+                  }}
                 >
+                  <div
+                    className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ background: unlocked ? "rgba(242,185,13,0.2)" : "#1e293b" }}
+                  >
+                    <MaterialIcon
+                      name={cap.icon}
+                      className={unlocked ? "text-[#f2b90d]" : "text-slate-400"}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-slate-100 font-bold text-sm">{cap.name}</h4>
+                    <p className="text-slate-400 text-xs">{cap.desc}</p>
+                    {!unlocked && requiredPlan && (
+                      <p className="text-[10px] mt-1 font-bold uppercase tracking-wider" style={{ color: "#f2b90d" }}>
+                        Requires {requiredPlan}
+                      </p>
+                    )}
+                  </div>
                   <MaterialIcon
-                    name={cap.icon}
-                    className={cap.unlocked ? "text-[#f2b90d]" : "text-slate-400"}
+                    name={unlocked ? "verified" : "lock"}
+                    className={unlocked ? "text-[rgba(242,185,13,0.4)]" : "text-slate-600"}
                   />
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-slate-100 font-bold text-sm">{cap.name}</h4>
-                  <p className="text-slate-400 text-xs">{cap.desc}</p>
-                </div>
-                <MaterialIcon
-                  name={cap.unlocked ? "verified" : "lock"}
-                  className={cap.unlocked ? "text-[rgba(242,185,13,0.4)]" : "text-slate-600"}
-                />
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -207,69 +305,107 @@ export default function PermissionsPage() {
             className="rounded-xl overflow-hidden"
             style={{ background: "#1c1c18", border: "1px solid #2d2a1e" }}
           >
-            {PERMISSIONS_LIST.map((perm, i) => (
-              <div
-                key={perm.label}
-                className="flex items-center justify-between p-4"
-                style={{
-                  borderTop: i > 0 ? "1px solid #2d2a1e" : "none",
-                  opacity: perms[i] ? 1 : 0.5,
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <MaterialIcon name={perm.icon} className="text-slate-400" />
-                  <span className="text-sm font-medium text-slate-200">{perm.label}</span>
-                </div>
-                <button
-                  onClick={() => {
-                    const next = [...perms];
-                    next[i] = !next[i];
-                    setPerms(next);
+            {PERMISSIONS_LIST.map((perm, i) => {
+              const enabled = features[perm.featureKey] === true;
+              const requiredPlan = !enabled ? PLAN_TIER_MAP[minimumPlanFor(perm.featureKey)] : null;
+
+              return (
+                <div
+                  key={perm.label}
+                  className="flex items-center justify-between p-4"
+                  style={{
+                    borderTop: i > 0 ? "1px solid #2d2a1e" : "none",
+                    opacity: enabled ? 1 : 0.5,
                   }}
-                  className="w-11 h-6 rounded-full relative transition-colors"
-                  style={{ background: perms[i] ? "#f2b90d" : "#334155" }}
                 >
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <MaterialIcon name={perm.icon} className={enabled ? "text-[#f2b90d]" : "text-slate-500"} />
+                    <div className="min-w-0">
+                      <span className="text-sm font-medium text-slate-200 block">{perm.label}</span>
+                      {!enabled && requiredPlan && (
+                        <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: "#f2b90d" }}>
+                          {requiredPlan}+
+                        </span>
+                      )}
+                    </div>
+                  </div>
                   <div
-                    className="absolute top-0.5 w-5 h-5 rounded-full transition-all"
-                    style={{
-                      background: "#121210",
-                      left: perms[i] ? "22px" : "2px",
-                      boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
-                    }}
-                  />
-                </button>
-              </div>
-            ))}
+                    className="w-11 h-6 rounded-full relative shrink-0"
+                    style={{ background: enabled ? "#f2b90d" : "#334155" }}
+                  >
+                    <div
+                      className="absolute top-0.5 w-5 h-5 rounded-full"
+                      style={{
+                        background: "#121210",
+                        left: enabled ? "22px" : "2px",
+                        boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
 
+        {/* ── Upgrade CTA ── */}
+        {plan !== "ENTERPRISE" && (
+          <section className="mt-8 px-4">
+            <Link
+              href="/plans"
+              className="flex items-center justify-center gap-2 p-4 rounded-xl font-bold text-sm uppercase tracking-wide transition-all"
+              style={{
+                background: "#f2b90d",
+                color: "#121210",
+                boxShadow: "0 4px 16px rgba(242,185,13,0.2)",
+              }}
+            >
+              <MaterialIcon name="rocket_launch" className="text-lg" />
+              Unlock More with Upgrade
+            </Link>
+          </section>
+        )}
+
         {/* ── Invite Member ── */}
         <section className="mt-8 px-4">
+          <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-500 mb-4">
+            Invite Team Member
+          </h2>
           <div
-            className="p-4 flex items-center gap-3 rounded-xl"
+            className="p-4 flex flex-col gap-3 rounded-xl"
             style={{ background: "#1c1c18", border: "1px solid #2d2a1e" }}
           >
-            <div className="relative flex-1">
-              <MaterialIcon
-                name="mail"
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-500"
-              />
-              <input
-                type="email"
-                placeholder="Add member by email..."
-                className="w-full rounded-lg py-3 pl-10 pr-4 text-slate-100 text-sm focus:outline-none transition-all"
-                style={{
-                  background: "#121210",
-                  border: "1px solid #2d2a1e",
-                }}
-              />
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <MaterialIcon name="group" className="text-sm" />
+              <span>
+                {limits.teamMembers === -1
+                  ? "Unlimited team members"
+                  : `Up to ${limits.teamMembers} member${limits.teamMembers > 1 ? "s" : ""} on ${planTier}`}
+              </span>
             </div>
-            <button
-              className="px-4 py-3 rounded-lg font-bold text-sm uppercase tracking-wide"
-              style={{ background: "#f2b90d", color: "#121210" }}
-            >
-              Invite
-            </button>
+            <div className="flex items-center gap-3">
+              <div className="relative flex-1">
+                <MaterialIcon
+                  name="mail"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-500"
+                />
+                <input
+                  type="email"
+                  placeholder="Add member by email..."
+                  className="w-full rounded-lg py-3 pl-10 pr-4 text-slate-100 text-sm focus:outline-none transition-all"
+                  style={{
+                    background: "#121210",
+                    border: "1px solid #2d2a1e",
+                  }}
+                />
+              </div>
+              <button
+                className="px-4 py-3 rounded-lg font-bold text-sm uppercase tracking-wide"
+                style={{ background: "#f2b90d", color: "#121210" }}
+              >
+                Invite
+              </button>
+            </div>
           </div>
         </section>
       </main>

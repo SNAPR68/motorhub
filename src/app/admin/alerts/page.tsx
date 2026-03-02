@@ -110,6 +110,38 @@ export default function AdminAlertsPage() {
               )}
             </div>
 
+            {/* Error Rate */}
+            {data.systemHealth.errorRate && (
+              <div className="mb-4">
+                <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Error Rate</h3>
+                <div className="flex items-center gap-3 rounded-lg p-3" style={{
+                  background: (data.systemHealth.errorRate as { spikeActive: boolean }).spikeActive
+                    ? "rgba(239,68,68,0.1)" : "rgba(16,185,129,0.08)"
+                }}>
+                  <MaterialIcon
+                    name={(data.systemHealth.errorRate as { spikeActive: boolean }).spikeActive ? "error" : "check_circle"}
+                    className="text-[18px] shrink-0"
+                    style={{ color: (data.systemHealth.errorRate as { spikeActive: boolean }).spikeActive ? "#ef4444" : "#10b981" }}
+                  />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-white">
+                      {(data.systemHealth.errorRate as { spikeActive: boolean }).spikeActive ? "Error Spike Active" : "Error Rate Normal"}
+                    </p>
+                    <p className="text-xs text-slate-400">
+                      Last 1 min: {(data.systemHealth.errorRate as { last1min: number }).last1min} | Last 5 min: {(data.systemHealth.errorRate as { last5min: number }).last5min}
+                    </p>
+                  </div>
+                  {(data.systemHealth.errorRate as { topRoutes: Array<{ route: string; count: number }> }).topRoutes.length > 0 && (
+                    <div className="text-right">
+                      {(data.systemHealth.errorRate as { topRoutes: Array<{ route: string; count: number }> }).topRoutes.slice(0, 2).map((r) => (
+                        <p key={r.route} className="text-[10px] text-slate-500">{r.route}: {r.count}</p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* Recent Agent Events */}
             <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Recent Platform Events</h3>
             {(data.systemHealth.recentEvents as Array<{ id: string; type: string; entityType: string; createdAt: string }>).length === 0 ? (

@@ -152,11 +152,18 @@ export default function DealerProfilePage({
             </div>
             <div className="flex-1 min-w-0">
               <h2 className="text-white font-bold text-lg leading-tight">{displayName}</h2>
-              <span className="inline-flex items-center gap-1 text-xs font-semibold rounded-full px-2.5 py-0.5 mt-1"
-                style={{ background: "#1152d420", color: "#4d80f0" }}>
-                <MaterialIcon name="verified" fill className="text-[12px]" />
-                Maruti Authorized
-              </span>
+              <div className="flex items-center gap-1.5 mt-1 flex-wrap">
+                <span className="inline-flex items-center gap-1 text-xs font-semibold rounded-full px-2.5 py-0.5"
+                  style={{ background: "#1152d420", color: "#4d80f0" }}>
+                  <MaterialIcon name="verified" fill className="text-[12px]" />
+                  Maruti Authorized
+                </span>
+                <span className="inline-flex items-center gap-1 text-xs font-semibold rounded-full px-2.5 py-0.5"
+                  style={{ background: "rgba(43,173,238,0.15)", color: "#2badee" }}>
+                  <MaterialIcon name="workspace_premium" fill className="text-[12px]" />
+                  Autovinci Verified: 85/100
+                </span>
+              </div>
             </div>
           </div>
 

@@ -11,6 +11,8 @@ import {
   checkTrendingVehicle,
   warnUnresponsiveLeads,
 } from "./actions";
+import { scheduleFollowUps } from "./follow-ups";
+import { recordResponse } from "./agent-memory";
 
 interface EventPayload {
   type: string;
@@ -30,11 +32,16 @@ export async function processEvent(event: EventPayload): Promise<void> {
     switch (event.type) {
       case "LEAD_CREATED":
         if (event.dealerProfileId) {
-          // Auto-analyze sentiment + auto-reply (parallel)
+          // Auto-analyze sentiment + auto-reply + schedule follow-ups (parallel)
           await Promise.allSettled([
             autoAnalyzeSentiment(event.entityId, event.dealerProfileId),
             autoReplyToLead(event.entityId, event.dealerProfileId),
+            scheduleFollowUps(event.entityId, event.dealerProfileId),
           ]);
+          // Occasionally check for unresponsive leads batch
+          if (Math.random() < 0.1) {
+            await warnUnresponsiveLeads(event.dealerProfileId);
+          }
         }
         break;
 
@@ -45,18 +52,14 @@ export async function processEvent(event: EventPayload): Promise<void> {
         break;
 
       case "LEAD_STATUS_CHANGED":
-        // When lead moves to CONTACTED, could schedule follow-up (future)
+        // Track agent memory: if buyer responded after auto-reply, record it
+        if (event.dealerProfileId && event.metadata?.newStatus === "CONTACTED") {
+          await recordResponse(event.dealerProfileId, event.entityId);
+        }
         break;
 
       case "VEHICLE_WISHLISTED":
         await checkTrendingVehicle(event.entityId);
-        break;
-
-      case "LEAD_CREATED":
-        // Check for unresponsive leads batch (runs occasionally, not on every event)
-        if (event.dealerProfileId && Math.random() < 0.1) {
-          await warnUnresponsiveLeads(event.dealerProfileId);
-        }
         break;
     }
   } catch (error) {

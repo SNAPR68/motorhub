@@ -113,10 +113,10 @@ export default function InterestsPage() {
 
           <div className="px-6 mt-8">
             <Link
-              href="/inventory"
+              href="/used-cars"
               className="block w-full py-4 rounded-xl border border-slate-800 text-[11px] font-bold tracking-[0.2em] uppercase text-slate-400 hover:bg-slate-900 transition-colors text-center"
             >
-              View Full Inventory
+              Browse All Cars
             </Link>
           </div>
         </div>
@@ -128,7 +128,7 @@ export default function InterestsPage() {
           <MaterialIcon name="home" className="text-[26px]" />
           <span className="text-[9px] font-bold uppercase tracking-widest">Home</span>
         </Link>
-        <Link href="/inventory" className="flex flex-col items-center gap-1 text-slate-500">
+        <Link href="/used-cars" className="flex flex-col items-center gap-1 text-slate-500">
           <MaterialIcon name="search" className="text-[26px]" />
           <span className="text-[9px] font-bold uppercase tracking-widest">Search</span>
         </Link>

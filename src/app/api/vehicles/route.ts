@@ -10,13 +10,27 @@ import { db } from "@/lib/db";
 import { Prisma } from "@/generated/prisma/client";
 import { parseBody, createVehicleSchema } from "@/lib/validation";
 import { createClient } from "@/lib/supabase/server";
+import { checkRateLimit, rateLimitHeaders } from "@/lib/rate-limit";
+import { emitEvent } from "@/lib/events";
 
 export async function GET(request: NextRequest) {
+  // Rate limit public endpoint
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+  const rl = checkRateLimit(`vehicles:${ip}`);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "Too many requests" },
+      { status: 429, headers: rateLimitHeaders(rl) }
+    );
+  }
+
   const { searchParams } = request.nextUrl;
   const category = searchParams.get("category");
   const status = searchParams.get("status");
   const search = searchParams.get("search");
   const sort = searchParams.get("sort");
+  const city = searchParams.get("city");
+  const brand = searchParams.get("brand");
   const limit = parseInt(searchParams.get("limit") ?? "50", 10);
   const offset = parseInt(searchParams.get("offset") ?? "0", 10);
 
@@ -31,12 +45,29 @@ export async function GET(request: NextRequest) {
       where.status = status.toUpperCase() as Prisma.EnumVehicleStatusFilter["equals"];
     }
 
-    if (search) {
+    // Filter by city (matches location field or dealer's city)
+    if (city) {
+      const cityClean = city.replace(/-/g, " ");
       where.OR = [
+        ...(where.OR ?? []),
+        { location: { contains: cityClean, mode: "insensitive" } },
+        { dealerProfile: { city: { contains: cityClean, mode: "insensitive" } } },
+      ];
+    }
+
+    // Filter by brand name
+    if (brand) {
+      const brandClean = brand.replace(/-/g, " ");
+      where.name = { contains: brandClean, mode: "insensitive" };
+    }
+
+    if (search) {
+      const searchConditions: Prisma.VehicleWhereInput[] = [
         { name: { contains: search, mode: "insensitive" } },
         { location: { contains: search, mode: "insensitive" } },
         { engine: { contains: search, mode: "insensitive" } },
       ];
+      where.OR = [...(where.OR ?? []), ...searchConditions];
     }
 
     // Sorting
@@ -120,6 +151,14 @@ export async function POST(request: NextRequest) {
         description: validated.description ?? undefined,
         images: validated.images,
       },
+    });
+
+    emitEvent({
+      type: "VEHICLE_CREATED",
+      entityType: "Vehicle",
+      entityId: vehicle.id,
+      dealerProfileId: dealerProfile.id,
+      metadata: { name: validated.name, category: validated.category },
     });
 
     return NextResponse.json({ vehicle }, { status: 201 });

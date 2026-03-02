@@ -3,6 +3,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { aiRequest } from "@/lib/ai-router";
+import { parseBody, aiNotificationEnhanceSchema } from "@/lib/validation";
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,21 +12,9 @@ export async function POST(request: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const body = await request.json();
-    const { message, voice = "Sophisticated", channel = "whatsapp" } = body as {
-      message?: string;
-      voice?: string;
-      channel?: string;
-    };
-
-    if (!message?.trim()) {
-      return NextResponse.json({ error: "message required" }, { status: 400 });
-    }
-
-    const openaiKey = process.env.OPENAI_API_KEY;
-    if (!openaiKey) {
-      return NextResponse.json({ enhanced: message, note: "OpenAI not configured" });
-    }
+    const parsed = await parseBody(request, aiNotificationEnhanceSchema);
+    if (parsed.error) return NextResponse.json({ error: parsed.error }, { status: 400 });
+    const { message, voice, channel } = parsed.data!;
 
     const voicePrompt =
       voice === "Sophisticated"
@@ -42,22 +32,13 @@ Original message:
 
 Return ONLY the rewritten message, no quotes or labels. Preserve placeholders like {name} if present.`;
 
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${openaiKey}` },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 300,
-        temperature: 0.7,
-      }),
+    const result = await aiRequest({
+      messages: [{ role: "user", content: prompt }],
+      complexity: "MODERATE",
+      maxTokens: 300,
     });
 
-    if (!res.ok) throw new Error("OpenAI request failed");
-    const data = await res.json();
-    const enhanced = data.choices?.[0]?.message?.content?.trim() ?? message;
-
-    return NextResponse.json({ enhanced });
+    return NextResponse.json({ enhanced: result.content || message });
   } catch (error) {
     console.error("POST /api/ai/notification-enhance error:", error);
     return NextResponse.json({ error: "Enhancement failed" }, { status: 500 });

@@ -35,10 +35,10 @@ export default function Error({
             Try Again
           </button>
           <Link
-            href="/dashboard"
+            href="/"
             className="px-6 py-3 rounded-xl border border-slate-600 text-slate-300 text-sm font-bold transition-all active:scale-95 hover:bg-white/5"
           >
-            Go to Dashboard
+            Go Home
           </Link>
         </div>
       </div>

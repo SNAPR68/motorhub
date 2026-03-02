@@ -1,29 +1,18 @@
 /* POST /api/payments/create-order — Create a Razorpay order for plan upgrade
  *
- * Body: { plan: "GROWTH" | "ENTERPRISE", billing: "monthly" | "annual" }
+ * Body: { plan: "STARTER" | "GROWTH" | "ENTERPRISE", billing: "monthly" | "annual" }
  * Returns: { orderId, amount, currency, key }
  */
 
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import Razorpay from "razorpay";
+import { PLAN_PRICES } from "@/lib/plan-limits";
 
 const BodySchema = z.object({
-  plan: z.enum(["GROWTH", "ENTERPRISE"]),
+  plan: z.enum(["STARTER", "GROWTH", "ENTERPRISE"]),
   billing: z.enum(["monthly", "annual"]),
 });
-
-// Plan pricing in INR (paise)
-const PLAN_PRICES: Record<string, Record<string, number>> = {
-  GROWTH: {
-    monthly: 3999900, // ₹39,999
-    annual: 3999900 * 10, // 10 months (2 free)
-  },
-  ENTERPRISE: {
-    monthly: 6999900, // ₹69,999
-    annual: 6999900 * 10,
-  },
-};
 
 export async function POST(request: NextRequest) {
   try {
@@ -44,7 +33,13 @@ export async function POST(request: NextRequest) {
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
     if (!keyId || !keySecret) {
-      // Demo mode: return a mock order for testing without Razorpay keys
+      if (process.env.NODE_ENV === "production") {
+        return NextResponse.json(
+          { error: "Payment service not configured" },
+          { status: 503 }
+        );
+      }
+      // Demo mode: only in development/preview
       return NextResponse.json({
         orderId: `order_demo_${Date.now()}`,
         amount,

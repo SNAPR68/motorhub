@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { requireAdminAuth } from "@/lib/admin-guard";
 import { getAllCircuitStatuses } from "@/lib/ai-circuit-breaker";
+import { getErrorStats } from "@/lib/error-spike-detector";
 
 export async function GET() {
   const admin = await requireAdminAuth();
@@ -52,6 +53,8 @@ export async function GET() {
       agentVehiclesScoredToday,
       agentTrendingToday,
       totalEventsToday,
+      followUpsSentToday,
+      apiErrorsToday,
       recentDealerSignups,
       recentLeads,
       recentServices,
@@ -98,6 +101,9 @@ export async function GET() {
       db.platformEvent.count({ where: { type: "VEHICLE_SCORED", createdAt: { gte: todayStart } } }),
       db.platformEvent.count({ where: { type: "TRENDING_BADGE_SET", createdAt: { gte: todayStart } } }),
       db.platformEvent.count({ where: { createdAt: { gte: todayStart } } }),
+      // New: follow-ups sent + API errors
+      db.followUpSchedule.count({ where: { status: "SENT", sentAt: { gte: todayStart } } }),
+      db.platformEvent.count({ where: { type: "API_ERROR", createdAt: { gte: todayStart } } }),
       // Recent activity
       db.dealerProfile.findMany({
         take: 5,
@@ -230,10 +236,13 @@ export async function GET() {
         sentimentsAnalyzedToday: agentSentimentsToday,
         vehiclesScoredToday: agentVehiclesScoredToday,
         trendingBadgesToday: agentTrendingToday,
+        followUpsSentToday,
+        apiErrorsToday,
         totalEventsToday,
       },
       systemHealth: {
         circuitBreakers: getAllCircuitStatuses(),
+        errorRate: getErrorStats(),
       },
       recent: {
         dealers: recentDealerSignups,

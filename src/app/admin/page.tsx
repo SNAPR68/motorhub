@@ -225,12 +225,14 @@ export default function AdminOverviewPage() {
                 <MaterialIcon name="smart_toy" className="text-[18px]" style={{ color: "#8b5cf6" }} />
                 <h3 className="text-sm font-bold text-white">AI Agent Activity (Today)</h3>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 {[
-                  { label: "Auto-Replies Sent", value: d.agentActivity.autoRepliesToday, color: "#8b5cf6" },
-                  { label: "Sentiments Analyzed", value: d.agentActivity.sentimentsAnalyzedToday, color: "#2badee" },
+                  { label: "Auto-Replies", value: d.agentActivity.autoRepliesToday, color: "#8b5cf6" },
+                  { label: "Follow-Ups", value: d.agentActivity.followUpsSentToday ?? 0, color: "#ec4899" },
+                  { label: "Sentiments", value: d.agentActivity.sentimentsAnalyzedToday, color: "#2badee" },
                   { label: "Vehicles Scored", value: d.agentActivity.vehiclesScoredToday, color: "#10b981" },
                   { label: "Trending Badges", value: d.agentActivity.trendingBadgesToday, color: "#f59e0b" },
+                  { label: "API Errors", value: d.agentActivity.apiErrorsToday ?? 0, color: "#ef4444" },
                 ].map((stat) => (
                   <div key={stat.label} className="rounded-lg p-3" style={{ background: `${stat.color}08`, border: `1px solid ${stat.color}15` }}>
                     <p className="text-xl font-black text-white">{stat.value}</p>

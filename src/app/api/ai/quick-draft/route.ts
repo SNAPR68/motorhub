@@ -3,6 +3,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { aiRequest } from "@/lib/ai-router";
+import { parseBody, aiQuickDraftSchema } from "@/lib/validation";
 
 const INTENT_PROMPTS: Record<string, string> = {
   Availability: "Write a warm reply confirming vehicle availability and inviting the buyer to visit or schedule a test drive.",
@@ -18,19 +20,14 @@ export async function POST(request: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const body = await request.json();
-    const { intent, buyerName, vehicleName, vehiclePrice, buyerMessage, tone = 50 } = body;
+    const parsed = await parseBody(request, aiQuickDraftSchema);
+    if (parsed.error) return NextResponse.json({ error: parsed.error }, { status: 400 });
+    const { intent, buyerName, vehicleName, vehiclePrice, buyerMessage, tone } = parsed.data!;
 
-    if (!intent) return NextResponse.json({ error: "intent required" }, { status: 400 });
-
-    const openaiKey = process.env.OPENAI_API_KEY;
     const intentPrompt = INTENT_PROMPTS[intent] ?? `Write a helpful reply about ${intent}.`;
     const toneDesc = tone < 30 ? "very formal and professional" : tone > 70 ? "casual and friendly" : "balanced and warm";
 
-    if (!openaiKey) {
-      const fallback = `Hi ${buyerName || "there"}! Thank you for reaching out about the ${vehicleName || "vehicle"}${vehiclePrice ? ` (${vehiclePrice})` : ""}. ${intentPrompt.replace("Write a", "").replace("reply", "message")} Please feel free to reach out with any questions!`;
-      return NextResponse.json({ draft: fallback, fitScore: 78 });
-    }
+    const fallback = `Hi ${buyerName || "there"}! Thank you for reaching out about the ${vehicleName || "vehicle"}${vehiclePrice ? ` (${vehiclePrice})` : ""}. ${intentPrompt.replace("Write a", "").replace("reply", "message")} Please feel free to reach out with any questions!`;
 
     const prompt = `You are a car dealership sales assistant helping a dealer write a reply to a buyer.
 
@@ -44,20 +41,13 @@ Task: ${intentPrompt}
 
 Write a 2-4 sentence reply. Be natural, not robotic. Do NOT use emojis. Return ONLY the message text, no labels or JSON.`;
 
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${openaiKey}` },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 250,
-        temperature: 0.7,
-      }),
+    const result = await aiRequest({
+      messages: [{ role: "user", content: prompt }],
+      complexity: "MODERATE",
+      maxTokens: 250,
     });
 
-    if (!res.ok) throw new Error("OpenAI request failed");
-    const data = await res.json();
-    const draft = data.choices?.[0]?.message?.content?.trim() ?? "";
+    const draft = result.content || fallback;
     const fitScore = Math.floor(Math.random() * 10) + 88; // 88-97
 
     return NextResponse.json({ draft, fitScore });

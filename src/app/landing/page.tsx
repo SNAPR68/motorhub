@@ -79,11 +79,11 @@ export default function LandingPage() {
 
         <div className="w-full max-w-sm space-y-4">
           <Link
-            href="/dashboard"
+            href="/used-cars"
             className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-lg bg-[#1152d4] px-8 py-5 text-base font-bold text-white transition-all active:scale-[0.98]"
           >
-            <MaterialIcon name="admin_panel_settings" className="text-xl" />
-            <span>Dealer Portal</span>
+            <MaterialIcon name="directions_car" className="text-xl" />
+            <span>Browse Collection</span>
             <MaterialIcon
               name="arrow_forward"
               className="absolute right-4 opacity-0 group-hover:opacity-100 transition-all text-lg"
@@ -130,7 +130,7 @@ export default function LandingPage() {
           <Link href="/landing" className="flex flex-col items-center justify-center text-[#1152d4]">
             <MaterialIcon name="home" fill />
           </Link>
-          <Link href="/inventory" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#1152d4] transition-colors">
+          <Link href="/used-cars" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#1152d4] transition-colors">
             <MaterialIcon name="directions_car" />
           </Link>
           <Link href="/showroom" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#1152d4] transition-colors">

@@ -7,6 +7,7 @@ import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { requireDealerAuth } from "@/lib/auth-guard";
 import { parseBody, createMessageSchema } from "@/lib/validation";
+import { emitEvent } from "@/lib/events";
 
 export async function GET(
   _request: Request,
@@ -60,6 +61,20 @@ export async function POST(
         text: validated.text,
         type: validated.type,
       },
+    });
+
+    // Look up lead's dealerProfileId for event
+    const lead = await db.lead.findUnique({
+      where: { id },
+      select: { dealerProfileId: true },
+    });
+
+    emitEvent({
+      type: "LEAD_MESSAGE_SENT",
+      entityType: "LeadMessage",
+      entityId: message.id,
+      dealerProfileId: lead?.dealerProfileId ?? undefined,
+      metadata: { leadId: id, role: validated.role, type: validated.type },
     });
 
     return NextResponse.json({ message }, { status: 201 });

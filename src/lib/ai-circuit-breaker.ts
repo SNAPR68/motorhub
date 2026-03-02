@@ -85,14 +85,51 @@ export function recordFailure(service: string, config = DEFAULT_CONFIG): void {
   circuit.failures++;
   circuit.lastFailure = now;
 
+  const wasOpen = circuit.state === "OPEN";
+
   if (circuit.state === "HALF_OPEN") {
-    // Probe failed -> back to OPEN
     circuit.state = "OPEN";
     circuit.lastStateChange = now;
   } else if (circuit.failures >= config.failureThreshold) {
     circuit.state = "OPEN";
     circuit.lastStateChange = now;
   }
+
+  // Notify admin when circuit trips to OPEN (fire-and-forget)
+  if (!wasOpen && circuit.state === "OPEN") {
+    notifyCircuitOpen(service, circuit.failures).catch(() => {});
+  }
+}
+
+/** Create admin notification when circuit breaker opens */
+async function notifyCircuitOpen(service: string, failures: number): Promise<void> {
+  const { db } = await import("@/lib/db");
+
+  const admins = await db.user.findMany({
+    where: { email: { in: [process.env.ADMIN_EMAIL ?? "admin@autovinci.com"] } },
+    select: { id: true },
+    take: 3,
+  });
+
+  for (const admin of admins) {
+    await db.notification.create({
+      data: {
+        userId: admin.id,
+        title: `Circuit Breaker: ${service} OPEN`,
+        message: `The ${service} circuit breaker opened after ${failures} consecutive failures. AI features will fallback to templates until the service recovers.`,
+        type: "SYSTEM",
+      },
+    });
+  }
+
+  await db.platformEvent.create({
+    data: {
+      type: "CIRCUIT_BREAKER_OPEN",
+      entityType: "System",
+      entityId: service,
+      metadata: { service, failures, openedAt: new Date().toISOString() },
+    },
+  });
 }
 
 /** Get current circuit state for monitoring */

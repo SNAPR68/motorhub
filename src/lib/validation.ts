@@ -127,6 +127,95 @@ export const wishlistSchema = z.object({
   vehicleId: z.string().min(1, "Vehicle ID required"),
 });
 
+// ── AI Schemas ──
+
+export const aiValuationSchema = z.object({
+  brand: z.string().min(1, "Brand is required").max(100),
+  model: z.string().min(1, "Model is required").max(100),
+  year: z.union([z.string(), z.number()]).transform((v) => String(v)),
+  km: z.string().max(20).default("30,000"),
+  fuel: z.string().max(20).default("Petrol"),
+  transmission: z.string().max(20).default("Manual"),
+  owner: z.string().max(20).default("1st Owner"),
+  city: z.string().max(100).default("Delhi"),
+  condition: z.string().max(20).default("Good"),
+});
+
+export const aiSmartReplySchema = z.object({
+  leadMessage: z.string().min(1, "leadMessage is required").max(5000),
+  vehicleName: z.string().max(200).optional(),
+  vehiclePrice: z.string().max(50).optional(),
+  buyerName: z.string().max(200).optional(),
+});
+
+export const aiSentimentSchema = z.object({
+  leadId: z.string().min(1, "leadId is required"),
+});
+
+export const aiQuickDraftSchema = z.object({
+  intent: z.string().min(1, "intent is required").max(100),
+  buyerName: z.string().max(200).optional(),
+  vehicleName: z.string().max(200).optional(),
+  vehiclePrice: z.string().max(50).optional(),
+  buyerMessage: z.string().max(5000).optional(),
+  tone: z.number().min(0).max(100).default(50),
+});
+
+export const aiDescriptionSchema = z.object({
+  vehicleId: z.string().optional(),
+  name: z.string().max(200).optional(),
+  year: z.union([z.string(), z.number()]).optional(),
+  km: z.union([z.string(), z.number()]).optional(),
+  price: z.union([z.string(), z.number()]).optional(),
+  fuel: z.string().max(20).optional(),
+  transmission: z.string().max(20).optional(),
+  engine: z.string().max(100).optional(),
+  power: z.string().max(50).optional(),
+  mileage: z.string().max(50).optional(),
+  location: z.string().max(200).optional(),
+  owner: z.string().max(50).optional(),
+  category: z.string().max(20).optional(),
+  features: z.array(z.object({
+    key: z.string(),
+    label: z.string(),
+    available: z.boolean(),
+  })).optional(),
+});
+
+export const aiNotificationEnhanceSchema = z.object({
+  message: z.string().min(1, "message is required").max(2000),
+  voice: z.string().max(50).default("Sophisticated"),
+  channel: z.string().max(20).default("whatsapp"),
+});
+
+export const aiCreativeSuggestionsSchema = z.object({
+  vehicleName: z.string().max(200).optional(),
+  vehicleType: z.string().max(50).optional(),
+  price: z.string().max(50).optional(),
+  specs: z.string().max(500).optional(),
+});
+
+export const aiPhotoMoodSchema = z.object({
+  image: z.string().url("Valid image URL required"),
+  mood: z.string().max(50).default("golden_hour"),
+});
+
+export const aiPhotoBgRemoveSchema = z.object({
+  image: z.string().url("Valid image URL required"),
+});
+
+export const aiReelScriptSchema = z.object({
+  vehicleId: z.string().optional(),
+  vehicleName: z.string().max(200).optional(),
+  specs: z.string().max(500).optional(),
+  tone: z.string().max(50).default("luxury"),
+});
+
+export const aiReelTtsSchema = z.object({
+  text: z.string().min(1, "text is required").max(4096),
+  voice: z.string().max(20).default("onyx"),
+});
+
 // ── Utility: Parse and validate request body ──
 
 export async function parseBody<T>(

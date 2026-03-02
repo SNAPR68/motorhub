@@ -31,12 +31,18 @@ function DealerLoginInner() {
   const error = localError || storeError || "";
   const loading = storeLoading;
 
+  // Determine where to redirect after login
+  const getRedirectUrl = () => {
+    if (searchParams.get("onboard") === "1") return "/onboarding/dealer";
+    return searchParams.get("redirect") ?? "/dashboard";
+  };
+
   // If already authenticated, redirect
   useEffect(() => {
     if (isAuthenticated) {
-      const redirect = searchParams.get("redirect") ?? "/dashboard";
-      router.push(redirect);
+      router.push(getRedirectUrl());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, router, searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -50,8 +56,7 @@ function DealerLoginInner() {
 
     const success = await login(dealerId.trim(), password.trim(), "dealer");
     if (success) {
-      const redirect = searchParams.get("redirect") ?? "/dashboard";
-      router.push(redirect);
+      router.push(getRedirectUrl());
     }
   };
 

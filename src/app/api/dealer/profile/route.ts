@@ -4,8 +4,19 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { db } from "@/lib/db";
+
+const ProfileUpdateSchema = z.object({
+  dealershipName: z.string().min(1).max(200).optional(),
+  gstin: z.string().max(20).optional(),
+  phone: z.string().max(20).optional(),
+  address: z.string().max(500).optional(),
+  city: z.string().max(100).optional(),
+  state: z.string().max(100).optional(),
+  logoUrl: z.string().url().nullable().optional(),
+}).strict();
 
 export async function GET() {
   try {
@@ -84,18 +95,18 @@ export async function PUT(request: NextRequest) {
     }
 
     const body = await request.json();
+    const parsed = ProfileUpdateSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "Validation failed", details: parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`) },
+        { status: 400 }
+      );
+    }
 
     const profile = await db.dealerProfile.update({
       where: { id: user.dealerProfile.id },
-      data: {
-        dealershipName: body.dealershipName,
-        gstin: body.gstin,
-        phone: body.phone,
-        address: body.address,
-        city: body.city,
-        state: body.state,
-        logoUrl: body.logoUrl,
-      },
+      data: parsed.data,
     });
 
     return NextResponse.json({ profile });

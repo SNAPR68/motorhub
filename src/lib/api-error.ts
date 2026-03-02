@@ -4,6 +4,7 @@
  */
 
 import { NextResponse } from "next/server";
+import { recordError } from "@/lib/error-spike-detector";
 
 export type ErrorCode =
   | "VALIDATION_ERROR"
@@ -90,8 +91,31 @@ export function handleApiError(error: unknown, context?: string): NextResponse {
   // Generic fallback
   const message = error instanceof Error ? error.message : "Unknown error";
   console.error(`[API${context ? ` ${context}` : ""}]`, message);
+
+  // Structured error logging to PlatformEvent (fire-and-forget)
+  logApiError(context, message, 500).catch(() => {});
+
+  // Record in spike detector (in-memory, sync)
+  recordError(context ?? "unknown");
+
   return NextResponse.json(
     { error: "Internal server error", code: "INTERNAL_ERROR" },
     { status: 500 }
   );
+}
+
+/** Log API errors as PlatformEvents for queryable error monitoring */
+async function logApiError(context: string | undefined, message: string, status: number): Promise<void> {
+  // Only log 5xx errors to avoid noise
+  if (status < 500) return;
+
+  const { db } = await import("@/lib/db");
+  await db.platformEvent.create({
+    data: {
+      type: "API_ERROR",
+      entityType: "System",
+      entityId: context ?? "unknown",
+      metadata: { route: context, message, status, timestamp: new Date().toISOString() },
+    },
+  });
 }

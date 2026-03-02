@@ -173,22 +173,6 @@ export default function MyAccountPage() {
           </div>
         ))}
 
-        {/* ─── Dealer promo ─── */}
-        <Link
-          href="/dashboard"
-          className="flex items-center gap-3 rounded-2xl p-4 border border-blue-500/15 transition-all active:scale-[0.99]"
-          style={{ background: "rgba(17,82,212,0.06)" }}
-        >
-          <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(17,82,212,0.15)" }}>
-            <MaterialIcon name="store" className="text-[20px] text-blue-400" />
-          </div>
-          <div className="flex-1">
-            <p className="text-sm font-bold text-white">Are you a dealer?</p>
-            <p className="text-[11px] text-slate-500">Access your dealer dashboard</p>
-          </div>
-          <MaterialIcon name="arrow_forward" className="text-[18px] text-blue-500" />
-        </Link>
-
         {/* Sign out */}
         {user && (
           <button

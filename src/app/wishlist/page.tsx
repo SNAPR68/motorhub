@@ -89,10 +89,10 @@ export default function WishlistPage() {
                   you&apos;re interested in.
                 </p>
                 <Link
-                  href="/inventory"
+                  href="/used-cars"
                   className="inline-flex items-center gap-2 rounded-lg bg-[#f2cc0d] px-6 py-3 text-sm font-bold text-[#0a0a0a]"
                 >
-                  Browse Inventory
+                  Browse Cars
                 </Link>
               </div>
             ) : (
@@ -187,7 +187,7 @@ export default function WishlistPage() {
       {/* FAB */}
       <div className="fixed bottom-24 right-4 z-20">
         <Link
-          href="/inventory"
+          href="/used-cars"
           className="size-14 rounded-full bg-[#f2cc0d] text-[#0a0a0a] shadow-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
         >
           <MaterialIcon name="add" className="text-3xl font-bold" />
@@ -198,12 +198,12 @@ export default function WishlistPage() {
       <nav className="fixed bottom-0 left-0 right-0 z-30 mx-auto max-w-md bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-[#2a2a2a] px-6 pb-8 pt-3 md:hidden">
         <div className="flex items-center justify-between">
           <Link
-            href="/inventory"
+            href="/used-cars"
             className="flex flex-col items-center gap-1 text-slate-500"
           >
             <MaterialIcon name="directions_car" className="text-2xl" />
             <span className="text-[10px] font-bold uppercase tracking-widest">
-              Inventory
+              Cars
             </span>
           </Link>
           <Link
@@ -216,12 +216,12 @@ export default function WishlistPage() {
             </span>
           </Link>
           <Link
-            href="/dashboard"
+            href="/"
             className="flex flex-col items-center gap-1 text-slate-500"
           >
-            <MaterialIcon name="monitoring" className="text-2xl" />
+            <MaterialIcon name="home" className="text-2xl" />
             <span className="text-[10px] font-bold uppercase tracking-widest">
-              Insights
+              Home
             </span>
           </Link>
           <Link

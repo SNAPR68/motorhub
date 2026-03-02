@@ -40,6 +40,8 @@ export async function fetchVehicles(params?: {
   status?: string;
   search?: string;
   sort?: string;
+  city?: string;
+  brand?: string;
   limit?: number;
   offset?: number;
 }) {
@@ -48,12 +50,49 @@ export async function fetchVehicles(params?: {
   if (params?.status) sp.set("status", params.status);
   if (params?.search) sp.set("search", params.search);
   if (params?.sort) sp.set("sort", params.sort);
+  if (params?.city) sp.set("city", params.city);
+  if (params?.brand) sp.set("brand", params.brand);
   if (params?.limit) sp.set("limit", String(params.limit));
   if (params?.offset) sp.set("offset", String(params.offset));
 
   const qs = sp.toString();
   return apiFetch<{ vehicles: DbVehicle[]; total: number }>(
     `/api/vehicles${qs ? `?${qs}` : ""}`
+  );
+}
+
+// ── Public Dealer Search ──
+
+export interface PublicDealer {
+  id: string;
+  dealershipName: string;
+  ownerName: string;
+  city: string;
+  state: string;
+  phone: string | null;
+  logo: string | null;
+  plan: string;
+  vehicleCount: number;
+  address: string;
+}
+
+export async function fetchDealerSearch(params?: {
+  city?: string;
+  brand?: string;
+  search?: string;
+  limit?: number;
+  offset?: number;
+}) {
+  const sp = new URLSearchParams();
+  if (params?.city) sp.set("city", params.city);
+  if (params?.brand) sp.set("brand", params.brand);
+  if (params?.search) sp.set("search", params.search);
+  if (params?.limit) sp.set("limit", String(params.limit));
+  if (params?.offset) sp.set("offset", String(params.offset));
+
+  const qs = sp.toString();
+  return apiFetch<{ dealers: PublicDealer[]; total: number }>(
+    `/api/dealers/search${qs ? `?${qs}` : ""}`
   );
 }
 
@@ -782,7 +821,7 @@ export async function submitInquiry(data: {
   });
 }
 
-// ── Dealer Health Score & Benchmarks (Switching Cost) ──
+// ── Dealer Health Score, Benchmarks & Trends (Switching Cost) ──
 
 export async function fetchHealthScore(): Promise<any> {
   return apiFetch("/api/analytics/health-score");
@@ -790,6 +829,18 @@ export async function fetchHealthScore(): Promise<any> {
 
 export async function fetchBenchmarks(): Promise<any> {
   return apiFetch("/api/analytics/benchmarks");
+}
+
+export async function fetchTrends(weeks = 12): Promise<any> {
+  return apiFetch(`/api/analytics/trends?weeks=${weeks}`);
+}
+
+export async function fetchDataExport(): Promise<any> {
+  return apiFetch("/api/analytics/export");
+}
+
+export async function fetchPublicDealerProfile(dealerId: string): Promise<any> {
+  return apiFetch(`/api/dealers/${dealerId}/public`);
 }
 
 // ── Market Intelligence Feed ──
@@ -881,7 +932,7 @@ export interface PaymentOrder {
 }
 
 export async function createPaymentOrder(data: {
-  plan: "GROWTH" | "ENTERPRISE";
+  plan: "STARTER" | "GROWTH" | "ENTERPRISE";
   billing: "monthly" | "annual";
 }) {
   return apiFetch<PaymentOrder>("/api/payments/create-order", {
@@ -894,7 +945,7 @@ export async function verifyPayment(data: {
   razorpay_order_id: string;
   razorpay_payment_id: string;
   razorpay_signature: string;
-  plan: "GROWTH" | "ENTERPRISE";
+  plan: "STARTER" | "GROWTH" | "ENTERPRISE";
   billing: "monthly" | "annual";
 }) {
   return apiFetch<{ verified: boolean; plan: string; demo?: boolean }>(
@@ -904,4 +955,30 @@ export async function verifyPayment(data: {
       body: JSON.stringify(data),
     }
   );
+}
+
+// ── Predictive Lead Scoring ──
+
+export async function fetchLeadScore(leadId: string): Promise<{
+  leadId: string;
+  score: number;
+  confidence: number;
+  signals: Array<{ name: string; value: number; detail: string }>;
+  predictedOutcome: "LIKELY_CONVERT" | "NEEDS_NURTURE" | "AT_RISK" | "COLD";
+  suggestedAction: string;
+}> {
+  return apiFetch(`/api/leads/${leadId}/score`);
+}
+
+// ── Health Check ──
+
+export async function fetchHealthCheck(): Promise<{
+  status: "healthy" | "degraded" | "critical";
+  timestamp: string;
+  version: string;
+  uptime: string;
+  checks: Record<string, { status: string; detail?: string }>;
+  metrics: Record<string, unknown>;
+}> {
+  return apiFetch("/api/health");
 }

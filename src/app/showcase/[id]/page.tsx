@@ -260,7 +260,7 @@ export default function ShowcasePage({
         {/* Top Navigation */}
         <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-gradient-to-b from-black/60 to-transparent">
           <Link
-            href="/inventory"
+            href="/used-cars"
             className="flex items-center justify-center size-10 rounded-full glass-effect text-white"
           >
             <MaterialIcon name="arrow_back_ios_new" className="text-[24px]" />
