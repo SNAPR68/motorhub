@@ -93,10 +93,10 @@ function BuyerLoginInner() {
             className="mb-2 text-4xl leading-tight text-white italic md:text-5xl"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Private Showroom
+            Welcome Back
           </h1>
           <p className="text-xs font-light uppercase tracking-[0.2em] text-slate-400">
-            Access Exclusive Inventory
+            Sign in to continue
           </p>
         </div>
 
@@ -185,7 +185,7 @@ function BuyerLoginInner() {
               href="/register"
               className="ml-1 text-white underline underline-offset-4 transition-colors hover:text-[#1754cf]"
             >
-              Become a Member
+              Create an Account
             </Link>
           </p>
           <div className="flex justify-center gap-6 pt-4">

@@ -90,10 +90,10 @@ function DealerLoginInner() {
         >
           <div className="mb-8">
             <h2 className="text-xl font-light tracking-wide text-white/90">
-              Dealer Portal
+              Dealer Login
             </h2>
             <p className="mt-1 text-xs font-medium uppercase tracking-widest text-white/40">
-              Authorized Personnel Only
+              Manage your dealership
             </p>
           </div>
 
@@ -208,7 +208,7 @@ function DealerLoginInner() {
         <div className="flex items-center gap-3">
           <div className="h-[1px] w-8 bg-white/10" />
           <span className="text-[10px] uppercase tracking-[0.2em] text-white/20">
-            External Access
+            Not a dealer?
           </span>
           <div className="h-[1px] w-8 bg-white/10" />
         </div>
