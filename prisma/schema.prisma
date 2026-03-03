@@ -164,10 +164,12 @@ model User {
   updatedAt   DateTime @updatedAt @map("updated_at")
 
   // Relations
-  dealerProfile   DealerProfile?
-  wishlists       Wishlist[]
-  notifications   Notification[]
-  serviceBookings ServiceBooking[]
+  dealerProfile       DealerProfile?
+  wishlists           Wishlist[]
+  notifications       Notification[]
+  serviceBookings     ServiceBooking[]
+  escrowsAsBuyer      EscrowAccount[]      @relation("BuyerEscrows")
+  financeApplications FinanceApplication[]
 
   @@map("users")
 }
@@ -189,15 +191,19 @@ model DealerProfile {
   updatedAt      DateTime         @updatedAt @map("updated_at")
 
   // Relations
-  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  stores        StoreLocation[]
-  vehicles      Vehicle[]
-  leads         Lead[]
-  appointments  Appointment[]
-  teamMembers   TeamMember[]
-  subscriptions Subscription[]
-  activities    Activity[]
-  preferences   DealerPreference?
+  user           User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stores         StoreLocation[]
+  vehicles       Vehicle[]
+  leads          Lead[]
+  appointments   Appointment[]
+  teamMembers    TeamMember[]
+  subscriptions  Subscription[]
+  activities     Activity[]
+  preferences    DealerPreference?
+  escrowAccounts EscrowAccount[]
+  sellerAuctions Auction[]         @relation("SellerAuctions")
+  wonAuctions    Auction[]         @relation("WonAuctions")
+  bids           Bid[]
 
   @@map("dealer_profiles")
 }
@@ -251,11 +257,14 @@ model Vehicle {
   updatedAt       DateTime        @updatedAt @map("updated_at")
 
   // Relations
-  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id], onDelete: Cascade)
-  store         StoreLocation? @relation(fields: [storeId], references: [id], onDelete: SetNull)
-  leads         Lead[]
-  wishlists     Wishlist[]
-  appointments  Appointment[]
+  dealerProfile       DealerProfile        @relation(fields: [dealerProfileId], references: [id], onDelete: Cascade)
+  store               StoreLocation?       @relation(fields: [storeId], references: [id], onDelete: SetNull)
+  leads               Lead[]
+  wishlists           Wishlist[]
+  appointments        Appointment[]
+  escrowAccounts      EscrowAccount[]
+  auctions            Auction[]
+  financeApplications FinanceApplication[]
 
   @@index([dealerProfileId])
   @@index([status])
@@ -667,4 +676,187 @@ model NewCarVariant {
 
   @@index([modelId])
   @@map("new_car_variants")
+}
+
+// ─────────────────────────────────────────────
+// ESCROW PAYMENTS (Buyer → Platform → Dealer)
+// ─────────────────────────────────────────────
+
+enum EscrowStatus {
+  INITIATED   // Buyer clicked "Buy", escrow created
+  PAYMENT_PENDING // Waiting for buyer payment
+  HELD        // Money received, held in escrow
+  DELIVERED   // Dealer marked car as delivered
+  RELEASED    // Buyer confirmed receipt, funds released to dealer
+  REFUNDED    // Dispute or cancellation — refund to buyer
+  DISPUTED    // Buyer raised a dispute
+  EXPIRED     // Payment window expired
+}
+
+/// Escrow account for a vehicle purchase transaction.
+/// Buyer pays into escrow → Dealer delivers → Buyer confirms → Funds released.
+model EscrowAccount {
+  id              String       @id @default(cuid())
+  vehicleId       String       @map("vehicle_id")
+  buyerId         String       @map("buyer_id")
+  dealerProfileId String       @map("dealer_profile_id")
+  amount          Int          // Amount in INR (paise)
+  platformFee     Int          @default(0) @map("platform_fee") // CaroBest commission in paise
+  status          EscrowStatus @default(INITIATED)
+  razorpayOrderId String?      @unique @map("razorpay_order_id")
+  razorpayPaymentId String?    @map("razorpay_payment_id")
+  paidAt          DateTime?    @map("paid_at")
+  deliveredAt     DateTime?    @map("delivered_at")
+  releasedAt      DateTime?    @map("released_at")
+  refundedAt      DateTime?    @map("refunded_at")
+  disputeReason   String?      @map("dispute_reason")
+  expiresAt       DateTime?    @map("expires_at") // Payment deadline
+  notes           String?
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  // Relations
+  vehicle       Vehicle       @relation(fields: [vehicleId], references: [id])
+  buyer         User          @relation("BuyerEscrows", fields: [buyerId], references: [id])
+  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id])
+  transactions  Transaction[]
+
+  @@index([buyerId])
+  @@index([dealerProfileId])
+  @@index([vehicleId])
+  @@index([status])
+  @@map("escrow_accounts")
+}
+
+enum TransactionType {
+  DEBIT
+  CREDIT
+}
+
+/// Double-entry ledger for escrow fund movements.
+/// Every money movement creates a debit + credit pair.
+model Transaction {
+  id            String          @id @default(cuid())
+  escrowId      String          @map("escrow_id")
+  type          TransactionType
+  debitAccount  String          @map("debit_account")  // e.g. "buyer_wallet", "escrow_hold", "platform_revenue"
+  creditAccount String          @map("credit_account") // e.g. "escrow_hold", "dealer_payout", "refund_pool"
+  amount        Int             // Amount in paise
+  description   String?
+  createdAt     DateTime        @default(now()) @map("created_at")
+
+  // Relations
+  escrow EscrowAccount @relation(fields: [escrowId], references: [id], onDelete: Cascade)
+
+  @@index([escrowId])
+  @@index([createdAt])
+  @@map("transactions")
+}
+
+// ─────────────────────────────────────────────
+// AUCTIONS & BIDDING (Dealer-to-Dealer Liquidity)
+// ─────────────────────────────────────────────
+
+enum AuctionStatus {
+  DRAFT       // Created but not started
+  LIVE        // Currently accepting bids
+  ENDED       // Bidding period over, winner determined
+  SOLD        // Winner confirmed and payment completed
+  CANCELLED   // Auction cancelled by dealer
+  NO_BIDS     // Ended with zero bids
+}
+
+/// Dealer-to-dealer auction for wholesale vehicle liquidation.
+/// A dealer lists a car, other dealers bid. Highest bidder wins.
+model Auction {
+  id              String        @id @default(cuid())
+  vehicleId       String        @map("vehicle_id")
+  dealerProfileId String        @map("dealer_profile_id") // Seller dealer
+  startPrice      Int           @map("start_price") // Reserve price in INR
+  currentPrice    Int           @map("current_price") // Highest bid so far
+  bidIncrement    Int           @default(5000) @map("bid_increment") // Minimum bid step
+  status          AuctionStatus @default(DRAFT)
+  startTime       DateTime      @map("start_time")
+  endTime         DateTime      @map("end_time")
+  winnerId        String?       @map("winner_id") // Winning dealer profile ID
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  vehicle       Vehicle       @relation(fields: [vehicleId], references: [id])
+  dealerProfile DealerProfile @relation("SellerAuctions", fields: [dealerProfileId], references: [id])
+  winner        DealerProfile? @relation("WonAuctions", fields: [winnerId], references: [id])
+  bids          Bid[]
+
+  @@index([dealerProfileId])
+  @@index([status])
+  @@index([endTime])
+  @@map("auctions")
+}
+
+/// Individual bid on an auction.
+model Bid {
+  id              String   @id @default(cuid())
+  auctionId       String   @map("auction_id")
+  dealerProfileId String   @map("dealer_profile_id") // Bidding dealer
+  amount          Int      // Bid amount in INR
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  // Relations
+  auction       Auction       @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  dealerProfile DealerProfile @relation(fields: [dealerProfileId], references: [id])
+
+  @@index([auctionId])
+  @@index([dealerProfileId])
+  @@map("bids")
+}
+
+// ─────────────────────────────────────────────
+// FINANCING (Loan Pre-Approval & Insurance)
+// ─────────────────────────────────────────────
+
+enum FinanceApplicationStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  DISBURSED
+  EXPIRED
+}
+
+enum FinanceType {
+  LOAN
+  INSURANCE
+}
+
+/// Buyer finance application (loan or insurance).
+/// Submitted to NBFC/insurer partners via API.
+model FinanceApplication {
+  id              String                    @id @default(cuid())
+  userId          String                    @map("user_id")
+  vehicleId       String?                   @map("vehicle_id")
+  type            FinanceType
+  status          FinanceApplicationStatus  @default(DRAFT)
+  provider        String?                   // NBFC/insurer name (e.g. "HDFC Bank", "ICICI Lombard")
+  amount          Int?                      // Requested loan amount or premium in INR
+  tenure          Int?                      // Loan tenure in months
+  interestRate    Float?                    @map("interest_rate") // Annual rate %
+  emi             Int?                      // Monthly EMI in INR
+  downPayment     Int?                      @map("down_payment")
+  applicantDetails Json?                    @map("applicant_details") // { income, employment, panCard, etc. }
+  providerResponse Json?                    @map("provider_response") // Raw response from NBFC/insurer API
+  approvedAt      DateTime?                 @map("approved_at")
+  expiresAt       DateTime?                 @map("expires_at")
+  createdAt       DateTime                  @default(now()) @map("created_at")
+  updatedAt       DateTime                  @updatedAt @map("updated_at")
+
+  // Relations
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicle Vehicle? @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([vehicleId])
+  @@index([status])
+  @@map("finance_applications")
 }

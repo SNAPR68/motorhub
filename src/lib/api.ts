@@ -996,6 +996,141 @@ export async function fetchLeadScore(leadId: string): Promise<{
   return apiFetch(`/api/leads/${leadId}/score`);
 }
 
+// ── Escrow API ──
+
+export interface EscrowAccount {
+  id: string;
+  vehicleId: string;
+  buyerId: string;
+  dealerProfileId: string;
+  amount: number;
+  platformFee: number;
+  status: string;
+  razorpayOrderId: string | null;
+  razorpayPaymentId: string | null;
+  paidAt: string | null;
+  deliveredAt: string | null;
+  releasedAt: string | null;
+  refundedAt: string | null;
+  disputeReason: string | null;
+  expiresAt: string | null;
+  createdAt: string;
+  vehicle?: { id: string; name: string; priceDisplay: string; images: string[]; location: string };
+  dealerProfile?: { dealershipName: string; city: string };
+  transactions?: Array<{ id: string; type: string; debitAccount: string; creditAccount: string; amount: number; description: string | null; createdAt: string }>;
+}
+
+export async function createEscrow(vehicleId: string) {
+  return apiFetch<{ escrowId: string; amount: number; platformFee: number; expiresAt: string; status: string }>(
+    "/api/escrow",
+    { method: "POST", body: JSON.stringify({ vehicleId }) },
+  );
+}
+
+export async function fetchEscrows(status?: string) {
+  const qs = status ? `?status=${status}` : "";
+  return apiFetch<{ escrows: EscrowAccount[]; total: number }>(`/api/escrow${qs}`);
+}
+
+export async function fetchEscrow(id: string) {
+  return apiFetch<{ escrow: EscrowAccount }>(`/api/escrow/${id}`);
+}
+
+export async function updateEscrow(id: string, action: string, extra?: Record<string, unknown>) {
+  return apiFetch<{ escrow: EscrowAccount }>(`/api/escrow/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ action, ...extra }),
+  });
+}
+
+// ── Auction API ──
+
+export interface AuctionItem {
+  id: string;
+  vehicleId: string;
+  dealerProfileId: string;
+  startPrice: number;
+  currentPrice: number;
+  bidIncrement: number;
+  status: string;
+  startTime: string;
+  endTime: string;
+  winnerId: string | null;
+  createdAt: string;
+  vehicle?: { id: string; name: string; priceDisplay: string; images: string[]; location: string; year: number; km: string; fuel: string };
+  dealerProfile?: { dealershipName: string; city: string };
+  bids?: Array<{ id: string; amount: number; createdAt: string; dealerProfile: { dealershipName: string; city: string } }>;
+  _count?: { bids: number };
+}
+
+export async function fetchAuctions(params?: { status?: string; dealerId?: string; limit?: number }) {
+  const sp = new URLSearchParams();
+  if (params?.status) sp.set("status", params.status);
+  if (params?.dealerId) sp.set("dealerId", params.dealerId);
+  if (params?.limit) sp.set("limit", String(params.limit));
+  const qs = sp.toString();
+  return apiFetch<{ auctions: AuctionItem[]; total: number }>(`/api/auctions${qs ? `?${qs}` : ""}`);
+}
+
+export async function fetchAuction(id: string) {
+  return apiFetch<{ auction: AuctionItem }>(`/api/auctions/${id}`);
+}
+
+export async function createAuction(data: { vehicleId: string; startPrice: number; bidIncrement?: number; durationHours: number }) {
+  return apiFetch<{ auction: AuctionItem }>("/api/auctions", { method: "POST", body: JSON.stringify(data) });
+}
+
+export async function placeBid(auctionId: string, amount: number) {
+  return apiFetch<{ bid: { id: string; amount: number; createdAt: string } }>(
+    `/api/auctions/${auctionId}/bids`,
+    { method: "POST", body: JSON.stringify({ amount }) },
+  );
+}
+
+export async function cancelAuction(auctionId: string) {
+  return apiFetch<{ auction: AuctionItem }>(`/api/auctions/${auctionId}`, { method: "PATCH" });
+}
+
+// ── Finance API ──
+
+export interface FinanceApp {
+  id: string;
+  type: string;
+  status: string;
+  provider: string | null;
+  amount: number | null;
+  tenure: number | null;
+  interestRate: number | null;
+  emi: number | null;
+  downPayment: number | null;
+  createdAt: string;
+  vehicle?: { id: string; name: string; priceDisplay: string; images: string[] } | null;
+}
+
+export async function fetchFinanceApplications(type?: string) {
+  const qs = type ? `?type=${type}` : "";
+  return apiFetch<{ applications: FinanceApp[]; total: number }>(`/api/finance${qs}`);
+}
+
+export async function createFinanceApplication(data: {
+  vehicleId?: string;
+  type: "LOAN" | "INSURANCE";
+  amount?: number;
+  tenure?: number;
+  downPayment?: number;
+  applicantDetails: {
+    fullName: string;
+    phone: string;
+    email?: string;
+    income?: number;
+    employment?: "SALARIED" | "SELF_EMPLOYED" | "BUSINESS";
+    panCard?: string;
+    city?: string;
+  };
+}) {
+  return apiFetch<{ application: FinanceApp }>("/api/finance", { method: "POST", body: JSON.stringify(data) });
+}
+
 // ── Health Check ──
 
 export async function fetchHealthCheck(): Promise<{

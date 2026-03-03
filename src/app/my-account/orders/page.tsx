@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchServiceBookings } from "@/lib/api";
+import { fetchServiceBookings, fetchEscrows } from "@/lib/api";
 
 type OrderFilter = "All" | "Active" | "Completed" | "Cancelled";
 type OrderStatus = "BOOKING_CONFIRMED" | "COMPLETED" | "CANCELLED" | "IN_TRANSIT";
@@ -58,12 +58,24 @@ const STATUS_FILTER_MAP: Record<OrderStatus, OrderFilter> = {
 
 const FILTERS: OrderFilter[] = ["All", "Active", "Completed", "Cancelled"];
 
+const ESCROW_STATUS_MAP: Record<string, OrderStatus> = {
+  INITIATED: "BOOKING_CONFIRMED",
+  PAYMENT_PENDING: "BOOKING_CONFIRMED",
+  HELD: "IN_TRANSIT",
+  DELIVERED: "IN_TRANSIT",
+  RELEASED: "COMPLETED",
+  REFUNDED: "CANCELLED",
+  DISPUTED: "IN_TRANSIT",
+  EXPIRED: "CANCELLED",
+};
+
 export default function MyOrdersPage() {
   const [activeFilter, setActiveFilter] = useState<OrderFilter>("All");
   const { data } = useApi(() => fetchServiceBookings(), []);
+  const { data: escrowData } = useApi(() => fetchEscrows(), []);
 
   // Map DB bookings to Order interface
-  const ORDERS: Order[] = (data?.bookings ?? []).map((b) => {
+  const serviceOrders: Order[] = (data?.bookings ?? []).map((b) => {
     const details = (b.details ?? {}) as Record<string, unknown>;
     return {
       id: `ORD-${b.id.slice(0, 8).toUpperCase()}`,
@@ -77,6 +89,19 @@ export default function MyOrdersPage() {
       icon: TYPE_ICONS[b.type] ?? "receipt_long",
     };
   });
+
+  // Map escrow purchases to Order interface
+  const escrowOrders: Order[] = (escrowData?.escrows ?? []).map((e) => ({
+    id: `ESC-${e.id.slice(0, 8).toUpperCase()}`,
+    name: e.vehicle?.name ?? "Vehicle Purchase",
+    type: "vehicle" as const,
+    date: new Date(e.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+    status: ESCROW_STATUS_MAP[e.status] ?? "BOOKING_CONFIRMED",
+    amount: `₹${e.amount.toLocaleString("en-IN")}`,
+    icon: "directions_car",
+  }));
+
+  const ORDERS = [...escrowOrders, ...serviceOrders].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const filtered = ORDERS.filter(
     (o) => activeFilter === "All" || STATUS_FILTER_MAP[o.status] === activeFilter

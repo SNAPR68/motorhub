@@ -7,9 +7,10 @@ import { useSearchParams } from "next/navigation";
 import { CRETA, BLUR_DATA_URL } from "@/lib/car-images";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchVehicle, adaptVehicle } from "@/lib/api";
+import { fetchVehicle, adaptVehicle, createEscrow } from "@/lib/api";
 import { AuthGuard } from "@/components/AuthGuard";
 import type { DbVehicle } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 /* Stitch: exclusive_commit_&_deposit — #7311d4, Work Sans, #050505 */
 
@@ -28,9 +29,12 @@ const DOCS = [
 
 function CommitContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const vehicleId = searchParams.get("vehicleId");
   const [deposit, setDeposit] = useState(50000);
   const [refundable, setRefundable] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [escrowCreated, setEscrowCreated] = useState<{ escrowId: string; amount: number } | null>(null);
 
   const fetcher = async (): Promise<{ vehicle: DbVehicle | null }> =>
     vehicleId ? await fetchVehicle(vehicleId) : { vehicle: null };
@@ -160,10 +164,39 @@ function CommitContent() {
 
       {/* CTA */}
       <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-30 p-4 bg-[#050505]/95 backdrop-blur-md border-t border-white/5">
-        <button className="w-full bg-[#7311d4] text-white py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-[#7311d4]/30 active:scale-[0.98] transition-transform">
-          Commit Deposit — ₹{(deposit / 1000).toFixed(0)}K
-          <MaterialIcon name="arrow_forward" className="text-lg" />
-        </button>
+        {escrowCreated ? (
+          <div className="text-center space-y-3">
+            <div className="flex items-center justify-center gap-2 text-emerald-400 text-sm font-semibold">
+              <MaterialIcon name="check_circle" className="text-lg" /> Escrow Created
+            </div>
+            <p className="text-xs text-slate-400">Escrow ID: {escrowCreated.escrowId}</p>
+            <button
+              onClick={() => router.push("/my-account/orders")}
+              className="w-full bg-[#7311d4] text-white py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2"
+            >
+              View My Orders
+              <MaterialIcon name="arrow_forward" className="text-lg" />
+            </button>
+          </div>
+        ) : (
+          <button
+            disabled={submitting || !vehicleId}
+            onClick={async () => {
+              if (!vehicleId) return;
+              setSubmitting(true);
+              try {
+                const result = await createEscrow(vehicleId);
+                setEscrowCreated({ escrowId: result.escrowId, amount: result.amount });
+              } catch {
+                setSubmitting(false);
+              }
+            }}
+            className="w-full bg-[#7311d4] text-white py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-[#7311d4]/30 active:scale-[0.98] transition-transform disabled:opacity-50"
+          >
+            {submitting ? "Creating Escrow..." : `Commit Deposit — ₹${(deposit / 1000).toFixed(0)}K`}
+            {!submitting && <MaterialIcon name="arrow_forward" className="text-lg" />}
+          </button>
+        )}
       </div>
     </div>
   );

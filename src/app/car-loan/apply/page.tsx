@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { createFinanceApplication } from "@/lib/api";
 
 /* ── Steps ──────────────────────────────────────── */
 const STEPS = ["Personal", "Vehicle", "Financial", "Review"] as const;
@@ -165,6 +166,8 @@ export default function CarLoanApplyPage() {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormData>(INITIAL);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [apiResult, setApiResult] = useState<{ id: string; emi: number | null; interestRate: number | null } | null>(null);
   const [refId] = useState(() => {
     const n = Math.floor(100000 + Math.random() * 900000);
     return `LOAN-${n}`;
@@ -307,9 +310,14 @@ export default function CarLoanApplyPage() {
             <MaterialIcon name="check_circle" className="text-[48px] text-emerald-400" fill />
           </div>
           <h2 className="text-2xl font-bold text-white mb-2">Application Submitted!</h2>
-          <p className="text-slate-400 text-sm mb-6">
-            Ref: <span className="text-white font-semibold">{refId}</span>
+          <p className="text-slate-400 text-sm mb-2">
+            Ref: <span className="text-white font-semibold">{apiResult?.id ? `APP-${apiResult.id.slice(0, 8).toUpperCase()}` : refId}</span>
           </p>
+          {apiResult?.emi && (
+            <p className="text-emerald-400 font-bold text-lg mb-4">
+              Est. EMI: ₹{apiResult.emi.toLocaleString("en-IN")}/mo @ {apiResult.interestRate?.toFixed(2)}%
+            </p>
+          )}
           <div className="rounded-2xl p-5 w-full" style={{ background: "#111827" }}>
             <div className="flex items-center gap-3 mb-3">
               <div
@@ -454,12 +462,34 @@ export default function CarLoanApplyPage() {
             </button>
           ) : (
             <button
-              onClick={() => setSubmitted(true)}
-              className="flex-1 flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white"
+              disabled={submitting}
+              onClick={async () => {
+                setSubmitting(true);
+                try {
+                  const result = await createFinanceApplication({
+                    type: "LOAN",
+                    amount: form.loanAmount ? parseInt(form.loanAmount) : undefined,
+                    tenure: form.tenure ? parseInt(form.tenure) : undefined,
+                    applicantDetails: {
+                      fullName: form.fullName,
+                      phone: form.phone,
+                      email: form.email || undefined,
+                      income: form.monthlyIncome ? parseInt(form.monthlyIncome) * 12 : undefined,
+                      employment: form.employment === "Salaried" ? "SALARIED" : form.employment === "Self-Employed" ? "SELF_EMPLOYED" : "BUSINESS",
+                      panCard: form.pan || undefined,
+                    },
+                  });
+                  setApiResult({ id: result.application.id, emi: result.application.emi, interestRate: result.application.interestRate });
+                  setSubmitted(true);
+                } catch {
+                  setSubmitting(false);
+                }
+              }}
+              className="flex-1 flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white disabled:opacity-50"
               style={{ background: "#059669" }}
             >
               <MaterialIcon name="send" className="text-[18px]" />
-              Submit Application
+              {submitting ? "Submitting..." : "Submit Application"}
             </button>
           )}
         </div>
