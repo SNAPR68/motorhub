@@ -8,6 +8,7 @@ import { useWishlist } from "@/context/WishlistContext";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, fetchWishlist, adaptVehicle } from "@/lib/api";
+import { AuthGuard } from "@/components/AuthGuard";
 
 /* Stitch: private_collection_wishlist — #f2cc0d (gold), Noto Sans + Noto Serif, #0a0a0a */
 
@@ -30,6 +31,7 @@ export default function WishlistPage() {
   );
 
   return (
+    <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
     <div
       className="relative flex min-h-dvh w-full max-w-md mx-auto flex-col overflow-x-hidden text-slate-100 antialiased"
       style={{ fontFamily: "'Noto Sans', sans-serif", background: "#0a0a0a" }}
@@ -236,5 +238,6 @@ export default function WishlistPage() {
         </div>
       </nav>
     </div>
+    </AuthGuard>
   );
 }

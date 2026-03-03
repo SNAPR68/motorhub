@@ -8,6 +8,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicle, fetchVehicles, adaptVehicle } from "@/lib/api";
+import { AuthGuard } from "@/components/AuthGuard";
 import type { DbVehicle } from "@/lib/api";
 
 /* Stitch: secure_luxury_reservation — #f4c025, Manrope + Playfair Display, #0a0a0a */
@@ -266,8 +267,10 @@ function ReservationContent() {
 
 export default function ReservationPage() {
   return (
-    <Suspense fallback={<div className="min-h-dvh flex items-center justify-center bg-[#0a0a0a] text-white"><div className="w-8 h-8 rounded-full border-2 border-[#f4c025] border-t-transparent animate-spin" /></div>}>
-      <ReservationContent />
-    </Suspense>
+    <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
+      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center bg-[#0a0a0a] text-white"><div className="w-8 h-8 rounded-full border-2 border-[#f4c025] border-t-transparent animate-spin" /></div>}>
+        <ReservationContent />
+      </Suspense>
+    </AuthGuard>
   );
 }

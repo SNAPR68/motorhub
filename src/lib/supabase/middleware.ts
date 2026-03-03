@@ -4,7 +4,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 // Dealer-only routes — require authenticated dealer
-const PROTECTED_PREFIXES = [
+const DEALER_PROTECTED_PREFIXES = [
   "/dashboard",
   "/leads",
   "/appointments",
@@ -26,6 +26,15 @@ const PROTECTED_PREFIXES = [
   "/analytics",
   "/plans",
   "/notifications",
+];
+
+// Buyer-only routes — require authenticated buyer
+const BUYER_PROTECTED_PREFIXES = [
+  "/my-account",
+  "/wishlist",
+  "/my-cars",
+  "/alerts",
+  "/reservation",
 ];
 
 export async function updateSession(request: NextRequest) {
@@ -60,11 +69,18 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  // Check if this is a protected route
-  const isProtected = PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
-
-  if (isProtected && !user) {
+  // Check if this is a dealer-protected route
+  const isDealerProtected = DEALER_PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
+  if (isDealerProtected && !user) {
     const loginUrl = new URL("/login/dealer", request.url);
+    loginUrl.searchParams.set("redirect", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // Check if this is a buyer-protected route
+  const isBuyerProtected = BUYER_PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
+  if (isBuyerProtected && !user) {
+    const loginUrl = new URL("/login/buyer", request.url);
     loginUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(loginUrl);
   }

@@ -8,6 +8,7 @@ import { CRETA, BLUR_DATA_URL } from "@/lib/car-images";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicle, adaptVehicle } from "@/lib/api";
+import { AuthGuard } from "@/components/AuthGuard";
 import type { DbVehicle } from "@/lib/api";
 
 /* Stitch: exclusive_commit_&_deposit — #7311d4, Work Sans, #050505 */
@@ -170,8 +171,10 @@ function CommitContent() {
 
 export default function ReservationCommitPage() {
   return (
-    <Suspense fallback={<div className="min-h-dvh flex items-center justify-center bg-[#050505] text-white"><div className="w-8 h-8 rounded-full border-2 border-[#7311d4] border-t-transparent animate-spin" /></div>}>
-      <CommitContent />
-    </Suspense>
+    <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
+      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center bg-[#050505] text-white"><div className="w-8 h-8 rounded-full border-2 border-[#7311d4] border-t-transparent animate-spin" /></div>}>
+        <CommitContent />
+      </Suspense>
+    </AuthGuard>
   );
 }

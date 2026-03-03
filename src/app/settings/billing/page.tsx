@@ -49,18 +49,17 @@ export default function BillingPage() {
   // Subscription info from profile
   const subscriptions = (profile?.subscriptions as Array<Record<string, unknown>> | undefined) ?? [];
   const activeSub = subscriptions[0];
-  const planTier = activeSub?.plan
-    ? String(activeSub.plan).replace(/_/g, " ")
-    : "Pro Dealer Tier";
+  const planKey = (activeSub?.plan ?? profile?.plan ?? "FREE") as string;
+  const planTier = String(planKey).replace(/_/g, " ");
   const nextBilling = activeSub?.currentPeriodEnd
     ? new Date(activeSub.currentPeriodEnd as string).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
-    : "Mar 15, 2026";
-  const billingCycle = activeSub?.interval ? String(activeSub.interval) : "Annual";
+    : "—";
+  const billingCycle = activeSub?.interval ? String(activeSub.interval) : "—";
 
-  // Slot usage from total vehicles
-  const slotLimit = 20;
+  const PLAN_LIMITS: Record<string, number> = { FREE: 5, STARTER: 25, GROWTH: 100, ENTERPRISE: 999 };
+  const slotLimit = PLAN_LIMITS[planKey] ?? 5;
   const slotUsed = Math.min(totalVehicles, slotLimit);
-  const slotPct = Math.round((slotUsed / slotLimit) * 100);
+  const slotPct = slotLimit > 0 ? Math.round((slotUsed / slotLimit) * 100) : 0;
 
   return (
     <div
@@ -138,12 +137,13 @@ export default function BillingPage() {
               </div>
             </div>
 
-            <button
-              className="w-full mt-6 py-3 rounded-lg text-sm font-semibold transition-colors"
+            <Link
+              href="/plans"
+              className="block w-full mt-6 py-3 rounded-lg text-sm font-semibold transition-colors text-center"
               style={{ border: "1px solid #243047", color: "#e2e8f0" }}
             >
               Manage Subscription
-            </button>
+            </Link>
           </div>
         </section>
 
@@ -198,7 +198,7 @@ export default function BillingPage() {
         {/* Footer Link */}
         <footer className="mt-12 mb-8 text-center px-6">
           <Link
-            href="/settings"
+            href="/plans"
             className="inline-flex items-center gap-2 py-2 text-sm font-medium text-slate-400"
           >
             <span

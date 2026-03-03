@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchCurrentUser } from "@/lib/api";
 
 interface ToggleState {
   push: boolean;
@@ -54,11 +56,23 @@ function Toggle({
 }
 
 export default function AccountSettingsPage() {
+  const { data: userData, isLoading: loading } = useApi(() => fetchCurrentUser(), []);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("Delhi NCR");
   const [showCityPicker, setShowCityPicker] = useState(false);
+  const [prefilled, setPrefilled] = useState(false);
+
+  // Pre-fill from API data once loaded
+  useEffect(() => {
+    if (userData?.user && !prefilled) {
+      if (userData.user.name) setName(userData.user.name);
+      if (userData.user.email) setEmail(userData.user.email);
+      setPrefilled(true);
+    }
+  }, [userData, prefilled]);
 
   const [toggles, setToggles] = useState<ToggleState>({
     push: true,
@@ -74,11 +88,17 @@ export default function AccountSettingsPage() {
     setToggles((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const handleSave = () => {
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    setSaving(true);
+    // Simulate save delay
+    setTimeout(() => {
+      setSaving(false);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    }, 800);
   };
 
   const handleDelete = () => {
@@ -117,6 +137,9 @@ export default function AccountSettingsPage() {
           <div className="flex items-center gap-2 mb-4">
             <MaterialIcon name="person" className="text-[18px]" style={{ color: "#60a5fa" }} />
             <h2 className="text-sm font-bold text-white">Profile</h2>
+            {loading && (
+              <span className="text-[10px] text-slate-600 ml-auto">Loading...</span>
+            )}
           </div>
 
           <div className="space-y-3">
@@ -125,16 +148,24 @@ export default function AccountSettingsPage() {
               <label className="text-[11px] text-slate-500 uppercase tracking-wider mb-1 block">
                 Full Name
               </label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full h-10 px-3 rounded-xl text-sm text-white placeholder:text-slate-600 outline-none"
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                }}
-              />
+              {loading ? (
+                <div
+                  className="w-full h-10 rounded-xl animate-pulse"
+                  style={{ background: "rgba(255,255,255,0.05)" }}
+                />
+              ) : (
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your name"
+                  className="w-full h-10 px-3 rounded-xl text-sm text-white placeholder:text-slate-600 outline-none"
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                  }}
+                />
+              )}
             </div>
 
             {/* Email */}
@@ -142,16 +173,24 @@ export default function AccountSettingsPage() {
               <label className="text-[11px] text-slate-500 uppercase tracking-wider mb-1 block">
                 Email
               </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full h-10 px-3 rounded-xl text-sm text-white placeholder:text-slate-600 outline-none"
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                }}
-              />
+              {loading ? (
+                <div
+                  className="w-full h-10 rounded-xl animate-pulse"
+                  style={{ background: "rgba(255,255,255,0.05)" }}
+                />
+              ) : (
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full h-10 px-3 rounded-xl text-sm text-white placeholder:text-slate-600 outline-none"
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                  }}
+                />
+              )}
             </div>
 
             {/* Phone */}
@@ -163,6 +202,7 @@ export default function AccountSettingsPage() {
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                placeholder="Enter your phone number"
                 className="w-full h-10 px-3 rounded-xl text-sm text-white placeholder:text-slate-600 outline-none"
                 style={{
                   background: "rgba(255,255,255,0.05)",
@@ -344,10 +384,19 @@ export default function AccountSettingsPage() {
         <div className="max-w-lg mx-auto px-4 py-3">
           <button
             onClick={handleSave}
+            disabled={saving}
             className="w-full h-12 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-all"
-            style={{ background: saved ? "#16a34a" : "#1152d4" }}
+            style={{
+              background: saved ? "#16a34a" : saving ? "#0e40a0" : "#1152d4",
+              opacity: saving ? 0.8 : 1,
+            }}
           >
-            {saved ? (
+            {saving ? (
+              <>
+                <MaterialIcon name="hourglass_empty" className="text-[18px] animate-spin" />
+                Saving...
+              </>
+            ) : saved ? (
               <>
                 <MaterialIcon name="check_circle" className="text-[18px]" />
                 Saved!

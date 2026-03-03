@@ -4,60 +4,19 @@ import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
-
-interface ShortlistedCar {
-  id: number;
-  name: string;
-  year: number;
-  price: string;
-  priceNum: string;
-  fuel: string;
-  transmission: string;
-  image: string;
-  slug: string;
-}
-
-const SHORTLISTED_CARS: ShortlistedCar[] = [
-  {
-    id: 1,
-    name: "Maruti Brezza",
-    year: 2024,
-    price: "₹14.5L",
-    priceNum: "₹14,50,000",
-    fuel: "Petrol",
-    transmission: "Manual",
-    image: "/cars/brezza.jpg",
-    slug: "maruti-brezza-2024",
-  },
-  {
-    id: 2,
-    name: "Hyundai Creta",
-    year: 2024,
-    price: "₹18.2L",
-    priceNum: "₹18,20,000",
-    fuel: "Diesel",
-    transmission: "Automatic",
-    image: "/cars/creta.jpg",
-    slug: "hyundai-creta-2024",
-  },
-  {
-    id: 3,
-    name: "Tata Nexon",
-    year: 2024,
-    price: "₹11.8L",
-    priceNum: "₹11,80,000",
-    fuel: "Petrol",
-    transmission: "AMT",
-    image: "/cars/nexon.jpg",
-    slug: "tata-nexon-2024",
-  },
-];
+import { useApi } from "@/lib/hooks/use-api";
+import { fetchWishlist, type DbVehicle } from "@/lib/api";
 
 export default function MyShortlistPage() {
-  const [cars, setCars] = useState<ShortlistedCar[]>(SHORTLISTED_CARS);
-  const [selected, setSelected] = useState<Set<number>>(new Set());
+  const { data, isLoading: loading } = useApi(() => fetchWishlist(), []);
 
-  const toggleSelect = (id: number) => {
+  const allVehicles: DbVehicle[] = data?.wishlists?.map((w) => w.vehicle) ?? [];
+  const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+
+  const cars = allVehicles.filter((v) => !removedIds.has(v.id));
+
+  const toggleSelect = (id: string) => {
     setSelected((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
@@ -66,8 +25,8 @@ export default function MyShortlistPage() {
     });
   };
 
-  const removeCar = (id: number) => {
-    setCars((prev) => prev.filter((c) => c.id !== id));
+  const removeCar = (id: string) => {
+    setRemovedIds((prev) => new Set(prev).add(id));
     setSelected((prev) => {
       const next = new Set(prev);
       next.delete(id);
@@ -91,17 +50,30 @@ export default function MyShortlistPage() {
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-400" />
           </Link>
           <h1 className="text-base font-bold text-white flex-1">My Shortlist</h1>
-          <span
-            className="text-[11px] font-bold px-2.5 py-1 rounded-full"
-            style={{ background: "rgba(255,255,255,0.06)", color: "#94a3b8" }}
-          >
-            {cars.length} cars
-          </span>
+          {!loading && (
+            <span
+              className="text-[11px] font-bold px-2.5 py-1 rounded-full"
+              style={{ background: "rgba(255,255,255,0.06)", color: "#94a3b8" }}
+            >
+              {cars.length} cars
+            </span>
+          )}
         </div>
       </header>
 
       <main className="max-w-lg mx-auto px-4 pt-4 space-y-4">
-        {cars.length === 0 ? (
+        {loading ? (
+          /* Loading skeleton */
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="h-36 rounded-2xl animate-pulse"
+                style={{ background: "rgba(255,255,255,0.05)" }}
+              />
+            ))}
+          </div>
+        ) : cars.length === 0 ? (
           /* Empty State */
           <div className="flex flex-col items-center py-20 text-center">
             <div
@@ -129,6 +101,7 @@ export default function MyShortlistPage() {
             <div className="space-y-3">
               {cars.map((car) => {
                 const isSelected = selected.has(car.id);
+                const imageUrl = car.images?.[0];
                 return (
                   <div
                     key={car.id}
@@ -139,12 +112,20 @@ export default function MyShortlistPage() {
                     }}
                   >
                     <div className="flex items-start gap-3">
-                      {/* Car thumbnail placeholder */}
+                      {/* Car thumbnail */}
                       <div
-                        className="h-20 w-24 rounded-xl flex items-center justify-center shrink-0"
+                        className="h-20 w-24 rounded-xl flex items-center justify-center shrink-0 overflow-hidden"
                         style={{ background: "rgba(255,255,255,0.05)" }}
                       >
-                        <MaterialIcon name="directions_car" className="text-[28px] text-slate-600" />
+                        {imageUrl ? (
+                          <img
+                            src={imageUrl}
+                            alt={car.name}
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          <MaterialIcon name="directions_car" className="text-[28px] text-slate-600" />
+                        )}
                       </div>
 
                       <div className="flex-1 min-w-0">
@@ -154,7 +135,7 @@ export default function MyShortlistPage() {
                               {car.name} {car.year}
                             </h3>
                             <p className="text-base font-bold mt-0.5" style={{ color: "#60a5fa" }}>
-                              {car.price}
+                              {car.priceDisplay}
                             </p>
                           </div>
                           {/* Remove (red heart) */}
@@ -203,7 +184,7 @@ export default function MyShortlistPage() {
                         Compare
                       </button>
                       <Link
-                        href={`/cars/${car.slug}`}
+                        href={`/vehicle/${car.id}`}
                         className="flex-1 h-9 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all"
                         style={{
                           background: "rgba(17,82,212,0.12)",

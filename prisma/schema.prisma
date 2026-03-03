@@ -152,15 +152,16 @@ enum BodyType {
 
 /// Application user — linked to Supabase Auth via `auth_id`
 model User {
-  id        String   @id @default(cuid())
-  authId    String   @unique @map("auth_id") // Supabase Auth UUID
-  email     String   @unique
-  name      String
-  role      UserRole
-  phone     String?
-  avatarUrl String?  @map("avatar_url")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id          String   @id @default(cuid())
+  authId      String   @unique @map("auth_id") // Supabase Auth UUID
+  email       String   @unique
+  name        String
+  role        UserRole
+  phone       String?
+  avatarUrl   String?  @map("avatar_url")
+  preferences Json?    // Buyer alert prefs: { emailPrefs, waPrefs, frequency, quietHours? }
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   // Relations
   dealerProfile   DealerProfile?

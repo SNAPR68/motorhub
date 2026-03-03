@@ -127,7 +127,7 @@ export default function LandingPage() {
             border: "1px solid rgba(255,255,255,0.1)",
           }}
         >
-          <Link href="/landing" className="flex flex-col items-center justify-center text-[#1152d4]">
+          <Link href="/" className="flex flex-col items-center justify-center text-[#1152d4]">
             <MaterialIcon name="home" fill />
           </Link>
           <Link href="/used-cars" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#1152d4] transition-colors">

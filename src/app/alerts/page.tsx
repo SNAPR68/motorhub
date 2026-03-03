@@ -4,42 +4,20 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
-import { fetchCurrentUser } from "@/lib/api";
+import { fetchCurrentUser, fetchUserPreferences, updateUserPreferences } from "@/lib/api";
+import { AuthGuard } from "@/components/AuthGuard";
 
 /* Stitch: buyer_alert_preferences — #dab80b, Manrope, #0a0a0a */
 
 const EMAIL_PREFS = [
-  {
-    key: "new_arrivals",
-    label: "New Arrivals in My Collection",
-    desc: "Immediate notifications for bookmarked marques.",
-    on: true,
-  },
-  {
-    key: "price_change",
-    label: "Price Change Alerts",
-    desc: "Instant updates on value shifts for watchlisted vehicles.",
-    on: false,
-  },
+  { key: "new_arrivals", label: "New Arrivals in My Collection", desc: "Immediate notifications for bookmarked marques.", on: true },
+  { key: "price_change", label: "Price Change Alerts", desc: "Instant updates on value shifts for watchlisted vehicles.", on: false },
 ];
 
 const WA_PREFS = [
-  {
-    key: "concierge",
-    label: "Concierge Personal Responses",
-    desc: "Direct 1-on-1 access to our procurement team.",
-    on: true,
-    live: true,
-  },
-  {
-    key: "urgent",
-    label: "Urgent Inventory Alerts",
-    desc: "Exclusive early-access to off-market listings.",
-    on: true,
-  },
+  { key: "concierge", label: "Concierge Personal Responses", desc: "Direct 1-on-1 access to our procurement team.", on: true, live: true },
+  { key: "urgent", label: "Urgent Inventory Alerts", desc: "Exclusive early-access to off-market listings.", on: true },
 ];
-
-const STORAGE_KEY = "autovinci_alert_prefs";
 
 export default function AlertsPage() {
   const [emailPrefs, setEmailPrefs] = useState<Record<string, boolean>>(() =>
@@ -53,37 +31,27 @@ export default function AlertsPage() {
   const [saved, setSaved] = useState(false);
 
   const { data: meData } = useApi(() => fetchCurrentUser(), []);
+  const { data: prefsData } = useApi(() => fetchUserPreferences(), []);
+
   const userEmail = (meData?.user?.email as string | undefined) ?? null;
-  // Mask the email for display (e.g., "user@..." → "u***@...")
   const maskedEmail = userEmail
     ? userEmail.replace(/^(.{2})(.*)(@.*)$/, (_m, a, b, c) => `${a}${"●".repeat(Math.min(b.length, 4))}${c}`)
     : null;
 
-  // Load saved prefs from localStorage on mount
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.emailPrefs) setEmailPrefs(parsed.emailPrefs);
-        if (parsed.waPrefs) setWaPrefs(parsed.waPrefs);
-        if (parsed.frequency) setFrequency(parsed.frequency);
-      }
-    } catch {
-      // ignore
+    if (prefsData) {
+      if (Object.keys(prefsData.emailPrefs || {}).length > 0) setEmailPrefs(prefsData.emailPrefs);
+      if (Object.keys(prefsData.waPrefs || {}).length > 0) setWaPrefs(prefsData.waPrefs);
+      if (prefsData.frequency) setFrequency(prefsData.frequency);
     }
-  }, []);
+  }, [prefsData]);
 
   const handleSave = async () => {
     setSaving(true);
-    // Persist to localStorage
-    const prefs = { emailPrefs, waPrefs, frequency };
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
-      // Simulate API call (300ms)
-      await new Promise((r) => setTimeout(r, 300));
+      await updateUserPreferences({ emailPrefs, waPrefs, frequency });
     } catch {
-      // ignore
+      // Fallback: could show toast
     }
     setSaving(false);
     setSaved(true);
@@ -91,6 +59,7 @@ export default function AlertsPage() {
   };
 
   return (
+    <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
     <div
       className="relative flex min-h-dvh w-full flex-col overflow-x-hidden max-w-[430px] mx-auto shadow-2xl text-slate-100"
       style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0a0a" }}
@@ -293,5 +262,6 @@ export default function AlertsPage() {
         </button>
       </div>
     </div>
+    </AuthGuard>
   );
 }

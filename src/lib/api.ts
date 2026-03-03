@@ -27,7 +27,11 @@ async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
       throw new Error(JSON.stringify(body));
     } catch (e) {
       if (e instanceof Error && e.message.startsWith("{")) throw e;
-      throw new Error(JSON.stringify({ error: `API ${path}: ${res.status}`, code: res.status >= 500 ? "INTERNAL_ERROR" : "UNKNOWN" }));
+      const code = res.status >= 500 ? "INTERNAL_ERROR"
+                 : res.status === 401 ? "UNAUTHORIZED"
+                 : res.status === 403 ? "FORBIDDEN"
+                 : "UNKNOWN";
+      throw new Error(JSON.stringify({ error: `API ${path}: ${res.status}`, code }));
     }
   }
   return res.json();
@@ -317,6 +321,27 @@ export async function fetchNotifications() {
   }>("/api/notifications");
 }
 
+// ── User Preferences (Buyer alert prefs) ──
+
+export interface UserPreferences {
+  emailPrefs: Record<string, boolean>;
+  waPrefs: Record<string, boolean>;
+  frequency: string;
+  quietHours?: string;
+  timezone?: string;
+}
+
+export async function fetchUserPreferences() {
+  return apiFetch<UserPreferences>("/api/user/preferences");
+}
+
+export async function updateUserPreferences(data: Partial<UserPreferences>) {
+  return apiFetch<UserPreferences>("/api/user/preferences", {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+}
+
 // ── Current User (Buyer or Dealer) ──
 
 export interface CurrentUser {
@@ -377,6 +402,7 @@ export interface ReportsData {
     conversionRate: number; conversionGrowth: number;
     revenue: string; totalRevenue: string;
     totalVehicles: number;
+    avgDaysToSell?: number;
   };
   breakdown: { sources: Record<string, number>; statuses: Record<string, number> };
   activities: DbActivity[];

@@ -177,6 +177,10 @@ export default function ShowroomPage() {
             <Link href="/" className="flex h-9 w-9 items-center justify-center shrink-0 rounded-xl" style={{ background: "rgba(255,255,255,0.05)" }}>
               <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
             </Link>
+            <Link href="/interests" className="flex items-center gap-1.5 shrink-0 rounded-xl px-2.5 py-2 text-[11px] font-semibold" style={{ background: "rgba(255,255,255,0.05)", color: "#60a5fa" }}>
+              <MaterialIcon name="auto_awesome" className="text-[14px]" />
+              Curated
+            </Link>
 
             <div
               className="flex flex-1 items-center gap-2 rounded-xl px-3 py-2.5 border border-white/10 focus-within:border-blue-500/40 transition-colors"

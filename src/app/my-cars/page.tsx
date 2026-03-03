@@ -8,6 +8,7 @@ import { useApi } from "@/lib/hooks/use-api";
 import { fetchWishlist, adaptVehicle } from "@/lib/api";
 import type { DbVehicle } from "@/lib/api";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { AuthGuard } from "@/components/AuthGuard";
 
 /* Stitch: premium_ownership_dashboard — #dab80b, Space Grotesk, #16150d */
 
@@ -24,6 +25,7 @@ export default function MyCarsPage() {
   const primaryCar = vehicles[0] ?? null;
 
   return (
+    <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
     <div
       className="relative flex min-h-dvh w-full flex-col text-slate-100"
       style={{ fontFamily: "'Space Grotesk', sans-serif", background: "#16150d" }}
@@ -207,12 +209,13 @@ export default function MyCarsPage() {
           <section className="mt-10">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold tracking-tight">Documents Vault</h3>
-              <button className="text-xs text-[#dab80b] font-bold">Manage All</button>
+              <Link href="/my-account/documents" className="text-xs text-[#dab80b] font-bold">Manage All</Link>
             </div>
             <div className="flex overflow-x-auto gap-4 pb-4 -mx-6 px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {DOCUMENTS.map((doc) => (
-                <div
+                <Link
                   key={doc.title}
+                  href={doc.icon === "shield" ? "/my-account/warranty" : "/my-account/documents"}
                   className="flex-none w-40 bg-[#221f10] border border-[#342f18] rounded-xl p-4 flex flex-col gap-3"
                 >
                   <div className="size-10 rounded-lg bg-[#16150d] border border-[#342f18] flex items-center justify-center">
@@ -222,10 +225,10 @@ export default function MyCarsPage() {
                     <p className="text-sm font-bold">{doc.title}</p>
                     <p className="text-[10px] text-slate-500 mt-0.5">{doc.desc}</p>
                   </div>
-                  <button className="mt-2 w-full py-2 bg-[#dab80b]/10 rounded-lg text-[#dab80b] text-[10px] font-bold uppercase tracking-widest">
+                  <span className="mt-2 w-full py-2 bg-[#dab80b]/10 rounded-lg text-[#dab80b] text-[10px] font-bold uppercase tracking-widest text-center">
                     Open
-                  </button>
-                </div>
+                  </span>
+                </Link>
               ))}
             </div>
           </section>
@@ -297,5 +300,6 @@ export default function MyCarsPage() {
         </div>
       </nav>
     </div>
+    </AuthGuard>
   );
 }

@@ -27,6 +27,7 @@ export default function MonthlyReportPage() {
   const salesGrowth = summary?.salesGrowth ?? 0;
   const conversionGrowth = summary?.conversionGrowth ?? 0;
   const totalVehicles = summary?.totalVehicles ?? 0;
+  const avgDaysToSell = summary?.avgDaysToSell ?? 0;
   const periodLabel = period ? `${period.month} ${period.year}` : "Loading...";
   const convNum = summary?.conversionRate ?? 0;
 
@@ -145,7 +146,7 @@ export default function MonthlyReportPage() {
                   <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: "#a1a1a1", fontFamily: "system-ui, sans-serif" }}>
                     Avg. Days to Sell
                   </p>
-                  <p className="text-xl font-medium text-white">18 Days</p>
+                  <p className="text-xl font-medium text-white">{avgDaysToSell || "—"} Days</p>
                 </div>
               </div>
 

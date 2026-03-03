@@ -61,6 +61,18 @@ export function useApi<T>(
           }
         }
 
+        // Redirect to login on 401 (session expired)
+        if (code === "UNAUTHORIZED" && typeof window !== "undefined") {
+          const path = window.location.pathname;
+          const isDealerPage = path.startsWith("/dashboard") || path.startsWith("/inventory") ||
+            path.startsWith("/leads") || path.startsWith("/analytics") ||
+            path.startsWith("/intelligence") || path.startsWith("/settings/billing") ||
+            path.startsWith("/studio") || path.startsWith("/marketing");
+          const loginUrl = isDealerPage ? "/login/dealer" : "/login/buyer";
+          window.location.href = `${loginUrl}?redirect=${encodeURIComponent(path)}`;
+          return;
+        }
+
         // Auto-retry on 5xx or network errors (once)
         const isRetryable = !code || code === "INTERNAL_ERROR" || code === "DB_ERROR" || code === "NETWORK_ERROR";
         if (isRetryable && retryCount.current < MAX_RETRIES) {

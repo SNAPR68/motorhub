@@ -29,6 +29,7 @@ export async function GET() {
       totalRevenue,
       monthRevenue,
       totalVehicles,
+      soldVehiclesForDays,
     ] = await Promise.all([
       // Current month leads
       db.lead.count({ where: { createdAt: { gte: startOfMonth } } }),
@@ -57,6 +58,12 @@ export async function GET() {
       db.vehicle.aggregate({ where: { status: "SOLD", updatedAt: { gte: startOfMonth } }, _sum: { price: true } }),
       // Total vehicle stock
       db.vehicle.count(),
+      // Sold vehicles for avg days computation (createdAt to updatedAt when SOLD)
+      db.vehicle.findMany({
+        where: { status: "SOLD", updatedAt: { gte: startOfLastMonth } },
+        select: { createdAt: true, updatedAt: true },
+        take: 100,
+      }),
     ]);
 
     // Lead sources breakdown
@@ -89,6 +96,16 @@ export async function GET() {
     const conversionRate = monthLeads > 0 ? Math.round((monthClosedWon / monthLeads) * 100) : 0;
     const lastConversionRate = lastMonthLeads > 0 ? Math.round((lastMonthClosedWon / lastMonthLeads) * 100) : 0;
 
+    const avgDaysToSell =
+      soldVehiclesForDays.length > 0
+        ? Math.round(
+            soldVehiclesForDays.reduce(
+              (sum, v) => sum + Math.round((v.updatedAt.getTime() - v.createdAt.getTime()) / (1000 * 60 * 60 * 24)),
+              0
+            ) / soldVehiclesForDays.length
+          )
+        : 0;
+
     return NextResponse.json({
       period: {
         month: now.toLocaleString("en-IN", { month: "long", year: "numeric" }),
@@ -104,6 +121,7 @@ export async function GET() {
         revenue: formatRevenue(monthRevenue._sum.price || 0),
         totalRevenue: formatRevenue(totalRevenue._sum.price || 0),
         totalVehicles,
+        avgDaysToSell,
       },
       breakdown: {
         sources: sourceBreakdown,

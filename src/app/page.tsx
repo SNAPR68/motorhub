@@ -508,7 +508,10 @@ export default function HomePage() {
       <section className="px-4 mb-5">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-sm font-bold text-white">Browse by Body Type</h2>
-          <Link href="/new-cars" className="text-xs font-semibold" style={{ color: "#1152d4" }}>View all</Link>
+          <div className="flex items-center gap-4">
+            <Link href="/interests" className="text-xs font-semibold" style={{ color: "#1152d4" }}>Curated for You</Link>
+            <Link href="/new-cars" className="text-xs font-semibold" style={{ color: "#1152d4" }}>View all</Link>
+          </div>
         </div>
         <div className="flex gap-3 overflow-x-auto no-scrollbar">
           {BODY_TYPES.map((bt) => (
@@ -789,6 +792,7 @@ export default function HomePage() {
               { label: "Contact", href: "/contact" },
               { label: "Privacy", href: "/privacy-policy" },
               { label: "Dealers", href: "/dealers" },
+              { label: "Luxury Portal", href: "/landing" },
             ].map((l) => (
               <Link key={l.href} href={l.href} className="text-[11px] text-slate-500 hover:text-slate-300 transition-colors">{l.label}</Link>
             ))}
