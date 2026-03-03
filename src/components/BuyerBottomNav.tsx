@@ -16,7 +16,7 @@ export function BuyerBottomNav({ className }: BuyerBottomNavProps) {
   return (
     <nav
       className={cn(
-        "fixed bottom-0 left-0 right-0 z-50 max-w-lg mx-auto px-6 pb-8 pt-4",
+        "fixed bottom-0 left-0 right-0 z-50 max-w-lg mx-auto px-6 pb-8 pt-4 md:hidden",
         className
       )}
     >

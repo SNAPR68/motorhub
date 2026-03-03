@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchCarModels } from "@/lib/api";
 import type { ApiCarModel } from "@/lib/api";
@@ -80,8 +80,9 @@ export default function NewCarsSegmentClient({ segment }: { segment: string }) {
   });
 
   return (
+    <BuyerAppShell>
     <div
-      className="min-h-dvh w-full pb-28"
+      className="min-h-dvh w-full "
       style={{ background: "#080a0f", color: "#e2e8f0" }}
     >
       {/* Header */}
@@ -284,8 +285,7 @@ export default function NewCarsSegmentClient({ segment }: { segment: string }) {
           )}
         </main>
       )}
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

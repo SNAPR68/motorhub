@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useAuthStore } from "@/lib/stores";
 import {
   BODY_TYPES,
@@ -137,8 +137,9 @@ export default function HomePage() {
     : null;
 
   return (
+    <BuyerAppShell>
     <div
-      className="min-h-dvh w-full max-w-lg mx-auto pb-28"
+      className="min-h-dvh w-full"
       style={{ background: "#080a0f", color: "#e2e8f0", fontFamily: "'Noto Sans', sans-serif" }}
     >
       {/* ─── HEADER ─── */}
@@ -181,7 +182,7 @@ export default function HomePage() {
       </header>
 
       {/* ─── HERO CAROUSEL ─── */}
-      <section className="relative w-full overflow-hidden" style={{ height: "480px" }}>
+      <section className="relative w-full overflow-hidden" style={{ height: "480px", maxHeight: "60vh" }}>
         {/* Carousel slides */}
         {HERO_SLIDES.map((slide, i) => (
           <div
@@ -586,7 +587,7 @@ export default function HomePage() {
           <h2 className="text-sm font-bold text-white">Browse by Budget</h2>
           <Link href="/new-cars" className="text-xs font-semibold" style={{ color: "#1152d4" }}>See all</Link>
         </div>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
           {BUDGET_SEGMENTS.map((b) => (
             <Link
               key={b.label}
@@ -607,7 +608,7 @@ export default function HomePage() {
           <h2 className="text-sm font-bold text-white">Popular Brands</h2>
           <Link href="/new-cars" className="text-xs font-semibold" style={{ color: "#1152d4" }}>All brands</Link>
         </div>
-        <div className="grid grid-cols-4 gap-2.5">
+        <div className="grid grid-cols-4 md:grid-cols-8 gap-2.5">
           {popularBrands.map((brand) => (
             <Link
               key={brand.slug}
@@ -748,7 +749,7 @@ export default function HomePage() {
       {/* ─── EXPLORE MORE ─── */}
       <section className="px-4 mb-5">
         <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Explore More</p>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
           {[
             { icon: "upcoming", label: "Upcoming Cars", href: "/upcoming-cars", color: "#f59e0b" },
             { icon: "electric_car", label: "Electric Cars", href: "/electric-cars", color: "#10b981" },
@@ -803,7 +804,7 @@ export default function HomePage() {
         </div>
       </footer>
 
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

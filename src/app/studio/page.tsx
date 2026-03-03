@@ -15,7 +15,7 @@ export default function StudioPage() {
 
   return (
     <div
-      className="min-h-screen max-w-md mx-auto flex flex-col pb-24"
+      className="min-h-screen max-w-md md:max-w-2xl mx-auto flex flex-col pb-24"
       style={{ fontFamily: "'Inter', sans-serif", background: "#0a0a0a", color: "#e2e8f0" }}
     >
       {/* ── Header ── */}

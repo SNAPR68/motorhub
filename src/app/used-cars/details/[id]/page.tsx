@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { InquiryModal } from "@/components/InquiryModal";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicle, adaptVehicle } from "@/lib/api";
 import { formatEmi } from "@/lib/car-catalog";
@@ -127,6 +127,7 @@ export default function UsedCarDetailPage({
   };
 
   return (
+    <BuyerAppShell>
     <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
@@ -776,8 +777,7 @@ export default function UsedCarDetailPage({
         vehicleName={vehicle?.name}
         type={inquiryType ?? "GENERAL"}
       />
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

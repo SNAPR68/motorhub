@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const EMPLOYMENT_TYPES = ["Salaried", "Self-Employed", "Business"] as const;
 const CIBIL_OPTIONS = ["750-900", "700-749", "650-699", "Don't know"] as const;
@@ -35,6 +35,7 @@ export default function EligibilityPage() {
   }
 
   return (
+    <BuyerAppShell>
     <div
       className="min-h-dvh pb-36"
       style={{ background: "#080a0f", color: "#f1f5f9" }}
@@ -243,8 +244,7 @@ export default function EligibilityPage() {
           </div>
         )}
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

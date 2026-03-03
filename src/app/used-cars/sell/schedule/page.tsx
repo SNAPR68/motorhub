@@ -4,7 +4,7 @@ import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 // Feb 24–28 2026 (Mon–Fri)
 const DATES = [
@@ -64,7 +64,7 @@ function SchedulePageInner() {
   if (confirmed) {
     return (
       <div
-        className="min-h-dvh w-full flex flex-col pb-32"
+        className="min-h-dvh w-full flex flex-col "
         style={{ background: "#080a0f", color: "#e2e8f0" }}
       >
         <div className="flex-1 flex flex-col items-center justify-center px-6 text-center max-w-lg mx-auto w-full py-16">
@@ -190,15 +190,12 @@ function SchedulePageInner() {
             Sell another car
           </Link>
         </div>
-
-        <BuyerBottomNav />
       </div>
     );
   }
 
-  return (
-    <div
-      className="min-h-dvh w-full pb-32"
+  return (<div
+      className="min-h-dvh w-full "
       style={{ background: "#080a0f", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
@@ -487,8 +484,6 @@ function SchedulePageInner() {
           Free cancellation up to 2 hours before inspection
         </p>
       </main>
-
-      <BuyerBottomNav />
     </div>
   );
 }
@@ -522,6 +517,7 @@ function SummaryRow({
 
 export default function SchedulePage() {
   return (
+    <BuyerAppShell>
     <Suspense
       fallback={
         <div
@@ -540,5 +536,6 @@ export default function SchedulePage() {
     >
       <SchedulePageInner />
     </Suspense>
+    </BuyerAppShell>
   );
 }

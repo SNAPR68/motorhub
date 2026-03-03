@@ -3,7 +3,7 @@
 import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { fetchCarModel, type ApiCarModelDetail, type ApiCarVariant } from "@/lib/api";
 import { formatEmi } from "@/lib/car-catalog";
 
@@ -91,6 +91,7 @@ export default function VariantsPage({
   const hasVariants = variants.length > 0;
 
   return (
+    <BuyerAppShell>
     <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
@@ -272,8 +273,7 @@ export default function VariantsPage({
           </div>
         )}
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

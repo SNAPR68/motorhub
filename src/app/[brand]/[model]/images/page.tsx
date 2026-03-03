@@ -3,7 +3,7 @@
 import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { fetchCarModel, type ApiCarModelDetail } from "@/lib/api";
 
 /* ─── Gallery items ─── */
@@ -85,6 +85,7 @@ export default function ImagesPage({
   };
 
   return (
+    <BuyerAppShell>
     <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
@@ -187,8 +188,7 @@ export default function ImagesPage({
           <span className="text-xs font-semibold text-white">360° View coming soon</span>
         </div>
       )}
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

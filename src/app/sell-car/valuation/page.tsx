@@ -4,7 +4,7 @@ import { Suspense, useState, useEffect, useCallback, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ─── Brand → base price lookup (lakhs, for a 2020 model, 30k km) ─── */
 const BASE_PRICES: Record<string, number> = {
@@ -114,8 +114,7 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
     { label: "Inspection", icon: "event_available" },
   ];
 
-  return (
-    <div className="flex items-center justify-center gap-0 py-4 px-2">
+  return (<div className="flex items-center justify-center gap-0 py-4 px-2">
       {steps.slice(0, total).map((step, i) => (
         <div key={step.label} className="flex items-center">
           <div className="flex flex-col items-center gap-1">
@@ -321,7 +320,7 @@ function ValuationPageInner() {
   const step3Valid = selectedDate && selectedTime && address.trim().length > 5 && phone.trim().length >= 10;
 
   return (
-    <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* Header */}
       <header
@@ -937,8 +936,6 @@ function ValuationPageInner() {
           )}
         </div>
       </main>
-
-      <BuyerBottomNav className="md:hidden" />
     </div>
   );
 }
@@ -946,6 +943,7 @@ function ValuationPageInner() {
 /* ─── Page wrapper with Suspense ─── */
 export default function SellCarValuationPage() {
   return (
+    <BuyerAppShell>
     <Suspense
       fallback={
         <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
@@ -958,5 +956,6 @@ export default function SellCarValuationPage() {
     >
       <ValuationPageInner />
     </Suspense>
+    </BuyerAppShell>
   );
 }

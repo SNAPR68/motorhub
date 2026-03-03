@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const timelineSteps = [
   {
@@ -52,7 +52,8 @@ const documents = [
 
 export default function CrossStateTrackPage() {
   return (
-    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto pb-28">
+    <BuyerAppShell>
+    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto ">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-lg border-b border-white/5">
         <div className="flex items-center gap-3 px-4 py-3">
@@ -271,8 +272,7 @@ export default function CrossStateTrackPage() {
           Available 24/7 &middot; Average response time: 2 min
         </p>
       </section>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

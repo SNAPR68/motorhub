@@ -4,7 +4,7 @@ import { use, useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ─── Types ─── */
 interface CarModel {
@@ -153,7 +153,8 @@ export default function BrandPage({ params }: { params: Promise<{ brand: string 
   }, [models]);
 
   return (
-    <div className="min-h-screen bg-[#080a0f] text-white pb-32">
+    <BuyerAppShell>
+    <div className="min-h-screen bg-[#080a0f] text-white ">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-[#080a0f]/95 backdrop-blur border-b border-white/5 max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
         <Link href="/cars" className="p-2 rounded-full hover:bg-white/10 transition-colors -ml-2">
@@ -305,8 +306,7 @@ export default function BrandPage({ params }: { params: Promise<{ brand: string 
           </Link>
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

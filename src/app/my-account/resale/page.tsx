@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchWishlist } from "@/lib/api";
 
@@ -75,8 +75,9 @@ export default function ResaleValuePage() {
   const carName = firstCar ? `${firstCar.name} ${firstCar.year ?? ""}`.trim() : "Maruti Brezza 2022";
 
   return (
+    <BuyerAppShell>
     <div
-      className="min-h-dvh w-full pb-32"
+      className="min-h-dvh w-full "
       style={{ background: "#080a0f", color: "#e2e8f0" }}
     >
       {/* Header */}
@@ -413,8 +414,7 @@ export default function ResaleValuePage() {
           </Link>
         </section>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

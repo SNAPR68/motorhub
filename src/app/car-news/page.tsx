@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const CATEGORIES = ["All", "Launches", "Reviews", "EV", "Comparison", "Price Drops", "Industry"];
 
@@ -91,7 +91,8 @@ export default function CarNewsPage() {
   const filtered = activeCategory === "All" ? NEWS : NEWS.filter((n) => n.category === activeCategory);
 
   return (
-    <div className="min-h-dvh w-full pb-32" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <BuyerAppShell>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
@@ -209,8 +210,7 @@ export default function CarNewsPage() {
           </div>
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle } from "@/lib/api";
 import type { Vehicle } from "@/lib/types";
@@ -70,8 +70,8 @@ export default function UsedCarsPage() {
     setActiveOwner(""); setMaxBudget(999999999); setSort("featured");
   };
 
-  return (
-    <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+  return (<BuyerAppShell>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
       <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
@@ -261,9 +261,8 @@ export default function UsedCarsPage() {
           ))}
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }
 
@@ -342,6 +341,5 @@ function UsedCarCard({ car }: { car: Vehicle }) {
           </p>
         </div>
       </div>
-    </Link>
-  );
+    </Link>);
 }

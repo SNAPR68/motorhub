@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { createServiceBooking } from "@/lib/api";
 
 const states = [
@@ -161,7 +161,8 @@ export default function CrossStateExpressPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto pb-28">
+    <BuyerAppShell>
+    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto ">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-lg border-b border-white/5">
         <div className="flex items-center gap-3 px-4 py-3">
@@ -461,8 +462,7 @@ export default function CrossStateExpressPage() {
           ))}
         </div>
       </section>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

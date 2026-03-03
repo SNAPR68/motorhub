@@ -4,7 +4,7 @@ import { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ─── EMI Calculator ─── */
 
@@ -32,9 +32,11 @@ function formatINR(n: number): string {
 
 export default function EmiCalculatorPage() {
   return (
-    <Suspense fallback={<div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}><div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" /></div>}>
-      <EmiCalculatorInner />
-    </Suspense>
+    <BuyerAppShell>
+      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}><div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" /></div>}>
+        <EmiCalculatorInner />
+      </Suspense>
+    </BuyerAppShell>
   );
 }
 
@@ -61,7 +63,7 @@ function EmiCalculatorInner() {
   const interestPctVal = 100 - principalPct;
 
   return (
-    <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
       <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
@@ -250,8 +252,5 @@ function EmiCalculatorInner() {
           Apply for Car Loan
         </button>
       </main>
-
-      <BuyerBottomNav />
-    </div>
-  );
+    </div>);
 }

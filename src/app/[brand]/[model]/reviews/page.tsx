@@ -3,7 +3,7 @@
 import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { fetchCarModel, type ApiCarModelDetail } from "@/lib/api";
 
 /* ─── Rating distribution ─── */
@@ -86,8 +86,7 @@ const USER_REVIEWS = [
 const TABS = ["Expert Reviews", "User Reviews"] as const;
 
 function StarRating({ rating, size = 14 }: { rating: number; size?: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
+  return (<div className="flex items-center gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
         <MaterialIcon
           key={i}
@@ -121,10 +120,13 @@ export default function ReviewsPage({
   /* ── Loading state ── */
   if (loading) {
     return (
+    <BuyerAppShell>
       <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
         <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
       </div>
-    );
+    
+    </BuyerAppShell>
+  );
   }
 
   /* ── 404 state ── */
@@ -316,8 +318,5 @@ export default function ReviewsPage({
           </>
         )}
       </div>
-
-      <BuyerBottomNav />
-    </div>
-  );
+    </div>);
 }

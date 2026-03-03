@@ -3,7 +3,7 @@
 import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { fetchCarModel, type ApiCarModelDetail } from "@/lib/api";
 
 /* ─── Default spec sections ─── */
@@ -158,6 +158,7 @@ export default function SpecificationsPage({
   }
 
   return (
+    <BuyerAppShell>
     <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
@@ -242,8 +243,7 @@ export default function SpecificationsPage({
           Please confirm exact details with your nearest authorized dealer.
         </p>
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

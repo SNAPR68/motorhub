@@ -3,7 +3,7 @@
 import { use } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 function toTitleCase(str: string) {
   return str
@@ -42,7 +42,8 @@ export default function ExpertReviewPage({
   const overallRating = 4.2;
 
   return (
-    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto pb-28">
+    <BuyerAppShell>
+    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto ">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-lg border-b border-white/5">
         <div className="flex items-center gap-3 px-4 py-3">
@@ -208,8 +209,7 @@ export default function ExpertReviewPage({
           Get instant on-road price for your city
         </p>
       </section>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

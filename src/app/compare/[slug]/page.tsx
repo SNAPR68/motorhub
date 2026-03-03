@@ -3,7 +3,7 @@
 import { use } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ─── Specs data keyed by car name slug ─── */
 const CAR_DATA: Record<
@@ -122,8 +122,9 @@ export default function CompareSlugPage({
   const car2 = CAR_DATA[car2Slug] ?? { ...DEFAULT_CAR, name: capitalize(car2Slug) };
 
   return (
+    <BuyerAppShell>
     <div
-      className="min-h-dvh w-full pb-28"
+      className="min-h-dvh w-full "
       style={{ background: "#080a0f", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
@@ -364,9 +365,8 @@ export default function CompareSlugPage({
           </span>
         </Link>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }
 

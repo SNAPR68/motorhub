@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ── Data ───────────────────────────────────────── */
 interface CityPrices {
@@ -50,6 +50,7 @@ export default function FuelPricePage() {
   const trendRange = trendMax - trendMin || 1;
 
   return (
+    <BuyerAppShell>
     <div className="min-h-dvh pb-36" style={{ background: "#080a0f", color: "#f1f5f9" }}>
       {/* Header */}
       <div
@@ -279,8 +280,7 @@ export default function FuelPricePage() {
           </div>
         </div>
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

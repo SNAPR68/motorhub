@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ── Bank data ──────────────────────────────────── */
 type BankType = "Public" | "Private" | "NBFC";
@@ -55,6 +55,7 @@ export default function BankRatesPage() {
   }, [filter, sort]);
 
   return (
+    <BuyerAppShell>
     <div className="min-h-dvh pb-36" style={{ background: "#080a0f", color: "#f1f5f9" }}>
       {/* Header */}
       <div
@@ -194,8 +195,7 @@ export default function BankRatesPage() {
           </div>
         </div>
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

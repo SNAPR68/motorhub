@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ─── Brand Data ─── */
 interface BrandEntry {
@@ -79,8 +79,7 @@ const ALL_BRANDS: BrandEntry[] = BRAND_GROUPS.flatMap((g) => g.brands);
 
 /* ─── Brand Avatar ─── */
 function BrandAvatar({ name, color }: { name: string; color: string }) {
-  return (
-    <div
+  return (<div
       className="w-12 h-12 rounded-full flex items-center justify-center text-white font-black text-[18px] flex-shrink-0"
       style={{ backgroundColor: `${color}22`, border: `2px solid ${color}44` }}
     >
@@ -105,7 +104,8 @@ export default function AllBrandsPage() {
   const totalFiltered = filteredGroups.reduce((sum, g) => sum + g.brands.length, 0);
 
   return (
-    <div className="min-h-screen bg-[#080a0f] text-white pb-32">
+    <BuyerAppShell>
+    <div className="min-h-screen bg-[#080a0f] text-white ">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-[#080a0f]/95 backdrop-blur border-b border-white/5 max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
         <Link href="/" className="p-2 rounded-full hover:bg-white/10 transition-colors -ml-2">
@@ -209,8 +209,7 @@ export default function AllBrandsPage() {
           </p>
         )}
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

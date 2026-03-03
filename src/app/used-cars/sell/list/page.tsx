@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 function formatLakhs(n: number): string {
   if (n >= 100000) {
@@ -57,9 +57,8 @@ function ListPageInner() {
   const carLabel = [brand, year, variant, fuel].filter(Boolean).join(" · ");
   const kmLabel = km ? `${Number(km).toLocaleString("en-IN")} km` : "";
 
-  return (
-    <div
-      className="min-h-dvh w-full pb-32"
+  return (<div
+      className="min-h-dvh w-full "
       style={{ background: "#080a0f", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
@@ -496,14 +495,13 @@ function ListPageInner() {
           </div>
         )}
       </main>
-
-      <BuyerBottomNav />
     </div>
   );
 }
 
 export default function ListPage() {
   return (
+    <BuyerAppShell>
     <Suspense
       fallback={
         <div
@@ -522,5 +520,6 @@ export default function ListPage() {
     >
       <ListPageInner />
     </Suspense>
+    </BuyerAppShell>
   );
 }

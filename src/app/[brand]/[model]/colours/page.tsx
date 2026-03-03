@@ -3,7 +3,7 @@
 import { use, useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ─── Color Options Page ─── */
 
@@ -30,7 +30,8 @@ export default function ColoursPage({
   const [selected, setSelected] = useState(0);
 
   return (
-    <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <BuyerAppShell>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
@@ -144,8 +145,7 @@ export default function ColoursPage({
           <MaterialIcon name="check_circle" className="text-[22px] text-emerald-500 shrink-0" />
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

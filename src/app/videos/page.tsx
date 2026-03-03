@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const TABS = ["All", "Reviews", "Comparisons", "Tips"] as const;
 
@@ -65,7 +65,8 @@ export default function VideosPage() {
     activeTab === "All" ? VIDEOS : VIDEOS.filter((v) => v.category === activeTab);
 
   return (
-    <div className="min-h-dvh w-full pb-32" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <BuyerAppShell>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
@@ -149,8 +150,7 @@ export default function VideosPage() {
           ))}
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

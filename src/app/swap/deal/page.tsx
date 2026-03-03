@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ─── SwapDirect — Swap Deal Details ─── */
 
@@ -42,6 +42,7 @@ export default function SwapDealPage() {
   const [depositAgreed, setDepositAgreed] = useState(false);
 
   return (
+    <BuyerAppShell>
     <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* Header */}
@@ -317,8 +318,7 @@ export default function SwapDealPage() {
           </div>
         </div>
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

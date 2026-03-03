@@ -3,7 +3,7 @@
 import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { fetchCarModel } from "@/lib/api";
 import type { ApiCarModelDetail } from "@/lib/api";
 
@@ -207,8 +207,7 @@ function buildReviewData(
 
 /* ─── Star Rating Component ─── */
 function StarRating({ rating, size = 16 }: { rating: number; size?: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
+  return (<div className="flex items-center gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => {
         const filled = i < Math.floor(rating);
         const half = !filled && i < rating;
@@ -336,6 +335,7 @@ export default function ReviewDetailPage({
   const helpfulDown = review.thumbsDown + (helpfulState === "down" ? 1 : 0);
 
   return (
+    <BuyerAppShell>
     <div
       className="min-h-dvh w-full pb-36"
       style={{ background: "#080a0f", color: "#e2e8f0" }}
@@ -778,8 +778,6 @@ export default function ReviewDetailPage({
           View All {car.name} Reviews
         </Link>
       </section>
-
-      <BuyerBottomNav />
     </div>
-  );
+    </BuyerAppShell>);
 }

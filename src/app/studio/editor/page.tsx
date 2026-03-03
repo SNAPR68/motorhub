@@ -92,7 +92,7 @@ export default function StudioEditorPage() {
 
   return (
     <div
-      className="min-h-dvh w-full flex flex-col max-w-md mx-auto text-slate-100 pb-24"
+      className="min-h-dvh w-full flex flex-col max-w-md md:max-w-2xl mx-auto text-slate-100 pb-24"
       style={{ fontFamily: "'Manrope', sans-serif", background: "#1a1008" }}
     >
       {/* Header */}

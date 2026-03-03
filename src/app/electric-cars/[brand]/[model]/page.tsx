@@ -3,7 +3,7 @@
 import { use } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ─── EV data keyed by brand-model slug ─── */
 const EV_DATA: Record<
@@ -121,8 +121,9 @@ export default function EvModelPage({
   };
 
   return (
+    <BuyerAppShell>
     <div
-      className="min-h-dvh w-full pb-28"
+      className="min-h-dvh w-full "
       style={{ background: "#080a0f", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
@@ -324,8 +325,7 @@ export default function EvModelPage({
           </div>
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

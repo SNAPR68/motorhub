@@ -3,7 +3,7 @@
 import { use, useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { fetchCarModel } from "@/lib/api";
 import type { ApiCarModelDetail } from "@/lib/api";
 import { formatPrice } from "@/lib/car-catalog";
@@ -114,6 +114,7 @@ export default function OnRoadPricePage({
   }, [exShowroom]);
 
   return (
+    <BuyerAppShell>
     <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
@@ -261,8 +262,7 @@ export default function OnRoadPricePage({
         </div>
 
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

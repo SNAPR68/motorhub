@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const TOOLS = [
   {
@@ -59,6 +59,7 @@ const QUICK_EMI_PRESETS = [
 
 export default function CarLoanPage() {
   return (
+    <BuyerAppShell>
     <div
       className="min-h-dvh pb-36"
       style={{ background: "#080a0f", color: "#f1f5f9" }}
@@ -224,8 +225,7 @@ export default function CarLoanPage() {
           Apply Now
         </Link>
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

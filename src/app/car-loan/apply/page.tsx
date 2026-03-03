@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { createFinanceApplication } from "@/lib/api";
 
 /* ── Steps ──────────────────────────────────────── */
@@ -66,8 +66,7 @@ function Pill({
   active: boolean;
   onClick: () => void;
 }) {
-  return (
-    <button
+  return (<button
       onClick={onClick}
       className="rounded-full px-4 py-2 text-sm font-semibold transition-colors"
       style={{
@@ -276,6 +275,7 @@ export default function CarLoanApplyPage() {
     ];
 
     return (
+    <BuyerAppShell>
       <div className="space-y-4">
         {sections.map((s) => (
           <div key={s.title} className="rounded-2xl p-4" style={{ background: "#111827" }}>
@@ -295,7 +295,9 @@ export default function CarLoanApplyPage() {
           </div>
         ))}
       </div>
-    );
+    
+    </BuyerAppShell>
+  );
   };
 
   /* ── Success state ── */
@@ -353,7 +355,6 @@ export default function CarLoanApplyPage() {
             Back to Car Loan
           </Link>
         </div>
-        <BuyerBottomNav />
       </div>
     );
   }
@@ -494,8 +495,5 @@ export default function CarLoanApplyPage() {
           )}
         </div>
       </div>
-
-      <BuyerBottomNav />
-    </div>
-  );
+    </div>);
 }

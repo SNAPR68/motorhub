@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const sections = [
   {
@@ -42,8 +42,9 @@ export default function PrivacyPolicyPage() {
   const [expanded, setExpanded] = useState<number | null>(0);
 
   return (
+    <BuyerAppShell>
     <div className="min-h-screen bg-[#080a0f] text-[#e2e8f0]">
-      <div className="max-w-lg mx-auto px-4 pb-32">
+      <div className="max-w-lg mx-auto px-4 ">
         {/* Header */}
         <header className="flex items-center gap-3 py-4">
           <Link href="/" className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 transition">
@@ -110,8 +111,7 @@ export default function PrivacyPolicyPage() {
           </p>
         </div>
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

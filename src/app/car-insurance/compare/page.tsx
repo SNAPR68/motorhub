@@ -4,7 +4,7 @@ import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const FILTER_PILLS = ["All", "Comprehensive", "Third Party", "Zero Dep"] as const;
 
@@ -48,8 +48,7 @@ const PLANS = [
 ];
 
 function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center gap-1">
+  return (<div className="flex items-center gap-1">
       <MaterialIcon name="star" fill className="text-[14px] text-amber-400" />
       <span className="text-amber-400 text-xs font-semibold">{rating}</span>
     </div>
@@ -213,14 +212,13 @@ function ComparePlansInner() {
           ))}
         </div>
       </div>
-
-      <BuyerBottomNav />
     </div>
   );
 }
 
 export default function ComparePlansPage() {
   return (
+    <BuyerAppShell>
     <Suspense
       fallback={
         <div
@@ -233,5 +231,6 @@ export default function ComparePlansPage() {
     >
       <ComparePlansInner />
     </Suspense>
+    </BuyerAppShell>
   );
 }

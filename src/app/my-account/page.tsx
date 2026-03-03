@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { AuthGuard } from "@/components/AuthGuard";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchCurrentUser } from "@/lib/api";
@@ -65,8 +65,9 @@ export default function MyAccountPage() {
     : "?";
 
   return (
+    <BuyerAppShell>
     <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
-    <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
       <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
@@ -187,9 +188,8 @@ export default function MyAccountPage() {
           </button>
         )}
       </main>
-
-      <BuyerBottomNav />
     </div>
     </AuthGuard>
+    </BuyerAppShell>
   );
 }

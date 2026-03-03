@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchCurrentUser } from "@/lib/api";
 
@@ -37,8 +37,7 @@ function Toggle({
   on: boolean;
   onToggle: () => void;
 }) {
-  return (
-    <button
+  return (<button
       onClick={onToggle}
       className="relative w-11 h-6 rounded-full transition-all shrink-0"
       style={{
@@ -110,6 +109,7 @@ export default function AccountSettingsPage() {
   };
 
   return (
+    <BuyerAppShell>
     <div className="min-h-dvh w-full pb-40" style={{ background: "#080a0f", color: "#e2e8f0" }}>
       {/* Header */}
       <header
@@ -410,8 +410,7 @@ export default function AccountSettingsPage() {
           </button>
         </div>
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

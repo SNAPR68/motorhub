@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchDealerSearch } from "@/lib/api";
 import type { PublicDealer } from "@/lib/api";
@@ -18,8 +18,9 @@ export default function DealersCityClient({ city }: { city: string }) {
   const dealers: PublicDealer[] = data?.dealers ?? [];
 
   return (
+    <BuyerAppShell>
     <div
-      className="min-h-dvh w-full pb-28"
+      className="min-h-dvh w-full "
       style={{ background: "#080a0f", color: "#e2e8f0" }}
     >
       {/* Header */}
@@ -221,8 +222,7 @@ export default function DealersCityClient({ city }: { city: string }) {
           </div>
         )}
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

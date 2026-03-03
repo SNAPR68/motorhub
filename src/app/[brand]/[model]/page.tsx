@@ -4,7 +4,7 @@ import { use, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { formatEmi, formatPrice } from "@/lib/car-catalog";
 import { fetchCarModel, type ApiCarModelDetail, type ApiCarVariant } from "@/lib/api";
 import { computeTrueCost, formatCost } from "@/lib/true-cost";
@@ -43,10 +43,13 @@ export default function ModelPage({
 
   if (loading) {
     return (
+    <BuyerAppShell>
       <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
         <div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
       </div>
-    );
+    
+    </BuyerAppShell>
+  );
   }
 
   if (notFound || !car) {
@@ -65,8 +68,7 @@ export default function ModelPage({
 
   const gallery = car.gallery?.length ? car.gallery : [car.image];
 
-  return (
-    <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+  return (<div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
       <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
@@ -418,8 +420,6 @@ export default function ModelPage({
           </Link>
         </div>
       </div>
-
-      <BuyerBottomNav />
     </div>
   );
 }
@@ -439,6 +439,5 @@ function VariantCard({ variant }: { variant: ApiCarVariant }) {
         <p className="text-sm font-black text-white">{variant.exShowroomDisplay}</p>
         <p className="text-[10px] text-slate-500">{formatEmi(variant.exShowroom)}/mo</p>
       </div>
-    </div>
-  );
+    </div>);
 }

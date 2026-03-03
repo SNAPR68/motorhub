@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const FILTERS = ["All", "SUV", "Sedan", "Hatchback", "EV", "Upcoming"];
 
@@ -82,8 +82,7 @@ function ScoreRing({ score }: { score: number }) {
   const fill = (score / 10) * circumference;
   const color = SCORE_COLOR(score);
 
-  return (
-    <div className="relative flex items-center justify-center w-14 h-14 shrink-0">
+  return (<div className="relative flex items-center justify-center w-14 h-14 shrink-0">
       <svg width="56" height="56" viewBox="0 0 56 56" className="-rotate-90">
         <circle cx="28" cy="28" r={radius} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="4" />
         <circle
@@ -110,7 +109,8 @@ export default function ExpertReviewsPage() {
   const filtered = activeFilter === "All" ? REVIEWS : REVIEWS.filter((r) => r.category === activeFilter);
 
   return (
-    <div className="min-h-dvh w-full pb-32" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <BuyerAppShell>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
@@ -233,8 +233,7 @@ export default function ExpertReviewsPage() {
           ))}
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

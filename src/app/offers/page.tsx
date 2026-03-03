@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ── Offer data ─────────────────────────────────── */
 type Category = "New Cars" | "Used Cars" | "Service" | "Insurance" | "Finance";
@@ -110,6 +110,7 @@ export default function OffersPage() {
   };
 
   return (
+    <BuyerAppShell>
     <div className="min-h-dvh pb-36" style={{ background: "#080a0f", color: "#f1f5f9" }}>
       {/* Header */}
       <div
@@ -242,8 +243,7 @@ export default function OffersPage() {
           </div>
         )}
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

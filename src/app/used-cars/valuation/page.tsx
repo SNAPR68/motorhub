@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ─── Types ─── */
 interface ValuationResult {
@@ -93,7 +93,8 @@ export default function ValuationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#080a0f] text-white pb-32">
+    <BuyerAppShell>
+    <div className="min-h-screen bg-[#080a0f] text-white ">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-[#080a0f]/95 backdrop-blur border-b border-white/5 px-4 py-4 max-w-lg mx-auto flex items-center gap-3">
         <Link href="/used-cars" className="p-2 rounded-full hover:bg-white/10 transition-colors -ml-2">
@@ -344,8 +345,7 @@ export default function ValuationPage() {
           </div>
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

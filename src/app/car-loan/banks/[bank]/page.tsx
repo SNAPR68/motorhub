@@ -3,7 +3,7 @@
 import { use } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 function formatBank(slug: string) {
   return slug
@@ -47,7 +47,8 @@ export default function BankDetailPage({ params }: { params: Promise<{ bank: str
   const bankName = formatBank(bank);
 
   return (
-    <div className="min-h-dvh w-full pb-32" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <BuyerAppShell>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
@@ -203,8 +204,7 @@ export default function BankDetailPage({ params }: { params: Promise<{ bank: str
           <MaterialIcon name="arrow_forward" className="text-[16px]" />
         </Link>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

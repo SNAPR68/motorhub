@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { createServiceBooking } from "@/lib/api";
 
 const packages = [
@@ -111,7 +111,7 @@ export default function InspectionPage() {
 
   if (booked) {
     return (
-      <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto pb-28">
+      <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto ">
         <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-lg border-b border-white/5">
           <div className="flex items-center gap-3 px-4 py-3">
             <button onClick={() => setBooked(false)} className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 transition">
@@ -166,14 +166,13 @@ export default function InspectionPage() {
             Back to Home
           </Link>
         </div>
-
-        <BuyerBottomNav />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto pb-28">
+    <BuyerAppShell>
+    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto ">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-lg border-b border-white/5">
         <div className="flex items-center gap-3 px-4 py-3">
@@ -456,8 +455,7 @@ export default function InspectionPage() {
           ))}
         </div>
       </section>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

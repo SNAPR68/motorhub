@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import {
   BODY_TYPES,
   BUDGET_SEGMENTS,
@@ -19,9 +19,11 @@ const FUEL_TYPES = ["Petrol", "Diesel", "Electric", "Hybrid", "CNG"];
 
 export default function NewCarsPage() {
   return (
-    <Suspense fallback={<div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}><div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" /></div>}>
-      <NewCarsInner />
-    </Suspense>
+    <BuyerAppShell>
+      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}><div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" /></div>}>
+        <NewCarsInner />
+      </Suspense>
+    </BuyerAppShell>
   );
 }
 
@@ -81,7 +83,7 @@ function NewCarsInner() {
   };
 
   return (
-    <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
       <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
@@ -238,8 +240,6 @@ function NewCarsInner() {
           ))}
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
   );
 }
@@ -306,6 +306,5 @@ function NewCarCard({ car }: { car: ApiCarModel }) {
           </p>
         </div>
       </div>
-    </Link>
-  );
+    </Link>);
 }

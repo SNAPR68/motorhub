@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle, fetchWishlist, addToWishlist, removeFromWishlist } from "@/lib/api";
@@ -163,14 +163,15 @@ export default function ShowroomPage() {
   };
 
   return (
-    <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <BuyerAppShell>
+    <div className="min-h-dvh w-full" style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── STICKY HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
       >
-        <div className="max-w-lg mx-auto px-4 pt-3 pb-0">
+        <div className="max-w-lg md:max-w-none mx-auto px-4 pt-3 pb-0">
 
           {/* Search row */}
           <div className="flex items-center gap-2 mb-3">
@@ -336,7 +337,7 @@ export default function ShowroomPage() {
       </header>
 
       {/* ─── RESULTS ─── */}
-      <main className="max-w-lg mx-auto px-4 pt-4">
+      <main className="max-w-lg md:max-w-none mx-auto px-4 pt-4">
 
         {/* Count bar */}
         <div className="flex items-center justify-between mb-4">
@@ -387,7 +388,7 @@ export default function ShowroomPage() {
 
         {/* ─── LIST ─── */}
         {!isLoading && filtered.length > 0 && (
-          <div className="space-y-3">
+          <div className="space-y-3 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-3 md:space-y-0">
             {filtered.map((v) => (
               <CarListCard key={v.id} vehicle={v} wishlisted={wishlist.has(v.id)} onWishlist={toggleWishlist} />
             ))}
@@ -406,8 +407,8 @@ export default function ShowroomPage() {
         )}
       </main>
 
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const RECENT_SALES = [
   { name: "Hyundai Creta", year: 2021, price: "₹8.4L", fuel: "Petrol", km: "38,200 km", daysAgo: 2 },
@@ -70,8 +70,9 @@ const STEPS = [
 
 export default function SellCarPage() {
   return (
+    <BuyerAppShell>
     <div
-      className="min-h-dvh w-full pb-32"
+      className="min-h-dvh w-full "
       style={{ background: "#080a0f", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
@@ -372,8 +373,7 @@ export default function SellCarPage() {
           ))}
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

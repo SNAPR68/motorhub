@@ -3,7 +3,7 @@
 import { use, useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 type Tab = "overview" | "inventory" | "reviews" | "offers";
 
@@ -85,8 +85,7 @@ const CERTIFICATIONS = [
 ];
 
 function StarRating({ stars }: { stars: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
+  return (<div className="flex items-center gap-0.5">
       {[1, 2, 3, 4, 5].map((i) => (
         <MaterialIcon
           key={i}
@@ -119,6 +118,7 @@ export default function DealerProfilePage({
   const isOpen = hour >= 9 && hour < 20;
 
   return (
+    <BuyerAppShell>
     <div
       className="min-h-dvh pb-40"
       style={{ background: "#080a0f", color: "#f1f5f9" }}
@@ -427,8 +427,7 @@ export default function DealerProfilePage({
           Browse Vehicles
         </Link>
       </div>
-
-      <BuyerBottomNav className="md:hidden" />
     </div>
+    </BuyerAppShell>
   );
 }

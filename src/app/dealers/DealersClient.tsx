@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchDealerSearch } from "@/lib/api";
 import type { PublicDealer } from "@/lib/api";
@@ -21,8 +21,7 @@ const BRAND_COLORS: Record<string, string> = {
 };
 
 function StarRating({ count }: { count: number }) {
-  return (
-    <div className="flex items-center gap-1">
+  return (<div className="flex items-center gap-1">
       <MaterialIcon name="storefront" className="text-[14px] text-blue-400" />
       <span className="text-blue-400 text-xs font-semibold">{count} cars</span>
     </div>
@@ -49,6 +48,7 @@ export default function DealersClient() {
   });
 
   return (
+    <BuyerAppShell>
     <div
       className="min-h-dvh pb-36"
       style={{ background: "#080a0f", color: "#f1f5f9" }}
@@ -215,8 +215,7 @@ export default function DealersClient() {
           </div>
         )}
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

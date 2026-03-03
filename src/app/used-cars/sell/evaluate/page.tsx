@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const BRANDS = [
   "Maruti Suzuki",
@@ -87,9 +87,9 @@ export default function EvaluatePage() {
 
   const stepLabels = ["Car Details", "Usage History", "Contact Info"];
 
-  return (
+  return (<BuyerAppShell>
     <div
-      className="min-h-dvh w-full pb-32"
+      className="min-h-dvh w-full "
       style={{ background: "#080a0f", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
@@ -483,9 +483,8 @@ export default function EvaluatePage() {
           </button>
         </div>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }
 
@@ -568,6 +567,5 @@ function PillGroup({
           </button>
         );
       })}
-    </div>
-  );
+    </div>);
 }

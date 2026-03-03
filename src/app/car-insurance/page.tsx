@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const INSURERS = [
   "HDFC Ergo",
@@ -47,6 +47,7 @@ export default function CarInsurancePage() {
   }).toString();
 
   return (
+    <BuyerAppShell>
     <div
       className="min-h-dvh pb-36"
       style={{ background: "#080a0f", color: "#f1f5f9" }}
@@ -211,8 +212,7 @@ export default function CarInsurancePage() {
           </div>
         </Link>
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

@@ -3,7 +3,7 @@
 import { use, useState } from "react";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 /* ─── City-wise Price Page ─── */
 
@@ -74,7 +74,8 @@ export default function PriceInCityPage({
   const totalOnRoad = EX_SHOWROOM + registration + INSURANCE + TCS + OTHERS;
 
   return (
-    <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <BuyerAppShell>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
@@ -216,8 +217,7 @@ export default function PriceInCityPage({
           Contact your nearest dealer for exact on-road price.
         </p>
       </main>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

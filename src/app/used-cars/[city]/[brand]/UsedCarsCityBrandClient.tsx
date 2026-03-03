@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle } from "@/lib/api";
 import { BLUR_DATA_URL } from "@/lib/car-images";
@@ -26,8 +26,9 @@ export default function UsedCarsCityBrandClient({
   const vehicles = (data?.vehicles ?? []).map(adaptVehicle);
 
   return (
+    <BuyerAppShell>
     <div
-      className="min-h-dvh w-full pb-28"
+      className="min-h-dvh w-full "
       style={{ background: "#080a0f", color: "#e2e8f0" }}
     >
       {/* Header */}
@@ -217,8 +218,7 @@ export default function UsedCarsCityBrandClient({
           </div>
         </main>
       )}
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

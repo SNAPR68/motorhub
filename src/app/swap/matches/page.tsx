@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle } from "@/lib/api";
 
@@ -95,8 +95,7 @@ function MatchesContent() {
     return 0;
   });
 
-  return (
-    <main className="max-w-lg mx-auto px-4 pt-5 space-y-4">
+  return (<main className="max-w-lg mx-auto px-4 pt-5 space-y-4">
 
       {/* Search context */}
       <div className="rounded-xl p-3 border border-white/5 flex items-center gap-3" style={{ background: "rgba(255,255,255,0.03)" }}>
@@ -242,7 +241,8 @@ function MatchesContent() {
 
 export default function SwapMatchesPage() {
   return (
-    <div className="min-h-dvh w-full pb-28" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <BuyerAppShell>
+    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
@@ -264,8 +264,7 @@ export default function SwapMatchesPage() {
       }>
         <MatchesContent />
       </Suspense>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }

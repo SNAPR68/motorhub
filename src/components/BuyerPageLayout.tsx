@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 interface BuyerPageLayoutProps {
   children: React.ReactNode;
@@ -14,16 +14,20 @@ export function BuyerPageLayout({
   hideNav,
   className,
 }: BuyerPageLayoutProps) {
+  if (hideNav) {
+    /* No shell — full-screen overlays (login, onboarding, etc.) */
+    return (
+      <div className={cn("dark-page min-h-dvh w-full", className)}>
+        <div className="mx-auto max-w-lg md:max-w-none">{children}</div>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={cn(
-        "dark-page min-h-dvh w-full",
-        !hideNav && "pb-28",
-        className
-      )}
-    >
-      <div className="mx-auto max-w-lg">{children}</div>
-      {!hideNav && <BuyerBottomNav />}
-    </div>
+    <BuyerAppShell>
+      <div className={cn("dark-page min-h-dvh w-full", className)}>
+        {children}
+      </div>
+    </BuyerAppShell>
   );
 }

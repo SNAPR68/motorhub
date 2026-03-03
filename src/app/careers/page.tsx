@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
-import { BuyerBottomNav } from "@/components/BuyerBottomNav";
+import { BuyerAppShell } from "@/components/BuyerAppShell";
 
 const stats = [
   { value: "150+", label: "Team Members" },
@@ -28,8 +28,9 @@ const benefits = [
 
 export default function CareersPage() {
   return (
+    <BuyerAppShell>
     <div className="min-h-screen bg-[#080a0f] text-[#e2e8f0]">
-      <div className="max-w-lg mx-auto px-4 pb-32">
+      <div className="max-w-lg mx-auto px-4 ">
         {/* Header */}
         <header className="flex items-center gap-3 py-4">
           <Link href="/" className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 transition">
@@ -116,8 +117,7 @@ export default function CareersPage() {
           </div>
         </section>
       </div>
-
-      <BuyerBottomNav />
     </div>
+    </BuyerAppShell>
   );
 }
