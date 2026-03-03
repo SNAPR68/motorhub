@@ -145,6 +145,13 @@ async function main() {
   const SEDAN = "/cars/sedan.jpg";
   const KIA = "/cars/seltos.jpg";
   const BREZZA = "/cars/brezza.jpg";
+  const ERTIGA = "/cars/ertiga.jpg";
+  const I20 = "/cars/i20.jpg";
+  const PUNCH = "/cars/punch.jpg";
+  const THAR = "/cars/thar.jpg";
+  const HECTOR = "/cars/hector.jpg";
+  const SONET = "/cars/sonet.jpg";
+  const HYRYDER = "/cars/hyryder.jpg";
 
   const vehiclesData = [
     {
@@ -444,9 +451,7 @@ async function main() {
     console.log(`  ✓ Brand: ${brand.name}`);
   }
 
-  // Helper for Unsplash URLs (WM replaced with local images)
-  const UU = (id: string, w = 800) =>
-    `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
+  // No more Unsplash URLs -- all images are local in /public/cars/
 
   const modelsData: Array<{
     slug: string; brand: string; name: string; fullName: string;
@@ -460,8 +465,8 @@ async function main() {
     {
       slug: "brezza", brand: "maruti", name: "Brezza", fullName: "Maruti Suzuki Brezza",
       category: "SUV",
-      image: "/cars/brezza.jpg",
-      gallery: ["/cars/brezza.jpg", UU("1494976388531-d1058494cdd8"), UU("1503376780353-7e6692767b70")],
+      image: BREZZA,
+      gallery: [BREZZA],
       startingPrice: 799000, startingPriceDisplay: "₹7.99 L", rating: 4.2, reviewCount: 3840,
       year: 2024, fuelTypes: ["Petrol"], transmissions: ["Manual", "Automatic"],
       mileage: "19.8 km/l", engine: "1.5L K15C", power: "103 bhp", seating: 5, bodyType: "SUV",
@@ -472,8 +477,8 @@ async function main() {
     {
       slug: "swift", brand: "maruti", name: "Swift", fullName: "Maruti Suzuki Swift",
       category: "HATCHBACK",
-      image: "/cars/swift.jpg",
-      gallery: ["/cars/swift.jpg", UU("1494976388531-d1058494cdd8")],
+      image: SWIFT,
+      gallery: [SWIFT],
       startingPrice: 659000, startingPriceDisplay: "₹6.59 L", rating: 4.3, reviewCount: 6120,
       year: 2024, fuelTypes: ["Petrol", "CNG"], transmissions: ["Manual", "AMT"],
       mileage: "24.8 km/l", engine: "1.2L Z12E", power: "81 bhp", seating: 5, bodyType: "Hatchback",
@@ -484,8 +489,8 @@ async function main() {
     {
       slug: "ertiga", brand: "maruti", name: "Ertiga", fullName: "Maruti Suzuki Ertiga",
       category: "MPV",
-      image: UU("1558618666-fcd25c85cd64"),
-      gallery: [UU("1558618666-fcd25c85cd64")],
+      image: ERTIGA,
+      gallery: [ERTIGA],
       startingPrice: 886000, startingPriceDisplay: "₹8.86 L", rating: 4.1, reviewCount: 2780,
       year: 2024, fuelTypes: ["Petrol", "CNG"], transmissions: ["Manual", "Automatic"],
       mileage: "20.3 km/l", engine: "1.5L K15C", power: "103 bhp", seating: 7, bodyType: "MPV",
@@ -496,8 +501,8 @@ async function main() {
     {
       slug: "creta", brand: "hyundai", name: "Creta", fullName: "Hyundai Creta",
       category: "SUV",
-      image: "/cars/creta.jpg",
-      gallery: ["/cars/creta.jpg", UU("1494976388531-d1058494cdd8"), UU("1503376780353-7e6692767b70")],
+      image: CRETA,
+      gallery: [CRETA],
       startingPrice: 1099900, startingPriceDisplay: "₹11.0 L", rating: 4.4, reviewCount: 9210,
       year: 2024, fuelTypes: ["Petrol", "Diesel", "Electric"], transmissions: ["Manual", "Automatic", "DCT"],
       mileage: "17.4 km/l", engine: "1.5L Petrol / 1.5L Diesel", power: "115 bhp (petrol)",
@@ -508,8 +513,8 @@ async function main() {
     {
       slug: "i20", brand: "hyundai", name: "i20", fullName: "Hyundai i20",
       category: "HATCHBACK",
-      image: UU("1503376780353-7e6692767b70"),
-      gallery: [UU("1503376780353-7e6692767b70")],
+      image: I20,
+      gallery: [I20],
       startingPrice: 722000, startingPriceDisplay: "₹7.22 L", rating: 4.2, reviewCount: 4380,
       year: 2024, fuelTypes: ["Petrol", "Diesel", "CNG"], transmissions: ["Manual", "IVT", "DCT"],
       mileage: "20.35 km/l", engine: "1.2L / 1.0L Turbo", power: "88 bhp / 120 bhp",
@@ -520,8 +525,8 @@ async function main() {
     {
       slug: "nexon", brand: "tata", name: "Nexon", fullName: "Tata Nexon",
       category: "SUV",
-      image: "/cars/nexon.jpg",
-      gallery: ["/cars/nexon.jpg", UU("1494976388531-d1058494cdd8")],
+      image: NEXON,
+      gallery: [NEXON],
       startingPrice: 799000, startingPriceDisplay: "₹7.99 L", rating: 4.3, reviewCount: 7540,
       year: 2024, fuelTypes: ["Petrol", "Diesel"], transmissions: ["Manual", "Automatic", "AMT"],
       mileage: "17.44 km/l", engine: "1.2L Turbo / 1.5L Diesel", power: "120 bhp / 115 bhp",
@@ -532,8 +537,8 @@ async function main() {
     {
       slug: "nexon-ev", brand: "tata", name: "Nexon EV", fullName: "Tata Nexon EV",
       category: "EV",
-      image: "/cars/nexon-ev.jpg",
-      gallery: ["/cars/nexon-ev.jpg"],
+      image: NEXON_EV,
+      gallery: [NEXON_EV],
       startingPrice: 1399000, startingPriceDisplay: "₹13.99 L", rating: 4.2, reviewCount: 3120,
       year: 2024, fuelTypes: ["Electric"], transmissions: ["Automatic"],
       mileage: "489 km range", engine: "40.5 kWh battery", power: "143 bhp",
@@ -544,8 +549,8 @@ async function main() {
     {
       slug: "punch", brand: "tata", name: "Punch", fullName: "Tata Punch",
       category: "SUV",
-      image: UU("1558618666-fcd25c85cd64"),
-      gallery: [UU("1558618666-fcd25c85cd64")],
+      image: PUNCH,
+      gallery: [PUNCH],
       startingPrice: 599000, startingPriceDisplay: "₹5.99 L", rating: 4.1, reviewCount: 5490,
       year: 2024, fuelTypes: ["Petrol", "CNG"], transmissions: ["Manual", "AMT"],
       mileage: "18.82 km/l", engine: "1.2L Revotron", power: "86 bhp",
@@ -556,8 +561,8 @@ async function main() {
     {
       slug: "xuv700", brand: "mahindra", name: "XUV700", fullName: "Mahindra XUV700",
       category: "SUV",
-      image: "/cars/xuv700.jpg",
-      gallery: ["/cars/xuv700.jpg"],
+      image: XUV700,
+      gallery: [XUV700],
       startingPrice: 1399900, startingPriceDisplay: "₹13.99 L", rating: 4.5, reviewCount: 4820,
       year: 2024, fuelTypes: ["Petrol", "Diesel"], transmissions: ["Manual", "Automatic"],
       mileage: "15.14 km/l", engine: "2.0L Turbo / 2.2L mHawk Diesel", power: "200 bhp / 185 bhp",
@@ -568,8 +573,8 @@ async function main() {
     {
       slug: "thar", brand: "mahindra", name: "Thar", fullName: "Mahindra Thar",
       category: "SUV",
-      image: UU("1533473359307-62f2c0f2e8c4"),
-      gallery: [UU("1533473359307-62f2c0f2e8c4")],
+      image: THAR,
+      gallery: [THAR],
       startingPrice: 1149000, startingPriceDisplay: "₹11.49 L", rating: 4.4, reviewCount: 6210,
       year: 2024, fuelTypes: ["Petrol", "Diesel"], transmissions: ["Manual", "Automatic"],
       mileage: "15.2 km/l", engine: "2.0L / 2.2L", power: "150 bhp / 130 bhp",
@@ -580,8 +585,8 @@ async function main() {
     {
       slug: "city", brand: "honda", name: "City", fullName: "Honda City",
       category: "SEDAN",
-      image: "/cars/sedan.jpg",
-      gallery: ["/cars/sedan.jpg"],
+      image: SEDAN,
+      gallery: [SEDAN],
       startingPrice: 1149900, startingPriceDisplay: "₹11.49 L", rating: 4.3, reviewCount: 5640,
       year: 2024, fuelTypes: ["Petrol", "Hybrid"], transmissions: ["Manual", "CVT"],
       mileage: "24.1 km/l", engine: "1.5L i-VTEC", power: "121 bhp",
@@ -592,8 +597,8 @@ async function main() {
     {
       slug: "fortuner", brand: "toyota", name: "Fortuner", fullName: "Toyota Fortuner",
       category: "SUV",
-      image: "/cars/fortuner.jpg",
-      gallery: ["/cars/fortuner.jpg"],
+      image: FORTUNER,
+      gallery: [FORTUNER],
       startingPrice: 3399000, startingPriceDisplay: "₹33.99 L", rating: 4.5, reviewCount: 3940,
       year: 2024, fuelTypes: ["Petrol", "Diesel"], transmissions: ["Manual", "Automatic"],
       mileage: "14.24 km/l", engine: "2.7L Petrol / 2.8L Diesel", power: "166 bhp / 204 bhp",
@@ -604,8 +609,8 @@ async function main() {
     {
       slug: "hyryder", brand: "toyota", name: "Urban Cruiser Hyryder", fullName: "Toyota Urban Cruiser Hyryder",
       category: "SUV",
-      image: UU("1502877338-d1b7a9e2b7c4"),
-      gallery: [UU("1502877338-d1b7a9e2b7c4")],
+      image: HYRYDER,
+      gallery: [HYRYDER],
       startingPrice: 1099000, startingPriceDisplay: "₹10.99 L", rating: 4.3, reviewCount: 1820,
       year: 2024, fuelTypes: ["Petrol", "Hybrid"], transmissions: ["Manual", "Automatic"],
       mileage: "27.97 km/l", engine: "1.5L TNGA / 1.5L Hybrid", power: "103 bhp / 116 bhp",
@@ -616,8 +621,8 @@ async function main() {
     {
       slug: "seltos", brand: "kia", name: "Seltos", fullName: "Kia Seltos",
       category: "SUV",
-      image: "/cars/seltos.jpg",
-      gallery: ["/cars/seltos.jpg"],
+      image: KIA,
+      gallery: [KIA],
       startingPrice: 1079900, startingPriceDisplay: "₹10.79 L", rating: 4.4, reviewCount: 6720,
       year: 2024, fuelTypes: ["Petrol", "Diesel"], transmissions: ["Manual", "Automatic", "DCT"],
       mileage: "16.5 km/l", engine: "1.5L / 1.5L Turbo / 1.5L Diesel", power: "115 bhp / 160 bhp / 116 bhp",
@@ -628,8 +633,8 @@ async function main() {
     {
       slug: "sonet", brand: "kia", name: "Sonet", fullName: "Kia Sonet",
       category: "SUV",
-      image: UU("1494976388531-d1058494cdd8"),
-      gallery: [UU("1494976388531-d1058494cdd8")],
+      image: SONET,
+      gallery: [SONET],
       startingPrice: 799900, startingPriceDisplay: "₹7.99 L", rating: 4.2, reviewCount: 4110,
       year: 2024, fuelTypes: ["Petrol", "Diesel", "CNG"], transmissions: ["Manual", "AMT", "DCT", "Torque Converter"],
       mileage: "18.2 km/l", engine: "1.2L / 1.0L Turbo / 1.5L Diesel", power: "83 bhp / 120 bhp / 100 bhp",
@@ -640,8 +645,8 @@ async function main() {
     {
       slug: "hector", brand: "mg", name: "Hector", fullName: "MG Hector",
       category: "SUV",
-      image: UU("1533473359307-62f2c0f2e8c4"),
-      gallery: [UU("1533473359307-62f2c0f2e8c4")],
+      image: HECTOR,
+      gallery: [HECTOR],
       startingPrice: 1399000, startingPriceDisplay: "₹13.99 L", rating: 4.1, reviewCount: 3280,
       year: 2024, fuelTypes: ["Petrol", "Diesel", "Hybrid"], transmissions: ["Manual", "Automatic"],
       mileage: "14.19 km/l", engine: "1.5L Turbo / 2.0L Diesel", power: "143 bhp / 170 bhp",

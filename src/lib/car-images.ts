@@ -1,31 +1,42 @@
 /**
  * Local car images — stored in /public/cars/
- * All images are from Unsplash (free license)
+ * Sources: Unsplash (free license), Wikimedia Commons (CC license)
  */
 
-// Maruti Suzuki Swift
+// Maruti Suzuki
 export const SWIFT = "/cars/swift.jpg";
-// Hyundai Creta
-export const CRETA = "/cars/creta.jpg";
-// Tata Nexon
-export const NEXON = "/cars/nexon.jpg";
-// Tata Nexon EV
-export const NEXON_EV = "/cars/nexon-ev.jpg";
-// Mahindra XUV700
-export const XUV700 = "/cars/xuv700.jpg";
-// Toyota Fortuner
-export const FORTUNER = "/cars/fortuner.jpg";
-// Honda City (Sedan)
-export const SEDAN = "/cars/sedan.jpg";
-// Kia Seltos
-export const KIA = "/cars/seltos.jpg";
-// Maruti Suzuki Brezza
 export const BREZZA = "/cars/brezza.jpg";
+export const ERTIGA = "/cars/ertiga.jpg";
 
-// Interior / dashboard (Unsplash — generic)
-const U = (id: string, w = 800) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&q=80`;
-export const INTERIOR = U("1503376780353-7e6692767b70");
+// Hyundai
+export const CRETA = "/cars/creta.jpg";
+export const I20 = "/cars/i20.jpg";
+
+// Tata Motors
+export const NEXON = "/cars/nexon.jpg";
+export const NEXON_EV = "/cars/nexon-ev.jpg";
+export const PUNCH = "/cars/punch.jpg";
+
+// Mahindra
+export const XUV700 = "/cars/xuv700.jpg";
+export const THAR = "/cars/thar.jpg";
+
+// Toyota
+export const FORTUNER = "/cars/fortuner.jpg";
+export const HYRYDER = "/cars/hyryder.jpg";
+
+// Honda
+export const SEDAN = "/cars/sedan.jpg";
+
+// Kia
+export const KIA = "/cars/seltos.jpg";
+export const SONET = "/cars/sonet.jpg";
+
+// MG Motor
+export const HECTOR = "/cars/hector.jpg";
+
+// Interior / dashboard placeholder
+export const INTERIOR = "/cars/creta.jpg";
 
 /** Returns resized URL for different use cases */
 export function resizeUrl(url: string, width: number): string {
