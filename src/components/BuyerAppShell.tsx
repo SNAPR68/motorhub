@@ -105,8 +105,8 @@ export function BuyerAppShell({ children }: { children: React.ReactNode }) {
           <BuyerBottomNav />
         </div>
 
-        {/* Desktop: full width content */}
-        <div className="hidden md:block min-h-screen">
+        {/* Desktop: contained width content */}
+        <div className="hidden md:block min-h-screen max-w-5xl mx-auto px-6 lg:px-10 py-6">
           {children}
         </div>
       </div>

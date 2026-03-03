@@ -144,7 +144,7 @@ export default function HomePage() {
     >
       {/* ─── HEADER ─── */}
       <header
-        className="sticky top-0 z-50 flex items-center justify-between px-4 h-14 border-b border-white/5"
+        className="sticky top-0 z-50 flex items-center justify-between px-4 h-14 border-b border-white/5 md:hidden"
         style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
       >
         <Link href="/" className="flex items-center gap-2">
@@ -182,7 +182,7 @@ export default function HomePage() {
       </header>
 
       {/* ─── HERO CAROUSEL ─── */}
-      <section className="relative w-full overflow-hidden" style={{ height: "480px", maxHeight: "60vh" }}>
+      <section className="relative w-full overflow-hidden md:rounded-2xl" style={{ height: "480px", maxHeight: "60vh" }}>
         {/* Carousel slides */}
         {HERO_SLIDES.map((slide, i) => (
           <div
@@ -194,7 +194,7 @@ export default function HomePage() {
               src={slide.src}
               alt={slide.alt}
               fill
-              sizes="(max-width: 768px) 100vw, 512px"
+              sizes="(max-width: 768px) 100vw, 1024px"
               className="object-cover"
               priority={i === 0}
               unoptimized
@@ -380,8 +380,8 @@ export default function HomePage() {
       )}
 
       {/* ─── HERO SEARCH ─── */}
-      <section className="px-4 pt-6 pb-5" style={{ background: "linear-gradient(180deg, rgba(17,82,212,0.08) 0%, transparent 100%)" }}>
-        <h1 className="text-2xl font-bold text-white leading-tight mb-1" style={{ fontFamily: "'Noto Serif', serif" }}>
+      <section className="px-4 md:px-0 pt-6 pb-5" style={{ background: "linear-gradient(180deg, rgba(17,82,212,0.08) 0%, transparent 100%)" }}>
+        <h1 className="text-2xl md:text-3xl font-bold text-white leading-tight mb-1" style={{ fontFamily: "'Noto Serif', serif" }}>
           Find Your Perfect Car
         </h1>
         <p className="text-sm text-slate-400 mb-4">New, used &amp; upcoming cars — all in one place</p>
@@ -472,7 +472,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── TRUST STRIP ─── */}
-      <section className="mx-4 mb-5 rounded-2xl px-4 py-3 border border-blue-500/15" style={{ background: "rgba(17,82,212,0.05)" }}>
+      <section className="mx-4 md:mx-0 mb-5 rounded-2xl px-4 py-3 border border-blue-500/15" style={{ background: "rgba(17,82,212,0.05)" }}>
         <div className="grid grid-cols-4 gap-1 text-center">
           {[{ v: "50K+", l: "New Cars" }, { v: "12K+", l: "Used Cars" }, { v: "2.5K+", l: "Dealers" }, { v: "4.8", l: "Rated" }].map((s) => (
             <div key={s.l}>
@@ -484,13 +484,13 @@ export default function HomePage() {
       </section>
 
       {/* ─── QUICK TOOLS ─── */}
-      <section className="px-4 mb-5">
-        <div className="flex gap-2 overflow-x-auto no-scrollbar">
+      <section className="px-4 md:px-0 mb-5">
+        <div className="flex gap-2 overflow-x-auto no-scrollbar md:grid md:grid-cols-6 md:overflow-visible">
           {QUICK_TOOLS.map((tool) => (
             <Link
               key={tool.label}
               href={tool.href}
-              className="flex flex-col items-center gap-1.5 rounded-2xl py-3 px-3 border border-white/6 shrink-0 transition-all active:scale-95"
+              className="flex flex-col items-center gap-1.5 rounded-2xl py-3 px-3 border border-white/6 shrink-0 md:shrink transition-all active:scale-95"
               style={{ background: "rgba(255,255,255,0.04)", minWidth: "72px" }}
             >
               <div
@@ -506,20 +506,20 @@ export default function HomePage() {
       </section>
 
       {/* ─── BROWSE BY BODY TYPE ─── */}
-      <section className="px-4 mb-5">
+      <section className="px-4 md:px-0 mb-5">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-bold text-white">Browse by Body Type</h2>
+          <h2 className="text-sm md:text-base font-bold text-white">Browse by Body Type</h2>
           <div className="flex items-center gap-4">
             <Link href="/interests" className="text-xs font-semibold" style={{ color: "#1152d4" }}>Curated for You</Link>
             <Link href="/new-cars" className="text-xs font-semibold" style={{ color: "#1152d4" }}>View all</Link>
           </div>
         </div>
-        <div className="flex gap-3 overflow-x-auto no-scrollbar">
+        <div className="flex gap-3 overflow-x-auto no-scrollbar md:grid md:grid-cols-6 md:overflow-visible">
           {BODY_TYPES.map((bt) => (
             <Link
               key={bt.value}
               href={`/new-cars?body=${bt.value}`}
-              className="flex flex-col items-center gap-2 rounded-2xl py-3 px-4 border border-white/6 shrink-0 transition-all active:scale-95"
+              className="flex flex-col items-center gap-2 rounded-2xl py-3 px-4 border border-white/6 shrink-0 md:shrink transition-all active:scale-95"
               style={{ background: "rgba(255,255,255,0.04)", minWidth: "72px" }}
             >
               <span className="text-2xl">{bt.icon}</span>
@@ -531,21 +531,21 @@ export default function HomePage() {
 
       {/* ─── POPULAR NEW CARS ─── */}
       <section className="mb-5">
-        <div className="flex items-center justify-between px-4 mb-3">
+        <div className="flex items-center justify-between px-4 md:px-0 mb-3">
           <div>
-            <h2 className="text-sm font-bold text-white">Popular New Cars</h2>
+            <h2 className="text-sm md:text-base font-bold text-white">Popular New Cars</h2>
             <p className="text-[11px] text-slate-500">Top picks in India right now</p>
           </div>
           <Link href="/new-cars" className="text-xs font-semibold flex items-center gap-0.5" style={{ color: "#1152d4" }}>
             See all <MaterialIcon name="chevron_right" className="text-[14px]" />
           </Link>
         </div>
-        <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory">
+        <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:snap-none md:px-0">
           {popularModels.map((car) => (
             <Link
               key={car.slug}
               href={`/${car.brand.slug}/${car.slug}`}
-              className="shrink-0 w-44 snap-start rounded-2xl overflow-hidden border border-white/6 transition-all active:scale-[0.98] block"
+              className="shrink-0 w-44 md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/6 transition-all active:scale-[0.98] block"
               style={{ background: "rgba(255,255,255,0.04)" }}
             >
               <div className="relative" style={{ aspectRatio: "4/3" }}>
@@ -582,9 +582,9 @@ export default function HomePage() {
       </section>
 
       {/* ─── BROWSE BY BUDGET ─── */}
-      <section className="px-4 mb-5">
+      <section className="px-4 md:px-0 mb-5">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-bold text-white">Browse by Budget</h2>
+          <h2 className="text-sm md:text-base font-bold text-white">Browse by Budget</h2>
           <Link href="/new-cars" className="text-xs font-semibold" style={{ color: "#1152d4" }}>See all</Link>
         </div>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
@@ -603,9 +603,9 @@ export default function HomePage() {
       </section>
 
       {/* ─── POPULAR BRANDS ─── */}
-      <section className="px-4 mb-5">
+      <section className="px-4 md:px-0 mb-5">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-bold text-white">Popular Brands</h2>
+          <h2 className="text-sm md:text-base font-bold text-white">Popular Brands</h2>
           <Link href="/new-cars" className="text-xs font-semibold" style={{ color: "#1152d4" }}>All brands</Link>
         </div>
         <div className="grid grid-cols-4 md:grid-cols-8 gap-2.5">
@@ -631,21 +631,21 @@ export default function HomePage() {
       {/* ─── RECENTLY LISTED USED CARS (from DB) ─── */}
       {!usedCarsLoading && usedCars.length > 0 && (
         <section className="mb-5">
-          <div className="flex items-center justify-between px-4 mb-3">
+          <div className="flex items-center justify-between px-4 md:px-0 mb-3">
             <div>
-              <h2 className="text-sm font-bold text-white">Recently Listed Used Cars</h2>
+              <h2 className="text-sm md:text-base font-bold text-white">Recently Listed Used Cars</h2>
               <p className="text-[11px] text-slate-500">Certified &amp; inspected in {selectedCity}</p>
             </div>
             <Link href="/used-cars" className="text-xs font-semibold flex items-center gap-0.5" style={{ color: "#10b981" }}>
               See all <MaterialIcon name="chevron_right" className="text-[14px]" />
             </Link>
           </div>
-          <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory">
+          <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:snap-none md:px-0">
             {usedCars.map((car) => (
               <Link
                 key={car.id}
                 href={`/used-cars/details/${car.id}`}
-                className="shrink-0 w-44 snap-start rounded-2xl overflow-hidden border border-white/6 transition-all active:scale-[0.98] block"
+                className="shrink-0 w-44 md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/6 transition-all active:scale-[0.98] block"
                 style={{ background: "rgba(255,255,255,0.04)" }}
               >
                 <div className="relative" style={{ aspectRatio: "4/3" }}>
@@ -684,45 +684,46 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* ─── USED CARS BANNER ─── */}
-      <section className="px-4 mb-4">
-        <Link
-          href="/used-cars"
-          className="flex items-center gap-4 rounded-2xl p-4 border border-emerald-500/20 transition-all active:scale-[0.99] block"
-          style={{ background: "linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.03) 100%)" }}
-        >
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(16,185,129,0.15)" }}>
-            <MaterialIcon name="directions_car" className="text-[26px] text-emerald-400" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-bold text-white">Certified Used Cars</p>
-            <p className="text-xs text-slate-400 mt-0.5">Inspected, warranted &amp; ready to drive</p>
-            <p className="text-[10px] text-emerald-400 font-semibold mt-1">Browse in {selectedCity}</p>
-          </div>
-          <MaterialIcon name="arrow_forward_ios" className="text-[14px] text-emerald-400 shrink-0" />
-        </Link>
-      </section>
+      {/* ─── BANNERS ─── */}
+      <div className="md:grid md:grid-cols-2 md:gap-4">
+        <section className="px-4 md:px-0 mb-4 md:mb-0">
+          <Link
+            href="/used-cars"
+            className="flex items-center gap-4 rounded-2xl p-4 border border-emerald-500/20 transition-all active:scale-[0.99] block h-full"
+            style={{ background: "linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.03) 100%)" }}
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(16,185,129,0.15)" }}>
+              <MaterialIcon name="directions_car" className="text-[26px] text-emerald-400" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-white">Certified Used Cars</p>
+              <p className="text-xs text-slate-400 mt-0.5">Inspected, warranted &amp; ready to drive</p>
+              <p className="text-[10px] text-emerald-400 font-semibold mt-1">Browse in {selectedCity}</p>
+            </div>
+            <MaterialIcon name="arrow_forward_ios" className="text-[14px] text-emerald-400 shrink-0" />
+          </Link>
+        </section>
 
-      {/* ─── AI CONCIERGE BANNER ─── */}
-      <section className="px-4 mb-5">
-        <Link
-          href="/concierge"
-          className="flex items-center gap-4 rounded-2xl p-4 border border-blue-500/20 transition-all active:scale-[0.99] block"
-          style={{ background: "linear-gradient(135deg, rgba(17,82,212,0.1) 0%, rgba(17,82,212,0.04) 100%)" }}
-        >
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(17,82,212,0.18)" }}>
-            <MaterialIcon name="smart_toy" className="text-[26px]" style={{ color: "#1152d4" }} />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-bold text-white">AI Car Concierge</p>
-            <p className="text-xs text-slate-400 mt-0.5">Tell us your budget &amp; needs — AI finds your match</p>
-          </div>
-          <MaterialIcon name="arrow_forward_ios" className="text-[14px] text-blue-400 shrink-0" />
-        </Link>
-      </section>
+        <section className="px-4 md:px-0 mb-5 md:mb-0">
+          <Link
+            href="/concierge"
+            className="flex items-center gap-4 rounded-2xl p-4 border border-blue-500/20 transition-all active:scale-[0.99] block h-full"
+            style={{ background: "linear-gradient(135deg, rgba(17,82,212,0.1) 0%, rgba(17,82,212,0.04) 100%)" }}
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(17,82,212,0.18)" }}>
+              <MaterialIcon name="smart_toy" className="text-[26px]" style={{ color: "#1152d4" }} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-white">AI Car Concierge</p>
+              <p className="text-xs text-slate-400 mt-0.5">Tell us your budget &amp; needs — AI finds your match</p>
+            </div>
+            <MaterialIcon name="arrow_forward_ios" className="text-[14px] text-blue-400 shrink-0" />
+          </Link>
+        </section>
+      </div>
 
       {/* ─── DEALER / SELL CTA ─── */}
-      <section className="px-4 mb-5">
+      <section className="px-4 md:px-0 mb-5">
         <div className="rounded-2xl p-4 border border-white/7" style={{ background: "rgba(255,255,255,0.03)" }}>
           <div className="flex items-center gap-3 mb-4">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(16,185,129,0.12)" }}>
@@ -747,7 +748,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── EXPLORE MORE ─── */}
-      <section className="px-4 mb-5">
+      <section className="px-4 md:px-0 mb-5">
         <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Explore More</p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
           {[
@@ -777,7 +778,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── FOOTER ─── */}
-      <footer className="px-4 pb-4">
+      <footer className="px-4 md:px-0 pb-4">
         <div className="rounded-2xl p-4 border border-white/5" style={{ background: "rgba(255,255,255,0.02)" }}>
           <div className="flex items-center gap-2 mb-3">
             <MaterialIcon name="token" className="text-[18px]" style={{ color: "#1152d4" }} />
