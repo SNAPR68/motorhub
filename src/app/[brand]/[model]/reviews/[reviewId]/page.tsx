@@ -88,7 +88,7 @@ function buildReviewData(
   const reviewerName = isExpert
     ? EXPERT_NAMES[seed % EXPERT_NAMES.length]
     : USER_NAMES[seed % USER_NAMES.length];
-  const reviewerOrg = isExpert ? "Autovinci Expert Team" : undefined;
+  const reviewerOrg = isExpert ? "CaroBest Expert Team" : undefined;
   const reviewerCity = !isExpert ? CITIES[seed % CITIES.length] : undefined;
   const date = generateDate(seed);
 

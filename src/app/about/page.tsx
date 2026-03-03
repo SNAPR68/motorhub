@@ -32,7 +32,7 @@ export default function AboutPage() {
           <Link href="/" className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 transition">
             <MaterialIcon name="arrow_back" className="text-xl" />
           </Link>
-          <h1 className="text-lg font-semibold">About Autovinci</h1>
+          <h1 className="text-lg font-semibold">About CaroBest</h1>
         </header>
 
         {/* Hero */}
@@ -53,7 +53,7 @@ export default function AboutPage() {
           <h3 className="text-lg font-semibold mb-3">Our Story</h3>
           <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
             <p className="text-sm text-slate-300 leading-relaxed">
-              Founded in 2024, Autovinci was born from a simple frustration: buying a used car in India shouldn&apos;t feel like a gamble. We set out to build a marketplace where AI does the heavy lifting -- verifying cars, predicting fair prices, and matching buyers with the right vehicle -- so you can buy with confidence.
+              Founded in 2024, CaroBest was born from a simple frustration: buying a used car in India shouldn&apos;t feel like a gamble. We set out to build a marketplace where AI does the heavy lifting -- verifying cars, predicting fair prices, and matching buyers with the right vehicle -- so you can buy with confidence.
             </p>
           </div>
         </section>

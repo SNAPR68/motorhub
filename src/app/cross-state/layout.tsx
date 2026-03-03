@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Buy used cars from any state in India. Complete RC transfer, insurance, and logistics handled end-to-end.",
   openGraph: {
-    title: "CrossState Express — Autovinci",
+    title: "CrossState Express — CaroBest",
     description:
       "Buy used cars from any Indian state with end-to-end RC transfer and logistics.",
   },

@@ -1,6 +1,6 @@
-/* Autovinci — Market Insights Feed API
+/* CaroBest — Market Insights Feed API
  * Cross-dealer intelligence that gets more valuable with scale.
- * "Nexon demand up 23% this week" — only possible on Autovinci.
+ * "Nexon demand up 23% this week" — only possible on CaroBest.
  */
 
 import { NextResponse } from "next/server";

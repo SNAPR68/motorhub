@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Compare specifications, features, and prices of used cars side-by-side. Make informed buying decisions with AI-powered insights.",
   openGraph: {
-    title: "Compare Cars — Autovinci",
+    title: "Compare Cars — CaroBest",
     description:
       "Side-by-side comparison of used car specifications, features, and pricing.",
   },

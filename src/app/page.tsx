@@ -15,7 +15,7 @@ import {
 } from "@/lib/car-catalog";
 import { fetchCarBrands, fetchCarModels, type ApiBrand, type ApiCarModel } from "@/lib/api";
 
-/* ─── Autovinci Homepage — CarDekho-style consumer marketplace ─── */
+/* ─── CaroBest Homepage — CarDekho-style consumer marketplace ─── */
 
 const POPULAR_SEARCHES_NEW = ["Brezza", "Creta", "Nexon", "Swift", "Seltos", "XUV700"];
 const POPULAR_SEARCHES_USED = ["Creta 2021", "Swift 2020", "Nexon Diesel", "City 2022", "i20"];
@@ -80,7 +80,7 @@ export default function HomePage() {
 
   // Load city from localStorage
   useEffect(() => {
-    const saved = localStorage.getItem("autovinci_city");
+    const saved = localStorage.getItem("carobest_city");
     if (saved) setSelectedCity(saved);
   }, []);
 
@@ -113,7 +113,7 @@ export default function HomePage() {
 
   const handleCitySelect = (city: string) => {
     setSelectedCity(city);
-    localStorage.setItem("autovinci_city", city);
+    localStorage.setItem("carobest_city", city);
     setShowCityPicker(false);
     setCitySearch("");
   };
@@ -149,7 +149,7 @@ export default function HomePage() {
         <Link href="/" className="flex items-center gap-2">
           <MaterialIcon name="token" className="text-[24px]" style={{ color: "#1152d4" }} />
           <span className="text-lg font-bold text-white" style={{ fontFamily: "'Noto Serif', serif" }}>
-            Autovinci
+            CaroBest
           </span>
         </Link>
 
@@ -780,7 +780,7 @@ export default function HomePage() {
         <div className="rounded-2xl p-4 border border-white/5" style={{ background: "rgba(255,255,255,0.02)" }}>
           <div className="flex items-center gap-2 mb-3">
             <MaterialIcon name="token" className="text-[18px]" style={{ color: "#1152d4" }} />
-            <span className="text-sm font-bold text-white" style={{ fontFamily: "'Noto Serif', serif" }}>Autovinci</span>
+            <span className="text-sm font-bold text-white" style={{ fontFamily: "'Noto Serif', serif" }}>CaroBest</span>
           </div>
           <p className="text-[11px] text-slate-500 leading-relaxed mb-3">
             India&apos;s AI-powered car marketplace. Buy, sell &amp; compare new and used cars with confidence.
@@ -798,7 +798,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="border-t border-white/5 pt-3">
-            <p className="text-[10px] text-slate-700">&copy; 2026 Autovinci Technologies Pvt. Ltd.</p>
+            <p className="text-[10px] text-slate-700">&copy; 2026 The Singularity Covenant LLP</p>
           </div>
         </div>
       </footer>

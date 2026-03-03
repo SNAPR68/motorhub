@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Exchange your current car for a different one instantly. AI-powered matching, fair valuations, and seamless swap experience.",
   openGraph: {
-    title: "SwapDirect — Autovinci",
+    title: "SwapDirect — CaroBest",
     description:
       "Instant car exchange with AI-powered matching and fair valuations.",
   },

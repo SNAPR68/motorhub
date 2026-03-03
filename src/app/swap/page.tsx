@@ -86,7 +86,7 @@ export default function SwapDirectPage() {
         <div className="rounded-2xl p-5 border border-emerald-500/20 relative overflow-hidden" style={{ background: "rgba(16,185,129,0.06)" }}>
           <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full" style={{ background: "rgba(16,185,129,0.12)", filter: "blur(24px)" }} />
           <div className="absolute -left-6 -bottom-6 w-24 h-24 rounded-full" style={{ background: "rgba(17,82,212,0.10)", filter: "blur(20px)" }} />
-          <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 mb-2">SwapDirect by Autovinci</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 mb-2">SwapDirect by CaroBest</p>
           <h2 className="text-2xl font-black text-white leading-tight mb-1">Swap Your Car<br />Directly</h2>
           <p className="text-xs text-slate-400">Exchange cars peer-to-peer. Skip the dealer. Save lakhs.</p>
           <div className="flex items-center gap-3 mt-4">

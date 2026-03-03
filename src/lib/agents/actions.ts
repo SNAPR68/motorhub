@@ -1,4 +1,4 @@
-/* Autovinci — Agent Actions
+/* CaroBest — Agent Actions
  * Individual autonomous actions triggered by the event processor.
  * Each action is self-contained: reads state, makes decisions, writes results.
  */

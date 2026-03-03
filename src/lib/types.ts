@@ -1,4 +1,4 @@
-/* Autovinci — Shared TypeScript Interfaces */
+/* CaroBest — Shared TypeScript Interfaces */
 
 // ── Vehicle ──
 

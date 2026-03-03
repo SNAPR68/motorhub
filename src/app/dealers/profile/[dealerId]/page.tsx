@@ -161,7 +161,7 @@ export default function DealerProfilePage({
                 <span className="inline-flex items-center gap-1 text-xs font-semibold rounded-full px-2.5 py-0.5"
                   style={{ background: "rgba(43,173,238,0.15)", color: "#2badee" }}>
                   <MaterialIcon name="workspace_premium" fill className="text-[12px]" />
-                  Autovinci Verified: 85/100
+                  CaroBest Verified: 85/100
                 </span>
               </div>
             </div>

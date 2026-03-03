@@ -20,7 +20,7 @@ type WishlistAction =
   | { type: "HYDRATE"; ids: string[] }
   | { type: "MARK_SYNCED" };
 
-const STORAGE_KEY = "autovinci_wishlist";
+const STORAGE_KEY = "carobest_wishlist";
 
 function reducer(state: WishlistState, action: WishlistAction): WishlistState {
   switch (action.type) {

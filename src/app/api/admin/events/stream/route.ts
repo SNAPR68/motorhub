@@ -1,4 +1,4 @@
-/* Autovinci — Real-Time Event Feed (Server-Sent Events)
+/* CaroBest — Real-Time Event Feed (Server-Sent Events)
  * Streams PlatformEvents to admin dashboard in real-time.
  * Polls DB every 2 seconds for new events since last check.
  * Admin-only: requires admin auth.

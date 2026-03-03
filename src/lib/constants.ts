@@ -1,4 +1,4 @@
-/* Autovinci — Constants & Navigation */
+/* CaroBest — Constants & Navigation */
 
 import type { NavItem, FilterCategory } from "./types";
 

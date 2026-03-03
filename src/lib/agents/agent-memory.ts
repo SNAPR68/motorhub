@@ -1,4 +1,4 @@
-/* Autovinci — Agent Memory System
+/* CaroBest — Agent Memory System
  * Tracks which auto-reply templates got buyer responses per dealer.
  * Adapts future auto-replies based on what works best.
  * Implements Thompson Sampling (A/B testing) for template selection.

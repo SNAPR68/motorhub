@@ -1,4 +1,4 @@
-/* Autovinci — Dealer Benchmarks API
+/* CaroBest — Dealer Benchmarks API
  * Cross-dealer comparisons that improve with scale.
  * "Your conversion: 18%. Platform avg: 24%. Top dealers: 32%."
  * Network effect: more dealers = more accurate benchmarks.

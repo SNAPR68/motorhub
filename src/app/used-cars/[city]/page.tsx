@@ -11,7 +11,7 @@ export async function generateMetadata({
   const cityName = capitalize(city);
   return seoMeta({
     title: `Used Cars in ${cityName}`,
-    description: `Browse verified used cars in ${cityName}. Compare prices, check vehicle history, and buy with confidence on Autovinci.`,
+    description: `Browse verified used cars in ${cityName}. Compare prices, check vehicle history, and buy with confidence on CaroBest.`,
     path: `/used-cars/${city}`,
     keywords: [`used cars ${cityName}`, `second hand cars ${cityName}`, `buy used cars ${cityName}`],
   });

@@ -1,4 +1,4 @@
-/* Autovinci — Auth & Dealer TypeScript Interfaces */
+/* CaroBest — Auth & Dealer TypeScript Interfaces */
 
 // ── Roles ──
 

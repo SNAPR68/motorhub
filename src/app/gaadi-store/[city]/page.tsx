@@ -25,7 +25,7 @@ const CITY_STORES: Record<string, Store[]> = {
   mumbai: [
     {
       id: 1,
-      name: "Autovinci Experience Center — Andheri",
+      name: "CaroBest Experience Center — Andheri",
       address: "Ground Floor, Link Road, Andheri West, Mumbai 400053",
       timings: "10:00 AM - 8:00 PM (Mon-Sat), 11:00 AM - 6:00 PM (Sun)",
       services: ["Test Drive", "150-Point Inspection", "Instant Finance", "RC Transfer"],
@@ -33,7 +33,7 @@ const CITY_STORES: Record<string, Store[]> = {
     },
     {
       id: 2,
-      name: "Autovinci Studio — Powai",
+      name: "CaroBest Studio — Powai",
       address: "Hiranandani Gardens, Central Avenue, Powai, Mumbai 400076",
       timings: "10:00 AM - 8:00 PM (Mon-Sat), Closed Sunday",
       services: ["Test Drive", "150-Point Inspection", "Insurance"],
@@ -41,7 +41,7 @@ const CITY_STORES: Record<string, Store[]> = {
     },
     {
       id: 3,
-      name: "Autovinci Hub — Thane",
+      name: "CaroBest Hub — Thane",
       address: "Viviana Mall, Eastern Express Highway, Thane West 400601",
       timings: "11:00 AM - 9:00 PM (All Days)",
       services: ["Test Drive", "Instant Finance", "Accessories"],
@@ -53,7 +53,7 @@ const CITY_STORES: Record<string, Store[]> = {
 const DEFAULT_STORES: Store[] = [
   {
     id: 10,
-    name: "Autovinci Experience Center — City Center",
+    name: "CaroBest Experience Center — City Center",
     address: "Main Road, City Center, Near Central Mall",
     timings: "10:00 AM - 8:00 PM (Mon-Sat), 11:00 AM - 6:00 PM (Sun)",
     services: ["Test Drive", "150-Point Inspection", "Instant Finance", "RC Transfer"],
@@ -61,7 +61,7 @@ const DEFAULT_STORES: Store[] = [
   },
   {
     id: 11,
-    name: "Autovinci Studio — East",
+    name: "CaroBest Studio — East",
     address: "IT Park Road, Eastern Hub, Near Metro Station",
     timings: "10:00 AM - 8:00 PM (Mon-Sat), Closed Sunday",
     services: ["Test Drive", "150-Point Inspection", "Insurance"],
@@ -69,7 +69,7 @@ const DEFAULT_STORES: Store[] = [
   },
   {
     id: 12,
-    name: "Autovinci Hub — West",
+    name: "CaroBest Hub — West",
     address: "Ring Road, Western Plaza, Near Highway Junction",
     timings: "11:00 AM - 9:00 PM (All Days)",
     services: ["Test Drive", "Instant Finance", "Accessories"],

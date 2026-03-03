@@ -1,4 +1,4 @@
-/* Autovinci — Health Check Endpoint
+/* CaroBest — Health Check Endpoint
  * Returns system health status for monitoring services (UptimeRobot, Vercel, etc.)
  *
  * Checks:

@@ -77,7 +77,7 @@ export default function PlansPage() {
           key: order.key,
           amount: order.amount,
           currency: order.currency,
-          name: "Autovinci",
+          name: "CaroBest",
           description: `${PLAN_KEY_MAP[planDbKey]} Plan - ${billing}`,
           order_id: order.orderId,
           handler: async (response: {

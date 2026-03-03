@@ -153,7 +153,7 @@ export default function SettingsPage() {
         </button>
 
         <p className="text-center text-[10px] text-slate-500">
-          Autovinci v2.1.0 &bull; Made with AI in India
+          CaroBest v2.1.0 &bull; Made with AI in India
         </p>
       </main>
 

@@ -1,4 +1,4 @@
-/* Autovinci — useApi hook for client-side data fetching
+/* CaroBest — useApi hook for client-side data fetching
  * Features: auto-retry on 5xx, error code extraction, retry state
  */
 

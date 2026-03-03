@@ -77,7 +77,7 @@ export default function RegisterPage() {
 
         {/* Title */}
         <div className="mt-6 mb-8">
-          <h2 className="text-2xl font-bold">Join Autovinci</h2>
+          <h2 className="text-2xl font-bold">Join CaroBest</h2>
           <p className="text-slate-400 mt-1">Find your perfect car with AI-powered search</p>
         </div>
 

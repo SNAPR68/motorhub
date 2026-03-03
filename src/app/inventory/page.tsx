@@ -117,7 +117,7 @@ export default function InventoryPage() {
       <header className="sticky top-0 z-50 glass-panel border-b border-slate-800/50 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <MaterialIcon name="blur_on" className="text-[30px] text-[#137fec] font-bold" />
-          <h1 className="text-xl font-extrabold tracking-tight uppercase italic">Autovinci</h1>
+          <h1 className="text-xl font-extrabold tracking-tight uppercase italic">CaroBest</h1>
         </div>
         <div className="flex items-center gap-4">
           <button

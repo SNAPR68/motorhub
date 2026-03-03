@@ -1,4 +1,4 @@
-# Autovinci — Forensic Project Audit
+# CaroBest — Forensic Project Audit
 
 > **Generated:** February 2026  
 > **Purpose:** Complete project structure, tech stack, user journeys, and built vs. needs building vs. broken status.
@@ -8,7 +8,7 @@
 ## 1. Project Structure (Forensic Order)
 
 ```
-autovinci-web/
+carobest-web/
 ├── .claude/                      # Claude IDE config
 │   ├── launch.json
 │   ├── settings.local.json
@@ -208,7 +208,7 @@ autovinci-web/
 │   │   └── validation.ts
 │   └── middleware.ts
 ├── stitch/                       # 75+ design screens (source of truth)
-│   ├── autovinci_luxury_landing_page/
+│   ├── carobest_luxury_landing_page/
 │   ├── dealer_portal_login/
 │   ├── buyer_portal_login/
 │   ├── dealer_executive_dashboard_1/

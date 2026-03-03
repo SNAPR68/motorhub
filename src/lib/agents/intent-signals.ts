@@ -1,4 +1,4 @@
-/* Autovinci — Buyer Intent Signal Extraction
+/* CaroBest — Buyer Intent Signal Extraction
  * Rule-based keyword extraction from lead conversations.
  * Accumulated intelligence that deepens with each message.
  * No AI call needed — fast, deterministic, and always available.

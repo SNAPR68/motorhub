@@ -40,7 +40,7 @@ export default function CareersPage() {
 
         {/* Hero */}
         <div className="mt-6 mb-8">
-          <h2 className="text-2xl font-bold leading-tight">Join Autovinci</h2>
+          <h2 className="text-2xl font-bold leading-tight">Join CaroBest</h2>
           <p className="text-slate-400 mt-2 leading-relaxed">
             Build the future of car buying in India. We&apos;re looking for passionate people who want to solve real problems with technology.
           </p>
@@ -91,7 +91,7 @@ export default function CareersPage() {
 
         {/* Benefits */}
         <section className="mb-8">
-          <h3 className="text-lg font-semibold mb-4">Why Autovinci?</h3>
+          <h3 className="text-lg font-semibold mb-4">Why CaroBest?</h3>
           <div className="grid grid-cols-2 gap-3">
             {benefits.map((b) => (
               <div key={b.title} className="bg-white/5 border border-white/10 rounded-2xl p-4">
@@ -110,7 +110,7 @@ export default function CareersPage() {
           <div className="bg-gradient-to-br from-[#1152d4]/10 to-[#10b981]/10 border border-white/10 rounded-2xl p-5">
             <MaterialIcon name="format_quote" className="text-3xl text-[#1152d4] mb-2" />
             <p className="text-sm text-slate-300 leading-relaxed italic">
-              &quot;At Autovinci, we believe the best products come from diverse teams who care deeply about the problem they&apos;re solving. Every voice matters, every idea gets heard.&quot;
+              &quot;At CaroBest, we believe the best products come from diverse teams who care deeply about the problem they&apos;re solving. Every voice matters, every idea gets heard.&quot;
             </p>
             <div className="mt-3 text-xs text-slate-400">-- Arjun Mehta, CEO</div>
           </div>

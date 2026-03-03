@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Your personal AI car-buying assistant. Get instant recommendations, financing advice, and expert guidance for buying used cars in India.",
   openGraph: {
-    title: "AI Concierge — Autovinci",
+    title: "AI Concierge — CaroBest",
     description:
       "Personal AI car-buying assistant with instant recommendations and expert guidance.",
   },

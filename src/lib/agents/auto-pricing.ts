@@ -1,4 +1,4 @@
-/* Autovinci — Auto-Price Adjustment Agent
+/* CaroBest — Auto-Price Adjustment Agent
  * Suggests or auto-adjusts price for vehicles listed 30+ days.
  * Stays within dealer-set bounds. Never exceeds 10% reduction.
  */

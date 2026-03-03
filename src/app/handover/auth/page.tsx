@@ -17,7 +17,7 @@ export default function HandoverAuthPage() {
         <Link href="/handover" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
           <MaterialIcon name="arrow_back_ios_new" className="text-sm" />
         </Link>
-        <span className="text-[#d4af37] font-bold tracking-widest text-xs uppercase">Autovinci</span>
+        <span className="text-[#d4af37] font-bold tracking-widest text-xs uppercase">CaroBest</span>
         <button className="text-slate-400 hover:text-white transition-opacity">
           <MaterialIcon name="more_vert" />
         </button>

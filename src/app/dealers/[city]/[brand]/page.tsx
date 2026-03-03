@@ -12,7 +12,7 @@ export async function generateMetadata({
   const brandName = capitalize(brand);
   return seoMeta({
     title: `${brandName} Dealers in ${cityName}`,
-    description: `Find authorized ${brandName} dealers in ${cityName}. Browse showrooms, inventory, and contact dealerships on Autovinci.`,
+    description: `Find authorized ${brandName} dealers in ${cityName}. Browse showrooms, inventory, and contact dealerships on CaroBest.`,
     path: `/dealers/${city}/${brand}`,
     keywords: [`${brandName} dealers ${cityName}`, `${brandName} showroom ${cityName}`, `buy ${brandName} ${cityName}`],
   });

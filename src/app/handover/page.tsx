@@ -60,7 +60,7 @@ export default function HandoverPage() {
       <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0a0a]/80 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <span className="text-[#ecc813] font-bold tracking-widest text-xs uppercase">
-            Autovinci
+            CaroBest
           </span>
         </div>
         <button className="text-slate-100 opacity-60 hover:opacity-100 transition-opacity">
@@ -142,7 +142,7 @@ export default function HandoverPage() {
             </div>
             <div className="flex items-center gap-2 text-[10px] text-slate-500 italic">
               <MaterialIcon name="shield" className="text-xs" />
-              Digitally Encrypted & Verified by Autovinci
+              Digitally Encrypted & Verified by CaroBest
             </div>
           </div>
         </div>

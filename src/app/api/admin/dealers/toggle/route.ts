@@ -1,4 +1,4 @@
-/* Autovinci — Admin Dealer Activation Toggle API */
+/* CaroBest — Admin Dealer Activation Toggle API */
 
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdminAuth } from "@/lib/admin-guard";

@@ -533,7 +533,7 @@ export default function UsedCarDetailPage({
                   <p className="text-xs text-slate-500">Report ID: <span className="text-slate-300 font-mono">{passport.reportId}</span></p>
                   <div className="flex items-center gap-1.5 mt-2">
                     <div className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
-                    <span className="text-[10px] text-amber-400 font-semibold">AUTOVINCI COMPUTED</span>
+                    <span className="text-[10px] text-amber-400 font-semibold">CAROBEST COMPUTED</span>
                   </div>
                 </div>
               </div>

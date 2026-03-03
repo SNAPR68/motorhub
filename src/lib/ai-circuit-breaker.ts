@@ -1,4 +1,4 @@
-/* Autovinci — AI Circuit Breaker
+/* CaroBest — AI Circuit Breaker
  * Prevents cascading timeouts when OpenAI/Replicate are down.
  * After 3 consecutive failures in 5 min: circuit OPEN -> instant fallback.
  * After 30s: HALF-OPEN -> try one request.
@@ -106,7 +106,7 @@ async function notifyCircuitOpen(service: string, failures: number): Promise<voi
   const { db } = await import("@/lib/db");
 
   const admins = await db.user.findMany({
-    where: { email: { in: [process.env.ADMIN_EMAIL ?? "admin@autovinci.com"] } },
+    where: { email: { in: [process.env.ADMIN_EMAIL ?? "admin@carobest.com"] } },
     select: { id: true },
     take: 3,
   });

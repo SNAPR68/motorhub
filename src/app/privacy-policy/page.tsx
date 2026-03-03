@@ -34,7 +34,7 @@ const sections = [
   {
     title: "Contact Us",
     content:
-      "For privacy-related questions or concerns, reach out to our Data Protection Officer at privacy@autovinci.com or write to us at Autovinci Technologies Pvt. Ltd., Sector 44, Gurgaon, Haryana 122003.",
+      "For privacy-related questions or concerns, reach out to our Data Protection Officer at privacy@carobest.com or write to us at The Singularity Covenant LLP, Sector 44, Gurgaon, Haryana 122003.",
   },
 ];
 
@@ -63,7 +63,7 @@ export default function PrivacyPolicyPage() {
         {/* Intro */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mb-6">
           <p className="text-sm text-slate-300 leading-relaxed">
-            At Autovinci, your privacy matters. This policy explains how we collect, use, and protect your personal information when you use our platform.
+            At CaroBest, your privacy matters. This policy explains how we collect, use, and protect your personal information when you use our platform.
           </p>
         </div>
 
@@ -100,7 +100,7 @@ export default function PrivacyPolicyPage() {
         {/* Footer Note */}
         <div className="mt-8 text-center">
           <p className="text-xs text-slate-500">
-            By using Autovinci, you agree to this Privacy Policy.
+            By using CaroBest, you agree to this Privacy Policy.
           </p>
           <p className="text-xs text-slate-500 mt-1">
             Questions?{" "}

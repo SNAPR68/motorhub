@@ -1,4 +1,4 @@
-// Autovinci — Production Database Schema
+// CaroBest — Production Database Schema
 // PostgreSQL via Supabase + Prisma ORM
 
 generator client {

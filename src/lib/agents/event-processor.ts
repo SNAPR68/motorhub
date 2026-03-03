@@ -1,4 +1,4 @@
-/* Autovinci — Agent Event Processor
+/* CaroBest — Agent Event Processor
  * Processes PlatformEvents and triggers autonomous AI actions.
  * Called fire-and-forget after each event emission.
  * Never blocks the calling API route.

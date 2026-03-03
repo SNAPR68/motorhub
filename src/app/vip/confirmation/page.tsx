@@ -30,7 +30,7 @@ const QUICK_MENU = [
 
 export default function VIPConfirmationPage() {
   const { data: meData } = useApi(() => fetchCurrentUser(), []);
-  const userName = meData?.user?.name ?? "Autovinci Buyer";
+  const userName = meData?.user?.name ?? "CaroBest Buyer";
   // Generate member ID from user id or timestamp
   const memberId = meData?.user?.id
     ? `AV-${meData.user.id.slice(0, 4).toUpperCase()}-VIP`
@@ -96,7 +96,7 @@ export default function VIPConfirmationPage() {
             <div className="flex justify-between items-start relative z-10">
               <div className="flex flex-col">
                 <span className="text-[#f2cc0d] text-[10px] font-black tracking-[0.3em] uppercase mb-1">
-                  Autovinci
+                  CaroBest
                 </span>
                 <span className="text-white/40 text-[9px] font-medium tracking-widest uppercase">
                   Member Since 2026

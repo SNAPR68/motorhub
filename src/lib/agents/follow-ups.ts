@@ -1,4 +1,4 @@
-/* Autovinci — Multi-Step Follow-Up Agent
+/* CaroBest — Multi-Step Follow-Up Agent
  * Manages scheduled follow-up sequences: first reply -> 3-day -> 7-day.
  * Called by event processor and nightly cron.
  */

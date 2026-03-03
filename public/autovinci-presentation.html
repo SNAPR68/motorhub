@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CaroBest — Investor Presentation 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #7A6230;
+    --ink: #080808;
+    --ink-2: #0F0F0F;
+    --ink-3: #161616;
+    --surface: #1A1A1A;
+    --surface-2: #222222;
+    --muted: #3A3A3A;
+    --text: #E8E4DC;
+    --text-dim: #8A8580;
+    --red: #E84040;
+    --green: #3DBE72;
+    --blue: #4A90D9;
+    --orange: #E8874A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+
+  body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── SLIDE SYSTEM ── */
+  .slide {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold-dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── SLIDE 1: HERO ── */
+  #slide-hero {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: var(--ink);
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 12vw, 160px);
+    line-height: 0.9;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.4s;
+  }
+
+  .hero-title .gold { color: var(--gold); }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    max-width: 480px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+
+  .hero-metrics {
+    display: flex;
+    gap: 48px;
+    margin-top: 60px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+
+  .hero-metric {
+    text-align: center;
+  }
+
+  .hero-metric-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  .hero-metric-lbl {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 6px;
+  }
+
+  .hero-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--muted);
+    align-self: center;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1.4s;
+  }
+
+  .scroll-cue span {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── COMMON SLIDE PARTS ── */
+  .slide-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 120px 48px 80px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .slide-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .slide-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .slide-h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    color: var(--text);
+    margin-bottom: 48px;
+  }
+
+  .slide-h2 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  /* ── SLIDE 2: MARKET OPPORTUNITY ── */
+  #slide-market { background: var(--ink-2); }
+
+  .market-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .market-left {}
+
+  .market-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+  }
+
+  .market-body strong { color: var(--text); font-weight: 600; }
+
+  .market-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .mstat {
+    background: var(--surface);
+    padding: 24px;
+    border: 1px solid rgba(201,168,76,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mstat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .mstat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    color: var(--gold);
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+
+  .mstat-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 8px;
+  }
+
+  .market-right {}
+
+  .pain-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pain-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--muted);
+    border-left: 3px solid var(--red);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .pain-item:hover {
+    background: var(--surface-2);
+    border-color: var(--red);
+    border-left-color: var(--red);
+  }
+
+  .pain-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .pain-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  .pain-text strong { color: var(--text); font-weight: 600; }
+
+  /* ── SLIDE 3: PLATFORM ARCHITECTURE ── */
+  #slide-arch { background: var(--ink); }
+
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 8px;
+  }
+
+  .arch-col {
+    background: var(--surface);
+    border-top: 2px solid var(--muted);
+    transition: border-color 0.3s;
+  }
+
+  .arch-col:hover { border-color: var(--gold); }
+
+  .arch-col-header {
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--muted);
+    background: var(--surface-2);
+  }
+
+  .arch-col-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+  }
+
+  .arch-col-subtitle {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .arch-col-body {
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .arch-route {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    padding: 5px 10px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 2px;
+    transition: color 0.2s, background 0.2s;
+    cursor: default;
+  }
+
+  .arch-route:hover {
+    color: var(--gold-light);
+    background: rgba(201,168,76,0.08);
+  }
+
+  .arch-route.featured {
+    color: var(--gold);
+    border-left: 2px solid var(--gold);
+  }
+
+  .arch-stat-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    margin-top: 24px;
+  }
+
+  .arch-stat {
+    background: var(--surface-2);
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--muted);
+  }
+
+  .arch-stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--gold);
+  }
+
+  .arch-stat-lbl {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* ── SLIDE 4: 10 KILLER FEATURES ── */
+  #slide-features { background: var(--ink-2); }
+
+  .features-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+  }
+
+  .feat-card {
+    background: var(--surface);
+    padding: 24px 20px;
+    border-top: 2px solid var(--muted);
+    position: relative;
+    transition: all 0.25s ease;
+    cursor: default;
+  }
+
+  .feat-card:hover {
+    background: var(--surface-2);
+    border-top-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .feat-card.p0 { border-top-color: var(--red); }
+  .feat-card.p0:hover { border-top-color: var(--red); }
+
+  .feat-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .feat-badge .priority {
+    padding: 2px 8px;
+    background: rgba(201,168,76,0.12);
+    color: var(--gold);
+    border-radius: 2px;
+  }
+
+  .feat-badge .priority.critical {
+    background: rgba(232,64,64,0.15);
+    color: var(--red);
+  }
+
+  .feat-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .feat-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.65;
+  }
+
+  .feat-revenue {
+    margin-top: 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.05em;
+  }
+
+  .feat-status {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+  }
+
+  .feat-status.partial {
+    background: var(--orange);
+    box-shadow: 0 0 6px var(--orange);
+  }
+
+  /* ── SLIDE 5: COMPETITIVE MOAT ── */
+  #slide-moat { background: var(--ink); }
+
+  .moat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .moat-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .moat-card {
+    background: var(--surface);
+    padding: 22px 24px;
+    border: 1px solid var(--muted);
+    border-left: 3px solid var(--gold);
+    position: relative;
+  }
+
+  .moat-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .moat-card-body {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-dim);
+  }
+
+  .moat-quote {
+    background: var(--surface-2);
+    padding: 40px;
+    border: 1px solid var(--muted);
+    border-top: 3px solid var(--gold);
+    position: relative;
+  }
+
+  .moat-quote::before {
+    content: '\201C';
+    font-family: 'DM Serif Display', serif;
+    font-size: 100px;
+    color: var(--gold-dim);
+    position: absolute;
+    top: -10px;
+    left: 28px;
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  .moat-quote-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--text);
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 24px;
+  }
+
+  .moat-matrix {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--muted);
+    border: 1px solid var(--muted);
+  }
+
+  .mm-cell {
+    background: var(--surface-2);
+    padding: 10px 14px;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .mm-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    background: var(--surface);
+  }
+
+  .mm-yes { color: var(--green); font-weight: 600; }
+  .mm-no { color: var(--red); }
+  .mm-partial { color: var(--orange); }
+  .mm-brand { color: var(--gold); font-weight: 600; }
+
+  /* ── SLIDE 6: COMPETITOR RANKING ── */
+  #slide-ranking { background: var(--ink-2); }
+
+  .ranking-table-wrap {
+    width: 100%;
+    overflow: visible;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 14px 16px;
+    background: var(--surface);
+    border-bottom: 2px solid var(--gold);
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  thead th:first-child { border-left: none; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--muted);
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: rgba(201,168,76,0.04); }
+
+  tbody tr.rank-1 { background: rgba(201,168,76,0.06); }
+
+  td {
+    padding: 14px 16px;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    background: var(--muted);
+    color: var(--text-dim);
+  }
+
+  .rank-badge.gold {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .rank-badge.silver {
+    background: #8A8A8A;
+    color: var(--ink);
+  }
+
+  .rank-badge.bronze {
+    background: #8B5E3C;
+    color: var(--text);
+  }
+
+  .company-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .company-type {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 3px;
+  }
+
+  .score-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .score-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--muted);
+    border-radius: 3px;
+    overflow: hidden;
+    max-width: 100px;
+  }
+
+  .score-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--gold);
+    transition: width 0.5s ease;
+  }
+
+  .score-fill.blue { background: var(--blue); }
+  .score-fill.green { background: var(--green); }
+  .score-fill.orange { background: var(--orange); }
+
+  .score-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .score-num.top { color: var(--gold); font-weight: 500; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    font-family: 'DM Mono', monospace;
+    margin: 2px 2px 2px 0;
+    white-space: nowrap;
+  }
+
+  .tag-green { background: rgba(61,190,114,0.15); color: var(--green); }
+  .tag-red { background: rgba(232,64,64,0.15); color: var(--red); }
+  .tag-gold { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .tag-blue { background: rgba(74,144,217,0.15); color: var(--blue); }
+  .tag-orange { background: rgba(232,135,74,0.15); color: var(--orange); }
+  .tag-dim { background: rgba(255,255,255,0.06); color: var(--text-dim); }
+
+  .justification {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    max-width: 320px;
+  }
+
+  .justification strong { color: var(--text); font-weight: 500; }
+
+  /* ── SLIDE 7: REVENUE ARCHITECTURE ── */
+  #slide-revenue { background: var(--ink); }
+
+  .revenue-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+  }
+
+  .rev-streams {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .rev-stream {
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--muted);
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .rev-stream:hover { border-color: var(--gold); }
+
+  .rev-stream-name {
+    padding: 20px 22px;
+    background: var(--surface-2);
+    border-right: 1px solid var(--muted);
+  }
+
+  .rev-stream-name .label {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .rev-stream-name .sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  .rev-stream-detail {
+    padding: 20px 22px;
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .rev-stream-amount {
+    padding: 20px 22px;
+    text-align: right;
+    border-left: 1px solid var(--muted);
+    background: var(--surface-2);
+  }
+
+  .rev-amount-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--green);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .rev-amount-period {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+
+  .rev-total {
+    margin-top: 2px;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 20px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .rev-total-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+  }
+
+  .rev-total-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.04em;
+  }
+
+  .rev-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .rev-funnel {
+    background: var(--surface);
+    padding: 28px 24px;
+    border: 1px solid var(--muted);
+    border-top: 2px solid var(--gold);
+  }
+
+  .rev-funnel-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .funnel-step {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 12px;
+  }
+
+  .funnel-step:last-child { border-bottom: none; }
+
+  .funnel-label { color: var(--text-dim); }
+  .funnel-val {
+    font-family: 'DM Mono', monospace;
+    color: var(--text);
+  }
+
+  /* ── SLIDE 8: TECH STACK ── */
+  #slide-tech { background: var(--ink-2); }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .tech-category {
+    background: var(--surface);
+    padding: 28px 24px;
+    border-top: 2px solid var(--muted);
+    transition: border-color 0.2s;
+  }
+
+  .tech-category:hover { border-top-color: var(--gold); }
+
+  .tech-cat-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .tech-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tech-chip {
+    padding: 5px 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .tech-chip:hover {
+    color: var(--gold-light);
+    border-color: var(--gold-dim);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .tech-chip.highlight {
+    background: rgba(201,168,76,0.1);
+    border-color: var(--gold-dim);
+    color: var(--gold-light);
+  }
+
+  .tech-note {
+    margin-top: 32px;
+    background: var(--surface);
+    border: 1px solid var(--muted);
+    border-left: 3px solid var(--blue);
+    padding: 20px 24px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .tech-note strong { color: var(--text); }
+
+  /* ── SLIDE 9: ROADMAP ── */
+  #slide-roadmap { background: var(--ink); }
+
+  .roadmap-timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+    margin-top: 8px;
+  }
+
+  .roadmap-timeline::before {
+    content: '';
+    position: absolute;
+    top: 48px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dim) 50%, var(--muted) 100%);
+  }
+
+  .roadmap-phase {
+    padding-top: 80px;
+    padding-right: 24px;
+    position: relative;
+  }
+
+  .roadmap-dot {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--muted);
+    border: 2px solid var(--muted);
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  .roadmap-phase:nth-child(1) .roadmap-dot { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 10px rgba(201,168,76,0.4); }
+  .roadmap-phase:nth-child(2) .roadmap-dot { background: var(--gold); border-color: var(--gold); }
+  .roadmap-phase:nth-child(3) .roadmap-dot { background: var(--surface-2); border-color: var(--text-dim); }
+  .roadmap-phase:nth-child(4) .roadmap-dot { background: var(--surface-2); border-color: var(--muted); }
+
+  .roadmap-phase-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .roadmap-phase-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .roadmap-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .roadmap-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .roadmap-item::before {
+    content: '—';
+    color: var(--gold-dim);
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .roadmap-item.done { color: var(--text); }
+  .roadmap-item.done::before { content: '✓'; color: var(--green); }
+
+  /* ── SLIDE 10: CLOSING ── */
+  #slide-close {
+    background: var(--ink);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .close-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .close-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .close-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .close-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+
+  .close-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 8vw, 96px);
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  .close-title .gold { color: var(--gold); }
+
+  .close-sub {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--text-dim);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .close-cta-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 48px;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); }
+
+  .btn-secondary {
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--text-dim);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+  }
+
+  /* ── SECTION DIVIDERS ── */
+  .gold-line {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 40px;
+  }
+
+  /* ── SLIDE NUMBER ── */
+  .slide-num {
+    position: absolute;
+    bottom: 32px;
+    right: 48px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* ── INTERSECTION OBSERVER ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ── CORNER MARK ── */
+  .corner-mark {
+    position: absolute;
+    top: 80px;
+    right: 48px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    letter-spacing: 0.15em;
+  }
+
+  /* ── OVERLINE ── */
+  .overline {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, transparent 60%);
+    margin-bottom: 48px;
+  }
+
+  /* ── PRINT / EXPORT HINT ── */
+  .export-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(8,8,8,0.95);
+    border-top: 1px solid var(--muted);
+    padding: 12px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+
+  .export-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.12em;
+  }
+
+  .export-note span { color: var(--gold); }
+
+  .progress-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .prog-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .prog-dot.active { background: var(--gold); }
+
+  @media print {
+    .export-bar, nav { display: none; }
+    .slide { page-break-after: always; scroll-snap-align: none; }
+    html { scroll-snap-type: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <div class="nav-logo">CaroBest</div>
+  <ul class="nav-links">
+    <li><a href="#slide-hero">Overview</a></li>
+    <li><a href="#slide-market">Market</a></li>
+    <li><a href="#slide-features">Features</a></li>
+    <li><a href="#slide-ranking">Comparison</a></li>
+    <li><a href="#slide-revenue">Revenue</a></li>
+    <li><a href="#slide-roadmap">Roadmap</a></li>
+  </ul>
+  <div class="nav-tag">CONFIDENTIAL — 2026</div>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 1 — HERO
+═══════════════════════════════════════════════ -->
+<section class="slide" id="slide-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding-top:80px;">
+    <p class="hero-eyebrow">Investor Presentation · February 2026</p>
+    <h1 class="hero-title">AUTO<br><span class="gold">VINCI</span></h1>
+    <p class="hero-sub">India's first AI-powered used car trust engine. We don't just list cars — we solve the $83 billion problem everyone is ignoring.</p>
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <div class="hero-metric-val">$83B</div>
+        <div class="hero-metric-lbl">Market Size 2031</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-metric">
+        <div class="hero-metric-val">204+</div>
+        <div class="hero-metric-lbl">Routes Built</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-metric">
+        <div class="hero-metric-val">10</div>
+        <div class="hero-metric-lbl">Killer Features</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-metric">
+        <div class="hero-metric-val">26.85%</div>
+        <div class="hero-metric-lbl">CAGR Online</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+  <div class="slide-num">01 / 09</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 2 — MARKET
+═══════════════════════════════════════════════ -->
+<section class="slide" id="slide-market">
+  <div class="slide-container">
+    <div class="overline"></div>
+    <div class="slide-label reveal">02 — Market Opportunity</div>
+    <h2 class="slide-h2 reveal reveal-delay-1">The <em>$36B</em><br>Trust Deficit</h2>
+    <div class="market-split">
+      <div class="market-left reveal reveal-delay-2">
+        <p class="market-body">The Indian used car market is <strong>$36 billion (2025)</strong> heading to <strong>$83 billion by 2031</strong>. Yet <strong>70.83% is still controlled by unorganized local dealers.</strong> Online platforms are growing at 26.85% CAGR, but trust remains the #1 barrier. CardDekho, Cars24, and OLX have scratched the surface — but left massive, painful gaps.</p>
+        <div class="market-stats">
+          <div class="mstat">
+            <div class="mstat-val">$36B</div>
+            <div class="mstat-label">Market Today (2025)</div>
+          </div>
+          <div class="mstat">
+            <div class="mstat-val">$83B</div>
+            <div class="mstat-label">Projected 2031</div>
+          </div>
+          <div class="mstat">
+            <div class="mstat-val">26.85%</div>
+            <div class="mstat-label">Online CAGR</div>
+          </div>
+          <div class="mstat">
+            <div class="mstat-val">70.83%</div>
+            <div class="mstat-label">Still Unorganized</div>
+          </div>
+        </div>
+      </div>
+      <div class="market-right reveal reveal-delay-3">
+        <div class="pain-list">
+          <div class="pain-item">
+            <div class="pain-icon">⚠</div>
+            <div class="pain-text"><strong>Zero reliable vehicle history</strong> — 60%+ of used cars have odometer tampering. No Indian platform offers a Carfax equivalent.</div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-icon">⚠</div>
+            <div class="pain-text"><strong>RC transfer nightmare</strong> — Transfers take 1–4 years. Sellers face police calls and criminal liability for cars sold years ago.</div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-icon">⚠</div>
+            <div class="pain-text"><strong>True cost is invisible</strong> — Buyers see ₹6L price tag; nobody shows the ₹1.8L/year maintenance reality.</div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-icon">⚠</div>
+            <div class="pain-text"><strong>Dealer tools are nonexistent</strong> — 70% of dealers manage inventory on WhatsApp. No pricing data, no digital presence.</div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-icon">⚠</div>
+            <div class="pain-text"><strong>Post-purchase void</strong> — The moment a car is bought, every platform disappears. No warranty tracking, no support.</div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-icon">⚠</div>
+            <div class="pain-text"><strong>Interstate purchase is impossible</strong> — Different road tax, NOC requirements, re-registration. Nobody simplifies this.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">02 / 09</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 3 — PLATFORM ARCHITECTURE
+═══════════════════════════════════════════════ -->
+<section class="slide" id="slide-arch">
+  <div class="slide-container">
+    <div class="overline"></div>
+    <div class="slide-label reveal">03 — Platform Architecture</div>
+    <h2 class="slide-h2 reveal reveal-delay-1">204+ Routes,<br><em>One Platform</em></h2>
+
+    <div class="arch-grid reveal reveal-delay-2">
+      <div class="arch-col">
+        <div class="arch-col-header">
+          <div class="arch-col-title">Buyer Side</div>
+          <div class="arch-col-subtitle">80+ consumer routes</div>
+        </div>
+        <div class="arch-col-body">
+          <div class="arch-route featured">/showroom</div>
+          <div class="arch-route featured">/vehicle/[id]/true-cost</div>
+          <div class="arch-route featured">/vehicle/passport/[id]</div>
+          <div class="arch-route featured">/vehicle/[id]/negotiate</div>
+          <div class="arch-route">/compare</div>
+          <div class="arch-route">/wishlist</div>
+          <div class="arch-route">/concierge</div>
+          <div class="arch-route">/vip</div>
+          <div class="arch-route">/my-account/*</div>
+          <div class="arch-route">/swap</div>
+          <div class="arch-route">/inspection</div>
+        </div>
+      </div>
+      <div class="arch-col">
+        <div class="arch-col-header">
+          <div class="arch-col-title">Dealer OS</div>
+          <div class="arch-col-subtitle">30+ dealer routes</div>
+        </div>
+        <div class="arch-col-body">
+          <div class="arch-route featured">/dashboard</div>
+          <div class="arch-route featured">/inventory</div>
+          <div class="arch-route featured">/leads</div>
+          <div class="arch-route featured">/intelligence/*</div>
+          <div class="arch-route">/analytics/*</div>
+          <div class="arch-route">/studio</div>
+          <div class="arch-route">/marketing</div>
+          <div class="arch-route">/settings/*</div>
+          <div class="arch-route">/dealer/signup</div>
+          <div class="arch-route">/plans</div>
+        </div>
+      </div>
+      <div class="arch-col">
+        <div class="arch-col-header">
+          <div class="arch-col-title">Marketplace</div>
+          <div class="arch-col-subtitle">60+ SEO routes</div>
+        </div>
+        <div class="arch-col-body">
+          <div class="arch-route">/[brand]/[model]/*</div>
+          <div class="arch-route">/used-cars/[city]</div>
+          <div class="arch-route">/dealers/[city]</div>
+          <div class="arch-route">/compare/[a]-vs-[b]</div>
+          <div class="arch-route">/new-cars/*</div>
+          <div class="arch-route">/electric-cars</div>
+          <div class="arch-route">/upcoming-cars</div>
+          <div class="arch-route">/car-news/*</div>
+          <div class="arch-route">/expert-reviews/*</div>
+          <div class="arch-route">/gaadi-store/[city]</div>
+        </div>
+      </div>
+      <div class="arch-col">
+        <div class="arch-col-header">
+          <div class="arch-col-title">Finance Tools</div>
+          <div class="arch-col-subtitle">Finance + utility routes</div>
+        </div>
+        <div class="arch-col-body">
+          <div class="arch-route featured">/rc-transfer</div>
+          <div class="arch-route featured">/cross-state</div>
+          <div class="arch-route">/car-loan/*</div>
+          <div class="arch-route">/car-insurance/*</div>
+          <div class="arch-route">/fuel-price/[city]</div>
+          <div class="arch-route">/rto/[state]</div>
+          <div class="arch-route">/my-account/garage</div>
+          <div class="arch-route">/my-account/warranty</div>
+          <div class="arch-route">/my-account/documents</div>
+          <div class="arch-route">/my-account/resale</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-stat-row reveal reveal-delay-3">
+      <div class="arch-stat">
+        <div class="arch-stat-val">204+</div>
+        <div class="arch-stat-lbl">Total Routes</div>
+      </div>
+      <div class="arch-stat">
+        <div class="arch-stat-val">37</div>
+        <div class="arch-stat-lbl">API Endpoints</div>
+      </div>
+      <div class="arch-stat">
+        <div class="arch-stat-val">75+</div>
+        <div class="arch-stat-lbl">Design Screens</div>
+      </div>
+      <div class="arch-stat">
+        <div class="arch-stat-val">159</div>
+        <div class="arch-stat-lbl">Static Pages</div>
+      </div>
+      <div class="arch-stat">
+        <div class="arch-stat-val">0</div>
+        <div class="arch-stat-lbl">Build Errors</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">03 / 09</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 4 — 10 KILLER FEATURES
+═══════════════════════════════════════════════ -->
+<section class="slide" id="slide-features">
+  <div class="slide-container" style="padding-top:100px;padding-bottom:40px;">
+    <div class="overline"></div>
+    <div class="slide-label reveal">04 — Competitive Features</div>
+    <div class="features-header">
+      <h2 class="slide-h2 reveal reveal-delay-1" style="margin-bottom:0;">10 Features<br><em>Nobody Else Built</em></h2>
+      <div class="reveal reveal-delay-2" style="text-align:right;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:0.15em;margin-bottom:8px;">STATUS LEGEND</div>
+        <div style="display:flex;gap:16px;justify-content:flex-end;">
+          <span style="font-size:11px;color:var(--green);display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;"></span> Live</span>
+          <span style="font-size:11px;color:var(--orange);display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--orange);display:inline-block;"></span> Partial</span>
+        </div>
+      </div>
+    </div>
+    <div class="features-grid reveal reveal-delay-2">
+      <div class="feat-card p0">
+        <div class="feat-status"></div>
+        <div class="feat-badge"><span>#01</span><span class="priority critical">P0</span></div>
+        <div class="feat-name">VehiclePassport</div>
+        <div class="feat-desc">Tamper-proof vehicle life history — Vahan API, OEM service records, insurance claims, OBD-II ECU scan vs. odometer, flood cross-reference.</div>
+        <div class="feat-revenue">₹499/report · ₹299 bulk</div>
+      </div>
+      <div class="feat-card p0">
+        <div class="feat-status"></div>
+        <div class="feat-badge"><span>#02</span><span class="priority critical">P0</span></div>
+        <div class="feat-name">TrueCost Engine</div>
+        <div class="feat-desc">AI-powered 3-year ownership cost predictor — maintenance forecast, known defects, real-world fuel, insurance, depreciation curve.</div>
+        <div class="feat-revenue">Embedded · drives conversion</div>
+      </div>
+      <div class="feat-card p0">
+        <div class="feat-status partial"></div>
+        <div class="feat-badge"><span>#03</span><span class="priority critical">P0</span></div>
+        <div class="feat-name">InstantRC</div>
+        <div class="feat-desc">Escrow-based ownership transfer with instant seller indemnity, automated RTO tracking, verified agent network, deemed transfer insurance.</div>
+        <div class="feat-revenue">₹999 policy · escrow float</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-status"></div>
+        <div class="feat-badge"><span>#04</span><span class="priority">P1</span></div>
+        <div class="feat-name">DealerOS</div>
+        <div class="feat-desc">Freemium SaaS for unorganized dealers — AI listing generation, dynamic pricing, embedded financing, digital storefront, lead scoring.</div>
+        <div class="feat-revenue">₹2,999/mo · ₹299/loan</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-status partial"></div>
+        <div class="feat-badge"><span>#05</span><span class="priority">P2</span></div>
+        <div class="feat-name">SwapDirect</div>
+        <div class="feat-desc">P2P car exchange marketplace — match buyers/sellers swapping, value gap calc, dual escrow, simultaneous RC transfer.</div>
+        <div class="feat-revenue">2–3% transaction fee</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-status partial"></div>
+        <div class="feat-badge"><span>#06</span><span class="priority">P1</span></div>
+        <div class="feat-name">LiveCondition</div>
+        <div class="feat-desc">Uber-like independent mechanics — 2-hour booking, live video stream, 250-point digital report, expert second opinion on any inspection.</div>
+        <div class="feat-revenue">₹999 basic · ₹1,999 premium</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-status partial"></div>
+        <div class="feat-badge"><span>#07</span><span class="priority">P2</span></div>
+        <div class="feat-name">CrossState Express</div>
+        <div class="feat-desc">Interstate purchase end-to-end — landed cost calculator, document autopilot, flatbed delivery, single-window payment across states.</div>
+        <div class="feat-revenue">Service fees + logistics</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-status"></div>
+        <div class="feat-badge"><span>#08</span><span class="priority">P1</span></div>
+        <div class="feat-name">PostPurchase Hub</div>
+        <div class="feat-desc">Car companion from day of purchase — warranty tracker, service scheduler, insurance renewal, RC tracker, resale value monitor, doc vault.</div>
+        <div class="feat-revenue">Retention moat · repeat txn</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-status"></div>
+        <div class="feat-badge"><span>#09</span><span class="priority">P1</span></div>
+        <div class="feat-name">AI NegotiationCoach</div>
+        <div class="feat-desc">Buyer's secret weapon — fair price range, negotiation scripts, walk-away alerts, post-deal validation. Platform becomes the buyer's ally.</div>
+        <div class="feat-revenue">Buyer loyalty · word-of-mouth</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-status"></div>
+        <div class="feat-badge"><span>#10</span><span class="priority">P1</span></div>
+        <div class="feat-name">DemandPulse</div>
+        <div class="feat-desc">Bloomberg Terminal for used cars — real-time pricing, demand heatmaps, depreciation curves, API for banks/NBFCs/insurers/OEMs.</div>
+        <div class="feat-revenue">₹9,999/mo · ₹25–50K API</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">04 / 09</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 5 — COMPETITIVE MOAT
+═══════════════════════════════════════════════ -->
+<section class="slide" id="slide-moat">
+  <div class="slide-container">
+    <div class="overline"></div>
+    <div class="slide-label reveal">05 — Competitive Moat</div>
+    <h2 class="slide-h2 reveal reveal-delay-1">Not a Listing Platform.<br><em>A Trust Engine.</em></h2>
+    <div class="moat-grid">
+      <div class="moat-cards reveal reveal-delay-2">
+        <div class="moat-card">
+          <div class="moat-card-title">Data Network Effect</div>
+          <div class="moat-card-body">Every inspection, every VehiclePassport, every transaction enriches the database. More data → better AI pricing → more accurate TrueCost → stronger buyer trust → more transactions. Competitors cannot replicate proprietary data moats without years of transactions.</div>
+        </div>
+        <div class="moat-card">
+          <div class="moat-card-title">Supply-Side Lock-In (DealerOS)</div>
+          <div class="moat-card-body">When unorganized dealers use our free tools to manage inventory, price cars, and access financing — they list with us first. Controlling 70% of supply means we control price discovery for the entire market.</div>
+        </div>
+        <div class="moat-card">
+          <div class="moat-card-title">Lifetime Buyer Relationship</div>
+          <div class="moat-card-body">PostPurchase Hub means we stay in the buyer's life from day 1 of ownership to the day they resell. When they sell, they sell through us. When they buy next, they buy through us. One acquisition, perpetual revenue.</div>
+        </div>
+        <div class="moat-card">
+          <div class="moat-card-title">Regulatory Integration</div>
+          <div class="moat-card-body">InstantRC + VehiclePassport require deep integrations with Vahan/Parivahan, OEM service portals, insurance aggregators, and RTO agent networks. This integration layer takes 12–18 months to build and cannot be fast-followed.</div>
+        </div>
+      </div>
+      <div class="moat-quote reveal reveal-delay-3">
+        <div class="moat-quote-text">"CardDekho is an information portal. Cars24 is a transaction platform. OLX is a classifieds board. None of them are a Trust Engine. That's the gap. That's the opportunity."</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.2em;">— GAP ANALYSIS BRIEF, 2025</div>
+
+        <div class="moat-matrix" style="margin-top:32px;">
+          <div class="mm-cell mm-header">Feature</div>
+          <div class="mm-cell mm-header">Competitors</div>
+          <div class="mm-cell mm-header mm-brand">CaroBest</div>
+
+          <div class="mm-cell" style="font-size:11px;color:var(--text-dim);">Vehicle History (Carfax-equiv)</div>
+          <div class="mm-cell mm-no">None</div>
+          <div class="mm-cell mm-yes">✓ Built</div>
+
+          <div class="mm-cell" style="font-size:11px;color:var(--text-dim);">3-Year Cost Predictor</div>
+          <div class="mm-cell mm-no">None</div>
+          <div class="mm-cell mm-yes">✓ Built</div>
+
+          <div class="mm-cell" style="font-size:11px;color:var(--text-dim);">RC Transfer Guarantee</div>
+          <div class="mm-cell mm-partial">Reactive</div>
+          <div class="mm-cell mm-yes">✓ Proactive</div>
+
+          <div class="mm-cell" style="font-size:11px;color:var(--text-dim);">Dealer SaaS Tools</div>
+          <div class="mm-cell mm-no">None</div>
+          <div class="mm-cell mm-yes">✓ Built</div>
+
+          <div class="mm-cell" style="font-size:11px;color:var(--text-dim);">B2B Data API</div>
+          <div class="mm-cell mm-no">None</div>
+          <div class="mm-cell mm-yes">✓ Built</div>
+
+          <div class="mm-cell" style="font-size:11px;color:var(--text-dim);">Post-Purchase Hub</div>
+          <div class="mm-cell mm-no">None</div>
+          <div class="mm-cell mm-yes">✓ Built</div>
+
+          <div class="mm-cell" style="font-size:11px;color:var(--text-dim);">P2P Car Swap</div>
+          <div class="mm-cell mm-no">None</div>
+          <div class="mm-cell mm-yes">✓ Built</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">05 / 09</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 6 — COMPETITOR RANKING
+═══════════════════════════════════════════════ -->
+<section class="slide" id="slide-ranking" style="min-height:auto;padding:120px 0 80px;">
+  <div style="max-width:1200px;width:100%;margin:0 auto;padding:0 48px;">
+    <div class="overline"></div>
+    <div class="slide-label reveal">06 — Competitive Intelligence</div>
+    <h2 class="slide-h2 reveal reveal-delay-1">Market Ranking<br><em>by Trust Score</em></h2>
+    <div style="font-size:13px;color:var(--text-dim);margin-bottom:32px;max-width:600px;line-height:1.7;" class="reveal reveal-delay-2">
+      Ranked across 6 dimensions: Trust Infrastructure, Dealer Empowerment, Buyer Tools, Data Intelligence, Post-Purchase, and Market Coverage. Scores out of 100.
+    </div>
+
+    <div class="ranking-table-wrap reveal reveal-delay-2">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:40px;">#</th>
+            <th>Platform</th>
+            <th>Trust Score</th>
+            <th>Trust Infra</th>
+            <th>Dealer Tools</th>
+            <th>Buyer AI</th>
+            <th>Data Intel</th>
+            <th>Post-Purchase</th>
+            <th>Strengths</th>
+            <th>Fatal Gap</th>
+            <th style="min-width:280px;">Justification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- CAROBEST -->
+          <tr class="rank-1">
+            <td><div class="rank-badge gold">1</div></td>
+            <td>
+              <div class="company-name" style="color:var(--gold);">CaroBest</div>
+              <div class="company-type">AI Trust Engine</div>
+            </td>
+            <td>
+              <div class="score-bar-wrap">
+                <div class="score-bar"><div class="score-fill" style="width:88%;"></div></div>
+                <span class="score-num top">88/100</span>
+              </div>
+            </td>
+            <td><span class="tag tag-green">92/100</span></td>
+            <td><span class="tag tag-gold">85/100</span></td>
+            <td><span class="tag tag-gold">90/100</span></td>
+            <td><span class="tag tag-blue">88/100</span></td>
+            <td><span class="tag tag-green">85/100</span></td>
+            <td>
+              <span class="tag tag-gold">VehiclePassport</span>
+              <span class="tag tag-gold">TrueCost</span>
+              <span class="tag tag-gold">DemandPulse</span>
+              <span class="tag tag-gold">DealerOS</span>
+            </td>
+            <td><span class="tag tag-dim">APIs need live data</span></td>
+            <td class="justification">Only platform with a Carfax-equivalent, 3-year cost predictor, escrow RC transfer, and full dealer SaaS stack simultaneously. <strong>No Indian competitor has built all 10 trust layers.</strong> Score constrained by production data depth — not architecture.</td>
+          </tr>
+          <!-- CARS24 -->
+          <tr>
+            <td><div class="rank-badge silver">2</div></td>
+            <td>
+              <div class="company-name">Cars24</div>
+              <div class="company-type">C2B Inventory Platform</div>
+            </td>
+            <td>
+              <div class="score-bar-wrap">
+                <div class="score-bar"><div class="score-fill blue" style="width:64%;"></div></div>
+                <span class="score-num">64/100</span>
+              </div>
+            </td>
+            <td><span class="tag tag-orange">55/100</span></td>
+            <td><span class="tag tag-dim">40/100</span></td>
+            <td><span class="tag tag-orange">58/100</span></td>
+            <td><span class="tag tag-blue">72/100</span></td>
+            <td><span class="tag tag-dim">35/100</span></td>
+            <td>
+              <span class="tag tag-blue">Brand Trust</span>
+              <span class="tag tag-blue">Financing</span>
+              <span class="tag tag-blue">Inventory Scale</span>
+            </td>
+            <td><span class="tag tag-red">No vehicle history</span></td>
+            <td class="justification">Strong brand, embedded NBFC (Cars24 Capital), and inventory scale. But <strong>no Carfax equivalent, no TrueCost, no DealerOS</strong>. "Seller Kavach" is reactive post-complaint — not proactive. Post-purchase is a dead zone. Data is locked internally.</td>
+          </tr>
+          <!-- CARWALE -->
+          <tr>
+            <td><div class="rank-badge silver">3</div></td>
+            <td>
+              <div class="company-name">CarWale</div>
+              <div class="company-type">Media + Marketplace (Autocar India)</div>
+            </td>
+            <td>
+              <div class="score-bar-wrap">
+                <div class="score-bar"><div class="score-fill blue" style="width:58%;"></div></div>
+                <span class="score-num">58/100</span>
+              </div>
+            </td>
+            <td><span class="tag tag-dim">42/100</span></td>
+            <td><span class="tag tag-orange">55/100</span></td>
+            <td><span class="tag tag-orange">62/100</span></td>
+            <td><span class="tag tag-orange">60/100</span></td>
+            <td><span class="tag tag-dim">30/100</span></td>
+            <td>
+              <span class="tag tag-blue">Editorial Trust</span>
+              <span class="tag tag-blue">New Car Reviews</span>
+              <span class="tag tag-blue">Autocar Integration</span>
+            </td>
+            <td><span class="tag tag-red">Weak used car play</span></td>
+            <td class="justification">Exceptional editorial content and new car coverage from Autocar India backing. However, <strong>used car segment is an afterthought</strong>. No dealer SaaS, no trust infrastructure, no AI buyer tools. Traffic is high; conversion tools are primitive.</td>
+          </tr>
+          <!-- CARDDEKHO -->
+          <tr>
+            <td><div class="rank-badge silver">3</div></td>
+            <td>
+              <div class="company-name">CardDekho</div>
+              <div class="company-type">Classified + Finance Portal</div>
+            </td>
+            <td>
+              <div class="score-bar-wrap">
+                <div class="score-bar"><div class="score-fill blue" style="width:56%;"></div></div>
+                <span class="score-num">56/100</span>
+              </div>
+            </td>
+            <td><span class="tag tag-orange">48/100</span></td>
+            <td><span class="tag tag-orange">52/100</span></td>
+            <td><span class="tag tag-orange">55/100</span></td>
+            <td><span class="tag tag-orange">60/100</span></td>
+            <td><span class="tag tag-dim">28/100</span></td>
+            <td>
+              <span class="tag tag-blue">SEO Scale</span>
+              <span class="tag tag-blue">Loan Distribution</span>
+              <span class="tag tag-blue">Brand Recognition</span>
+            </td>
+            <td><span class="tag tag-red">TrustMark is theater</span></td>
+            <td class="justification">Market leader by traffic, strong loan distribution, and excellent programmatic SEO. But <strong>TrustMark is a one-time snapshot from their own evaluators</strong> — not independent. No vehicle history, no TrueCost, no DealerOS. An information portal, not a transaction engine.</td>
+          </tr>
+          <!-- SPINNY -->
+          <tr>
+            <td><div class="rank-badge bronze">5</div></td>
+            <td>
+              <div class="company-name">Spinny</div>
+              <div class="company-type">Full-Stack Used Car Retailer</div>
+            </td>
+            <td>
+              <div class="score-bar-wrap">
+                <div class="score-bar"><div class="score-fill green" style="width:54%;"></div></div>
+                <span class="score-num">54/100</span>
+              </div>
+            </td>
+            <td><span class="tag tag-green">68/100</span></td>
+            <td><span class="tag tag-dim">22/100</span></td>
+            <td><span class="tag tag-orange">52/100</span></td>
+            <td><span class="tag tag-dim">38/100</span></td>
+            <td><span class="tag tag-orange">55/100</span></td>
+            <td>
+              <span class="tag tag-blue">200-pt Inspection</span>
+              <span class="tag tag-blue">Fixed Price</span>
+              <span class="tag tag-blue">7-Day Return</span>
+            </td>
+            <td><span class="tag tag-red">Asset-heavy model</span></td>
+            <td class="justification">Best physical inspection quality in market. Fixed pricing and 7-day returns build genuine trust. But <strong>asset-heavy model limits scale and margin</strong>. No dealer empowerment (they bypass dealers entirely), no B2B data play, no programmatic SEO. Limited to 20 cities.</td>
+          </tr>
+          <!-- DROOM -->
+          <tr>
+            <td><div class="rank-badge">6</div></td>
+            <td>
+              <div class="company-name">Droom</div>
+              <div class="company-type">Used Car Classified + AI</div>
+            </td>
+            <td>
+              <div class="score-bar-wrap">
+                <div class="score-bar"><div class="score-fill" style="width:44%;background:var(--orange);"></div></div>
+                <span class="score-num">44/100</span>
+              </div>
+            </td>
+            <td><span class="tag tag-orange">50/100</span></td>
+            <td><span class="tag tag-orange">48/100</span></td>
+            <td><span class="tag tag-orange">55/100</span></td>
+            <td><span class="tag tag-dim">35/100</span></td>
+            <td><span class="tag tag-dim">25/100</span></td>
+            <td>
+              <span class="tag tag-blue">Orange Book Value</span>
+              <span class="tag tag-blue">AI Valuation</span>
+              <span class="tag tag-blue">Multi-category</span>
+            </td>
+            <td><span class="tag tag-red">Trust & growth stalled</span></td>
+            <td class="justification">Orange Book Value (OBV) is a genuinely useful pricing tool. But <strong>Droom struggled to convert its AI ambitions into verified transactions</strong>. High return rates, mixed inspection quality, and weak post-purchase support have stalled growth after its IPO-filing period.</td>
+          </tr>
+          <!-- OLX AUTOS -->
+          <tr>
+            <td><div class="rank-badge">7</div></td>
+            <td>
+              <div class="company-name">OLX Autos</div>
+              <div class="company-type">Classifieds Platform (C2B)</div>
+            </td>
+            <td>
+              <div class="score-bar-wrap">
+                <div class="score-bar"><div class="score-fill" style="width:34%;background:var(--text-dim);"></div></div>
+                <span class="score-num">34/100</span>
+              </div>
+            </td>
+            <td><span class="tag tag-red">18/100</span></td>
+            <td><span class="tag tag-dim">30/100</span></td>
+            <td><span class="tag tag-dim">28/100</span></td>
+            <td><span class="tag tag-dim">22/100</span></td>
+            <td><span class="tag tag-dim">15/100</span></td>
+            <td>
+              <span class="tag tag-blue">Brand Awareness</span>
+              <span class="tag tag-blue">Volume</span>
+            </td>
+            <td><span class="tag tag-red">Zero trust layer</span></td>
+            <td class="justification">Massive traffic and brand recognition, but <strong>effectively an unregulated noticeboard</strong>. Zero inspection, zero vehicle history, zero financing, zero post-purchase. Odometer fraud, fake listings, and scams are rampant. High volume, catastrophically low trust. Being sunset by parent OLX Group globally.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:28px;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;" class="reveal reveal-delay-3">
+      <div style="background:var(--surface);padding:18px 20px;border-left:3px solid var(--gold);">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.15em;margin-bottom:6px;">TRUST INFRA</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.6;">Vehicle history, RC guarantee, inspection independence</div>
+      </div>
+      <div style="background:var(--surface);padding:18px 20px;border-left:3px solid var(--blue);">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:0.15em;margin-bottom:6px;">DEALER TOOLS</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.6;">Inventory mgmt, AI pricing, embedded financing, storefront</div>
+      </div>
+      <div style="background:var(--surface);padding:18px 20px;border-left:3px solid var(--green);">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);letter-spacing:0.15em;margin-bottom:6px;">BUYER AI</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.6;">Cost predictor, negotiation coach, comparison intelligence</div>
+      </div>
+      <div style="background:var(--surface);padding:18px 20px;border-left:3px solid var(--orange);">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:0.15em;margin-bottom:6px;">DATA INTEL</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.6;">Real-time pricing, demand heatmaps, B2B API for banks</div>
+      </div>
+      <div style="background:var(--surface);padding:18px 20px;border-left:3px solid var(--text-dim);">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:0.15em;margin-bottom:6px;">POST-PURCHASE</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.6;">Warranty, service, insurance, resale — lifetime companion</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num" style="position:relative;bottom:auto;right:auto;text-align:right;padding:20px 48px;">06 / 09</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 7 — REVENUE ARCHITECTURE
+═══════════════════════════════════════════════ -->
+<section class="slide" id="slide-revenue">
+  <div class="slide-container">
+    <div class="overline"></div>
+    <div class="slide-label reveal">07 — Revenue Architecture</div>
+    <h2 class="slide-h2 reveal reveal-delay-1">5 Revenue Streams,<br><em>₹100+ Cr Potential</em></h2>
+
+    <div class="revenue-grid">
+      <div>
+        <div class="rev-streams reveal reveal-delay-2">
+          <div class="rev-stream">
+            <div class="rev-stream-name">
+              <div class="label">VehiclePassport</div>
+              <div class="sub">Report fees</div>
+            </div>
+            <div class="rev-stream-detail">₹499/report for buyers · ₹299 bulk for dealers · Free for platform-listed cars. 440K reports/yr at 10% market penetration.</div>
+            <div class="rev-stream-amount">
+              <div class="rev-amount-val">₹22 Cr</div>
+              <div class="rev-amount-period">Year 1 potential</div>
+            </div>
+          </div>
+          <div class="rev-stream">
+            <div class="rev-stream-name">
+              <div class="label">DealerOS SaaS</div>
+              <div class="sub">Subscription + loan commission</div>
+            </div>
+            <div class="rev-stream-detail">₹2,999/mo Pro tier (5K dealers = ₹18Cr/yr) + ₹299 per loan disbursed (5K dealers × 10 loans/mo = ₹18Cr/yr).</div>
+            <div class="rev-stream-amount">
+              <div class="rev-amount-val">₹36 Cr</div>
+              <div class="rev-amount-period">Year 1 potential</div>
+            </div>
+          </div>
+          <div class="rev-stream">
+            <div class="rev-stream-name">
+              <div class="label">DemandPulse B2B</div>
+              <div class="sub">Data API + SaaS</div>
+            </div>
+            <div class="rev-stream-detail">50 banks × ₹3L + 15 insurers × ₹5L + 20 OEMs × ₹10L + 5K premium dealers × ₹1.2L/yr. High-margin recurring SaaS.</div>
+            <div class="rev-stream-amount">
+              <div class="rev-amount-val">₹64 Cr</div>
+              <div class="rev-amount-period">Steady state</div>
+            </div>
+          </div>
+          <div class="rev-stream">
+            <div class="rev-stream-name">
+              <div class="label">LiveCondition</div>
+              <div class="sub">Inspection marketplace</div>
+            </div>
+            <div class="rev-stream-detail">₹999 basic, ₹1,999 premium, ₹499 second opinion. Mechanic network — 30% platform take. Works for any car from any source.</div>
+            <div class="rev-stream-amount">
+              <div class="rev-amount-val">₹8 Cr</div>
+              <div class="rev-amount-period">Year 1 potential</div>
+            </div>
+          </div>
+          <div class="rev-stream">
+            <div class="rev-stream-name">
+              <div class="label">InstantRC / SwapDirect</div>
+              <div class="sub">Transaction fees + insurance</div>
+            </div>
+            <div class="rev-stream-detail">₹999 Deemed Transfer policy + escrow float on ₹10–25K per deal. 2–3% flat fee on SwapDirect transaction value.</div>
+            <div class="rev-stream-amount">
+              <div class="rev-amount-val">₹12 Cr</div>
+              <div class="rev-amount-period">Year 1 potential</div>
+            </div>
+          </div>
+        </div>
+        <div class="rev-total reveal reveal-delay-3">
+          <div class="rev-total-label">Combined Year 1 Potential</div>
+          <div class="rev-total-val">₹142+ Crore</div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-3">
+        <div class="rev-funnel">
+          <div class="rev-funnel-title">Unit Economics</div>
+          <div class="funnel-step">
+            <span class="funnel-label">Avg. revenue per dealer/yr</span>
+            <span class="funnel-val">₹72K</span>
+          </div>
+          <div class="funnel-step">
+            <span class="funnel-label">Avg. revenue per buyer txn</span>
+            <span class="funnel-val">₹3,200</span>
+          </div>
+          <div class="funnel-step">
+            <span class="funnel-label">B2B API avg. contract</span>
+            <span class="funnel-val">₹5L/yr</span>
+          </div>
+          <div class="funnel-step">
+            <span class="funnel-label">DemandPulse gross margin</span>
+            <span class="funnel-val">82%+</span>
+          </div>
+          <div class="funnel-step">
+            <span class="funnel-label">VehiclePassport margin</span>
+            <span class="funnel-val">71%</span>
+          </div>
+          <div class="funnel-step">
+            <span class="funnel-label">Total addressable market</span>
+            <span class="funnel-val">4.4M cars/yr</span>
+          </div>
+        </div>
+
+        <div class="rev-funnel" style="margin-top:16px;">
+          <div class="rev-funnel-title">Market Sizing</div>
+          <div class="funnel-step">
+            <span class="funnel-label">Used car sales (2025)</span>
+            <span class="funnel-val">4.4M/yr</span>
+          </div>
+          <div class="funnel-step">
+            <span class="funnel-label">10% VehiclePassport attach</span>
+            <span class="funnel-val">440K reports</span>
+          </div>
+          <div class="funnel-step">
+            <span class="funnel-label">Target dealers Year 1</span>
+            <span class="funnel-val">5,000</span>
+          </div>
+          <div class="funnel-step">
+            <span class="funnel-label">Total dealers in India</span>
+            <span class="funnel-val">100,000</span>
+          </div>
+          <div class="funnel-step">
+            <span class="funnel-label">Market share needed</span>
+            <span class="funnel-val">5%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">07 / 09</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 8 — TECH STACK
+═══════════════════════════════════════════════ -->
+<section class="slide" id="slide-tech">
+  <div class="slide-container">
+    <div class="overline"></div>
+    <div class="slide-label reveal">08 — Technology</div>
+    <h2 class="slide-h2 reveal reveal-delay-1">Production-Grade Stack,<br><em>Zero Technical Debt</em></h2>
+
+    <div class="tech-grid reveal reveal-delay-2">
+      <div class="tech-category">
+        <div class="tech-cat-name">Frontend</div>
+        <div class="tech-items">
+          <span class="tech-chip highlight">Next.js 16.1.6</span>
+          <span class="tech-chip highlight">App Router</span>
+          <span class="tech-chip">TypeScript 5</span>
+          <span class="tech-chip">React 19</span>
+          <span class="tech-chip highlight">Tailwind CSS v4</span>
+          <span class="tech-chip">Framer Motion 12</span>
+          <span class="tech-chip">Zustand 5</span>
+        </div>
+      </div>
+      <div class="tech-category">
+        <div class="tech-cat-name">Backend + DB</div>
+        <div class="tech-items">
+          <span class="tech-chip highlight">Prisma 7.4.1</span>
+          <span class="tech-chip highlight">Supabase PostgreSQL</span>
+          <span class="tech-chip">Supabase Auth</span>
+          <span class="tech-chip">Next.js API Routes</span>
+          <span class="tech-chip">Zod Validation</span>
+          <span class="tech-chip">NextResponse JSON</span>
+        </div>
+      </div>
+      <div class="tech-category">
+        <div class="tech-cat-name">AI + Integrations</div>
+        <div class="tech-items">
+          <span class="tech-chip highlight">OpenAI GPT-4</span>
+          <span class="tech-chip">Replicate API</span>
+          <span class="tech-chip">Razorpay Payments</span>
+          <span class="tech-chip">Vahan/Parivahan API</span>
+          <span class="tech-chip">OBD-II ECU Scan</span>
+          <span class="tech-chip">Insurance Aggregators</span>
+        </div>
+      </div>
+      <div class="tech-category">
+        <div class="tech-cat-name">Infrastructure</div>
+        <div class="tech-items">
+          <span class="tech-chip highlight">Vercel Edge</span>
+          <span class="tech-chip">ISR / SSR / CSR hybrid</span>
+          <span class="tech-chip">CDN + Edge Functions</span>
+          <span class="tech-chip">Cloudflare R2</span>
+          <span class="tech-chip">Elasticsearch (search)</span>
+          <span class="tech-chip">Redis Cache</span>
+        </div>
+      </div>
+      <div class="tech-category">
+        <div class="tech-cat-name">SEO Architecture</div>
+        <div class="tech-items">
+          <span class="tech-chip highlight">160K+ generated pages</span>
+          <span class="tech-chip">Programmatic SEO</span>
+          <span class="tech-chip">ISR revalidation</span>
+          <span class="tech-chip">Structured Data</span>
+          <span class="tech-chip">City × Brand pages</span>
+          <span class="tech-chip">Auto sitemap</span>
+        </div>
+      </div>
+      <div class="tech-category">
+        <div class="tech-cat-name">Auth + Security</div>
+        <div class="tech-items">
+          <span class="tech-chip highlight">Supabase Auth</span>
+          <span class="tech-chip">OTP-based login</span>
+          <span class="tech-chip">AuthGuard HOC</span>
+          <span class="tech-chip">Middleware protection</span>
+          <span class="tech-chip">Row-level security</span>
+          <span class="tech-chip">Dealer role gating</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-note reveal reveal-delay-3">
+      <strong>Rendering Strategy:</strong> Homepage, brand pages, and model pages use ISR (60s–5min revalidation) for SEO dominance. Used car listings use SSR (no cache, always fresh). Interactive tools (EMI, TrueCost, NegotiationCoach) use pure CSR. Dealer dashboard is auth-gated CSR. This hybrid approach delivers both <strong>Google-indexable content at scale</strong> and <strong>real-time transactional features</strong> — without compromising either.
+    </div>
+  </div>
+  <div class="slide-num">08 / 09</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 9 — ROADMAP
+═══════════════════════════════════════════════ -->
+<section class="slide" id="slide-roadmap">
+  <div class="slide-container">
+    <div class="overline"></div>
+    <div class="slide-label reveal">09 — Roadmap</div>
+    <h2 class="slide-h2 reveal reveal-delay-1">From Platform<br><em>to Market Standard</em></h2>
+
+    <div class="roadmap-timeline reveal reveal-delay-2">
+      <div class="roadmap-phase">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-phase-label">Sprint 20 · Now</div>
+        <div class="roadmap-phase-title">API Wiring</div>
+        <div class="roadmap-items">
+          <div class="roadmap-item done">204+ routes built, zero errors</div>
+          <div class="roadmap-item done">VehiclePassport live on real API</div>
+          <div class="roadmap-item done">DealerOS dashboard API-wired</div>
+          <div class="roadmap-item done">37 API endpoints functional</div>
+          <div class="roadmap-item">InstantRC → real Parivahan integration</div>
+          <div class="roadmap-item">SwapDirect → escrow banking API</div>
+          <div class="roadmap-item">LiveCondition → mechanic booking engine</div>
+        </div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-phase-label">Sprint 21–22 · Q1 2026</div>
+        <div class="roadmap-phase-title">AI & Payments</div>
+        <div class="roadmap-items">
+          <div class="roadmap-item">Replicate AI photo studio for dealers</div>
+          <div class="roadmap-item">OpenAI smart-reply for leads</div>
+          <div class="roadmap-item">Razorpay subscription for /plans</div>
+          <div class="roadmap-item">CarBrand / NewCar DB models live</div>
+          <div class="roadmap-item">Car catalog → real DB (not static)</div>
+          <div class="roadmap-item">DemandPulse real-time data pipeline</div>
+        </div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-phase-label">Q2 2026</div>
+        <div class="roadmap-phase-title">Network Effects</div>
+        <div class="roadmap-items">
+          <div class="roadmap-item">Vahan + OEM service API integrations</div>
+          <div class="roadmap-item">Insurance aggregator partnerships</div>
+          <div class="roadmap-item">RTO agent network (top 50 cities)</div>
+          <div class="roadmap-item">LiveCondition mechanic onboarding</div>
+          <div class="roadmap-item">DemandPulse B2B API launch</div>
+          <div class="roadmap-item">Dealer co-marketing program</div>
+        </div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-phase-label">Q3–Q4 2026</div>
+        <div class="roadmap-phase-title">Market Standard</div>
+        <div class="roadmap-items">
+          <div class="roadmap-item">VehiclePassport as industry standard</div>
+          <div class="roadmap-item">Bank / NBFC DemandPulse contracts</div>
+          <div class="roadmap-item">CrossState 10+ state coverage</div>
+          <div class="roadmap-item">100K+ DealerOS free tier dealers</div>
+          <div class="roadmap-item">Series A fundraise</div>
+          <div class="roadmap-item">Mobile app launch (React Native)</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:56px;background:var(--surface);border:1px solid var(--muted);border-top:2px solid var(--gold);padding:28px 32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;" class="reveal reveal-delay-3">
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);letter-spacing:0.04em;">₹142+ Cr</div>
+        <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);margin-top:4px;">Year 1 Revenue Potential</div>
+      </div>
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);letter-spacing:0.04em;">100K+</div>
+        <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);margin-top:4px;">Target Dealer Partners</div>
+      </div>
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);letter-spacing:0.04em;">$83B</div>
+        <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);margin-top:4px;">Market to Own by 2031</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">09 / 09</div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SLIDE 10 — CLOSE
+═══════════════════════════════════════════════ -->
+<section class="slide" id="slide-close">
+  <div class="close-grid-bg"></div>
+  <div class="close-glow"></div>
+  <div class="close-content">
+    <div class="close-label">The Opportunity</div>
+    <div class="close-title">TRUST THE<br><span class="gold">MARKET</span><br>HASN'T GOT</div>
+    <div class="close-sub">"The used car market doesn't need another listing platform. It needs someone to fix the trust deficit. Build that, and you own the $83 billion market."</div>
+    <div class="close-cta-row">
+      <a href="#slide-hero" class="btn-primary">Back to Top</a>
+      <a href="/dashboard" class="btn-secondary">View Live Platform</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPORT BAR ── -->
+<div class="export-bar">
+  <div class="export-note">CAROBEST · INVESTOR PRESENTATION · <span>CONFIDENTIAL 2026</span></div>
+  <div class="progress-dots" id="progressDots"></div>
+  <div class="export-note">Press <span>Ctrl+P</span> to export PDF</div>
+</div>
+
+<script>
+  // ── Intersection Observer for reveal animations
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── Progress dots
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('progressDots');
+  slides.forEach((s, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'prog-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => s.scrollIntoView({ behavior: 'smooth' }));
+    dotsContainer.appendChild(dot);
+  });
+
+  // Update active dot on scroll
+  const dotEls = dotsContainer.querySelectorAll('.prog-dot');
+  const slideObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        const idx = Array.from(slides).indexOf(e.target);
+        dotEls.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0.5 });
+  slides.forEach(s => slideObserver.observe(s));
+
+  // ── Animate score bars on visibility
+  const scoreObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.score-fill').forEach(fill => {
+          const w = fill.style.width;
+          fill.style.width = '0%';
+          setTimeout(() => { fill.style.width = w; }, 200);
+        });
+        scoreObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const rankingSection = document.querySelector('#slide-ranking');
+  if (rankingSection) scoreObserver.observe(rankingSection);
+</script>
+</body>
+</html>

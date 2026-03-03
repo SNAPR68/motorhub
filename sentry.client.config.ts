@@ -1,4 +1,4 @@
-/* Autovinci — Sentry Client-Side Configuration */
+/* CaroBest — Sentry Client-Side Configuration */
 
 import * as Sentry from "@sentry/nextjs";
 
@@ -15,7 +15,7 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
     replaysOnErrorSampleRate: 1.0,
 
     // Only send errors from our domain
-    allowUrls: [/autovinci\.com/, /autovinci\.vercel\.app/, /localhost/],
+    allowUrls: [/carobest\.com/, /carobest\.vercel\.app/, /localhost/],
 
     // Ignore common browser noise
     ignoreErrors: [

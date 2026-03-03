@@ -45,7 +45,7 @@ export default function VehiclePage({
             className="text-xl font-bold tracking-tight text-white"
             style={{ fontFamily: "'Noto Serif', serif" }}
           >
-            Autovinci
+            CaroBest
           </span>
           <div className="flex gap-6 items-center">
             <button className="text-white/60 hover:text-white transition-colors">

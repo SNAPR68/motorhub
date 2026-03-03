@@ -88,7 +88,7 @@ export default function ContentStudioPage() {
       }
       const a = document.createElement("a");
       a.href = dataUrl;
-      a.download = `autovinci-${Date.now()}.png`;
+      a.download = `carobest-${Date.now()}.png`;
       a.click();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Export failed");

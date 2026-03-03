@@ -1,6 +1,6 @@
-/* GET /api/analytics/export — Proprietary data export in Autovinci format
+/* GET /api/analytics/export — Proprietary data export in CaroBest format
  * Exports dealer's complete data package: vehicles, leads, analytics, health score.
- * Format is Autovinci-specific JSON with computed fields that only exist on this platform.
+ * Format is CaroBest-specific JSON with computed fields that only exist on this platform.
  * Intentional switching cost: data includes proprietary scores, signals, and benchmarks.
  */
 
@@ -80,9 +80,9 @@ export async function GET() {
     });
 
     const exportData = {
-      _format: "autovinci-dealer-export-v1",
+      _format: "carobest-dealer-export-v1",
       _exportedAt: new Date().toISOString(),
-      _platform: "Autovinci",
+      _platform: "CaroBest",
       dealer: {
         name: dealerProfile?.dealershipName,
         dealershipId: dealerProfile?.dealershipId,
@@ -146,7 +146,7 @@ export async function GET() {
       status: 200,
       headers: {
         "Content-Type": "application/json",
-        "Content-Disposition": `attachment; filename="autovinci-export-${dealerProfile?.dealershipId ?? "dealer"}-${new Date().toISOString().slice(0, 10)}.json"`,
+        "Content-Disposition": `attachment; filename="carobest-export-${dealerProfile?.dealershipId ?? "dealer"}-${new Date().toISOString().slice(0, 10)}.json"`,
       },
     });
   } catch (error) {

@@ -254,7 +254,7 @@ export default function SellCarPage() {
         {/* ─── WHY SELL HERE ─── */}
         <div>
           <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">
-            Why sell on Autovinci
+            Why sell on CaroBest
           </p>
           <div className="grid grid-cols-2 gap-3">
             {WHY_SELL.map((item) => (

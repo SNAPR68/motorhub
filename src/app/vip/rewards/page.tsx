@@ -173,7 +173,7 @@ export default function VIPRewardsPage() {
               </h3>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              Extend the circle. Invite a fellow collector to Autovinci and both
+              Extend the circle. Invite a fellow collector to CaroBest and both
               receive 1,000 bonus points upon their first acquisition.
             </p>
             <div className="flex items-center gap-2">

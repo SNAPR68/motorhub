@@ -109,7 +109,7 @@ export default function MyBookingsPage() {
         id: b.id,
         type: mapServiceType(b.type),
         car: formatServiceLabel(b.type),
-        dealer: b.city || "Autovinci Service",
+        dealer: b.city || "CaroBest Service",
         dateTime: formatDate(b.scheduledAt),
         status: mapStatus(b.status),
         amount: b.amount ? `₹${b.amount.toLocaleString("en-IN")}` : undefined,

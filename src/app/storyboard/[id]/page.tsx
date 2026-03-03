@@ -75,7 +75,7 @@ export default function StoryboardPage({
         </Link>
         <div className="flex flex-col items-center">
           <span className="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-semibold">
-            Autovinci
+            CaroBest
           </span>
           <h1 className="text-sm font-bold tracking-widest uppercase text-white">
             {vehicle.name.split(" ").slice(-1)[0]}
@@ -215,7 +215,7 @@ export default function StoryboardPage({
           <div className="mt-16 flex flex-col items-center opacity-40">
             <div className="h-12 w-px bg-gradient-to-b from-white to-transparent mb-4" />
             <span className="text-[10px] uppercase tracking-[0.5em] text-white">
-              Autovinci Inventory
+              CaroBest Inventory
             </span>
           </div>
         </section>

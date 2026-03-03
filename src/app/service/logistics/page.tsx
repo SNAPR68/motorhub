@@ -214,7 +214,7 @@ function ServiceLogisticsInner() {
                 <MaterialIcon name="precision_manufacturing" className="text-[#dab80b]" />
               </div>
               <div className="flex-1">
-                <h4 className="text-sm font-bold">Autovinci South Delhi</h4>
+                <h4 className="text-sm font-bold">CaroBest South Delhi</h4>
                 <p className="text-[11px] text-slate-400">Certified Master Technicians</p>
               </div>
             </div>

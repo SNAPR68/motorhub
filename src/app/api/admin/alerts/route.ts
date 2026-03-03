@@ -1,4 +1,4 @@
-/* Autovinci — Admin Alerts API
+/* CaroBest — Admin Alerts API
  * Today's activity, threshold warnings, weekly digest preview
  */
 

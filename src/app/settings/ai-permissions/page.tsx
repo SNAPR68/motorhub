@@ -13,7 +13,7 @@ const PERMISSIONS = [
     icon: "auto_awesome",
     iconBg: "rgba(23,84,207,0.1)",
     title: "Automated Posting",
-    desc: "Allow Autovinci to automatically publish vehicle listings and marketing content to connected social platforms.",
+    desc: "Allow CaroBest to automatically publish vehicle listings and marketing content to connected social platforms.",
     defaultOn: true,
   },
   {
@@ -78,7 +78,7 @@ export default function AIPermissionsPage() {
           </h1>
         </div>
         <p className="text-sm text-slate-400 leading-relaxed">
-          Grant Autovinci permission to supercharge your dealership with AI automation. You can change these anytime.
+          Grant CaroBest permission to supercharge your dealership with AI automation. You can change these anytime.
         </p>
       </header>
 

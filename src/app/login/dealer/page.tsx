@@ -73,7 +73,7 @@ function DealerLoginInner() {
       {/* Logo */}
       <div className="flex flex-col items-center pt-20 pb-12">
         <h1 className="text-3xl font-extralight uppercase tracking-[0.3em] text-white">
-          Autovinci
+          CaroBest
         </h1>
         <div className="mt-4 h-[1px] w-12 bg-white/30" />
       </div>

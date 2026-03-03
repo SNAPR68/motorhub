@@ -1,4 +1,4 @@
-/* Autovinci — In-Memory Rate Limiter
+/* CaroBest — In-Memory Rate Limiter
  * Simple sliding-window rate limit for public API routes.
  * In-memory: resets on Vercel cold start (acceptable for basic protection).
  */

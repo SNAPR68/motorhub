@@ -1,4 +1,4 @@
-/* Autovinci — Prisma Client Singleton (with pg driver adapter for Supabase) */
+/* CaroBest — Prisma Client Singleton (with pg driver adapter for Supabase) */
 
 import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";

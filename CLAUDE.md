@@ -1,15 +1,15 @@
-# Autovinci — Claude Code Instructions
+# CaroBest — Claude Code Instructions
 
 ## Project Overview
 AI-powered used car marketplace for India. Dual-user: **Buyers** and **Dealers**.
 
 - **Stack**: Next.js 16.1.6 App Router, TypeScript 5, React 19, Tailwind CSS v4, Prisma 7.4.1, Supabase (PostgreSQL + Auth), OpenAI, Zustand 5, Framer Motion 12
-- **Root**: `/Users/autovinci-web`
+- **Root**: `/Users/carobest-web`
 - **Design source of truth**: `stitch/` — 75+ HTML/Tailwind screens (each folder has `code.html` + `screen.png`)
 - **Key docs**: `PRD.md`, `docs/FORENSIC_AUDIT.md`, `docs/ROUTE_AUDIT.md`
 - **Bible docs** (external, source of truth for features):
-  - `~/Downloads/autovinci-web/Autovinci structure.md` — complete route map, buyer journey, SEO strategy
-  - `~/Downloads/autovinci-web/cardekho-gap-analysis.md` — 10 killer features, competitive moat
+  - `~/Downloads/carobest-web/CaroBest structure.md` — complete route map, buyer journey, SEO strategy
+  - `~/Downloads/carobest-web/cardekho-gap-analysis.md` — 10 killer features, competitive moat
 
 ## Architecture Rules
 - All pages `max-w-md mx-auto` (mobile-first, 390px target)

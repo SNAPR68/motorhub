@@ -170,7 +170,7 @@ export default function StudioPage() {
                   <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "rgba(19,127,236,0.2)", backdropFilter: "blur(12px)" }}>
                     <MaterialIcon name="stars" className="text-white text-sm" />
                   </div>
-                  <span className="text-xs font-bold text-white drop-shadow-md">AUTOVINCI AI</span>
+                  <span className="text-xs font-bold text-white drop-shadow-md">CAROBEST AI</span>
                 </div>
                 <h4 className="text-2xl font-black italic text-white leading-tight drop-shadow-lg">
                   DRIVE THE<br />FUTURE.

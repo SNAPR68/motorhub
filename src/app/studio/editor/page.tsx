@@ -85,7 +85,7 @@ export default function StudioEditorPage() {
     if (audioUrl) {
       const a = document.createElement("a");
       a.href = audioUrl;
-      a.download = `autovinci-narration-${Date.now()}.mp3`;
+      a.download = `carobest-narration-${Date.now()}.mp3`;
       a.click();
     }
   }, [audioUrl]);

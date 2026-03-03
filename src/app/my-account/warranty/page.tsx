@@ -130,7 +130,7 @@ export default function WarrantyTrackerPage() {
               </span>
             </div>
             <p className="text-xs text-slate-400">
-              Autovinci Comprehensive Warranty
+              CaroBest Comprehensive Warranty
             </p>
           </div>
 

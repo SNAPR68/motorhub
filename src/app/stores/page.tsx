@@ -52,7 +52,7 @@ export default function MultiStorePage() {
               className="text-[10px] uppercase font-bold leading-none"
               style={{ letterSpacing: "0.2em", color: "rgba(203,213,225,0.6)" }}
             >
-              Autovinci
+              CaroBest
             </p>
             <h1 className="font-extrabold text-sm tracking-tight">Executive Portal</h1>
           </div>

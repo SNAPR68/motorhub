@@ -54,7 +54,7 @@ export default function ComparePage() {
           </Link>
           <div className="text-center">
             <h1 className="text-[10px] font-bold tracking-[0.2em] uppercase opacity-60">
-              Autovinci
+              CaroBest
             </h1>
             <p className="text-sm italic text-slate-100">Comparison Studio</p>
           </div>

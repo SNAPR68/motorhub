@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
     if (openaiKey) {
       const inventoryContext = await fetchInventoryContext();
 
-      const systemPrompt = `You are Aria, an intelligent AI car concierge for Autovinci — India's premium AI-powered used car marketplace. You help buyers find their perfect car and assist dealers.
+      const systemPrompt = `You are Aria, an intelligent AI car concierge for CaroBest — India's premium AI-powered used car marketplace. You help buyers find their perfect car and assist dealers.
 
 CURRENT INVENTORY:
 ${inventoryContext}
@@ -195,7 +195,7 @@ FILTERS: {"search": "creta", "category": "SUV", "maxPrice": 1000000}
     } else if (keywords.brand || keywords.category || keywords.maxPrice) {
       text = `I couldn't find exact matches right now, but our inventory is updated daily. Would you like me to alert you when something matches?`;
     } else {
-      text = `Hi! I'm Aria, your Autovinci AI concierge. Tell me your budget, preferred brand, or car type and I'll find the best options for you!`;
+      text = `Hi! I'm Aria, your CaroBest AI concierge. Tell me your budget, preferred brand, or car type and I'll find the best options for you!`;
     }
 
     return NextResponse.json({ response: { text, vehicles: vehicles.length > 0 ? vehicles : undefined } });

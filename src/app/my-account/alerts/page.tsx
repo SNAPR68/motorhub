@@ -9,7 +9,7 @@ import { fetchWishlist, type DbVehicle } from "@/lib/api";
 
 type NotifChannel = "Email" | "SMS" | "Push";
 
-const STORAGE_KEY = "autovinci_price_alerts";
+const STORAGE_KEY = "carobest_price_alerts";
 
 function getAlertPrefs(): Record<string, boolean> {
   if (typeof window === "undefined") return {};

@@ -2,13 +2,13 @@ import type { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
 import "./globals.css";
 
-const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://autovinci.com";
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://carobest.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Autovinci — AI-Powered Used Car Marketplace",
-    template: "%s | Autovinci",
+    default: "CaroBest — AI-Powered Used Car Marketplace",
+    template: "%s | CaroBest",
   },
   description:
     "Intelligence & Elegance. India's AI-powered luxury automotive marketplace for buying and selling pre-owned cars. Smart pricing, virtual tours, and dealer intelligence.",
@@ -19,22 +19,22 @@ export const metadata: Metadata = {
     "sell car online",
     "AI car marketplace",
     "luxury used cars",
-    "Autovinci",
+    "CaroBest",
     "car dealer platform",
     "used car Delhi",
     "second hand car",
   ],
-  authors: [{ name: "Autovinci", url: SITE_URL }],
-  creator: "Autovinci",
-  publisher: "Autovinci",
+  authors: [{ name: "CaroBest", url: SITE_URL }],
+  creator: "CaroBest",
+  publisher: "CaroBest",
 
   // Open Graph
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: SITE_URL,
-    siteName: "Autovinci",
-    title: "Autovinci — AI-Powered Used Car Marketplace",
+    siteName: "CaroBest",
+    title: "CaroBest — AI-Powered Used Car Marketplace",
     description:
       "India's AI-powered luxury automotive marketplace. Smart pricing, virtual tours, dealer intelligence.",
     images: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Autovinci — AI-Powered Automotive Marketplace",
+        alt: "CaroBest — AI-Powered Automotive Marketplace",
       },
     ],
   },
@@ -50,11 +50,11 @@ export const metadata: Metadata = {
   // Twitter / X
   twitter: {
     card: "summary_large_image",
-    title: "Autovinci — AI-Powered Used Car Marketplace",
+    title: "CaroBest — AI-Powered Used Car Marketplace",
     description:
       "India's AI-powered luxury automotive marketplace. Smart pricing, virtual tours, dealer intelligence.",
     images: ["/og-image.png"],
-    creator: "@autovinci",
+    creator: "@carobest",
   },
 
   // Robots

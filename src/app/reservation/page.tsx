@@ -51,7 +51,7 @@ function ReservationContent() {
           className="text-xl italic font-medium tracking-tight"
           style={{ fontFamily: "'Playfair Display', serif" }}
         >
-          Autovinci
+          CaroBest
         </h1>
         <div className="w-10 flex justify-end">
           <MaterialIcon name="verified_user" className="text-[#f4c025]" />

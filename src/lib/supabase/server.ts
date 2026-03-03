@@ -1,4 +1,4 @@
-/* Autovinci — Supabase Server Client (for Route Handlers & Server Components) */
+/* CaroBest — Supabase Server Client (for Route Handlers & Server Components) */
 
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";

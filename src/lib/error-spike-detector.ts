@@ -1,4 +1,4 @@
-/* Autovinci — Error Spike Detector
+/* CaroBest — Error Spike Detector
  * Monitors API error rates in sliding windows.
  * When error rate crosses threshold, fires admin alert.
  *
@@ -121,7 +121,7 @@ async function checkForSpike(): Promise<void> {
   // Send admin notification
   try {
     const admins = await db.user.findMany({
-      where: { email: { in: [process.env.ADMIN_EMAIL ?? "admin@autovinci.com"] } },
+      where: { email: { in: [process.env.ADMIN_EMAIL ?? "admin@carobest.com"] } },
       select: { id: true },
       take: 3,
     });

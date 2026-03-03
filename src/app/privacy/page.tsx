@@ -27,7 +27,7 @@ const SECTIONS = [
   {
     title: "Your Rights",
     content:
-      "Under the Digital Personal Data Protection Act, 2023 (DPDP Act), you have the right to access your personal data, request correction of inaccurate data, request deletion of your data, withdraw consent for data processing, and file complaints with the Data Protection Board of India. To exercise these rights, contact us at privacy@autovinci.in.",
+      "Under the Digital Personal Data Protection Act, 2023 (DPDP Act), you have the right to access your personal data, request correction of inaccurate data, request deletion of your data, withdraw consent for data processing, and file complaints with the Data Protection Board of India. To exercise these rights, contact us at privacy@carobest.com.",
   },
   {
     title: "Cookies & Tracking",
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h2>
           <p className="text-sm text-slate-400 leading-relaxed">
-            Last updated: February 2026. This policy describes how Autovinci collects, uses,
+            Last updated: February 2026. This policy describes how CaroBest collects, uses,
             and protects your personal information in compliance with Indian data protection laws.
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function PrivacyPage() {
           <h3 className="text-sm font-bold text-white mb-2">Contact Us</h3>
           <p className="text-sm text-slate-400">
             For privacy-related inquiries, reach us at{" "}
-            <span className="text-[#137fec]">privacy@autovinci.in</span>
+            <span className="text-[#137fec]">privacy@carobest.com</span>
           </p>
         </div>
 

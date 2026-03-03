@@ -1,4 +1,4 @@
-/* Autovinci — Store Barrel Exports */
+/* CaroBest — Store Barrel Exports */
 
 export { useAuthStore } from "./auth-store";
 export { useUIStore } from "./ui-store";

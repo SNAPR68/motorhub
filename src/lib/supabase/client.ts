@@ -1,4 +1,4 @@
-/* Autovinci — Supabase Browser Client */
+/* CaroBest — Supabase Browser Client */
 
 import { createBrowserClient } from "@supabase/ssr";
 

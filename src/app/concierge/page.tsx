@@ -26,7 +26,7 @@ const QUICK_ACTIONS = [
 const WELCOME_MESSAGE: Message = {
   id: 1,
   role: "ai",
-  text: "Welcome to Autovinci Concierge. I\u2019m your AI-powered car buying assistant. I can help you find cars by brand, budget, or type — compare vehicles side by side — check availability and pricing. What are you looking for today?",
+  text: "Welcome to CaroBest Concierge. I\u2019m your AI-powered car buying assistant. I can help you find cars by brand, budget, or type — compare vehicles side by side — check availability and pricing. What are you looking for today?",
 };
 
 export default function ConciergePage() {
@@ -106,7 +106,7 @@ export default function ConciergePage() {
           </div>
           <div>
             <h1 className="text-lg font-semibold leading-none tracking-tight">
-              Autovinci Concierge
+              CaroBest Concierge
             </h1>
             <p className="text-[11px] uppercase tracking-widest text-[#1773cf] font-medium mt-1">
               Active Now

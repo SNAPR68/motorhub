@@ -61,7 +61,7 @@ const steps = [
   {
     icon: "verified_user",
     title: "Verification",
-    desc: "Autovinci verifies both parties within 24 hours — no surprises.",
+    desc: "CaroBest verifies both parties within 24 hours — no surprises.",
   },
   {
     icon: "account_balance",

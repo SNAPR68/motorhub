@@ -1,4 +1,4 @@
-/* Autovinci — Next.js Middleware (Supabase session refresh + route protection) */
+/* CaroBest — Next.js Middleware (Supabase session refresh + route protection) */
 
 import { type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";

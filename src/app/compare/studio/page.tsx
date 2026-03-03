@@ -85,7 +85,7 @@ export default function CompareStudioV2Page() {
             <MaterialIcon name="arrow_back" className="text-slate-100" />
           </Link>
           <div className="text-center">
-            <h1 className="text-sm font-light tracking-[0.3em] uppercase text-[#1269e2]">Autovinci</h1>
+            <h1 className="text-sm font-light tracking-[0.3em] uppercase text-[#1269e2]">CaroBest</h1>
             <p className="text-xs font-medium text-slate-400 uppercase tracking-widest">Technical Duel</p>
           </div>
           <button className="p-2 hover:bg-white/5 rounded-full transition-colors">

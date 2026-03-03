@@ -1,4 +1,4 @@
-/* Autovinci — Server-side auth guard helpers for API routes
+/* CaroBest — Server-side auth guard helpers for API routes
  *
  * Reusable functions to check authentication and get dealer profile.
  * Avoids repeating Supabase + Prisma lookup in every route handler.

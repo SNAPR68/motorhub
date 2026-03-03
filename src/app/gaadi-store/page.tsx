@@ -10,7 +10,7 @@ const CITIES = ["Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai", "Pune", 
 const STORES = [
   {
     id: 1,
-    name: "Autovinci Experience Center — Andheri",
+    name: "CaroBest Experience Center — Andheri",
     address: "Ground Floor, Link Road, Andheri West, Mumbai 400053",
     features: ["Test Drive", "Inspection", "Finance"],
     rating: 4.8,
@@ -19,7 +19,7 @@ const STORES = [
   },
   {
     id: 2,
-    name: "Autovinci Hub — Koramangala",
+    name: "CaroBest Hub — Koramangala",
     address: "80 Feet Road, Koramangala 4th Block, Bangalore 560034",
     features: ["Test Drive", "Inspection", "Finance"],
     rating: 4.7,
@@ -28,7 +28,7 @@ const STORES = [
   },
   {
     id: 3,
-    name: "Autovinci Studio — Connaught Place",
+    name: "CaroBest Studio — Connaught Place",
     address: "Block B, Connaught Place, New Delhi 110001",
     features: ["Test Drive", "Finance"],
     rating: 4.6,
@@ -37,7 +37,7 @@ const STORES = [
   },
   {
     id: 4,
-    name: "Autovinci Flagship — Banjara Hills",
+    name: "CaroBest Flagship — Banjara Hills",
     address: "Road No. 12, Banjara Hills, Hyderabad 500034",
     features: ["Test Drive", "Inspection", "Finance"],
     rating: 4.9,
@@ -78,7 +78,7 @@ export default function GaadiStorePage() {
           >
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-400" />
           </Link>
-          <h1 className="text-base font-bold text-white flex-1">Autovinci Stores</h1>
+          <h1 className="text-base font-bold text-white flex-1">CaroBest Stores</h1>
         </div>
       </header>
 

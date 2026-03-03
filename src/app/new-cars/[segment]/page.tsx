@@ -26,7 +26,7 @@ export async function generateMetadata({
   const title = SEGMENT_TITLES[segment] ?? capitalize(segment);
   return seoMeta({
     title: `New ${title} in India - Prices & Specs`,
-    description: `Explore new ${title.toLowerCase()} in India. Compare prices, specifications, mileage, and features. Find your perfect car on Autovinci.`,
+    description: `Explore new ${title.toLowerCase()} in India. Compare prices, specifications, mileage, and features. Find your perfect car on CaroBest.`,
     path: `/new-cars/${segment}`,
     keywords: [`new ${title.toLowerCase()}`, `${title.toLowerCase()} prices India`, `best ${title.toLowerCase()} 2026`],
   });

@@ -453,7 +453,7 @@ function StepGoLive() {
       {/* Stats teaser */}
       <div className="text-center">
         <p className="text-xs text-slate-500">
-          Join <span className="text-white font-semibold">2,400+</span> dealers already on Autovinci
+          Join <span className="text-white font-semibold">2,400+</span> dealers already on CaroBest
         </p>
       </div>
 

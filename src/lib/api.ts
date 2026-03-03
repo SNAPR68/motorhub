@@ -1,4 +1,4 @@
-/* Autovinci — Client-side API helpers
+/* CaroBest — Client-side API helpers
  *
  * Provides typed fetch wrappers for all API routes,
  * plus adapters to convert Prisma DB records into the

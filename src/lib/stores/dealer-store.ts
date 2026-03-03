@@ -1,4 +1,4 @@
-/* Autovinci — Dealer Zustand Store */
+/* CaroBest — Dealer Zustand Store */
 
 import { create } from "zustand";
 import type { DealerProfile, StoreLocation, TeamMember } from "../auth-types";

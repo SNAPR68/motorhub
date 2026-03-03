@@ -72,7 +72,7 @@ type CompareModel = (typeof MODELS_COMPARE)[number];
 interface CompetitorPricing {
   carDekho: string;
   olx: string;
-  autovinci: string;
+  carobest: string;
   vsCarDekho: string;
   vsOLX: string;
 }
@@ -81,35 +81,35 @@ const COMPETITOR_DATA: Record<CompareModel, CompetitorPricing> = {
   Creta: {
     carDekho: "₹8.4L",
     olx: "₹7.9L",
-    autovinci: "₹8.1L",
+    carobest: "₹8.1L",
     vsCarDekho: "3.6% below",
     vsOLX: "2.5% above",
   },
   Seltos: {
     carDekho: "₹9.2L",
     olx: "₹8.6L",
-    autovinci: "₹8.9L",
+    carobest: "₹8.9L",
     vsCarDekho: "3.3% below",
     vsOLX: "3.5% above",
   },
   Nexon: {
     carDekho: "₹7.8L",
     olx: "₹7.2L",
-    autovinci: "₹7.5L",
+    carobest: "₹7.5L",
     vsCarDekho: "3.8% below",
     vsOLX: "4.2% above",
   },
   Swift: {
     carDekho: "₹5.6L",
     olx: "₹5.1L",
-    autovinci: "₹5.3L",
+    carobest: "₹5.3L",
     vsCarDekho: "5.4% below",
     vsOLX: "3.9% above",
   },
   City: {
     carDekho: "₹10.8L",
     olx: "₹10.1L",
-    autovinci: "₹10.4L",
+    carobest: "₹10.4L",
     vsCarDekho: "3.7% below",
     vsOLX: "3.0% above",
   },
@@ -524,7 +524,7 @@ export default function ForecastPage() {
               {[
                 { name: "CarDekho", price: pricing.carDekho, color: "#ef4444" },
                 { name: "OLX", price: pricing.olx, color: "#f59e0b" },
-                { name: "Autovinci", price: pricing.autovinci, color: "#0dccf2" },
+                { name: "CaroBest", price: pricing.carobest, color: "#0dccf2" },
               ].map((platform) => (
                 <div key={platform.name} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">

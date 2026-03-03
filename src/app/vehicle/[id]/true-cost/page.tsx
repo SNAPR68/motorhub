@@ -924,7 +924,7 @@ export default function TrueCostPage({
             TrueCost Engine estimates are based on industry averages and
             algorithmic projections. Actual costs may vary based on driving
             habits, geography, service provider, and vehicle condition.
-            Autovinci does not guarantee these figures.
+            CaroBest does not guarantee these figures.
           </p>
         </div>
       </main>

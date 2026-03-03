@@ -1,6 +1,6 @@
 /* GET /api/dealers/[id]/public — Public dealer profile with health score badge
  * No auth required. Returns dealer info + health score for buyer-facing pages.
- * Health score is proprietary — only available on Autovinci.
+ * Health score is proprietary — only available on CaroBest.
  */
 
 import { NextRequest, NextResponse } from "next/server";

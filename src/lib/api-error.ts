@@ -1,4 +1,4 @@
-/* Autovinci — Standardized API Error Handling
+/* CaroBest — Standardized API Error Handling
  * Every API route uses: throw new ApiError(...) + handleApiError() in catch
  * Classifies: validation, auth, not-found, DB, AI, generic errors
  */

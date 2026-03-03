@@ -1,4 +1,4 @@
-/* Autovinci — Smart AI Router
+/* CaroBest — Smart AI Router
  * Routes AI requests to the optimal model based on query complexity.
  * Includes exponential backoff retry for transient failures.
  *

@@ -1,4 +1,4 @@
-/* Autovinci — Admin auth guard for admin API routes
+/* CaroBest — Admin auth guard for admin API routes
  *
  * Checks Supabase session + email against ADMIN_EMAILS env var.
  * Zero schema migration needed — upgrade to role-based later.
@@ -13,7 +13,7 @@ export async function requireAdminAuth(): Promise<{
 } | null> {
   // Dev-mode bypass: skip auth when ADMIN_EMAILS is not configured in development
   if (process.env.NODE_ENV === "development" && !process.env.ADMIN_EMAILS) {
-    return { userId: "dev-admin", email: "dev@autovinci.local" };
+    return { userId: "dev-admin", email: "dev@carobest.local" };
   }
 
   const adminEmails = (process.env.ADMIN_EMAILS ?? "")

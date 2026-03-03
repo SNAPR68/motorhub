@@ -39,7 +39,7 @@ export default function VIPMembershipPage() {
             className="text-[#1754cf] font-bold text-xl tracking-tighter uppercase"
             style={{ fontFamily: "'Newsreader', serif" }}
           >
-            Autovinci
+            CaroBest
           </span>
         </div>
         <Link

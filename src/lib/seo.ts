@@ -1,8 +1,8 @@
-/* Autovinci -- Shared SEO Metadata Utilities */
+/* CaroBest -- Shared SEO Metadata Utilities */
 
 import type { Metadata } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://autovinci.com";
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://carobest.com";
 
 /** Convert slug to Title Case: "used-cars" -> "Used Cars" */
 export function capitalize(s: string): string {
@@ -25,10 +25,10 @@ export function seoMeta(opts: {
     keywords: opts.keywords,
     alternates: { canonical: `${SITE_URL}${opts.path}` },
     openGraph: {
-      title: `${opts.title} | Autovinci`,
+      title: `${opts.title} | CaroBest`,
       description: opts.description,
       url: `${SITE_URL}${opts.path}`,
-      siteName: "Autovinci",
+      siteName: "CaroBest",
       locale: "en_IN",
       type: "website",
     },

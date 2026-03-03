@@ -53,7 +53,7 @@ const OFFERS: Offer[] = [
   {
     id: 4,
     title: "Free First Service",
-    detail: "Free first service on any car purchased through Autovinci",
+    detail: "Free first service on any car purchased through CaroBest",
     category: "Service",
     badge: "Service",
     badgeColor: "#059669",
@@ -63,7 +63,7 @@ const OFFERS: Offer[] = [
   {
     id: 5,
     title: "HDFC Ergo Insurance",
-    detail: "10% off on comprehensive car insurance via Autovinci",
+    detail: "10% off on comprehensive car insurance via CaroBest",
     category: "Insurance",
     badge: "Insurance",
     badgeColor: "#7c3aed",

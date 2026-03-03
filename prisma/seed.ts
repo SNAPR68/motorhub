@@ -1,4 +1,4 @@
-/* Autovinci — Database Seed Script
+/* CaroBest — Database Seed Script
  *
  * Migrates all existing mock data into the database.
  * Run: npx prisma db seed
@@ -23,16 +23,16 @@ const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log("🚗 Seeding Autovinci database...\n");
+  console.log("🚗 Seeding CaroBest database...\n");
 
   // ── 1. Users ──
   console.log("👤 Creating users...");
   const dealerUser = await prisma.user.upsert({
-    where: { email: "rajesh@autovinci.in" },
+    where: { email: "rajesh@carobest.com" },
     update: {},
     create: {
       authId: "00000000-0000-0000-0000-000000000001", // Replace with real Supabase Auth UUID
-      email: "rajesh@autovinci.in",
+      email: "rajesh@carobest.com",
       name: "Rajesh Malhotra",
       role: "DEALER",
       phone: "+91 98765 43210",
@@ -114,17 +114,17 @@ async function main() {
   // ── 4. Team Members ──
   console.log("\n👥 Creating team members...");
   const teamData = [
-    { name: "Rajesh Malhotra", role: "Owner", email: "rajesh@autovinci.in", status: "ACTIVE" as const, joinedAt: new Date("2024-01-15") },
-    { name: "Priya Kapoor", role: "Sales Manager", email: "priya.k@autovinci.in", status: "ACTIVE" as const, joinedAt: new Date("2024-03-01") },
-    { name: "Vikram Singh", role: "Inventory Lead", email: "vikram.s@autovinci.in", status: "ACTIVE" as const, joinedAt: new Date("2024-06-15") },
-    { name: "Aisha Patel", role: "Marketing", email: "aisha.p@autovinci.in", status: "INVITED" as const, joinedAt: new Date("2025-01-10") },
+    { name: "Rajesh Malhotra", role: "Owner", email: "rajesh@carobest.com", status: "ACTIVE" as const, joinedAt: new Date("2024-01-15") },
+    { name: "Priya Kapoor", role: "Sales Manager", email: "priya.k@carobest.com", status: "ACTIVE" as const, joinedAt: new Date("2024-03-01") },
+    { name: "Vikram Singh", role: "Inventory Lead", email: "vikram.s@carobest.com", status: "ACTIVE" as const, joinedAt: new Date("2024-06-15") },
+    { name: "Aisha Patel", role: "Marketing", email: "aisha.p@carobest.com", status: "INVITED" as const, joinedAt: new Date("2025-01-10") },
   ];
 
   for (const t of teamData) {
     const member = await prisma.teamMember.create({
       data: {
         dealerProfileId: dealerProfile.id,
-        userId: t.email === "rajesh@autovinci.in" ? dealerUser.id : null,
+        userId: t.email === "rajesh@carobest.com" ? dealerUser.id : null,
         avatarUrl: "https://lh3.googleusercontent.com/a/default-user",
         ...t,
       },

@@ -1,5 +1,5 @@
 /**
- * Autovinci — Static Car Catalog
+ * CaroBest — Static Car Catalog
  * Brands, models, variants, specs — mock data (real data replaces this later)
  */
 

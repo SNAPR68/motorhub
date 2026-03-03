@@ -6,7 +6,7 @@ export function generateMetadata(): Metadata {
   return seoMeta({
     title: "Find Car Dealers Near You",
     description:
-      "Browse verified car dealers across India. Compare ratings, view inventory, and contact dealerships directly on Autovinci.",
+      "Browse verified car dealers across India. Compare ratings, view inventory, and contact dealerships directly on CaroBest.",
     path: "/dealers",
     keywords: ["car dealers", "used car dealers", "dealerships India", "buy used cars"],
   });

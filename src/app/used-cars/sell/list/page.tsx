@@ -46,7 +46,7 @@ function ListPageInner() {
   const basePrice = computePrice(year);
   const low = Math.round(basePrice * 0.9);
   const high = Math.round(basePrice * 1.05);
-  const autovinciOffer = Math.round(basePrice * 0.97);
+  const carobestOffer = Math.round(basePrice * 0.97);
 
   const [activeTab, setActiveTab] = useState<"sell" | "marketplace" | "exchange">("sell");
   const [description, setDescription] = useState("");
@@ -159,7 +159,7 @@ function ListPageInner() {
             style={{ background: "rgba(255,255,255,0.07)" }}
           />
 
-          {/* Autovinci offer highlight */}
+          {/* CaroBest offer highlight */}
           <div
             className="flex items-center justify-between rounded-xl px-4 py-3"
             style={{
@@ -176,11 +176,11 @@ function ListPageInner() {
                   style={{ color: "#1152d4" }}
                 />
                 <span className="text-[10px] font-bold uppercase tracking-wide text-blue-400">
-                  Autovinci Guaranteed Offer
+                  CaroBest Guaranteed Offer
                 </span>
               </div>
               <p className="text-[26px] font-black text-white leading-none">
-                {formatLakhs(autovinciOffer)}
+                {formatLakhs(carobestOffer)}
               </p>
               <p className="text-[11px] text-slate-400 mt-0.5">
                 Instant · No negotiation · Today&apos;s price
@@ -237,7 +237,7 @@ function ListPageInner() {
           ))}
         </div>
 
-        {/* ─── TAB: Sell to Autovinci ─── */}
+        {/* ─── TAB: Sell to CaroBest ─── */}
         {activeTab === "sell" && (
           <div className="space-y-4">
             <div
@@ -280,7 +280,7 @@ function ListPageInner() {
             >
               <div className="flex items-baseline gap-2 mb-1">
                 <p className="text-[28px] font-black text-white">
-                  {formatLakhs(autovinciOffer)}
+                  {formatLakhs(carobestOffer)}
                 </p>
                 <p className="text-[13px] text-emerald-400 font-semibold">
                   Locked price
@@ -313,7 +313,7 @@ function ListPageInner() {
         {activeTab === "marketplace" && (
           <div className="space-y-4">
             <p className="text-[13px] text-slate-400 leading-relaxed">
-              List your car directly on the Autovinci marketplace and reach 3.2M+ active buyers. Set your own price.
+              List your car directly on the CaroBest marketplace and reach 3.2M+ active buyers. Set your own price.
             </p>
 
             {/* Asking price */}
@@ -467,7 +467,7 @@ function ListPageInner() {
               <div>
                 <p className="text-[11px] text-slate-500">Your car&apos;s exchange value</p>
                 <p className="text-[22px] font-black text-white">
-                  {formatLakhs(Math.round(autovinciOffer * 0.95))}
+                  {formatLakhs(Math.round(carobestOffer * 0.95))}
                 </p>
               </div>
               <MaterialIcon

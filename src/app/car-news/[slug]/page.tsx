@@ -74,7 +74,7 @@ export default function CarNewsArticlePage({
         </span>
         <h2 className="text-2xl font-bold leading-tight mb-3">{title}</h2>
         <div className="flex items-center gap-2 text-xs text-white/40">
-          <span>Autovinci Editorial</span>
+          <span>CaroBest Editorial</span>
           <span className="w-1 h-1 rounded-full bg-white/20" />
           <span>Feb 25, 2026</span>
           <span className="w-1 h-1 rounded-full bg-white/20" />
@@ -94,7 +94,7 @@ export default function CarNewsArticlePage({
         </p>
         <p className="text-sm text-white/70 leading-relaxed">
           The used car segment has emerged as a particularly dynamic part of the market,
-          with platforms like Autovinci leveraging AI-powered pricing tools and comprehensive
+          with platforms like CaroBest leveraging AI-powered pricing tools and comprehensive
           vehicle history reports to bring transparency to transactions. The pre-owned market
           is projected to reach 8 million units annually by 2027, nearly double the new car
           sales volume. This shift reflects growing consumer confidence in certified pre-owned
@@ -122,7 +122,7 @@ export default function CarNewsArticlePage({
             {copied ? "Copied!" : "Copy Link"}
           </button>
           <a
-            href={`https://wa.me/?text=${encodeURIComponent(title + " — Read on Autovinci")}`}
+            href={`https://wa.me/?text=${encodeURIComponent(title + " — Read on CaroBest")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 hover:bg-[#25D366]/20 transition text-xs font-medium text-[#25D366]"
@@ -131,7 +131,7 @@ export default function CarNewsArticlePage({
             WhatsApp
           </a>
           <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title + " — Read on Autovinci")}`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title + " — Read on CaroBest")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition text-xs font-medium"

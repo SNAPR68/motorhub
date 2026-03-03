@@ -14,7 +14,7 @@ import { fetchVehicle, adaptVehicle } from "@/lib/api";
 const FALLBACK_LOT = [
   { date: "Jan 2024", event: "First Registration", location: "Mumbai, MH", icon: "flag" },
   { date: "Aug 2024", event: "1st Service Completed", location: "Authorized Service Center", icon: "build" },
-  { date: "Feb 2026", event: "Listed on Autovinci", location: "Verified Dealer", icon: "verified" },
+  { date: "Feb 2026", event: "Listed on CaroBest", location: "Verified Dealer", icon: "verified" },
 ];
 
 function DossierContent() {

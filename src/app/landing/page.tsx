@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CRETA, BLUR_DATA_URL } from "@/lib/car-images";
 import { MaterialIcon } from "@/components/MaterialIcon";
 
-/* Stitch: autovinci_luxury_landing_page — #1152d4, Noto Serif + Noto Sans, #101622 */
+/* Stitch: carobest_luxury_landing_page — #1152d4, Noto Serif + Noto Sans, #101622 */
 
 export default function LandingPage() {
   return (
@@ -44,7 +44,7 @@ export default function LandingPage() {
             className="text-xl font-bold tracking-widest uppercase"
             style={{ fontFamily: "'Noto Serif', serif" }}
           >
-            Autovinci
+            CaroBest
           </h2>
         </div>
         <button

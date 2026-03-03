@@ -1,4 +1,4 @@
-/* Autovinci — Admin AI Quality Monitor API */
+/* CaroBest — Admin AI Quality Monitor API */
 
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdminAuth } from "@/lib/admin-guard";

@@ -1,4 +1,4 @@
-/* Autovinci — Admin Vehicle Moderation API
+/* CaroBest — Admin Vehicle Moderation API
  * GET: moderation queue, featured, low-quality vehicles
  * PATCH: approve/reject/feature/unfeature/flag actions
  */

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Get the best price for your used car. AI-powered instant valuation, doorstep pickup, and hassle-free paperwork. Sell in 3 simple steps.",
   openGraph: {
-    title: "Sell Your Car — Autovinci",
+    title: "Sell Your Car — CaroBest",
     description:
       "AI-powered instant valuation and hassle-free car selling. Get the best price in 3 steps.",
   },

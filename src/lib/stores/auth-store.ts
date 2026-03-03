@@ -1,4 +1,4 @@
-/* Autovinci — Auth Zustand Store (Supabase) */
+/* CaroBest — Auth Zustand Store (Supabase) */
 
 import { create } from "zustand";
 import { createClient } from "@/lib/supabase/client";

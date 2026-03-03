@@ -1,4 +1,4 @@
-/* Autovinci — Supabase Middleware Client (session refresh + route protection) */
+/* CaroBest — Supabase Middleware Client (session refresh + route protection) */
 
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";

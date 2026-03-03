@@ -59,7 +59,7 @@ export default function ExpertReviewPage({
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#1152d4]/10 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="relative">
             <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-[#1152d4]/15 text-[#1152d4] rounded-full px-2.5 py-1 mb-3">
-              Autovinci Expert Review
+              CaroBest Expert Review
             </span>
             <h2 className="text-2xl font-bold leading-tight mb-4">{modelName}</h2>
             {/* Star rating */}

@@ -20,7 +20,7 @@ const EXPERT_REVIEWS = [
   {
     title: "A solid all-rounder",
     rating: 4.5,
-    author: "Autovinci Expert Team",
+    author: "CaroBest Expert Team",
     date: "Jan 2026",
     pros: [
       "Refined and peppy engine with good low-end torque",
@@ -37,7 +37,7 @@ const EXPERT_REVIEWS = [
   {
     title: "Best in class safety",
     rating: 4.0,
-    author: "Autovinci Safety Lab",
+    author: "CaroBest Safety Lab",
     date: "Dec 2025",
     pros: [
       "6 airbags standard across all variants",

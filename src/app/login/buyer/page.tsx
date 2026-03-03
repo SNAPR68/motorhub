@@ -75,7 +75,7 @@ function BuyerLoginInner() {
             <MaterialIcon name="diamond" className="text-white text-xl" />
           </div>
           <span className="text-sm font-bold uppercase tracking-widest text-white">
-            Autovinci
+            CaroBest
           </span>
         </div>
         <Link
@@ -180,7 +180,7 @@ function BuyerLoginInner() {
             Forgot Password?
           </Link>
           <p className="text-sm font-medium text-slate-400">
-            New to Autovinci?{" "}
+            New to CaroBest?{" "}
             <Link
               href="/register"
               className="ml-1 text-white underline underline-offset-4 transition-colors hover:text-[#1754cf]"

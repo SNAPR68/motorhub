@@ -1,4 +1,4 @@
-/* Autovinci — Platform Event Emission Layer
+/* CaroBest — Platform Event Emission Layer
  * Append-only event log powering: benchmarks, agent triggers, audit trail, network effects.
  * Fire-and-forget: never blocks the calling API route.
  */

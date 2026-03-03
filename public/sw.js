@@ -1,9 +1,9 @@
-/* Autovinci — Minimal Service Worker
+/* CaroBest — Minimal Service Worker
  * Network-first for navigation, offline fallback to cached home page.
  * Cleans up old caches on activate.
  */
 
-const CACHE_NAME = "autovinci-v1";
+const CACHE_NAME = "carobest-v1";
 const OFFLINE_URL = "/";
 
 // Pre-cache the home page on install

@@ -1,4 +1,4 @@
-/* Autovinci — Vehicle JSON-LD Structured Data for SEO */
+/* CaroBest — Vehicle JSON-LD Structured Data for SEO */
 
 "use client";
 
@@ -9,7 +9,7 @@ interface VehicleJsonLdProps {
 }
 
 export function VehicleJsonLd({ vehicle }: VehicleJsonLdProps) {
-  const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://autovinci.com";
+  const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://carobest.com";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -41,7 +41,7 @@ export function VehicleJsonLd({ vehicle }: VehicleJsonLdProps) {
       url: `${SITE_URL}/showcase/${vehicle.id}`,
       seller: {
         "@type": "AutoDealer",
-        name: "Autovinci",
+        name: "CaroBest",
         url: SITE_URL,
       },
     },

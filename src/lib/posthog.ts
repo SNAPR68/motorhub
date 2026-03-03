@@ -1,4 +1,4 @@
-/* Autovinci — PostHog Analytics Client */
+/* CaroBest — PostHog Analytics Client */
 
 import posthog from "posthog-js";
 

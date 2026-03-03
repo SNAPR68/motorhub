@@ -1,4 +1,4 @@
-/* Autovinci — Admin Broadcast Notification API */
+/* CaroBest — Admin Broadcast Notification API */
 
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdminAuth } from "@/lib/admin-guard";

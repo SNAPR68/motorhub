@@ -117,7 +117,7 @@ export default function VehiclePassportPage({
           {/* Brand + report meta */}
           <div className="flex items-start justify-between mb-4">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Autovinci VehiclePassport™</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">CaroBest VehiclePassport™</p>
               <h2 className="text-base font-black text-white">{vehicle.name}</h2>
               <p className="text-xs text-slate-500">{vehicle.year} · {vehicle.owner} · {vehicle.fuel}</p>
             </div>
@@ -334,7 +334,7 @@ export default function VehiclePassportPage({
         {/* ─── Disclaimer ─── */}
         <div className="rounded-xl px-4 py-3 border border-white/5" style={{ background: "rgba(255,255,255,0.02)" }}>
           <p className="text-[10px] text-slate-600 leading-relaxed">
-            This report is computed by Autovinci&apos;s proprietary algorithms and does not constitute a legally verified vehicle history. Actual Vahan/RTO data verification coming soon. Report ID: <span className="font-mono">{passport.reportId}</span>
+            This report is computed by CaroBest&apos;s proprietary algorithms and does not constitute a legally verified vehicle history. Actual Vahan/RTO data verification coming soon. Report ID: <span className="font-mono">{passport.reportId}</span>
           </p>
         </div>
 

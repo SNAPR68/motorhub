@@ -6,7 +6,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerBottomNav } from "@/components/BuyerBottomNav";
 
 const contactCards = [
-  { icon: "mail", label: "Email", value: "hello@autovinci.com" },
+  { icon: "mail", label: "Email", value: "hello@carobest.com" },
   { icon: "phone", label: "Phone", value: "1800-309-AUTO (toll-free)" },
   { icon: "location_on", label: "Address", value: "Sector 44, Gurgaon, Haryana 122003" },
 ];

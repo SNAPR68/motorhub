@@ -1,6 +1,6 @@
-/* Autovinci — Dealer Health Score API
+/* CaroBest — Dealer Health Score API
  * Proprietary composite metric: response time, conversion rate, AI score avg, listing quality.
- * Autovinci-exclusive — leaving means losing your score.
+ * CaroBest-exclusive — leaving means losing your score.
  */
 
 import { NextResponse } from "next/server";

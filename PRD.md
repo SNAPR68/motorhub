@@ -1,4 +1,4 @@
-# AUTOVINCI — Product Requirements Document (PRD)
+# CAROBEST — Product Requirements Document (PRD)
 
 > AI-Powered Used Car Marketplace for India — The CarDekho Killer
 > Version: 1.0 | Last Updated: 2026-02-23
@@ -7,7 +7,7 @@
 
 ## 1. PRODUCT VISION
 
-Autovinci is an **AI-powered used car buy/sell platform for the Indian market** — a direct competitor to CarDekho, Cars24, Spinny, and OLX Autos. It differentiates through:
+CaroBest is an **AI-powered used car buy/sell platform for the Indian market** — a direct competitor to CarDekho, Cars24, Spinny, and OLX Autos. It differentiates through:
 
 - **AI Photo Enhancement** — Background removal, studio lighting, HDR, ray tracing for car photos
 - **AI 360° Virtual Tours** — Interactive 3D views with hotspots, ambient lighting controls
@@ -181,7 +181,7 @@ Every page below has a pixel-perfect HTML/Tailwind design in the `/stitch` folde
 |---|------|-------|---------------|--------|-------------|
 | 70 | **Buyer Login** | `/login/buyer` | `buyer_portal_login` | ✅ LIVE | Google SSO + email/password |
 | 71 | **Dealer Login** | `/login/dealer` | `dealer_portal_login` | ✅ LIVE | Dealer ID + password |
-| 72 | **Landing Page** | `/landing` | `autovinci_luxury_landing_page` | 🔴 MISSING | Marketing hero: "Future of Luxury Automotive Intelligence", portal buttons |
+| 72 | **Landing Page** | `/landing` | `carobest_luxury_landing_page` | 🔴 MISSING | Marketing hero: "Future of Luxury Automotive Intelligence", portal buttons |
 | 73 | **Privacy Policy** | `/privacy` | (legal, no stitch) | 🟢 CUSTOM | Privacy policy page |
 | 74 | **Terms of Service** | `/terms` | (legal, no stitch) | 🟢 CUSTOM | Terms of service page |
 
@@ -201,7 +201,7 @@ Every page below has a pixel-perfect HTML/Tailwind design in the `/stitch` folde
 
 ## 6. AI TOOLS — COMPLETE FEATURE SPEC
 
-These are the **differentiating features** that make Autovinci a CarDekho killer. Every AI tool has a stitch design. None are currently functional.
+These are the **differentiating features** that make CaroBest a CarDekho killer. Every AI tool has a stitch design. None are currently functional.
 
 ### 6.1 AI Photo Enhancement Studio
 **Stitch**: `ai_content_studio_editor_1`, `ai_content_studio_editor_2`, `premium_ai_studio_&_marketing`
@@ -482,4 +482,4 @@ Vercel deployment, custom domain, final QA.
 
 ---
 
-*This PRD is the single source of truth for Autovinci development. Every page, every AI tool, every API route is documented here. Follow the stitch designs to the T.*
+*This PRD is the single source of truth for CaroBest development. Every page, every AI tool, every API route is documented here. Follow the stitch designs to the T.*

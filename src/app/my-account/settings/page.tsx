@@ -104,7 +104,7 @@ export default function AccountSettingsPage() {
   const handleDelete = () => {
     if (typeof window !== "undefined") {
       window.alert(
-        "Are you sure you want to delete your account? This action is irreversible. Please contact support@autovinci.com to proceed."
+        "Are you sure you want to delete your account? This action is irreversible. Please contact support@carobest.com to proceed."
       );
     }
   };

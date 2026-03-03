@@ -61,7 +61,7 @@ export default function SocialOnboardingPage() {
             className="text-[10px] font-bold uppercase"
             style={{ letterSpacing: "0.2em", color: "#7311d4" }}
           >
-            Autovinci Premium
+            CaroBest Premium
           </span>
           <span
             className="text-[10px] font-bold uppercase"

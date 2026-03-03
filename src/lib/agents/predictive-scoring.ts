@@ -1,4 +1,4 @@
-/* Autovinci — Predictive Lead Scoring
+/* CaroBest — Predictive Lead Scoring
  * Uses PlatformEvent history + lead attributes to predict conversion probability.
  * Pure computation — no AI API calls needed.
  *

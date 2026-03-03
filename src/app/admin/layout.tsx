@@ -42,7 +42,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <MaterialIcon name="admin_panel_settings" className="text-white text-[18px]" />
             </div>
             <div>
-              <p className="text-[13px] font-extrabold tracking-tight text-white leading-none">Autovinci</p>
+              <p className="text-[13px] font-extrabold tracking-tight text-white leading-none">CaroBest</p>
               <p className="text-[9px] font-semibold tracking-[0.15em] uppercase leading-none mt-0.5" style={{ color: "rgba(43,173,238,0.7)" }}>Admin Panel</p>
             </div>
           </Link>

@@ -7,12 +7,12 @@ const SECTIONS = [
   {
     title: "Acceptance of Terms",
     content:
-      "By accessing or using the Autovinci platform, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services. These terms constitute a legally binding agreement between you and Autovinci Technologies Private Limited.",
+      "By accessing or using the CaroBest platform, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services. These terms constitute a legally binding agreement between you and CaroBest Technologies Private Limited.",
   },
   {
     title: "Description of Services",
     content:
-      "Autovinci provides an AI-powered platform connecting used car buyers and dealers in India. Our services include vehicle listing management, AI-driven lead CRM, appointment scheduling, digital showroom experiences, and dealer analytics tools. We act as a technology facilitator and are not a party to any vehicle transaction.",
+      "CaroBest provides an AI-powered platform connecting used car buyers and dealers in India. Our services include vehicle listing management, AI-driven lead CRM, appointment scheduling, digital showroom experiences, and dealer analytics tools. We act as a technology facilitator and are not a party to any vehicle transaction.",
   },
   {
     title: "User Accounts",
@@ -27,17 +27,17 @@ const SECTIONS = [
   {
     title: "Buyer Terms",
     content:
-      "Vehicle information on the platform is provided by dealers and may vary from the actual vehicle. Buyers should independently verify vehicle condition, history, and documentation before purchase. Autovinci does not guarantee the accuracy of listings or the quality of vehicles. All transactions are directly between buyers and dealers.",
+      "Vehicle information on the platform is provided by dealers and may vary from the actual vehicle. Buyers should independently verify vehicle condition, history, and documentation before purchase. CaroBest does not guarantee the accuracy of listings or the quality of vehicles. All transactions are directly between buyers and dealers.",
   },
   {
     title: "Intellectual Property",
     content:
-      "All content, designs, logos, AI models, and software on the Autovinci platform are our intellectual property or licensed to us. You may not copy, modify, distribute, or create derivative works without written permission. User-submitted content (vehicle images, descriptions) grants us a non-exclusive licence to display and promote the listings.",
+      "All content, designs, logos, AI models, and software on the CaroBest platform are our intellectual property or licensed to us. You may not copy, modify, distribute, or create derivative works without written permission. User-submitted content (vehicle images, descriptions) grants us a non-exclusive licence to display and promote the listings.",
   },
   {
     title: "Limitation of Liability",
     content:
-      "Autovinci is provided on an \"as is\" basis. We disclaim all warranties to the maximum extent permitted by law. We are not liable for any indirect, incidental, or consequential damages arising from your use of the platform. Our total liability shall not exceed the amount you have paid us in the preceding 12 months.",
+      "CaroBest is provided on an \"as is\" basis. We disclaim all warranties to the maximum extent permitted by law. We are not liable for any indirect, incidental, or consequential damages arising from your use of the platform. Our total liability shall not exceed the amount you have paid us in the preceding 12 months.",
   },
   {
     title: "Governing Law & Disputes",
@@ -74,7 +74,7 @@ export default function TermsPage() {
           </h2>
           <p className="text-sm text-slate-400 leading-relaxed">
             Last updated: February 2026. Please read these terms carefully before using the
-            Autovinci platform.
+            CaroBest platform.
           </p>
         </div>
 

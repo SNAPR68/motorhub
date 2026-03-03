@@ -97,7 +97,7 @@ export default function BrandVoicePage() {
               className="text-[10px] uppercase font-bold"
               style={{ letterSpacing: "0.3em", color: "#7311d4" }}
             >
-              {dealershipName || "Autovinci"}
+              {dealershipName || "CaroBest"}
             </span>
             <h1 className="text-sm font-semibold tracking-tight text-slate-400">AI Brand Voice</h1>
           </div>
@@ -231,7 +231,7 @@ export default function BrandVoicePage() {
                 <div className="flex items-center gap-2">
                   <div className="h-px flex-1" style={{ background: "#1e293b" }} />
                   <span className="text-[10px] text-slate-500 font-mono">
-                    {dealershipName ? `${dealershipName.toUpperCase()} · ` : ""}ENHANCED BY AUTOVINCI
+                    {dealershipName ? `${dealershipName.toUpperCase()} · ` : ""}ENHANCED BY CAROBEST
                   </span>
                 </div>
               </div>

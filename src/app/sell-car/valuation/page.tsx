@@ -656,7 +656,7 @@ function ValuationPageInner() {
                 </div>
               </div>
 
-              {/* Autovinci offer */}
+              {/* CaroBest offer */}
               <div className="rounded-2xl p-4 border border-emerald-500/20 relative overflow-hidden" style={{ background: "rgba(16,185,129,0.06)" }}>
                 <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full" style={{ background: "rgba(16,185,129,0.15)", filter: "blur(24px)" }} />
                 <div className="flex items-start gap-3 relative z-10">
@@ -665,7 +665,7 @@ function ValuationPageInner() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#10b981" }}>Autovinci Offer</p>
+                      <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#10b981" }}>CaroBest Offer</p>
                       <span className="h-4 px-1.5 rounded text-[8px] font-bold uppercase flex items-center" style={{ background: "rgba(16,185,129,0.2)", color: "#10b981" }}>Best Price</span>
                     </div>
                     <p className="text-2xl font-black text-white mb-0.5">{formatLakhs(valuation.offer)}</p>

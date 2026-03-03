@@ -53,7 +53,7 @@ export default function SellCarPage() {
         {/* Hero */}
         <div className="rounded-2xl p-5 border border-blue-500/20 relative overflow-hidden" style={{ background: "rgba(17,82,212,0.07)" }}>
           <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full" style={{ background: "rgba(17,82,212,0.12)", filter: "blur(24px)" }} />
-          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-2">Autovinci Instant Sell</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-2">CaroBest Instant Sell</p>
           <h2 className="text-2xl font-black text-white leading-tight mb-1">Get the best price<br />for your car today</h2>
           <p className="text-xs text-slate-400">AI valuation · Free inspection · Same-day payment</p>
           <div className="flex items-center gap-3 mt-4">
@@ -142,9 +142,9 @@ export default function SellCarPage() {
           </div>
         </div>
 
-        {/* Why Autovinci */}
+        {/* Why CaroBest */}
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Why Sell with Autovinci</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Why Sell with CaroBest</p>
           <div className="grid grid-cols-2 gap-2">
             {WHY_CARDS.map(({ icon, label, sub, color }) => (
               <div key={label} className="rounded-xl p-3 border border-white/5" style={{ background: "rgba(255,255,255,0.03)" }}>

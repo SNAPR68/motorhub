@@ -1,4 +1,4 @@
-/* Autovinci — Nightly Cron Job
+/* CaroBest — Nightly Cron Job
  * Runs daily at 2 AM IST via Vercel Cron.
  * - Re-scores vehicles with stale AI scores (>7 days)
  * - Re-analyzes NEW leads with no sentiment update in 48h

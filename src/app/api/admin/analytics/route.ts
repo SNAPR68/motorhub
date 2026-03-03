@@ -1,4 +1,4 @@
-/* Autovinci — Admin Analytics API
+/* CaroBest — Admin Analytics API
  * MRR, ARPU, churn, LTV, monthly trends, geographic breakdown
  */
 

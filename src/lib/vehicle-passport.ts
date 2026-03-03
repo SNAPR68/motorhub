@@ -1,5 +1,5 @@
 /**
- * Autovinci — VehiclePassport Generator
+ * CaroBest — VehiclePassport Generator
  * Deterministic report from vehicle fields. No external API yet.
  * When Vahan API registration completes, replace generateFromVehicle()
  * with a real fetch — the PassportReport interface stays identical.
@@ -22,7 +22,7 @@ export interface ChallanRecord {
 export interface PassportReport {
   reportId: string;
   generatedAt: string;
-  verificationLevel: "AUTOVINCI_COMPUTED" | "VAHAN_VERIFIED";
+  verificationLevel: "CAROBEST_COMPUTED" | "VAHAN_VERIFIED";
 
   ownership: {
     totalOwners: number;
@@ -219,7 +219,7 @@ export function generatePassport({
   return {
     reportId,
     generatedAt: new Date().toISOString(),
-    verificationLevel: "AUTOVINCI_COMPUTED",
+    verificationLevel: "CAROBEST_COMPUTED",
     ownership: {
       totalOwners: ownerCount,
       registrationState: STATES[stateIdx],

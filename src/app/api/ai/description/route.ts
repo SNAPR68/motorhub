@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
             .join(", ")
         : "";
 
-    const prompt = `You are an expert automotive copywriter for a premium used car marketplace in India called Autovinci.
+    const prompt = `You are an expert automotive copywriter for a premium used car marketplace in India called CaroBest.
 
 Write a compelling, premium 3–4 sentence marketing description for this vehicle listing. Be specific, confident, and persuasive. Use rupees (₹) for prices. Highlight the best features. End with a value statement. Do NOT use bullet points. Do NOT start with "Introducing". Write in third person.
 

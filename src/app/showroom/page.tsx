@@ -12,7 +12,7 @@ import { fetchVehicles, adaptVehicle, fetchWishlist, addToWishlist, removeFromWi
 import { VEHICLE_CATEGORIES, SORT_OPTIONS } from "@/lib/constants";
 import type { Vehicle } from "@/lib/types";
 
-/* ─── Autovinci Showroom — CarDekho-level buyer search experience ─── */
+/* ─── CaroBest Showroom — CarDekho-level buyer search experience ─── */
 
 const PAGE_SIZE = 20;
 

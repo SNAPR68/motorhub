@@ -171,7 +171,7 @@ export default function AdminAlertsPage() {
           </div>
 
           <div className="rounded-xl p-4 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.02)" }}>
-            <p className="text-sm font-bold text-white mb-3">Autovinci Weekly Summary</p>
+            <p className="text-sm font-bold text-white mb-3">CaroBest Weekly Summary</p>
             <div className="grid grid-cols-2 gap-3">
               {[
                 { label: "New Dealers", value: digest.newDealers, color: "#2badee" },

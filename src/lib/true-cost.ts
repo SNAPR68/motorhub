@@ -1,5 +1,5 @@
 /**
- * Autovinci — TrueCost Engine
+ * CaroBest — TrueCost Engine
  * 3-year total ownership cost estimates per model/category
  * Static data now; replace with AI/API later.
  */
