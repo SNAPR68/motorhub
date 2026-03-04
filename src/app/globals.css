@@ -14,22 +14,26 @@
 }
 
 :root {
-  /* Stitch canonical tokens from autovinci_luxury_landing_page */
-  --primary: #1152d4;
-  --primary-dark: #1152d4; /* alias for backward compat */
+  /* P2P Marketplace palette (UI/UX Pro #50 dark mode) */
+  --primary: #00969E;
+  --primary-dark: #007A80;
   --background-light: #f6f6f8;
-  --background-dark: #101622;
-  --bg-dark: #101622;
-  --glass-bg: rgba(16, 22, 34, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --background-dark: #111318;
+  --bg-dark: #111318;
+  --glass-bg: rgba(26, 29, 36, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.06);
 
-  /* Extended tokens for dealer/light contexts (from luxury_dealer_dashboard etc) */
-  --primary-alt: #137fec;
-  --bg-pure: #0a0c10;
+  /* Extended tokens */
+  --primary-alt: #00969E;
+  --bg-pure: #0d0f14;
   --success: #10B981;
-  --accent: #7C3AED;
+  --accent: #FF4D33;
   --danger: #EF4444;
   --warning: #F59E0B;
+  --secondary: #4A9A6A;
+  --surface: #1A1D24;
+  --text-muted: #8B95A5;
+  --border: #252830;
 }
 
 @theme inline {
@@ -62,7 +66,7 @@ body {
 }
 
 ::selection {
-  background: rgba(17, 82, 212, 0.2);
+  background: rgba(0, 150, 158, 0.25);
 }
 
 .font-display,
