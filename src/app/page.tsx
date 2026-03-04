@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -15,10 +15,9 @@ import {
 } from "@/lib/car-catalog";
 import { fetchCarBrands, fetchCarModels, type ApiBrand, type ApiCarModel } from "@/lib/api";
 
-/* ─── CaroBest Homepage — CarDekho-style consumer marketplace ─── */
+/* ─── CaroBest Homepage — Premium Automotive Marketplace ─── */
 
-const POPULAR_SEARCHES_NEW = ["Brezza", "Creta", "Nexon", "Swift", "Seltos", "XUV700"];
-const POPULAR_SEARCHES_USED = ["Creta 2021", "Swift 2020", "Nexon Diesel", "City 2022", "i20"];
+const POPULAR_SEARCHES = ["Brezza", "Creta", "Nexon", "Swift", "Seltos", "XUV700"];
 
 interface UsedCar {
   id: string;
@@ -32,15 +31,6 @@ interface UsedCar {
   images: string[];
 }
 
-const QUICK_TOOLS = [
-  { icon: "calculate", label: "EMI Calculator", href: "/car-loan/emi-calculator", color: "#1152d4" },
-  { icon: "compare_arrows", label: "Compare Cars", href: "/compare", color: "#10b981" },
-  { icon: "sell", label: "Sell Car", href: "/sell-car", color: "#f59e0b" },
-  { icon: "local_gas_station", label: "Fuel Price", href: "/fuel-price", color: "#ef4444" },
-  { icon: "shield", label: "Insurance", href: "/car-insurance", color: "#8b5cf6" },
-  { icon: "account_balance", label: "Car Loan", href: "/car-loan", color: "#06b6d4" },
-];
-
 const HERO_SLIDES = [
   { src: "/hero-1.jpg", alt: "Premium SUV", label: "Tata Harrier" },
   { src: "/hero-2.webp", alt: "Hyundai Creta", label: "Hyundai Creta" },
@@ -48,12 +38,13 @@ const HERO_SLIDES = [
   { src: "/hero-4.jpg", alt: "Car on open road", label: "Tata Nexon" },
 ];
 
+/* Browse filter tab type */
+type BrowseTab = "body" | "budget" | "brand";
+
 export default function HomePage() {
   const router = useRouter();
   const { user, isAuthenticated, checkAuth } = useAuthStore();
-  const [activeTab, setActiveTab] = useState<"new" | "used">("new");
-  const [newSearch, setNewSearch] = useState("");
-  const [usedSearch, setUsedSearch] = useState("");
+  const [search, setSearch] = useState("");
   const [selectedCity, setSelectedCity] = useState("Bengaluru");
   const [showCityPicker, setShowCityPicker] = useState(false);
   const [citySearch, setCitySearch] = useState("");
@@ -62,29 +53,26 @@ export default function HomePage() {
   const [popularBrands, setPopularBrands] = useState<ApiBrand[]>([]);
   const [popularModels, setPopularModels] = useState<ApiCarModel[]>([]);
   const [heroIndex, setHeroIndex] = useState(0);
+  const [browseTab, setBrowseTab] = useState<BrowseTab>("body");
+  const [browseOpen, setBrowseOpen] = useState(false);
+  const browseRef = useRef<HTMLDivElement>(null);
 
-  // Auto-rotate hero carousel
+  /* Auto-rotate hero */
   const nextSlide = useCallback(() => {
     setHeroIndex((prev) => (prev + 1) % HERO_SLIDES.length);
   }, []);
-
   useEffect(() => {
-    const timer = setInterval(nextSlide, 4000);
+    const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
   }, [nextSlide]);
 
-  // Check auth on mount
-  useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+  useEffect(() => { checkAuth(); }, [checkAuth]);
 
-  // Load city from localStorage
   useEffect(() => {
     const saved = localStorage.getItem("carobest_city");
     if (saved) setSelectedCity(saved);
   }, []);
 
-  // Fetch real used cars from DB
   useEffect(() => {
     async function loadUsedCars() {
       try {
@@ -93,22 +81,26 @@ export default function HomePage() {
           const data = await res.json();
           setUsedCars(data.vehicles || []);
         }
-      } catch {
-        // silent fail — section just won't show
-      }
+      } catch { /* silent */ }
       setUsedCarsLoading(false);
     }
     loadUsedCars();
   }, []);
 
-  // Fetch brands + popular models from DB
   useEffect(() => {
-    fetchCarBrands()
-      .then((d) => setPopularBrands(d.brands.filter((b) => b.popular)))
-      .catch(() => {});
-    fetchCarModels({ popular: true, limit: 8 })
-      .then((d) => setPopularModels(d.models))
-      .catch(() => {});
+    fetchCarBrands().then((d) => setPopularBrands(d.brands.filter((b) => b.popular))).catch(() => {});
+    fetchCarModels({ popular: true, limit: 8 }).then((d) => setPopularModels(d.models)).catch(() => {});
+  }, []);
+
+  /* Close browse dropdown on outside click */
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (browseRef.current && !browseRef.current.contains(e.target as Node)) {
+        setBrowseOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
   const handleCitySelect = (city: string) => {
@@ -122,14 +114,9 @@ export default function HomePage() {
     ? CITIES.filter((c) => c.toLowerCase().includes(citySearch.toLowerCase()))
     : CITIES;
 
-  const handleNewSearch = (q?: string) => {
-    const term = q ?? newSearch.trim();
+  const handleSearch = (q?: string) => {
+    const term = q ?? search.trim();
     router.push(term ? `/new-cars?q=${encodeURIComponent(term)}` : "/new-cars");
-  };
-
-  const handleUsedSearch = (q?: string) => {
-    const term = q ?? usedSearch.trim();
-    router.push(term ? `/used-cars?q=${encodeURIComponent(term)}` : "/used-cars");
   };
 
   const userInitials = user?.name
@@ -138,39 +125,31 @@ export default function HomePage() {
 
   return (
     <BuyerAppShell>
-    <div
-      className="min-h-dvh w-full"
-      style={{ background: "#080a0f", color: "#e2e8f0", fontFamily: "'Noto Sans', sans-serif" }}
-    >
-      {/* ─── HEADER ─── */}
+    <div className="min-h-dvh w-full" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+
+      {/* ─── MOBILE HEADER ─── */}
       <header
         className="sticky top-0 z-50 flex items-center justify-between px-4 h-14 border-b border-white/5 md:hidden"
         style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
       >
         <Link href="/" className="flex items-center gap-2">
           <MaterialIcon name="token" className="text-[24px]" style={{ color: "#1152d4" }} />
-          <span className="text-lg font-bold text-white" style={{ fontFamily: "'Noto Serif', serif" }}>
+          <span className="text-lg font-bold text-white" style={{ fontFamily: "Newsreader, serif" }}>
             CaroBest
           </span>
         </Link>
-
         <button
           onClick={() => setShowCityPicker(true)}
-          className="flex items-center gap-1 rounded-full px-3 h-8 text-xs font-semibold border border-white/10 transition-all active:scale-95"
+          className="flex items-center gap-1 rounded-full px-3 h-8 text-xs font-semibold border border-white/10 active:scale-95"
           style={{ background: "rgba(255,255,255,0.04)", color: "#94a3b8" }}
         >
           <MaterialIcon name="location_on" className="text-[13px]" style={{ color: "#1152d4" }} />
           {selectedCity}
           <MaterialIcon name="keyboard_arrow_down" className="text-[13px]" />
         </button>
-
         <div className="flex items-center gap-1.5">
           {isAuthenticated && user ? (
-            <Link
-              href="/my-account"
-              className="flex h-8 w-8 items-center justify-center rounded-full text-[10px] font-black text-white"
-              style={{ background: "linear-gradient(135deg, #1152d4, #4f8ef7)" }}
-            >
+            <Link href="/my-account" className="flex h-8 w-8 items-center justify-center rounded-full text-[10px] font-black text-white" style={{ background: "linear-gradient(135deg, #1152d4, #4f8ef7)" }}>
               {userInitials}
             </Link>
           ) : (
@@ -181,102 +160,89 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* ─── HERO CAROUSEL ─── */}
-      <section className="relative w-full overflow-hidden md:-mx-8 lg:-mx-12 md:-mt-6 md:w-[calc(100%+4rem)] lg:w-[calc(100%+6rem)] md:rounded-b-2xl" style={{ height: "480px", maxHeight: "60vh" }}>
-        {/* Light background behind images so dark cars are visible */}
-        <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(135deg, #1a2540 0%, #0f1829 50%, #162035 100%)" }} />
+      {/* ─── HERO ─── */}
+      <section
+        className="relative w-full overflow-hidden md:-mx-8 lg:-mx-12 md:-mt-6 md:w-[calc(100%+4rem)] lg:w-[calc(100%+6rem)]"
+        style={{ height: "520px", maxHeight: "65vh" }}
+      >
+        <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(135deg, #0c1a35 0%, #0a1225 50%, #0e1a30 100%)" }} />
 
-        {/* Carousel slides */}
         {HERO_SLIDES.map((slide, i) => (
           <div
             key={slide.alt}
             className="absolute inset-0 transition-opacity duration-1000"
             style={{ opacity: heroIndex === i ? 1 : 0, zIndex: heroIndex === i ? 1 : 0 }}
           >
-            <Image
-              src={slide.src}
-              alt={slide.alt}
-              fill
-              sizes="100vw"
-              className="object-cover"
-              priority={i === 0}
-              unoptimized
-            />
+            <Image src={slide.src} alt={slide.alt} fill sizes="100vw" className="object-cover" priority={i === 0} unoptimized />
           </div>
         ))}
 
-        {/* Overlays — light on desktop so car images stay visible */}
-        <div className="absolute inset-0 bg-black/50 md:bg-black/25 z-10" />
-        <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.85) 0%, rgba(8,10,15,0.4) 40%, rgba(8,10,15,0.15) 100%)" }} />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[200px] z-10 pointer-events-none" style={{ background: "radial-gradient(ellipse, rgba(17,82,212,0.15) 0%, transparent 70%)" }} />
+        {/* Gradient overlay -- lighter to show car */}
+        <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.95) 0%, rgba(8,10,15,0.5) 35%, rgba(8,10,15,0.1) 70%, rgba(8,10,15,0.2) 100%)" }} />
 
-        {/* Content overlay */}
-        <div className="relative z-30 flex flex-col items-center justify-end h-full px-6 pb-6 text-center">
-          <div className="mb-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 border border-blue-500/20" style={{ background: "rgba(17,82,212,0.1)" }}>
-              <MaterialIcon name="auto_awesome" className="text-[12px]" style={{ color: "#60a5fa" }} />
-              <span className="text-[10px] uppercase tracking-[0.3em] font-semibold" style={{ color: "#60a5fa" }}>AI-Powered Marketplace</span>
+        {/* Hero content */}
+        <div className="relative z-30 flex flex-col items-center justify-end h-full pb-8 md:pb-12 px-6 text-center md:items-start md:text-left md:px-12 lg:px-16">
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 border border-blue-400/20" style={{ background: "rgba(17,82,212,0.12)" }}>
+              <MaterialIcon name="auto_awesome" className="text-[12px] text-blue-400" />
+              <span className="text-[10px] uppercase tracking-[0.25em] font-semibold text-blue-400">AI-Powered Marketplace</span>
             </div>
-            <h2
-              className="text-[26px] font-bold leading-[1.15] mb-3 whitespace-nowrap mx-auto text-white"
-              style={{ fontFamily: "'Noto Serif', serif" }}
-            >
-              Drive Smart. Buy&nbsp;Smarter.
-            </h2>
-            <p className="text-[13px] text-slate-400 max-w-[280px] mx-auto leading-relaxed">
-              AI-inspected, dealer-certified used cars across 50+ Indian cities
+            <h1 className="text-3xl md:text-5xl font-bold text-white leading-[1.1] mb-3" style={{ fontFamily: "Newsreader, serif" }}>
+              Find Your Next Car
+            </h1>
+            <p className="text-sm md:text-base text-slate-400 leading-relaxed mb-6 max-w-md">
+              AI-inspected, dealer-certified cars across 50+ Indian cities. 200-point check, 1-year warranty, easy returns.
             </p>
-          </div>
 
-          {/* Trust badges */}
-          <div className="flex items-center justify-center gap-4 mb-5">
-            {[
-              { icon: "verified_user", label: "200-Point Check" },
-              { icon: "shield", label: "1-Year Warranty" },
-              { icon: "swap_horiz", label: "Easy Returns" },
-            ].map((badge) => (
-              <div key={badge.label} className="flex items-center gap-1.5">
-                <MaterialIcon name={badge.icon} className="text-[13px]" style={{ color: "#10b981" }} />
-                <span className="text-[10px] font-semibold text-slate-400">{badge.label}</span>
+            {/* Search bar -- the main action */}
+            <div className="w-full max-w-lg">
+              <div
+                className="flex items-center gap-3 rounded-2xl px-4 py-3.5 md:py-4 border border-white/15 focus-within:border-blue-500/50 transition-all"
+                style={{ background: "rgba(8,10,15,0.85)", backdropFilter: "blur(20px)" }}
+              >
+                <MaterialIcon name="search" className="text-[22px] text-slate-500 shrink-0" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                  placeholder="Search any car..."
+                  className="flex-1 bg-transparent text-sm md:text-base text-white outline-none placeholder:text-slate-500"
+                  style={{ fontFamily: "Manrope, sans-serif" }}
+                />
+                <button
+                  onClick={() => handleSearch()}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl text-white shrink-0 transition-transform active:scale-95"
+                  style={{ background: "#1152d4" }}
+                >
+                  <MaterialIcon name="arrow_forward" className="text-[18px]" />
+                </button>
               </div>
-            ))}
+              <div className="flex items-center gap-2 mt-3 overflow-x-auto no-scrollbar">
+                <span className="text-[11px] text-slate-600 shrink-0 font-medium" style={{ fontFamily: "Manrope, sans-serif" }}>Popular:</span>
+                {POPULAR_SEARCHES.map((q) => (
+                  <button
+                    key={q}
+                    onClick={() => handleSearch(q)}
+                    className="shrink-0 rounded-full px-3 py-1 text-[11px] font-medium text-slate-400 border border-white/8 transition-all hover:border-white/20 hover:text-white active:scale-95"
+                    style={{ background: "rgba(255,255,255,0.04)" }}
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="w-full max-w-sm space-y-2.5">
-            <Link
-              href="/used-cars"
-              className="group relative flex w-full items-center justify-center gap-3 rounded-xl py-4 text-sm font-bold text-white transition-all active:scale-[0.98]"
-              style={{ background: "linear-gradient(135deg, #1152d4, #1a6bff)" }}
-            >
-              <MaterialIcon name="directions_car" className="text-[20px]" />
-              <span>Browse Used Cars</span>
-              <MaterialIcon name="arrow_forward" className="text-[18px] absolute right-4 opacity-60 group-hover:opacity-100 transition-opacity" />
-            </Link>
-            <Link
-              href="/sell-car"
-              className="group relative flex w-full items-center justify-center gap-3 rounded-xl py-3.5 text-sm font-bold text-white transition-all active:scale-[0.98]"
-              style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.12)" }}
-            >
-              <MaterialIcon name="sell" className="text-[18px]" />
-              <span>Sell Your Car — Get Instant Valuation</span>
-              <MaterialIcon name="arrow_forward" className="text-[18px] absolute right-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Carousel indicators + car label */}
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1.5">
-          <span className="text-[10px] font-semibold text-white/60 transition-all">{HERO_SLIDES[heroIndex].label}</span>
-          <div className="flex gap-1.5">
+          {/* Carousel dots */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 md:left-auto md:right-12 md:translate-x-0 flex items-center gap-2">
+            <span className="text-[10px] font-medium text-white/50 mr-1 hidden md:block">{HERO_SLIDES[heroIndex].label}</span>
             {HERO_SLIDES.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setHeroIndex(i)}
                 className="h-1.5 rounded-full transition-all"
-                style={{
-                  width: heroIndex === i ? "20px" : "6px",
-                  background: heroIndex === i ? "#1152d4" : "rgba(255,255,255,0.3)",
-                }}
+                style={{ width: heroIndex === i ? "24px" : "6px", background: heroIndex === i ? "#1152d4" : "rgba(255,255,255,0.25)" }}
               />
             ))}
           </div>
@@ -293,399 +259,258 @@ export default function HomePage() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-bold text-white">Select City</h3>
-              <button
-                onClick={() => setShowCityPicker(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-full"
-                style={{ background: "rgba(255,255,255,0.06)" }}
-              >
+              <h3 className="text-base font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>Select City</h3>
+              <button onClick={() => setShowCityPicker(false)} className="flex h-8 w-8 items-center justify-center rounded-full" style={{ background: "rgba(255,255,255,0.06)" }}>
                 <MaterialIcon name="close" className="text-[18px] text-slate-400" />
               </button>
             </div>
-
-            {/* Search */}
-            <div
-              className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 mb-4 border border-white/10"
-              style={{ background: "rgba(255,255,255,0.04)" }}
-            >
+            <div className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 mb-4 border border-white/10" style={{ background: "rgba(255,255,255,0.04)" }}>
               <MaterialIcon name="search" className="text-[18px] text-slate-500" />
-              <input
-                type="text"
-                value={citySearch}
-                onChange={(e) => setCitySearch(e.target.value)}
-                placeholder="Search city..."
-                className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
-                autoFocus
-              />
+              <input type="text" value={citySearch} onChange={(e) => setCitySearch(e.target.value)} placeholder="Search city..." className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500" autoFocus />
             </div>
-
-            {/* Popular cities */}
             {!citySearch && (
               <div className="mb-3">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Popular Cities</p>
                 <div className="flex flex-wrap gap-2">
                   {["Delhi", "Mumbai", "Bengaluru", "Chennai", "Hyderabad", "Pune"].map((c) => (
-                    <button
-                      key={c}
-                      onClick={() => handleCitySelect(c)}
-                      className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all active:scale-95 ${
-                        selectedCity === c
-                          ? "text-white"
-                          : "text-slate-400 border border-white/10"
-                      }`}
-                      style={{
-                        background: selectedCity === c ? "#1152d4" : "rgba(255,255,255,0.04)",
-                      }}
-                    >
-                      {c}
-                    </button>
+                    <button key={c} onClick={() => handleCitySelect(c)} className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all active:scale-95 ${selectedCity === c ? "text-white" : "text-slate-400 border border-white/10"}`} style={{ background: selectedCity === c ? "#1152d4" : "rgba(255,255,255,0.04)" }}>{c}</button>
                   ))}
                 </div>
               </div>
             )}
-
-            {/* All cities */}
-            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">
-              {citySearch ? "Results" : "All Cities"}
-            </p>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">{citySearch ? "Results" : "All Cities"}</p>
             <div className="flex-1 overflow-y-auto space-y-0.5">
               {filteredCities.map((c) => (
-                <button
-                  key={c}
-                  onClick={() => handleCitySelect(c)}
-                  className="flex items-center gap-3 w-full rounded-xl px-3 py-2.5 text-left transition-all active:scale-[0.99]"
-                  style={{
-                    background: selectedCity === c ? "rgba(17,82,212,0.1)" : "transparent",
-                  }}
-                >
-                  <MaterialIcon
-                    name="location_on"
-                    className="text-[16px]"
-                    style={{ color: selectedCity === c ? "#1152d4" : "#475569" }}
-                  />
-                  <span
-                    className="text-sm font-medium"
-                    style={{ color: selectedCity === c ? "#60a5fa" : "#cbd5e1" }}
-                  >
-                    {c}
-                  </span>
-                  {selectedCity === c && (
-                    <MaterialIcon name="check" className="text-[16px] ml-auto" style={{ color: "#1152d4" }} />
-                  )}
+                <button key={c} onClick={() => handleCitySelect(c)} className="flex items-center gap-3 w-full rounded-xl px-3 py-2.5 text-left transition-all active:scale-[0.99]" style={{ background: selectedCity === c ? "rgba(17,82,212,0.1)" : "transparent" }}>
+                  <MaterialIcon name="location_on" className="text-[16px]" style={{ color: selectedCity === c ? "#1152d4" : "#475569" }} />
+                  <span className="text-sm font-medium" style={{ color: selectedCity === c ? "#60a5fa" : "#cbd5e1" }}>{c}</span>
+                  {selectedCity === c && <MaterialIcon name="check" className="text-[16px] ml-auto" style={{ color: "#1152d4" }} />}
                 </button>
               ))}
-              {filteredCities.length === 0 && (
-                <p className="text-sm text-slate-500 text-center py-4">No cities found</p>
-              )}
+              {filteredCities.length === 0 && <p className="text-sm text-slate-500 text-center py-4">No cities found</p>}
             </div>
           </div>
         </div>
       )}
 
-      {/* ─── HERO SEARCH ─── */}
-      <section className="px-4 md:px-0 pt-6 pb-5 md:pt-8 md:pb-6 md:rounded-2xl" style={{ background: "linear-gradient(180deg, rgba(17,82,212,0.08) 0%, transparent 100%)" }}>
-        <div className="md:flex md:items-start md:justify-between md:gap-8">
-          <div className="md:shrink-0">
-            <h1 className="text-2xl md:text-3xl font-bold text-white leading-tight mb-1" style={{ fontFamily: "'Noto Serif', serif" }}>
-              Find Your Perfect Car
-            </h1>
-            <p className="text-sm text-slate-400 mb-4 md:mb-0">New, used &amp; upcoming cars — all in one place</p>
-          </div>
-
-          <div className="md:flex-1 md:max-w-xl">
-        {/* Tab toggle */}
-        <div className="flex rounded-xl overflow-hidden border border-white/10 mb-3" style={{ background: "rgba(255,255,255,0.04)" }}>
-          {(["new", "used"] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className="flex-1 py-2.5 text-sm font-bold transition-all"
-              style={{
-                background: activeTab === tab ? "#1152d4" : "transparent",
-                color: activeTab === tab ? "#fff" : "#64748b",
-              }}
-            >
-              {tab === "new" ? "New Cars" : "Used Cars"}
-            </button>
+      {/* ─── STATS + BROWSE FILTERS (consolidated) ─── */}
+      <section className="px-4 md:px-0 pt-8 md:pt-10 pb-6">
+        {/* Stats row */}
+        <div className="flex items-center justify-between md:justify-start md:gap-12 mb-8">
+          {[
+            { value: "50K+", label: "New Cars" },
+            { value: "12K+", label: "Used Cars" },
+            { value: "2.5K+", label: "Dealers" },
+            { value: "4.8", label: "Rating", star: true },
+          ].map((s) => (
+            <div key={s.label} className="text-center md:text-left">
+              <p className="text-lg md:text-2xl font-extrabold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>
+                {s.value}{s.star && <span className="text-amber-400 ml-0.5">★</span>}
+              </p>
+              <p className="text-[10px] md:text-xs text-slate-500 font-medium mt-0.5">{s.label}</p>
+            </div>
           ))}
         </div>
 
-        {/* Search input */}
-        {activeTab === "new" ? (
-          <div>
-            <div
-              className="flex items-center gap-2.5 rounded-2xl px-4 py-3 border border-white/10 focus-within:border-blue-500/40 transition-colors"
-              style={{ background: "rgba(15,18,27,0.98)" }}
-            >
-              <MaterialIcon name="search" className="text-[20px] text-slate-500 shrink-0" />
-              <input
-                type="text"
-                value={newSearch}
-                onChange={(e) => setNewSearch(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleNewSearch()}
-                placeholder="Search brand or model..."
-                className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
-              />
+        {/* Browse filters -- dropdown tabs instead of icon grids */}
+        <div ref={browseRef} className="relative">
+          <div className="flex items-center gap-2 md:gap-3 mb-4">
+            <h2 className="text-base md:text-lg font-bold text-white mr-2" style={{ fontFamily: "Newsreader, serif" }}>Browse by</h2>
+            {([
+              { key: "body" as BrowseTab, label: "Body Type", icon: "directions_car" },
+              { key: "budget" as BrowseTab, label: "Budget", icon: "currency_rupee" },
+              { key: "brand" as BrowseTab, label: "Brand", icon: "star" },
+            ]).map((tab) => (
               <button
-                onClick={() => handleNewSearch()}
-                className="flex h-9 w-9 items-center justify-center rounded-xl text-white shrink-0"
-                style={{ background: "#1152d4" }}
+                key={tab.key}
+                onClick={() => { setBrowseTab(tab.key); setBrowseOpen(browseTab === tab.key ? !browseOpen : true); }}
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition-all active:scale-95 ${
+                  browseTab === tab.key && browseOpen
+                    ? "text-white border-blue-500/50"
+                    : "text-slate-400 border-white/10 hover:text-white hover:border-white/20"
+                }`}
+                style={{
+                  background: browseTab === tab.key && browseOpen ? "rgba(17,82,212,0.15)" : "rgba(255,255,255,0.04)",
+                  border: `1px solid ${browseTab === tab.key && browseOpen ? "rgba(17,82,212,0.4)" : "rgba(255,255,255,0.08)"}`,
+                }}
               >
-                <MaterialIcon name="arrow_forward" className="text-[17px]" />
+                <MaterialIcon name={tab.icon} className="text-[16px]" />
+                {tab.label}
+                <MaterialIcon
+                  name={browseTab === tab.key && browseOpen ? "expand_less" : "expand_more"}
+                  className="text-[16px] -mr-1"
+                />
               </button>
-            </div>
-            <div className="flex items-center gap-2 mt-2.5 overflow-x-auto no-scrollbar">
-              <span className="text-[11px] text-slate-600 shrink-0 font-semibold">Popular:</span>
-              {POPULAR_SEARCHES_NEW.map((q) => (
-                <button key={q} onClick={() => handleNewSearch(q)} className="shrink-0 rounded-full px-3 py-1 text-[11px] text-slate-400 border border-white/8" style={{ background: "rgba(255,255,255,0.03)" }}>
-                  {q}
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
-        ) : (
-          <div>
+
+          {/* Dropdown content */}
+          {browseOpen && (
             <div
-              className="flex items-center gap-2.5 rounded-2xl px-4 py-3 border border-white/10 focus-within:border-blue-500/40 transition-colors"
-              style={{ background: "rgba(15,18,27,0.98)" }}
+              className="rounded-2xl p-4 md:p-5 mb-2 border border-white/8 animate-in fade-in slide-in-from-top-2 duration-200"
+              style={{ background: "rgba(255,255,255,0.03)" }}
             >
-              <MaterialIcon name="search" className="text-[20px] text-slate-500 shrink-0" />
-              <input
-                type="text"
-                value={usedSearch}
-                onChange={(e) => setUsedSearch(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleUsedSearch()}
-                placeholder={`Used cars in ${selectedCity}...`}
-                className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
-              />
-              <button
-                onClick={() => handleUsedSearch()}
-                className="flex h-9 w-9 items-center justify-center rounded-xl text-white shrink-0"
-                style={{ background: "#1152d4" }}
-              >
-                <MaterialIcon name="arrow_forward" className="text-[17px]" />
-              </button>
+              {browseTab === "body" && (
+                <div className="flex flex-wrap gap-2 md:gap-3">
+                  {BODY_TYPES.map((bt) => (
+                    <Link
+                      key={bt.value}
+                      href={`/new-cars?body=${bt.value}`}
+                      className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-300 border border-white/8 transition-all hover:border-blue-500/30 hover:text-white hover:bg-blue-500/5 active:scale-95"
+                      style={{ background: "rgba(255,255,255,0.03)" }}
+                    >
+                      <span className="text-lg">{bt.icon}</span>
+                      {bt.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+              {browseTab === "budget" && (
+                <div className="flex flex-wrap gap-2 md:gap-3">
+                  {BUDGET_SEGMENTS.map((b) => (
+                    <Link
+                      key={b.label}
+                      href={`/new-cars?minPrice=${b.min}&maxPrice=${b.max}`}
+                      className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-300 border border-white/8 transition-all hover:border-blue-500/30 hover:text-white hover:bg-blue-500/5 active:scale-95"
+                      style={{ background: "rgba(255,255,255,0.03)" }}
+                    >
+                      <MaterialIcon name="currency_rupee" className="text-[16px] text-blue-400" />
+                      {b.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+              {browseTab === "brand" && (
+                <div className="flex flex-wrap gap-2 md:gap-3">
+                  {popularBrands.map((brand) => (
+                    <Link
+                      key={brand.slug}
+                      href={`/new-cars?brand=${brand.slug}`}
+                      className="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-300 border border-white/8 transition-all hover:border-blue-500/30 hover:text-white hover:bg-blue-500/5 active:scale-95"
+                      style={{ background: "rgba(255,255,255,0.03)" }}
+                    >
+                      <div
+                        className="h-7 w-7 rounded-full flex items-center justify-center text-[10px] font-black"
+                        style={{ background: `${brand.color}22`, border: `1px solid ${brand.color}44`, color: brand.color }}
+                      >
+                        {brand.logo}
+                      </div>
+                      {brand.name.split(" ")[0]}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/new-cars"
+                    className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-blue-400 border border-blue-500/20 transition-all hover:bg-blue-500/5 active:scale-95"
+                    style={{ background: "rgba(17,82,212,0.05)" }}
+                  >
+                    View all brands
+                    <MaterialIcon name="arrow_forward" className="text-[16px]" />
+                  </Link>
+                </div>
+              )}
             </div>
-            <div className="flex items-center gap-2 mt-2.5 overflow-x-auto no-scrollbar">
-              <span className="text-[11px] text-slate-600 shrink-0 font-semibold">Popular:</span>
-              {POPULAR_SEARCHES_USED.map((q) => (
-                <button key={q} onClick={() => handleUsedSearch(q)} className="shrink-0 rounded-full px-3 py-1 text-[11px] text-slate-400 border border-white/8" style={{ background: "rgba(255,255,255,0.03)" }}>
-                  {q}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-          </div>{/* close md:max-w-xl */}
-        </div>{/* close md:flex */}
-      </section>
-
-      {/* ─── TRUST STRIP ─── */}
-      <section className="mx-4 md:mx-0 mb-5 md:mb-8 rounded-2xl px-4 md:px-6 py-3 md:py-4 border border-blue-500/15" style={{ background: "rgba(17,82,212,0.05)" }}>
-        <div className="grid grid-cols-4 gap-1 md:gap-4 text-center">
-          {[{ v: "50K+", l: "New Cars" }, { v: "12K+", l: "Used Cars" }, { v: "2.5K+", l: "Dealers" }, { v: "4.8", l: "Rated" }].map((s) => (
-            <div key={s.l}>
-              <p className="text-sm md:text-lg font-black text-white">{s.v}{s.l === "Rated" && <span className="text-amber-400">★</span>}</p>
-              <p className="text-[10px] md:text-xs text-slate-500 mt-0.5">{s.l}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── QUICK TOOLS ─── */}
-      <section className="px-4 md:px-0 mb-5 md:mb-8">
-        <div className="flex gap-2 md:gap-3 overflow-x-auto no-scrollbar md:grid md:grid-cols-6 md:overflow-visible">
-          {QUICK_TOOLS.map((tool) => (
-            <Link
-              key={tool.label}
-              href={tool.href}
-              className="flex flex-col items-center gap-1.5 md:gap-2 rounded-2xl py-3 md:py-4 px-3 border border-white/6 shrink-0 md:shrink transition-all active:scale-95 hover:border-white/15 hover:bg-white/[0.06]"
-              style={{ background: "rgba(255,255,255,0.04)", minWidth: "72px" }}
-            >
-              <div
-                className="h-9 w-9 md:h-11 md:w-11 rounded-xl flex items-center justify-center"
-                style={{ background: `${tool.color}15` }}
-              >
-                <MaterialIcon name={tool.icon} className="text-[18px] md:text-[22px]" style={{ color: tool.color }} />
-              </div>
-              <span className="text-[10px] md:text-xs font-semibold text-slate-400 whitespace-nowrap">{tool.label}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── BROWSE BY BODY TYPE ─── */}
-      <section className="px-4 md:px-0 mb-5 md:mb-8">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm md:text-lg font-bold text-white">Browse by Body Type</h2>
-          <div className="flex items-center gap-4">
-            <Link href="/interests" className="text-xs md:text-sm font-semibold" style={{ color: "#1152d4" }}>Curated for You</Link>
-            <Link href="/new-cars" className="text-xs md:text-sm font-semibold" style={{ color: "#1152d4" }}>View all</Link>
-          </div>
-        </div>
-        <div className="flex gap-3 overflow-x-auto no-scrollbar md:grid md:grid-cols-6 md:gap-4 md:overflow-visible">
-          {BODY_TYPES.map((bt) => (
-            <Link
-              key={bt.value}
-              href={`/new-cars?body=${bt.value}`}
-              className="flex flex-col items-center gap-2 rounded-2xl py-3 md:py-4 px-4 border border-white/6 shrink-0 md:shrink transition-all active:scale-95 hover:border-white/15 hover:bg-white/[0.06]"
-              style={{ background: "rgba(255,255,255,0.04)", minWidth: "72px" }}
-            >
-              <span className="text-2xl md:text-3xl">{bt.icon}</span>
-              <span className="text-[11px] md:text-sm font-semibold text-slate-300 whitespace-nowrap">{bt.label}</span>
-            </Link>
-          ))}
+          )}
         </div>
       </section>
 
       {/* ─── POPULAR NEW CARS ─── */}
-      <section className="mb-5 md:mb-8">
-        <div className="flex items-center justify-between px-4 md:px-0 mb-3">
+      <section className="mb-10 md:mb-14">
+        <div className="flex items-center justify-between px-4 md:px-0 mb-5">
           <div>
-            <h2 className="text-sm md:text-lg font-bold text-white">Popular New Cars</h2>
-            <p className="text-[11px] md:text-sm text-slate-500">Top picks in India right now</p>
+            <h2 className="text-lg md:text-2xl font-bold text-white" style={{ fontFamily: "Newsreader, serif" }}>
+              Popular New Cars
+            </h2>
+            <p className="text-xs md:text-sm text-slate-500 mt-0.5">Top picks across India</p>
           </div>
-          <Link href="/new-cars" className="text-xs md:text-sm font-semibold flex items-center gap-0.5" style={{ color: "#1152d4" }}>
-            See all <MaterialIcon name="chevron_right" className="text-[14px]" />
+          <Link
+            href="/new-cars"
+            className="flex items-center gap-1 text-xs md:text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            View all <MaterialIcon name="arrow_forward" className="text-[16px]" />
           </Link>
         </div>
-        <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-5 md:overflow-visible md:snap-none md:px-0">
+        <div className="flex gap-4 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-5 md:overflow-visible md:snap-none md:px-0">
           {popularModels.map((car) => (
             <Link
               key={car.slug}
               href={`/${car.brand.slug}/${car.slug}`}
-              className="shrink-0 w-44 md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/6 transition-all active:scale-[0.98] block hover:border-white/15 hover:bg-white/[0.06]"
-              style={{ background: "rgba(255,255,255,0.04)" }}
+              className="group shrink-0 w-[280px] md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/[0.06] transition-all hover:border-white/15 active:scale-[0.98] block"
+              style={{ background: "rgba(255,255,255,0.03)" }}
             >
-              <div className="relative" style={{ aspectRatio: "4/3" }}>
+              <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
                 <Image
                   src={car.image}
                   alt={car.fullName}
                   fill
-                  sizes="(max-width: 768px) 176px, 25vw"
-                  className="object-cover"
+                  sizes="(max-width: 768px) 280px, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                   unoptimized
                 />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.6) 0%, transparent 60%)" }} />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.6) 0%, transparent 50%)" }} />
                 {car.tag && (
-                  <span
-                    className="absolute top-2 left-2 text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-full text-white"
-                    style={{ background: "rgba(17,82,212,0.9)" }}
-                  >
+                  <span className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-lg text-white" style={{ background: "rgba(17,82,212,0.85)", backdropFilter: "blur(4px)" }}>
                     {car.tag}
                   </span>
                 )}
-                <span className="absolute bottom-2 right-2 text-[10px] md:text-xs font-bold text-amber-400">
-                  {car.rating}★
-                </span>
+                <div className="absolute bottom-3 right-3 flex items-center gap-1 text-amber-400">
+                  <span className="text-xs font-bold">{car.rating}</span>
+                  <MaterialIcon name="star" fill className="text-[14px]" />
+                </div>
               </div>
-              <div className="p-3 md:p-4">
-                <p className="text-[10px] md:text-[11px] text-slate-500 font-semibold uppercase tracking-wide truncate">{car.brand.name.toUpperCase()}</p>
-                <h3 className="text-[13px] md:text-sm font-bold text-white truncate mt-0.5">{car.name}</h3>
-                <p className="text-xs md:text-sm font-black text-white mt-1">{car.startingPriceDisplay} <span className="text-[10px] md:text-xs font-normal text-slate-500">onwards</span></p>
-                <p className="text-[10px] md:text-xs text-slate-500 mt-0.5">EMI {formatEmi(car.startingPrice)}</p>
+              <div className="p-4">
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{car.brand.name}</p>
+                <h3 className="text-sm md:text-base font-bold text-white mt-1" style={{ fontFamily: "Manrope, sans-serif" }}>{car.name}</h3>
+                <div className="flex items-baseline gap-2 mt-2">
+                  <p className="text-sm md:text-base font-extrabold text-white">{car.startingPriceDisplay}</p>
+                  <span className="text-[10px] text-slate-500 font-medium">onwards</span>
+                </div>
+                <p className="text-[11px] text-slate-500 mt-1">EMI {formatEmi(car.startingPrice)}</p>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ─── BROWSE BY BUDGET ─── */}
-      <section className="px-4 md:px-0 mb-5 md:mb-8">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm md:text-lg font-bold text-white">Browse by Budget</h2>
-          <Link href="/new-cars" className="text-xs md:text-sm font-semibold" style={{ color: "#1152d4" }}>See all</Link>
-        </div>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
-          {BUDGET_SEGMENTS.map((b) => (
-            <Link
-              key={b.label}
-              href={`/new-cars?minPrice=${b.min}&maxPrice=${b.max}`}
-              className="flex flex-col items-center gap-1.5 md:gap-2 rounded-2xl py-3.5 md:py-4 px-2 border border-white/6 text-center transition-all active:scale-95 hover:border-white/15 hover:bg-white/[0.06]"
-              style={{ background: "rgba(255,255,255,0.04)" }}
-            >
-              <MaterialIcon name="currency_rupee" className="text-[18px] md:text-[22px]" style={{ color: "#1152d4" }} />
-              <span className="text-[11px] md:text-sm font-bold text-slate-300 leading-tight">{b.label}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── POPULAR BRANDS ─── */}
-      <section className="px-4 md:px-0 mb-5 md:mb-8">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm md:text-lg font-bold text-white">Popular Brands</h2>
-          <Link href="/new-cars" className="text-xs md:text-sm font-semibold" style={{ color: "#1152d4" }}>All brands</Link>
-        </div>
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-2.5 md:gap-4">
-          {popularBrands.map((brand) => (
-            <Link
-              key={brand.slug}
-              href={`/new-cars?brand=${brand.slug}`}
-              className="flex flex-col items-center gap-2 rounded-2xl py-3 md:py-4 px-2 border border-white/6 transition-all active:scale-95 hover:border-white/15 hover:bg-white/[0.06]"
-              style={{ background: "rgba(255,255,255,0.04)" }}
-            >
-              <div
-                className="h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center text-xs md:text-sm font-black"
-                style={{ background: `${brand.color}22`, border: `1px solid ${brand.color}44`, color: brand.color }}
-              >
-                {brand.logo}
-              </div>
-              <span className="text-[10px] md:text-xs font-semibold text-slate-400 text-center leading-tight">{brand.name.split(" ")[0]}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── RECENTLY LISTED USED CARS (from DB) ─── */}
+      {/* ─── RECENTLY LISTED USED CARS ─── */}
       {!usedCarsLoading && usedCars.length > 0 && (
-        <section className="mb-5 md:mb-8">
-          <div className="flex items-center justify-between px-4 md:px-0 mb-3">
+        <section className="mb-10 md:mb-14">
+          <div className="flex items-center justify-between px-4 md:px-0 mb-5">
             <div>
-              <h2 className="text-sm md:text-lg font-bold text-white">Recently Listed Used Cars</h2>
-              <p className="text-[11px] md:text-sm text-slate-500">Certified &amp; inspected in {selectedCity}</p>
+              <h2 className="text-lg md:text-2xl font-bold text-white" style={{ fontFamily: "Newsreader, serif" }}>
+                Certified Used Cars
+              </h2>
+              <p className="text-xs md:text-sm text-slate-500 mt-0.5">Inspected &amp; warranted in {selectedCity}</p>
             </div>
-            <Link href="/used-cars" className="text-xs md:text-sm font-semibold flex items-center gap-0.5" style={{ color: "#10b981" }}>
-              See all <MaterialIcon name="chevron_right" className="text-[14px]" />
+            <Link href="/used-cars" className="flex items-center gap-1 text-xs md:text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors">
+              View all <MaterialIcon name="arrow_forward" className="text-[16px]" />
             </Link>
           </div>
-          <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:snap-none md:px-0">
+          <div className="flex gap-4 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:snap-none md:px-0">
             {usedCars.map((car) => (
               <Link
                 key={car.id}
                 href={`/used-cars/details/${car.id}`}
-                className="shrink-0 w-44 md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/6 transition-all active:scale-[0.98] block hover:border-white/15 hover:bg-white/[0.06]"
-                style={{ background: "rgba(255,255,255,0.04)" }}
+                className="group shrink-0 w-[280px] md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/[0.06] transition-all hover:border-white/15 active:scale-[0.98] block"
+                style={{ background: "rgba(255,255,255,0.03)" }}
               >
-                <div className="relative" style={{ aspectRatio: "4/3" }}>
+                <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
                   {car.images?.[0] ? (
-                    <Image
-                      src={car.images[0]}
-                      alt={car.name}
-                      fill
-                      sizes="(max-width: 768px) 176px, 33vw"
-                      className="object-cover"
-                      unoptimized
-                    />
+                    <Image src={car.images[0]} alt={car.name} fill sizes="(max-width: 768px) 280px, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" unoptimized />
                   ) : (
-                    <div className="h-full w-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.06)" }}>
-                      <MaterialIcon name="directions_car" className="text-[36px] text-slate-700" />
+                    <div className="h-full w-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.04)" }}>
+                      <MaterialIcon name="directions_car" className="text-[40px] text-slate-700" />
                     </div>
                   )}
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.7) 0%, transparent 60%)" }} />
-                  <span className="absolute top-2 left-2 text-[9px] font-bold px-2 py-0.5 rounded-full text-white" style={{ background: "rgba(16,185,129,0.9)" }}>
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.6) 0%, transparent 50%)" }} />
+                  <span className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-lg text-white" style={{ background: "rgba(16,185,129,0.85)", backdropFilter: "blur(4px)" }}>
                     Certified
                   </span>
                 </div>
-                <div className="p-3 md:p-4">
-                  <p className="text-[10px] md:text-[11px] text-slate-500 font-semibold uppercase tracking-wide truncate">
-                    {car.year} · {car.fuel}
-                  </p>
-                  <h3 className="text-[13px] md:text-sm font-bold text-white truncate mt-0.5">{car.name}</h3>
-                  <p className="text-xs md:text-sm font-black text-white mt-1">
-                    {car.priceDisplay || `₹${(car.price / 100000).toFixed(1)}L`}
-                  </p>
-                  <p className="text-[10px] md:text-xs text-slate-500 mt-0.5">{car.km} · {car.location || selectedCity}</p>
+                <div className="p-4">
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{car.year} · {car.fuel}</p>
+                  <h3 className="text-sm md:text-base font-bold text-white mt-1" style={{ fontFamily: "Manrope, sans-serif" }}>{car.name}</h3>
+                  <p className="text-sm md:text-base font-extrabold text-white mt-2">{car.priceDisplay || `₹${(car.price / 100000).toFixed(1)} Lakh`}</p>
+                  <p className="text-[11px] text-slate-500 mt-1">{car.km} · {car.location || selectedCity}</p>
                 </div>
               </Link>
             ))}
@@ -693,94 +518,80 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* ─── BANNERS ─── */}
-      <div className="md:grid md:grid-cols-2 md:gap-5 md:mb-8">
-        <section className="px-4 md:px-0 mb-4 md:mb-0">
+      {/* ─── CTA STRIP ─── */}
+      <section className="px-4 md:px-0 mb-10 md:mb-14">
+        <div className="grid md:grid-cols-3 gap-4">
+          {/* Sell your car */}
           <Link
-            href="/used-cars"
-            className="flex items-center gap-4 rounded-2xl p-4 md:p-5 border border-emerald-500/20 transition-all active:scale-[0.99] block h-full hover:border-emerald-500/40"
-            style={{ background: "linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.03) 100%)" }}
+            href="/sell-car"
+            className="group flex items-center gap-4 rounded-2xl p-5 md:p-6 border border-emerald-500/15 transition-all hover:border-emerald-500/30 active:scale-[0.99]"
+            style={{ background: "linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%)" }}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(16,185,129,0.15)" }}>
-              <MaterialIcon name="directions_car" className="text-[26px] text-emerald-400" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(16,185,129,0.12)" }}>
+              <MaterialIcon name="sell" className="text-[24px] text-emerald-400" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm md:text-base font-bold text-white">Certified Used Cars</p>
-              <p className="text-xs md:text-sm text-slate-400 mt-0.5">Inspected, warranted &amp; ready to drive</p>
-              <p className="text-[10px] md:text-xs text-emerald-400 font-semibold mt-1">Browse in {selectedCity}</p>
+              <p className="text-sm font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>Sell Your Car</p>
+              <p className="text-xs text-slate-500 mt-0.5">AI valuation in 30 seconds</p>
             </div>
-            <MaterialIcon name="arrow_forward_ios" className="text-[14px] text-emerald-400 shrink-0" />
+            <MaterialIcon name="arrow_forward" className="text-[18px] text-emerald-400/50 group-hover:text-emerald-400 transition-colors shrink-0" />
           </Link>
-        </section>
 
-        <section className="px-4 md:px-0 mb-5 md:mb-0">
+          {/* AI Concierge */}
           <Link
             href="/concierge"
-            className="flex items-center gap-4 rounded-2xl p-4 md:p-5 border border-blue-500/20 transition-all active:scale-[0.99] block h-full hover:border-blue-500/40"
-            style={{ background: "linear-gradient(135deg, rgba(17,82,212,0.1) 0%, rgba(17,82,212,0.04) 100%)" }}
+            className="group flex items-center gap-4 rounded-2xl p-5 md:p-6 border border-blue-500/15 transition-all hover:border-blue-500/30 active:scale-[0.99]"
+            style={{ background: "linear-gradient(135deg, rgba(17,82,212,0.08) 0%, rgba(17,82,212,0.03) 100%)" }}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(17,82,212,0.18)" }}>
-              <MaterialIcon name="smart_toy" className="text-[26px]" style={{ color: "#1152d4" }} />
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(17,82,212,0.15)" }}>
+              <MaterialIcon name="smart_toy" className="text-[24px] text-blue-400" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm md:text-base font-bold text-white">AI Car Concierge</p>
-              <p className="text-xs md:text-sm text-slate-400 mt-0.5">Tell us your budget &amp; needs — AI finds your match</p>
+              <p className="text-sm font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>AI Concierge</p>
+              <p className="text-xs text-slate-500 mt-0.5">Tell us your needs, AI finds your match</p>
             </div>
-            <MaterialIcon name="arrow_forward_ios" className="text-[14px] text-blue-400 shrink-0" />
+            <MaterialIcon name="arrow_forward" className="text-[18px] text-blue-400/50 group-hover:text-blue-400 transition-colors shrink-0" />
           </Link>
-        </section>
-      </div>
 
-      {/* ─── DEALER / SELL CTA ─── */}
-      <section className="px-4 md:px-0 mb-5 md:mb-8">
-        <div className="rounded-2xl p-4 md:p-6 border border-white/7" style={{ background: "rgba(255,255,255,0.03)" }}>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(16,185,129,0.12)" }}>
-              <MaterialIcon name="sell" className="text-[22px] md:text-[26px] text-emerald-400" />
+          {/* Compare */}
+          <Link
+            href="/compare"
+            className="group flex items-center gap-4 rounded-2xl p-5 md:p-6 border border-amber-500/15 transition-all hover:border-amber-500/30 active:scale-[0.99]"
+            style={{ background: "linear-gradient(135deg, rgba(245,158,11,0.06) 0%, rgba(245,158,11,0.02) 100%)" }}
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(245,158,11,0.12)" }}>
+              <MaterialIcon name="compare_arrows" className="text-[24px] text-amber-400" />
             </div>
-            <div>
-              <p className="text-sm md:text-base font-bold text-white">Sell Your Car</p>
-              <p className="text-xs md:text-sm text-slate-500">Free listing · AI valuation · Instant payment</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>Compare Cars</p>
+              <p className="text-xs text-slate-500 mt-0.5">Side-by-side specs comparison</p>
             </div>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            <Link href="/sell-car" className="flex items-center justify-center gap-2 h-10 rounded-xl text-white font-bold text-xs active:scale-95" style={{ background: "#1152d4" }}>
-              <MaterialIcon name="auto_awesome" className="text-[16px]" />
-              Get Valuation
-            </Link>
-            <Link href="/used-cars/sell" className="flex items-center justify-center gap-2 h-10 rounded-xl font-bold text-xs active:scale-95 border border-white/10 text-slate-300" style={{ background: "rgba(255,255,255,0.05)" }}>
-              <MaterialIcon name="person" className="text-[16px]" />
-              Sell as Owner
-            </Link>
-          </div>
+            <MaterialIcon name="arrow_forward" className="text-[18px] text-amber-400/50 group-hover:text-amber-400 transition-colors shrink-0" />
+          </Link>
         </div>
       </section>
 
-      {/* ─── EXPLORE MORE ─── */}
-      <section className="px-4 md:px-0 mb-5 md:mb-8">
-        <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Explore More</p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
+      {/* ─── QUICK LINKS ─── */}
+      <section className="px-4 md:px-0 mb-8 md:mb-12">
+        <div className="flex flex-wrap items-center gap-2 md:gap-3">
+          <span className="text-xs text-slate-600 font-medium mr-1">Quick links:</span>
           {[
-            { icon: "upcoming", label: "Upcoming Cars", href: "/upcoming-cars", color: "#f59e0b" },
-            { icon: "electric_car", label: "Electric Cars", href: "/electric-cars", color: "#10b981" },
-            { icon: "play_circle", label: "Car Videos", href: "/videos", color: "#ef4444" },
-            { icon: "newspaper", label: "Car News", href: "/car-news", color: "#8b5cf6" },
-            { icon: "storefront", label: "Find Dealers", href: "/dealers", color: "#06b6d4" },
-            { icon: "swap_horiz", label: "Exchange Car", href: "/swap", color: "#ec4899" },
-          ].map((item) => (
+            { label: "EMI Calculator", href: "/car-loan/emi-calculator" },
+            { label: "Fuel Prices", href: "/fuel-price" },
+            { label: "Car Insurance", href: "/car-insurance" },
+            { label: "Car Loan", href: "/car-loan" },
+            { label: "Upcoming Cars", href: "/upcoming-cars" },
+            { label: "Electric Cars", href: "/electric-cars" },
+            { label: "Find Dealers", href: "/dealers" },
+            { label: "Car News", href: "/car-news" },
+          ].map((link) => (
             <Link
-              key={item.label}
-              href={item.href}
-              className="flex items-center gap-3 rounded-xl p-3 md:p-4 border border-white/5 transition-all active:scale-95 hover:border-white/15 hover:bg-white/[0.06]"
-              style={{ background: "rgba(255,255,255,0.03)" }}
+              key={link.href}
+              href={link.href}
+              className="text-xs font-medium text-slate-400 px-3 py-1.5 rounded-full border border-white/6 hover:text-white hover:border-white/15 transition-all"
+              style={{ background: "rgba(255,255,255,0.02)" }}
             >
-              <div
-                className="h-8 w-8 md:h-10 md:w-10 rounded-lg flex items-center justify-center shrink-0"
-                style={{ background: `${item.color}15` }}
-              >
-                <MaterialIcon name={item.icon} className="text-[16px] md:text-[20px]" style={{ color: item.color }} />
-              </div>
-              <span className="text-xs md:text-sm font-semibold text-slate-300">{item.label}</span>
+              {link.label}
             </Link>
           ))}
         </div>
@@ -788,27 +599,31 @@ export default function HomePage() {
 
       {/* ─── FOOTER ─── */}
       <footer className="px-4 md:px-0 pb-4 md:pb-8">
-        <div className="rounded-2xl p-4 md:p-6 border border-white/5" style={{ background: "rgba(255,255,255,0.02)" }}>
-          <div className="flex items-center gap-2 mb-3">
-            <MaterialIcon name="token" className="text-[18px]" style={{ color: "#1152d4" }} />
-            <span className="text-sm font-bold text-white" style={{ fontFamily: "'Noto Serif', serif" }}>CaroBest</span>
+        <div className="border-t border-white/[0.06] pt-6 md:pt-8">
+          <div className="md:flex md:items-start md:justify-between md:gap-12">
+            <div className="mb-4 md:mb-0">
+              <div className="flex items-center gap-2 mb-2">
+                <MaterialIcon name="token" className="text-[18px]" style={{ color: "#1152d4" }} />
+                <span className="text-sm font-bold text-white" style={{ fontFamily: "Newsreader, serif" }}>CaroBest</span>
+              </div>
+              <p className="text-[11px] text-slate-500 leading-relaxed max-w-xs">
+                India&apos;s AI-powered car marketplace. Buy, sell &amp; compare new and used cars with confidence.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              {[
+                { label: "About", href: "/about" },
+                { label: "Careers", href: "/careers" },
+                { label: "Contact", href: "/contact" },
+                { label: "Privacy", href: "/privacy-policy" },
+                { label: "Dealers", href: "/dealers" },
+                { label: "Luxury Portal", href: "/landing" },
+              ].map((l) => (
+                <Link key={l.href} href={l.href} className="text-xs text-slate-500 hover:text-slate-300 transition-colors">{l.label}</Link>
+              ))}
+            </div>
           </div>
-          <p className="text-[11px] text-slate-500 leading-relaxed mb-3">
-            India&apos;s AI-powered car marketplace. Buy, sell &amp; compare new and used cars with confidence.
-          </p>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 mb-3">
-            {[
-              { label: "About", href: "/about" },
-              { label: "Careers", href: "/careers" },
-              { label: "Contact", href: "/contact" },
-              { label: "Privacy", href: "/privacy-policy" },
-              { label: "Dealers", href: "/dealers" },
-              { label: "Luxury Portal", href: "/landing" },
-            ].map((l) => (
-              <Link key={l.href} href={l.href} className="text-[11px] text-slate-500 hover:text-slate-300 transition-colors">{l.label}</Link>
-            ))}
-          </div>
-          <div className="border-t border-white/5 pt-3">
+          <div className="border-t border-white/[0.04] mt-6 pt-4">
             <p className="text-[10px] text-slate-700">&copy; 2026 The Singularity Covenant LLP</p>
           </div>
         </div>
