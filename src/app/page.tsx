@@ -182,7 +182,10 @@ export default function HomePage() {
       </header>
 
       {/* ─── HERO CAROUSEL ─── */}
-      <section className="relative w-full overflow-hidden md:-mx-8 lg:-mx-12 md:w-[calc(100%+4rem)] lg:w-[calc(100%+6rem)]" style={{ height: "480px", maxHeight: "60vh" }}>
+      <section className="relative w-full overflow-hidden md:-mx-8 lg:-mx-12 md:-mt-6 md:w-[calc(100%+4rem)] lg:w-[calc(100%+6rem)] md:rounded-b-2xl" style={{ height: "480px", maxHeight: "60vh" }}>
+        {/* Light background behind images so dark cars are visible */}
+        <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(135deg, #1a2540 0%, #0f1829 50%, #162035 100%)" }} />
+
         {/* Carousel slides */}
         {HERO_SLIDES.map((slide, i) => (
           <div
@@ -202,9 +205,9 @@ export default function HomePage() {
           </div>
         ))}
 
-        {/* Overlays */}
-        <div className="absolute inset-0 bg-black/50 z-10" />
-        <div className="absolute inset-0 z-10" style={{ background: "radial-gradient(ellipse at 50% 80%, transparent 10%, rgba(8,10,15,0.9) 100%)" }} />
+        {/* Overlays — light on desktop so car images stay visible */}
+        <div className="absolute inset-0 bg-black/50 md:bg-black/25 z-10" />
+        <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.85) 0%, rgba(8,10,15,0.4) 40%, rgba(8,10,15,0.15) 100%)" }} />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[200px] z-10 pointer-events-none" style={{ background: "radial-gradient(ellipse, rgba(17,82,212,0.15) 0%, transparent 70%)" }} />
 
         {/* Content overlay */}
