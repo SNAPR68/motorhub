@@ -17,7 +17,7 @@ const BRANDS = [
 const YEARS = Array.from({ length: 15 }, (_, i) => 2025 - i);
 
 const STEPS = [
-  { icon: "directions_car", label: "List Your Car", desc: "Tell us what you drive and what you want", color: "#1152d4" },
+  { icon: "directions_car", label: "List Your Car", desc: "Tell us what you drive and what you want", color: "#3B82F6" },
   { icon: "auto_awesome", label: "AI Matching", desc: "Our engine finds compatible swap partners", color: "#8b5cf6" },
   { icon: "verified", label: "Dual Inspection", desc: "Both cars get 250-point VehiclePassport check", color: "#10b981" },
   { icon: "swap_horiz", label: "Single Transaction", desc: "One payment, both RCs transfer simultaneously", color: "#f59e0b" },
@@ -25,7 +25,7 @@ const STEPS = [
 
 const VALUE_CARDS = [
   { icon: "savings", label: "Save ₹1.5-2L", sub: "No dealer margins on either side", color: "#10b981" },
-  { icon: "verified_user", label: "Both Cars Inspected", sub: "250-point VehiclePassport for each", color: "#1152d4" },
+  { icon: "verified_user", label: "Both Cars Inspected", sub: "250-point VehiclePassport for each", color: "#3B82F6" },
   { icon: "account_balance", label: "One EMI for Gap", sub: "Finance only the price difference", color: "#8b5cf6" },
   { icon: "shield", label: "Escrow Protection", sub: "Gap amount held safe until transfer", color: "#f59e0b" },
 ];
@@ -66,10 +66,10 @@ export default function SwapDirectPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link href="/" className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
@@ -86,7 +86,7 @@ export default function SwapDirectPage() {
         {/* Hero */}
         <div className="rounded-2xl p-5 border border-emerald-500/20 relative overflow-hidden" style={{ background: "rgba(16,185,129,0.06)" }}>
           <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full" style={{ background: "rgba(16,185,129,0.12)", filter: "blur(24px)" }} />
-          <div className="absolute -left-6 -bottom-6 w-24 h-24 rounded-full" style={{ background: "rgba(17,82,212,0.10)", filter: "blur(20px)" }} />
+          <div className="absolute -left-6 -bottom-6 w-24 h-24 rounded-full" style={{ background: "rgba(59,130,246,0.10)", filter: "blur(20px)" }} />
           <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 mb-2">SwapDirect by CaroBest</p>
           <h2 className="text-2xl font-black text-white leading-tight mb-1">Swap Your Car<br />Directly</h2>
           <p className="text-xs text-slate-400">Exchange cars peer-to-peer. Skip the dealer. Save lakhs.</p>
@@ -105,7 +105,7 @@ export default function SwapDirectPage() {
         {/* Your Car Form */}
         <div className="rounded-2xl p-4 border border-white/5 space-y-4" style={{ background: "rgba(255,255,255,0.03)" }}>
           <div className="flex items-center gap-2">
-            <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(17,82,212,0.15)" }}>
+            <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(59,130,246,0.15)" }}>
               <MaterialIcon name="directions_car" className="text-[14px] text-blue-400" />
             </div>
             <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Your Car</p>
@@ -217,7 +217,7 @@ export default function SwapDirectPage() {
           onClick={handleSwapSearch}
           disabled={!canSearch || submitting}
           className={`flex items-center justify-center gap-2 h-13 rounded-2xl text-sm font-bold text-white w-full transition-all ${!canSearch || submitting ? "opacity-40" : ""}`}
-          style={{ background: "#1152d4" }}
+          style={{ background: "#3B82F6" }}
         >
           {submitting ? (
             <div className="h-5 w-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />

@@ -103,7 +103,7 @@ function QuickDraftContent() {
         className="sticky top-0 z-10 border-b px-4 py-3 flex items-center justify-between"
         style={{ background: "rgba(255,255,255,0.8)", backdropFilter: "blur(12px)", borderColor: "#e2e8f0" }}
       >
-        <Link href={leadId ? `/leads/${leadId}` : "/leads"} className="flex items-center" style={{ color: "#137fec" }}>
+        <Link href={leadId ? `/leads/${leadId}` : "/leads"} className="flex items-center" style={{ color: "#3B82F6" }}>
           <MaterialIcon name="arrow_back_ios_new" />
         </Link>
         <div className="flex flex-col items-center">
@@ -130,14 +130,14 @@ function QuickDraftContent() {
                   setVehicleName(`${v.year} ${v.name}`);
                   setVehiclePrice(v.price);
                 }}
-                className="w-full flex items-center gap-3 p-2 rounded-lg bg-white border border-slate-200 text-left hover:border-[#137fec]/50 transition-colors"
+                className="w-full flex items-center gap-3 p-2 rounded-lg bg-white border border-slate-200 text-left hover:border-[#3B82F6]/50 transition-colors"
               >
                 <div className="relative w-12 h-9 rounded overflow-hidden shrink-0 bg-slate-100">
                   <Image src={v.image} alt="" fill className="object-cover" sizes="48px" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold text-slate-900 truncate">{v.year} {v.name}</p>
-                  <p className="text-xs font-bold text-[#137fec]">{v.price}</p>
+                  <p className="text-xs font-bold text-[#3B82F6]">{v.price}</p>
                 </div>
               </button>
             ))}
@@ -145,7 +145,7 @@ function QuickDraftContent() {
         </details>
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "rgba(19,127,236,0.1)" }}>
-            <MaterialIcon name="person" style={{ color: "#137fec" }} />
+            <MaterialIcon name="person" style={{ color: "#3B82F6" }} />
           </div>
           <div>
             <h3 className="text-sm font-bold text-slate-900">Inquiry: {buyerName}</h3>
@@ -159,7 +159,7 @@ function QuickDraftContent() {
           <p className="text-sm italic text-slate-600 line-clamp-2">&ldquo;{buyerMessage}&rdquo;</p>
           <div className="flex justify-between items-center mt-2">
             <span className="text-[10px] text-slate-400">Received just now</span>
-            <span className="text-[10px] font-semibold flex items-center gap-1" style={{ color: "#137fec" }}>
+            <span className="text-[10px] font-semibold flex items-center gap-1" style={{ color: "#3B82F6" }}>
               <MaterialIcon name="auto_awesome" className="text-[12px]" />
               Context Synced
             </span>
@@ -178,7 +178,7 @@ function QuickDraftContent() {
               disabled={loading}
               className="flex-none px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 disabled:opacity-60"
               style={i === selectedIntent
-                ? { background: "#137fec", color: "white", boxShadow: "0 4px 12px rgba(19,127,236,0.2)" }
+                ? { background: "#3B82F6", color: "white", boxShadow: "0 4px 12px rgba(19,127,236,0.2)" }
                 : { background: "white", color: "#475569", border: "1px solid #e2e8f0" }}
             >
               <MaterialIcon name={intent.icon} className="text-sm" />
@@ -196,7 +196,7 @@ function QuickDraftContent() {
             onClick={() => generateDraft(INTENTS[selectedIntent].label, tone)}
             disabled={loading}
             className="text-xs font-bold flex items-center gap-1 disabled:opacity-50"
-            style={{ color: "#137fec" }}
+            style={{ color: "#3B82F6" }}
           >
             <MaterialIcon name="refresh" className="text-sm" />
             Regenerate
@@ -227,7 +227,7 @@ function QuickDraftContent() {
               className="absolute bottom-4 right-4 bg-white px-2 py-1 rounded-lg border flex items-center gap-2"
               style={{ borderColor: "#e2e8f0", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}
             >
-              <MaterialIcon name="bolt" fill className="text-[14px] text-[#137fec]" />
+              <MaterialIcon name="bolt" fill className="text-[14px] text-[#3B82F6]" />
               <span className="text-[10px] font-bold text-slate-500 uppercase">{fitScore}% Fit Score</span>
             </div>
           )}
@@ -239,7 +239,7 @@ function QuickDraftContent() {
         <div className="space-y-3 px-2">
           <div className="flex justify-between items-center text-[11px] font-bold uppercase tracking-widest text-slate-400">
             <span>Formal</span>
-            <span style={{ color: "#137fec" }}>Optimized Tone</span>
+            <span style={{ color: "#3B82F6" }}>Optimized Tone</span>
             <span>Casual</span>
           </div>
           <div className="relative h-6 flex items-center">
@@ -254,7 +254,7 @@ function QuickDraftContent() {
             />
             <div
               className="absolute w-5 h-5 bg-white rounded-full border-2 pointer-events-none"
-              style={{ borderColor: "#137fec", boxShadow: "0 2px 6px rgba(0,0,0,0.15)", left: `calc(${tone}% - 10px)` }}
+              style={{ borderColor: "#3B82F6", boxShadow: "0 2px 6px rgba(0,0,0,0.15)", left: `calc(${tone}% - 10px)` }}
             />
           </div>
         </div>
@@ -263,7 +263,7 @@ function QuickDraftContent() {
             onClick={handleSend}
             disabled={sending || loading || !draftText.trim() || sent}
             className="flex-1 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50"
-            style={{ background: "#137fec", boxShadow: "0 4px 16px rgba(19,127,236,0.25)" }}
+            style={{ background: "#3B82F6", boxShadow: "0 4px 16px rgba(19,127,236,0.25)" }}
           >
             <MaterialIcon name={sent ? "check" : "send"} />
             {sent ? "Sent!" : sending ? "Sending..." : "Approve & Send"}
@@ -280,7 +280,7 @@ function QuickDraftContent() {
           { icon: "monitoring", label: "Analytics", href: "/analytics" },
           { icon: "settings", label: "Settings", href: "/settings" },
         ].map((item) => (
-          <Link key={item.label} href={item.href} className="flex flex-1 flex-col items-center gap-1" style={{ color: item.active ? "#137fec" : "#94a3b8" }}>
+          <Link key={item.label} href={item.href} className="flex flex-1 flex-col items-center gap-1" style={{ color: item.active ? "#3B82F6" : "#94a3b8" }}>
             <MaterialIcon name={item.icon} fill={item.active} />
             <p className={`text-[10px] ${item.active ? "font-bold" : "font-medium"}`}>{item.label}</p>
           </Link>
@@ -292,7 +292,7 @@ function QuickDraftContent() {
 
 export default function QuickDraftPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#f6f7f8] flex items-center justify-center"><div className="w-8 h-8 rounded-full border-2 border-[#137fec] border-t-transparent animate-spin" /></div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#f6f7f8] flex items-center justify-center"><div className="w-8 h-8 rounded-full border-2 border-[#3B82F6] border-t-transparent animate-spin" /></div>}>
       <QuickDraftContent />
     </Suspense>
   );

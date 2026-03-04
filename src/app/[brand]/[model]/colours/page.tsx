@@ -31,11 +31,11 @@ export default function ColoursPage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -108,10 +108,10 @@ export default function ColoursPage({
                     width: selected === i ? "56px" : "44px",
                     height: selected === i ? "56px" : "44px",
                     background: color.hex,
-                    borderColor: selected === i ? "#1152d4" : "rgba(255,255,255,0.1)",
+                    borderColor: selected === i ? "#3B82F6" : "rgba(255,255,255,0.1)",
                     boxShadow:
                       selected === i
-                        ? `0 0 0 3px rgba(17,82,212,0.3), 0 4px 12px ${color.hex}40`
+                        ? `0 0 0 3px rgba(59,130,246,0.3), 0 4px 12px ${color.hex}40`
                         : "none",
                   }}
                 />

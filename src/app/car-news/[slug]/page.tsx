@@ -49,9 +49,9 @@ export default function CarNewsArticlePage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto ">
+    <div className="min-h-screen bg-[#0A1628] text-white max-w-lg mx-auto ">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-lg border-b border-white/5">
+      <header className="sticky top-0 z-40 bg-[#0A1628]/90 backdrop-blur-lg border-b border-white/5">
         <div className="flex items-center gap-3 px-4 py-3">
           <Link href="/car-news" className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 transition">
             <MaterialIcon name="arrow_back" className="text-xl text-white/80" />
@@ -70,7 +70,7 @@ export default function CarNewsArticlePage({
 
       {/* Category + Title */}
       <section className="px-4 pt-5">
-        <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-[#1152d4]/15 text-[#1152d4] rounded-full px-2.5 py-1 mb-3">
+        <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-[#3B82F6]/15 text-[#3B82F6] rounded-full px-2.5 py-1 mb-3">
           Industry News
         </span>
         <h2 className="text-2xl font-bold leading-tight mb-3">{title}</h2>
@@ -158,7 +158,7 @@ export default function CarNewsArticlePage({
                   <MaterialIcon name="article" className="text-xl text-white/10" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#1152d4]">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#3B82F6]">
                     {article.category}
                   </span>
                   <h4 className="text-sm font-medium mt-1 leading-snug line-clamp-2">

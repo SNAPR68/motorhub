@@ -83,13 +83,13 @@ export default function NewCarsSegmentClient({ segment }: { segment: string }) {
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -219,7 +219,7 @@ export default function NewCarsSegmentClient({ segment }: { segment: string }) {
                   )}
                   <span
                     className="absolute top-2 left-2 text-[9px] font-bold px-2 py-0.5 rounded-full text-white"
-                    style={{ background: "rgba(17,82,212,0.9)" }}
+                    style={{ background: "rgba(59,130,246,0.9)" }}
                   >
                     New
                   </span>
@@ -260,7 +260,7 @@ export default function NewCarsSegmentClient({ segment }: { segment: string }) {
                   </div>
                   <div
                     className="mt-3 flex items-center gap-1 text-[11px] font-semibold"
-                    style={{ color: "#1152d4" }}
+                    style={{ color: "#3B82F6" }}
                   >
                     View Details
                     <MaterialIcon name="arrow_forward" className="text-[14px]" />

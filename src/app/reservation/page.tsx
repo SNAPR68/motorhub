@@ -11,7 +11,7 @@ import { fetchVehicle, fetchVehicles, adaptVehicle } from "@/lib/api";
 import { AuthGuard } from "@/components/AuthGuard";
 import type { DbVehicle } from "@/lib/api";
 
-/* Stitch: secure_luxury_reservation — #f4c025, Manrope + Playfair Display, #0a0a0a */
+/* Stitch: secure_luxury_reservation — #E5C158, Manrope + Playfair Display, #0A1628 */
 
 function ReservationContent() {
   const searchParams = useSearchParams();
@@ -26,7 +26,7 @@ function ReservationContent() {
 
   if (!vehicle) {
     return (
-      <div className="min-h-dvh flex items-center justify-center bg-[#0a0a0a] text-white">
+      <div className="min-h-dvh flex items-center justify-center bg-[#0A1628] text-white">
         <div className="animate-pulse text-white/50">Loading...</div>
       </div>
     );
@@ -35,10 +35,10 @@ function ReservationContent() {
   return (
     <div
       className="relative flex min-h-dvh w-full flex-col max-w-[430px] mx-auto text-slate-100 antialiased"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0a0a" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628" }}
     >
       {/* Top Navigation */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-4 py-4 border-b border-[#2a2a2a]"
+      <nav className="sticky top-0 z-50 flex items-center justify-between px-4 py-4 border-b border-[#1E3048]"
         style={{ background: "rgba(22,22,22,0.7)", backdropFilter: "blur(12px)" }}
       >
         <Link
@@ -54,14 +54,14 @@ function ReservationContent() {
           CaroBest
         </h1>
         <div className="w-10 flex justify-end">
-          <MaterialIcon name="verified_user" className="text-[#f4c025]" />
+          <MaterialIcon name="verified_user" className="text-[#E5C158]" />
         </div>
       </nav>
 
       <main className="max-w-md mx-auto pb-32 w-full">
         {/* Vehicle Hero Summary */}
         <div className="p-4">
-          <div className="relative group overflow-hidden rounded-xl bg-[#161616] border border-[#2a2a2a]">
+          <div className="relative group overflow-hidden rounded-xl bg-[#0A1628] border border-[#1E3048]">
             <div className="aspect-[16/9] w-full relative">
               <Image
                 alt={vehicle.name}
@@ -75,7 +75,7 @@ function ReservationContent() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#161616] via-transparent to-transparent" />
             </div>
             <div className="p-5 relative -mt-12">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#f4c025] font-bold mb-1 block">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-[#E5C158] font-bold mb-1 block">
                 Selected Inventory
               </span>
               <h2
@@ -93,17 +93,17 @@ function ReservationContent() {
 
         {/* Reservation Details Section */}
         <section className="px-4 space-y-4 mt-2">
-          <div className="flex items-center justify-between py-2 border-b border-[#2a2a2a]/50">
+          <div className="flex items-center justify-between py-2 border-b border-[#1E3048]/50">
             <h3 className="text-sm font-medium uppercase tracking-widest text-slate-500">
               Reservation Summary
             </h3>
-            <span className="text-xs text-[#f4c025] bg-[#f4c025]/10 px-2 py-1 rounded">
+            <span className="text-xs text-[#E5C158] bg-[#E5C158]/10 px-2 py-1 rounded">
               Immediate Allocation
             </span>
           </div>
 
           {/* Deposit Amount */}
-          <div className="bg-[#161616] rounded-xl p-6 border border-[#2a2a2a] flex items-center justify-between">
+          <div className="bg-[#0A1628] rounded-xl p-6 border border-[#1E3048] flex items-center justify-between">
             <div>
               <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">
                 Deposit Amount
@@ -113,7 +113,7 @@ function ReservationContent() {
               </p>
             </div>
             <div className="text-right">
-              <div className="flex items-center gap-1 text-[#f4c025] mb-1">
+              <div className="flex items-center gap-1 text-[#E5C158] mb-1">
                 <MaterialIcon name="lock" className="text-sm" />
                 <span className="text-[10px] font-bold uppercase">Encrypted</span>
               </div>
@@ -124,13 +124,13 @@ function ReservationContent() {
           </div>
 
           {/* Refundable Toggle */}
-          <div className="bg-[#161616] rounded-xl p-5 border border-[#2a2a2a] flex items-center justify-between">
+          <div className="bg-[#0A1628] rounded-xl p-5 border border-[#1E3048] flex items-center justify-between">
             <div className="flex-1 pr-4">
               <div className="flex items-center gap-2 mb-1">
                 <p className="text-white text-sm font-semibold tracking-tight">
                   Refundable Guarantee
                 </p>
-                <MaterialIcon name="info" className="text-[#f4c025] text-xs" />
+                <MaterialIcon name="info" className="text-[#E5C158] text-xs" />
               </div>
               <p className="text-slate-500 text-xs leading-relaxed">
                 Cancel anytime within 48 hours for a full, hassle-free refund to your original payment method.
@@ -143,14 +143,14 @@ function ReservationContent() {
                 onChange={() => setRefundable(!refundable)}
                 className="sr-only peer"
               />
-              <div className="w-12 h-6 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f4c025]" />
+              <div className="w-12 h-6 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#E5C158]" />
             </label>
           </div>
         </section>
 
         {/* Payment Section */}
         <section className="px-4 mt-8 space-y-6">
-          <h3 className="text-sm font-medium uppercase tracking-widest text-slate-500 border-b border-[#2a2a2a]/50 pb-2">
+          <h3 className="text-sm font-medium uppercase tracking-widest text-slate-500 border-b border-[#1E3048]/50 pb-2">
             Payment Method
           </h3>
 
@@ -163,32 +163,32 @@ function ReservationContent() {
           </button>
 
           <div className="relative flex py-2 items-center">
-            <div className="flex-grow border-t border-[#2a2a2a]" />
+            <div className="flex-grow border-t border-[#1E3048]" />
             <span className="flex-shrink mx-4 text-xs text-slate-600 uppercase tracking-widest">
               Or credit card
             </span>
-            <div className="flex-grow border-t border-[#2a2a2a]" />
+            <div className="flex-grow border-t border-[#1E3048]" />
           </div>
 
           {/* Credit Card Form */}
           <div className="space-y-4">
             <div className="group relative">
-              <label className="absolute -top-2 left-3 bg-[#0a0a0a] px-1 text-[10px] text-slate-500 uppercase tracking-widest z-10">
+              <label className="absolute -top-2 left-3 bg-[#0A1628] px-1 text-[10px] text-slate-500 uppercase tracking-widest z-10">
                 Cardholder Name
               </label>
               <input
-                className="w-full bg-transparent border border-slate-700 focus:border-[#f4c025] focus:ring-0 rounded-lg h-12 text-sm tracking-widest text-white placeholder:text-slate-800 px-3"
+                className="w-full bg-transparent border border-slate-700 focus:border-[#E5C158] focus:ring-0 rounded-lg h-12 text-sm tracking-widest text-white placeholder:text-slate-800 px-3"
                 placeholder="FULL NAME"
                 type="text"
               />
             </div>
             <div className="group relative">
-              <label className="absolute -top-2 left-3 bg-[#0a0a0a] px-1 text-[10px] text-slate-500 uppercase tracking-widest z-10">
+              <label className="absolute -top-2 left-3 bg-[#0A1628] px-1 text-[10px] text-slate-500 uppercase tracking-widest z-10">
                 Card Number
               </label>
               <div className="relative">
                 <input
-                  className="w-full bg-transparent border border-slate-700 focus:border-[#f4c025] focus:ring-0 rounded-lg h-12 text-sm tracking-widest text-white placeholder:text-slate-800 px-3"
+                  className="w-full bg-transparent border border-slate-700 focus:border-[#E5C158] focus:ring-0 rounded-lg h-12 text-sm tracking-widest text-white placeholder:text-slate-800 px-3"
                   placeholder="0000 0000 0000 0000"
                   type="text"
                 />
@@ -199,21 +199,21 @@ function ReservationContent() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="group relative">
-                <label className="absolute -top-2 left-3 bg-[#0a0a0a] px-1 text-[10px] text-slate-500 uppercase tracking-widest z-10">
+                <label className="absolute -top-2 left-3 bg-[#0A1628] px-1 text-[10px] text-slate-500 uppercase tracking-widest z-10">
                   Expiry
                 </label>
                 <input
-                  className="w-full bg-transparent border border-slate-700 focus:border-[#f4c025] focus:ring-0 rounded-lg h-12 text-sm tracking-widest text-white placeholder:text-slate-800 px-3"
+                  className="w-full bg-transparent border border-slate-700 focus:border-[#E5C158] focus:ring-0 rounded-lg h-12 text-sm tracking-widest text-white placeholder:text-slate-800 px-3"
                   placeholder="MM/YY"
                   type="text"
                 />
               </div>
               <div className="group relative">
-                <label className="absolute -top-2 left-3 bg-[#0a0a0a] px-1 text-[10px] text-slate-500 uppercase tracking-widest z-10">
+                <label className="absolute -top-2 left-3 bg-[#0A1628] px-1 text-[10px] text-slate-500 uppercase tracking-widest z-10">
                   CVC
                 </label>
                 <input
-                  className="w-full bg-transparent border border-slate-700 focus:border-[#f4c025] focus:ring-0 rounded-lg h-12 text-sm tracking-widest text-white placeholder:text-slate-800 px-3"
+                  className="w-full bg-transparent border border-slate-700 focus:border-[#E5C158] focus:ring-0 rounded-lg h-12 text-sm tracking-widest text-white placeholder:text-slate-800 px-3"
                   placeholder="***"
                   type="password"
                 />
@@ -225,9 +225,9 @@ function ReservationContent() {
         {/* Trust Badge */}
         <div className="mt-12 flex flex-col items-center justify-center space-y-3 px-10 text-center">
           <div className="relative">
-            <div className="absolute inset-0 bg-[#f4c025]/20 blur-xl rounded-full" />
-            <div className="relative border-2 border-[#f4c025]/40 rounded-full p-2">
-              <MaterialIcon name="verified" className="text-[#f4c025] text-3xl" />
+            <div className="absolute inset-0 bg-[#E5C158]/20 blur-xl rounded-full" />
+            <div className="relative border-2 border-[#E5C158]/40 rounded-full p-2">
+              <MaterialIcon name="verified" className="text-[#E5C158] text-3xl" />
             </div>
           </div>
           <div>
@@ -243,17 +243,17 @@ function ReservationContent() {
 
       {/* Fixed Bottom Action */}
       <div
-        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] p-4 border-t border-[#2a2a2a] z-50"
+        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] p-4 border-t border-[#1E3048] z-50"
         style={{ background: "rgba(22,22,22,0.7)", backdropFilter: "blur(12px)" }}
       >
         <div className="space-y-3">
           <p className="text-[10px] text-slate-500 text-center">
             By clicking confirm, you agree to our{" "}
-            <span className="text-[#f4c025] underline">Terms of Reservation</span>
+            <span className="text-[#E5C158] underline">Terms of Reservation</span>
           </p>
           <Link
             href={vehicle ? `/reservation/commit?vehicleId=${vehicle.id}` : "/reservation/commit"}
-            className="w-full h-14 bg-slate-900 border border-[#2a2a2a] text-white rounded-xl font-bold tracking-[0.1em] uppercase flex items-center justify-center gap-2 group hover:bg-black transition-all"
+            className="w-full h-14 bg-slate-900 border border-[#1E3048] text-white rounded-xl font-bold tracking-[0.1em] uppercase flex items-center justify-center gap-2 group hover:bg-black transition-all"
             style={{ boxShadow: "0 0 15px rgba(244,192,37,0.15)" }}
           >
             Confirm Reservation
@@ -268,7 +268,7 @@ function ReservationContent() {
 export default function ReservationPage() {
   return (
     <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
-      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center bg-[#0a0a0a] text-white"><div className="w-8 h-8 rounded-full border-2 border-[#f4c025] border-t-transparent animate-spin" /></div>}>
+      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center bg-[#0A1628] text-white"><div className="w-8 h-8 rounded-full border-2 border-[#E5C158] border-t-transparent animate-spin" /></div>}>
         <ReservationContent />
       </Suspense>
     </AuthGuard>

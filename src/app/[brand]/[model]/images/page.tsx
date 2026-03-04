@@ -53,7 +53,7 @@ export default function ImagesPage({
   /* ── Loading state ── */
   if (loading) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
@@ -62,11 +62,11 @@ export default function ImagesPage({
   /* ── 404 state ── */
   if (!car) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="text-center px-6">
           <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
           <p className="text-slate-400 font-semibold">Model not found</p>
-          <Link href="/new-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#1152d4" }}>
+          <Link href="/new-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#3B82F6" }}>
             <MaterialIcon name="arrow_back" className="text-[15px]" /> Browse New Cars
           </Link>
         </div>
@@ -86,10 +86,10 @@ export default function ImagesPage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full pb-36" style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link href={`/${brandSlug}/${modelSlug}`} className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
@@ -104,7 +104,7 @@ export default function ImagesPage({
       {/* ─── IMAGE COUNT BADGE ─── */}
       <div className="max-w-lg mx-auto px-4 pt-4 pb-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full" style={{ background: "rgba(17,82,212,0.1)" }}>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full" style={{ background: "rgba(59,130,246,0.1)" }}>
             <MaterialIcon name="photo_library" className="text-[14px]" style={{ color: "#60a5fa" }} />
             <span className="text-[11px] font-semibold" style={{ color: "#60a5fa" }}>12 Photos</span>
           </div>
@@ -122,7 +122,7 @@ export default function ImagesPage({
               onClick={() => setActiveFilter(f)}
               className="shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all"
               style={{
-                background: activeFilter === f ? "#1152d4" : "rgba(255,255,255,0.05)",
+                background: activeFilter === f ? "#3B82F6" : "rgba(255,255,255,0.05)",
                 color: activeFilter === f ? "#fff" : "#64748b",
               }}
             >
@@ -168,9 +168,9 @@ export default function ImagesPage({
         <button
           onClick={show360Toast}
           className="w-full h-14 rounded-2xl border border-white/5 flex items-center justify-center gap-3 transition-all active:scale-[0.98]"
-          style={{ background: "rgba(17,82,212,0.06)" }}
+          style={{ background: "rgba(59,130,246,0.06)" }}
         >
-          <div className="h-9 w-9 rounded-xl flex items-center justify-center" style={{ background: "rgba(17,82,212,0.15)" }}>
+          <div className="h-9 w-9 rounded-xl flex items-center justify-center" style={{ background: "rgba(59,130,246,0.15)" }}>
             <MaterialIcon name="360" className="text-[20px]" style={{ color: "#60a5fa" }} />
           </div>
           <div className="text-left">

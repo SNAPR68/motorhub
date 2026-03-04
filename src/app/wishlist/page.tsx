@@ -10,7 +10,7 @@ import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, fetchWishlist, adaptVehicle } from "@/lib/api";
 import { AuthGuard } from "@/components/AuthGuard";
 
-/* Stitch: private_collection_wishlist — #f2cc0d (gold), Noto Sans + Noto Serif, #0a0a0a */
+/* Stitch: private_collection_wishlist — #E5C158 (gold), Noto Sans + Noto Serif, #0A1628 */
 
 const AI_TAGS = ["Price Drop", "Low Stock", "Investment Grade"];
 
@@ -34,14 +34,14 @@ export default function WishlistPage() {
     <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
     <div
       className="relative flex min-h-dvh w-full max-w-md mx-auto flex-col overflow-x-hidden text-slate-100 antialiased"
-      style={{ fontFamily: "'Noto Sans', sans-serif", background: "#0a0a0a" }}
+      style={{ fontFamily: "'Noto Sans', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
-      <header className="sticky top-0 z-20 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-[#2a2a2a] px-4 pt-6 pb-4">
+      <header className="sticky top-0 z-20 bg-[#0A1628]/80 backdrop-blur-md border-b border-[#1E3048] px-4 pt-6 pb-4">
         <div className="flex items-center justify-between mb-6">
           <Link
             href="/"
-            className="flex items-center justify-center size-10 rounded-full hover:bg-[#2a2a2a] transition-colors"
+            className="flex items-center justify-center size-10 rounded-full hover:bg-[#1E3048] transition-colors"
           >
             <MaterialIcon name="arrow_back_ios_new" className="text-2xl" />
           </Link>
@@ -51,19 +51,19 @@ export default function WishlistPage() {
           >
             My Collection
           </h1>
-          <button className="flex items-center justify-center size-10 rounded-full hover:bg-[#2a2a2a] transition-colors">
+          <button className="flex items-center justify-center size-10 rounded-full hover:bg-[#1E3048] transition-colors">
             <MaterialIcon name="search" className="text-2xl" />
           </button>
         </div>
         {/* Segmented Control */}
-        <div className="flex p-1 bg-[#2a2a2a] rounded-xl">
+        <div className="flex p-1 bg-[#1E3048] rounded-xl">
           {["Active Interests", "Past Viewed"].map((tab, i) => (
             <button
               key={tab}
               onClick={() => setActiveTab(i)}
               className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${
                 activeTab === i
-                  ? "bg-[#0a0a0a] shadow-sm text-[#f2cc0d]"
+                  ? "bg-[#0A1628] shadow-sm text-[#E5C158]"
                   : "text-slate-400 hover:text-slate-200"
               }`}
             >
@@ -92,7 +92,7 @@ export default function WishlistPage() {
                 </p>
                 <Link
                   href="/used-cars"
-                  className="inline-flex items-center gap-2 rounded-lg bg-[#f2cc0d] px-6 py-3 text-sm font-bold text-[#0a0a0a]"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#E5C158] px-6 py-3 text-sm font-bold text-[#0A1628]"
                 >
                   Browse Cars
                 </Link>
@@ -100,7 +100,7 @@ export default function WishlistPage() {
             ) : (
               wishlistedVehicles.map((vehicle, i) => (
                 <div key={vehicle.id} className="group relative flex flex-col gap-4">
-                  <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl bg-[#1a1a1a] shadow-lg">
+                  <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl bg-[#0F1D32] shadow-lg">
                     <Image
                       alt={vehicle.name}
                       fill
@@ -119,11 +119,11 @@ export default function WishlistPage() {
                       <MaterialIcon
                         name="favorite"
                         fill
-                        className="text-[#f2cc0d]"
+                        className="text-[#E5C158]"
                       />
                     </button>
                     {/* AI Tag */}
-                    <div className="absolute bottom-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f2cc0d]/90 text-[#0a0a0a] text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm">
+                    <div className="absolute bottom-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E5C158]/90 text-[#0A1628] text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm">
                       <MaterialIcon
                         name={
                           i % 3 === 0
@@ -146,7 +146,7 @@ export default function WishlistPage() {
                         {vehicle.year} {vehicle.name}
                       </h2>
                       {vehicle.badge && (
-                        <span className="text-xs font-bold text-[#f2cc0d] bg-[#f2cc0d]/10 px-2 py-0.5 rounded">
+                        <span className="text-xs font-bold text-[#E5C158] bg-[#E5C158]/10 px-2 py-0.5 rounded">
                           {vehicle.badge}
                         </span>
                       )}
@@ -190,14 +190,14 @@ export default function WishlistPage() {
       <div className="fixed bottom-24 right-4 z-20">
         <Link
           href="/used-cars"
-          className="size-14 rounded-full bg-[#f2cc0d] text-[#0a0a0a] shadow-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
+          className="size-14 rounded-full bg-[#E5C158] text-[#0A1628] shadow-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
         >
           <MaterialIcon name="add" className="text-3xl font-bold" />
         </Link>
       </div>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 z-30 mx-auto max-w-md bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-[#2a2a2a] px-6 pb-8 pt-3 md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 z-30 mx-auto max-w-md bg-[#0A1628]/95 backdrop-blur-lg border-t border-[#1E3048] px-6 pb-8 pt-3 md:hidden">
         <div className="flex items-center justify-between">
           <Link
             href="/used-cars"
@@ -210,7 +210,7 @@ export default function WishlistPage() {
           </Link>
           <Link
             href="/wishlist"
-            className="flex flex-col items-center gap-1 text-[#f2cc0d]"
+            className="flex flex-col items-center gap-1 text-[#E5C158]"
           >
             <MaterialIcon name="favorite" fill className="text-2xl" />
             <span className="text-[10px] font-bold uppercase tracking-widest">

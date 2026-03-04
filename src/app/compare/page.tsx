@@ -19,7 +19,7 @@ import { BLUR_DATA_URL } from "@/lib/car-images";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle } from "@/lib/api";
 
-/* Stitch: premium_comparison_studio_1 — #1466b8, Newsreader, #050505 */
+/* Stitch: premium_comparison_studio_1 — #3B82F6, Newsreader, #0A1628 */
 
 export default function ComparePage() {
   const { compareIds, removeFromCompare, clearCompare } = useCompare();
@@ -34,14 +34,14 @@ export default function ComparePage() {
 
   return (
     <div
-      className="min-h-dvh w-full text-slate-100 antialiased selection:bg-[#1466b8]/30"
-      style={{ fontFamily: "'Newsreader', serif", background: "#050505" }}
+      className="min-h-dvh w-full text-slate-100 antialiased selection:bg-[#3B82F6]/30"
+      style={{ fontFamily: "'Newsreader', serif", background: "#0A1628" }}
     >
       {/* Sticky Header */}
       <header
         className="sticky top-0 z-50 border-b border-white/5 px-4 py-3"
         style={{
-          background: "rgba(5,5,5,0.8)",
+          background: "rgba(10,22,40,0.85)",
           backdropFilter: "blur(12px)",
         }}
       >
@@ -92,7 +92,7 @@ export default function ComparePage() {
                   <MaterialIcon name="close" className="text-white text-sm" />
                 </button>
                 <div className="absolute bottom-4 left-4 right-4 z-20">
-                  <span className="text-[10px] uppercase tracking-widest text-[#1466b8] font-bold">
+                  <span className="text-[10px] uppercase tracking-widest text-[#3B82F6] font-bold">
                     {car.status === "available" ? "In Inventory" : "In Review"}
                   </span>
                   <h3 className="text-white text-xl leading-tight">
@@ -119,7 +119,7 @@ export default function ComparePage() {
             </p>
             <Link
               href="/used-cars"
-              className="inline-flex items-center gap-2 rounded-lg bg-[#1466b8] px-6 py-3 text-sm font-bold text-white"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#3B82F6] px-6 py-3 text-sm font-bold text-white"
             >
               Browse Cars
             </Link>
@@ -133,7 +133,7 @@ export default function ComparePage() {
               <div className="flex items-center gap-2 mb-6">
                 <MaterialIcon
                   name="speed"
-                  className="text-[#1466b8] text-sm"
+                  className="text-[#3B82F6] text-sm"
                 />
                 <h2 className="uppercase tracking-[0.2em] text-[10px] font-bold opacity-60">
                   Performance Metrics
@@ -143,7 +143,7 @@ export default function ComparePage() {
                 {/* Mileage Row */}
                 <div className="space-y-3">
                   <div className="flex justify-between items-baseline">
-                    <span className="text-[#1466b8] text-2xl italic">
+                    <span className="text-[#3B82F6] text-2xl italic">
                       {cars[0].mileage}
                     </span>
                     <span className="text-xs uppercase tracking-widest opacity-40">
@@ -155,7 +155,7 @@ export default function ComparePage() {
                   </div>
                   <div className="flex h-1 gap-4 items-center">
                     <div className="flex-1 bg-white/5 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#1466b8] w-[75%] rounded-full" />
+                      <div className="h-full bg-[#3B82F6] w-[75%] rounded-full" />
                     </div>
                     <div className="flex-1 bg-white/5 rounded-full overflow-hidden flex justify-end">
                       <div className="h-full bg-slate-400 w-[85%] rounded-full" />
@@ -165,7 +165,7 @@ export default function ComparePage() {
                 {/* Power Row */}
                 <div className="space-y-3">
                   <div className="flex justify-between items-baseline">
-                    <span className="text-[#1466b8] text-2xl italic">
+                    <span className="text-[#3B82F6] text-2xl italic">
                       {cars[0].power}
                     </span>
                     <span className="text-xs uppercase tracking-widest opacity-40">
@@ -177,7 +177,7 @@ export default function ComparePage() {
                   </div>
                   <div className="flex h-1 gap-4 items-center">
                     <div className="flex-1 bg-white/5 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#1466b8] w-[60%] rounded-full" />
+                      <div className="h-full bg-[#3B82F6] w-[60%] rounded-full" />
                     </div>
                     <div className="flex-1 bg-white/5 rounded-full overflow-hidden flex justify-end">
                       <div className="h-full bg-slate-400 w-full rounded-full" />
@@ -192,7 +192,7 @@ export default function ComparePage() {
               <div className="flex items-center gap-2 mb-6">
                 <MaterialIcon
                   name="trending_up"
-                  className="text-[#1466b8] text-sm"
+                  className="text-[#3B82F6] text-sm"
                 />
                 <h2 className="uppercase tracking-[0.2em] text-[10px] font-bold opacity-60">
                   Investment Analysis
@@ -217,7 +217,7 @@ export default function ComparePage() {
                         />
                         <circle
                           className={
-                            i === 0 ? "text-[#1466b8]" : "text-[#c0c0c0]"
+                            i === 0 ? "text-[#3B82F6]" : "text-[#8B9BAA]"
                           }
                           cx="40"
                           cy="40"
@@ -237,7 +237,7 @@ export default function ComparePage() {
                     </div>
                     <p
                       className={`text-[10px] uppercase tracking-widest font-bold mb-1 ${
-                        i === 0 ? "text-[#1466b8]" : "text-[#c0c0c0]"
+                        i === 0 ? "text-[#3B82F6]" : "text-[#8B9BAA]"
                       }`}
                     >
                       AI Score
@@ -253,7 +253,7 @@ export default function ComparePage() {
               <div className="px-6 flex items-center gap-2 mb-4">
                 <MaterialIcon
                   name="list_alt"
-                  className="text-[#1466b8] text-sm"
+                  className="text-[#3B82F6] text-sm"
                 />
                 <h2 className="uppercase tracking-[0.2em] text-[10px] font-bold opacity-60">
                   Detailed Specifications
@@ -301,11 +301,11 @@ export default function ComparePage() {
           <div className="flex justify-center mb-4">
             <Link
               href="/concierge"
-              className="flex items-center gap-3 px-6 py-4 rounded-full bg-[#1466b8]/20 hover:bg-[#1466b8]/30 border border-[#1466b8]/40 backdrop-blur-xl group transition-all duration-300"
+              className="flex items-center gap-3 px-6 py-4 rounded-full bg-[#3B82F6]/20 hover:bg-[#3B82F6]/30 border border-[#3B82F6]/40 backdrop-blur-xl group transition-all duration-300"
             >
               <MaterialIcon
                 name="auto_awesome"
-                className="text-[#1466b8] group-hover:scale-110 transition-transform"
+                className="text-[#3B82F6] group-hover:scale-110 transition-transform"
               />
               <span className="text-sm font-bold tracking-wide text-slate-100">
                 Ask AI Concierge for Advice
@@ -316,7 +316,7 @@ export default function ComparePage() {
         <nav
           className="border-t border-white/10 px-6 py-2 md:hidden"
           style={{
-            background: "rgba(5,5,5,0.8)",
+            background: "rgba(10,22,40,0.85)",
             backdropFilter: "blur(12px)",
           }}
         >
@@ -332,7 +332,7 @@ export default function ComparePage() {
             </Link>
             <Link
               href="/compare"
-              className="flex flex-col items-center gap-1 py-1 text-[#1466b8]"
+              className="flex flex-col items-center gap-1 py-1 text-[#3B82F6]"
             >
               <MaterialIcon
                 name="compare_arrows"

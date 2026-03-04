@@ -7,7 +7,7 @@ import { fetchReports, fetchVehicles } from "@/lib/api";
 import { SkeletonCard } from "@/components/ui/Skeleton";
 
 /* ── design tokens: dealer_monthly_performance_report ── */
-// primary: #f2b90d (gold), font: Newsreader (serif), bg: #121212, card: #1c1c1c, accent-silver: #a1a1a1
+// primary: #E5C158 (gold), font: Newsreader (serif), bg: #121212, card: #1c1c1c, accent-silver: #a1a1a1
 
 const MONTH_LABELS = ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb"];
 
@@ -59,7 +59,7 @@ export default function MonthlyReportPage() {
         </Link>
         <div className="text-center">
           <h1 className="text-lg font-semibold tracking-tight text-white">Performance Report</h1>
-          <p className="text-[10px] uppercase font-bold" style={{ letterSpacing: "0.2em", color: "#f2b90d", fontFamily: "system-ui, sans-serif" }}>
+          <p className="text-[10px] uppercase font-bold" style={{ letterSpacing: "0.2em", color: "#E5C158", fontFamily: "system-ui, sans-serif" }}>
             {periodLabel}
           </p>
         </div>
@@ -88,9 +88,9 @@ export default function MonthlyReportPage() {
                 </p>
                 <h2 className="text-4xl font-medium text-white mb-1">{totalRevenue}</h2>
                 <div className="flex items-center gap-2 mb-6">
-                  <MaterialIcon name={salesGrowth >= 0 ? "trending_up" : "trending_down"} className="text-sm text-[#f2b90d]" />
+                  <MaterialIcon name={salesGrowth >= 0 ? "trending_up" : "trending_down"} className="text-sm text-[#E5C158]" />
                   <p className="text-sm font-medium" style={{ fontFamily: "system-ui, sans-serif" }}>
-                    <span style={{ color: "#f2b90d" }}>{monthlySales} sold</span>{" "}
+                    <span style={{ color: "#E5C158" }}>{monthlySales} sold</span>{" "}
                     <span style={{ color: "#a1a1a1" }}>· {conversionRate} conv. rate</span>
                     {salesGrowth !== 0 && (
                       <span style={{ color: salesGrowth > 0 ? "#22c55e" : "#ef4444", marginLeft: "6px" }}>
@@ -107,21 +107,21 @@ export default function MonthlyReportPage() {
                     <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: "#a1a1a1", fontFamily: "system-ui, sans-serif" }}>
                       AI Operational Efficiency
                     </p>
-                    <p className="text-2xl font-medium" style={{ color: "#f2b90d" }}>{efficiency}%</p>
+                    <p className="text-2xl font-medium" style={{ color: "#E5C158" }}>{efficiency}%</p>
                   </div>
                   <div className="relative w-14 h-14">
                     <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
                       <circle cx="18" cy="18" r="16" fill="none" strokeWidth="3" stroke="rgba(255,255,255,0.1)" />
                       <circle
                         cx="18" cy="18" r="16" fill="none" strokeWidth="3"
-                        stroke="#f2b90d"
+                        stroke="#E5C158"
                         strokeDasharray="100"
                         strokeDashoffset={100 - efficiency}
                         strokeLinecap="round"
                       />
                     </svg>
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <MaterialIcon name="auto_awesome" className="text-xs text-[#f2b90d]" />
+                      <MaterialIcon name="auto_awesome" className="text-xs text-[#E5C158]" />
                     </div>
                   </div>
                 </div>
@@ -132,17 +132,17 @@ export default function MonthlyReportPage() {
             <section className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-5 rounded-xl border" style={{ background: "#1c1c1c", borderColor: "rgba(255,255,255,0.05)" }}>
-                  <MaterialIcon name="inventory" className="mb-3 text-[#f2b90d]" />
+                  <MaterialIcon name="inventory" className="mb-3 text-[#E5C158]" />
                   <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: "#a1a1a1", fontFamily: "system-ui, sans-serif" }}>
                     Total Stock
                   </p>
                   <p className="text-xl font-medium text-white">
                     {totalVehicles}{" "}
-                    <span className="text-xs" style={{ color: "#f2b90d", fontFamily: "system-ui, sans-serif" }}>cars</span>
+                    <span className="text-xs" style={{ color: "#E5C158", fontFamily: "system-ui, sans-serif" }}>cars</span>
                   </p>
                 </div>
                 <div className="p-5 rounded-xl border" style={{ background: "#1c1c1c", borderColor: "rgba(255,255,255,0.05)" }}>
-                  <MaterialIcon name="speed" className="mb-3 text-[#f2b90d]" />
+                  <MaterialIcon name="speed" className="mb-3 text-[#E5C158]" />
                   <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: "#a1a1a1", fontFamily: "system-ui, sans-serif" }}>
                     Avg. Days to Sell
                   </p>
@@ -177,7 +177,7 @@ export default function MonthlyReportPage() {
                 </div>
                 <div className="space-y-3">
                   <div className="relative h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
-                    <div className="absolute top-0 left-0 h-full rounded-full" style={{ width: `${Math.min(99, convNum + 30)}%`, background: "#f2b90d" }} />
+                    <div className="absolute top-0 left-0 h-full rounded-full" style={{ width: `${Math.min(99, convNum + 30)}%`, background: "#E5C158" }} />
                   </div>
                   <div className="flex justify-between text-[10px] uppercase" style={{ color: "#a1a1a1", fontFamily: "system-ui, sans-serif" }}>
                     <span>Leads ({activeLeads})</span>
@@ -193,7 +193,7 @@ export default function MonthlyReportPage() {
                 <h3 className="text-lg font-medium text-white">Revenue Growth</h3>
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 rounded-full" style={{ background: "#f2b90d" }} />
+                    <div className="w-2 h-2 rounded-full" style={{ background: "#E5C158" }} />
                     <span className="text-[10px]" style={{ color: "#a1a1a1", fontFamily: "system-ui, sans-serif" }}>Current</span>
                   </div>
                   <div className="flex items-center gap-1">
@@ -209,14 +209,14 @@ export default function MonthlyReportPage() {
                       className="w-full rounded-t-sm"
                       style={{
                         height: bar.height,
-                        background: bar.active ? "#f2b90d" : "rgba(255,255,255,0.05)",
+                        background: bar.active ? "#E5C158" : "rgba(255,255,255,0.05)",
                         ...(bar.active ? { boxShadow: "0 0 15px rgba(242,185,13,0.3)" } : {}),
                       }}
                     />
                     <span
                       className="text-[10px]"
                       style={{
-                        color: bar.active ? "#f2b90d" : "#a1a1a1",
+                        color: bar.active ? "#E5C158" : "#a1a1a1",
                         fontWeight: bar.active ? "bold" : "normal",
                         fontFamily: "system-ui, sans-serif",
                       }}
@@ -234,19 +234,19 @@ export default function MonthlyReportPage() {
                 <div className="relative">
                   <div
                     className="w-16 h-16 rounded-full overflow-hidden border-2 flex items-center justify-center text-xl font-bold"
-                    style={{ borderColor: "#f2b90d", background: "rgba(242,185,13,0.1)", color: "#f2b90d" }}
+                    style={{ borderColor: "#E5C158", background: "rgba(242,185,13,0.1)", color: "#E5C158" }}
                   >
                     {topVehicle ? topVehicle.name.slice(0, 2).toUpperCase() : "AV"}
                   </div>
                   <div
                     className="absolute -bottom-1 -right-1 rounded-full p-1 border-2"
-                    style={{ background: "#f2b90d", color: "#121212", borderColor: "#1c1c1c" }}
+                    style={{ background: "#E5C158", color: "#121212", borderColor: "#1c1c1c" }}
                   >
                     <MaterialIcon name="workspace_premium" className="!text-[14px] font-bold" />
                   </div>
                 </div>
                 <div className="flex-1">
-                  <p className="text-[10px] uppercase tracking-widest font-bold mb-0.5" style={{ color: "#f2b90d", fontFamily: "system-ui, sans-serif" }}>
+                  <p className="text-[10px] uppercase tracking-widest font-bold mb-0.5" style={{ color: "#E5C158", fontFamily: "system-ui, sans-serif" }}>
                     {topVehicle ? "Top Selling Vehicle" : "Top Sales Executive"}
                   </p>
                   <h4 className="text-xl font-medium text-white truncate">
@@ -283,7 +283,7 @@ export default function MonthlyReportPage() {
                 key={item.label}
                 href={item.href}
                 className="flex flex-col items-center gap-1"
-                style={{ color: item.active ? "#f2b90d" : "#a1a1a1" }}
+                style={{ color: item.active ? "#E5C158" : "#a1a1a1" }}
               >
                 <MaterialIcon name={item.icon} fill={item.active} />
                 <span className={`text-[10px] tracking-tight ${item.active ? "font-bold" : "font-medium"}`} style={{ fontFamily: "system-ui, sans-serif" }}>

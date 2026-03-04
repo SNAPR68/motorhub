@@ -17,7 +17,7 @@ import { fetchVehicle, adaptVehicle } from "@/lib/api";
    Real drag-to-pan panorama using pointer/touch events + CSS transform.
    The vehicle's images array is laid side-by-side at 300vw total width,
    giving a genuine "look around" feel without any external library.
-   Tokens: #1773cf / Manrope / #111921
+   Tokens: #3B82F6 / Manrope / #0A1628
 ──────────────────────────────────────────────────────────────── */
 
 // Hotspot definitions per image index (0-based)
@@ -204,18 +204,18 @@ function usePanorama(totalImages: number, gyroEnabled: boolean) {
 // ── Loading skeleton ────────────────────────────────────────────
 function TourSkeleton() {
   return (
-    <div className="h-dvh w-full flex flex-col items-center justify-center gap-6 bg-[#111921]">
+    <div className="h-dvh w-full flex flex-col items-center justify-center gap-6 bg-[#0A1628]">
       <div className="relative">
-        <div className="w-16 h-16 rounded-full border-2 border-[#1773cf]/20 border-t-[#1773cf] animate-spin" />
+        <div className="w-16 h-16 rounded-full border-2 border-[#3B82F6]/20 border-t-[#3B82F6] animate-spin" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <MaterialIcon name="360" className="text-[#1773cf] text-xl" />
+          <MaterialIcon name="360" className="text-[#3B82F6] text-xl" />
         </div>
       </div>
       <div className="flex flex-col items-center gap-1">
         <span className="text-white/50 text-xs font-bold uppercase tracking-[0.3em]">Loading Tour</span>
         <div className="flex gap-1 mt-2">
           {[0,1,2].map(i => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#1773cf]/50 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#3B82F6]/50 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
           ))}
         </div>
       </div>
@@ -259,10 +259,10 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
   if (isLoading) return <TourSkeleton />;
   if (!vehicle) {
     return (
-      <div className="h-dvh flex flex-col items-center justify-center gap-4 bg-[#111921] text-white">
+      <div className="h-dvh flex flex-col items-center justify-center gap-4 bg-[#0A1628] text-white">
         <MaterialIcon name="360" className="text-4xl text-white/20" />
         <p className="text-white/40 text-sm">Vehicle not found</p>
-        <Link href="/inventory" className="text-[#1773cf] text-sm font-bold">← Back to Inventory</Link>
+        <Link href="/inventory" className="text-[#3B82F6] text-sm font-bold">← Back to Inventory</Link>
       </div>
     );
   }
@@ -317,7 +317,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
               className="h-full shrink-0 flex items-center justify-center"
               style={{
                 width: `${STRIP_MULTIPLIER * 100}vw`,
-                background: "linear-gradient(135deg, #0d1117 0%, #111921 30%, #151e28 60%, #0d1117 100%)",
+                background: "linear-gradient(135deg, #0d1117 0%, #0A1628 30%, #151e28 60%, #0d1117 100%)",
               }}
             >
               <div className="flex flex-col items-center gap-4 text-white/20">
@@ -376,7 +376,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
               <span
                 className="relative flex w-5 h-5 rounded-full items-center justify-center transition-all duration-200"
                 style={{
-                  background: activeHotspot === i ? "#1773cf" : "rgba(23,115,207,0.85)",
+                  background: activeHotspot === i ? "#3B82F6" : "rgba(23,115,207,0.85)",
                   boxShadow: activeHotspot === i ? "0 0 0 3px rgba(23,115,207,0.4)" : "0 0 0 2px rgba(255,255,255,0.3)",
                   transform: activeHotspot === i ? "scale(1.3)" : "scale(1)",
                 }}
@@ -402,7 +402,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
                 {/* Connector arrow */}
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45"
                   style={{ background: "rgba(10,14,20,0.88)", borderRight: "1px solid rgba(23,115,207,0.35)", borderBottom: "1px solid rgba(23,115,207,0.35)" }} />
-                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#1773cf] mb-1.5">{h.category}</p>
+                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#3B82F6] mb-1.5">{h.category}</p>
                 <h3 className="text-sm font-bold text-white leading-tight mb-1">{h.label}</h3>
                 <p className="text-[11px] text-slate-400 leading-relaxed">{h.desc}</p>
               </div>
@@ -432,14 +432,14 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
           <div className="flex flex-col items-center flex-1 min-w-0">
             <h1 className="text-sm font-extrabold text-white tracking-tight truncate max-w-full">{vehicle.name}</h1>
             <div className="flex items-center gap-1.5 mt-0.5">
-              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-[#1773cf]">360° VIEW</span>
+              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-[#3B82F6]">360° VIEW</span>
               {/* Progress bar showing pan position */}
               <div className="w-16 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.1)" }}>
                 <div
                   className="h-full rounded-full transition-all duration-100"
                   style={{
                     width: "100%",
-                    background: "#1773cf",
+                    background: "#3B82F6",
                     transform: `scaleX(${Math.abs(pan.offsetX) > 0 ? (1 - Math.abs(pan.offsetX) / (window?.innerWidth ? window.innerWidth * (STRIP_MULTIPLIER - 1) : 1)) : 1})`,
                     transformOrigin: pan.offsetX <= 0 ? "left" : "right",
                   }}
@@ -458,7 +458,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
               <MaterialIcon
                 name="screen_rotation"
                 className="text-[18px] transition-colors"
-                style={{ color: gyroEnabled ? "#1773cf" : "#64748b" }}
+                style={{ color: gyroEnabled ? "#3B82F6" : "#64748b" }}
               />
             </button>
             {/* Photo counter */}
@@ -493,7 +493,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
         >
           {/* Animated hand icon */}
           <div className="animate-bounce">
-            <MaterialIcon name="swipe" className="text-sm text-[#1773cf]" />
+            <MaterialIcon name="swipe" className="text-sm text-[#3B82F6]" />
           </div>
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300">Drag to explore</span>
         </div>
@@ -510,7 +510,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
               width: pan.activeImageIdx === i ? "6px" : "4px",
               height: pan.activeImageIdx === i ? "24px" : "8px",
               borderRadius: "99px",
-              background: pan.activeImageIdx === i ? "#1773cf" : "rgba(255,255,255,0.25)",
+              background: pan.activeImageIdx === i ? "#3B82F6" : "rgba(255,255,255,0.25)",
               boxShadow: pan.activeImageIdx === i ? "0 0 8px rgba(23,115,207,0.6)" : "none",
             }}
           />
@@ -523,7 +523,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
           href="/concierge"
           className="relative flex h-14 w-14 items-center justify-center rounded-2xl text-white transition-transform active:scale-95"
           style={{
-            background: "linear-gradient(135deg, #1773cf 0%, #0d5aad 100%)",
+            background: "linear-gradient(135deg, #3B82F6 0%, #0d5aad 100%)",
             boxShadow: "0 8px 24px rgba(23,115,207,0.4)",
           }}
         >
@@ -533,7 +533,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
             <span className="relative flex h-3.5 w-3.5 rounded-full bg-white" />
           </span>
         </Link>
-        <span className="block text-center text-[8px] font-bold text-[#1773cf] uppercase tracking-wider mt-1">Ask AI</span>
+        <span className="block text-center text-[8px] font-bold text-[#3B82F6] uppercase tracking-wider mt-1">Ask AI</span>
       </div>
 
       {/* ── Bottom: Image Thumbnail Strip + Actions ──────────── */}
@@ -552,7 +552,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
                 style={{
                   width: "64px",
                   height: "44px",
-                  border: pan.activeImageIdx === i ? "2px solid #1773cf" : "2px solid rgba(255,255,255,0.1)",
+                  border: pan.activeImageIdx === i ? "2px solid #3B82F6" : "2px solid rgba(255,255,255,0.1)",
                   boxShadow: pan.activeImageIdx === i ? "0 0 12px rgba(23,115,207,0.5)" : "none",
                   transform: pan.activeImageIdx === i ? "scale(1.05)" : "scale(1)",
                 }}
@@ -584,7 +584,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
             href={`/appointments?vehicleId=${vehicle.id}`}
             className="flex-1 py-3.5 rounded-xl flex items-center justify-center gap-2 text-white text-sm font-bold"
             style={{
-              background: "linear-gradient(135deg, #1773cf 0%, #0d5aad 100%)",
+              background: "linear-gradient(135deg, #3B82F6 0%, #0d5aad 100%)",
               boxShadow: "0 4px 16px rgba(23,115,207,0.4)",
             }}
           >
@@ -613,7 +613,7 @@ export default function VirtualTourPage({ params }: { params: Promise<{ id: stri
               key={item.label}
               href={item.href}
               className="flex flex-1 flex-col items-center gap-1"
-              style={{ color: item.active ? "#1773cf" : "#475569" }}
+              style={{ color: item.active ? "#3B82F6" : "#475569" }}
             >
               <MaterialIcon name={item.icon} fill={item.active} className="text-[22px]" />
               <span className="text-[9px] font-bold uppercase tracking-wide">{item.label}</span>

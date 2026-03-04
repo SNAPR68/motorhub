@@ -60,11 +60,11 @@ export default function OffersPage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -151,7 +151,7 @@ export default function OffersPage({
         <Link
           href={`/${brand}/${model}/price-in-delhi`}
           className="flex items-center justify-center gap-2 w-full h-12 rounded-2xl text-sm font-bold text-white"
-          style={{ background: "#1152d4" }}
+          style={{ background: "#3B82F6" }}
         >
           <MaterialIcon name="receipt_long" className="text-[18px]" />
           Check On-Road Price

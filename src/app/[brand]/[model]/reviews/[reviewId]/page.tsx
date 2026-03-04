@@ -62,7 +62,7 @@ const VARIANTS_DRIVEN = [
 /* ─── Category rating config ─── */
 const CATEGORIES = [
   { label: "Comfort", icon: "weekend", color: "#8b5cf6" },
-  { label: "Performance", icon: "speed", color: "#1152d4" },
+  { label: "Performance", icon: "speed", color: "#3B82F6" },
   { label: "Mileage", icon: "local_gas_station", color: "#10b981" },
   { label: "Features", icon: "settings_suggest", color: "#f59e0b" },
   { label: "Value for Money", icon: "currency_rupee", color: "#ec4899" },
@@ -294,7 +294,7 @@ export default function ReviewDetailPage({
   /* ── Loading state ── */
   if (loading) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
@@ -305,7 +305,7 @@ export default function ReviewDetailPage({
     return (
       <div
         className="min-h-dvh flex items-center justify-center"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <div className="text-center px-6">
           <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
@@ -313,7 +313,7 @@ export default function ReviewDetailPage({
           <Link
             href="/new-cars"
             className="mt-4 inline-flex items-center gap-1 text-sm font-semibold"
-            style={{ color: "#1152d4" }}
+            style={{ color: "#3B82F6" }}
           >
             <MaterialIcon name="arrow_back" className="text-[15px]" /> Browse New Cars
           </Link>
@@ -338,13 +338,13 @@ export default function ReviewDetailPage({
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full pb-36"
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -379,7 +379,7 @@ export default function ReviewDetailPage({
           className="rounded-2xl border border-white/5 p-5 relative overflow-hidden"
           style={{
             background: review.isExpert
-              ? "linear-gradient(135deg, rgba(17,82,212,0.12), rgba(255,255,255,0.02))"
+              ? "linear-gradient(135deg, rgba(59,130,246,0.12), rgba(255,255,255,0.02))"
               : "linear-gradient(135deg, rgba(245,158,11,0.08), rgba(255,255,255,0.02))",
           }}
         >
@@ -388,7 +388,7 @@ export default function ReviewDetailPage({
             className="absolute -top-8 -right-8 w-28 h-28 rounded-full"
             style={{
               background: review.isExpert
-                ? "rgba(17,82,212,0.08)"
+                ? "rgba(59,130,246,0.08)"
                 : "rgba(245,158,11,0.06)",
             }}
           />
@@ -399,9 +399,9 @@ export default function ReviewDetailPage({
               className="inline-block text-[10px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1 mb-3"
               style={{
                 background: review.isExpert
-                  ? "rgba(17,82,212,0.15)"
+                  ? "rgba(59,130,246,0.15)"
                   : "rgba(245,158,11,0.12)",
-                color: review.isExpert ? "#6b9aff" : "#fbbf24",
+                color: review.isExpert ? "#6b9aff" : "#E5C158",
               }}
             >
               {review.isExpert ? "Expert Review" : "User Review"}
@@ -412,7 +412,7 @@ export default function ReviewDetailPage({
               <div
                 className="h-10 w-10 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0"
                 style={{
-                  background: review.isExpert ? "#1152d4" : "#f59e0b",
+                  background: review.isExpert ? "#3B82F6" : "#f59e0b",
                 }}
               >
                 {review.reviewerName.charAt(0)}
@@ -474,7 +474,7 @@ export default function ReviewDetailPage({
           <MaterialIcon
             name="article"
             className="text-[18px]"
-            style={{ color: "#1152d4" }}
+            style={{ color: "#3B82F6" }}
           />
           Overall Impression
         </h2>
@@ -556,7 +556,7 @@ export default function ReviewDetailPage({
           <MaterialIcon
             name="bar_chart"
             className="text-[18px]"
-            style={{ color: "#1152d4" }}
+            style={{ color: "#3B82F6" }}
           />
           Rating Breakdown
         </h2>
@@ -581,14 +581,14 @@ export default function ReviewDetailPage({
         <div
           className="rounded-2xl border border-white/5 p-5 relative overflow-hidden"
           style={{
-            background: "linear-gradient(135deg, rgba(17,82,212,0.08), rgba(255,255,255,0.02))",
+            background: "linear-gradient(135deg, rgba(59,130,246,0.08), rgba(255,255,255,0.02))",
           }}
         >
           <div className="flex items-center gap-2 mb-3">
             <MaterialIcon
               name="gavel"
               className="text-[18px]"
-              style={{ color: "#1152d4" }}
+              style={{ color: "#3B82F6" }}
             />
             <h2 className="text-base font-bold text-white">Verdict</h2>
           </div>
@@ -602,7 +602,7 @@ export default function ReviewDetailPage({
                   review.overallRating >= 4.5
                     ? "linear-gradient(135deg, #10b981, #059669)"
                     : review.overallRating >= 4.0
-                    ? "linear-gradient(135deg, #1152d4, #0e44b5)"
+                    ? "linear-gradient(135deg, #3B82F6, #0e44b5)"
                     : "linear-gradient(135deg, #f59e0b, #d97706)",
               }}
             >
@@ -705,7 +705,7 @@ export default function ReviewDetailPage({
           <MaterialIcon
             name="reviews"
             className="text-[18px]"
-            style={{ color: "#1152d4" }}
+            style={{ color: "#3B82F6" }}
           />
           More {car.name} Reviews
         </h2>
@@ -723,7 +723,7 @@ export default function ReviewDetailPage({
                     className="h-9 w-9 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0"
                     style={{
                       background:
-                        rel.type === "Expert Review" ? "#1152d4" : "#f59e0b",
+                        rel.type === "Expert Review" ? "#3B82F6" : "#f59e0b",
                     }}
                   >
                     {rel.reviewer.charAt(0)}
@@ -737,10 +737,10 @@ export default function ReviewDetailPage({
                       style={{
                         background:
                           rel.type === "Expert Review"
-                            ? "rgba(17,82,212,0.12)"
+                            ? "rgba(59,130,246,0.12)"
                             : "rgba(245,158,11,0.1)",
                         color:
-                          rel.type === "Expert Review" ? "#6b9aff" : "#fbbf24",
+                          rel.type === "Expert Review" ? "#6b9aff" : "#E5C158",
                       }}
                     >
                       {rel.type}
@@ -772,7 +772,7 @@ export default function ReviewDetailPage({
         <Link
           href={`/${brandSlug}/${modelSlug}/reviews`}
           className="w-full h-12 rounded-2xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
-          style={{ background: "#1152d4" }}
+          style={{ background: "#3B82F6" }}
         >
           <MaterialIcon name="rate_review" className="text-[18px]" />
           View All {car.name} Reviews

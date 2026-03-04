@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-[#e2e8f0]">
+    <div className="min-h-screen bg-[#0A1628] text-[#e2e8f0]">
       <div className="max-w-lg mx-auto px-4 ">
         {/* Header */}
         <header className="flex items-center gap-3 py-4">
@@ -77,8 +77,8 @@ export default function PrivacyPolicyPage() {
                 className="w-full flex items-center justify-between p-4 text-left hover:bg-white/5 transition"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#1152d4]/10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-xs font-bold text-[#1152d4]">{i + 1}</span>
+                  <div className="w-8 h-8 rounded-lg bg-[#3B82F6]/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-xs font-bold text-[#3B82F6]">{i + 1}</span>
                   </div>
                   <h3 className="text-sm font-medium">{section.title}</h3>
                 </div>
@@ -105,7 +105,7 @@ export default function PrivacyPolicyPage() {
           </p>
           <p className="text-xs text-slate-500 mt-1">
             Questions?{" "}
-            <Link href="/contact" className="text-[#1152d4] hover:underline">
+            <Link href="/contact" className="text-[#3B82F6] hover:underline">
               Contact us
             </Link>
           </p>

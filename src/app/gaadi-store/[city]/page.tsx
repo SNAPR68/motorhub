@@ -78,7 +78,7 @@ const DEFAULT_STORES: Store[] = [
 ];
 
 const SERVICE_ICONS: Record<string, { icon: string; color: string }> = {
-  "Test Drive": { icon: "directions_car", color: "#1152d4" },
+  "Test Drive": { icon: "directions_car", color: "#3B82F6" },
   "150-Point Inspection": { icon: "search", color: "#10b981" },
   "Instant Finance": { icon: "account_balance", color: "#f59e0b" },
   "RC Transfer": { icon: "swap_horiz", color: "#8b5cf6" },
@@ -93,11 +93,11 @@ export default function GaadiStoreCityPage({ params }: { params: Promise<{ city:
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -167,7 +167,7 @@ export default function GaadiStoreCityPage({ params }: { params: Promise<{ city:
           </p>
           <div
             className="rounded-2xl h-48 flex flex-col items-center justify-center border border-white/5"
-            style={{ background: "linear-gradient(135deg, rgba(17,82,212,0.08), rgba(99,102,241,0.05))" }}
+            style={{ background: "linear-gradient(135deg, rgba(59,130,246,0.08), rgba(99,102,241,0.05))" }}
           >
             <MaterialIcon name="map" className="text-[40px] text-white/15 mb-2" />
             <p className="text-xs text-slate-500">Map view coming soon</p>
@@ -185,7 +185,7 @@ export default function GaadiStoreCityPage({ params }: { params: Promise<{ city:
           </div>
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <MaterialIcon name="phone" className="text-[20px] text-white" />
           </div>

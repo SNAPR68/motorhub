@@ -51,11 +51,11 @@ export default function FuelPricePage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh pb-36" style={{ background: "#080a0f", color: "#f1f5f9" }}>
+    <div className="min-h-dvh pb-36" style={{ background: "#0A1628", color: "#f1f5f9" }}>
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/"
@@ -69,7 +69,7 @@ export default function FuelPricePage() {
       <div className="max-w-lg mx-auto px-4 pt-5 space-y-6">
         {/* City selector */}
         <div className="flex items-center gap-2">
-          <MaterialIcon name="location_on" className="text-[18px]" style={{ color: "#1152d4" }} />
+          <MaterialIcon name="location_on" className="text-[18px]" style={{ color: "#3B82F6" }} />
           <select
             value={selectedCity}
             onChange={(e) => setSelectedCity(e.target.value)}
@@ -89,7 +89,7 @@ export default function FuelPricePage() {
         <div
           className="rounded-2xl p-6"
           style={{
-            background: "linear-gradient(135deg, #1152d4 0%, #0a3ba8 60%, #071e6b 100%)",
+            background: "linear-gradient(135deg, #3B82F6 0%, #0a3ba8 60%, #071e6b 100%)",
           }}
         >
           <p className="text-blue-200 text-xs font-semibold uppercase tracking-wide mb-4">
@@ -156,7 +156,7 @@ export default function FuelPricePage() {
                     style={{
                       height: `${height}%`,
                       background: isLast
-                        ? "linear-gradient(to top, #1152d4, #60a5fa)"
+                        ? "linear-gradient(to top, #3B82F6, #60a5fa)"
                         : "rgba(255,255,255,0.08)",
                       minHeight: "8px",
                     }}
@@ -204,9 +204,9 @@ export default function FuelPricePage() {
           <div className="flex items-center gap-2 mb-4">
             <div
               className="w-9 h-9 rounded-xl flex items-center justify-center"
-              style={{ background: "rgba(17,82,212,0.15)" }}
+              style={{ background: "rgba(59,130,246,0.15)" }}
             >
-              <MaterialIcon name="calculate" className="text-[20px]" style={{ color: "#1152d4" }} />
+              <MaterialIcon name="calculate" className="text-[20px]" style={{ color: "#3B82F6" }} />
             </div>
             <div>
               <h3 className="text-white font-semibold text-sm">Fuel Cost Calculator</h3>
@@ -249,9 +249,9 @@ export default function FuelPricePage() {
                     onClick={() => setFuelType(f)}
                     className="rounded-full px-4 py-2 text-xs font-semibold transition-colors"
                     style={{
-                      background: fuelType === f ? "#1152d4" : "rgba(255,255,255,0.06)",
+                      background: fuelType === f ? "#3B82F6" : "rgba(255,255,255,0.06)",
                       color: fuelType === f ? "#fff" : "#94a3b8",
-                      border: fuelType === f ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.1)",
+                      border: fuelType === f ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.1)",
                     }}
                   >
                     {f}

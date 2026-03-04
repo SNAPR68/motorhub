@@ -55,11 +55,11 @@ export default function NewsByCategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -84,7 +84,7 @@ export default function NewsByCategoryPage({ params }: { params: Promise<{ categ
             {/* Image placeholder */}
             <div
               className="w-24 h-20 rounded-xl flex items-center justify-center shrink-0"
-              style={{ background: "linear-gradient(135deg, rgba(17,82,212,0.15), rgba(99,102,241,0.1))" }}
+              style={{ background: "linear-gradient(135deg, rgba(59,130,246,0.15), rgba(99,102,241,0.1))" }}
             >
               <MaterialIcon name={article.icon} className="text-[28px] text-white/25" />
             </div>

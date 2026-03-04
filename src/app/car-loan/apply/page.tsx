@@ -70,9 +70,9 @@ function Pill({
       onClick={onClick}
       className="rounded-full px-4 py-2 text-sm font-semibold transition-colors"
       style={{
-        background: active ? "#1152d4" : "rgba(255,255,255,0.06)",
+        background: active ? "#3B82F6" : "rgba(255,255,255,0.06)",
         color: active ? "#fff" : "#94a3b8",
-        border: active ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.1)",
+        border: active ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.1)",
       }}
     >
       {label}
@@ -284,7 +284,7 @@ export default function CarLoanApplyPage() {
               <button
                 onClick={() => setStep(s.step)}
                 className="text-xs font-semibold px-3 py-1 rounded-full"
-                style={{ color: "#1152d4", background: "rgba(17,82,212,0.1)" }}
+                style={{ color: "#3B82F6", background: "rgba(59,130,246,0.1)" }}
               >
                 Edit
               </button>
@@ -303,7 +303,7 @@ export default function CarLoanApplyPage() {
   /* ── Success state ── */
   if (submitted) {
     return (
-      <div className="min-h-dvh pb-36" style={{ background: "#080a0f", color: "#f1f5f9" }}>
+      <div className="min-h-dvh pb-36" style={{ background: "#0A1628", color: "#f1f5f9" }}>
         <div className="max-w-lg mx-auto px-4 flex flex-col items-center justify-center pt-24 text-center">
           <div
             className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
@@ -324,9 +324,9 @@ export default function CarLoanApplyPage() {
             <div className="flex items-center gap-3 mb-3">
               <div
                 className="w-10 h-10 rounded-full flex items-center justify-center"
-                style={{ background: "rgba(17,82,212,0.15)" }}
+                style={{ background: "rgba(59,130,246,0.15)" }}
               >
-                <MaterialIcon name="phone_in_talk" className="text-[22px]" style={{ color: "#1152d4" }} />
+                <MaterialIcon name="phone_in_talk" className="text-[22px]" style={{ color: "#3B82F6" }} />
               </div>
               <div className="text-left">
                 <p className="text-white font-semibold text-sm">Our advisor will call you</p>
@@ -349,7 +349,7 @@ export default function CarLoanApplyPage() {
           <Link
             href="/car-loan"
             className="mt-8 flex items-center justify-center gap-2 w-full rounded-xl py-4 text-white font-bold text-sm"
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <MaterialIcon name="arrow_back" className="text-[18px]" />
             Back to Car Loan
@@ -362,11 +362,11 @@ export default function CarLoanApplyPage() {
   const stepContent = [renderPersonal, renderVehicle, renderFinancial, renderReview];
 
   return (
-    <div className="min-h-dvh pb-36" style={{ background: "#080a0f", color: "#f1f5f9" }}>
+    <div className="min-h-dvh pb-36" style={{ background: "#0A1628", color: "#f1f5f9" }}>
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/car-loan"
@@ -389,15 +389,15 @@ export default function CarLoanApplyPage() {
                   {i > 0 && (
                     <div
                       className="flex-1 h-0.5 rounded-full"
-                      style={{ background: done || current ? "#1152d4" : "rgba(255,255,255,0.1)" }}
+                      style={{ background: done || current ? "#3B82F6" : "rgba(255,255,255,0.1)" }}
                     />
                   )}
                   <div
                     className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
                     style={{
-                      background: done ? "#1152d4" : current ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.06)",
+                      background: done ? "#3B82F6" : current ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.06)",
                       color: done || current ? "#fff" : "#64748b",
-                      border: current ? "2px solid #1152d4" : "2px solid transparent",
+                      border: current ? "2px solid #3B82F6" : "2px solid transparent",
                     }}
                   >
                     {done ? (
@@ -409,7 +409,7 @@ export default function CarLoanApplyPage() {
                   {i < STEPS.length - 1 && (
                     <div
                       className="flex-1 h-0.5 rounded-full"
-                      style={{ background: done ? "#1152d4" : "rgba(255,255,255,0.1)" }}
+                      style={{ background: done ? "#3B82F6" : "rgba(255,255,255,0.1)" }}
                     />
                   )}
                 </div>
@@ -456,7 +456,7 @@ export default function CarLoanApplyPage() {
             <button
               onClick={() => setStep((s) => s + 1)}
               className="flex-1 flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               Next
               <MaterialIcon name="arrow_forward" className="text-[18px]" />

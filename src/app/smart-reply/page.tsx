@@ -116,8 +116,8 @@ function SmartReplyContent() {
           <div className="flex flex-col items-center">
             <h2 className="text-lg font-bold text-slate-900">AI Smart Reply</h2>
             <div className="flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#137fec" }} />
-              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "#137fec" }}>
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#3B82F6" }} />
+              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "#3B82F6" }}>
                 {loading ? "Generating..." : "Assistant Active"}
               </span>
             </div>
@@ -127,7 +127,7 @@ function SmartReplyContent() {
             className="flex w-10 h-10 items-center justify-center rounded-full"
             style={{ background: "rgba(19,127,236,0.1)" }}
           >
-            <MaterialIcon name="auto_awesome" className="text-[22px] text-[#137fec]" />
+            <MaterialIcon name="auto_awesome" className="text-[22px] text-[#3B82F6]" />
           </button>
         </div>
 
@@ -141,7 +141,7 @@ function SmartReplyContent() {
                   <Image src={CRETA} alt="" width={56} height={56} className="object-cover" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                 </div>
                 <div className="flex-1">
-                  <p className="text-[10px] font-bold" style={{ color: "#137fec" }}>{vehicleName} &bull; {vehiclePrice}</p>
+                  <p className="text-[10px] font-bold" style={{ color: "#3B82F6" }}>{vehicleName} &bull; {vehiclePrice}</p>
                   <p className="text-sm font-bold text-slate-900">Lead: {buyerName}</p>
                   <p className="mt-1 text-sm leading-relaxed text-slate-600 italic">&ldquo;{leadMessage}&rdquo;</p>
                 </div>
@@ -153,7 +153,7 @@ function SmartReplyContent() {
           <div className="mt-8">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">AI Generated Suggestions</h3>
-              <span className="rounded-full px-2 py-0.5 text-[10px] font-bold" style={{ background: "rgba(19,127,236,0.1)", color: "#137fec" }}>
+              <span className="rounded-full px-2 py-0.5 text-[10px] font-bold" style={{ background: "rgba(19,127,236,0.1)", color: "#3B82F6" }}>
                 {loading ? "..." : `${suggestions.length} OPTIONS`}
               </span>
             </div>
@@ -180,14 +180,14 @@ function SmartReplyContent() {
                     key={s.tone}
                     onClick={() => setSelected(i)}
                     className="relative cursor-pointer rounded-2xl bg-white p-5 transition-all"
-                    style={i === selected ? { border: "2px solid #137fec", boxShadow: "0 0 20px rgba(19,127,236,0.25)" } : { border: "1px solid #e2e8f0" }}
+                    style={i === selected ? { border: "2px solid #3B82F6", boxShadow: "0 0 20px rgba(19,127,236,0.25)" } : { border: "1px solid #e2e8f0" }}
                   >
                     <div className="mb-3 flex items-center justify-between">
                       <span className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold" style={{ background: s.toneBg, color: s.toneColor }}>
                         <MaterialIcon name={s.toneIcon} className="text-sm" />
                         {s.tone}
                       </span>
-                      {i === selected && <MaterialIcon name="check_circle" className="text-[#137fec]" />}
+                      {i === selected && <MaterialIcon name="check_circle" className="text-[#3B82F6]" />}
                     </div>
                     <p className="text-[15px] leading-relaxed" style={{ color: i === selected ? "#334155" : "#64748b" }}>{s.text}</p>
                     {i === selected && (
@@ -196,7 +196,7 @@ function SmartReplyContent() {
                           onClick={() => handleSend("whatsapp")}
                           disabled={sending || sent}
                           className="flex flex-1 items-center justify-center gap-2 rounded-lg py-3 text-sm font-bold text-white disabled:opacity-60"
-                          style={{ background: "#137fec", boxShadow: "0 4px 12px rgba(19,127,236,0.25)" }}
+                          style={{ background: "#3B82F6", boxShadow: "0 4px 12px rgba(19,127,236,0.25)" }}
                         >
                           <MaterialIcon name={sent ? "check" : "send"} className="text-lg" />
                           {sent ? "Sent!" : sending ? "Sending..." : "Send Now"}
@@ -216,7 +216,7 @@ function SmartReplyContent() {
                 onClick={generateSuggestions}
                 disabled={loading}
                 className="flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold shadow-sm disabled:opacity-50"
-                style={{ border: "1px solid rgba(19,127,236,0.3)", color: "#137fec" }}
+                style={{ border: "1px solid rgba(19,127,236,0.3)", color: "#3B82F6" }}
               >
                 <MaterialIcon name="auto_awesome" className="text-xl" />
                 Regenerate Suggestions
@@ -255,7 +255,7 @@ function SmartReplyContent() {
 
 export default function SmartReplyPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#f6f7f8] flex items-center justify-center"><div className="w-8 h-8 rounded-full border-2 border-[#137fec] border-t-transparent animate-spin" /></div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#f6f7f8] flex items-center justify-center"><div className="w-8 h-8 rounded-full border-2 border-[#3B82F6] border-t-transparent animate-spin" /></div>}>
       <SmartReplyContent />
     </Suspense>
   );

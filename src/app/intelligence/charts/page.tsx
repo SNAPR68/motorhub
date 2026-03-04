@@ -6,7 +6,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles } from "@/lib/api";
 
-/* Stitch: ai_market_intelligence_hub_2 — #0dccf2, Manrope, #0a0a0a */
+/* Stitch: ai_market_intelligence_hub_2 — #0dccf2, Manrope, #0A1628 */
 
 const TIMEFRAMES = ["1W", "2W", "1M", "3M", "6M", "1Y"];
 
@@ -31,11 +31,11 @@ export default function IntelligenceChartsPage() {
   return (
     <div
       className="min-h-dvh w-full flex flex-col max-w-md mx-auto text-slate-100 pb-24"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0a0a" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
       <header className="sticky top-0 z-50 px-4 py-4 flex items-center justify-between border-b"
-        style={{ background: "rgba(10,10,10,0.8)", backdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.05)" }}>
+        style={{ background: "rgba(10,22,40,0.8)", backdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.05)" }}>
         <div className="flex items-center gap-3">
           <Link href="/intelligence" className="p-1">
             <MaterialIcon name="arrow_back" className="text-slate-400" />
@@ -59,7 +59,7 @@ export default function IntelligenceChartsPage() {
               className="flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all"
               style={{
                 background: selectedTF === tf ? "#0dccf2" : "rgba(255,255,255,0.05)",
-                color: selectedTF === tf ? "#0a0a0a" : "#94a3b8",
+                color: selectedTF === tf ? "#0A1628" : "#94a3b8",
                 border: selectedTF === tf ? "none" : "1px solid rgba(255,255,255,0.05)",
               }}
             >
@@ -70,7 +70,7 @@ export default function IntelligenceChartsPage() {
 
         {/* Main Price Chart */}
         <section className="rounded-2xl p-5 mb-6"
-          style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
+          style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
           <div className="flex justify-between items-start mb-4">
             <div>
               <h2 className="text-sm font-semibold uppercase tracking-widest text-[#94a3b8] mb-1">
@@ -118,7 +118,7 @@ export default function IntelligenceChartsPage() {
               { name: "No vehicles listed", price: "—", trend: "—", signal: "NEUTRAL", signalColor: "#f59e0b" },
             ]).map((m) => (
               <div key={m.name} className="rounded-xl p-4 flex items-center justify-between"
-                style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
+                style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
                 <div>
                   <h3 className="text-sm font-bold text-white">{m.name}</h3>
                   <p className="text-lg font-extrabold mt-1" style={{ color: "#0dccf2" }}>{m.price}</p>
@@ -137,7 +137,7 @@ export default function IntelligenceChartsPage() {
         {/* Volume Chart */}
         <section>
           <h2 className="text-xs font-bold uppercase tracking-widest text-[#94a3b8] mb-3">Trading Volume</h2>
-          <div className="rounded-2xl p-5" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
+          <div className="rounded-2xl p-5" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
             <div className="flex items-end justify-between h-24 gap-1">
               {[40, 65, 55, 80, 70, 90, 60, 75, 85, 45, 70, 95].map((h, i) => (
                 <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: i === 11 ? "#0dccf2" : "rgba(13,204,242,0.2)" }} />
@@ -149,15 +149,15 @@ export default function IntelligenceChartsPage() {
 
       {/* Bottom Nav */}
       <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 pb-8 pt-2 px-6 flex justify-between items-center border-t md:hidden"
-        style={{ background: "rgba(10,10,10,0.9)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}>
+        style={{ background: "rgba(10,22,40,0.9)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}>
         <Link href="/inventory" className="flex flex-col items-center gap-1">
           <MaterialIcon name="directions_car" className="text-[#94a3b8]" />
           <span className="text-[10px] font-bold tracking-widest uppercase text-[#94a3b8]">Inventory</span>
         </Link>
         <Link href="/intelligence" className="flex flex-col items-center gap-1 relative">
           <div className="absolute -top-12 w-14 h-14 rounded-2xl flex items-center justify-center rotate-45"
-            style={{ background: "#0dccf2", boxShadow: "0 8px 20px rgba(13,204,242,0.4)", border: "4px solid #0a0a0a" }}>
-            <MaterialIcon name="query_stats" className="text-[#0a0a0a] font-bold -rotate-45" />
+            style={{ background: "#0dccf2", boxShadow: "0 8px 20px rgba(13,204,242,0.4)", border: "4px solid #0A1628" }}>
+            <MaterialIcon name="query_stats" className="text-[#0A1628] font-bold -rotate-45" />
           </div>
           <span className="text-[10px] font-black tracking-widest uppercase mt-4 text-[#0dccf2]">Insights</span>
         </Link>

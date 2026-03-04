@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CRETA, BLUR_DATA_URL } from "@/lib/car-images";
 import { MaterialIcon } from "@/components/MaterialIcon";
 
-/* Stitch: carobest_luxury_landing_page — #1152d4, Noto Serif + Noto Sans, #101622 */
+/* Stitch: carobest_luxury_landing_page — #3B82F6, Noto Serif + Noto Sans, #101622 */
 
 export default function LandingPage() {
   return (
@@ -39,7 +39,7 @@ export default function LandingPage() {
       {/* Navigation Header */}
       <header className="relative z-30 flex items-center justify-between px-6 pt-12 pb-6">
         <div className="flex items-center gap-2">
-          <MaterialIcon name="token" className="text-3xl text-[#1152d4]" />
+          <MaterialIcon name="token" className="text-3xl text-[#3B82F6]" />
           <h2
             className="text-xl font-bold tracking-widest uppercase"
             style={{ fontFamily: "'Noto Serif', serif" }}
@@ -63,7 +63,7 @@ export default function LandingPage() {
       <main className="relative z-30 flex flex-col items-center justify-end min-h-dvh px-6 pb-36 text-center">
         <div className="mb-12">
           <p
-            className="text-xs uppercase mb-4 font-semibold text-[#1152d4]"
+            className="text-xs uppercase mb-4 font-semibold text-[#3B82F6]"
             style={{ letterSpacing: "0.4em" }}
           >
             Intelligence &amp; Elegance
@@ -74,13 +74,13 @@ export default function LandingPage() {
           >
             The Future of Luxury Automotive
           </h1>
-          <div className="w-12 h-px bg-[#1152d4]/60 mx-auto" />
+          <div className="w-12 h-px bg-[#3B82F6]/60 mx-auto" />
         </div>
 
         <div className="w-full max-w-sm space-y-4">
           <Link
             href="/used-cars"
-            className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-lg bg-[#1152d4] px-8 py-5 text-base font-bold text-white transition-all active:scale-[0.98]"
+            className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-lg bg-[#3B82F6] px-8 py-5 text-base font-bold text-white transition-all active:scale-[0.98]"
           >
             <MaterialIcon name="directions_car" className="text-xl" />
             <span>Browse Collection</span>
@@ -113,7 +113,7 @@ export default function LandingPage() {
           <span className="text-[10px] uppercase" style={{ letterSpacing: "0.3em" }}>
             Explore
           </span>
-          <div className="w-px h-10 bg-gradient-to-b from-[#1152d4] to-transparent" />
+          <div className="w-px h-10 bg-gradient-to-b from-[#3B82F6] to-transparent" />
         </div>
       </main>
 
@@ -127,19 +127,19 @@ export default function LandingPage() {
             border: "1px solid rgba(255,255,255,0.1)",
           }}
         >
-          <Link href="/" className="flex flex-col items-center justify-center text-[#1152d4]">
+          <Link href="/" className="flex flex-col items-center justify-center text-[#3B82F6]">
             <MaterialIcon name="home" fill />
           </Link>
-          <Link href="/used-cars" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#1152d4] transition-colors">
+          <Link href="/used-cars" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#3B82F6] transition-colors">
             <MaterialIcon name="directions_car" />
           </Link>
-          <Link href="/showroom" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#1152d4] transition-colors">
+          <Link href="/showroom" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#3B82F6] transition-colors">
             <MaterialIcon name="search" />
           </Link>
-          <Link href="/vip" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#1152d4] transition-colors">
+          <Link href="/vip" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#3B82F6] transition-colors">
             <MaterialIcon name="verified_user" />
           </Link>
-          <Link href="/login/buyer" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#1152d4] transition-colors">
+          <Link href="/login/buyer" className="flex flex-col items-center justify-center text-slate-400 hover:text-[#3B82F6] transition-colors">
             <MaterialIcon name="account_circle" />
           </Link>
         </div>

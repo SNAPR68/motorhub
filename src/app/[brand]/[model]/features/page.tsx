@@ -73,11 +73,11 @@ export default function FeaturesPage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -102,9 +102,9 @@ export default function FeaturesPage({
             <div className="flex items-center gap-3 px-4 pt-4 pb-3">
               <div
                 className="h-9 w-9 rounded-xl flex items-center justify-center shrink-0"
-                style={{ background: "rgba(17,82,212,0.1)" }}
+                style={{ background: "rgba(59,130,246,0.1)" }}
               >
-                <MaterialIcon name={cat.icon} className="text-[18px]" style={{ color: "#1152d4" }} />
+                <MaterialIcon name={cat.icon} className="text-[18px]" style={{ color: "#3B82F6" }} />
               </div>
               <div>
                 <p className="text-sm font-bold text-white">{cat.title}</p>
@@ -144,7 +144,7 @@ export default function FeaturesPage({
         {/* Summary */}
         <div
           className="rounded-2xl p-4 border border-blue-500/20 text-center"
-          style={{ background: "rgba(17,82,212,0.06)" }}
+          style={{ background: "rgba(59,130,246,0.06)" }}
         >
           <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-1">
             Total Features

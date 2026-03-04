@@ -25,7 +25,7 @@ export default function VehiclePassportPage({
 
   if (loading) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="flex flex-col items-center gap-3">
           <div className="h-10 w-10 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
           <p className="text-slate-500 text-sm">Generating passport...</p>
@@ -36,11 +36,11 @@ export default function VehiclePassportPage({
 
   if (!vehicle) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="text-center px-6">
           <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
           <p className="text-slate-400 font-semibold">Vehicle not found</p>
-          <Link href="/used-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#1152d4" }}>
+          <Link href="/used-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#3B82F6" }}>
             <MaterialIcon name="arrow_back" className="text-[15px]" /> Browse used cars
           </Link>
         </div>
@@ -82,10 +82,10 @@ export default function VehiclePassportPage({
   const redCount = passport.flags.filter((f) => f.level === "red").length;
 
   return (
-    <div className="min-h-dvh w-full pb-10" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full pb-10" style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
             href={`/used-cars/details/${id}`}
@@ -342,7 +342,7 @@ export default function VehiclePassportPage({
         <Link
           href={`/used-cars/details/${id}`}
           className="flex items-center justify-center gap-2 h-12 rounded-2xl text-sm font-bold text-white w-full"
-          style={{ background: "#1152d4" }}
+          style={{ background: "#3B82F6" }}
         >
           <MaterialIcon name="arrow_back" className="text-[18px]" />
           Back to Vehicle Details

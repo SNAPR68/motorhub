@@ -65,7 +65,7 @@ export default function VariantsPage({
   /* ── Loading state ── */
   if (loading) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
@@ -74,11 +74,11 @@ export default function VariantsPage({
   /* ── 404 state ── */
   if (!car) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="text-center px-6">
           <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
           <p className="text-slate-400 font-semibold">Model not found</p>
-          <Link href="/new-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#1152d4" }}>
+          <Link href="/new-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#3B82F6" }}>
             <MaterialIcon name="arrow_back" className="text-[15px]" /> Browse New Cars
           </Link>
         </div>
@@ -92,10 +92,10 @@ export default function VariantsPage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full pb-36" style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link href={`/${brandSlug}/${modelSlug}`} className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
@@ -113,8 +113,8 @@ export default function VariantsPage({
         {/* ─── COMING SOON ─── */}
         {!hasVariants && (
           <div className="text-center py-20">
-            <div className="inline-flex h-20 w-20 items-center justify-center rounded-full mb-4" style={{ background: "rgba(17,82,212,0.08)" }}>
-              <MaterialIcon name="format_list_bulleted" className="text-[36px]" style={{ color: "#1152d4" }} />
+            <div className="inline-flex h-20 w-20 items-center justify-center rounded-full mb-4" style={{ background: "rgba(59,130,246,0.08)" }}>
+              <MaterialIcon name="format_list_bulleted" className="text-[36px]" style={{ color: "#3B82F6" }} />
             </div>
             <h2 className="text-lg font-bold text-white mb-2">Variants Coming Soon</h2>
             <p className="text-sm text-slate-500 max-w-xs mx-auto">
@@ -123,7 +123,7 @@ export default function VariantsPage({
             <Link
               href={`/${brandSlug}/${modelSlug}`}
               className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="arrow_back" className="text-[16px]" />
               Back to {car.name}
@@ -143,8 +143,8 @@ export default function VariantsPage({
                   key={v.name + v.fuel}
                   className="rounded-2xl border transition-all"
                   style={{
-                    background: isSelected ? "rgba(17,82,212,0.06)" : "rgba(255,255,255,0.03)",
-                    borderColor: isSelected ? "rgba(17,82,212,0.3)" : "rgba(255,255,255,0.05)",
+                    background: isSelected ? "rgba(59,130,246,0.06)" : "rgba(255,255,255,0.03)",
+                    borderColor: isSelected ? "rgba(59,130,246,0.3)" : "rgba(255,255,255,0.05)",
                   }}
                 >
                   <div className="p-4">
@@ -183,7 +183,7 @@ export default function VariantsPage({
                       onClick={() => setSelectedIdx(isSelected ? null : i)}
                       className="mt-3 w-full h-10 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2"
                       style={{
-                        background: isSelected ? "#1152d4" : "rgba(17,82,212,0.1)",
+                        background: isSelected ? "#3B82F6" : "rgba(59,130,246,0.1)",
                         color: isSelected ? "#fff" : "#60a5fa",
                       }}
                     >
@@ -208,7 +208,7 @@ export default function VariantsPage({
                 <table className="w-full min-w-[480px]">
                   <thead>
                     <tr className="border-b border-white/5">
-                      <th className="text-left text-[10px] text-slate-600 font-bold uppercase tracking-wider px-4 py-3 sticky left-0" style={{ background: "rgba(8,10,15,0.98)" }}>
+                      <th className="text-left text-[10px] text-slate-600 font-bold uppercase tracking-wider px-4 py-3 sticky left-0" style={{ background: "rgba(10,22,40,0.98)" }}>
                         Spec
                       </th>
                       {variants.map((v) => (
@@ -220,34 +220,34 @@ export default function VariantsPage({
                   </thead>
                   <tbody>
                     <tr className="border-b border-white/5">
-                      <td className="text-[11px] text-slate-400 px-4 py-2.5 font-medium sticky left-0" style={{ background: "rgba(8,10,15,0.98)" }}>Price</td>
+                      <td className="text-[11px] text-slate-400 px-4 py-2.5 font-medium sticky left-0" style={{ background: "rgba(10,22,40,0.98)" }}>Price</td>
                       {variants.map((v) => (
                         <td key={v.name + "price"} className="text-center text-[11px] font-bold text-white px-3 py-2.5">{v.exShowroomDisplay}</td>
                       ))}
                     </tr>
                     <tr className="border-b border-white/5">
-                      <td className="text-[11px] text-slate-400 px-4 py-2.5 font-medium sticky left-0" style={{ background: "rgba(8,10,15,0.98)" }}>Engine</td>
+                      <td className="text-[11px] text-slate-400 px-4 py-2.5 font-medium sticky left-0" style={{ background: "rgba(10,22,40,0.98)" }}>Engine</td>
                       {variants.map((v, i) => {
                         const spec = getVariantSpec(v, i, variants.length);
                         return <td key={v.name + "eng"} className="text-center text-[11px] text-slate-300 px-3 py-2.5">{spec.engine}</td>;
                       })}
                     </tr>
                     <tr className="border-b border-white/5">
-                      <td className="text-[11px] text-slate-400 px-4 py-2.5 font-medium sticky left-0" style={{ background: "rgba(8,10,15,0.98)" }}>Power</td>
+                      <td className="text-[11px] text-slate-400 px-4 py-2.5 font-medium sticky left-0" style={{ background: "rgba(10,22,40,0.98)" }}>Power</td>
                       {variants.map((v, i) => {
                         const spec = getVariantSpec(v, i, variants.length);
                         return <td key={v.name + "pwr"} className="text-center text-[11px] text-slate-300 px-3 py-2.5">{spec.power}</td>;
                       })}
                     </tr>
                     <tr className="border-b border-white/5">
-                      <td className="text-[11px] text-slate-400 px-4 py-2.5 font-medium sticky left-0" style={{ background: "rgba(8,10,15,0.98)" }}>Mileage</td>
+                      <td className="text-[11px] text-slate-400 px-4 py-2.5 font-medium sticky left-0" style={{ background: "rgba(10,22,40,0.98)" }}>Mileage</td>
                       {variants.map((v, i) => {
                         const spec = getVariantSpec(v, i, variants.length);
                         return <td key={v.name + "mil"} className="text-center text-[11px] text-slate-300 px-3 py-2.5">{spec.mileage}</td>;
                       })}
                     </tr>
                     <tr>
-                      <td className="text-[11px] text-slate-400 px-4 py-2.5 font-medium sticky left-0" style={{ background: "rgba(8,10,15,0.98)" }}>Transmission</td>
+                      <td className="text-[11px] text-slate-400 px-4 py-2.5 font-medium sticky left-0" style={{ background: "rgba(10,22,40,0.98)" }}>Transmission</td>
                       {variants.map((v) => (
                         <td key={v.name + "trans"} className="text-center text-[11px] text-slate-300 px-3 py-2.5">{v.transmission}</td>
                       ))}
@@ -265,7 +265,7 @@ export default function VariantsPage({
             <Link
               href={`/${brandSlug}/${modelSlug}/on-road-price`}
               className="w-full h-12 rounded-2xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="tune" className="text-[18px]" />
               Configure & Price

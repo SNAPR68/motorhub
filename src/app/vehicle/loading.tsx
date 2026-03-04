@@ -2,7 +2,7 @@
 
 export default function VehicleLoading() {
   return (
-    <div className="min-h-dvh" style={{ background: "#0a0c10" }}>
+    <div className="min-h-dvh" style={{ background: "#0A1628" }}>
       <div className="max-w-md mx-auto">
         <div className="aspect-[4/3] animate-pulse bg-white/[0.03]" />
         <div className="p-4 space-y-4">

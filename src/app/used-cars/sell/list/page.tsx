@@ -59,13 +59,13 @@ function ListPageInner() {
 
   return (<div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -88,12 +88,12 @@ function ListPageInner() {
           <div
             className="flex items-center gap-1.5 rounded-full px-3 py-1.5"
             style={{
-              background: "rgba(17,82,212,0.12)",
-              border: "1px solid rgba(17,82,212,0.2)",
+              background: "rgba(59,130,246,0.12)",
+              border: "1px solid rgba(59,130,246,0.2)",
             }}
           >
-            <MaterialIcon name="auto_awesome" className="text-[13px]" style={{ color: "#1152d4" }} />
-            <span className="text-[10px] font-bold" style={{ color: "#1152d4" }}>
+            <MaterialIcon name="auto_awesome" className="text-[13px]" style={{ color: "#3B82F6" }} />
+            <span className="text-[10px] font-bold" style={{ color: "#3B82F6" }}>
               AI Priced
             </span>
           </div>
@@ -131,8 +131,8 @@ function ListPageInner() {
         <div
           className="relative overflow-hidden rounded-2xl p-5 border"
           style={{
-            background: "linear-gradient(135deg, rgba(17,82,212,0.12) 0%, rgba(59,130,246,0.08) 100%)",
-            borderColor: "rgba(17,82,212,0.2)",
+            background: "linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(59,130,246,0.08) 100%)",
+            borderColor: "rgba(59,130,246,0.2)",
           }}
         >
           <p className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-2">
@@ -162,8 +162,8 @@ function ListPageInner() {
           <div
             className="flex items-center justify-between rounded-xl px-4 py-3"
             style={{
-              background: "rgba(17,82,212,0.15)",
-              border: "1px solid rgba(17,82,212,0.3)",
+              background: "rgba(59,130,246,0.15)",
+              border: "1px solid rgba(59,130,246,0.3)",
             }}
           >
             <div>
@@ -172,7 +172,7 @@ function ListPageInner() {
                   name="verified"
                   className="text-[14px]"
                   fill
-                  style={{ color: "#1152d4" }}
+                  style={{ color: "#3B82F6" }}
                 />
                 <span className="text-[10px] font-bold uppercase tracking-wide text-blue-400">
                   CaroBest Guaranteed Offer
@@ -187,7 +187,7 @@ function ListPageInner() {
             </div>
             <div
               className="flex h-12 w-12 items-center justify-center rounded-full shrink-0"
-              style={{ background: "rgba(17,82,212,0.2)" }}
+              style={{ background: "rgba(59,130,246,0.2)" }}
             >
               <MaterialIcon
                 name="local_offer"
@@ -221,12 +221,12 @@ function ListPageInner() {
               style={{
                 background:
                   activeTab === tab.key
-                    ? "rgba(17,82,212,0.2)"
+                    ? "rgba(59,130,246,0.2)"
                     : "transparent",
                 color: activeTab === tab.key ? "#fff" : "#64748b",
                 border:
                   activeTab === tab.key
-                    ? "1px solid rgba(17,82,212,0.4)"
+                    ? "1px solid rgba(59,130,246,0.4)"
                     : "1px solid transparent",
               }}
             >
@@ -242,8 +242,8 @@ function ListPageInner() {
             <div
               className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5"
               style={{
-                background: "rgba(17,82,212,0.1)",
-                border: "1px solid rgba(17,82,212,0.2)",
+                background: "rgba(59,130,246,0.1)",
+                border: "1px solid rgba(59,130,246,0.2)",
               }}
             >
               <MaterialIcon name="thumb_up" className="text-[13px]" style={{ color: "#60a5fa" }} fill />
@@ -324,7 +324,7 @@ function ListPageInner() {
                 className="flex items-center gap-2 rounded-xl px-4 py-3.5 border"
                 style={{
                   background: "rgba(255,255,255,0.05)",
-                  borderColor: "rgba(17,82,212,0.3)",
+                  borderColor: "rgba(59,130,246,0.3)",
                 }}
               >
                 <span className="text-[15px] font-bold text-slate-400">₹</span>
@@ -383,8 +383,8 @@ function ListPageInner() {
                 <button
                   className="mt-2 px-4 py-2 rounded-xl text-[12px] font-bold border"
                   style={{
-                    background: "rgba(17,82,212,0.1)",
-                    borderColor: "rgba(17,82,212,0.3)",
+                    background: "rgba(59,130,246,0.1)",
+                    borderColor: "rgba(59,130,246,0.3)",
                     color: "#60a5fa",
                   }}
                 >
@@ -396,8 +396,8 @@ function ListPageInner() {
             <button
               className="flex items-center justify-center gap-2 w-full rounded-2xl py-4 font-bold text-[15px] text-white transition-all active:scale-[0.98]"
               style={{
-                background: "linear-gradient(135deg, #1152d4 0%, #1d4ed8 100%)",
-                boxShadow: "0 8px 24px rgba(17,82,212,0.35)",
+                background: "linear-gradient(135deg, #3B82F6 0%, #1d4ed8 100%)",
+                boxShadow: "0 8px 24px rgba(59,130,246,0.35)",
               }}
             >
               <MaterialIcon name="publish" className="text-[20px]" />
@@ -506,12 +506,12 @@ export default function ListPage() {
       fallback={
         <div
           className="min-h-dvh flex items-center justify-center"
-          style={{ background: "#080a0f" }}
+          style={{ background: "#0A1628" }}
         >
           <div className="flex flex-col items-center gap-3">
             <div
               className="h-10 w-10 rounded-full border-2 border-transparent animate-spin"
-              style={{ borderTopColor: "#1152d4" }}
+              style={{ borderTopColor: "#3B82F6" }}
             />
             <p className="text-[13px] text-slate-500">Calculating valuation…</p>
           </div>

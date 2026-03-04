@@ -50,11 +50,11 @@ export default function CarInsurancePage() {
     <BuyerAppShell>
     <div
       className="min-h-dvh pb-36"
-      style={{ background: "#080a0f", color: "#f1f5f9" }}
+      style={{ background: "#0A1628", color: "#f1f5f9" }}
     >
       {/* Header */}
       <div className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}>
+        style={{ background: "#0A1628" }}>
         <Link href="/" className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10">
           <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
         </Link>
@@ -66,7 +66,7 @@ export default function CarInsurancePage() {
         <div
           className="rounded-2xl p-6 text-white"
           style={{
-            background: "linear-gradient(135deg, #1152d4 0%, #0a3ba8 60%, #071e6b 100%)",
+            background: "linear-gradient(135deg, #3B82F6 0%, #0a3ba8 60%, #071e6b 100%)",
           }}
         >
           <div className="inline-flex items-center gap-1.5 bg-white/20 rounded-full px-3 py-1 text-xs font-semibold mb-3">
@@ -94,7 +94,7 @@ export default function CarInsurancePage() {
               value={vehicleNumber}
               onChange={(e) => setVehicleNumber(e.target.value.toUpperCase())}
               className="w-full rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm font-mono tracking-wider border border-white/10 focus:outline-none focus:border-blue-500"
-              style={{ background: "#1a2235" }}
+              style={{ background: "#0F1D32" }}
             />
           </div>
 
@@ -110,9 +110,9 @@ export default function CarInsurancePage() {
                   onClick={() => setPolicyType(t)}
                   className="rounded-full px-4 py-2 text-sm font-medium transition-all"
                   style={{
-                    background: policyType === t ? "#1152d4" : "#1a2235",
+                    background: policyType === t ? "#3B82F6" : "#0F1D32",
                     color: policyType === t ? "#fff" : "#94a3b8",
-                    border: policyType === t ? "1px solid #1152d4" : "1px solid transparent",
+                    border: policyType === t ? "1px solid #3B82F6" : "1px solid transparent",
                   }}
                 >
                   {t}
@@ -133,9 +133,9 @@ export default function CarInsurancePage() {
                   onClick={() => setUsage(u)}
                   className="flex-1 rounded-full px-4 py-2 text-sm font-medium transition-all"
                   style={{
-                    background: usage === u ? "#1152d4" : "#1a2235",
+                    background: usage === u ? "#3B82F6" : "#0F1D32",
                     color: usage === u ? "#fff" : "#94a3b8",
-                    border: usage === u ? "1px solid #1152d4" : "1px solid transparent",
+                    border: usage === u ? "1px solid #3B82F6" : "1px solid transparent",
                   }}
                 >
                   {u}
@@ -147,7 +147,7 @@ export default function CarInsurancePage() {
           <Link
             href={`/car-insurance/compare?${queryString}`}
             className="flex items-center justify-center gap-2 w-full rounded-xl py-3.5 text-white font-semibold text-sm transition-opacity hover:opacity-90"
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <MaterialIcon name="search" className="text-[18px]" />
             Get Quotes
@@ -164,7 +164,7 @@ export default function CarInsurancePage() {
             >
               <div
                 className="w-10 h-10 rounded-full flex items-center justify-center"
-                style={{ background: "#1152d420" }}
+                style={{ background: "#3B82F620" }}
               >
                 <MaterialIcon name={f.icon} className="text-[20px]" style={{ color: "#4d80f0" }} />
               </div>
@@ -186,7 +186,7 @@ export default function CarInsurancePage() {
               >
                 <div
                   className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                  style={{ background: "#1152d4" }}
+                  style={{ background: "#3B82F6" }}
                 >
                   {insurer[0]}
                 </div>

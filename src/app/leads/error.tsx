@@ -19,7 +19,7 @@ export default function LeadsError({
       <p className="text-sm text-slate-500 mb-6 max-w-xs">{error.message}</p>
       <button
         onClick={reset}
-        className="bg-[#137fec] text-white px-6 py-3 rounded-xl font-bold text-sm transition-all active:scale-95"
+        className="bg-[#3B82F6] text-white px-6 py-3 rounded-xl font-bold text-sm transition-all active:scale-95"
       >
         Try Again
       </button>

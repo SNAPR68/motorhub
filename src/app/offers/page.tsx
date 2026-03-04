@@ -111,11 +111,11 @@ export default function OffersPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh pb-36" style={{ background: "#080a0f", color: "#f1f5f9" }}>
+    <div className="min-h-dvh pb-36" style={{ background: "#0A1628", color: "#f1f5f9" }}>
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/"
@@ -133,7 +133,7 @@ export default function OffersPage() {
             className="flex items-center gap-1.5 px-3 py-2 rounded-full"
             style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
           >
-            <MaterialIcon name="location_on" className="text-[16px]" style={{ color: "#1152d4" }} />
+            <MaterialIcon name="location_on" className="text-[16px]" style={{ color: "#3B82F6" }} />
             <span className="text-white text-xs font-semibold">Bengaluru</span>
             <MaterialIcon name="expand_more" className="text-[16px] text-slate-400" />
           </div>
@@ -147,9 +147,9 @@ export default function OffersPage() {
               onClick={() => setFilter(f)}
               className="rounded-full px-4 py-2 text-xs font-semibold whitespace-nowrap transition-colors"
               style={{
-                background: filter === f ? "#1152d4" : "rgba(255,255,255,0.06)",
+                background: filter === f ? "#3B82F6" : "rgba(255,255,255,0.06)",
                 color: filter === f ? "#fff" : "#94a3b8",
-                border: filter === f ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.1)",
+                border: filter === f ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.1)",
               }}
             >
               {f}
@@ -223,7 +223,7 @@ export default function OffersPage() {
                       <button
                         onClick={() => handleClaim(offer.id)}
                         className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white transition-opacity hover:opacity-90"
-                        style={{ background: "#1152d4" }}
+                        style={{ background: "#3B82F6" }}
                       >
                         Claim Offer
                         <MaterialIcon name="arrow_forward" className="text-[14px]" />

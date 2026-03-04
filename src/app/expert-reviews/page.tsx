@@ -18,7 +18,7 @@ const REVIEWS = [
     date: "3 days ago",
     readTime: "8 min read",
     category: "SUV",
-    gradient: "linear-gradient(135deg, rgba(17,82,212,0.2), rgba(59,130,246,0.12))",
+    gradient: "linear-gradient(135deg, rgba(59,130,246,0.2), rgba(59,130,246,0.12))",
   },
   {
     id: 2,
@@ -72,7 +72,7 @@ const REVIEWS = [
 
 const SCORE_COLOR = (score: number) => {
   if (score >= 8.5) return "#34d399";
-  if (score >= 7.5) return "#fbbf24";
+  if (score >= 7.5) return "#E5C158";
   return "#f87171";
 };
 
@@ -110,11 +110,11 @@ export default function ExpertReviewsPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -138,7 +138,7 @@ export default function ExpertReviewsPage() {
           <div
             className="h-44 relative flex flex-col items-start justify-end p-4"
             style={{
-              background: "linear-gradient(135deg, rgba(17,82,212,0.25) 0%, rgba(99,102,241,0.15) 50%, rgba(8,10,15,0.6) 100%)",
+              background: "linear-gradient(135deg, rgba(59,130,246,0.25) 0%, rgba(99,102,241,0.15) 50%, rgba(10,22,40,0.6) 100%)",
             }}
           >
             <div
@@ -149,7 +149,7 @@ export default function ExpertReviewsPage() {
             </div>
             <span
               className="relative text-[10px] font-bold px-2.5 py-1 rounded-full mb-2"
-              style={{ background: "rgba(245,158,11,0.2)", color: "#fbbf24" }}
+              style={{ background: "rgba(245,158,11,0.2)", color: "#E5C158" }}
             >
               Featured Review
             </span>
@@ -163,7 +163,7 @@ export default function ExpertReviewsPage() {
               <div className="flex items-center gap-2">
                 <div
                   className="h-6 w-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0"
-                  style={{ background: "linear-gradient(135deg, #1152d4, #4f8ef7)" }}
+                  style={{ background: "linear-gradient(135deg, #3B82F6, #4f8ef7)" }}
                 >
                   VM
                 </div>
@@ -191,9 +191,9 @@ export default function ExpertReviewsPage() {
                 onClick={() => setActiveFilter(f)}
                 className="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0"
                 style={{
-                  background: active ? "#1152d4" : "rgba(255,255,255,0.05)",
+                  background: active ? "#3B82F6" : "rgba(255,255,255,0.05)",
                   color: active ? "#fff" : "#94a3b8",
-                  border: active ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.08)",
+                  border: active ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 {f}
@@ -218,7 +218,7 @@ export default function ExpertReviewsPage() {
                 <div className="flex items-center gap-1.5 mt-2">
                   <div
                     className="h-5 w-5 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0"
-                    style={{ background: "linear-gradient(135deg, #1152d4, #4f8ef7)" }}
+                    style={{ background: "linear-gradient(135deg, #3B82F6, #4f8ef7)" }}
                   >
                     {review.author.split(" ").map((n) => n[0]).join("")}
                   </div>

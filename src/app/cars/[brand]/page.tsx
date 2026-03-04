@@ -25,27 +25,27 @@ interface BrandMeta {
 /* ─── Static Data ─── */
 const BRAND_META: Record<string, BrandMeta> = {
   maruti: { tagline: "India's Most Trusted", color: "#16a34a", accentColor: "#4ade80", modelCount: 16 },
-  hyundai: { tagline: "Drive Your Way", color: "#1152d4", accentColor: "#60a5fa", modelCount: 12 },
-  tata: { tagline: "Built for India", color: "#1152d4", accentColor: "#60a5fa", modelCount: 10 },
+  hyundai: { tagline: "Drive Your Way", color: "#3B82F6", accentColor: "#60a5fa", modelCount: 12 },
+  tata: { tagline: "Built for India", color: "#3B82F6", accentColor: "#60a5fa", modelCount: 10 },
   mahindra: { tagline: "Explore the Impossible", color: "#dc2626", accentColor: "#f87171", modelCount: 9 },
   honda: { tagline: "The Power of Dreams", color: "#dc2626", accentColor: "#f87171", modelCount: 7 },
-  toyota: { tagline: "Let's Go Places", color: "#b45309", accentColor: "#fbbf24", modelCount: 8 },
+  toyota: { tagline: "Let's Go Places", color: "#b45309", accentColor: "#E5C158", modelCount: 8 },
   kia: { tagline: "Movement That Inspires", color: "#dc2626", accentColor: "#f87171", modelCount: 6 },
-  volkswagen: { tagline: "Das Auto", color: "#1152d4", accentColor: "#60a5fa", modelCount: 6 },
+  volkswagen: { tagline: "Das Auto", color: "#3B82F6", accentColor: "#60a5fa", modelCount: 6 },
   skoda: { tagline: "Simply Clever", color: "#16a34a", accentColor: "#4ade80", modelCount: 5 },
-  bmw: { tagline: "Sheer Driving Pleasure", color: "#1152d4", accentColor: "#60a5fa", modelCount: 11 },
+  bmw: { tagline: "Sheer Driving Pleasure", color: "#3B82F6", accentColor: "#60a5fa", modelCount: 11 },
   audi: { tagline: "Vorsprung Durch Technik", color: "#9ca3af", accentColor: "#e5e7eb", modelCount: 10 },
   "mercedes-benz": { tagline: "The Best or Nothing", color: "#9ca3af", accentColor: "#e5e7eb", modelCount: 13 },
-  ford: { tagline: "Built Ford Tough", color: "#1152d4", accentColor: "#60a5fa", modelCount: 5 },
+  ford: { tagline: "Built Ford Tough", color: "#3B82F6", accentColor: "#60a5fa", modelCount: 5 },
   jeep: { tagline: "Go Anywhere. Do Anything.", color: "#16a34a", accentColor: "#4ade80", modelCount: 4 },
   mg: { tagline: "Emotion for Life", color: "#dc2626", accentColor: "#f87171", modelCount: 5 },
-  byd: { tagline: "Build Your Dreams", color: "#1152d4", accentColor: "#60a5fa", modelCount: 4 },
+  byd: { tagline: "Build Your Dreams", color: "#3B82F6", accentColor: "#60a5fa", modelCount: 4 },
   nissan: { tagline: "Innovation That Excites", color: "#dc2626", accentColor: "#f87171", modelCount: 5 },
 };
 
 const DEFAULT_META: BrandMeta = {
   tagline: "Drive the Difference",
-  color: "#1152d4",
+  color: "#3B82F6",
   accentColor: "#60a5fa",
   modelCount: 4,
 };
@@ -154,9 +154,9 @@ export default function BrandPage({ params }: { params: Promise<{ brand: string 
 
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-white ">
+    <div className="min-h-screen bg-[#0A1628] text-white ">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#080a0f]/95 backdrop-blur border-b border-white/5 max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
+      <header className="sticky top-0 z-40 bg-[#0A1628]/95 backdrop-blur border-b border-white/5 max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
         <Link href="/cars" className="p-2 rounded-full hover:bg-white/10 transition-colors -ml-2">
           <MaterialIcon name="arrow_back" className="text-[22px]" />
         </Link>
@@ -209,8 +209,8 @@ export default function BrandPage({ params }: { params: Promise<{ brand: string 
                 onClick={() => setActiveFilter(type)}
                 className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold border transition-all ${
                   activeFilter === type
-                    ? "bg-[#1152d4] border-[#1152d4] text-white"
-                    : "bg-white/5 border-white/10 text-slate-400 hover:border-[#1152d4]/50"
+                    ? "bg-[#3B82F6] border-[#3B82F6] text-white"
+                    : "bg-white/5 border-white/10 text-slate-400 hover:border-[#3B82F6]/50"
                 }`}
               >
                 {type}
@@ -230,7 +230,7 @@ export default function BrandPage({ params }: { params: Promise<{ brand: string 
             <Link
               key={model.slug}
               href={`/${brand}/${model.slug}`}
-              className="bg-white/[0.03] border border-white/5 rounded-xl overflow-hidden hover:border-[#1152d4]/30 hover:bg-white/[0.05] transition-all group"
+              className="bg-white/[0.03] border border-white/5 rounded-xl overflow-hidden hover:border-[#3B82F6]/30 hover:bg-white/[0.05] transition-all group"
             >
               {/* Image */}
               <div className="relative aspect-[3/2] bg-white/5 overflow-hidden">
@@ -275,7 +275,7 @@ export default function BrandPage({ params }: { params: Promise<{ brand: string 
         {/* Popular Comparisons */}
         <div className="px-4 mt-7 mb-4">
           <h3 className="text-[14px] font-bold text-white mb-3 flex items-center gap-2">
-            <MaterialIcon name="compare_arrows" className="text-[20px] text-[#1152d4]" />
+            <MaterialIcon name="compare_arrows" className="text-[20px] text-[#3B82F6]" />
             Popular Comparisons
           </h3>
           <div className="space-y-2">
@@ -283,7 +283,7 @@ export default function BrandPage({ params }: { params: Promise<{ brand: string 
               <Link
                 key={idx}
                 href={`/compare?a=${encodeURIComponent(a)}&b=${encodeURIComponent(b)}`}
-                className="flex items-center gap-3 bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 hover:border-[#1152d4]/30 transition-all group"
+                className="flex items-center gap-3 bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 hover:border-[#3B82F6]/30 transition-all group"
               >
                 <span className="text-sm font-medium text-slate-300 flex-1 group-hover:text-white transition-colors">
                   {a} vs {b}
@@ -298,7 +298,7 @@ export default function BrandPage({ params }: { params: Promise<{ brand: string 
         <div className="px-4 mb-2">
           <Link
             href={`/used-cars?brand=${brandName}`}
-            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl border border-[#1152d4]/30 text-[#60a5fa] text-sm font-semibold hover:bg-[#1152d4]/10 transition-colors"
+            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl border border-[#3B82F6]/30 text-[#60a5fa] text-sm font-semibold hover:bg-[#3B82F6]/10 transition-colors"
           >
             <MaterialIcon name="directions_car" className="text-[18px]" />
             Browse Used {brandName} Cars

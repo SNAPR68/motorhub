@@ -12,7 +12,7 @@ import { AuthGuard } from "@/components/AuthGuard";
 import type { DbVehicle } from "@/lib/api";
 import { useRouter } from "next/navigation";
 
-/* Stitch: exclusive_commit_&_deposit — #7311d4, Work Sans, #050505 */
+/* Stitch: exclusive_commit_&_deposit — #7311d4, Work Sans, #0A1628 */
 
 const PRICING = [
   { label: "Vehicle Price", value: "₹14,50,000" },
@@ -48,10 +48,10 @@ function CommitContent() {
   return (
     <div
       className="min-h-dvh w-full flex flex-col max-w-md mx-auto text-slate-100"
-      style={{ fontFamily: "'Work Sans', sans-serif", background: "#050505" }}
+      style={{ fontFamily: "'Work Sans', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
-      <header className="sticky top-0 z-30 px-4 py-4 flex items-center justify-between border-b border-white/5 bg-[#050505]/80 backdrop-blur-md">
+      <header className="sticky top-0 z-30 px-4 py-4 flex items-center justify-between border-b border-white/5 bg-[#0A1628]/80 backdrop-blur-md">
         <Link href="/reservation" className="p-2 rounded-full hover:bg-white/5">
           <MaterialIcon name="arrow_back" />
         </Link>
@@ -65,7 +65,7 @@ function CommitContent() {
         {/* Vehicle Hero */}
         <div className="relative aspect-[16/9] w-full overflow-hidden">
           <Image src={img} alt={name} fill className="object-cover" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-transparent to-transparent" />
           <div className="absolute bottom-4 left-4">
             <h2 className="text-xl font-bold text-white">{name}</h2>
             <p className="text-sm text-slate-400">{specs}</p>
@@ -163,7 +163,7 @@ function CommitContent() {
       </main>
 
       {/* CTA */}
-      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-30 p-4 bg-[#050505]/95 backdrop-blur-md border-t border-white/5">
+      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-30 p-4 bg-[#0A1628]/95 backdrop-blur-md border-t border-white/5">
         {escrowCreated ? (
           <div className="text-center space-y-3">
             <div className="flex items-center justify-center gap-2 text-emerald-400 text-sm font-semibold">
@@ -205,7 +205,7 @@ function CommitContent() {
 export default function ReservationCommitPage() {
   return (
     <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
-      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center bg-[#050505] text-white"><div className="w-8 h-8 rounded-full border-2 border-[#7311d4] border-t-transparent animate-spin" /></div>}>
+      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center bg-[#0A1628] text-white"><div className="w-8 h-8 rounded-full border-2 border-[#7311d4] border-t-transparent animate-spin" /></div>}>
         <CommitContent />
       </Suspense>
     </AuthGuard>

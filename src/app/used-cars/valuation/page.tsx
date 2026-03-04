@@ -94,9 +94,9 @@ export default function ValuationPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-white ">
+    <div className="min-h-screen bg-[#0A1628] text-white ">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#080a0f]/95 backdrop-blur border-b border-white/5 px-4 py-4 max-w-lg mx-auto flex items-center gap-3">
+      <header className="sticky top-0 z-40 bg-[#0A1628]/95 backdrop-blur border-b border-white/5 px-4 py-4 max-w-lg mx-auto flex items-center gap-3">
         <Link href="/used-cars" className="p-2 rounded-full hover:bg-white/10 transition-colors -ml-2">
           <MaterialIcon name="arrow_back" className="text-[22px]" />
         </Link>
@@ -135,11 +135,11 @@ export default function ValuationPage() {
               <select
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-[#1152d4] transition-colors text-sm"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-[#3B82F6] transition-colors text-sm"
               >
-                <option value="" disabled className="bg-[#0d1117]">Select brand</option>
+                <option value="" disabled className="bg-[#0A1628]">Select brand</option>
                 {BRANDS.map((b) => (
-                  <option key={b} value={b} className="bg-[#0d1117]">{b}</option>
+                  <option key={b} value={b} className="bg-[#0A1628]">{b}</option>
                 ))}
               </select>
               <MaterialIcon name="expand_more" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[20px]" />
@@ -156,7 +156,7 @@ export default function ValuationPage() {
               value={model}
               onChange={(e) => setModel(e.target.value)}
               placeholder="e.g. Swift, Creta, Nexon"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition-colors text-sm"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm"
             />
           </div>
 
@@ -170,11 +170,11 @@ export default function ValuationPage() {
                 <select
                   value={year}
                   onChange={(e) => setYear(Number(e.target.value))}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-[#1152d4] transition-colors text-sm"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-[#3B82F6] transition-colors text-sm"
                 >
-                  <option value="" disabled className="bg-[#0d1117]">Select</option>
+                  <option value="" disabled className="bg-[#0A1628]">Select</option>
                   {YEARS.map((y) => (
-                    <option key={y} value={y} className="bg-[#0d1117]">{y}</option>
+                    <option key={y} value={y} className="bg-[#0A1628]">{y}</option>
                   ))}
                 </select>
                 <MaterialIcon name="expand_more" className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[18px]" />
@@ -190,7 +190,7 @@ export default function ValuationPage() {
                 onChange={(e) => setKm(e.target.value)}
                 placeholder="e.g. 45000"
                 min={0}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition-colors text-sm"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm"
               />
             </div>
           </div>
@@ -208,8 +208,8 @@ export default function ValuationPage() {
                   onClick={() => setFuel(f)}
                   className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
                     fuel === f
-                      ? "bg-[#1152d4] border-[#1152d4] text-white"
-                      : "bg-white/5 border-white/10 text-slate-300 hover:border-[#1152d4]/50"
+                      ? "bg-[#3B82F6] border-[#3B82F6] text-white"
+                      : "bg-white/5 border-white/10 text-slate-300 hover:border-[#3B82F6]/50"
                   }`}
                 >
                   {f}
@@ -230,7 +230,7 @@ export default function ValuationPage() {
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="e.g. Mumbai, Delhi, Bangalore"
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition-colors text-sm"
+                className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm"
               />
             </div>
           </div>
@@ -240,7 +240,7 @@ export default function ValuationPage() {
             type="submit"
             disabled={!canSubmit}
             className="w-full py-4 rounded-xl font-bold text-white text-[15px] transition-all disabled:opacity-40 disabled:cursor-not-allowed mt-2"
-            style={{ background: canSubmit ? "linear-gradient(135deg, #1152d4, #3b82f6)" : undefined, backgroundColor: !canSubmit ? "#1f2937" : undefined }}
+            style={{ background: canSubmit ? "linear-gradient(135deg, #3B82F6, #3b82f6)" : undefined, backgroundColor: !canSubmit ? "#1f2937" : undefined }}
           >
             <span className="flex items-center justify-center gap-2">
               <MaterialIcon name="auto_awesome" className="text-[18px]" />
@@ -253,9 +253,9 @@ export default function ValuationPage() {
         {submitted && result && (
           <div id="valuation-result" className="mt-6 rounded-2xl border border-white/10 overflow-hidden">
             {/* Result header */}
-            <div className="bg-gradient-to-r from-[#1152d4]/20 to-[#3b82f6]/10 border-b border-white/10 px-5 py-4">
+            <div className="bg-gradient-to-r from-[#3B82F6]/20 to-[#3b82f6]/10 border-b border-white/10 px-5 py-4">
               <div className="flex items-center gap-2 mb-1">
-                <MaterialIcon name="verified" className="text-[20px] text-[#1152d4]" fill />
+                <MaterialIcon name="verified" className="text-[20px] text-[#3B82F6]" fill />
                 <span className="text-xs font-bold uppercase tracking-widest text-[#60a5fa]">Valuation Complete</span>
               </div>
               <p className="text-sm text-slate-400">
@@ -304,14 +304,14 @@ export default function ValuationPage() {
               <div className="grid grid-cols-2 gap-3 pt-1">
                 <Link
                   href="/used-cars/sell/evaluate"
-                  className="flex flex-col items-center gap-1.5 bg-[#1152d4] hover:bg-[#1a5fe0] rounded-xl py-3.5 px-3 transition-colors text-center"
+                  className="flex flex-col items-center gap-1.5 bg-[#3B82F6] hover:bg-[#3B82F6] rounded-xl py-3.5 px-3 transition-colors text-center"
                 >
                   <MaterialIcon name="sell" className="text-[22px]" />
                   <span className="text-xs font-bold">Sell This Car</span>
                 </Link>
                 <Link
                   href="/used-cars/sell/list"
-                  className="flex flex-col items-center gap-1.5 bg-white/5 border border-white/10 hover:border-[#1152d4]/50 rounded-xl py-3.5 px-3 transition-colors text-center"
+                  className="flex flex-col items-center gap-1.5 bg-white/5 border border-white/10 hover:border-[#3B82F6]/50 rounded-xl py-3.5 px-3 transition-colors text-center"
                 >
                   <MaterialIcon name="storefront" className="text-[22px] text-slate-300" />
                   <span className="text-xs font-bold text-slate-300">List on Marketplace</span>
@@ -330,12 +330,12 @@ export default function ValuationPage() {
           <div className="space-y-3">
             {HOW_IT_WORKS.map((step) => (
               <div key={step.step} className="flex gap-4 bg-white/[0.03] border border-white/5 rounded-xl p-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#1152d4]/15 border border-[#1152d4]/25 flex items-center justify-center">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#3B82F6]/15 border border-[#3B82F6]/25 flex items-center justify-center">
                   <MaterialIcon name={step.icon} className="text-[18px] text-[#60a5fa]" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-black text-[#1152d4] tracking-widest">{step.step}</span>
+                    <span className="text-[10px] font-black text-[#3B82F6] tracking-widest">{step.step}</span>
                     <span className="font-bold text-sm text-white">{step.title}</span>
                   </div>
                   <p className="text-xs text-slate-400 leading-relaxed">{step.desc}</p>

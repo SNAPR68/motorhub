@@ -11,7 +11,7 @@ import type { PublicDealer } from "@/lib/api";
 const BRANDS = ["All", "Maruti", "Hyundai", "Tata", "Honda", "Toyota", "Mahindra", "Kia"] as const;
 
 const BRAND_COLORS: Record<string, string> = {
-  Maruti: "#1152d4",
+  Maruti: "#3B82F6",
   Hyundai: "#0055a4",
   Honda: "#cc0000",
   Tata: "#003a8c",
@@ -51,12 +51,12 @@ export default function DealersClient() {
     <BuyerAppShell>
     <div
       className="min-h-dvh pb-36"
-      style={{ background: "#080a0f", color: "#f1f5f9" }}
+      style={{ background: "#0A1628", color: "#f1f5f9" }}
     >
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/"
@@ -96,9 +96,9 @@ export default function DealersClient() {
               onClick={() => setActiveBrand(brand)}
               className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all"
               style={{
-                background: activeBrand === brand ? "#1152d4" : "#111827",
+                background: activeBrand === brand ? "#3B82F6" : "#111827",
                 color: activeBrand === brand ? "#fff" : "#94a3b8",
-                border: activeBrand === brand ? "1px solid #1152d4" : "1px solid transparent",
+                border: activeBrand === brand ? "1px solid #3B82F6" : "1px solid transparent",
               }}
             >
               {brand}
@@ -141,7 +141,7 @@ export default function DealersClient() {
                   <div className="flex items-center gap-3">
                     <div
                       className="w-10 h-10 rounded-xl flex items-center justify-center text-white text-xs font-bold"
-                      style={{ background: BRAND_COLORS[activeBrand] ?? "#1152d4" }}
+                      style={{ background: BRAND_COLORS[activeBrand] ?? "#3B82F6" }}
                     >
                       {dealer.dealershipName.charAt(0).toUpperCase()}
                     </div>
@@ -184,7 +184,7 @@ export default function DealersClient() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 rounded-xl py-2.5 text-sm font-medium flex items-center justify-center gap-1.5 border border-white/15 text-slate-300"
-                      style={{ background: "#1a2235" }}
+                      style={{ background: "#0F1D32" }}
                     >
                       <MaterialIcon name="directions" className="text-[15px]" />
                       Directions
@@ -193,7 +193,7 @@ export default function DealersClient() {
                   <Link
                     href={`/dealers/profile/${dealer.id}`}
                     className="flex-1 rounded-xl py-2.5 text-sm font-medium flex items-center justify-center gap-1.5 text-white"
-                    style={{ background: "#1152d4" }}
+                    style={{ background: "#3B82F6" }}
                   >
                     <MaterialIcon name="storefront" className="text-[15px]" />
                     View

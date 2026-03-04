@@ -124,13 +124,13 @@ export default function EvModelPage({
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -164,7 +164,7 @@ export default function EvModelPage({
           className="rounded-2xl overflow-hidden border flex items-center justify-center"
           style={{
             height: "200px",
-            background: "linear-gradient(135deg, rgba(16,185,129,0.08), rgba(17,82,212,0.08))",
+            background: "linear-gradient(135deg, rgba(16,185,129,0.08), rgba(59,130,246,0.08))",
             borderColor: "rgba(16,185,129,0.15)",
           }}
         >
@@ -215,8 +215,8 @@ export default function EvModelPage({
         <div
           className="rounded-2xl p-5 border text-center"
           style={{
-            background: "rgba(17,82,212,0.06)",
-            borderColor: "rgba(17,82,212,0.15)",
+            background: "rgba(59,130,246,0.06)",
+            borderColor: "rgba(59,130,246,0.15)",
           }}
         >
           <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">
@@ -301,7 +301,7 @@ export default function EvModelPage({
             <MaterialIcon
               name="ev_station"
               className="text-[18px]"
-              style={{ color: "#1152d4" }}
+              style={{ color: "#3B82F6" }}
             />
             <h2 className="text-sm font-bold text-white">Charging</h2>
           </div>

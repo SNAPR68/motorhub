@@ -57,11 +57,11 @@ export default function ModelEmiCalculatorPage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -79,7 +79,7 @@ export default function ModelEmiCalculatorPage({
         {/* ─── EMI Result ─── */}
         <div
           className="rounded-2xl p-5 border border-blue-500/20"
-          style={{ background: "rgba(17,82,212,0.06)" }}
+          style={{ background: "rgba(59,130,246,0.06)" }}
         >
           <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-1">
             Monthly EMI
@@ -110,7 +110,7 @@ export default function ModelEmiCalculatorPage({
                   cy="60"
                   r="54"
                   fill="none"
-                  stroke="#1152d4"
+                  stroke="#3B82F6"
                   strokeWidth="10"
                   strokeDasharray={`${principalDash} ${circumference}`}
                   strokeLinecap="round"
@@ -138,7 +138,7 @@ export default function ModelEmiCalculatorPage({
             <div className="space-y-3 flex-1">
               <div>
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="w-3 h-3 rounded-full" style={{ background: "#1152d4" }} />
+                  <span className="w-3 h-3 rounded-full" style={{ background: "#3B82F6" }} />
                   <span className="text-xs text-slate-400">Principal</span>
                 </div>
                 <p className="text-sm font-bold text-white pl-5">{formatINR(principal)}</p>
@@ -168,7 +168,7 @@ export default function ModelEmiCalculatorPage({
               </span>
             </div>
             <div className="h-1.5 rounded-full" style={{ background: "rgba(255,255,255,0.1)" }}>
-              <div className="h-full rounded-full" style={{ width: "100%", background: "#1152d4" }} />
+              <div className="h-full rounded-full" style={{ width: "100%", background: "#3B82F6" }} />
             </div>
           </div>
 
@@ -273,7 +273,7 @@ export default function ModelEmiCalculatorPage({
         <Link
           href="/car-loan/eligibility"
           className="flex items-center justify-center gap-2 w-full h-12 rounded-2xl text-sm font-bold text-white"
-          style={{ background: "#1152d4" }}
+          style={{ background: "#3B82F6" }}
         >
           <MaterialIcon name="account_balance" className="text-[18px]" />
           Apply for Loan

@@ -45,7 +45,7 @@ export default function PrivacyPage() {
   return (
     <div
       className="min-h-dvh"
-      style={{ background: "#0a0c10", fontFamily: "'Noto Sans', sans-serif" }}
+      style={{ background: "#0A1628", fontFamily: "'Noto Sans', sans-serif" }}
     >
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-white/5 px-6 py-4" style={{ background: "rgba(10,12,16,0.85)", backdropFilter: "blur(12px)" }}>
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
 
       <main className="max-w-2xl mx-auto px-6 py-10 pb-20">
         <div className="mb-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#137fec] mb-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#3B82F6] mb-2">
             Legal
           </p>
           <h2 className="text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Noto Serif', serif" }}>
@@ -90,16 +90,16 @@ export default function PrivacyPage() {
           ))}
         </div>
 
-        <div className="mt-10 p-5 rounded-xl border border-[#137fec]/20 bg-[#137fec]/5">
+        <div className="mt-10 p-5 rounded-xl border border-[#3B82F6]/20 bg-[#3B82F6]/5">
           <h3 className="text-sm font-bold text-white mb-2">Contact Us</h3>
           <p className="text-sm text-slate-400">
             For privacy-related inquiries, reach us at{" "}
-            <span className="text-[#137fec]">privacy@carobest.com</span>
+            <span className="text-[#3B82F6]">privacy@carobest.com</span>
           </p>
         </div>
 
         <p className="mt-8 text-center text-xs text-slate-600">
-          <Link href="/terms" className="text-[#137fec] hover:underline">Terms of Service</Link>
+          <Link href="/terms" className="text-[#3B82F6] hover:underline">Terms of Service</Link>
           {" "}&bull;{" "}
           <Link href="/" className="text-slate-500 hover:text-slate-300">Home</Link>
         </p>

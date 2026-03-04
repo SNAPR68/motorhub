@@ -11,7 +11,7 @@ import { SkeletonList } from "@/components/ui/Skeleton";
 import { EmptyState } from "@/components/ui/EmptyState";
 
 /* ── design tokens: ai-powered_lead_crm_1 ── */
-// primary: #137fec, font: Inter, bg: #f6f7f8
+// primary: #3B82F6, font: Inter, bg: #f6f7f8
 
 const FILTERS = ["All", "New", "Follow-up", "Test Drive", "Closed"];
 
@@ -71,7 +71,7 @@ export default function LeadsPage() {
             </button>
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
-              style={{ background: "#137fec" }}
+              style={{ background: "#3B82F6" }}
             >
               R
             </div>
@@ -105,7 +105,7 @@ export default function LeadsPage() {
                   ? "text-white"
                   : "bg-white border border-slate-200 text-slate-600"
               }`}
-              style={i === activeFilter ? { background: "#137fec" } : {}}
+              style={i === activeFilter ? { background: "#3B82F6" } : {}}
             >
               {f}
             </button>
@@ -150,7 +150,7 @@ export default function LeadsPage() {
                         name={sourceIcon}
                         className={`!text-[14px] ${
                           sourceIcon === "social_leaderboard"
-                            ? "text-[#137fec]"
+                            ? "text-[#3B82F6]"
                             : "text-slate-400"
                         }`}
                       />
@@ -209,7 +209,7 @@ export default function LeadsPage() {
                 <button
                   className="w-full mt-2 flex items-center justify-center gap-2 py-2.5 rounded-lg text-white text-sm font-bold"
                   style={{
-                    background: "#137fec",
+                    background: "#3B82F6",
                     boxShadow: "0 4px 12px rgba(19,127,236,0.2)",
                   }}
                 >
@@ -224,7 +224,7 @@ export default function LeadsPage() {
       {/* ── FAB ── */}
       <button
         className="absolute bottom-24 right-6 w-14 h-14 rounded-full text-white shadow-xl flex items-center justify-center z-30 active:scale-95 transition-transform"
-        style={{ background: "#137fec" }}
+        style={{ background: "#3B82F6" }}
       >
         <MaterialIcon name="add" className="text-3xl" />
       </button>
@@ -245,7 +245,7 @@ export default function LeadsPage() {
               key={item.label}
               href={item.href}
               className={`flex flex-col items-center gap-1 ${
-                item.active ? "text-[#137fec]" : "text-slate-400"
+                item.active ? "text-[#3B82F6]" : "text-slate-400"
               }`}
             >
               <MaterialIcon

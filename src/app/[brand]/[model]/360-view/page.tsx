@@ -43,11 +43,11 @@ export default function ThreeSixtyViewPage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -76,7 +76,7 @@ export default function ThreeSixtyViewPage({
               }}
               className="flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all"
               style={{
-                background: mode === m ? "#1152d4" : "transparent",
+                background: mode === m ? "#3B82F6" : "transparent",
                 color: mode === m ? "#fff" : "#64748b",
               }}
             >
@@ -90,8 +90,8 @@ export default function ThreeSixtyViewPage({
           className="relative rounded-2xl border border-white/5 overflow-hidden"
           style={{
             background: mode === "exterior"
-              ? "linear-gradient(135deg, rgba(17,82,212,0.08) 0%, rgba(8,10,15,1) 50%, rgba(16,185,129,0.05) 100%)"
-              : "linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(8,10,15,1) 50%, rgba(245,158,11,0.05) 100%)",
+              ? "linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(10,22,40,1) 50%, rgba(16,185,129,0.05) 100%)"
+              : "linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(10,22,40,1) 50%, rgba(245,158,11,0.05) 100%)",
             aspectRatio: "4/3",
           }}
         >
@@ -124,11 +124,11 @@ export default function ThreeSixtyViewPage({
               <span className="relative flex h-4 w-4">
                 <span
                   className="absolute inset-0 rounded-full animate-ping opacity-40"
-                  style={{ background: "#1152d4" }}
+                  style={{ background: "#3B82F6" }}
                 />
                 <span
                   className="relative inline-flex rounded-full h-4 w-4 border-2 border-white/30"
-                  style={{ background: activeHotspot === spot.label ? "#1152d4" : "rgba(17,82,212,0.7)" }}
+                  style={{ background: activeHotspot === spot.label ? "#3B82F6" : "rgba(59,130,246,0.7)" }}
                 />
               </span>
 
@@ -136,12 +136,12 @@ export default function ThreeSixtyViewPage({
               {activeHotspot === spot.label && (
                 <div
                   className="absolute bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1.5 rounded-lg text-[11px] font-semibold text-white"
-                  style={{ background: "rgba(17,82,212,0.95)", backdropFilter: "blur(8px)" }}
+                  style={{ background: "rgba(59,130,246,0.95)", backdropFilter: "blur(8px)" }}
                 >
                   {spot.label}
                   <div
                     className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
-                    style={{ background: "rgba(17,82,212,0.95)" }}
+                    style={{ background: "rgba(59,130,246,0.95)" }}
                   />
                 </div>
               )}
@@ -168,18 +168,18 @@ export default function ThreeSixtyViewPage({
                 style={{
                   background:
                     activeHotspot === spot.label
-                      ? "rgba(17,82,212,0.1)"
+                      ? "rgba(59,130,246,0.1)"
                       : "rgba(255,255,255,0.02)",
                   borderWidth: 1,
                   borderColor:
                     activeHotspot === spot.label
-                      ? "rgba(17,82,212,0.3)"
+                      ? "rgba(59,130,246,0.3)"
                       : "rgba(255,255,255,0.05)",
                 }}
               >
                 <span
                   className="w-2 h-2 rounded-full shrink-0"
-                  style={{ background: "#1152d4" }}
+                  style={{ background: "#3B82F6" }}
                 />
                 <span
                   className={`text-[11px] font-semibold ${

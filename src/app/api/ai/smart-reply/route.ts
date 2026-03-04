@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     const { leadMessage, vehicleName, vehiclePrice, buyerName } = parsed.data!;
 
     const fallbackSuggestions = [
-      { tone: "Professional", toneIcon: "business_center", toneColor: "#137fec", toneBg: "rgba(19,127,236,0.1)", text: `Hi ${buyerName || "there"}, thank you for your inquiry! ${vehicleName ? `The ${vehicleName} is still available.` : ""} I'd be happy to assist. When would you like to schedule a visit?` },
+      { tone: "Professional", toneIcon: "business_center", toneColor: "#3B82F6", toneBg: "rgba(19,127,236,0.1)", text: `Hi ${buyerName || "there"}, thank you for your inquiry! ${vehicleName ? `The ${vehicleName} is still available.` : ""} I'd be happy to assist. When would you like to schedule a visit?` },
       { tone: "Friendly", toneIcon: "mood", toneColor: "#059669", toneBg: "rgba(16,185,129,0.1)", text: `Hi ${buyerName || "there"}! Great to hear from you. ${vehicleName ? `The ${vehicleName} is a fantastic choice and still available!` : ""} Let's find a time that works for you!` },
       { tone: "Urgency-driven", toneIcon: "bolt", toneColor: "#ea580c", toneBg: "rgba(234,88,12,0.1)", text: `Hi ${buyerName || "there"}, the ${vehicleName || "vehicle"} is getting a lot of interest right now! Let's lock in a visit time today before it's gone.` },
     ];
@@ -31,7 +31,7 @@ Buyer's message: "${leadMessage}"
 Return ONLY a valid JSON object with a "suggestions" key containing an array of 3 objects, each with:
 - tone: string (e.g. "Professional", "Friendly", "Urgency-driven")
 - toneIcon: string (material icon name: "business_center", "mood", or "bolt")
-- toneColor: string (hex: "#137fec", "#059669", or "#ea580c")
+- toneColor: string (hex: "#3B82F6", "#059669", or "#ea580c")
 - toneBg: string (rgba)
 - text: string (the reply message, 2-3 sentences max)`;
 

@@ -20,7 +20,7 @@ const FUEL_TYPES = ["Petrol", "Diesel", "Electric", "Hybrid", "CNG"];
 export default function NewCarsPage() {
   return (
     <BuyerAppShell>
-      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}><div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" /></div>}>
+      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}><div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" /></div>}>
         <NewCarsInner />
       </Suspense>
     </BuyerAppShell>
@@ -83,10 +83,10 @@ function NewCarsInner() {
   };
 
   return (
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 pt-3 pb-0">
 
           <div className="flex items-center gap-2 mb-3">
@@ -111,7 +111,7 @@ function NewCarsInner() {
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="relative flex h-9 w-9 items-center justify-center rounded-xl shrink-0"
-              style={{ background: showFilters ? "#1152d4" : "rgba(255,255,255,0.05)", color: showFilters ? "#fff" : "#94a3b8" }}
+              style={{ background: showFilters ? "#3B82F6" : "rgba(255,255,255,0.05)", color: showFilters ? "#fff" : "#94a3b8" }}
             >
               <MaterialIcon name="tune" className="text-[20px]" />
               {activeFilterCount > 0 && (
@@ -127,7 +127,7 @@ function NewCarsInner() {
             <button
               onClick={() => setActiveBody("all")}
               className="flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3.5 text-xs font-semibold transition-all"
-              style={{ background: activeBody === "all" ? "#1152d4" : "rgba(255,255,255,0.05)", color: activeBody === "all" ? "#fff" : "#94a3b8" }}
+              style={{ background: activeBody === "all" ? "#3B82F6" : "rgba(255,255,255,0.05)", color: activeBody === "all" ? "#fff" : "#94a3b8" }}
             >
               🚘 All
             </button>
@@ -136,7 +136,7 @@ function NewCarsInner() {
                 key={bt.value}
                 onClick={() => setActiveBody(bt.value)}
                 className="flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3.5 text-xs font-semibold transition-all"
-                style={{ background: activeBody === bt.value ? "#1152d4" : "rgba(255,255,255,0.05)", color: activeBody === bt.value ? "#fff" : "#94a3b8" }}
+                style={{ background: activeBody === bt.value ? "#3B82F6" : "rgba(255,255,255,0.05)", color: activeBody === bt.value ? "#fff" : "#94a3b8" }}
               >
                 {bt.icon} {bt.label}
               </button>
@@ -158,7 +158,7 @@ function NewCarsInner() {
                       key={b.label}
                       onClick={() => { setMinPrice(isActive ? 0 : b.min); setMaxPrice(isActive ? 999999999 : b.max); }}
                       className="shrink-0 h-7 px-3 rounded-full text-[11px] font-semibold border"
-                      style={{ background: isActive ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)", color: isActive ? "#fff" : "#94a3b8", borderColor: isActive ? "#1152d4" : "rgba(255,255,255,0.1)" }}
+                      style={{ background: isActive ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.03)", color: isActive ? "#fff" : "#94a3b8", borderColor: isActive ? "#3B82F6" : "rgba(255,255,255,0.1)" }}
                     >
                       {b.label}
                     </button>
@@ -177,7 +177,7 @@ function NewCarsInner() {
                       key={f}
                       onClick={() => setActiveFuel(activeFuel === f ? "" : f)}
                       className="h-7 px-2.5 rounded-full text-[11px] font-semibold border"
-                      style={{ background: activeFuel === f ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)", color: activeFuel === f ? "#fff" : "#94a3b8", borderColor: activeFuel === f ? "#1152d4" : "rgba(255,255,255,0.1)" }}
+                      style={{ background: activeFuel === f ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.03)", color: activeFuel === f ? "#fff" : "#94a3b8", borderColor: activeFuel === f ? "#3B82F6" : "rgba(255,255,255,0.1)" }}
                     >
                       {f}
                     </button>
@@ -194,9 +194,9 @@ function NewCarsInner() {
                   className="w-full h-9 rounded-xl text-white text-xs px-3 outline-none border border-white/10"
                   style={{ background: "rgba(255,255,255,0.06)" }}
                 >
-                  <option value="all" style={{ background: "#080a0f" }}>All Brands</option>
+                  <option value="all" style={{ background: "#0A1628" }}>All Brands</option>
                   {brands.map((b) => (
-                    <option key={b.slug} value={b.slug} style={{ background: "#080a0f" }}>{b.name}</option>
+                    <option key={b.slug} value={b.slug} style={{ background: "#0A1628" }}>{b.name}</option>
                   ))}
                 </select>
               </div>
@@ -219,7 +219,7 @@ function NewCarsInner() {
             {loading ? "Loading..." : <><span className="text-white font-semibold">{filtered.length}</span> cars found</>}
           </p>
           {activeFilterCount > 0 && (
-            <button onClick={clearAll} className="text-xs font-semibold flex items-center gap-1" style={{ color: "#1152d4" }}>
+            <button onClick={clearAll} className="text-xs font-semibold flex items-center gap-1" style={{ color: "#3B82F6" }}>
               Clear all <MaterialIcon name="close" className="text-[13px]" />
             </button>
           )}
@@ -230,7 +230,7 @@ function NewCarsInner() {
             <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
             <p className="text-sm font-semibold text-slate-400">No cars found</p>
             <p className="text-xs text-slate-600 mt-1">Try adjusting your filters</p>
-            <button onClick={clearAll} className="mt-4 px-6 py-2 rounded-full text-sm font-semibold text-white" style={{ background: "#1152d4" }}>Clear filters</button>
+            <button onClick={clearAll} className="mt-4 px-6 py-2 rounded-full text-sm font-semibold text-white" style={{ background: "#3B82F6" }}>Clear filters</button>
           </div>
         )}
 
@@ -265,7 +265,7 @@ function NewCarCard({ car }: { car: ApiCarModel }) {
         {car.tag && (
           <span
             className="absolute top-2 left-2 text-[9px] font-bold px-2 py-0.5 rounded-full text-white"
-            style={{ background: "rgba(17,82,212,0.9)", backdropFilter: "blur(4px)" }}
+            style={{ background: "rgba(59,130,246,0.9)", backdropFilter: "blur(4px)" }}
           >
             {car.tag}
           </span>

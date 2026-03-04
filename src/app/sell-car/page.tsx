@@ -8,7 +8,7 @@ import { BuyerAppShell } from "@/components/BuyerAppShell";
 /* ─── Sell My Car — entry hub ─── */
 
 const SELL_STEPS = [
-  { icon: "search", label: "Get Instant Valuation", desc: "AI-powered price in 60 seconds", color: "#1152d4" },
+  { icon: "search", label: "Get Instant Valuation", desc: "AI-powered price in 60 seconds", color: "#3B82F6" },
   { icon: "verified", label: "Free Inspection", desc: "250-point certified inspection at home", color: "#10b981" },
   { icon: "payments", label: "Instant Payment", desc: "Same-day bank transfer on deal close", color: "#f59e0b" },
   { icon: "description", label: "RC Transfer Handled", desc: "Full paperwork — we do it all", color: "#8b5cf6" },
@@ -24,7 +24,7 @@ const YEARS = Array.from({ length: 15 }, (_, i) => 2025 - i);
 const WHY_CARDS = [
   { icon: "bolt", label: "Sell in 24 Hours", sub: "Fastest in India", color: "#f59e0b" },
   { icon: "trending_up", label: "Best Price", sub: "AI-matched market rate", color: "#10b981" },
-  { icon: "shield", label: "Zero Hassle", sub: "We handle RC + insurance", color: "#1152d4" },
+  { icon: "shield", label: "Zero Hassle", sub: "We handle RC + insurance", color: "#3B82F6" },
   { icon: "support_agent", label: "Doorstep Service", sub: "Inspection at your home", color: "#8b5cf6" },
 ];
 
@@ -37,10 +37,10 @@ export default function SellCarPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link href="/" className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
@@ -52,8 +52,8 @@ export default function SellCarPage() {
       <main className="max-w-lg mx-auto px-4 pt-5 space-y-5">
 
         {/* Hero */}
-        <div className="rounded-2xl p-5 border border-blue-500/20 relative overflow-hidden" style={{ background: "rgba(17,82,212,0.07)" }}>
-          <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full" style={{ background: "rgba(17,82,212,0.12)", filter: "blur(24px)" }} />
+        <div className="rounded-2xl p-5 border border-blue-500/20 relative overflow-hidden" style={{ background: "rgba(59,130,246,0.07)" }}>
+          <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full" style={{ background: "rgba(59,130,246,0.12)", filter: "blur(24px)" }} />
           <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-2">CaroBest Instant Sell</p>
           <h2 className="text-2xl font-black text-white leading-tight mb-1">Get the best price<br />for your car today</h2>
           <p className="text-xs text-slate-400">AI valuation · Free inspection · Same-day payment</p>
@@ -115,7 +115,7 @@ export default function SellCarPage() {
           <Link
             href={canProceed ? `/sell-car/valuation?brand=${encodeURIComponent(brand)}&year=${year}&km=${km}` : "#"}
             className={`flex items-center justify-center gap-2 h-12 rounded-2xl text-sm font-bold text-white w-full transition-all ${!canProceed ? "opacity-40 pointer-events-none" : ""}`}
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <MaterialIcon name="auto_awesome" className="text-[18px]" />
             Get Instant Valuation
@@ -162,7 +162,7 @@ export default function SellCarPage() {
         {/* Testimonial */}
         <div className="rounded-2xl p-4 border border-white/5" style={{ background: "rgba(255,255,255,0.02)" }}>
           <div className="flex items-center gap-3 mb-3">
-            <div className="h-10 w-10 rounded-full flex items-center justify-center font-bold text-sm text-white shrink-0" style={{ background: "#1152d4" }}>R</div>
+            <div className="h-10 w-10 rounded-full flex items-center justify-center font-bold text-sm text-white shrink-0" style={{ background: "#3B82F6" }}>R</div>
             <div>
               <p className="text-xs font-bold text-white">Rahul Sharma</p>
               <p className="text-[10px] text-slate-500">Sold 2019 Hyundai Creta · Delhi</p>

@@ -41,7 +41,7 @@ function Toggle({
       onClick={onToggle}
       className="relative w-11 h-6 rounded-full transition-all shrink-0"
       style={{
-        background: on ? "#1152d4" : "rgba(255,255,255,0.1)",
+        background: on ? "#3B82F6" : "rgba(255,255,255,0.1)",
       }}
     >
       <div
@@ -110,11 +110,11 @@ export default function AccountSettingsPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full pb-40" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full pb-40" style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -245,7 +245,7 @@ export default function AccountSettingsPage() {
                       className="w-full px-3 py-2.5 text-left text-sm transition-all flex items-center justify-between"
                       style={{
                         color: c === city ? "#60a5fa" : "#94a3b8",
-                        background: c === city ? "rgba(17,82,212,0.08)" : "transparent",
+                        background: c === city ? "rgba(59,130,246,0.08)" : "transparent",
                       }}
                     >
                       {c}
@@ -379,7 +379,7 @@ export default function AccountSettingsPage() {
       {/* Sticky Save Button */}
       <div
         className="fixed bottom-16 left-0 right-0 z-30 border-t border-white/5 md:hidden"
-        style={{ background: "rgba(8,10,15,0.95)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.95)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 py-3">
           <button
@@ -387,7 +387,7 @@ export default function AccountSettingsPage() {
             disabled={saving}
             className="w-full h-12 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-all"
             style={{
-              background: saved ? "#16a34a" : saving ? "#0e40a0" : "#1152d4",
+              background: saved ? "#16a34a" : saving ? "#0e40a0" : "#3B82F6",
               opacity: saving ? 0.8 : 1,
             }}
           >

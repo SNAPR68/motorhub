@@ -69,13 +69,13 @@ export default function WarrantyTrackerPage() {
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -107,7 +107,7 @@ export default function WarrantyTrackerPage() {
             className="px-4 pt-4 pb-3"
             style={{
               background:
-                "linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(17,82,212,0.08) 100%)",
+                "linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(59,130,246,0.08) 100%)",
             }}
           >
             <div className="flex items-start justify-between mb-1">
@@ -155,7 +155,7 @@ export default function WarrantyTrackerPage() {
                   style={{
                     width: `${progressPct}%`,
                     background:
-                      "linear-gradient(90deg, #10b981, #1152d4)",
+                      "linear-gradient(90deg, #10b981, #3B82F6)",
                   }}
                 />
               </div>
@@ -197,7 +197,7 @@ export default function WarrantyTrackerPage() {
             {/* File a Claim CTA */}
             <button
               className="w-full flex items-center justify-center gap-2 h-11 rounded-xl text-sm font-bold text-white"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="description" className="text-[18px]" />
               File a Claim

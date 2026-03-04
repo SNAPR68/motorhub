@@ -40,7 +40,7 @@ const STEPS = [
     title: "Instant Valuation",
     sub: "60 seconds",
     desc: "AI-powered pricing based on live market demand, condition & mileage.",
-    color: "#1152d4",
+    color: "#3B82F6",
   },
   {
     num: 2,
@@ -73,13 +73,13 @@ export default function SellCarPage() {
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -181,8 +181,8 @@ export default function SellCarPage() {
           href="/used-cars/sell/evaluate"
           className="flex items-center justify-center gap-2 w-full rounded-2xl py-4 font-bold text-[15px] text-white transition-all active:scale-[0.98]"
           style={{
-            background: "linear-gradient(135deg, #1152d4 0%, #1d4ed8 100%)",
-            boxShadow: "0 8px 32px rgba(17,82,212,0.4)",
+            background: "linear-gradient(135deg, #3B82F6 0%, #1d4ed8 100%)",
+            boxShadow: "0 8px 32px rgba(59,130,246,0.4)",
           }}
         >
           <MaterialIcon name="speed" className="text-[20px]" />
@@ -269,12 +269,12 @@ export default function SellCarPage() {
               >
                 <div
                   className="flex h-9 w-9 items-center justify-center rounded-xl mb-3"
-                  style={{ background: "rgba(17,82,212,0.12)" }}
+                  style={{ background: "rgba(59,130,246,0.12)" }}
                 >
                   <MaterialIcon
                     name={item.icon}
                     className="text-[18px]"
-                    style={{ color: "#1152d4" }}
+                    style={{ color: "#3B82F6" }}
                   />
                 </div>
                 <p className="text-[13px] font-bold text-white leading-tight">
@@ -346,8 +346,8 @@ export default function SellCarPage() {
           href="/used-cars/sell/evaluate"
           className="flex items-center justify-center gap-2 w-full rounded-2xl py-4 font-bold text-[15px] text-white transition-all active:scale-[0.98]"
           style={{
-            background: "linear-gradient(135deg, #1152d4 0%, #1d4ed8 100%)",
-            boxShadow: "0 8px 32px rgba(17,82,212,0.35)",
+            background: "linear-gradient(135deg, #3B82F6 0%, #1d4ed8 100%)",
+            boxShadow: "0 8px 32px rgba(59,130,246,0.35)",
           }}
         >
           <MaterialIcon name="speed" className="text-[20px]" />

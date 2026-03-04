@@ -78,13 +78,13 @@ export default function ResaleValuePage() {
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -115,7 +115,7 @@ export default function ResaleValuePage() {
             className="px-4 pt-4 pb-3"
             style={{
               background:
-                "linear-gradient(135deg, rgba(17,82,212,0.1) 0%, rgba(139,92,246,0.06) 100%)",
+                "linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.06) 100%)",
             }}
           >
             <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
@@ -195,8 +195,8 @@ export default function ResaleValuePage() {
                 x2="0"
                 y2="1"
               >
-                <stop offset="0%" stopColor="#1152d4" stopOpacity="0.2" />
-                <stop offset="100%" stopColor="#1152d4" stopOpacity="0" />
+                <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
               </linearGradient>
             </defs>
 
@@ -235,7 +235,7 @@ export default function ResaleValuePage() {
             <polyline
               points={polylinePoints}
               fill="none"
-              stroke="#1152d4"
+              stroke="#3B82F6"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -253,7 +253,7 @@ export default function ResaleValuePage() {
                   (CHART_H - CHART_PAD_Y * 2);
               return (
                 <g key={i}>
-                  <circle cx={x} cy={y} r="3.5" fill="#1152d4" />
+                  <circle cx={x} cy={y} r="3.5" fill="#3B82F6" />
                   <circle
                     cx={x}
                     cy={y}
@@ -399,7 +399,7 @@ export default function ResaleValuePage() {
           <Link
             href="/sell-car"
             className="flex items-center justify-center gap-2 h-12 rounded-2xl text-sm font-bold text-white"
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <MaterialIcon name="sell" className="text-[18px]" />
             Sell Now

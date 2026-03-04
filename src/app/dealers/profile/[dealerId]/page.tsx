@@ -121,12 +121,12 @@ export default function DealerProfilePage({
     <BuyerAppShell>
     <div
       className="min-h-dvh pb-40"
-      style={{ background: "#080a0f", color: "#f1f5f9" }}
+      style={{ background: "#0A1628", color: "#f1f5f9" }}
     >
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/dealers"
@@ -146,7 +146,7 @@ export default function DealerProfilePage({
           <div className="flex items-start gap-4 mb-4">
             <div
               className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl font-bold flex-shrink-0"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               {displayName[0]}
             </div>
@@ -154,7 +154,7 @@ export default function DealerProfilePage({
               <h2 className="text-white font-bold text-lg leading-tight">{displayName}</h2>
               <div className="flex items-center gap-1.5 mt-1 flex-wrap">
                 <span className="inline-flex items-center gap-1 text-xs font-semibold rounded-full px-2.5 py-0.5"
-                  style={{ background: "#1152d420", color: "#4d80f0" }}>
+                  style={{ background: "#3B82F620", color: "#4d80f0" }}>
                   <MaterialIcon name="verified" fill className="text-[12px]" />
                   Maruti Authorized
                 </span>
@@ -241,7 +241,7 @@ export default function DealerProfilePage({
               onClick={() => setActiveTab(tab.id)}
               className="flex-shrink-0 rounded-full px-5 py-2 text-sm font-semibold transition-all"
               style={{
-                background: activeTab === tab.id ? "#1152d4" : "transparent",
+                background: activeTab === tab.id ? "#3B82F6" : "transparent",
                 color: activeTab === tab.id ? "#fff" : "#64748b",
               }}
             >
@@ -272,7 +272,7 @@ export default function DealerProfilePage({
                     <div
                       key={c.label}
                       className="flex items-center gap-2 rounded-full px-3 py-1.5 border border-white/10"
-                      style={{ background: "#1a2235" }}
+                      style={{ background: "#0F1D32" }}
                     >
                       <MaterialIcon name={c.icon} fill className="text-[14px] text-blue-400" />
                       <span className="text-slate-300 text-xs font-medium">{c.label}</span>
@@ -288,7 +288,7 @@ export default function DealerProfilePage({
                     <div
                       key={a.label}
                       className="flex items-center gap-2 rounded-full px-3 py-1.5 border border-white/10"
-                      style={{ background: "#1a2235" }}
+                      style={{ background: "#0F1D32" }}
                     >
                       <MaterialIcon name={a.icon} className="text-[14px] text-slate-400" />
                       <span className="text-slate-300 text-xs font-medium">{a.label}</span>
@@ -304,7 +304,7 @@ export default function DealerProfilePage({
               >
                 <div className="absolute inset-0 opacity-20"
                   style={{
-                    backgroundImage: "repeating-linear-gradient(0deg, #1152d430 0px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, #1152d430 0px, transparent 1px, transparent 40px)",
+                    backgroundImage: "repeating-linear-gradient(0deg, #3B82F630 0px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, #3B82F630 0px, transparent 1px, transparent 40px)",
                   }}
                 />
                 <div className="flex flex-col items-center gap-2 z-10">
@@ -327,7 +327,7 @@ export default function DealerProfilePage({
                   <div className="flex items-center gap-3">
                     <div
                       className="w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{ background: "#1152d420" }}
+                      style={{ background: "#3B82F620" }}
                     >
                       <MaterialIcon name="directions_car" fill className="text-[24px] text-blue-400" />
                     </div>
@@ -342,7 +342,7 @@ export default function DealerProfilePage({
                     <p className="text-white font-bold text-sm">{car.price}</p>
                     <button
                       className="mt-1.5 rounded-full px-3 py-1 text-xs font-semibold text-white"
-                      style={{ background: "#1152d4" }}
+                      style={{ background: "#3B82F6" }}
                     >
                       Test Drive
                     </button>
@@ -365,7 +365,7 @@ export default function DealerProfilePage({
                     <div className="flex items-center gap-2">
                       <div
                         className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                        style={{ background: "#1152d4" }}
+                        style={{ background: "#3B82F6" }}
                       >
                         {r.name[0]}
                       </div>
@@ -392,7 +392,7 @@ export default function DealerProfilePage({
                   <div className="flex items-start gap-3 mb-3">
                     <div
                       className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: "#1152d430" }}
+                      style={{ background: "#3B82F630" }}
                     >
                       <MaterialIcon name={offer.icon} fill className="text-[20px] text-blue-400" />
                     </div>
@@ -416,12 +416,12 @@ export default function DealerProfilePage({
       {/* Sticky Book Test Drive */}
       <div
         className="fixed bottom-0 left-0 right-0 z-40 max-w-lg mx-auto px-4 pb-24 pt-3 md:hidden"
-        style={{ background: "linear-gradient(to top, #080a0f 60%, transparent)" }}
+        style={{ background: "linear-gradient(to top, #0A1628 60%, transparent)" }}
       >
         <Link
           href="/showroom"
           className="w-full rounded-2xl py-4 text-white font-bold text-base flex items-center justify-center gap-2 transition-opacity hover:opacity-90 shadow-2xl"
-          style={{ background: "#1152d4" }}
+          style={{ background: "#3B82F6" }}
         >
           <MaterialIcon name="directions_car" fill className="text-[20px]" />
           Browse Vehicles

@@ -36,11 +36,11 @@ export default function MyShortlistPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -90,7 +90,7 @@ export default function MyShortlistPage() {
             <Link
               href="/new-cars"
               className="h-11 px-6 rounded-xl flex items-center gap-2 text-sm font-semibold text-white transition-all"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="search" className="text-[18px]" />
               Browse Cars
@@ -108,8 +108,8 @@ export default function MyShortlistPage() {
                     key={car.id}
                     className="p-4 rounded-2xl border transition-all"
                     style={{
-                      background: isSelected ? "rgba(17,82,212,0.06)" : "rgba(255,255,255,0.03)",
-                      borderColor: isSelected ? "rgba(17,82,212,0.3)" : "rgba(255,255,255,0.05)",
+                      background: isSelected ? "rgba(59,130,246,0.06)" : "rgba(255,255,255,0.03)",
+                      borderColor: isSelected ? "rgba(59,130,246,0.3)" : "rgba(255,255,255,0.05)",
                     }}
                   >
                     <div className="flex items-start gap-3">
@@ -173,9 +173,9 @@ export default function MyShortlistPage() {
                         onClick={() => toggleSelect(car.id)}
                         className="flex items-center justify-center gap-1.5 h-9 px-3 rounded-xl text-xs font-semibold transition-all"
                         style={{
-                          background: isSelected ? "rgba(17,82,212,0.15)" : "rgba(255,255,255,0.05)",
+                          background: isSelected ? "rgba(59,130,246,0.15)" : "rgba(255,255,255,0.05)",
                           color: isSelected ? "#60a5fa" : "#94a3b8",
-                          border: isSelected ? "1px solid rgba(17,82,212,0.3)" : "1px solid rgba(255,255,255,0.08)",
+                          border: isSelected ? "1px solid rgba(59,130,246,0.3)" : "1px solid rgba(255,255,255,0.08)",
                         }}
                       >
                         <MaterialIcon
@@ -188,9 +188,9 @@ export default function MyShortlistPage() {
                         href={`/vehicle/${car.id}`}
                         className="flex-1 h-9 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all"
                         style={{
-                          background: "rgba(17,82,212,0.12)",
+                          background: "rgba(59,130,246,0.12)",
                           color: "#60a5fa",
-                          border: "1px solid rgba(17,82,212,0.2)",
+                          border: "1px solid rgba(59,130,246,0.2)",
                         }}
                       >
                         View Details
@@ -208,7 +208,7 @@ export default function MyShortlistPage() {
                 disabled={selected.size < 2}
                 className="w-full h-12 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all"
                 style={{
-                  background: selected.size >= 2 ? "#1152d4" : "rgba(255,255,255,0.05)",
+                  background: selected.size >= 2 ? "#3B82F6" : "rgba(255,255,255,0.05)",
                   color: selected.size >= 2 ? "#fff" : "#475569",
                   cursor: selected.size >= 2 ? "pointer" : "not-allowed",
                 }}

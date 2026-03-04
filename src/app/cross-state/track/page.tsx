@@ -53,9 +53,9 @@ const documents = [
 export default function CrossStateTrackPage() {
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto ">
+    <div className="min-h-screen bg-[#0A1628] text-white max-w-lg mx-auto ">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-lg border-b border-white/5">
+      <header className="sticky top-0 z-40 bg-[#0A1628]/90 backdrop-blur-lg border-b border-white/5">
         <div className="flex items-center gap-3 px-4 py-3">
           <Link href="/cross-state" className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 transition">
             <MaterialIcon name="arrow_back" className="text-xl text-white/80" />
@@ -74,10 +74,10 @@ export default function CrossStateTrackPage() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <p className="text-[11px] text-white/40 mb-0.5">Order Reference</p>
-              <p className="text-sm font-semibold text-[#1152d4]">#CSE-2026-1847</p>
+              <p className="text-sm font-semibold text-[#3B82F6]">#CSE-2026-1847</p>
             </div>
-            <div className="px-2.5 py-1 rounded-full bg-[#1152d4]/15 border border-[#1152d4]/30">
-              <span className="text-[11px] font-semibold text-[#1152d4]">In Transit</span>
+            <div className="px-2.5 py-1 rounded-full bg-[#3B82F6]/15 border border-[#3B82F6]/30">
+              <span className="text-[11px] font-semibold text-[#3B82F6]">In Transit</span>
             </div>
           </div>
 
@@ -88,10 +88,10 @@ export default function CrossStateTrackPage() {
               <p className="text-sm font-semibold">Mumbai</p>
               <p className="text-[10px] text-white/30">Maharashtra</p>
             </div>
-            <div className="flex items-center gap-1 text-[#1152d4]">
-              <div className="w-2 h-2 rounded-full bg-[#1152d4]" />
-              <div className="w-12 h-px bg-[#1152d4]/40 relative">
-                <div className="absolute inset-y-0 left-0 w-[65%] bg-[#1152d4]" />
+            <div className="flex items-center gap-1 text-[#3B82F6]">
+              <div className="w-2 h-2 rounded-full bg-[#3B82F6]" />
+              <div className="w-12 h-px bg-[#3B82F6]/40 relative">
+                <div className="absolute inset-y-0 left-0 w-[65%] bg-[#3B82F6]" />
               </div>
               <MaterialIcon name="local_shipping" className="text-lg" />
               <div className="w-12 h-px bg-white/10" />
@@ -122,7 +122,7 @@ export default function CrossStateTrackPage() {
               <span className="text-[11px] font-semibold text-[#10b981]">65%</span>
             </div>
             <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-              <div className="h-full w-[65%] rounded-full bg-gradient-to-r from-[#1152d4] to-[#10b981] transition-all duration-500" />
+              <div className="h-full w-[65%] rounded-full bg-gradient-to-r from-[#3B82F6] to-[#10b981] transition-all duration-500" />
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@ export default function CrossStateTrackPage() {
                       isCompleted
                         ? "bg-[#10b981]/40"
                         : isInProgress
-                        ? "bg-gradient-to-b from-[#1152d4]/40 to-white/5"
+                        ? "bg-gradient-to-b from-[#3B82F6]/40 to-white/5"
                         : "bg-white/5"
                     }`}
                   />
@@ -158,14 +158,14 @@ export default function CrossStateTrackPage() {
                     isCompleted
                       ? "bg-[#10b981]/15 border border-[#10b981]/30"
                       : isInProgress
-                      ? "bg-[#1152d4]/15 border border-[#1152d4]/30 animate-pulse"
+                      ? "bg-[#3B82F6]/15 border border-[#3B82F6]/30 animate-pulse"
                       : "bg-white/5 border border-white/10"
                   }`}
                 >
                   {isCompleted ? (
                     <MaterialIcon name="check_circle" className="text-lg text-[#10b981]" />
                   ) : isInProgress ? (
-                    <MaterialIcon name={step.icon} className="text-lg text-[#1152d4]" />
+                    <MaterialIcon name={step.icon} className="text-lg text-[#3B82F6]" />
                   ) : (
                     <MaterialIcon name={step.icon} className="text-lg text-white/25" />
                   )}
@@ -182,7 +182,7 @@ export default function CrossStateTrackPage() {
                       {step.title}
                     </h4>
                     {isInProgress && (
-                      <span className="text-[10px] font-bold text-[#1152d4] bg-[#1152d4]/10 rounded px-1.5 py-0.5">
+                      <span className="text-[10px] font-bold text-[#3B82F6] bg-[#3B82F6]/10 rounded px-1.5 py-0.5">
                         LIVE
                       </span>
                     )}
@@ -196,9 +196,9 @@ export default function CrossStateTrackPage() {
                     {step.desc}
                   </p>
                   {step.location && (
-                    <div className="mt-2 inline-flex items-center gap-1.5 bg-[#1152d4]/10 border border-[#1152d4]/20 rounded-lg px-2.5 py-1.5">
-                      <MaterialIcon name="gps_fixed" className="text-sm text-[#1152d4]" />
-                      <span className="text-[11px] font-medium text-[#1152d4]">
+                    <div className="mt-2 inline-flex items-center gap-1.5 bg-[#3B82F6]/10 border border-[#3B82F6]/20 rounded-lg px-2.5 py-1.5">
+                      <MaterialIcon name="gps_fixed" className="text-sm text-[#3B82F6]" />
+                      <span className="text-[11px] font-medium text-[#3B82F6]">
                         Near Ahmedabad, NH-48
                       </span>
                     </div>
@@ -265,7 +265,7 @@ export default function CrossStateTrackPage() {
       {/* Contact Support */}
       <section className="px-4 pt-6 pb-6">
         <button className="w-full py-3.5 rounded-xl bg-white/5 border border-white/10 text-white font-semibold text-sm hover:bg-white/10 transition flex items-center justify-center gap-2">
-          <MaterialIcon name="support_agent" className="text-lg text-[#1152d4]" />
+          <MaterialIcon name="support_agent" className="text-lg text-[#3B82F6]" />
           Contact Support
         </button>
         <p className="text-center text-[11px] text-white/30 mt-2">

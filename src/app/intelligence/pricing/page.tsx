@@ -6,7 +6,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle } from "@/lib/api";
 
-/* ── design tokens: intelligence pricing — #0dccf2 cyan, Manrope, #0a0a0a ── */
+/* ── design tokens: intelligence pricing — #0dccf2 cyan, Manrope, #0A1628 ── */
 
 const FALLBACK_VEHICLES = [
   { id: "swift-vxi", label: "2019 Maruti Swift VXi", km: "38,000 km", city: "Jaipur" },
@@ -70,13 +70,13 @@ export default function IntelligencePricingPage() {
   return (
     <div
       className="min-h-dvh w-full flex flex-col max-w-md mx-auto text-slate-100 pb-24"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0a0a" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
       <header
         className="sticky top-0 z-50 px-4 py-4 flex items-center justify-between border-b"
         style={{
-          background: "rgba(10,10,10,0.8)",
+          background: "rgba(10,22,40,0.8)",
           backdropFilter: "blur(12px)",
           borderColor: "rgba(255,255,255,0.05)",
         }}
@@ -113,7 +113,7 @@ export default function IntelligencePricingPage() {
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="w-full rounded-xl p-4 flex items-center justify-between text-left"
               style={{
-                background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)",
+                background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)",
                 border: "1px solid rgba(13,204,242,0.15)",
               }}
             >
@@ -182,7 +182,7 @@ export default function IntelligencePricingPage() {
           <div
             className="rounded-2xl p-5 relative overflow-hidden"
             style={{
-              background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)",
+              background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)",
               border: "1px solid rgba(13,204,242,0.2)",
             }}
           >
@@ -286,7 +286,7 @@ export default function IntelligencePricingPage() {
                 key={c.dealer}
                 className="flex items-center justify-between p-4"
                 style={{
-                  background: i % 2 === 0 ? "rgba(22,27,29,0.5)" : "rgba(10,10,10,1)",
+                  background: i % 2 === 0 ? "rgba(22,27,29,0.5)" : "rgba(10,22,40,1)",
                   borderBottom:
                     i < COMPETITORS.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
                 }}
@@ -323,7 +323,7 @@ export default function IntelligencePricingPage() {
           <div
             className="rounded-2xl p-5"
             style={{
-              background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)",
+              background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)",
               border: "1px solid rgba(148,163,184,0.1)",
             }}
           >
@@ -381,7 +381,7 @@ export default function IntelligencePricingPage() {
           <div
             className="rounded-2xl p-5 relative overflow-hidden"
             style={{
-              background: "linear-gradient(145deg, rgba(245,158,11,0.04) 0%, rgba(10,10,10,1) 100%)",
+              background: "linear-gradient(145deg, rgba(245,158,11,0.04) 0%, rgba(10,22,40,1) 100%)",
               border: "1px solid rgba(245,158,11,0.15)",
             }}
           >
@@ -497,7 +497,7 @@ export default function IntelligencePricingPage() {
           <div
             className="rounded-2xl p-5 relative overflow-hidden"
             style={{
-              background: "linear-gradient(145deg, rgba(16,185,129,0.04) 0%, rgba(10,10,10,1) 100%)",
+              background: "linear-gradient(145deg, rgba(16,185,129,0.04) 0%, rgba(10,22,40,1) 100%)",
               border: "1px solid rgba(16,185,129,0.15)",
             }}
           >
@@ -557,7 +557,7 @@ export default function IntelligencePricingPage() {
       <div
         className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 px-4 pb-8 pt-4 border-t md:hidden"
         style={{
-          background: "rgba(10,10,10,0.95)",
+          background: "rgba(10,22,40,0.95)",
           backdropFilter: "blur(16px)",
           borderColor: "rgba(255,255,255,0.05)",
         }}
@@ -577,7 +577,7 @@ export default function IntelligencePricingPage() {
             className="flex-1 py-3.5 rounded-xl text-sm font-bold tracking-wide flex items-center justify-center gap-2 transition-all"
             style={{
               background: "linear-gradient(135deg, #0dccf2 0%, #10b981 100%)",
-              color: "#0a0a0a",
+              color: "#0A1628",
               boxShadow: "0 8px 24px rgba(13,204,242,0.3)",
             }}
           >

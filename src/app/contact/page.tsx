@@ -25,7 +25,7 @@ export default function ContactPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-[#e2e8f0]">
+    <div className="min-h-screen bg-[#0A1628] text-[#e2e8f0]">
       <div className="max-w-lg mx-auto px-4 ">
         {/* Header */}
         <header className="flex items-center gap-3 py-4">
@@ -39,8 +39,8 @@ export default function ContactPage() {
         <div className="mt-4 space-y-3 mb-8">
           {contactCards.map((card) => (
             <div key={card.label} className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-4">
-              <div className="w-11 h-11 rounded-xl bg-[#1152d4]/10 flex items-center justify-center flex-shrink-0">
-                <MaterialIcon name={card.icon} className="text-xl text-[#1152d4]" />
+              <div className="w-11 h-11 rounded-xl bg-[#3B82F6]/10 flex items-center justify-center flex-shrink-0">
+                <MaterialIcon name={card.icon} className="text-xl text-[#3B82F6]" />
               </div>
               <div>
                 <div className="text-xs text-slate-500 uppercase tracking-wider">{card.label}</div>
@@ -61,7 +61,7 @@ export default function ContactPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Your name"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition"
               />
             </div>
 
@@ -72,7 +72,7 @@ export default function ContactPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition"
               />
             </div>
 
@@ -81,13 +81,13 @@ export default function ContactPage() {
               <select
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-300 focus:outline-none focus:border-[#1152d4] transition appearance-none"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-300 focus:outline-none focus:border-[#3B82F6] transition appearance-none"
               >
-                <option value="" className="bg-[#080a0f]">Select a subject</option>
-                <option value="general" className="bg-[#080a0f]">General Inquiry</option>
-                <option value="support" className="bg-[#080a0f]">Support</option>
-                <option value="partnership" className="bg-[#080a0f]">Partnership</option>
-                <option value="press" className="bg-[#080a0f]">Press</option>
+                <option value="" className="bg-[#0A1628]">Select a subject</option>
+                <option value="general" className="bg-[#0A1628]">General Inquiry</option>
+                <option value="support" className="bg-[#0A1628]">Support</option>
+                <option value="partnership" className="bg-[#0A1628]">Partnership</option>
+                <option value="press" className="bg-[#0A1628]">Press</option>
               </select>
             </div>
 
@@ -98,13 +98,13 @@ export default function ContactPage() {
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Write your message..."
                 rows={4}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition resize-none"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition resize-none"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#1152d4] hover:bg-[#1152d4]/90 text-white font-semibold py-3.5 rounded-xl transition"
+              className="w-full bg-[#3B82F6] hover:bg-[#3B82F6]/90 text-white font-semibold py-3.5 rounded-xl transition"
             >
               Send Message
             </button>

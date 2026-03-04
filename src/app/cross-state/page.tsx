@@ -70,7 +70,7 @@ const packages = [
     name: "Express",
     price: "9,999",
     popular: true,
-    color: "#1152d4",
+    color: "#3B82F6",
     features: [
       "Everything in Basic",
       "Flatbed car transport",
@@ -162,9 +162,9 @@ export default function CrossStateExpressPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto ">
+    <div className="min-h-screen bg-[#0A1628] text-white max-w-lg mx-auto ">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-lg border-b border-white/5">
+      <header className="sticky top-0 z-40 bg-[#0A1628]/90 backdrop-blur-lg border-b border-white/5">
         <div className="flex items-center gap-3 px-4 py-3">
           <Link href="/" className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 transition">
             <MaterialIcon name="arrow_back" className="text-xl text-white/80" />
@@ -178,7 +178,7 @@ export default function CrossStateExpressPage() {
 
       {/* Hero */}
       <section className="px-4 pt-5">
-        <div className="rounded-2xl bg-gradient-to-br from-[#1152d4] to-[#0a3a9e] p-6 relative overflow-hidden">
+        <div className="rounded-2xl bg-gradient-to-br from-[#3B82F6] to-[#0a3a9e] p-6 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-28 h-28 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
           <div className="relative">
@@ -205,7 +205,7 @@ export default function CrossStateExpressPage() {
             { value: "4.7/5", label: "Customer Rating" },
           ].map((s) => (
             <div key={s.label} className="bg-white/5 rounded-xl p-3 text-center border border-white/5">
-              <p className="text-lg font-bold text-[#1152d4]">{s.value}</p>
+              <p className="text-lg font-bold text-[#3B82F6]">{s.value}</p>
               <p className="text-[11px] text-white/50 mt-0.5">{s.label}</p>
             </div>
           ))}
@@ -232,7 +232,7 @@ export default function CrossStateExpressPage() {
                 placeholder="e.g. 8,50,000"
                 value={carPrice}
                 onChange={(e) => setCarPrice(e.target.value.replace(/[^0-9,]/g, ""))}
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-7 pr-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#1152d4]/50 focus:ring-1 focus:ring-[#1152d4]/30 transition"
+                className="w-full bg-white/5 border border-white/10 rounded-xl pl-7 pr-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#3B82F6]/50 focus:ring-1 focus:ring-[#3B82F6]/30 transition"
               />
             </div>
           </div>
@@ -243,11 +243,11 @@ export default function CrossStateExpressPage() {
             <select
               value={fromState}
               onChange={(e) => setFromState(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#1152d4]/50 focus:ring-1 focus:ring-[#1152d4]/30 transition appearance-none"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#3B82F6]/50 focus:ring-1 focus:ring-[#3B82F6]/30 transition appearance-none"
             >
-              <option value="" className="bg-[#0c0f16]">Select state</option>
+              <option value="" className="bg-[#0A1628]">Select state</option>
               {states.map((s) => (
-                <option key={s} value={s} className="bg-[#0c0f16]">{s}</option>
+                <option key={s} value={s} className="bg-[#0A1628]">{s}</option>
               ))}
             </select>
           </div>
@@ -258,11 +258,11 @@ export default function CrossStateExpressPage() {
             <select
               value={toState}
               onChange={(e) => setToState(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#1152d4]/50 focus:ring-1 focus:ring-[#1152d4]/30 transition appearance-none"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#3B82F6]/50 focus:ring-1 focus:ring-[#3B82F6]/30 transition appearance-none"
             >
-              <option value="" className="bg-[#0c0f16]">Select state</option>
+              <option value="" className="bg-[#0A1628]">Select state</option>
               {states.map((s) => (
-                <option key={s} value={s} className="bg-[#0c0f16]">{s}</option>
+                <option key={s} value={s} className="bg-[#0A1628]">{s}</option>
               ))}
             </select>
           </div>
@@ -271,7 +271,7 @@ export default function CrossStateExpressPage() {
           <button
             onClick={calculateCost}
             disabled={!carPrice || !fromState || !toState}
-            className="w-full py-3 rounded-xl bg-[#1152d4] text-white font-semibold text-sm hover:bg-[#0e47b5] disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center justify-center gap-2"
+            className="w-full py-3 rounded-xl bg-[#3B82F6] text-white font-semibold text-sm hover:bg-[#3B82F6] disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center justify-center gap-2"
           >
             <MaterialIcon name="calculate" className="text-lg" />
             Calculate Total Cost
@@ -316,14 +316,14 @@ export default function CrossStateExpressPage() {
           {howItWorks.map((step, i) => (
             <div key={step.title} className="flex gap-4 relative pb-6">
               {i < howItWorks.length - 1 && (
-                <div className="absolute left-5 top-10 w-px h-[calc(100%-10px)] bg-gradient-to-b from-[#1152d4]/40 to-transparent" />
+                <div className="absolute left-5 top-10 w-px h-[calc(100%-10px)] bg-gradient-to-b from-[#3B82F6]/40 to-transparent" />
               )}
-              <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[#1152d4]/15 border border-[#1152d4]/30 flex items-center justify-center">
-                <MaterialIcon name={step.icon} className="text-lg text-[#1152d4]" />
+              <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[#3B82F6]/15 border border-[#3B82F6]/30 flex items-center justify-center">
+                <MaterialIcon name={step.icon} className="text-lg text-[#3B82F6]" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[10px] font-bold text-[#1152d4] bg-[#1152d4]/10 rounded px-1.5 py-0.5">
+                  <span className="text-[10px] font-bold text-[#3B82F6] bg-[#3B82F6]/10 rounded px-1.5 py-0.5">
                     STEP {i + 1}
                   </span>
                   <h4 className="text-sm font-semibold">{step.title}</h4>
@@ -357,7 +357,7 @@ export default function CrossStateExpressPage() {
                     <div className="flex items-center gap-2">
                       <h4 className="font-semibold">{pkg.name}</h4>
                       {pkg.popular && (
-                        <span className="text-[10px] font-bold bg-[#1152d4] text-white rounded-full px-2 py-0.5">
+                        <span className="text-[10px] font-bold bg-[#3B82F6] text-white rounded-full px-2 py-0.5">
                           POPULAR
                         </span>
                       )}
@@ -403,7 +403,7 @@ export default function CrossStateExpressPage() {
           placeholder="e.g. 98765 43210"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none focus:border-[#1152d4]/50 transition"
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none focus:border-[#3B82F6]/50 transition"
         />
       </section>
 
@@ -426,7 +426,7 @@ export default function CrossStateExpressPage() {
             <button
               onClick={handleBook}
               disabled={booking}
-              className="w-full py-3.5 rounded-xl bg-[#1152d4] text-white font-semibold text-sm hover:bg-[#0e47b5] transition flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3.5 rounded-xl bg-[#3B82F6] text-white font-semibold text-sm hover:bg-[#3B82F6] transition flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {booking ? (
                 <div className="h-5 w-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />

@@ -18,7 +18,7 @@ const PLANS = [
     premium: "Rs 8,499/yr",
     coverage: "Rs 6,50,000",
     icon: "verified_user",
-    color: "#1152d4",
+    color: "#3B82F6",
     features: [
       "Own damage + third-party cover",
       "Natural calamity protection",
@@ -70,11 +70,11 @@ export default function InsuranceProviderPage({ params }: { params: Promise<{ pr
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -92,7 +92,7 @@ export default function InsuranceProviderPage({ params }: { params: Promise<{ pr
         {/* Provider hero */}
         <div
           className="rounded-2xl p-5 text-white"
-          style={{ background: "linear-gradient(135deg, #1152d4 0%, #0a3ba8 60%, #071e6b 100%)" }}
+          style={{ background: "linear-gradient(135deg, #3B82F6 0%, #0a3ba8 60%, #071e6b 100%)" }}
         >
           <div className="flex items-center gap-3 mb-3">
             <div className="w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold" style={{ background: "rgba(255,255,255,0.2)" }}>
@@ -179,12 +179,12 @@ export default function InsuranceProviderPage({ params }: { params: Promise<{ pr
                 <div className="flex flex-col items-center">
                   <div
                     className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-                    style={{ background: "#1152d4" }}
+                    style={{ background: "#3B82F6" }}
                   >
                     {step.step}
                   </div>
                   {idx < CLAIMS_STEPS.length - 1 && (
-                    <div className="w-px flex-1 mt-1" style={{ background: "rgba(17,82,212,0.3)" }} />
+                    <div className="w-px flex-1 mt-1" style={{ background: "rgba(59,130,246,0.3)" }} />
                   )}
                 </div>
 
@@ -208,7 +208,7 @@ export default function InsuranceProviderPage({ params }: { params: Promise<{ pr
         <Link
           href="/car-insurance/compare"
           className="flex items-center justify-center gap-2 w-full rounded-xl py-3.5 text-white font-bold text-sm transition-opacity hover:opacity-90"
-          style={{ background: "#1152d4" }}
+          style={{ background: "#3B82F6" }}
         >
           Get Quote
           <MaterialIcon name="arrow_forward" className="text-[16px]" />

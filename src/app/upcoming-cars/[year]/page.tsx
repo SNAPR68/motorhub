@@ -80,13 +80,13 @@ export default function UpcomingCarsYearPage({
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -186,8 +186,8 @@ export default function UpcomingCarsYearPage({
                   <span
                     className="text-[10px] font-bold px-2 py-1 rounded-lg shrink-0"
                     style={{
-                      background: "rgba(17,82,212,0.12)",
-                      color: "#1152d4",
+                      background: "rgba(59,130,246,0.12)",
+                      color: "#3B82F6",
                     }}
                   >
                     {car.highlight}
@@ -253,9 +253,9 @@ export default function UpcomingCarsYearPage({
                   <button
                     className="flex-1 flex items-center justify-center gap-1.5 h-9 rounded-xl text-[11px] font-semibold border"
                     style={{
-                      background: "rgba(17,82,212,0.1)",
-                      borderColor: "rgba(17,82,212,0.3)",
-                      color: "#1152d4",
+                      background: "rgba(59,130,246,0.1)",
+                      borderColor: "rgba(59,130,246,0.3)",
+                      color: "#3B82F6",
                     }}
                   >
                     <MaterialIcon

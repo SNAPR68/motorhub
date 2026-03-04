@@ -9,7 +9,7 @@ import { fetchVehicles, adaptVehicle } from "@/lib/api";
 import type { Vehicle } from "@/lib/types";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 
-/* Stitch: premium_comparison_studio_2 — #1269e2, Space Grotesk, #0a0c10 */
+/* Stitch: premium_comparison_studio_2 — #1269e2, Space Grotesk, #0A1628 */
 
 interface PerfSpec {
   label: string;
@@ -76,16 +76,16 @@ export default function CompareStudioV2Page() {
   return (
     <div
       className="min-h-dvh w-full flex flex-col max-w-md mx-auto text-slate-100 overflow-x-hidden"
-      style={{ fontFamily: "'Space Grotesk', sans-serif", background: "#0a0c10" }}
+      style={{ fontFamily: "'Space Grotesk', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#0a0c10]/80 backdrop-blur-md border-b border-white/5">
+      <header className="sticky top-0 z-50 bg-[#0A1628]/80 backdrop-blur-md border-b border-white/5">
         <div className="flex items-center justify-between px-4 h-16">
           <Link href="/compare" className="p-2 hover:bg-white/5 rounded-full transition-colors">
             <MaterialIcon name="arrow_back" className="text-slate-100" />
           </Link>
           <div className="text-center">
-            <h1 className="text-sm font-light tracking-[0.3em] uppercase text-[#1269e2]">CaroBest</h1>
+            <h1 className="text-sm font-light tracking-[0.3em] uppercase text-[#3B82F6]">CaroBest</h1>
             <p className="text-xs font-medium text-slate-400 uppercase tracking-widest">Technical Duel</p>
           </div>
           <button className="p-2 hover:bg-white/5 rounded-full transition-colors">
@@ -98,7 +98,7 @@ export default function CompareStudioV2Page() {
         {isLoading && (
           <div className="flex items-center justify-center py-32">
             <div className="flex flex-col items-center gap-3">
-              <div className="w-10 h-10 rounded-full border-2 border-[#1269e2] border-t-transparent animate-spin" />
+              <div className="w-10 h-10 rounded-full border-2 border-[#3B82F6] border-t-transparent animate-spin" />
               <span className="text-xs text-slate-400 uppercase tracking-widest">Loading vehicles...</span>
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function CompareStudioV2Page() {
             </p>
             <Link
               href="/used-cars"
-              className="inline-flex items-center gap-2 rounded-full bg-[#1269e2] px-6 py-3 text-sm font-bold text-white"
+              className="inline-flex items-center gap-2 rounded-full bg-[#3B82F6] px-6 py-3 text-sm font-bold text-white"
             >
               Browse Cars
             </Link>
@@ -125,7 +125,7 @@ export default function CompareStudioV2Page() {
             {/* Dual Hero */}
             <div className="flex w-full h-72 border-b border-white/10 relative">
               <div className="w-1/2 relative overflow-hidden border-r border-white/5 group">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-transparent z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-transparent to-transparent z-10" />
                 {carA.image ? (
                   <Image
                     src={carA.image}
@@ -141,13 +141,13 @@ export default function CompareStudioV2Page() {
                   </div>
                 )}
                 <div className="absolute bottom-4 left-4 z-20">
-                  <p className="text-[10px] uppercase tracking-widest text-[#1269e2] font-bold">Challenger A</p>
+                  <p className="text-[10px] uppercase tracking-widest text-[#3B82F6] font-bold">Challenger A</p>
                   <h2 className="text-base font-bold leading-tight">{carA.name}</h2>
                   <p className="text-[10px] text-slate-400">{carA.year}</p>
                 </div>
               </div>
               <div className="w-1/2 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-transparent z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-transparent to-transparent z-10" />
                 {carB.image ? (
                   <Image
                     src={carB.image}
@@ -163,13 +163,13 @@ export default function CompareStudioV2Page() {
                   </div>
                 )}
                 <div className="absolute bottom-4 right-4 z-20 text-right">
-                  <p className="text-[10px] uppercase tracking-widest text-[#1269e2] font-bold">Challenger B</p>
+                  <p className="text-[10px] uppercase tracking-widest text-[#3B82F6] font-bold">Challenger B</p>
                   <h2 className="text-base font-bold leading-tight">{carB.name}</h2>
                   <p className="text-[10px] text-slate-400">{carB.year}</p>
                 </div>
               </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
-                <div className="size-12 rounded-full bg-[#0a0c10] border border-white/20 flex items-center justify-center backdrop-blur-md">
+                <div className="size-12 rounded-full bg-[#0A1628] border border-white/20 flex items-center justify-center backdrop-blur-md">
                   <span className="text-xs font-bold tracking-tighter italic">VS</span>
                 </div>
               </div>
@@ -180,10 +180,10 @@ export default function CompareStudioV2Page() {
               {[carA, carB].map((car, i) => (
                 <div
                   key={car.id}
-                  className={`bg-[#0a0c10] p-6 flex flex-col items-center justify-center space-y-2 ${i === 1 ? "border-l border-white/5" : ""}`}
+                  className={`bg-[#0A1628] p-6 flex flex-col items-center justify-center space-y-2 ${i === 1 ? "border-l border-white/5" : ""}`}
                 >
                   <p className="text-[10px] uppercase tracking-[0.2em] text-slate-400">AI Score</p>
-                  <div className={`text-4xl font-light ${i === 0 ? "text-[#1269e2]" : "text-white/40"}`}>
+                  <div className={`text-4xl font-light ${i === 0 ? "text-[#3B82F6]" : "text-white/40"}`}>
                     {car.aiScore}<span className="text-xl">%</span>
                   </div>
                   <div className={`flex items-center gap-1 text-[10px] ${car.aiScore >= 90 ? "text-[#0bda5e]" : "text-slate-500"}`}>
@@ -205,16 +205,16 @@ export default function CompareStudioV2Page() {
                 {perfSpecs.map((s) => (
                   <div key={s.label} className="space-y-3">
                     <div className="flex justify-between items-end text-xs uppercase tracking-widest">
-                      <span className={`font-bold ${s.winner === "left" ? "text-[#1269e2]" : "text-slate-300"}`}>{s.left}</span>
+                      <span className={`font-bold ${s.winner === "left" ? "text-[#3B82F6]" : "text-slate-300"}`}>{s.left}</span>
                       <span className="text-slate-500 font-medium">{s.label}</span>
-                      <span className={`font-bold ${s.winner === "right" ? "text-[#1269e2]" : "text-slate-300"}`}>{s.right}</span>
+                      <span className={`font-bold ${s.winner === "right" ? "text-[#3B82F6]" : "text-slate-300"}`}>{s.right}</span>
                     </div>
                     <div className="flex h-1 gap-1">
                       <div className="flex-1 bg-white/5 rounded-full overflow-hidden">
-                        <div className={`h-full rounded-full ${s.winner === "left" ? "bg-[#1269e2]" : "bg-slate-500"}`} style={{ width: `${s.leftW}%` }} />
+                        <div className={`h-full rounded-full ${s.winner === "left" ? "bg-[#3B82F6]" : "bg-slate-500"}`} style={{ width: `${s.leftW}%` }} />
                       </div>
                       <div className="flex-1 bg-white/5 rounded-full overflow-hidden">
-                        <div className={`h-full rounded-full ${s.winner === "right" ? "bg-[#1269e2]" : "bg-slate-500"}`} style={{ width: `${s.rightW}%` }} />
+                        <div className={`h-full rounded-full ${s.winner === "right" ? "bg-[#3B82F6]" : "bg-slate-500"}`} style={{ width: `${s.rightW}%` }} />
                       </div>
                     </div>
                   </div>
@@ -237,7 +237,7 @@ export default function CompareStudioV2Page() {
                   ].map((row) => (
                     <div key={row.label} className="col-span-2 grid grid-cols-2 gap-2">
                       <div className="p-3 rounded-lg bg-white/5 border border-white/10">
-                        <MaterialIcon name={row.icon} className="text-[#1269e2] mb-1 text-sm" />
+                        <MaterialIcon name={row.icon} className="text-[#3B82F6] mb-1 text-sm" />
                         <p className="text-[10px] uppercase tracking-widest text-slate-400 mb-0.5">{row.label}</p>
                         <p className="text-xs font-bold uppercase truncate">{row.aVal}</p>
                       </div>
@@ -290,18 +290,18 @@ export default function CompareStudioV2Page() {
       )}
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#0a0c10]/95 backdrop-blur-xl border-t border-white/10 px-6 pb-6 pt-3 max-w-md mx-auto md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#0A1628]/95 backdrop-blur-xl border-t border-white/10 px-6 pb-6 pt-3 max-w-md mx-auto md:hidden">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex flex-col items-center gap-1 text-slate-500">
             <MaterialIcon name="home" />
             <span className="text-[9px] uppercase tracking-widest font-bold">Studio</span>
           </Link>
-          <Link href="/compare/studio" className="flex flex-col items-center gap-1 text-[#1269e2]">
+          <Link href="/compare/studio" className="flex flex-col items-center gap-1 text-[#3B82F6]">
             <MaterialIcon name="compare_arrows" fill />
             <span className="text-[9px] uppercase tracking-widest font-bold">Duel</span>
           </Link>
           <Link href="/concierge" className="relative -top-6">
-            <div className="bg-[#1269e2] size-14 rounded-full flex items-center justify-center shadow-lg shadow-[#1269e2]/20 border-4 border-[#0a0c10]">
+            <div className="bg-[#3B82F6] size-14 rounded-full flex items-center justify-center shadow-lg shadow-[#1269e2]/20 border-4 border-[#0A1628]">
               <MaterialIcon name="smart_toy" className="text-white text-3xl" />
             </div>
           </Link>

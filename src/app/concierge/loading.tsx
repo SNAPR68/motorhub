@@ -2,7 +2,7 @@
 
 export default function ConciergeLoading() {
   return (
-    <div className="min-h-dvh flex flex-col" style={{ background: "#0a0c10" }}>
+    <div className="min-h-dvh flex flex-col" style={{ background: "#0A1628" }}>
       <div className="max-w-md mx-auto w-full p-4 space-y-4">
         <div className="h-10 w-32 animate-pulse rounded-lg bg-white/5" />
         <div className="flex-1 space-y-4 py-8">

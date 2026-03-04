@@ -49,12 +49,12 @@ export default function RenewInsurancePage() {
     <BuyerAppShell>
     <div
       className="min-h-dvh pb-36"
-      style={{ background: "#080a0f", color: "#f1f5f9" }}
+      style={{ background: "#0A1628", color: "#f1f5f9" }}
     >
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/car-insurance"
@@ -87,7 +87,7 @@ export default function RenewInsurancePage() {
               value={vehicleNumber}
               onChange={(e) => setVehicleNumber(e.target.value.toUpperCase())}
               className="w-full rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm font-mono tracking-wider border border-white/10 focus:outline-none focus:border-blue-500"
-              style={{ background: "#1a2235" }}
+              style={{ background: "#0F1D32" }}
             />
           </div>
 
@@ -102,7 +102,7 @@ export default function RenewInsurancePage() {
               value={policyNumber}
               onChange={(e) => setPolicyNumber(e.target.value)}
               className="w-full rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm border border-white/10 focus:outline-none focus:border-blue-500"
-              style={{ background: "#1a2235" }}
+              style={{ background: "#0F1D32" }}
             />
           </div>
 
@@ -116,14 +116,14 @@ export default function RenewInsurancePage() {
               value={mobile}
               onChange={(e) => setMobile(e.target.value)}
               className="w-full rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm border border-white/10 focus:outline-none focus:border-blue-500"
-              style={{ background: "#1a2235" }}
+              style={{ background: "#0F1D32" }}
             />
           </div>
 
           <button
             type="submit"
             className="w-full rounded-xl py-3.5 text-white font-semibold text-sm flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <MaterialIcon name="search" className="text-[18px]" />
             Find My Policy
@@ -149,11 +149,11 @@ export default function RenewInsurancePage() {
                 </span>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-xl p-3" style={{ background: "#1a2235" }}>
+                <div className="rounded-xl p-3" style={{ background: "#0F1D32" }}>
                   <p className="text-slate-400 text-[10px] uppercase tracking-wide mb-1">Sum Assured</p>
                   <p className="text-white font-bold text-base">₹8.5 Lakh</p>
                 </div>
-                <div className="rounded-xl p-3" style={{ background: "#1a2235" }}>
+                <div className="rounded-xl p-3" style={{ background: "#0F1D32" }}>
                   <p className="text-slate-400 text-[10px] uppercase tracking-wide mb-1">Vehicle</p>
                   <p className="text-white font-bold text-sm font-mono tracking-wide">
                     {vehicleNumber || "MH02AB1234"}
@@ -173,7 +173,7 @@ export default function RenewInsurancePage() {
                     className="w-full rounded-2xl p-4 text-left flex items-center justify-between transition-all border"
                     style={{
                       background: selectedOption === opt.id ? "#0d1f47" : "#111827",
-                      borderColor: selectedOption === opt.id ? "#1152d4" : "transparent",
+                      borderColor: selectedOption === opt.id ? "#3B82F6" : "transparent",
                     }}
                   >
                     <div>
@@ -195,7 +195,7 @@ export default function RenewInsurancePage() {
             <button
               onClick={handleRenewNow}
               className="w-full rounded-xl py-4 text-white font-bold text-base flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="verified" className="text-[20px]" />
               Renew Now — ₹

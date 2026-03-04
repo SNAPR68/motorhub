@@ -9,7 +9,7 @@ import { fetchVehicles, fetchDashboard } from "@/lib/api";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 
 /* ── design tokens: elite_marketing_studio_1 ── */
-// primary: #1773cf, font: Manrope, bg: #0a0c10, glass: rgba(255,255,255,0.05)+blur(12px)
+// primary: #3B82F6, font: Manrope, bg: #0A1628, glass: rgba(255,255,255,0.05)+blur(12px)
 
 const PLATFORM_LABELS = ["IG Reel", "FB Post", "Brochure"];
 
@@ -40,7 +40,7 @@ export default function MarketingPage() {
   return (
     <div
       className="min-h-screen max-w-md mx-auto flex flex-col pb-40"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0c10", color: "#e2e8f0" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ── Header ── */}
       <header
@@ -63,7 +63,7 @@ export default function MarketingPage() {
           </button>
           <div
             className="w-9 h-9 rounded-full overflow-hidden border flex items-center justify-center text-xs font-bold"
-            style={{ borderColor: "rgba(23,115,207,0.3)", background: "rgba(23,115,207,0.15)", color: "#1773cf" }}
+            style={{ borderColor: "rgba(23,115,207,0.3)", background: "rgba(23,115,207,0.15)", color: "#3B82F6" }}
           >
             AV
           </div>
@@ -126,7 +126,7 @@ export default function MarketingPage() {
               </h3>
               <div className="flex items-center gap-3">
                 <div className="h-1 flex-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.2)" }}>
-                  <div className="h-full w-2/3" style={{ background: "#1773cf" }} />
+                  <div className="h-full w-2/3" style={{ background: "#3B82F6" }} />
                 </div>
                 <span className="text-[10px] font-medium text-white/70">{totalVehicles} in stock</span>
               </div>
@@ -141,7 +141,7 @@ export default function MarketingPage() {
               <h2 className="text-xl font-bold tracking-tight text-white">AI Marketing Assets</h2>
               <p className="text-xs text-slate-400 mt-0.5">Custom content for your inventory</p>
             </div>
-            <Link href="/inventory" className="text-sm font-semibold" style={{ color: "#1773cf" }}>
+            <Link href="/inventory" className="text-sm font-semibold" style={{ color: "#3B82F6" }}>
               View All
             </Link>
           </div>
@@ -260,7 +260,7 @@ export default function MarketingPage() {
             style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(12px)", borderColor: "rgba(23,115,207,0.2)" }}
           >
             <div className="flex items-center gap-3 mb-3">
-              <span style={{ color: "#1773cf" }}>
+              <span style={{ color: "#3B82F6" }}>
                 <MaterialIcon name="analytics" />
               </span>
               <h3 className="font-bold text-sm text-white">Real-time Forecast</h3>
@@ -276,7 +276,7 @@ export default function MarketingPage() {
                 <div className="w-1.5 rounded-full h-1/2" style={{ background: "rgba(23,115,207,0.2)" }} />
                 <div className="w-1.5 rounded-full h-2/3" style={{ background: "rgba(23,115,207,0.4)" }} />
                 <div className="w-1.5 rounded-full h-3/4" style={{ background: "rgba(23,115,207,0.6)" }} />
-                <div className="w-1.5 rounded-full h-full" style={{ background: "#1773cf" }} />
+                <div className="w-1.5 rounded-full h-full" style={{ background: "#3B82F6" }} />
               </div>
             </div>
           </div>
@@ -294,7 +294,7 @@ export default function MarketingPage() {
             style={{
               background: synced
                 ? "linear-gradient(135deg, #16a34a 0%, #15803d 100%)"
-                : "linear-gradient(135deg, #1773cf 0%, #0c4a8a 100%)",
+                : "linear-gradient(135deg, #3B82F6 0%, #0c4a8a 100%)",
               boxShadow: synced ? "0 8px 24px rgba(22,163,74,0.3)" : "0 8px 24px rgba(23,115,207,0.3)",
             }}
           >
@@ -320,7 +320,7 @@ export default function MarketingPage() {
               key={item.label}
               href={item.href}
               className="flex flex-col items-center gap-1"
-              style={{ color: item.active ? "#1773cf" : "#94a3b8" }}
+              style={{ color: item.active ? "#3B82F6" : "#94a3b8" }}
             >
               <MaterialIcon name={item.icon} fill={item.active} className="text-[26px]" />
               <span className="text-[10px] font-bold uppercase tracking-widest">{item.label}</span>

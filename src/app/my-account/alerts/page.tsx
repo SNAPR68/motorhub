@@ -76,11 +76,11 @@ export default function PriceAlertsPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -121,7 +121,7 @@ export default function PriceAlertsPage() {
               className="h-16 w-16 rounded-2xl flex items-center justify-center mb-4"
               style={{ background: "rgba(245,158,11,0.08)" }}
             >
-              <MaterialIcon name="notifications_active" className="text-[32px]" style={{ color: "#fbbf24" }} />
+              <MaterialIcon name="notifications_active" className="text-[32px]" style={{ color: "#E5C158" }} />
             </div>
             <h2 className="text-base font-bold text-white mb-1">No price alerts</h2>
             <p className="text-sm text-slate-500 mb-6 max-w-[260px]">
@@ -130,7 +130,7 @@ export default function PriceAlertsPage() {
             <Link
               href="/new-cars"
               className="h-11 px-6 rounded-xl flex items-center gap-2 text-sm font-semibold text-white transition-all"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="search" className="text-[18px]" />
               Browse Cars
@@ -154,10 +154,10 @@ export default function PriceAlertsPage() {
                     className="p-4 rounded-2xl border"
                     style={{
                       background: isOn
-                        ? "rgba(17,82,212,0.04)"
+                        ? "rgba(59,130,246,0.04)"
                         : "rgba(255,255,255,0.03)",
                       borderColor: isOn
-                        ? "rgba(17,82,212,0.15)"
+                        ? "rgba(59,130,246,0.15)"
                         : "rgba(255,255,255,0.05)",
                     }}
                   >
@@ -217,7 +217,7 @@ export default function PriceAlertsPage() {
                         onClick={() => toggleAlert(vehicle.id)}
                         className="relative w-11 h-6 rounded-full transition-all shrink-0 mt-1"
                         style={{
-                          background: isOn ? "#1152d4" : "rgba(255,255,255,0.1)",
+                          background: isOn ? "#3B82F6" : "rgba(255,255,255,0.1)",
                         }}
                       >
                         <div
@@ -268,9 +268,9 @@ export default function PriceAlertsPage() {
                       onClick={() => toggleChannel(ch)}
                       className="flex-1 h-10 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all"
                       style={{
-                        background: active ? "rgba(17,82,212,0.15)" : "rgba(255,255,255,0.05)",
+                        background: active ? "rgba(59,130,246,0.15)" : "rgba(255,255,255,0.05)",
                         color: active ? "#60a5fa" : "#64748b",
-                        border: active ? "1px solid rgba(17,82,212,0.3)" : "1px solid rgba(255,255,255,0.08)",
+                        border: active ? "1px solid rgba(59,130,246,0.3)" : "1px solid rgba(255,255,255,0.08)",
                       }}
                     >
                       <MaterialIcon name={icons[ch]} className="text-[14px]" />

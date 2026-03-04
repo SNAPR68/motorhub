@@ -75,11 +75,11 @@ export default function PriceInCityPage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -127,7 +127,7 @@ export default function PriceInCityPage({
         {/* ─── On-Road Price Breakdown ─── */}
         <div
           className="rounded-2xl border border-blue-500/20 overflow-hidden"
-          style={{ background: "rgba(17,82,212,0.04)" }}
+          style={{ background: "rgba(59,130,246,0.04)" }}
         >
           <div className="px-4 pt-4 pb-3">
             <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-1">
@@ -158,7 +158,7 @@ export default function PriceInCityPage({
             ))}
 
             {/* Total row */}
-            <div className="flex items-center gap-3 px-4 py-3 border-t-2 border-blue-500/30" style={{ background: "rgba(17,82,212,0.06)" }}>
+            <div className="flex items-center gap-3 px-4 py-3 border-t-2 border-blue-500/30" style={{ background: "rgba(59,130,246,0.06)" }}>
               <MaterialIcon name="summarize" className="text-[16px] text-blue-400 shrink-0" />
               <span className="text-xs font-bold text-white flex-1">Total On-Road Price</span>
               <span className="text-sm font-black text-white">{formatINR(totalOnRoad)}</span>
@@ -206,7 +206,7 @@ export default function PriceInCityPage({
         {/* ─── CTA ─── */}
         <button
           className="flex items-center justify-center gap-2 w-full h-12 rounded-2xl text-sm font-bold text-white"
-          style={{ background: "#1152d4" }}
+          style={{ background: "#3B82F6" }}
         >
           <MaterialIcon name="calendar_today" className="text-[18px]" />
           Book Now

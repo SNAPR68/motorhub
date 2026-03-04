@@ -232,7 +232,7 @@ export default function ContentStudioPage() {
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center"
               style={{ boxShadow: "0 4px 16px rgba(0,0,0,0.3)", border: "4px solid #2b6cee" }}
             >
-              <MaterialIcon name="unfold_more" className="text-lg font-bold text-[#2b6cee]" />
+              <MaterialIcon name="unfold_more" className="text-lg font-bold text-[#3B82F6]" />
             </div>
           </div>
         </div>

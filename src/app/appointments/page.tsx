@@ -9,7 +9,7 @@ import type { DbAppointment } from "@/lib/api";
 import { SkeletonList } from "@/components/ui/Skeleton";
 
 /* ── design tokens: ai_appointment_automation ── */
-// primary: #137fec, font: Inter, bg: #f6f7f8
+// primary: #3B82F6, font: Inter, bg: #f6f7f8
 
 const DATES = [
   { day: "Mon", date: "24" },
@@ -26,7 +26,7 @@ const AI_TRIGGERS = [
   {
     icon: "chat_bubble",
     iconBg: "rgba(19,127,236,0.1)",
-    iconColor: "#137fec",
+    iconColor: "#3B82F6",
     title: "Smart Auto-Suggest",
     subtitle: "Suggest drive after 3 messages",
     enabled: true,
@@ -42,7 +42,7 @@ const AI_TRIGGERS = [
 ];
 
 const STATUS_STYLE: Record<string, { bg: string; color: string }> = {
-  SCHEDULED: { bg: "rgba(19,127,236,0.1)", color: "#137fec" },
+  SCHEDULED: { bg: "rgba(19,127,236,0.1)", color: "#3B82F6" },
   CONFIRMED: { bg: "rgba(34,197,94,0.1)", color: "#16a34a" },
   COMPLETED: { bg: "rgba(100,116,139,0.1)", color: "#64748b" },
   CANCELLED: { bg: "rgba(239,68,68,0.1)", color: "#ef4444" },
@@ -110,7 +110,7 @@ export default function AppointmentsPage() {
                   className={`flex-shrink-0 w-12 h-20 flex flex-col items-center justify-center rounded-xl ${
                     i === selectedDate ? "text-white" : "bg-slate-50 text-slate-900"
                   }`}
-                  style={i === selectedDate ? { background: "#137fec" } : {}}
+                  style={i === selectedDate ? { background: "#3B82F6" } : {}}
                 >
                   <span
                     className={`text-[10px] uppercase font-bold ${
@@ -128,7 +128,7 @@ export default function AppointmentsPage() {
             <div className="mt-6">
               <p className="text-sm font-semibold mb-3 flex items-center gap-1 text-slate-900">
                 Available Slots{" "}
-                <MaterialIcon name="bolt" className="text-xs text-[#137fec]" />
+                <MaterialIcon name="bolt" className="text-xs text-[#3B82F6]" />
               </p>
               <div className="grid grid-cols-3 gap-2">
                 {TIME_SLOTS.map((t, i) => (
@@ -137,12 +137,12 @@ export default function AppointmentsPage() {
                     onClick={() => setSelectedSlot(i)}
                     className={`py-2 text-xs font-medium rounded-lg border ${
                       i === selectedSlot
-                        ? "border-[#137fec]/20"
+                        ? "border-[#3B82F6]/20"
                         : "bg-slate-50 border-transparent text-slate-700"
                     }`}
                     style={
                       i === selectedSlot
-                        ? { background: "rgba(19,127,236,0.1)", color: "#137fec", borderColor: "rgba(19,127,236,0.2)" }
+                        ? { background: "rgba(19,127,236,0.1)", color: "#3B82F6", borderColor: "rgba(19,127,236,0.2)" }
                         : {}
                     }
                   >
@@ -160,7 +160,7 @@ export default function AppointmentsPage() {
             <h3 className="text-base font-bold text-slate-900">AI Appointment Triggers</h3>
             <span
               className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider"
-              style={{ background: "rgba(19,127,236,0.1)", color: "#137fec" }}
+              style={{ background: "rgba(19,127,236,0.1)", color: "#3B82F6" }}
             >
               AI Active
             </span>
@@ -189,7 +189,7 @@ export default function AppointmentsPage() {
                   </div>
                 </div>
                 <div className="relative inline-flex items-center">
-                  <div className="w-11 h-6 rounded-full" style={{ background: "#137fec" }} />
+                  <div className="w-11 h-6 rounded-full" style={{ background: "#3B82F6" }} />
                   <div className="absolute left-6 w-4 h-4 bg-white rounded-full" />
                 </div>
               </div>
@@ -201,7 +201,7 @@ export default function AppointmentsPage() {
         <section className="px-4 mb-20">
           <div className="flex items-center justify-between mb-3 px-1">
             <h3 className="text-base font-bold text-slate-900">Upcoming Appointments</h3>
-            <button className="text-xs font-semibold" style={{ color: "#137fec" }}>
+            <button className="text-xs font-semibold" style={{ color: "#3B82F6" }}>
               View All
             </button>
           </div>
@@ -231,7 +231,7 @@ export default function AppointmentsPage() {
                     <div className="flex gap-3">
                       <div
                         className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold text-white"
-                        style={{ background: "#137fec" }}
+                        style={{ background: "#3B82F6" }}
                       >
                         {initials}
                       </div>
@@ -274,7 +274,7 @@ export default function AppointmentsPage() {
       {/* ── FAB ── */}
       <button
         className="fixed right-6 bottom-24 w-14 h-14 rounded-full text-white shadow-lg flex items-center justify-center z-40 active:scale-95 transition-transform"
-        style={{ background: "#137fec", boxShadow: "0 4px 16px rgba(19,127,236,0.4)" }}
+        style={{ background: "#3B82F6", boxShadow: "0 4px 16px rgba(19,127,236,0.4)" }}
       >
         <MaterialIcon name="add" className="text-2xl" />
       </button>
@@ -295,7 +295,7 @@ export default function AppointmentsPage() {
               key={item.label}
               href={item.href}
               className={`flex flex-col items-center gap-1 ${
-                item.active ? "text-[#137fec]" : "text-slate-400"
+                item.active ? "text-[#3B82F6]" : "text-slate-400"
               }`}
             >
               <MaterialIcon name={item.icon} fill={item.active} />

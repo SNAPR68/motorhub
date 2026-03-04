@@ -22,7 +22,7 @@ interface GarageCar {
 
 const HEALTH_COLOR = (score: number) => {
   if (score >= 80) return "#34d399";
-  if (score >= 60) return "#fbbf24";
+  if (score >= 60) return "#E5C158";
   return "#f87171";
 };
 
@@ -60,11 +60,11 @@ export default function MyGaragePage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -77,7 +77,7 @@ export default function MyGaragePage() {
           <h1 className="text-base font-bold text-white flex-1">My Garage</h1>
           <button
             className="flex items-center gap-1.5 h-9 px-3 rounded-xl text-xs font-bold text-white"
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <MaterialIcon name="add" className="text-[16px]" />
             Add Car
@@ -99,7 +99,7 @@ export default function MyGaragePage() {
             <p className="text-sm text-slate-500 mb-6">Add your car to track service, insurance, and resale value.</p>
             <button
               className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="add" className="text-[18px]" />
               Add your first car
@@ -116,7 +116,7 @@ export default function MyGaragePage() {
               <div
                 className="h-28 relative flex items-center px-4"
                 style={{
-                  background: "linear-gradient(135deg, rgba(17,82,212,0.1) 0%, rgba(99,102,241,0.06) 100%)",
+                  background: "linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(99,102,241,0.06) 100%)",
                 }}
               >
                 <MaterialIcon name="directions_car" className="text-[64px] text-white/8 absolute right-4" />

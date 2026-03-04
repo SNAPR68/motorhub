@@ -33,13 +33,13 @@ export default function UsedCarsCityClient({ city }: { city: string }) {
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -74,14 +74,14 @@ export default function UsedCarsCityClient({ city }: { city: string }) {
                 onChange={(e) => setActiveBudget(e.target.value)}
                 className="h-8 pl-3 pr-7 rounded-full text-[11px] font-semibold border appearance-none outline-none"
                 style={{
-                  background: activeBudget ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.05)",
+                  background: activeBudget ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.05)",
                   color: activeBudget ? "#fff" : "#94a3b8",
-                  borderColor: activeBudget ? "#1152d4" : "rgba(255,255,255,0.1)",
+                  borderColor: activeBudget ? "#3B82F6" : "rgba(255,255,255,0.1)",
                 }}
               >
-                <option value="" style={{ background: "#080a0f" }}>Budget</option>
+                <option value="" style={{ background: "#0A1628" }}>Budget</option>
                 {BUDGET_OPTIONS.map((b) => (
-                  <option key={b} value={b} style={{ background: "#080a0f" }}>{b}</option>
+                  <option key={b} value={b} style={{ background: "#0A1628" }}>{b}</option>
                 ))}
               </select>
               <MaterialIcon name="expand_more" className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[14px] text-slate-500 pointer-events-none" />
@@ -99,9 +99,9 @@ export default function UsedCarsCityClient({ city }: { city: string }) {
                   borderColor: activeBrand ? "#10b981" : "rgba(255,255,255,0.1)",
                 }}
               >
-                <option value="" style={{ background: "#080a0f" }}>Brand</option>
+                <option value="" style={{ background: "#0A1628" }}>Brand</option>
                 {BRAND_OPTIONS.map((b) => (
-                  <option key={b} value={b} style={{ background: "#080a0f" }}>{b}</option>
+                  <option key={b} value={b} style={{ background: "#0A1628" }}>{b}</option>
                 ))}
               </select>
               <MaterialIcon name="expand_more" className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[14px] text-slate-500 pointer-events-none" />
@@ -119,9 +119,9 @@ export default function UsedCarsCityClient({ city }: { city: string }) {
                   borderColor: activeFuel ? "#f59e0b" : "rgba(255,255,255,0.1)",
                 }}
               >
-                <option value="" style={{ background: "#080a0f" }}>Fuel</option>
+                <option value="" style={{ background: "#0A1628" }}>Fuel</option>
                 {FUEL_OPTIONS.map((f) => (
-                  <option key={f} value={f} style={{ background: "#080a0f" }}>{f}</option>
+                  <option key={f} value={f} style={{ background: "#0A1628" }}>{f}</option>
                 ))}
               </select>
               <MaterialIcon name="expand_more" className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[14px] text-slate-500 pointer-events-none" />
@@ -134,14 +134,14 @@ export default function UsedCarsCityClient({ city }: { city: string }) {
                 onChange={(e) => setActiveYear(e.target.value)}
                 className="h-8 pl-3 pr-7 rounded-full text-[11px] font-semibold border appearance-none outline-none"
                 style={{
-                  background: activeYear ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.05)",
+                  background: activeYear ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.05)",
                   color: activeYear ? "#fff" : "#94a3b8",
-                  borderColor: activeYear ? "#1152d4" : "rgba(255,255,255,0.1)",
+                  borderColor: activeYear ? "#3B82F6" : "rgba(255,255,255,0.1)",
                 }}
               >
-                <option value="" style={{ background: "#080a0f" }}>Year</option>
+                <option value="" style={{ background: "#0A1628" }}>Year</option>
                 {YEAR_OPTIONS.map((y) => (
-                  <option key={y} value={y} style={{ background: "#080a0f" }}>{y}</option>
+                  <option key={y} value={y} style={{ background: "#0A1628" }}>{y}</option>
                 ))}
               </select>
               <MaterialIcon name="expand_more" className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[14px] text-slate-500 pointer-events-none" />
@@ -170,7 +170,7 @@ export default function UsedCarsCityClient({ city }: { city: string }) {
           <div className="text-center py-16">
             <MaterialIcon name="directions_car" className="text-[48px] text-slate-600 mb-3" />
             <p className="text-sm text-slate-400">No cars available in {cityName} right now.</p>
-            <Link href="/showroom" className="text-[#1152d4] text-sm font-semibold mt-2 inline-block">
+            <Link href="/showroom" className="text-[#3B82F6] text-sm font-semibold mt-2 inline-block">
               Browse All Cars
             </Link>
           </div>

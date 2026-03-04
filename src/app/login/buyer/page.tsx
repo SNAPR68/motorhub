@@ -7,7 +7,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { INTERIOR } from "@/lib/car-images";
 import { useAuthStore } from "@/lib/stores";
 
-/* Stitch: buyer_portal_login — #1754cf, Manrope + Playfair Display, #0a0c10 */
+/* Stitch: buyer_portal_login — #3B82F6, Manrope + Playfair Display, #0A1628 */
 
 export default function BuyerLoginPage() {
   return (
@@ -57,7 +57,7 @@ function BuyerLoginInner() {
   return (
     <div
       className="relative flex h-dvh w-full flex-col overflow-hidden text-slate-100 antialiased"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0c10" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628" }}
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
@@ -65,13 +65,13 @@ function BuyerLoginInner() {
           className="h-full w-full scale-105 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url("${INTERIOR}")` }}
         />
-        <div className="absolute inset-0 bg-[#0a0c10]/60 [background:radial-gradient(circle_at_center,transparent_0%,rgba(10,12,16,0.8)_100%)]" />
+        <div className="absolute inset-0 bg-[#0A1628]/60 [background:radial-gradient(circle_at_center,transparent_0%,rgba(10,12,16,0.8)_100%)]" />
       </div>
 
       {/* Header */}
       <header className="relative z-10 flex items-center justify-between p-6">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1754cf]">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#3B82F6]">
             <MaterialIcon name="diamond" className="text-white text-xl" />
           </div>
           <span className="text-sm font-bold uppercase tracking-widest text-white">
@@ -141,7 +141,7 @@ function BuyerLoginInner() {
             <button
               onClick={() => setShowEmailForm(true)}
               disabled={isLoading}
-              className="flex h-14 w-full items-center justify-center rounded-lg bg-[#1754cf] text-base font-bold text-white shadow-lg shadow-[#1754cf]/20 transition-all active:scale-95 hover:bg-[#1754cf]/90 disabled:opacity-50"
+              className="flex h-14 w-full items-center justify-center rounded-lg bg-[#3B82F6] text-base font-bold text-white shadow-lg shadow-[#3B82F6]/20 transition-all active:scale-95 hover:bg-[#3B82F6]/90 disabled:opacity-50"
             >
               Continue with Email
             </button>
@@ -152,19 +152,19 @@ function BuyerLoginInner() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address"
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/30 outline-none focus:border-[#1754cf]"
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/30 outline-none focus:border-[#3B82F6]"
               />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/30 outline-none focus:border-[#1754cf]"
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/30 outline-none focus:border-[#3B82F6]"
               />
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex h-14 w-full items-center justify-center rounded-lg bg-[#1754cf] text-base font-bold text-white shadow-lg shadow-[#1754cf]/20 transition-all active:scale-95 hover:bg-[#1754cf]/90 disabled:opacity-50"
+                className="flex h-14 w-full items-center justify-center rounded-lg bg-[#3B82F6] text-base font-bold text-white shadow-lg shadow-[#3B82F6]/20 transition-all active:scale-95 hover:bg-[#3B82F6]/90 disabled:opacity-50"
               >
                 {isLoading ? "Signing in..." : "Sign In"}
               </button>
@@ -183,7 +183,7 @@ function BuyerLoginInner() {
             New to CaroBest?{" "}
             <Link
               href="/register"
-              className="ml-1 text-white underline underline-offset-4 transition-colors hover:text-[#1754cf]"
+              className="ml-1 text-white underline underline-offset-4 transition-colors hover:text-[#3B82F6]"
             >
               Create an Account
             </Link>

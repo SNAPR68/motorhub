@@ -37,7 +37,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080a0f] text-[#e2e8f0]">
+    <div className="min-h-screen bg-[#0A1628] text-[#e2e8f0]">
       <div className="max-w-lg mx-auto px-4 pb-32">
         {/* Header */}
         <header className="flex items-center gap-3 py-4">
@@ -51,8 +51,8 @@ export default function ForgotPasswordPage() {
           <>
             {/* Title */}
             <div className="mt-8 mb-8">
-              <div className="w-16 h-16 rounded-2xl bg-[#1152d4]/10 flex items-center justify-center mb-5">
-                <MaterialIcon name="lock_reset" className="text-3xl text-[#1152d4]" />
+              <div className="w-16 h-16 rounded-2xl bg-[#3B82F6]/10 flex items-center justify-center mb-5">
+                <MaterialIcon name="lock_reset" className="text-3xl text-[#3B82F6]" />
               </div>
               <h2 className="text-2xl font-bold">Forgot Password?</h2>
               <p className="text-slate-400 mt-2 leading-relaxed">
@@ -77,7 +77,7 @@ export default function ForgotPasswordPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition"
                     required
                   />
                 </div>
@@ -86,14 +86,14 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-[#1152d4] hover:bg-[#1152d4]/90 text-white font-semibold py-3.5 rounded-xl transition disabled:opacity-50"
+                className="w-full bg-[#3B82F6] hover:bg-[#3B82F6]/90 text-white font-semibold py-3.5 rounded-xl transition disabled:opacity-50"
               >
                 {isLoading ? "Sending..." : "Send Reset Link"}
               </button>
             </form>
 
             <p className="text-center text-sm text-slate-400 mt-6">
-              <Link href="/login/buyer" className="text-[#1152d4] font-medium hover:underline">
+              <Link href="/login/buyer" className="text-[#3B82F6] font-medium hover:underline">
                 Back to Login
               </Link>
             </p>
@@ -110,7 +110,7 @@ export default function ForgotPasswordPage() {
             </p>
             <Link
               href="/login/buyer"
-              className="inline-block bg-[#1152d4] hover:bg-[#1152d4]/90 text-white font-semibold py-3.5 px-8 rounded-xl transition"
+              className="inline-block bg-[#3B82F6] hover:bg-[#3B82F6]/90 text-white font-semibold py-3.5 px-8 rounded-xl transition"
             >
               Back to Login
             </Link>

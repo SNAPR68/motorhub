@@ -60,7 +60,7 @@ function Toast({ message, onClose }: { message: string; onClose: () => void }) {
     <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 max-w-xs w-full mx-auto px-4">
       <div
         className="flex items-center gap-3 rounded-xl px-4 py-3 shadow-2xl"
-        style={{ background: "#1152d4" }}
+        style={{ background: "#3B82F6" }}
       >
         <MaterialIcon name="open_in_new" className="text-[18px] text-white" />
         <p className="text-white text-sm font-medium flex-1">{message}</p>
@@ -91,14 +91,14 @@ function ComparePlansInner() {
   return (
     <div
       className="min-h-dvh pb-36"
-      style={{ background: "#080a0f", color: "#f1f5f9" }}
+      style={{ background: "#0A1628", color: "#f1f5f9" }}
     >
       {toast && <Toast message={toast} onClose={() => setToast(null)} />}
 
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/car-insurance"
@@ -132,9 +132,9 @@ function ComparePlansInner() {
               onClick={() => setActiveFilter(pill)}
               className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all"
               style={{
-                background: activeFilter === pill ? "#1152d4" : "#111827",
+                background: activeFilter === pill ? "#3B82F6" : "#111827",
                 color: activeFilter === pill ? "#fff" : "#94a3b8",
-                border: activeFilter === pill ? "1px solid #1152d4" : "1px solid transparent",
+                border: activeFilter === pill ? "1px solid #3B82F6" : "1px solid transparent",
               }}
             >
               {pill}
@@ -168,7 +168,7 @@ function ComparePlansInner() {
                 </div>
                 <span
                   className="rounded-full px-3 py-1 text-xs font-semibold text-white"
-                  style={{ background: "#1152d420", color: "#4d80f0" }}
+                  style={{ background: "#3B82F620", color: "#4d80f0" }}
                 >
                   {plan.planType}
                 </span>
@@ -196,14 +196,14 @@ function ComparePlansInner() {
               <div className="flex gap-3">
                 <button
                   className="flex-1 rounded-xl py-2.5 text-sm font-semibold border border-white/15 text-slate-300 hover:border-white/30 transition-colors"
-                  style={{ background: "#1a2235" }}
+                  style={{ background: "#0F1D32" }}
                 >
                   View Details
                 </button>
                 <button
                   onClick={() => handleBuyNow(plan.insurer)}
                   className="flex-1 rounded-xl py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                  style={{ background: "#1152d4" }}
+                  style={{ background: "#3B82F6" }}
                 >
                   Buy Now
                 </button>
@@ -223,7 +223,7 @@ export default function ComparePlansPage() {
       fallback={
         <div
           className="min-h-dvh flex items-center justify-center"
-          style={{ background: "#080a0f" }}
+          style={{ background: "#0A1628" }}
         >
           <div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
         </div>

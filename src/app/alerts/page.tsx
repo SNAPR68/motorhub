@@ -7,7 +7,7 @@ import { useApi } from "@/lib/hooks/use-api";
 import { fetchCurrentUser, fetchUserPreferences, updateUserPreferences } from "@/lib/api";
 import { AuthGuard } from "@/components/AuthGuard";
 
-/* Stitch: buyer_alert_preferences — #dab80b, Manrope, #0a0a0a */
+/* Stitch: buyer_alert_preferences — #E5C158, Manrope, #0A1628 */
 
 const EMAIL_PREFS = [
   { key: "new_arrivals", label: "New Arrivals in My Collection", desc: "Immediate notifications for bookmarked marques.", on: true },
@@ -62,21 +62,21 @@ export default function AlertsPage() {
     <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
     <div
       className="relative flex min-h-dvh w-full flex-col overflow-x-hidden max-w-[430px] mx-auto shadow-2xl text-slate-100"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0a0a" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
-      <header className="sticky top-0 z-50 flex items-center justify-between bg-[#0a0a0a]/80 backdrop-blur-md px-4 py-4 border-b border-[#2a2a2a]">
+      <header className="sticky top-0 z-50 flex items-center justify-between bg-[#0A1628]/80 backdrop-blur-md px-4 py-4 border-b border-[#1E3048]">
         <Link
           href="/my-cars"
-          className="flex items-center justify-center size-10 rounded-full hover:bg-[#161616] transition-colors"
+          className="flex items-center justify-center size-10 rounded-full hover:bg-[#0A1628] transition-colors"
         >
           <MaterialIcon name="arrow_back_ios_new" className="text-slate-400" />
         </Link>
         <h1 className="text-sm font-bold uppercase tracking-widest">
           VIP Alert Settings
         </h1>
-        <button className="flex items-center justify-center size-10 rounded-full hover:bg-[#161616] transition-colors">
-          <MaterialIcon name="verified_user" className="text-[#dab80b]" />
+        <button className="flex items-center justify-center size-10 rounded-full hover:bg-[#0A1628] transition-colors">
+          <MaterialIcon name="verified_user" className="text-[#E5C158]" />
         </button>
       </header>
 
@@ -95,7 +95,7 @@ export default function AlertsPage() {
         {/* Email Briefings */}
         <section className="mt-6 px-4">
           <div className="flex items-center gap-2 px-2 mb-4">
-            <MaterialIcon name="mail" className="text-[#dab80b] text-xl" />
+            <MaterialIcon name="mail" className="text-[#E5C158] text-xl" />
             <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400">
               Email Briefings
             </h3>
@@ -104,7 +104,7 @@ export default function AlertsPage() {
             {EMAIL_PREFS.map((p) => (
               <div
                 key={p.key}
-                className="flex items-center justify-between p-4 rounded-2xl bg-[#161616] border border-[#2a2a2a] transition-all"
+                className="flex items-center justify-between p-4 rounded-2xl bg-[#0A1628] border border-[#1E3048] transition-all"
               >
                 <div className="flex flex-col gap-1 pr-4">
                   <span className="text-sm font-semibold">{p.label}</span>
@@ -119,13 +119,13 @@ export default function AlertsPage() {
                     }
                     className="peer sr-only"
                   />
-                  <div className="peer h-6 w-11 rounded-full bg-slate-800 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#dab80b] peer-checked:after:translate-x-full peer-checked:after:border-white" />
+                  <div className="peer h-6 w-11 rounded-full bg-slate-800 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#E5C158] peer-checked:after:translate-x-full peer-checked:after:border-white" />
                 </label>
               </div>
             ))}
 
             {/* Frequency Selector */}
-            <div className="p-4 rounded-2xl bg-[#161616] border border-[#2a2a2a]">
+            <div className="p-4 rounded-2xl bg-[#0A1628] border border-[#1E3048]">
               <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-1">
                   <span className="text-sm font-semibold">Delivery Frequency</span>
@@ -135,7 +135,7 @@ export default function AlertsPage() {
                   <select
                     value={frequency}
                     onChange={(e) => setFrequency(e.target.value)}
-                    className="appearance-none bg-[#2a2a2a] text-xs font-bold text-[#dab80b] px-4 py-2 pr-8 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#dab80b] border-none"
+                    className="appearance-none bg-[#0F1D32] text-xs font-bold text-[#E5C158] px-4 py-2 pr-8 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#E5C158] border-none"
                   >
                     <option value="instant">Instant</option>
                     <option value="daily">Daily Digest</option>
@@ -143,7 +143,7 @@ export default function AlertsPage() {
                   </select>
                   <MaterialIcon
                     name="expand_more"
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-xs pointer-events-none text-[#dab80b]"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-xs pointer-events-none text-[#E5C158]"
                   />
                 </div>
               </div>
@@ -163,7 +163,7 @@ export default function AlertsPage() {
             {WA_PREFS.map((p) => (
               <div
                 key={p.key}
-                className="flex items-center justify-between p-4 rounded-2xl bg-[#161616] border border-[#2a2a2a] transition-all"
+                className="flex items-center justify-between p-4 rounded-2xl bg-[#0A1628] border border-[#1E3048] transition-all"
               >
                 <div className="flex flex-col gap-1 pr-4">
                   <div className="flex items-center gap-2">
@@ -183,21 +183,21 @@ export default function AlertsPage() {
                     }
                     className="peer sr-only"
                   />
-                  <div className="peer h-6 w-11 rounded-full bg-slate-800 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#dab80b] peer-checked:after:translate-x-full peer-checked:after:border-white" />
+                  <div className="peer h-6 w-11 rounded-full bg-slate-800 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#E5C158] peer-checked:after:translate-x-full peer-checked:after:border-white" />
                 </label>
               </div>
             ))}
-            <div className="flex items-center gap-3 p-4 rounded-2xl bg-[#dab80b]/10 border border-[#dab80b]/20">
-              <MaterialIcon name="phone_iphone" className="text-[#dab80b]" />
+            <div className="flex items-center gap-3 p-4 rounded-2xl bg-[#E5C158]/10 border border-[#E5C158]/20">
+              <MaterialIcon name="phone_iphone" className="text-[#E5C158]" />
               <div className="flex flex-col">
-                <span className="text-[10px] uppercase font-bold text-[#dab80b] tracking-wider">
+                <span className="text-[10px] uppercase font-bold text-[#E5C158] tracking-wider">
                   Connected Account
                 </span>
                 <span className="text-sm font-medium text-slate-300">
                   {maskedEmail ?? "+91 ●●●●● ●●●● 10"}
                 </span>
               </div>
-              <button className="ml-auto text-xs font-bold text-[#dab80b] hover:underline">
+              <button className="ml-auto text-xs font-bold text-[#E5C158] hover:underline">
                 Edit
               </button>
             </div>
@@ -213,14 +213,14 @@ export default function AlertsPage() {
             </h3>
           </div>
           <div className="space-y-1">
-            <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-[#161616] transition-colors">
+            <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-[#0A1628] transition-colors">
               <div className="flex flex-col text-left">
                 <span className="text-sm font-semibold">Quiet Hours</span>
                 <span className="text-xs text-slate-500">Currently: 22:00 — 07:00</span>
               </div>
               <MaterialIcon name="chevron_right" className="text-slate-400" />
             </button>
-            <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-[#161616] transition-colors">
+            <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-[#0A1628] transition-colors">
               <div className="flex flex-col text-left">
                 <span className="text-sm font-semibold">Timezone</span>
                 <span className="text-xs text-slate-500">India Standard Time (GMT+5:30)</span>
@@ -232,7 +232,7 @@ export default function AlertsPage() {
       </main>
 
       {/* Bottom Save Button */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] p-6 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/95 to-transparent backdrop-blur-sm">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] p-6 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/95 to-transparent backdrop-blur-sm">
         {/* Toast */}
         {saved && (
           <div className="mb-3 flex items-center gap-2 bg-[#1a2a0a] border border-green-500/30 text-green-400 text-sm font-semibold px-4 py-3 rounded-xl">
@@ -243,8 +243,8 @@ export default function AlertsPage() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="w-full text-[#0a0a0a] font-bold py-4 rounded-2xl shadow-lg shadow-[#dab80b]/20 transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-2"
-          style={{ background: "#dab80b" }}
+          className="w-full text-[#0A1628] font-bold py-4 rounded-2xl shadow-lg shadow-[#E5C158]/20 transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-2"
+          style={{ background: "#E5C158" }}
         >
           {saving ? (
             <>

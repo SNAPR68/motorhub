@@ -7,7 +7,7 @@ import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles } from "@/lib/api";
 
 /* ── design tokens: premium_ai_studio_&_marketing ── */
-// primary: #137fec, font: Inter, bg: #0a0a0a, card: #161616, border: #262626
+// primary: #3B82F6, font: Inter, bg: #0A1628, card: #161616, border: #262626
 
 export default function StudioPage() {
   const { data, isLoading } = useApi(() => fetchVehicles({ limit: 1 }), []);
@@ -16,7 +16,7 @@ export default function StudioPage() {
   return (
     <div
       className="min-h-screen max-w-md md:max-w-2xl mx-auto flex flex-col pb-24"
-      style={{ fontFamily: "'Inter', sans-serif", background: "#0a0a0a", color: "#e2e8f0" }}
+      style={{ fontFamily: "'Inter', sans-serif", background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ── Header ── */}
       <header
@@ -47,7 +47,7 @@ export default function StudioPage() {
                 <MaterialIcon name="directions_car" className="text-9xl text-slate-800" />
               </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-transparent to-transparent" />
           </div>
 
           {/* AI Control Overlay */}
@@ -58,7 +58,7 @@ export default function StudioPage() {
             <Link
               href="/content-studio"
               className="flex-1 flex items-center justify-center gap-2 py-3 px-2 rounded-xl text-white"
-              style={{ background: "#137fec", boxShadow: "0 4px 12px rgba(19,127,236,0.4)" }}
+              style={{ background: "#3B82F6", boxShadow: "0 4px 12px rgba(19,127,236,0.4)" }}
             >
               <MaterialIcon name="auto_videocam" className="text-sm" />
               <span className="text-xs font-semibold whitespace-nowrap">Background Remov.</span>
@@ -78,8 +78,8 @@ export default function StudioPage() {
             style={{ background: "rgba(26,26,26,0.7)", backdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.2)" }}
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "#137fec" }} />
-              <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "#137fec" }} />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "#3B82F6" }} />
+              <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "#3B82F6" }} />
             </span>
             <span className="text-[10px] font-bold tracking-widest uppercase text-white">Live AI Preview</span>
           </div>
@@ -105,7 +105,7 @@ export default function StudioPage() {
                   </p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-2xl font-bold" style={{ color: "#137fec" }}>
+                  <p className="text-2xl font-bold" style={{ color: "#3B82F6" }}>
                     {vehicle?.priceDisplay ?? "₹—"}
                   </p>
                   <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
@@ -126,7 +126,7 @@ export default function StudioPage() {
                     className="rounded-xl p-4 flex flex-col items-center text-center border"
                     style={{ background: "#161616", borderColor: "#262626" }}
                   >
-                    <span style={{ color: "#137fec" }}>
+                    <span style={{ color: "#3B82F6" }}>
                       <MaterialIcon name={spec.icon} className="mb-2" />
                     </span>
                     <span className="text-xs text-slate-400 mb-0.5">{spec.label}</span>
@@ -141,12 +141,12 @@ export default function StudioPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold flex items-center gap-2 text-white">
-                <span style={{ color: "#137fec" }}>
+                <span style={{ color: "#3B82F6" }}>
                   <MaterialIcon name="auto_awesome" />
                 </span>
                 Social Sync Preview
               </h3>
-              <Link href="/studio/creative" className="text-xs font-medium" style={{ color: "#137fec" }}>
+              <Link href="/studio/creative" className="text-xs font-medium" style={{ color: "#3B82F6" }}>
                 Edit Template
               </Link>
             </div>
@@ -217,7 +217,7 @@ export default function StudioPage() {
           <Link
             href="/studio/creative"
             className="flex-1 h-14 rounded-2xl text-white font-bold flex items-center justify-center gap-2"
-            style={{ background: "#137fec", boxShadow: "0 8px 20px -4px rgba(19,127,236,0.4)" }}
+            style={{ background: "#3B82F6", boxShadow: "0 8px 20px -4px rgba(19,127,236,0.4)" }}
           >
             <MaterialIcon name="share_windows" />
             Export to Socials

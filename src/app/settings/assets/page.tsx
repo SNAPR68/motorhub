@@ -6,7 +6,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { fetchDealerPreferences, updateDealerPreferences } from "@/lib/api";
 
 /* ── design tokens: ai_asset_&_media_settings ── */
-// primary: #dab80b (gold), font: Newsreader (headings) + Inter (body), bg: #0a0a0a, surface: #161616, border: #2a2614
+// primary: #E5C158 (gold), font: Newsreader (headings) + Inter (body), bg: #0A1628, surface: #161616, border: #2a2614
 
 const STORAGE_KEY = "av_assets_prefs";
 
@@ -97,20 +97,20 @@ export default function AssetsPage() {
   return (
     <div
       className="relative min-h-screen max-w-md mx-auto flex flex-col pb-32"
-      style={{ fontFamily: "'Inter', sans-serif", background: "#0a0a0a", color: "#f1f5f9" }}
+      style={{ fontFamily: "'Inter', sans-serif", background: "#0A1628", color: "#f1f5f9" }}
     >
       {/* ── Header ── */}
       <header
         className="sticky top-0 z-20 flex items-center justify-between px-4 py-4 border-b"
         style={{
-          background: "rgba(10,10,10,0.8)",
+          background: "rgba(10,22,40,0.8)",
           backdropFilter: "blur(12px)",
           borderColor: "#2a2614",
         }}
       >
         <div className="flex items-center gap-2">
           <Link href="/settings">
-            <MaterialIcon name="arrow_back_ios_new" className="text-[#dab80b]" />
+            <MaterialIcon name="arrow_back_ios_new" className="text-[#E5C158]" />
           </Link>
           <h1
             className="text-xl font-semibold tracking-tight"
@@ -119,7 +119,7 @@ export default function AssetsPage() {
             Dynamic Assets
           </h1>
         </div>
-        <button onClick={handleSave} disabled={saving} className="font-medium text-sm transition-colors" style={{ color: saved ? "#22c55e" : "#dab80b" }}>
+        <button onClick={handleSave} disabled={saving} className="font-medium text-sm transition-colors" style={{ color: saved ? "#22c55e" : "#E5C158" }}>
           {saving ? "Saving..." : saved ? "Saved" : "Save"}
         </button>
       </header>
@@ -160,7 +160,7 @@ export default function AssetsPage() {
                         setToggles(next);
                       }}
                       className="w-11 h-6 rounded-full relative transition-colors"
-                      style={{ background: toggles[idx] ? "#dab80b" : "#334155" }}
+                      style={{ background: toggles[idx] ? "#E5C158" : "#334155" }}
                     >
                       <div
                         className="absolute top-0.5 w-5 h-5 bg-white rounded-full transition-all shadow-sm"
@@ -173,7 +173,7 @@ export default function AssetsPage() {
                       className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium"
                       style={{
                         border: "1px solid #2a2614",
-                        color: "#dab80b",
+                        color: "#E5C158",
                       }}
                     >
                       <MaterialIcon name={item.icon} className="text-sm" />
@@ -194,8 +194,8 @@ export default function AssetsPage() {
           disabled={saving}
           className="relative flex w-full max-w-sm items-center justify-center gap-2 overflow-hidden rounded-xl py-4 text-sm font-bold tracking-wider active:scale-95 transition-all disabled:opacity-60"
           style={{
-            background: saved ? "#22c55e" : "#dab80b",
-            color: "#0a0a0a",
+            background: saved ? "#22c55e" : "#E5C158",
+            color: "#0A1628",
             boxShadow: saved ? "0 10px 40px -10px rgba(34,197,94,0.5)" : "0 10px 40px -10px rgba(218,184,11,0.5)",
           }}
         >
@@ -208,7 +208,7 @@ export default function AssetsPage() {
       <nav
         className="fixed bottom-0 inset-x-0 z-10 flex w-full border-t px-6 pb-8 pt-3 backdrop-blur-xl max-w-md mx-auto md:hidden"
         style={{
-          background: "rgba(10,10,10,0.95)",
+          background: "rgba(10,22,40,0.95)",
           borderColor: "#2a2614",
         }}
       >
@@ -222,7 +222,7 @@ export default function AssetsPage() {
             key={item.label}
             href={item.href}
             className="flex flex-1 flex-col items-center gap-1"
-            style={{ color: item.active ? "#dab80b" : "#64748b" }}
+            style={{ color: item.active ? "#E5C158" : "#64748b" }}
           >
             <MaterialIcon name={item.icon} className="text-2xl" />
             <span className="text-[10px] font-medium">{item.label}</span>

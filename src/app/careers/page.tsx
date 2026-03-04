@@ -29,7 +29,7 @@ const benefits = [
 export default function CareersPage() {
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-[#e2e8f0]">
+    <div className="min-h-screen bg-[#0A1628] text-[#e2e8f0]">
       <div className="max-w-lg mx-auto px-4 ">
         {/* Header */}
         <header className="flex items-center gap-3 py-4">
@@ -51,7 +51,7 @@ export default function CareersPage() {
         <div className="grid grid-cols-3 gap-3 mb-8">
           {stats.map((stat) => (
             <div key={stat.label} className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
-              <div className="text-xl font-bold text-[#1152d4]">{stat.value}</div>
+              <div className="text-xl font-bold text-[#3B82F6]">{stat.value}</div>
               <div className="text-xs text-slate-400 mt-1">{stat.label}</div>
             </div>
           ))}
@@ -81,7 +81,7 @@ export default function CareersPage() {
                       </span>
                     </div>
                   </div>
-                  <button className="flex-shrink-0 bg-[#1152d4] hover:bg-[#1152d4]/90 text-white text-xs font-semibold px-4 py-2 rounded-lg transition">
+                  <button className="flex-shrink-0 bg-[#3B82F6] hover:bg-[#3B82F6]/90 text-white text-xs font-semibold px-4 py-2 rounded-lg transition">
                     Apply
                   </button>
                 </div>
@@ -108,8 +108,8 @@ export default function CareersPage() {
 
         {/* Culture Quote */}
         <section className="mb-8">
-          <div className="bg-gradient-to-br from-[#1152d4]/10 to-[#10b981]/10 border border-white/10 rounded-2xl p-5">
-            <MaterialIcon name="format_quote" className="text-3xl text-[#1152d4] mb-2" />
+          <div className="bg-gradient-to-br from-[#3B82F6]/10 to-[#10b981]/10 border border-white/10 rounded-2xl p-5">
+            <MaterialIcon name="format_quote" className="text-3xl text-[#3B82F6] mb-2" />
             <p className="text-sm text-slate-300 leading-relaxed italic">
               &quot;At CaroBest, we believe the best products come from diverse teams who care deeply about the problem they&apos;re solving. Every voice matters, every idea gets heard.&quot;
             </p>

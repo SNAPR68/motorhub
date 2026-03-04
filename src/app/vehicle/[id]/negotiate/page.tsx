@@ -200,7 +200,7 @@ export default function NegotiateCoachPage({
     return (
       <div
         className="min-h-dvh flex items-center justify-center"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <div className="flex flex-col items-center gap-3">
           <div className="h-10 w-10 rounded-full border-2 border-emerald-500 border-t-transparent animate-spin" />
@@ -215,7 +215,7 @@ export default function NegotiateCoachPage({
     return (
       <div
         className="min-h-dvh flex items-center justify-center"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <div className="text-center px-6">
           <MaterialIcon
@@ -280,13 +280,13 @@ export default function NegotiateCoachPage({
   return (
     <div
       className="min-h-dvh w-full pb-28"
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -691,8 +691,8 @@ export default function NegotiateCoachPage({
             <span
               className="text-[9px] font-bold px-1.5 py-0.5 rounded"
               style={{
-                background: "rgba(17,82,212,0.12)",
-                color: "#1152d4",
+                background: "rgba(59,130,246,0.12)",
+                color: "#3B82F6",
               }}
             >
               COPY & USE
@@ -713,12 +713,12 @@ export default function NegotiateCoachPage({
               >
                 <div
                   className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0"
-                  style={{ background: "rgba(17,82,212,0.12)" }}
+                  style={{ background: "rgba(59,130,246,0.12)" }}
                 >
                   <MaterialIcon
                     name={script.icon}
                     className="text-[16px]"
-                    style={{ color: "#1152d4" }}
+                    style={{ color: "#3B82F6" }}
                   />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -742,7 +742,7 @@ export default function NegotiateCoachPage({
               {expandedScript === i && (
                 <div
                   className="px-4 pb-4 border-t border-white/5"
-                  style={{ background: "rgba(17,82,212,0.02)" }}
+                  style={{ background: "rgba(59,130,246,0.02)" }}
                 >
                   <pre className="text-[11px] text-slate-300 leading-relaxed whitespace-pre-wrap pt-3 font-sans">
                     {script.script}
@@ -753,8 +753,8 @@ export default function NegotiateCoachPage({
                     }}
                     className="mt-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold"
                     style={{
-                      background: "rgba(17,82,212,0.12)",
-                      color: "#1152d4",
+                      background: "rgba(59,130,246,0.12)",
+                      color: "#3B82F6",
                     }}
                   >
                     <MaterialIcon
@@ -848,7 +848,7 @@ export default function NegotiateCoachPage({
       <div
         className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/5 md:hidden"
         style={{
-          background: "rgba(8,10,15,0.95)",
+          background: "rgba(10,22,40,0.95)",
           backdropFilter: "blur(20px)",
         }}
       >

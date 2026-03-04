@@ -10,7 +10,7 @@ const TOOLS = [
     desc: "Plan your monthly payments",
     icon: "calculate",
     href: "/car-loan/emi-calculator",
-    color: "#1152d4",
+    color: "#3B82F6",
   },
   {
     title: "Check Eligibility",
@@ -62,12 +62,12 @@ export default function CarLoanPage() {
     <BuyerAppShell>
     <div
       className="min-h-dvh pb-36"
-      style={{ background: "#080a0f", color: "#f1f5f9" }}
+      style={{ background: "#0A1628", color: "#f1f5f9" }}
     >
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/"
@@ -83,7 +83,7 @@ export default function CarLoanPage() {
         <div
           className="rounded-2xl p-6"
           style={{
-            background: "linear-gradient(135deg, #1152d4 0%, #0a3ba8 60%, #071e6b 100%)",
+            background: "linear-gradient(135deg, #3B82F6 0%, #0a3ba8 60%, #071e6b 100%)",
           }}
         >
           <div className="inline-flex items-center gap-1.5 bg-white/20 rounded-full px-3 py-1 text-xs font-semibold text-white mb-3">
@@ -219,7 +219,7 @@ export default function CarLoanPage() {
         <Link
           href="/car-loan/apply"
           className="flex items-center justify-center gap-2 w-full rounded-xl py-4 text-white font-bold text-base transition-opacity hover:opacity-90"
-          style={{ background: "#1152d4" }}
+          style={{ background: "#3B82F6" }}
         >
           <MaterialIcon name="assignment" className="text-[20px]" />
           Apply Now

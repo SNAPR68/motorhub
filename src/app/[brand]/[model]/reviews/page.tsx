@@ -121,7 +121,7 @@ export default function ReviewsPage({
   if (loading) {
     return (
     <BuyerAppShell>
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
       </div>
     
@@ -132,11 +132,11 @@ export default function ReviewsPage({
   /* ── 404 state ── */
   if (!car) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="text-center px-6">
           <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
           <p className="text-slate-400 font-semibold">Model not found</p>
-          <Link href="/new-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#1152d4" }}>
+          <Link href="/new-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#3B82F6" }}>
             <MaterialIcon name="arrow_back" className="text-[15px]" /> Browse New Cars
           </Link>
         </div>
@@ -148,10 +148,10 @@ export default function ReviewsPage({
   const totalRatings = 342;
 
   return (
-    <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full pb-36" style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link href={`/${brandSlug}/${modelSlug}`} className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
@@ -195,7 +195,7 @@ export default function ReviewsPage({
       </div>
 
       {/* ─── TABS ─── */}
-      <div className="sticky top-14 z-30 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <div className="sticky top-14 z-30 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto flex">
           {TABS.map((tab) => (
             <button
@@ -203,7 +203,7 @@ export default function ReviewsPage({
               onClick={() => setActiveTab(tab)}
               className="flex-1 py-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-all"
               style={{
-                borderColor: activeTab === tab ? "#1152d4" : "transparent",
+                borderColor: activeTab === tab ? "#3B82F6" : "transparent",
                 color: activeTab === tab ? "#fff" : "#64748b",
               }}
             >
@@ -279,7 +279,7 @@ export default function ReviewsPage({
                 <div className="flex items-start justify-between gap-3 mb-2">
                   <div className="flex items-center gap-2.5">
                     {/* Avatar */}
-                    <div className="h-8 w-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0" style={{ background: "#1152d4" }}>
+                    <div className="h-8 w-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0" style={{ background: "#3B82F6" }}>
                       {review.name.charAt(0)}
                     </div>
                     <div>
@@ -310,7 +310,7 @@ export default function ReviewsPage({
             {/* Write a Review CTA */}
             <button
               className="w-full h-12 rounded-2xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-all active:scale-[0.98] mt-2"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="rate_review" className="text-[18px]" />
               Write a Review

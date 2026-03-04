@@ -6,7 +6,7 @@ import Image from "next/image";
 import { CRETA, SWIFT, NEXON, INTERIOR, BLUR_DATA_URL } from "@/lib/car-images";
 import { MaterialIcon } from "@/components/MaterialIcon";
 
-/* Stitch: vip_personalized_preferences — #1754cf, Manrope, #0F0F0F */
+/* Stitch: vip_personalized_preferences — #3B82F6, Manrope, #0F0F0F */
 
 const INTERESTS = [
   { label: "Vintage Classics", image: INTERIOR, icon: "auto_awesome" },
@@ -41,8 +41,8 @@ export default function VIPPreferencesPage() {
             <MaterialIcon name="arrow_back" className="text-slate-400" />
           </Link>
           <div className="flex gap-1.5">
-            <div className="w-8 h-1 rounded-full bg-[#1754cf]" />
-            <div className="w-8 h-1 rounded-full bg-[#1754cf]" />
+            <div className="w-8 h-1 rounded-full bg-[#3B82F6]" />
+            <div className="w-8 h-1 rounded-full bg-[#3B82F6]" />
             <div className="w-8 h-1 rounded-full bg-white/10" />
           </div>
           <span className="text-xs text-slate-500 font-medium">Step 2 of 3</span>
@@ -62,16 +62,16 @@ export default function VIPPreferencesPage() {
                 onClick={() => toggleInterest(i)}
                 className="relative aspect-[4/3] rounded-xl overflow-hidden group"
                 style={{
-                  border: selected.includes(i) ? "2px solid #1754cf" : "2px solid rgba(255,255,255,0.05)",
+                  border: selected.includes(i) ? "2px solid #3B82F6" : "2px solid rgba(255,255,255,0.05)",
                 }}
               >
                 <Image src={item.image} alt={item.label} fill className="object-cover brightness-50 group-hover:brightness-60 transition-all" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                 <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-                  <MaterialIcon name={item.icon} className={`text-3xl mb-2 ${selected.includes(i) ? "text-[#1754cf]" : "text-white/60"}`} />
+                  <MaterialIcon name={item.icon} className={`text-3xl mb-2 ${selected.includes(i) ? "text-[#3B82F6]" : "text-white/60"}`} />
                   <span className="text-xs font-bold text-white uppercase tracking-wider">{item.label}</span>
                 </div>
                 {selected.includes(i) && (
-                  <div className="absolute top-2 right-2 z-10 size-6 rounded-full bg-[#1754cf] flex items-center justify-center">
+                  <div className="absolute top-2 right-2 z-10 size-6 rounded-full bg-[#3B82F6] flex items-center justify-center">
                     <MaterialIcon name="check" className="text-white text-sm" />
                   </div>
                 )}
@@ -94,15 +94,15 @@ export default function VIPPreferencesPage() {
                   border: tone === t.label ? "1px solid rgba(23,84,207,0.3)" : "1px solid rgba(255,255,255,0.05)",
                 }}
               >
-                <div className={`size-10 rounded-lg flex items-center justify-center ${tone === t.label ? "bg-[#1754cf]/20 text-[#1754cf]" : "bg-white/5 text-slate-500"}`}>
+                <div className={`size-10 rounded-lg flex items-center justify-center ${tone === t.label ? "bg-[#3B82F6]/20 text-[#3B82F6]" : "bg-white/5 text-slate-500"}`}>
                   <MaterialIcon name={t.icon} />
                 </div>
                 <div className="flex-1 text-left">
                   <p className={`text-sm font-bold ${tone === t.label ? "text-white" : "text-slate-400"}`}>{t.label}</p>
                   <p className="text-xs text-slate-500 mt-0.5">{t.desc}</p>
                 </div>
-                <div className={`size-5 rounded-full border-2 flex items-center justify-center ${tone === t.label ? "border-[#1754cf]" : "border-slate-600"}`}>
-                  {tone === t.label && <div className="size-2.5 rounded-full bg-[#1754cf]" />}
+                <div className={`size-5 rounded-full border-2 flex items-center justify-center ${tone === t.label ? "border-[#3B82F6]" : "border-slate-600"}`}>
+                  {tone === t.label && <div className="size-2.5 rounded-full bg-[#3B82F6]" />}
                 </div>
               </button>
             ))}
@@ -111,10 +111,10 @@ export default function VIPPreferencesPage() {
       </main>
 
       {/* CTA */}
-      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-30 p-6 bg-[#0F0F0F]/95 backdrop-blur-md border-t border-white/5">
+      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-30 p-6 bg-[#0A1628]/95 backdrop-blur-md border-t border-white/5">
         <Link
           href="/vip/confirmation"
-          className="w-full bg-[#1754cf] text-white py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-[#1754cf]/30 active:scale-[0.98] transition-transform"
+          className="w-full bg-[#3B82F6] text-white py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-[#3B82F6]/30 active:scale-[0.98] transition-transform"
         >
           Continue to Verification
           <MaterialIcon name="arrow_forward" />

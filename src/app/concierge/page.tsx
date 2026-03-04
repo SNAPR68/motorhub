@@ -8,7 +8,7 @@ import { BLUR_DATA_URL } from "@/lib/car-images";
 import { sendConciergeMessage } from "@/lib/api";
 import type { ConciergeVehicle } from "@/lib/api";
 
-/* Stitch: elite_ai_concierge_chat_1 — #1773cf, Newsreader, #111921 */
+/* Stitch: elite_ai_concierge_chat_1 — #3B82F6, Newsreader, #0A1628 */
 
 type Message = {
   id: number;
@@ -90,25 +90,25 @@ export default function ConciergePage() {
   return (
     <div
       className="relative flex h-dvh w-full max-w-[450px] mx-auto flex-col overflow-hidden border-x border-slate-800 text-slate-100"
-      style={{ fontFamily: "'Newsreader', serif", background: "#111921" }}
+      style={{ fontFamily: "'Newsreader', serif", background: "#0A1628" }}
     >
       {/* Header */}
-      <header className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-[#111921]/80 backdrop-blur-md border-b border-slate-800">
+      <header className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-[#0A1628]/80 backdrop-blur-md border-b border-slate-800">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="size-10 rounded-full bg-slate-800 overflow-hidden border border-[#1773cf]/20 flex items-center justify-center">
+            <div className="size-10 rounded-full bg-slate-800 overflow-hidden border border-[#3B82F6]/20 flex items-center justify-center">
               <MaterialIcon
                 name="smart_toy"
-                className="text-[#1773cf] text-xl"
+                className="text-[#3B82F6] text-xl"
               />
             </div>
-            <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-[#111921]" />
+            <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-[#0A1628]" />
           </div>
           <div>
             <h1 className="text-lg font-semibold leading-none tracking-tight">
               CaroBest Concierge
             </h1>
-            <p className="text-[11px] uppercase tracking-widest text-[#1773cf] font-medium mt-1">
+            <p className="text-[11px] uppercase tracking-widest text-[#3B82F6] font-medium mt-1">
               Active Now
             </p>
           </div>
@@ -171,7 +171,7 @@ export default function ConciergePage() {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                           <div className="absolute bottom-4 left-4">
-                            <span className="bg-[#1773cf] px-2 py-1 rounded text-[10px] font-bold text-white uppercase tracking-tighter">
+                            <span className="bg-[#3B82F6] px-2 py-1 rounded text-[10px] font-bold text-white uppercase tracking-tighter">
                               Available Now
                             </span>
                           </div>
@@ -185,11 +185,11 @@ export default function ConciergePage() {
                               {car.year} &bull; {car.fuel} &bull; {car.km} km
                             </p>
                           </div>
-                          <span className="text-base font-semibold text-[#1773cf]">
+                          <span className="text-base font-semibold text-[#3B82F6]">
                             {car.price}
                           </span>
                         </div>
-                        <div className="mt-3 flex items-center justify-center gap-2 w-full bg-[#1773cf] hover:bg-[#1773cf]/90 text-white font-medium py-2.5 rounded-lg transition-colors text-sm">
+                        <div className="mt-3 flex items-center justify-center gap-2 w-full bg-[#3B82F6] hover:bg-[#3B82F6]/90 text-white font-medium py-2.5 rounded-lg transition-colors text-sm">
                           <span>View Details</span>
                           <MaterialIcon
                             name="arrow_forward"
@@ -229,7 +229,7 @@ export default function ConciergePage() {
       </main>
 
       {/* Footer — Quick Actions + Input + Nav */}
-      <footer className="p-4 bg-[#111921] border-t border-slate-800 space-y-4">
+      <footer className="p-4 bg-[#0A1628] border-t border-slate-800 space-y-4">
         {/* Quick Actions */}
         <div className="flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-1">
           {QUICK_ACTIONS.map((label) => (
@@ -237,7 +237,7 @@ export default function ConciergePage() {
               key={label}
               onClick={() => sendMessage(label)}
               disabled={typing}
-              className="whitespace-nowrap px-4 py-2 rounded-full border border-slate-700 bg-slate-800/40 text-xs font-medium hover:border-[#1773cf] transition-colors disabled:opacity-40"
+              className="whitespace-nowrap px-4 py-2 rounded-full border border-slate-700 bg-slate-800/40 text-xs font-medium hover:border-[#3B82F6] transition-colors disabled:opacity-40"
             >
               {label}
             </button>
@@ -248,7 +248,7 @@ export default function ConciergePage() {
         <form onSubmit={handleSubmit} className="flex items-center gap-3">
           <button
             type="button"
-            className="flex items-center justify-center size-10 rounded-full bg-[#1773cf]/10 text-[#1773cf] hover:bg-[#1773cf]/20 transition-colors"
+            className="flex items-center justify-center size-10 rounded-full bg-[#3B82F6]/10 text-[#3B82F6] hover:bg-[#3B82F6]/20 transition-colors"
           >
             <MaterialIcon name="magic_button" className="text-xl" />
           </button>
@@ -257,14 +257,14 @@ export default function ConciergePage() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="w-full bg-slate-900 border-none rounded-full px-5 py-3 text-sm focus:ring-1 focus:ring-[#1773cf] placeholder:text-slate-500 text-white"
+              className="w-full bg-slate-900 border-none rounded-full px-5 py-3 text-sm focus:ring-1 focus:ring-[#3B82F6] placeholder:text-slate-500 text-white"
               placeholder="Ask about cars, budget, specs..."
             />
           </div>
           <button
             type="submit"
             disabled={!input.trim() || typing}
-            className="flex items-center justify-center size-10 rounded-full bg-[#1773cf] text-white shadow-lg shadow-[#1773cf]/20 disabled:opacity-30 transition-opacity"
+            className="flex items-center justify-center size-10 rounded-full bg-[#3B82F6] text-white shadow-lg shadow-[#3B82F6]/20 disabled:opacity-30 transition-opacity"
           >
             <MaterialIcon name="send" className="text-xl" />
           </button>
@@ -286,7 +286,7 @@ export default function ConciergePage() {
           </Link>
           <Link
             href="/concierge"
-            className="flex flex-1 flex-col items-center justify-center text-[#1773cf]"
+            className="flex flex-1 flex-col items-center justify-center text-[#3B82F6]"
           >
             <MaterialIcon name="chat_bubble" fill />
           </Link>

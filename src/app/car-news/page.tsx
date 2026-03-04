@@ -25,7 +25,7 @@ const NEWS = [
     timeAgo: "1 day ago",
     readTime: "7 min read",
     views: "34.2K",
-    gradient: "linear-gradient(135deg, rgba(17,82,212,0.2), rgba(99,102,241,0.15))",
+    gradient: "linear-gradient(135deg, rgba(59,130,246,0.2), rgba(99,102,241,0.15))",
     icon: "star",
   },
   {
@@ -78,9 +78,9 @@ const TRENDING = [
 
 const CATEGORY_COLOR: Record<string, { bg: string; color: string }> = {
   Launches: { bg: "rgba(239,68,68,0.12)", color: "#f87171" },
-  Reviews: { bg: "rgba(17,82,212,0.12)", color: "#60a5fa" },
+  Reviews: { bg: "rgba(59,130,246,0.12)", color: "#60a5fa" },
   EV: { bg: "rgba(16,185,129,0.12)", color: "#34d399" },
-  Comparison: { bg: "rgba(245,158,11,0.12)", color: "#fbbf24" },
+  Comparison: { bg: "rgba(245,158,11,0.12)", color: "#E5C158" },
   "Price Drops": { bg: "rgba(239,68,68,0.1)", color: "#f87171" },
   Industry: { bg: "rgba(139,92,246,0.12)", color: "#a78bfa" },
 };
@@ -92,11 +92,11 @@ export default function CarNewsPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -131,9 +131,9 @@ export default function CarNewsPage() {
                 onClick={() => setActiveCategory(cat)}
                 className="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0"
                 style={{
-                  background: active ? "#1152d4" : "rgba(255,255,255,0.05)",
+                  background: active ? "#3B82F6" : "rgba(255,255,255,0.05)",
                   color: active ? "#fff" : "#94a3b8",
-                  border: active ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.08)",
+                  border: active ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 {cat}
@@ -199,7 +199,7 @@ export default function CarNewsPage() {
               >
                 <div
                   className="h-20 rounded-lg flex items-center justify-center mb-2"
-                  style={{ background: "linear-gradient(135deg, rgba(17,82,212,0.15), rgba(99,102,241,0.1))" }}
+                  style={{ background: "linear-gradient(135deg, rgba(59,130,246,0.15), rgba(99,102,241,0.1))" }}
                 >
                   <MaterialIcon name="trending_up" className="text-[28px] text-white/15" />
                 </div>

@@ -18,7 +18,7 @@ import { ImageUploader } from "@/components/ImageUploader";
 import { useCompare } from "@/context/CompareContext";
 
 /* Stitch: premium_inventory_collection
-   Tokens: primary=#137fec, font=Manrope, bg=#0a0c10
+   Tokens: primary=#3B82F6, font=Manrope, bg=#0A1628
    Bottom nav: Inventory(active), Showcase, Studio, Settings */
 
 const FILTER_PILLS = ["Premium", "Newest", "Status"];
@@ -110,13 +110,13 @@ export default function InventoryPage() {
       className="min-h-dvh w-full text-slate-100 flex flex-col"
       style={{
         fontFamily: "'Manrope', sans-serif",
-        background: "#0a0c10",
+        background: "#0A1628",
       }}
     >
       {/* Header */}
       <header className="sticky top-0 z-50 glass-panel border-b border-slate-800/50 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <MaterialIcon name="blur_on" className="text-[30px] text-[#137fec] font-bold" />
+          <MaterialIcon name="blur_on" className="text-[30px] text-[#3B82F6] font-bold" />
           <h1 className="text-xl font-extrabold tracking-tight uppercase italic">CaroBest</h1>
         </div>
         <div className="flex items-center gap-4">
@@ -147,7 +147,7 @@ export default function InventoryPage() {
               onClick={() => setActiveFilter(i)}
               className={`flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full px-6 transition-all ${
                 i === activeFilter
-                  ? "bg-[#137fec] shadow-lg shadow-[#137fec]/20"
+                  ? "bg-[#3B82F6] shadow-lg shadow-[#3B82F6]/20"
                   : "glass-panel hover:bg-slate-800"
               }`}
             >
@@ -189,7 +189,7 @@ export default function InventoryPage() {
       {/* Bottom Nav — Inventory, Showcase, Studio, Settings */}
       <nav className="fixed bottom-0 left-0 right-0 glass-panel border-t border-slate-800/50 pt-2 pb-8 px-6 z-50 max-w-md mx-auto md:hidden">
         <div className="flex justify-between items-center max-w-md mx-auto">
-          <Link href="/inventory" className="flex flex-col items-center gap-1 text-[#137fec]">
+          <Link href="/inventory" className="flex flex-col items-center gap-1 text-[#3B82F6]">
             <MaterialIcon name="directions_car" fill className="text-[28px]" />
             <span className="text-[10px] font-bold tracking-tight uppercase">Inventory</span>
           </Link>
@@ -224,7 +224,7 @@ export default function InventoryPage() {
                     onClick={() => setFilters((f) => ({ ...f, [cat.key]: opt.value }))}
                     className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                       filters[cat.key] === opt.value
-                        ? "bg-[#137fec] text-white"
+                        ? "bg-[#3B82F6] text-white"
                         : "glass-panel text-slate-300 hover:bg-white/5"
                     }`}
                   >
@@ -245,7 +245,7 @@ export default function InventoryPage() {
             <button
               type="button"
               onClick={() => setFilterOpen(false)}
-              className="flex-1 rounded-lg bg-[#137fec] py-3 text-sm font-bold text-white"
+              className="flex-1 rounded-lg bg-[#3B82F6] py-3 text-sm font-bold text-white"
             >
               Apply
             </button>
@@ -262,7 +262,7 @@ export default function InventoryPage() {
               type="button"
               onClick={() => { setSortBy(opt.value); setSortOpen(false); }}
               className={`w-full rounded-lg px-4 py-3.5 text-left text-sm font-medium transition-all ${
-                sortBy === opt.value ? "bg-[#137fec]/10 text-[#137fec]" : "text-slate-300 hover:bg-white/5"
+                sortBy === opt.value ? "bg-[#3B82F6]/10 text-[#3B82F6]" : "text-slate-300 hover:bg-white/5"
               }`}
             >
               {opt.label}
@@ -275,7 +275,7 @@ export default function InventoryPage() {
       <button
         type="button"
         onClick={() => setAddOpen(true)}
-        className="fixed right-6 bottom-28 z-40 w-14 h-14 rounded-full bg-[#137fec] text-white shadow-xl shadow-[#137fec]/30 flex items-center justify-center active:scale-95 transition-transform"
+        className="fixed right-6 bottom-28 z-40 w-14 h-14 rounded-full bg-[#3B82F6] text-white shadow-xl shadow-[#3B82F6]/30 flex items-center justify-center active:scale-95 transition-transform"
       >
         <MaterialIcon name="add" className="text-[30px]" />
       </button>
@@ -287,22 +287,22 @@ export default function InventoryPage() {
         <div className="space-y-4">
           <div>
             <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Vehicle Name *</label>
-            <input type="text" value={newVehicle.name} onChange={(e) => setNewVehicle(v => ({ ...v, name: e.target.value }))} placeholder="e.g., Hyundai Creta SX(O)" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50" />
+            <input type="text" value={newVehicle.name} onChange={(e) => setNewVehicle(v => ({ ...v, name: e.target.value }))} placeholder="e.g., Hyundai Creta SX(O)" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Year *</label>
-              <input type="number" value={newVehicle.year} onChange={(e) => setNewVehicle(v => ({ ...v, year: Number(e.target.value) }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50" />
+              <input type="number" value={newVehicle.year} onChange={(e) => setNewVehicle(v => ({ ...v, year: Number(e.target.value) }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50" />
             </div>
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Price (₹) *</label>
-              <input type="number" value={newVehicle.price} onChange={(e) => setNewVehicle(v => ({ ...v, price: e.target.value }))} placeholder="1450000" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50" />
+              <input type="number" value={newVehicle.price} onChange={(e) => setNewVehicle(v => ({ ...v, price: e.target.value }))} placeholder="1450000" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50" />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Category</label>
-              <select value={newVehicle.category} onChange={(e) => setNewVehicle(v => ({ ...v, category: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50">
+              <select value={newVehicle.category} onChange={(e) => setNewVehicle(v => ({ ...v, category: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50">
                 <option value="SUV">SUV</option>
                 <option value="SEDAN">Sedan</option>
                 <option value="HATCHBACK">Hatchback</option>
@@ -312,7 +312,7 @@ export default function InventoryPage() {
             </div>
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Fuel</label>
-              <select value={newVehicle.fuel} onChange={(e) => setNewVehicle(v => ({ ...v, fuel: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50">
+              <select value={newVehicle.fuel} onChange={(e) => setNewVehicle(v => ({ ...v, fuel: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50">
                 <option value="PETROL">Petrol</option>
                 <option value="DIESEL">Diesel</option>
                 <option value="ELECTRIC">Electric</option>
@@ -324,7 +324,7 @@ export default function InventoryPage() {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Transmission</label>
-              <select value={newVehicle.transmission} onChange={(e) => setNewVehicle(v => ({ ...v, transmission: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50">
+              <select value={newVehicle.transmission} onChange={(e) => setNewVehicle(v => ({ ...v, transmission: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50">
                 <option value="MANUAL">Manual</option>
                 <option value="AUTOMATIC">Automatic</option>
                 <option value="IMT">iMT</option>
@@ -332,27 +332,27 @@ export default function InventoryPage() {
             </div>
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">KM Driven</label>
-              <input type="text" value={newVehicle.km} onChange={(e) => setNewVehicle(v => ({ ...v, km: e.target.value }))} placeholder="12,000" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50" />
+              <input type="text" value={newVehicle.km} onChange={(e) => setNewVehicle(v => ({ ...v, km: e.target.value }))} placeholder="12,000" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50" />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Engine</label>
-              <input type="text" value={newVehicle.engine} onChange={(e) => setNewVehicle(v => ({ ...v, engine: e.target.value }))} placeholder="1.5L Turbo" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50" />
+              <input type="text" value={newVehicle.engine} onChange={(e) => setNewVehicle(v => ({ ...v, engine: e.target.value }))} placeholder="1.5L Turbo" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50" />
             </div>
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Location</label>
-              <input type="text" value={newVehicle.location} onChange={(e) => setNewVehicle(v => ({ ...v, location: e.target.value }))} placeholder="Delhi NCR" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50" />
+              <input type="text" value={newVehicle.location} onChange={(e) => setNewVehicle(v => ({ ...v, location: e.target.value }))} placeholder="Delhi NCR" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50" />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Power</label>
-              <input type="text" value={newVehicle.power} onChange={(e) => setNewVehicle(v => ({ ...v, power: e.target.value }))} placeholder="115 bhp" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50" />
+              <input type="text" value={newVehicle.power} onChange={(e) => setNewVehicle(v => ({ ...v, power: e.target.value }))} placeholder="115 bhp" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50" />
             </div>
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1.5 block">Owner</label>
-              <select value={newVehicle.owner} onChange={(e) => setNewVehicle(v => ({ ...v, owner: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50">
+              <select value={newVehicle.owner} onChange={(e) => setNewVehicle(v => ({ ...v, owner: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50">
                 <option value="1st">1st Owner</option>
                 <option value="2nd">2nd Owner</option>
                 <option value="3rd">3rd Owner</option>
@@ -393,8 +393,8 @@ export default function InventoryPage() {
                   } catch { /* silent */ }
                   setAiDescLoading(false);
                 }}
-                className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-[#137fec]/30 disabled:opacity-40"
-                style={{ color: "#137fec", background: "rgba(19,127,236,0.08)" }}
+                className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-[#3B82F6]/30 disabled:opacity-40"
+                style={{ color: "#3B82F6", background: "rgba(19,127,236,0.08)" }}
               >
                 <MaterialIcon name="auto_awesome" className="text-[12px]" />
                 {aiDescLoading ? "Generating..." : "AI Generate"}
@@ -405,7 +405,7 @@ export default function InventoryPage() {
               onChange={(e) => setNewVehicle((v) => ({ ...v, description: e.target.value }))}
               placeholder="AI-generated or manual description..."
               rows={3}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#137fec]/50 resize-none"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50 resize-none"
             />
           </div>
           <div>
@@ -426,7 +426,7 @@ export default function InventoryPage() {
               type="button"
               disabled={!newVehicle.name.trim() || !newVehicle.price || addVehicle.isSubmitting}
               onClick={() => addVehicle.mutate(newVehicle)}
-              className="flex-1 rounded-lg bg-[#137fec] py-3 text-sm font-bold text-white disabled:opacity-50"
+              className="flex-1 rounded-lg bg-[#3B82F6] py-3 text-sm font-bold text-white disabled:opacity-50"
             >
               {addVehicle.isSubmitting ? "Adding..." : "Add Vehicle"}
             </button>
@@ -488,10 +488,10 @@ function InventoryCard({ vehicle }: { vehicle: Vehicle }) {
           }}
           className={`absolute top-4 right-4 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-90 ${
             inCompare
-              ? "bg-[#137fec] shadow-lg shadow-[#137fec]/40"
+              ? "bg-[#3B82F6] shadow-lg shadow-[#3B82F6]/40"
               : isFull
               ? "bg-white/10 opacity-40 cursor-not-allowed"
-              : "bg-black/40 backdrop-blur-md hover:bg-[#137fec]/40"
+              : "bg-black/40 backdrop-blur-md hover:bg-[#3B82F6]/40"
           }`}
           disabled={!inCompare && isFull}
           title={inCompare ? "Remove from compare" : "Add to compare"}
@@ -520,9 +520,9 @@ function InventoryCard({ vehicle }: { vehicle: Vehicle }) {
             <Link
               href={`/content-studio?vehicleId=${vehicle.id}`}
               onClick={(e) => e.stopPropagation()}
-              className="flex items-center justify-center gap-2 glass-panel border border-[#137fec]/40 bg-[#137fec]/10 px-5 py-2.5 rounded-xl hover:bg-[#137fec]/20 transition-all active:scale-95"
+              className="flex items-center justify-center gap-2 glass-panel border border-[#3B82F6]/40 bg-[#3B82F6]/10 px-5 py-2.5 rounded-xl hover:bg-[#3B82F6]/20 transition-all active:scale-95"
             >
-              <MaterialIcon name="auto_fix_high" className="text-[20px] text-[#137fec]" />
+              <MaterialIcon name="auto_fix_high" className="text-[20px] text-[#3B82F6]" />
               <span className="text-white text-xs font-bold tracking-wider uppercase">AI Studio</span>
             </Link>
           </div>
@@ -544,7 +544,7 @@ function CompareTray() {
         style={{ background: "#0f1623", border: "1px solid rgba(19,127,236,0.4)", boxShadow: "0 8px 32px rgba(0,0,0,0.5)" }}
       >
         <div className="flex items-center gap-2">
-          <MaterialIcon name="compare_arrows" className="text-[#137fec]" />
+          <MaterialIcon name="compare_arrows" className="text-[#3B82F6]" />
           <span className="text-white text-sm font-bold">
             {compareCount} car{compareCount > 1 ? "s" : ""} selected
           </span>
@@ -559,7 +559,7 @@ function CompareTray() {
           {compareCount >= 2 && (
             <Link
               href="/compare"
-              className="bg-[#137fec] text-white text-xs font-bold px-4 py-2 rounded-xl"
+              className="bg-[#3B82F6] text-white text-xs font-bold px-4 py-2 rounded-xl"
             >
               Compare Now
             </Link>

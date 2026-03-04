@@ -8,7 +8,7 @@ import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles } from "@/lib/api";
 import { useCompare } from "@/context/CompareContext";
 
-/* Stitch: ai_technical_comparison — #ecc813, Space Grotesk, #121210 */
+/* Stitch: ai_technical_comparison — #E5C158, Space Grotesk, #121210 */
 
 function buildSpecRow(
   label: string,
@@ -90,7 +90,7 @@ export default function TechnicalComparisonPage() {
             <MaterialIcon name="arrow_back" />
           </Link>
           <div className="flex flex-col items-center">
-            <h1 className="text-sm font-bold tracking-tight uppercase text-[#ecc813]">Technical Duel</h1>
+            <h1 className="text-sm font-bold tracking-tight uppercase text-[#E5C158]">Technical Duel</h1>
             <p className="text-[10px] text-slate-400 font-medium">AI Comparison Mode</p>
           </div>
           <button className="p-2 rounded-full hover:bg-white/5 transition-colors">
@@ -100,13 +100,13 @@ export default function TechnicalComparisonPage() {
         <div className="flex border-t" style={{ borderColor: "#2d2d26" }}>
           <button
             onClick={() => setTab("specs")}
-            className={`flex-1 py-3 text-xs font-bold uppercase tracking-widest border-b-2 ${tab === "specs" ? "border-[#ecc813] text-[#ecc813]" : "border-transparent text-slate-400"}`}
+            className={`flex-1 py-3 text-xs font-bold uppercase tracking-widest border-b-2 ${tab === "specs" ? "border-[#E5C158] text-[#E5C158]" : "border-transparent text-slate-400"}`}
           >
             Specs
           </button>
           <button
             onClick={() => setTab("ai")}
-            className={`flex-1 py-3 text-xs font-bold uppercase tracking-widest border-b-2 ${tab === "ai" ? "border-[#ecc813] text-[#ecc813]" : "border-transparent text-slate-400"}`}
+            className={`flex-1 py-3 text-xs font-bold uppercase tracking-widest border-b-2 ${tab === "ai" ? "border-[#E5C158] text-[#E5C158]" : "border-transparent text-slate-400"}`}
           >
             AI Analysis
           </button>
@@ -116,7 +116,7 @@ export default function TechnicalComparisonPage() {
       <main className="flex-1 overflow-y-auto pb-32">
         {isLoading ? (
           <div className="flex items-center justify-center py-24">
-            <div className="w-8 h-8 rounded-full border-2 border-[#ecc813]/30 border-t-[#ecc813] animate-spin" />
+            <div className="w-8 h-8 rounded-full border-2 border-[#E5C158]/30 border-t-[#E5C158] animate-spin" />
           </div>
         ) : (
           <>
@@ -136,14 +136,14 @@ export default function TechnicalComparisonPage() {
                       </div>
                     )}
                   </div>
-                  <p className={`text-[10px] font-bold uppercase mb-1 ${idx === 0 ? "text-[#ecc813]" : "text-slate-400"}`}>{label}</p>
+                  <p className={`text-[10px] font-bold uppercase mb-1 ${idx === 0 ? "text-[#E5C158]" : "text-slate-400"}`}>{label}</p>
                   <h3 className="text-sm font-bold leading-tight">{car?.name ?? "Select Vehicle"}</h3>
-                  <div className={`mt-2 inline-flex items-center px-2 py-1 rounded text-[10px] font-mono ${idx === 0 ? "bg-[#1c1c18] text-slate-300" : "bg-[#ecc813] text-[#121210] font-bold"}`}>
+                  <div className={`mt-2 inline-flex items-center px-2 py-1 rounded text-[10px] font-mono ${idx === 0 ? "bg-[#1c1c18] text-slate-300" : "bg-[#E5C158] text-[#121210] font-bold"}`}>
                     {match}% MATCH
                   </div>
                 </div>
               ))}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 size-8 bg-[#ecc813] rounded-full flex items-center justify-center shadow-lg border-2 border-[#121210]">
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 size-8 bg-[#E5C158] rounded-full flex items-center justify-center shadow-lg border-2 border-[#121210]">
                 <span className="text-[10px] font-black text-[#121210] italic">VS</span>
               </div>
             </div>
@@ -160,13 +160,13 @@ export default function TechnicalComparisonPage() {
                     {specs.map((s) => (
                       <div key={s.label}>
                         <div className="flex justify-between items-end mb-1 px-1">
-                          <span className={`text-xs font-bold ${s.winner === "left" ? "text-[#ecc813] italic" : "text-slate-400"}`}>{s.left}</span>
+                          <span className={`text-xs font-bold ${s.winner === "left" ? "text-[#E5C158] italic" : "text-slate-400"}`}>{s.left}</span>
                           <span className="text-[10px] font-bold uppercase text-slate-500">{s.label}</span>
-                          <span className={`text-xs font-bold ${s.winner === "right" ? "text-[#ecc813] italic" : "text-slate-400"}`}>{s.right}</span>
+                          <span className={`text-xs font-bold ${s.winner === "right" ? "text-[#E5C158] italic" : "text-slate-400"}`}>{s.right}</span>
                         </div>
                         <div className="h-2 flex bg-[#1c1c18] rounded-full overflow-hidden">
-                          <div className={`h-full rounded-full ${s.winner === "left" ? "bg-[#ecc813]" : "bg-[#2d2d26]"}`} style={{ width: `${s.leftW}%` }} />
-                          <div className={`h-full rounded-full ml-auto ${s.winner === "right" ? "bg-[#ecc813]" : "bg-[#2d2d26]"}`} style={{ width: `${s.rightW}%` }} />
+                          <div className={`h-full rounded-full ${s.winner === "left" ? "bg-[#E5C158]" : "bg-[#2d2d26]"}`} style={{ width: `${s.leftW}%` }} />
+                          <div className={`h-full rounded-full ml-auto ${s.winner === "right" ? "bg-[#E5C158]" : "bg-[#2d2d26]"}`} style={{ width: `${s.rightW}%` }} />
                         </div>
                       </div>
                     ))}
@@ -185,7 +185,7 @@ export default function TechnicalComparisonPage() {
                         <p className="text-[9px] uppercase font-bold text-slate-500 mb-1">{e.label}</p>
                         <div className="flex flex-col gap-1">
                           <div className="flex items-center gap-1.5">
-                            <div className="size-1.5 rounded-full bg-[#ecc813]" />
+                            <div className="size-1.5 rounded-full bg-[#E5C158]" />
                             <span className="text-[11px] font-bold truncate">{e.left}</span>
                           </div>
                           <div className="flex items-center gap-1.5 opacity-50">
@@ -209,7 +209,7 @@ export default function TechnicalComparisonPage() {
                     <div className="flex justify-between items-center">
                       <div>
                         <p className="text-xs text-slate-400">{carA.name}</p>
-                        <p className="text-xl font-bold text-[#ecc813]">{carA.priceDisplay}</p>
+                        <p className="text-xl font-bold text-[#E5C158]">{carA.priceDisplay}</p>
                       </div>
                       <MaterialIcon name="compare_arrows" className="text-slate-600" />
                       <div className="text-right">
@@ -229,10 +229,10 @@ export default function TechnicalComparisonPage() {
 
             {/* AI Insight */}
             <section className="mt-8 px-4">
-              <div className="bg-[#ecc813]/10 border border-[#ecc813]/20 rounded-xl p-4">
+              <div className="bg-[#E5C158]/10 border border-[#E5C158]/20 rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <MaterialIcon name="auto_awesome" className="text-[#ecc813]" />
-                  <h5 className="text-xs font-bold text-[#ecc813] uppercase tracking-wider">AI Match Insight</h5>
+                  <MaterialIcon name="auto_awesome" className="text-[#E5C158]" />
+                  <h5 className="text-xs font-bold text-[#E5C158] uppercase tracking-wider">AI Match Insight</h5>
                 </div>
                 <p className="text-xs leading-relaxed text-slate-400">{aiInsight}</p>
               </div>
@@ -245,7 +245,7 @@ export default function TechnicalComparisonPage() {
       <div className="fixed bottom-24 left-1/2 -translate-x-1/2 w-[90%] max-w-md z-40 px-4">
         <Link
           href="/compare/studio"
-          className="w-full bg-[#ecc813] text-[#121210] font-black uppercase text-xs tracking-[0.2em] py-4 rounded-lg shadow-[0_8px_30px_rgba(236,200,19,0.3)] flex items-center justify-center gap-2"
+          className="w-full bg-[#E5C158] text-[#121210] font-black uppercase text-xs tracking-[0.2em] py-4 rounded-lg shadow-[0_8px_30px_rgba(236,200,19,0.3)] flex items-center justify-center gap-2"
         >
           Full Comparison
           <MaterialIcon name="arrow_forward_ios" className="text-sm" />
@@ -261,7 +261,7 @@ export default function TechnicalComparisonPage() {
           <MaterialIcon name="directions_car" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Cars</span>
         </Link>
-        <Link href="/compare/technical" className="flex flex-col items-center gap-1 text-[#ecc813]">
+        <Link href="/compare/technical" className="flex flex-col items-center gap-1 text-[#E5C158]">
           <MaterialIcon name="compare_arrows" fill />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Duel</span>
         </Link>

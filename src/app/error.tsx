@@ -19,7 +19,7 @@ export default function Error({
   return (
     <div
       className="min-h-dvh flex items-center justify-center px-8"
-      style={{ background: "#0a0c10", fontFamily: "'Manrope', sans-serif" }}
+      style={{ background: "#0A1628", fontFamily: "'Manrope', sans-serif" }}
     >
       <div className="text-center max-w-sm">
         <MaterialIcon name="error" className="text-6xl text-red-400 mb-4" />
@@ -30,7 +30,7 @@ export default function Error({
         <div className="flex gap-3 justify-center">
           <button
             onClick={reset}
-            className="px-6 py-3 rounded-xl bg-[#137fec] text-white text-sm font-bold transition-all active:scale-95"
+            className="px-6 py-3 rounded-xl bg-[#3B82F6] text-white text-sm font-bold transition-all active:scale-95"
           >
             Try Again
           </button>

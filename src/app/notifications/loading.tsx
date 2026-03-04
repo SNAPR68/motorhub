@@ -2,7 +2,7 @@
 
 export default function NotificationsLoading() {
   return (
-    <div className="min-h-dvh p-6" style={{ background: "#0a0c10" }}>
+    <div className="min-h-dvh p-6" style={{ background: "#0A1628" }}>
       <div className="max-w-md mx-auto space-y-4">
         <div className="h-8 w-36 animate-pulse rounded-lg bg-white/5" />
         {Array.from({ length: 5 }).map((_, i) => (

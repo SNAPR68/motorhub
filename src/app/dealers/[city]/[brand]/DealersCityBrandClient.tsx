@@ -28,13 +28,13 @@ export default function DealersCityBrandClient({
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -67,18 +67,18 @@ export default function DealersCityBrandClient({
         <div
           className="rounded-2xl p-4 border flex items-center gap-4"
           style={{
-            background: "rgba(17,82,212,0.06)",
-            borderColor: "rgba(17,82,212,0.15)",
+            background: "rgba(59,130,246,0.06)",
+            borderColor: "rgba(59,130,246,0.15)",
           }}
         >
           <div
             className="flex h-12 w-12 items-center justify-center rounded-xl shrink-0"
-            style={{ background: "rgba(17,82,212,0.15)" }}
+            style={{ background: "rgba(59,130,246,0.15)" }}
           >
             <MaterialIcon
               name="verified"
               className="text-[24px]"
-              style={{ color: "#1152d4" }}
+              style={{ color: "#3B82F6" }}
             />
           </div>
           <div>
@@ -182,7 +182,7 @@ export default function DealersCityBrandClient({
                   <Link
                     href={`/dealers/profile/${dealer.id}`}
                     className="flex-1 flex items-center justify-center gap-1.5 h-9 rounded-xl text-[11px] font-semibold text-white"
-                    style={{ background: "#1152d4" }}
+                    style={{ background: "#3B82F6" }}
                   >
                     <MaterialIcon name="visibility" className="text-[15px]" />
                     View Details

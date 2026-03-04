@@ -7,7 +7,7 @@ import { useApi } from "@/lib/hooks/use-api";
 import { fetchNotifications } from "@/lib/api";
 import type { DbNotification } from "@/lib/api";
 
-/* Stitch: notification_history_log — #135bec, Inter + Newsreader, #0a0c10/#101622 */
+/* Stitch: notification_history_log — #135bec, Inter + Newsreader, #0A1628/#101622 */
 
 const TYPE_ICON: Record<string, string> = {
   LEAD: "chat_bubble",
@@ -18,7 +18,7 @@ const TYPE_ICON: Record<string, string> = {
 };
 
 const TYPE_DOT: Record<string, string> = {
-  LEAD: "bg-[#135bec] shadow-[0_0_10px_#135bec]",
+  LEAD: "bg-[#3B82F6] shadow-[0_0_10px_#135bec]",
   SYSTEM: "bg-slate-700",
   ALERT: "bg-amber-500",
   APPOINTMENT: "bg-emerald-500",
@@ -58,10 +58,10 @@ export default function NotificationHistoryPage() {
   return (
     <div
       className="relative flex min-h-dvh w-full flex-col max-w-md mx-auto overflow-x-hidden shadow-2xl"
-      style={{ fontFamily: "'Inter', sans-serif", background: "#0a0c10" }}
+      style={{ fontFamily: "'Inter', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
-      <div className="sticky top-0 z-50 bg-[#0a0c10]/80 backdrop-blur-md border-b border-white/5">
+      <div className="sticky top-0 z-50 bg-[#0A1628]/80 backdrop-blur-md border-b border-white/5">
         <div className="flex items-center p-4 pb-2 justify-between">
           <Link
             href="/"
@@ -77,7 +77,7 @@ export default function NotificationHistoryPage() {
           </h2>
           <div className="flex w-10 items-center justify-end gap-1">
             {unreadCount > 0 && (
-              <span className="text-[10px] font-bold bg-[#135bec] text-white rounded-full px-1.5 py-0.5">
+              <span className="text-[10px] font-bold bg-[#3B82F6] text-white rounded-full px-1.5 py-0.5">
                 {unreadCount}
               </span>
             )}
@@ -111,7 +111,7 @@ export default function NotificationHistoryPage() {
                 onClick={() => setActiveChannel(ch)}
                 className={`flex-shrink-0 flex h-8 items-center justify-center gap-1.5 rounded-full px-3 transition-all cursor-pointer capitalize text-xs font-medium ${
                   activeChannel === ch
-                    ? "bg-[#135bec]/10 border border-[#135bec]/30 text-[#135bec]"
+                    ? "bg-[#3B82F6]/10 border border-[#3B82F6]/30 text-[#3B82F6]"
                     : "bg-slate-800/50 border border-white/5 text-white opacity-60"
                 }`}
               >
@@ -137,7 +137,7 @@ export default function NotificationHistoryPage() {
           <div className="space-y-6">
             {[1, 2, 3].map((i) => (
               <div key={i} className="relative pl-10 animate-pulse">
-                <div className="absolute left-[13px] top-1 size-4 rounded-full bg-slate-800 border-4 border-[#0a0c10]" />
+                <div className="absolute left-[13px] top-1 size-4 rounded-full bg-slate-800 border-4 border-[#0A1628]" />
                 <div className="rounded-xl p-4" style={{ background: "rgba(25,34,51,0.8)", border: "1px solid rgba(255,255,255,0.05)" }}>
                   <div className="h-4 bg-slate-800 rounded w-2/3 mb-2" />
                   <div className="h-3 bg-slate-800 rounded w-1/2" />
@@ -162,7 +162,7 @@ export default function NotificationHistoryPage() {
           return (
             <div key={notif.id} className="relative pl-10 mb-8">
               {/* Timeline Dot */}
-              <div className={`absolute left-[13px] top-1 size-4 rounded-full ${dotClass} border-4 border-[#0a0c10] z-10`} />
+              <div className={`absolute left-[13px] top-1 size-4 rounded-full ${dotClass} border-4 border-[#0A1628] z-10`} />
 
               <div
                 className={`rounded-xl p-4 shadow-xl ${!isFirst ? "opacity-90" : ""}`}
@@ -184,13 +184,13 @@ export default function NotificationHistoryPage() {
                   <div className="flex flex-col items-end gap-1 shrink-0">
                     <span className="text-slate-500 text-[10px]">{timeAgo(notif.createdAt)}</span>
                     {!notif.read && (
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-tighter border bg-[#135bec]/10 text-[#135bec] border-[#135bec]/20">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-tighter border bg-[#3B82F6]/10 text-[#3B82F6] border-[#3B82F6]/20">
                         New
                       </span>
                     )}
                     {notif.read && (
                       <div className="flex items-center gap-1">
-                        <MaterialIcon name="done_all" className="text-[14px] text-[#135bec]" />
+                        <MaterialIcon name="done_all" className="text-[14px] text-[#3B82F6]" />
                         <span className="text-slate-400 text-[10px] font-bold uppercase">Read</span>
                       </div>
                     )}
@@ -201,8 +201,8 @@ export default function NotificationHistoryPage() {
                 {isFirst && (
                   <div className="mt-4 pt-4 border-t border-white/5">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="size-8 rounded-full bg-[#135bec]/20 flex items-center justify-center">
-                        <MaterialIcon name={icon} className="text-[#135bec] text-sm" />
+                      <div className="size-8 rounded-full bg-[#3B82F6]/20 flex items-center justify-center">
+                        <MaterialIcon name={icon} className="text-[#3B82F6] text-sm" />
                       </div>
                       <div className="flex-1">
                         <p className="text-slate-300 text-sm leading-relaxed italic">
@@ -213,7 +213,7 @@ export default function NotificationHistoryPage() {
                     {notif.type === "LEAD" && (
                       <Link
                         href="/leads"
-                        className="w-full bg-[#135bec] text-white font-bold py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors"
+                        className="w-full bg-[#3B82F6] text-white font-bold py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors"
                       >
                         View Lead Profile
                         <MaterialIcon name="open_in_new" className="text-sm" />
@@ -232,7 +232,7 @@ export default function NotificationHistoryPage() {
 
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 md:hidden">
-        <div className="flex gap-2 border-t border-white/5 bg-[#0a0c10]/95 backdrop-blur-xl px-4 pb-8 pt-3 shadow-2xl">
+        <div className="flex gap-2 border-t border-white/5 bg-[#0A1628]/95 backdrop-blur-xl px-4 pb-8 pt-3 shadow-2xl">
           <Link href="/inventory" className="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 transition-colors hover:text-white">
             <div className="flex h-8 items-center justify-center">
               <MaterialIcon name="directions_car" />
@@ -245,7 +245,7 @@ export default function NotificationHistoryPage() {
             </div>
             <p className="text-[10px] font-medium uppercase tracking-wider">Leads</p>
           </Link>
-          <Link href="/notifications/history" className="flex flex-1 flex-col items-center justify-end gap-1 text-[#135bec]">
+          <Link href="/notifications/history" className="flex flex-1 flex-col items-center justify-end gap-1 text-[#3B82F6]">
             <div className="flex h-8 items-center justify-center">
               <MaterialIcon name="history" fill />
             </div>

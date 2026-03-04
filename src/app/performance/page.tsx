@@ -7,7 +7,7 @@ import { fetchDashboard } from "@/lib/api";
 import { SkeletonCard } from "@/components/ui/Skeleton";
 
 /* ── design tokens: ai_performance_analytics_(dark) ── */
-// primary: #137fec, accent-cyan: #00f2ff, font: Inter, bg: #0b0e14, card: #161b22
+// primary: #3B82F6, accent-cyan: #00f2ff, font: Inter, bg: #0b0e14, card: #161b22
 
 export default function PerformancePage() {
   const { data, isLoading } = useApi(() => fetchDashboard(), []);
@@ -26,7 +26,7 @@ export default function PerformancePage() {
   // Compute gauge offsets from real data (0-100 scale → 0-100 dashoffset)
   const convNum = parseInt(conversionRate) || 0;
   const gauges = [
-    { label: "Lead Conversion", value: conversionRate, offset: 100 - convNum, color: "#137fec" },
+    { label: "Lead Conversion", value: conversionRate, offset: 100 - convNum, color: "#3B82F6" },
     { label: "Hot Leads", value: String(hotLeads), offset: Math.max(0, 100 - Math.min(hotLeads * 5, 100)), color: "#00f2ff" },
     { label: "AI Replies", value: String(aiRepliesSent), offset: Math.max(0, 100 - Math.min(aiRepliesSent * 2, 100)), color: "#a855f7" },
   ];
@@ -49,7 +49,7 @@ export default function PerformancePage() {
       >
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg flex items-center justify-center border" style={{ background: "rgba(19,127,236,0.2)", borderColor: "rgba(19,127,236,0.3)" }}>
-            <MaterialIcon name="analytics" className="text-[#137fec]" />
+            <MaterialIcon name="analytics" className="text-[#3B82F6]" />
           </div>
           <h1 className="text-xl font-bold tracking-tight text-white">AI Analytics</h1>
         </div>
@@ -70,7 +70,7 @@ export default function PerformancePage() {
             <section className="mt-6">
               <div className="rounded-xl p-6 relative overflow-hidden" style={{ background: "rgba(22,27,34,0.8)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.05)", boxShadow: "0 0 15px rgba(19,127,236,0.3)" }}>
                 <div className="relative z-10">
-                  <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#137fec" }}>Total Revenue</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#3B82F6" }}>Total Revenue</p>
                   <div className="flex items-end gap-3 mt-1">
                     <h2 className="text-4xl font-bold tracking-tight text-white">{revenue}</h2>
                     <span className="mb-1 text-emerald-400 font-medium text-sm flex items-center">
@@ -83,7 +83,7 @@ export default function PerformancePage() {
                 <svg className="absolute bottom-0 right-0 w-full h-24 opacity-20 pointer-events-none" preserveAspectRatio="none" viewBox="0 0 400 100">
                   <defs>
                     <linearGradient id="roiGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#137fec" stopOpacity="1" />
+                      <stop offset="0%" stopColor="#3B82F6" stopOpacity="1" />
                       <stop offset="100%" stopColor="transparent" stopOpacity="0" />
                     </linearGradient>
                   </defs>
@@ -95,7 +95,7 @@ export default function PerformancePage() {
             {/* Quick Stats Row */}
             <section className="mt-6 grid grid-cols-3 gap-3">
               {[
-                { label: "Total Cars", value: totalVehicles, icon: "directions_car", color: "#137fec" },
+                { label: "Total Cars", value: totalVehicles, icon: "directions_car", color: "#3B82F6" },
                 { label: "Available", value: availableVehicles, icon: "check_circle", color: "#22c55e" },
                 { label: "Active Leads", value: activeLeads, icon: "group", color: "#f59e0b" },
               ].map((s) => (
@@ -142,10 +142,10 @@ export default function PerformancePage() {
                   <div>
                     <div className="flex justify-between text-xs mb-1">
                       <span className="text-slate-400">Available</span>
-                      <span style={{ color: "#137fec" }}>{availPct}%</span>
+                      <span style={{ color: "#3B82F6" }}>{availPct}%</span>
                     </div>
                     <div className="h-2 rounded-full" style={{ background: "rgba(255,255,255,0.05)" }}>
-                      <div className="h-full rounded-full" style={{ width: `${availPct}%`, background: "#137fec" }} />
+                      <div className="h-full rounded-full" style={{ width: `${availPct}%`, background: "#3B82F6" }} />
                     </div>
                   </div>
                   <div>
@@ -166,11 +166,11 @@ export default function PerformancePage() {
               <div className="rounded-xl p-4" style={{ background: "rgba(22,27,34,0.8)", border: "1px solid rgba(255,255,255,0.05)" }}>
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold text-white">Upcoming Appointments</h3>
-                  <Link href="/appointments" className="text-xs font-bold" style={{ color: "#137fec" }}>View All</Link>
+                  <Link href="/appointments" className="text-xs font-bold" style={{ color: "#3B82F6" }}>View All</Link>
                 </div>
                 <div className="mt-3 flex items-center gap-3">
                   <div className="w-14 h-14 rounded-xl flex items-center justify-center" style={{ background: "rgba(19,127,236,0.15)", border: "1px solid rgba(19,127,236,0.2)" }}>
-                    <span className="text-2xl font-bold" style={{ color: "#137fec" }}>{upcomingAppts}</span>
+                    <span className="text-2xl font-bold" style={{ color: "#3B82F6" }}>{upcomingAppts}</span>
                   </div>
                   <div>
                     <p className="text-white font-semibold">Test drives scheduled</p>
@@ -188,7 +188,7 @@ export default function PerformancePage() {
                   {activities.slice(0, 4).map((act) => (
                     <div key={(act as { id: string }).id} className="rounded-xl p-3 flex items-center gap-4" style={{ background: "rgba(22,27,34,0.8)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.05)" }}>
                       <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style={{ background: "rgba(19,127,236,0.15)" }}>
-                        <MaterialIcon name="bolt" className="text-[#137fec] text-sm" />
+                        <MaterialIcon name="bolt" className="text-[#3B82F6] text-sm" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-semibold text-sm text-white truncate">{(act as { title: string }).title}</h4>
@@ -212,7 +212,7 @@ export default function PerformancePage() {
             { icon: "bar_chart", label: "Analytics", href: "/performance", active: true },
             { icon: "settings", label: "Settings", href: "/settings" },
           ].map((item) => (
-            <Link key={item.label} href={item.href} className={`flex flex-col items-center gap-1 ${item.active ? "text-[#137fec]" : "text-slate-500"}`}>
+            <Link key={item.label} href={item.href} className={`flex flex-col items-center gap-1 ${item.active ? "text-[#3B82F6]" : "text-slate-500"}`}>
               <MaterialIcon name={item.icon} fill={item.active} />
               <span className={`text-[10px] uppercase tracking-tight ${item.active ? "font-bold" : "font-medium"}`}>{item.label}</span>
             </Link>

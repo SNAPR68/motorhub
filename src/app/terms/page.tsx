@@ -50,7 +50,7 @@ export default function TermsPage() {
   return (
     <div
       className="min-h-dvh"
-      style={{ background: "#0a0c10", fontFamily: "'Noto Sans', sans-serif" }}
+      style={{ background: "#0A1628", fontFamily: "'Noto Sans', sans-serif" }}
     >
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-white/5 px-6 py-4" style={{ background: "rgba(10,12,16,0.85)", backdropFilter: "blur(12px)" }}>
@@ -66,7 +66,7 @@ export default function TermsPage() {
 
       <main className="max-w-2xl mx-auto px-6 py-10 pb-20">
         <div className="mb-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#137fec] mb-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#3B82F6] mb-2">
             Legal
           </p>
           <h2 className="text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Noto Serif', serif" }}>
@@ -86,7 +86,7 @@ export default function TermsPage() {
               style={{ background: "rgba(255,255,255,0.02)" }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-xs font-bold text-[#137fec]/60">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-xs font-bold text-[#3B82F6]/60">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="text-base font-bold text-white" style={{ fontFamily: "'Noto Serif', serif" }}>
                   {section.title}
                 </h3>
@@ -99,7 +99,7 @@ export default function TermsPage() {
         </div>
 
         <p className="mt-8 text-center text-xs text-slate-600">
-          <Link href="/privacy" className="text-[#137fec] hover:underline">Privacy Policy</Link>
+          <Link href="/privacy" className="text-[#3B82F6] hover:underline">Privacy Policy</Link>
           {" "}&bull;{" "}
           <Link href="/" className="text-slate-500 hover:text-slate-300">Home</Link>
         </p>

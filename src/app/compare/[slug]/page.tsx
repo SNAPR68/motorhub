@@ -125,13 +125,13 @@ export default function CompareSlugPage({
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -170,7 +170,7 @@ export default function CompareSlugPage({
                 background: "rgba(255,255,255,0.035)",
                 borderColor:
                   i === 0
-                    ? "rgba(17,82,212,0.3)"
+                    ? "rgba(59,130,246,0.3)"
                     : "rgba(255,255,255,0.07)",
               }}
             >
@@ -189,7 +189,7 @@ export default function CompareSlugPage({
                 </h3>
                 <p
                   className="text-sm font-black mt-1"
-                  style={{ color: i === 0 ? "#1152d4" : "#10b981" }}
+                  style={{ color: i === 0 ? "#3B82F6" : "#10b981" }}
                 >
                   {car.price}
                 </p>
@@ -204,7 +204,7 @@ export default function CompareSlugPage({
             <MaterialIcon
               name="analytics"
               className="text-[18px]"
-              style={{ color: "#1152d4" }}
+              style={{ color: "#3B82F6" }}
             />
             <h2 className="text-sm font-bold text-white">Specifications</h2>
           </div>
@@ -306,8 +306,8 @@ export default function CompareSlugPage({
         <div
           className="rounded-2xl p-5 border"
           style={{
-            background: "rgba(17,82,212,0.06)",
-            borderColor: "rgba(17,82,212,0.15)",
+            background: "rgba(59,130,246,0.06)",
+            borderColor: "rgba(59,130,246,0.15)",
           }}
         >
           <div className="flex items-center gap-2 mb-3">
@@ -336,7 +336,7 @@ export default function CompareSlugPage({
                 style={{
                   width: "55%",
                   background:
-                    "linear-gradient(90deg, #1152d4, #10b981)",
+                    "linear-gradient(90deg, #3B82F6, #10b981)",
                 }}
               />
             </div>
@@ -358,7 +358,7 @@ export default function CompareSlugPage({
           <MaterialIcon
             name="compare_arrows"
             className="text-[20px]"
-            style={{ color: "#1152d4" }}
+            style={{ color: "#3B82F6" }}
           />
           <span className="text-sm font-semibold text-white">
             Compare More Cars

@@ -8,7 +8,7 @@ import { fetchFunnel } from "@/lib/api";
 import type { FunnelData } from "@/lib/api";
 
 /* ── design tokens: lead_conversion_analytics_(light) ── */
-// primary: #137fec, font: Inter, bg: white/light
+// primary: #3B82F6, font: Inter, bg: white/light
 
 const PERIOD_TABS = ["Weekly", "Monthly"];
 
@@ -82,11 +82,11 @@ function buildSentimentDisplay(data: FunnelData | null) {
     {
       icon: "sentiment_dissatisfied",
       iconBg: "bg-blue-50",
-      iconColor: "text-[#137fec]",
+      iconColor: "text-[#3B82F6]",
       title: "Cool Leads",
       subtitle: `${data.sentiment.cool} early-stage browsers`,
       change: `${coolPct}%`,
-      changeColor: "text-[#137fec]",
+      changeColor: "text-[#3B82F6]",
       bars: [3, 2, 2.5, 1.5, Math.max(1, coolPct / 20)],
       barColor: "bg-blue",
     },
@@ -124,7 +124,7 @@ export default function AnalyticsPage() {
           </Link>
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold border-2"
-            style={{ background: "rgba(19,127,236,0.1)", borderColor: "rgba(19,127,236,0.2)", color: "#137fec" }}
+            style={{ background: "rgba(19,127,236,0.1)", borderColor: "rgba(19,127,236,0.2)", color: "#3B82F6" }}
           >
             R
           </div>
@@ -143,7 +143,7 @@ export default function AnalyticsPage() {
                   ? "bg-white shadow-sm"
                   : "text-slate-500"
               }`}
-              style={i === period ? { color: "#137fec" } : {}}
+              style={i === period ? { color: "#3B82F6" } : {}}
             >
               {t}
             </button>
@@ -184,7 +184,7 @@ export default function AnalyticsPage() {
                   style={{
                     width: f.width,
                     background: f.opacity === 1
-                      ? "#137fec"
+                      ? "#3B82F6"
                       : `rgba(19,127,236,${f.opacity})`,
                     ...(f.opacity === 1 ? { boxShadow: "0 4px 12px rgba(19,127,236,0.2)" } : {}),
                   }}
@@ -192,13 +192,13 @@ export default function AnalyticsPage() {
                   <div className="absolute inset-0 flex items-center px-4">
                     <MaterialIcon
                       name={f.icon}
-                      className={`mr-2 ${f.whiteText ? "text-white" : "text-[#137fec]/60"}`}
+                      className={`mr-2 ${f.whiteText ? "text-white" : "text-[#3B82F6]/60"}`}
                     />
                     <span
                       className={`text-xs font-semibold ${
                         f.whiteText
                           ? "text-white uppercase tracking-wider font-bold"
-                          : "text-[#137fec]"
+                          : "text-[#3B82F6]"
                       }`}
                     >
                       {f.label}
@@ -218,7 +218,7 @@ export default function AnalyticsPage() {
             <h2 className="text-lg font-bold text-slate-900">AI Sentiment Trends</h2>
             <p className="text-xs text-slate-500">Lead emotional analysis</p>
           </div>
-          <MaterialIcon name="psychology" className="text-[#137fec]" />
+          <MaterialIcon name="psychology" className="text-[#3B82F6]" />
         </div>
 
         {isLoading ? (
@@ -280,7 +280,7 @@ export default function AnalyticsPage() {
             }}
           >
             <div className="flex items-start gap-3">
-              <MaterialIcon name="lightbulb" className="text-[#137fec] text-xl mt-0.5" />
+              <MaterialIcon name="lightbulb" className="text-[#3B82F6] text-xl mt-0.5" />
               <p className="text-xs leading-relaxed text-slate-600">
                 <span className="font-bold text-slate-900">AI Insight:</span>{" "}
                 {data.totalLeads > 0
@@ -307,7 +307,7 @@ export default function AnalyticsPage() {
             key={item.label}
             href={item.href}
             className={`flex flex-col items-center gap-1 ${
-              item.active ? "text-[#137fec]" : "text-slate-400"
+              item.active ? "text-[#3B82F6]" : "text-slate-400"
             }`}
           >
             <div className="relative">
@@ -315,7 +315,7 @@ export default function AnalyticsPage() {
               {item.active && (
                 <div
                   className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
-                  style={{ background: "#137fec" }}
+                  style={{ background: "#3B82F6" }}
                 />
               )}
             </div>

@@ -71,10 +71,10 @@ export default function UsedCarsPage() {
   };
 
   return (<BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 pt-3 pb-0">
 
           <div className="flex items-center gap-2 mb-3">
@@ -99,7 +99,7 @@ export default function UsedCarsPage() {
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="relative flex h-9 w-9 items-center justify-center rounded-xl shrink-0"
-              style={{ background: showFilters ? "#1152d4" : "rgba(255,255,255,0.05)", color: showFilters ? "#fff" : "#94a3b8" }}
+              style={{ background: showFilters ? "#3B82F6" : "rgba(255,255,255,0.05)", color: showFilters ? "#fff" : "#94a3b8" }}
             >
               <MaterialIcon name="tune" className="text-[20px]" />
               {activeFilterCount > 0 && (
@@ -120,9 +120,9 @@ export default function UsedCarsPage() {
                   onClick={() => setSort(s.value)}
                   className="flex h-7 shrink-0 items-center px-3 rounded-full text-[11px] font-semibold border transition-all"
                   style={{
-                    background: sort === s.value ? "rgba(17,82,212,0.15)" : "rgba(255,255,255,0.03)",
+                    background: sort === s.value ? "rgba(59,130,246,0.15)" : "rgba(255,255,255,0.03)",
                     color: sort === s.value ? "#fff" : "#64748b",
-                    borderColor: sort === s.value ? "#1152d4" : "rgba(255,255,255,0.08)",
+                    borderColor: sort === s.value ? "#3B82F6" : "rgba(255,255,255,0.08)",
                   }}
                 >
                   {s.label}
@@ -146,7 +146,7 @@ export default function UsedCarsPage() {
                       key={b.label}
                       onClick={() => setMaxBudget(isActive ? 999999999 : b.max)}
                       className="shrink-0 h-7 px-3 rounded-full text-[11px] font-semibold border"
-                      style={{ background: isActive ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)", color: isActive ? "#fff" : "#94a3b8", borderColor: isActive ? "#1152d4" : "rgba(255,255,255,0.1)" }}
+                      style={{ background: isActive ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.03)", color: isActive ? "#fff" : "#94a3b8", borderColor: isActive ? "#3B82F6" : "rgba(255,255,255,0.1)" }}
                     >
                       {b.label}
                     </button>
@@ -165,7 +165,7 @@ export default function UsedCarsPage() {
                       key={f}
                       onClick={() => setActiveFuel(activeFuel === f ? "" : f)}
                       className="h-7 px-2.5 rounded-full text-[11px] font-semibold border"
-                      style={{ background: activeFuel === f ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)", color: activeFuel === f ? "#fff" : "#94a3b8", borderColor: activeFuel === f ? "#1152d4" : "rgba(255,255,255,0.1)" }}
+                      style={{ background: activeFuel === f ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.03)", color: activeFuel === f ? "#fff" : "#94a3b8", borderColor: activeFuel === f ? "#3B82F6" : "rgba(255,255,255,0.1)" }}
                     >
                       {f}
                     </button>
@@ -182,7 +182,7 @@ export default function UsedCarsPage() {
                       key={t}
                       onClick={() => setActiveTrans(activeTrans === t ? "" : t)}
                       className="h-7 px-2.5 rounded-full text-[11px] font-semibold border"
-                      style={{ background: activeTrans === t ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)", color: activeTrans === t ? "#fff" : "#94a3b8", borderColor: activeTrans === t ? "#1152d4" : "rgba(255,255,255,0.1)" }}
+                      style={{ background: activeTrans === t ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.03)", color: activeTrans === t ? "#fff" : "#94a3b8", borderColor: activeTrans === t ? "#3B82F6" : "rgba(255,255,255,0.1)" }}
                     >
                       {t}
                     </button>
@@ -200,7 +200,7 @@ export default function UsedCarsPage() {
                     key={o}
                     onClick={() => setActiveOwner(activeOwner === o ? "" : o)}
                     className="h-7 px-3 rounded-full text-[11px] font-semibold border"
-                    style={{ background: activeOwner === o ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)", color: activeOwner === o ? "#fff" : "#94a3b8", borderColor: activeOwner === o ? "#1152d4" : "rgba(255,255,255,0.1)" }}
+                    style={{ background: activeOwner === o ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.03)", color: activeOwner === o ? "#fff" : "#94a3b8", borderColor: activeOwner === o ? "#3B82F6" : "rgba(255,255,255,0.1)" }}
                   >
                     {o}
                   </button>
@@ -225,7 +225,7 @@ export default function UsedCarsPage() {
             <span className="text-white font-semibold">{loading ? "..." : filtered.length}</span> used cars found
           </p>
           {activeFilterCount > 0 && (
-            <button onClick={clearAll} className="text-xs font-semibold flex items-center gap-1" style={{ color: "#1152d4" }}>
+            <button onClick={clearAll} className="text-xs font-semibold flex items-center gap-1" style={{ color: "#3B82F6" }}>
               Clear all <MaterialIcon name="close" className="text-[13px]" />
             </button>
           )}
@@ -236,7 +236,7 @@ export default function UsedCarsPage() {
             <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
             <p className="text-sm font-semibold text-slate-400">No cars found</p>
             <p className="text-xs text-slate-600 mt-1">Try adjusting your filters</p>
-            <button onClick={clearAll} className="mt-4 px-6 py-2 rounded-full text-sm font-semibold text-white" style={{ background: "#1152d4" }}>Clear filters</button>
+            <button onClick={clearAll} className="mt-4 px-6 py-2 rounded-full text-sm font-semibold text-white" style={{ background: "#3B82F6" }}>Clear filters</button>
           </div>
         )}
 
@@ -300,7 +300,7 @@ function UsedCarCard({ car }: { car: Vehicle }) {
           </span>
         )}
         {car.aiTag && (
-          <span className="absolute top-2 left-2 text-[9px] font-bold px-1.5 py-0.5 rounded-full text-white" style={{ background: "rgba(17,82,212,0.9)", backdropFilter: "blur(4px)" }}>
+          <span className="absolute top-2 left-2 text-[9px] font-bold px-1.5 py-0.5 rounded-full text-white" style={{ background: "rgba(59,130,246,0.9)", backdropFilter: "blur(4px)" }}>
             AI
           </span>
         )}

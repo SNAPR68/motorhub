@@ -23,9 +23,9 @@ interface Booking {
 
 const STATUS_STYLES: Record<BookingStatus, { bg: string; color: string; label: string }> = {
   CONFIRMED: { bg: "rgba(16,185,129,0.12)", color: "#34d399", label: "Confirmed" },
-  SCHEDULED: { bg: "rgba(17,82,212,0.12)", color: "#60a5fa", label: "Scheduled" },
+  SCHEDULED: { bg: "rgba(59,130,246,0.12)", color: "#60a5fa", label: "Scheduled" },
   COMPLETED: { bg: "rgba(100,116,139,0.15)", color: "#94a3b8", label: "Completed" },
-  PENDING: { bg: "rgba(245,158,11,0.12)", color: "#fbbf24", label: "Pending" },
+  PENDING: { bg: "rgba(245,158,11,0.12)", color: "#E5C158", label: "Pending" },
 };
 
 const TYPE_ICON: Record<BookingType, string> = {
@@ -136,11 +136,11 @@ export default function MyBookingsPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -174,9 +174,9 @@ export default function MyBookingsPage() {
                 onClick={() => setActiveTab(tab)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0"
                 style={{
-                  background: active ? "#1152d4" : "rgba(255,255,255,0.05)",
+                  background: active ? "#3B82F6" : "rgba(255,255,255,0.05)",
                   color: active ? "#fff" : "#94a3b8",
-                  border: active ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.08)",
+                  border: active ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 {tab}
@@ -264,7 +264,7 @@ export default function MyBookingsPage() {
                       )}
                       <button
                         className="flex-1 h-9 rounded-xl text-xs font-semibold transition-all"
-                        style={{ background: "rgba(17,82,212,0.12)", color: "#60a5fa", border: "1px solid rgba(17,82,212,0.2)" }}
+                        style={{ background: "rgba(59,130,246,0.12)", color: "#60a5fa", border: "1px solid rgba(59,130,246,0.2)" }}
                       >
                         {actionLabel}
                       </button>

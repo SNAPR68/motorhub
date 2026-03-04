@@ -14,7 +14,7 @@ import {
 } from "@/lib/plan-limits";
 
 /* ── design tokens: access_roles_&_permissions ── */
-// primary: #f2b90d (gold), font: Manrope, bg: #121210, card: #1c1c18, border: #2d2a1e
+// primary: #E5C158 (gold), font: Manrope, bg: #121210, card: #1c1c18, border: #2d2a1e
 
 const PLAN_TIER_MAP: Record<string, string> = {
   FREE: "Free",
@@ -26,7 +26,7 @@ const PLAN_TIER_MAP: Record<string, string> = {
 const ROLES = [
   {
     tier: "Tier 1",
-    tierBg: "#f2b90d",
+    tierBg: "#E5C158",
     tierColor: "#121210",
     name: "The Director",
     desc: "Supreme oversight with global administrative control and AI strategy.",
@@ -158,7 +158,7 @@ export default function PermissionsPage() {
         </div>
         <span
           className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase"
-          style={{ color: "#f2b90d", border: "1px solid rgba(242,185,13,0.3)", background: "rgba(242,185,13,0.05)" }}
+          style={{ color: "#E5C158", border: "1px solid rgba(242,185,13,0.3)", background: "rgba(242,185,13,0.05)" }}
         >
           {planTier}
         </span>
@@ -186,7 +186,7 @@ export default function PermissionsPage() {
                 className="flex flex-col items-center gap-1 p-3 rounded-xl"
                 style={{ background: "#1c1c18", border: "1px solid #2d2a1e" }}
               >
-                <MaterialIcon name={q.icon} className="text-[#f2b90d] text-lg" />
+                <MaterialIcon name={q.icon} className="text-[#E5C158] text-lg" />
                 <span className="text-lg font-black text-slate-100">{q.value}</span>
                 <span className="text-[9px] font-bold uppercase tracking-wide text-slate-500">{q.label}</span>
               </div>
@@ -203,7 +203,7 @@ export default function PermissionsPage() {
             <span
               className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase"
               style={{
-                color: "#f2b90d",
+                color: "#E5C158",
                 border: "1px solid rgba(242,185,13,0.3)",
                 background: "rgba(242,185,13,0.05)",
               }}
@@ -223,7 +223,7 @@ export default function PermissionsPage() {
                   className="relative aspect-[3/4] rounded-xl overflow-hidden p-6 flex flex-col justify-end transition-all"
                   style={{
                     background: "#1c1c18",
-                    border: i === selectedRole ? "2px solid #f2b90d" : "1px solid #2d2a1e",
+                    border: i === selectedRole ? "2px solid #E5C158" : "1px solid #2d2a1e",
                     boxShadow: i === selectedRole ? "0 0 20px rgba(242,185,13,0.15)" : "none",
                   }}
                 >
@@ -274,14 +274,14 @@ export default function PermissionsPage() {
                   >
                     <MaterialIcon
                       name={cap.icon}
-                      className={unlocked ? "text-[#f2b90d]" : "text-slate-400"}
+                      className={unlocked ? "text-[#E5C158]" : "text-slate-400"}
                     />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h4 className="text-slate-100 font-bold text-sm">{cap.name}</h4>
                     <p className="text-slate-400 text-xs">{cap.desc}</p>
                     {!unlocked && requiredPlan && (
-                      <p className="text-[10px] mt-1 font-bold uppercase tracking-wider" style={{ color: "#f2b90d" }}>
+                      <p className="text-[10px] mt-1 font-bold uppercase tracking-wider" style={{ color: "#E5C158" }}>
                         Requires {requiredPlan}
                       </p>
                     )}
@@ -319,11 +319,11 @@ export default function PermissionsPage() {
                   }}
                 >
                   <div className="flex items-center gap-3 flex-1 min-w-0">
-                    <MaterialIcon name={perm.icon} className={enabled ? "text-[#f2b90d]" : "text-slate-500"} />
+                    <MaterialIcon name={perm.icon} className={enabled ? "text-[#E5C158]" : "text-slate-500"} />
                     <div className="min-w-0">
                       <span className="text-sm font-medium text-slate-200 block">{perm.label}</span>
                       {!enabled && requiredPlan && (
-                        <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: "#f2b90d" }}>
+                        <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: "#E5C158" }}>
                           {requiredPlan}+
                         </span>
                       )}
@@ -331,7 +331,7 @@ export default function PermissionsPage() {
                   </div>
                   <div
                     className="w-11 h-6 rounded-full relative shrink-0"
-                    style={{ background: enabled ? "#f2b90d" : "#334155" }}
+                    style={{ background: enabled ? "#E5C158" : "#334155" }}
                   >
                     <div
                       className="absolute top-0.5 w-5 h-5 rounded-full"
@@ -355,7 +355,7 @@ export default function PermissionsPage() {
               href="/plans"
               className="flex items-center justify-center gap-2 p-4 rounded-xl font-bold text-sm uppercase tracking-wide transition-all"
               style={{
-                background: "#f2b90d",
+                background: "#E5C158",
                 color: "#121210",
                 boxShadow: "0 4px 16px rgba(242,185,13,0.2)",
               }}
@@ -401,7 +401,7 @@ export default function PermissionsPage() {
               </div>
               <button
                 className="px-4 py-3 rounded-lg font-bold text-sm uppercase tracking-wide"
-                style={{ background: "#f2b90d", color: "#121210" }}
+                style={{ background: "#E5C158", color: "#121210" }}
               >
                 Invite
               </button>
@@ -423,7 +423,7 @@ export default function PermissionsPage() {
           <MaterialIcon name="directions_car" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Inventory</span>
         </Link>
-        <Link href="/settings/team" className="flex flex-col items-center gap-1" style={{ color: "#f2b90d" }}>
+        <Link href="/settings/team" className="flex flex-col items-center gap-1" style={{ color: "#E5C158" }}>
           <MaterialIcon name="group" fill />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Team</span>
         </Link>
@@ -432,7 +432,7 @@ export default function PermissionsPage() {
           <div
             className="w-14 h-14 rounded-full flex items-center justify-center"
             style={{
-              background: "#f2b90d",
+              background: "#E5C158",
               boxShadow: "0 4px 20px rgba(242,185,13,0.4)",
               border: "4px solid #121210",
             }}

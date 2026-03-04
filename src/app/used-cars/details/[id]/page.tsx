@@ -38,7 +38,7 @@ export default function UsedCarDetailPage({
 
   if (loading) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="flex flex-col items-center gap-3">
           <div className="h-10 w-10 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
           <p className="text-slate-500 text-sm">Loading...</p>
@@ -49,11 +49,11 @@ export default function UsedCarDetailPage({
 
   if (!vehicle) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="text-center">
           <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
           <p className="text-slate-400 font-semibold">Vehicle not found</p>
-          <Link href="/used-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#1152d4" }}>
+          <Link href="/used-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#3B82F6" }}>
             <MaterialIcon name="arrow_back" className="text-[15px]" /> Back to listings
           </Link>
         </div>
@@ -128,10 +128,10 @@ export default function UsedCarDetailPage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full pb-36" style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center justify-between gap-3">
           <Link href="/used-cars" className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
@@ -167,9 +167,9 @@ export default function UsedCarDetailPage({
               <MaterialIcon name="directions_car" className="text-[64px] text-slate-700" />
             </div>
           )}
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.8) 0%, transparent 40%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,22,40,0.8) 0%, transparent 40%)" }} />
           {vehicle.aiTag && (
-            <span className="absolute top-3 left-3 text-[10px] font-bold px-2 py-1 rounded-full text-white" style={{ background: "rgba(17,82,212,0.9)", backdropFilter: "blur(4px)" }}>
+            <span className="absolute top-3 left-3 text-[10px] font-bold px-2 py-1 rounded-full text-white" style={{ background: "rgba(59,130,246,0.9)", backdropFilter: "blur(4px)" }}>
               AI Verified
             </span>
           )}
@@ -197,7 +197,7 @@ export default function UsedCarDetailPage({
                 key={i}
                 onClick={() => setActiveImg(i)}
                 className="relative shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all"
-                style={{ borderColor: i === activeImg ? "#1152d4" : "transparent" }}
+                style={{ borderColor: i === activeImg ? "#3B82F6" : "transparent" }}
               >
                 <Image src={img} alt="" fill sizes="64px" className="object-cover" unoptimized />
               </button>
@@ -240,7 +240,7 @@ export default function UsedCarDetailPage({
       </div>
 
       {/* ─── TABS ─── */}
-      <div className="sticky top-14 z-30 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <div className="sticky top-14 z-30 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto flex overflow-x-auto no-scrollbar">
           {TABS.map((tab) => (
             <button
@@ -248,7 +248,7 @@ export default function UsedCarDetailPage({
               onClick={() => setActiveTab(tab)}
               className="shrink-0 px-4 py-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-all whitespace-nowrap"
               style={{
-                borderColor: activeTab === tab ? "#1152d4" : "transparent",
+                borderColor: activeTab === tab ? "#3B82F6" : "transparent",
                 color: activeTab === tab ? "#fff" : "#64748b",
               }}
             >
@@ -268,7 +268,7 @@ export default function UsedCarDetailPage({
             <div className="rounded-2xl p-4 border border-white/5" style={{ background: "rgba(255,255,255,0.03)" }}>
               <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Seller Info</p>
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full flex items-center justify-center font-bold text-sm text-white" style={{ background: "#1152d4" }}>
+                <div className="h-10 w-10 rounded-full flex items-center justify-center font-bold text-sm text-white" style={{ background: "#3B82F6" }}>
                   {(vehicle.badge || "D")[0].toUpperCase()}
                 </div>
                 <div>
@@ -330,7 +330,7 @@ export default function UsedCarDetailPage({
         {/* EMI Calculator */}
         {activeTab === "EMI" && (
           <div className="space-y-4">
-            <div className="rounded-2xl p-5 border border-blue-500/20" style={{ background: "rgba(17,82,212,0.05)" }}>
+            <div className="rounded-2xl p-5 border border-blue-500/20" style={{ background: "rgba(59,130,246,0.05)" }}>
               <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-1">Monthly EMI</p>
               <p className="text-3xl font-black text-white">
                 ₹{emi.toLocaleString("en-IN")}
@@ -685,7 +685,7 @@ export default function UsedCarDetailPage({
             </div>
 
             {/* Target price */}
-            <div className="rounded-2xl p-4 border border-blue-500/20" style={{ background: "rgba(17,82,212,0.06)" }}>
+            <div className="rounded-2xl p-4 border border-blue-500/20" style={{ background: "rgba(59,130,246,0.06)" }}>
               <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-1">Your Target Price</p>
               <p className="text-2xl font-black text-white">{formatCost(marketMid)}</p>
               <p className="text-xs text-slate-500 mt-0.5">50th percentile — reasonable opening offer</p>
@@ -702,7 +702,7 @@ export default function UsedCarDetailPage({
               <div className="space-y-3">
                 {negotiationPoints.map((pt, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <div className="h-5 w-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-black text-white" style={{ background: "#1152d4" }}>
+                    <div className="h-5 w-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-black text-white" style={{ background: "#3B82F6" }}>
                       {i + 1}
                     </div>
                     <p className="text-xs text-slate-300 leading-relaxed">{pt}</p>
@@ -759,7 +759,7 @@ export default function UsedCarDetailPage({
           <button
             onClick={() => setInquiryType("TEST_DRIVE")}
             className="flex-1 h-12 rounded-2xl font-bold text-sm text-white transition-all"
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <span className="flex items-center justify-center gap-2">
               <MaterialIcon name="directions_car" className="text-[18px]" />

@@ -30,7 +30,7 @@ const CITY_AREAS = ["Andheri", "Powai", "Bandra", "Thane", "Navi Mumbai", "Juhu"
 
 function matchColor(pct: number) {
   if (pct >= 90) return "#10b981";
-  if (pct >= 85) return "#1152d4";
+  if (pct >= 85) return "#3B82F6";
   if (pct >= 80) return "#f59e0b";
   return "#94a3b8";
 }
@@ -99,7 +99,7 @@ function MatchesContent() {
 
       {/* Search context */}
       <div className="rounded-xl p-3 border border-white/5 flex items-center gap-3" style={{ background: "rgba(255,255,255,0.03)" }}>
-        <div className="h-9 w-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(17,82,212,0.15)" }}>
+        <div className="h-9 w-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(59,130,246,0.15)" }}>
           <MaterialIcon name="directions_car" className="text-[18px] text-blue-400" />
         </div>
         <div className="flex-1 min-w-0">
@@ -117,8 +117,8 @@ function MatchesContent() {
             onClick={() => setActiveFilter(f)}
             className="shrink-0 h-8 px-3.5 rounded-full text-[11px] font-bold transition-all border"
             style={{
-              background: activeFilter === f ? "#1152d4" : "rgba(255,255,255,0.04)",
-              borderColor: activeFilter === f ? "#1152d4" : "rgba(255,255,255,0.06)",
+              background: activeFilter === f ? "#3B82F6" : "rgba(255,255,255,0.04)",
+              borderColor: activeFilter === f ? "#3B82F6" : "rgba(255,255,255,0.06)",
               color: activeFilter === f ? "#fff" : "#94a3b8",
             }}
           >
@@ -148,7 +148,7 @@ function MatchesContent() {
           <MaterialIcon name="search_off" className="text-[48px] text-slate-700" />
           <p className="text-sm font-bold text-white">No matches found</p>
           <p className="text-[11px] text-slate-500 text-center max-w-[260px]">Try adjusting your preferences or check back later as new listings are added daily.</p>
-          <Link href="/swap" className="mt-2 h-10 px-6 rounded-xl text-xs font-bold text-white flex items-center" style={{ background: "#1152d4" }}>
+          <Link href="/swap" className="mt-2 h-10 px-6 rounded-xl text-xs font-bold text-white flex items-center" style={{ background: "#3B82F6" }}>
             Edit Search
           </Link>
         </div>
@@ -200,7 +200,7 @@ function MatchesContent() {
 
                 {/* Value gap */}
                 <div className="px-4 pb-3">
-                  <div className="rounded-xl p-3 border border-white/5" style={{ background: "rgba(17,82,212,0.05)" }}>
+                  <div className="rounded-xl p-3 border border-white/5" style={{ background: "rgba(59,130,246,0.05)" }}>
                     <div className="flex items-center justify-between text-[11px] mb-2">
                       <span className="text-slate-400">Your car</span>
                       <span className="text-white font-bold">{m.yourValue}</span>
@@ -222,7 +222,7 @@ function MatchesContent() {
                   <Link
                     href="/swap/deal"
                     className="flex items-center justify-center gap-2 h-10 rounded-xl text-xs font-bold text-white w-full transition-all"
-                    style={{ background: "#1152d4" }}
+                    style={{ background: "#3B82F6" }}
                   >
                     <MaterialIcon name="visibility" className="text-[16px]" />
                     View Deal
@@ -242,10 +242,10 @@ function MatchesContent() {
 export default function SwapMatchesPage() {
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link href="/swap" className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />

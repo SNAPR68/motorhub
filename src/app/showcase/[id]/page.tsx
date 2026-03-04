@@ -8,7 +8,7 @@ import { fetchVehicle, adaptVehicle } from "@/lib/api";
 import { VehicleJsonLd } from "@/components/VehicleJsonLd";
 
 /* Stitch: premium_vehicle_showcase
-   Tokens: primary=#eebd2b, font=Newsreader, bg=#121212
+   Tokens: primary=#E5C158, font=Newsreader, bg=#121212
    Bottom actions: PROMOTE WITH AI + CONTACT LEAD */
 
 // ── AI Description Sheet ────────────────────────────────────────
@@ -91,7 +91,7 @@ function AiDescriptionSheet({
                 className="w-9 h-9 rounded-xl flex items-center justify-center"
                 style={{ background: "rgba(238,189,43,0.12)", border: "1px solid rgba(238,189,43,0.2)" }}
               >
-                <MaterialIcon name="auto_awesome" className="text-[#eebd2b] text-lg" />
+                <MaterialIcon name="auto_awesome" className="text-[#E5C158] text-lg" />
               </div>
               <div>
                 <h2 className="text-white font-bold text-base leading-tight">AI Description</h2>
@@ -124,7 +124,7 @@ function AiDescriptionSheet({
                     <MaterialIcon
                       name={t.icon}
                       className="text-lg"
-                      style={{ color: tone === t.key ? "#eebd2b" : "#64748b" }}
+                      style={{ color: tone === t.key ? "#E5C158" : "#64748b" }}
                     />
                     <span className="text-[11px] font-bold text-white">{t.label}</span>
                     <span className="text-[9px] text-slate-500 leading-tight">{t.desc}</span>
@@ -141,14 +141,14 @@ function AiDescriptionSheet({
               style={{
                 background: loading
                   ? "rgba(238,189,43,0.15)"
-                  : "linear-gradient(135deg, #eebd2b 0%, #d4a420 100%)",
-                color: loading ? "#eebd2b" : "#0f1218",
+                  : "linear-gradient(135deg, #E5C158 0%, #d4a420 100%)",
+                color: loading ? "#E5C158" : "#0f1218",
                 boxShadow: loading ? "none" : "0 4px 20px rgba(238,189,43,0.3)",
               }}
             >
               {loading ? (
                 <>
-                  <div className="w-4 h-4 rounded-full border-2 border-[#eebd2b]/30 border-t-[#eebd2b] animate-spin" />
+                  <div className="w-4 h-4 rounded-full border-2 border-[#E5C158]/30 border-t-[#E5C158] animate-spin" />
                   Generating…
                 </>
               ) : (
@@ -170,8 +170,8 @@ function AiDescriptionSheet({
               >
                 {/* AI badge */}
                 <div className="flex items-center gap-1.5 mb-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#eebd2b] animate-pulse" />
-                  <span className="text-[9px] font-black uppercase tracking-[0.25em] text-[#eebd2b]">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#E5C158] animate-pulse" />
+                  <span className="text-[9px] font-black uppercase tracking-[0.25em] text-[#E5C158]">
                     {generated ? "AI Generated" : "Smart Fallback"}
                   </span>
                 </div>
@@ -197,7 +197,7 @@ function AiDescriptionSheet({
                   <Link
                     href={`/quick-draft?vehicleId=${vehicleId}&prefill=${encodeURIComponent(description.slice(0, 100))}`}
                     className="flex-1 py-2.5 rounded-lg flex items-center justify-center gap-1.5 text-xs font-bold"
-                    style={{ background: "rgba(238,189,43,0.1)", color: "#eebd2b", border: "1px solid rgba(238,189,43,0.2)" }}
+                    style={{ background: "rgba(238,189,43,0.1)", color: "#E5C158", border: "1px solid rgba(238,189,43,0.2)" }}
                   >
                     <MaterialIcon name="send" className="text-sm" />
                     Send as Draft
@@ -212,9 +212,9 @@ function AiDescriptionSheet({
                 className="rounded-xl p-4 flex items-start gap-3"
                 style={{ background: "rgba(238,189,43,0.05)", border: "1px solid rgba(238,189,43,0.1)" }}
               >
-                <MaterialIcon name="lightbulb" className="text-[#eebd2b] text-lg mt-0.5 shrink-0" />
+                <MaterialIcon name="lightbulb" className="text-[#E5C158] text-lg mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-xs font-bold text-[#eebd2b] mb-1">How it works</p>
+                  <p className="text-xs font-bold text-[#E5C158] mb-1">How it works</p>
                   <p className="text-[11px] text-slate-400 leading-relaxed">
                     AI reads this vehicle&apos;s specs, km, price, and features from the database to write a premium marketing description. Use it for listings, WhatsApp, or social media.
                   </p>
@@ -241,7 +241,7 @@ export default function ShowcasePage({
 
   if (!vehicle) {
     return (
-      <div className="min-h-dvh flex items-center justify-center bg-[#121212] text-white">
+      <div className="min-h-dvh flex items-center justify-center bg-[#0A1628] text-white">
         <div className="animate-pulse text-white/50">Loading...</div>
       </div>
     );
@@ -296,16 +296,16 @@ export default function ShowcasePage({
             <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
               <Link
                 href={`/virtual-tour/${vehicle.id}`}
-                className="flex items-center gap-2 px-6 py-2 rounded-full glass-effect border-[#eebd2b]/30 text-white hover:bg-white/10 transition-all"
+                className="flex items-center gap-2 px-6 py-2 rounded-full glass-effect border-[#E5C158]/30 text-white hover:bg-white/10 transition-all"
               >
-                <MaterialIcon name="360" className="text-[24px] text-[#eebd2b]" />
+                <MaterialIcon name="360" className="text-[24px] text-[#E5C158]" />
                 <span className="text-sm font-medium tracking-widest uppercase">360° View</span>
               </Link>
             </div>
 
             {/* Image Pagination Indicators */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5">
-              <div className="h-1 w-8 rounded-full bg-[#eebd2b]" />
+              <div className="h-1 w-8 rounded-full bg-[#E5C158]" />
               <div className="h-1 w-2 rounded-full bg-white/30" />
               <div className="h-1 w-2 rounded-full bg-white/30" />
               <div className="h-1 w-2 rounded-full bg-white/30" />
@@ -315,14 +315,14 @@ export default function ShowcasePage({
           {/* Vehicle Details Header */}
           <section className="px-6 pt-8">
             <div className="flex flex-col gap-1">
-              <span className="text-[#eebd2b] uppercase tracking-[0.2em] text-xs font-semibold">
+              <span className="text-[#E5C158] uppercase tracking-[0.2em] text-xs font-semibold">
                 {vehicle.status === "available" ? "Available Now" : "Limited Availability"}
               </span>
               <h1 className="text-5xl leading-tight tracking-tight text-slate-100">
                 {vehicle.year} {vehicle.name}
               </h1>
               <div className="mt-4 flex items-end justify-between">
-                <p className="text-3xl text-[#eebd2b]">{vehicle.price}</p>
+                <p className="text-3xl text-[#E5C158]">{vehicle.price}</p>
                 <p className="text-slate-400 text-sm italic">
                   {vehicle.km} km &bull; {vehicle.fuel}
                 </p>
@@ -338,21 +338,21 @@ export default function ShowcasePage({
           {/* Technical Specs Grid */}
           <section className="px-6 grid grid-cols-3 gap-8">
             <div className="flex flex-col items-center gap-2">
-              <MaterialIcon name="speed" className="text-[30px] text-[#eebd2b]/80 font-light" />
+              <MaterialIcon name="speed" className="text-[30px] text-[#E5C158]/80 font-light" />
               <div className="text-center">
                 <p className="text-xs uppercase tracking-widest text-slate-400">Kilometers</p>
                 <p className="text-lg font-medium">{vehicle.km}</p>
               </div>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <MaterialIcon name="bolt" className="text-[30px] text-[#eebd2b]/80 font-light" />
+              <MaterialIcon name="bolt" className="text-[30px] text-[#E5C158]/80 font-light" />
               <div className="text-center">
                 <p className="text-xs uppercase tracking-widest text-slate-400">Power</p>
                 <p className="text-lg font-medium">{vehicle.power}</p>
               </div>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <MaterialIcon name="settings_input_component" className="text-[30px] text-[#eebd2b]/80 font-light" />
+              <MaterialIcon name="settings_input_component" className="text-[30px] text-[#E5C158]/80 font-light" />
               <div className="text-center">
                 <p className="text-xs uppercase tracking-widest text-slate-400">Engine</p>
                 <p className="text-lg font-medium">{vehicle.engine}</p>
@@ -362,12 +362,12 @@ export default function ShowcasePage({
 
           {/* AI Insights Section */}
           <section className="mt-12 px-6">
-            <div className="rounded-xl p-6 bg-[#eebd2b]/5 border border-[#eebd2b]/20 relative overflow-hidden">
-              <div className="absolute -top-4 -right-4 size-24 bg-[#eebd2b]/10 rounded-full blur-3xl" />
+            <div className="rounded-xl p-6 bg-[#E5C158]/5 border border-[#E5C158]/20 relative overflow-hidden">
+              <div className="absolute -top-4 -right-4 size-24 bg-[#E5C158]/10 rounded-full blur-3xl" />
               <div className="relative">
                 <div className="flex items-center gap-2 mb-4">
-                  <MaterialIcon name="auto_awesome" className="text-[20px] text-[#eebd2b]" />
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-[#eebd2b]">AI Insights</h3>
+                  <MaterialIcon name="auto_awesome" className="text-[20px] text-[#E5C158]" />
+                  <h3 className="text-sm font-bold uppercase tracking-widest text-[#E5C158]">AI Insights</h3>
                 </div>
                 <div className="space-y-4">
                   <div>
@@ -376,16 +376,16 @@ export default function ShowcasePage({
                       Currently valued 4% below local market average. High demand for {vehicle.name} in {vehicle.location}.
                     </p>
                   </div>
-                  <div className="border-t border-[#eebd2b]/10 pt-4">
+                  <div className="border-t border-[#E5C158]/10 pt-4">
                     <h4 className="text-lg italic mb-1">Condition Report</h4>
                     <div className="flex items-center gap-2 mb-2">
                       <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-[#eebd2b] rounded-full"
+                          className="h-full bg-[#E5C158] rounded-full"
                           style={{ width: `${vehicle.aiScore}%` }}
                         />
                       </div>
-                      <span className="text-xs font-bold text-[#eebd2b]">{vehicle.aiScore}/100</span>
+                      <span className="text-xs font-bold text-[#E5C158]">{vehicle.aiScore}/100</span>
                     </div>
                     <p className="text-sm text-slate-400 leading-relaxed">
                       Pristine exterior with zero reported incidents. All service records verified through AI inspection.
@@ -417,14 +417,14 @@ export default function ShowcasePage({
             <button
               type="button"
               onClick={() => setShowDescriptionSheet(true)}
-              className="flex-1 h-14 rounded-xl border border-[#eebd2b]/40 flex items-center justify-center gap-2 text-[#eebd2b] font-bold tracking-wide glass-effect active:scale-95 transition-transform"
+              className="flex-1 h-14 rounded-xl border border-[#E5C158]/40 flex items-center justify-center gap-2 text-[#E5C158] font-bold tracking-wide glass-effect active:scale-95 transition-transform"
             >
               <MaterialIcon name="auto_awesome" className="text-[20px]" />
               AI DESCRIBE
             </button>
             <Link
               href={`/smart-reply?vehicleId=${vehicle.id}`}
-              className="flex-[1.2] h-14 rounded-xl bg-[#eebd2b] text-[#121212] font-extrabold tracking-widest flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-[0_8px_30px_rgb(238,189,43,0.3)]"
+              className="flex-[1.2] h-14 rounded-xl bg-[#E5C158] text-[#0A1628] font-extrabold tracking-widest flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-[0_8px_30px_rgb(238,189,43,0.3)]"
             >
               <MaterialIcon name="chat_bubble" className="text-[20px]" />
               CONTACT LEAD

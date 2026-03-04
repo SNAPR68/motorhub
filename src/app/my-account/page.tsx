@@ -67,10 +67,10 @@ export default function MyAccountPage() {
   return (
     <BuyerAppShell>
     <AuthGuard requiredRole="buyer" fallbackUrl="/login/buyer">
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center justify-between">
           <h1 className="text-base font-bold text-white">My Account</h1>
           <Link href="/alerts" className="relative flex h-9 w-9 items-center justify-center rounded-xl" style={{ background: "rgba(255,255,255,0.05)" }}>
@@ -93,14 +93,14 @@ export default function MyAccountPage() {
         ) : user ? (
           <div className="rounded-2xl p-5 border border-white/5" style={{ background: "rgba(255,255,255,0.03)" }}>
             <div className="flex items-center gap-4">
-              <div className="h-16 w-16 rounded-full flex items-center justify-center text-xl font-black text-white shrink-0" style={{ background: "linear-gradient(135deg, #1152d4, #4f8ef7)" }}>
+              <div className="h-16 w-16 rounded-full flex items-center justify-center text-xl font-black text-white shrink-0" style={{ background: "linear-gradient(135deg, #3B82F6, #4f8ef7)" }}>
                 {initials}
               </div>
               <div className="flex-1 min-w-0">
                 <h2 className="text-base font-bold text-white truncate">{user.name}</h2>
                 <p className="text-xs text-slate-500 truncate">{user.email}</p>
                 <div className="flex items-center gap-1.5 mt-1.5">
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(17,82,212,0.15)", color: "#60a5fa" }}>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(59,130,246,0.15)", color: "#60a5fa" }}>
                     Buyer
                   </span>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(16,185,129,0.1)", color: "#34d399" }}>
@@ -124,7 +124,7 @@ export default function MyAccountPage() {
             <Link
               href="/login/buyer"
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold text-white"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               Sign In / Register
             </Link>

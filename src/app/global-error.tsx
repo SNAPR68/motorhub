@@ -18,7 +18,7 @@ export default function GlobalError({
     <html lang="en">
       <body
         style={{
-          background: "#0a0c10",
+          background: "#0A1628",
           color: "#e2e8f0",
           fontFamily: "'Manrope', sans-serif",
           display: "flex",
@@ -43,7 +43,7 @@ export default function GlobalError({
           <button
             onClick={reset}
             style={{
-              background: "#137fec",
+              background: "#3B82F6",
               color: "white",
               border: "none",
               padding: "12px 32px",

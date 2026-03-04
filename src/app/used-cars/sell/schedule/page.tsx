@@ -65,7 +65,7 @@ function SchedulePageInner() {
     return (
       <div
         className="min-h-dvh w-full flex flex-col "
-        style={{ background: "#080a0f", color: "#e2e8f0" }}
+        style={{ background: "#0A1628", color: "#e2e8f0" }}
       >
         <div className="flex-1 flex flex-col items-center justify-center px-6 text-center max-w-lg mx-auto w-full py-16">
           {/* Success icon */}
@@ -144,8 +144,8 @@ function SchedulePageInner() {
           <div
             className="w-full rounded-2xl border p-4 text-left mb-6"
             style={{
-              background: "rgba(17,82,212,0.06)",
-              borderColor: "rgba(17,82,212,0.15)",
+              background: "rgba(59,130,246,0.06)",
+              borderColor: "rgba(59,130,246,0.15)",
             }}
           >
             <p className="text-[11px] font-bold uppercase tracking-widest text-blue-400 mb-3">
@@ -161,7 +161,7 @@ function SchedulePageInner() {
                 <div key={i} className="flex items-start gap-2.5">
                   <span
                     className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-black text-white mt-0.5"
-                    style={{ background: "#1152d4" }}
+                    style={{ background: "#3B82F6" }}
                   >
                     {i + 1}
                   </span>
@@ -175,8 +175,8 @@ function SchedulePageInner() {
             href="/"
             className="flex items-center justify-center gap-2 w-full rounded-2xl py-4 font-bold text-[15px] text-white"
             style={{
-              background: "linear-gradient(135deg, #1152d4 0%, #1d4ed8 100%)",
-              boxShadow: "0 8px 24px rgba(17,82,212,0.35)",
+              background: "linear-gradient(135deg, #3B82F6 0%, #1d4ed8 100%)",
+              boxShadow: "0 8px 24px rgba(59,130,246,0.35)",
             }}
           >
             <MaterialIcon name="home" className="text-[20px]" />
@@ -196,13 +196,13 @@ function SchedulePageInner() {
 
   return (<div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -248,7 +248,7 @@ function SchedulePageInner() {
           <div
             className="flex h-14 w-14 items-center justify-center rounded-full shrink-0 text-[20px] font-black text-white"
             style={{
-              background: "linear-gradient(135deg, #1152d4 0%, #3b82f6 100%)",
+              background: "linear-gradient(135deg, #3B82F6 0%, #3b82f6 100%)",
             }}
           >
             R
@@ -306,13 +306,13 @@ function SchedulePageInner() {
             style={{
               background: "rgba(255,255,255,0.05)",
               borderColor: address
-                ? "rgba(17,82,212,0.5)"
+                ? "rgba(59,130,246,0.5)"
                 : "rgba(255,255,255,0.1)",
             }}
           />
           <button
             className="mt-2 flex items-center gap-1.5 text-[12px] font-semibold"
-            style={{ color: "#1152d4" }}
+            style={{ color: "#3B82F6" }}
           >
             <MaterialIcon name="my_location" className="text-[14px]" />
             Use current location
@@ -334,11 +334,11 @@ function SchedulePageInner() {
                   className="flex flex-col items-center shrink-0 rounded-2xl px-4 py-3 border transition-all"
                   style={{
                     background: active
-                      ? "rgba(17,82,212,0.18)"
+                      ? "rgba(59,130,246,0.18)"
                       : "rgba(255,255,255,0.04)",
-                    borderColor: active ? "#1152d4" : "rgba(255,255,255,0.1)",
+                    borderColor: active ? "#3B82F6" : "rgba(255,255,255,0.1)",
                     minWidth: "64px",
-                    boxShadow: active ? "0 0 0 1px #1152d4" : "none",
+                    boxShadow: active ? "0 0 0 1px #3B82F6" : "none",
                   }}
                 >
                   <span
@@ -380,11 +380,11 @@ function SchedulePageInner() {
                   className="flex items-center justify-center rounded-xl py-3 text-[13px] font-bold border transition-all"
                   style={{
                     background: active
-                      ? "rgba(17,82,212,0.18)"
+                      ? "rgba(59,130,246,0.18)"
                       : "rgba(255,255,255,0.04)",
                     color: active ? "#fff" : "#64748b",
-                    borderColor: active ? "#1152d4" : "rgba(255,255,255,0.1)",
-                    boxShadow: active ? "0 0 0 1px #1152d4" : "none",
+                    borderColor: active ? "#3B82F6" : "rgba(255,255,255,0.1)",
+                    boxShadow: active ? "0 0 0 1px #3B82F6" : "none",
                   }}
                 >
                   {t.label}
@@ -412,7 +412,7 @@ function SchedulePageInner() {
                 <MaterialIcon
                   name={item.icon}
                   className="text-[20px] mb-2"
-                  style={{ color: "#1152d4" }}
+                  style={{ color: "#3B82F6" }}
                 />
                 <p className="text-[12px] font-bold text-white leading-tight">
                   {item.title}
@@ -430,8 +430,8 @@ function SchedulePageInner() {
           <div
             className="flex items-center gap-3 rounded-xl px-4 py-3 border"
             style={{
-              background: "rgba(17,82,212,0.08)",
-              borderColor: "rgba(17,82,212,0.2)",
+              background: "rgba(59,130,246,0.08)",
+              borderColor: "rgba(59,130,246,0.2)",
             }}
           >
             <MaterialIcon
@@ -501,7 +501,7 @@ function SummaryRow({
     <div className="flex items-start gap-3">
       <div
         className="flex h-8 w-8 items-center justify-center rounded-lg shrink-0"
-        style={{ background: "rgba(17,82,212,0.1)" }}
+        style={{ background: "rgba(59,130,246,0.1)" }}
       >
         <MaterialIcon name={icon} className="text-[15px]" style={{ color: "#60a5fa" }} />
       </div>
@@ -522,12 +522,12 @@ export default function SchedulePage() {
       fallback={
         <div
           className="min-h-dvh flex items-center justify-center"
-          style={{ background: "#080a0f" }}
+          style={{ background: "#0A1628" }}
         >
           <div className="flex flex-col items-center gap-3">
             <div
               className="h-10 w-10 rounded-full border-2 border-transparent animate-spin"
-              style={{ borderTopColor: "#1152d4" }}
+              style={{ borderTopColor: "#3B82F6" }}
             />
             <p className="text-[13px] text-slate-500">Loading…</p>
           </div>

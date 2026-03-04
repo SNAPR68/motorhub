@@ -83,11 +83,11 @@ export default function RtoPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh pb-36" style={{ background: "#080a0f", color: "#f1f5f9" }}>
+    <div className="min-h-dvh pb-36" style={{ background: "#0A1628", color: "#f1f5f9" }}>
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/"
@@ -126,9 +126,9 @@ export default function RtoPage() {
           <div className="flex items-center gap-2 mb-5">
             <div
               className="w-9 h-9 rounded-xl flex items-center justify-center"
-              style={{ background: "rgba(17,82,212,0.15)" }}
+              style={{ background: "rgba(59,130,246,0.15)" }}
             >
-              <MaterialIcon name="calculate" className="text-[20px]" style={{ color: "#1152d4" }} />
+              <MaterialIcon name="calculate" className="text-[20px]" style={{ color: "#3B82F6" }} />
             </div>
             <div>
               <h3 className="text-white font-semibold text-sm">RTO Cost Calculator</h3>
@@ -168,9 +168,9 @@ export default function RtoPage() {
                     }}
                     className="rounded-full px-4 py-2 text-xs font-semibold transition-colors"
                     style={{
-                      background: vehicleType === v ? "#1152d4" : "rgba(255,255,255,0.06)",
+                      background: vehicleType === v ? "#3B82F6" : "rgba(255,255,255,0.06)",
                       color: vehicleType === v ? "#fff" : "#94a3b8",
-                      border: vehicleType === v ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.1)",
+                      border: vehicleType === v ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.1)",
                     }}
                   >
                     {v}
@@ -192,9 +192,9 @@ export default function RtoPage() {
                     }}
                     className="rounded-full px-4 py-2 text-xs font-semibold transition-colors"
                     style={{
-                      background: fuelType === f ? "#1152d4" : "rgba(255,255,255,0.06)",
+                      background: fuelType === f ? "#3B82F6" : "rgba(255,255,255,0.06)",
                       color: fuelType === f ? "#fff" : "#94a3b8",
-                      border: fuelType === f ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.1)",
+                      border: fuelType === f ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.1)",
                     }}
                   >
                     {f}
@@ -218,7 +218,7 @@ export default function RtoPage() {
                   setCalculated(false);
                 }}
                 className="relative w-12 h-7 rounded-full transition-colors"
-                style={{ background: hasLoan ? "#1152d4" : "rgba(255,255,255,0.15)" }}
+                style={{ background: hasLoan ? "#3B82F6" : "rgba(255,255,255,0.15)" }}
               >
                 <div
                   className="absolute top-1 w-5 h-5 rounded-full bg-white transition-transform"
@@ -231,7 +231,7 @@ export default function RtoPage() {
             <button
               onClick={handleCalculate}
               className="flex items-center justify-center gap-2 w-full rounded-xl py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="calculate" className="text-[18px]" />
               Calculate
@@ -266,10 +266,10 @@ export default function RtoPage() {
                 )}
                 <div
                   className="flex items-center justify-between py-3 px-4 rounded-xl mt-2"
-                  style={{ background: "rgba(17,82,212,0.1)", border: "1px solid rgba(17,82,212,0.2)" }}
+                  style={{ background: "rgba(59,130,246,0.1)", border: "1px solid rgba(59,130,246,0.2)" }}
                 >
                   <span className="text-white text-sm font-bold">Total RTO Cost</span>
-                  <span className="text-xl font-bold" style={{ color: "#1152d4" }}>
+                  <span className="text-xl font-bold" style={{ color: "#3B82F6" }}>
                     ₹{breakdown.total.toLocaleString("en-IN")}
                   </span>
                 </div>
@@ -292,9 +292,9 @@ export default function RtoPage() {
               <div key={i} className="flex items-start gap-3">
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-                  style={{ background: "rgba(17,82,212,0.1)" }}
+                  style={{ background: "rgba(59,130,246,0.1)" }}
                 >
-                  <MaterialIcon name={doc.icon} className="text-[16px]" style={{ color: "#1152d4" }} />
+                  <MaterialIcon name={doc.icon} className="text-[16px]" style={{ color: "#3B82F6" }} />
                 </div>
                 <p className="text-slate-300 text-sm pt-1">{doc.text}</p>
               </div>

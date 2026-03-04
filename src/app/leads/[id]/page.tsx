@@ -11,10 +11,10 @@ import { fetchLead } from "@/lib/api";
 import type { DbLeadMessage } from "@/lib/api";
 
 /* ── design tokens: lead_communication_history ── */
-// primary: #137fec, font: Inter, bg: #f6f7f8
+// primary: #3B82F6, font: Inter, bg: #f6f7f8
 
 const SENTIMENT_STYLES: Record<string, { bg: string; color: string; label: string }> = {
-  HOT: { bg: "rgba(19,127,236,0.1)", color: "#137fec", label: "Hot Lead" },
+  HOT: { bg: "rgba(19,127,236,0.1)", color: "#3B82F6", label: "Hot Lead" },
   WARM: { bg: "rgba(245,158,11,0.1)", color: "#f59e0b", label: "Warm Lead" },
   COOL: { bg: "rgba(100,116,139,0.1)", color: "#64748b", label: "Cool Lead" },
 };
@@ -115,13 +115,13 @@ export default function LeadProfilePage({
         <Link
           href="/leads"
           className="flex items-center gap-1"
-          style={{ color: "#137fec" }}
+          style={{ color: "#3B82F6" }}
         >
           <MaterialIcon name="arrow_back_ios_new" />
           <span className="text-lg">Leads</span>
         </Link>
         <h1 className="text-lg font-bold text-slate-900">Lead Profile</h1>
-        <button style={{ color: "#137fec" }}>
+        <button style={{ color: "#3B82F6" }}>
           <MaterialIcon name="more_horiz" />
         </button>
       </div>
@@ -132,10 +132,10 @@ export default function LeadProfilePage({
         <section className="p-4 bg-white">
           <div className="flex items-center gap-4">
             <div className="relative">
-              <div className="w-20 h-20 rounded-full bg-slate-200 overflow-hidden border-2 border-[#137fec]/20 flex items-center justify-center">
+              <div className="w-20 h-20 rounded-full bg-slate-200 overflow-hidden border-2 border-[#3B82F6]/20 flex items-center justify-center">
                 <span
                   className="text-2xl font-bold"
-                  style={{ color: "#137fec" }}
+                  style={{ color: "#3B82F6" }}
                 >
                   {initials}
                 </span>
@@ -159,8 +159,8 @@ export default function LeadProfilePage({
                 <button
                   onClick={analyzeSentiment}
                   disabled={aiAnalyzing}
-                  className="text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-0.5 uppercase tracking-wider border border-[#137fec]/20 disabled:opacity-50"
-                  style={{ color: "#137fec", background: "rgba(19,127,236,0.05)" }}
+                  className="text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-0.5 uppercase tracking-wider border border-[#3B82F6]/20 disabled:opacity-50"
+                  style={{ color: "#3B82F6", background: "rgba(19,127,236,0.05)" }}
                 >
                   <MaterialIcon name="auto_awesome" className="!text-[12px]" />
                   {aiAnalyzing ? "..." : "AI"}
@@ -168,7 +168,7 @@ export default function LeadProfilePage({
               </div>
               {aiInsight && (
                 <div className="mt-2 px-3 py-2 rounded-lg text-xs" style={{ background: "rgba(19,127,236,0.05)", border: "1px solid rgba(19,127,236,0.1)" }}>
-                  <p className="text-slate-700"><span className="font-semibold" style={{ color: "#137fec" }}>AI Insight:</span> {aiInsight.reasoning}</p>
+                  <p className="text-slate-700"><span className="font-semibold" style={{ color: "#3B82F6" }}>AI Insight:</span> {aiInsight.reasoning}</p>
                   <p className="text-slate-500 mt-1"><span className="font-semibold">Next step:</span> {aiInsight.suggestedAction}</p>
                 </div>
               )}
@@ -198,7 +198,7 @@ export default function LeadProfilePage({
                     return `/smart-reply?${params.toString()}`;
                   })()}
                   className="flex-1 min-w-[100px] text-white font-semibold py-2 rounded-lg text-sm flex items-center justify-center gap-2"
-                  style={{ background: "#137fec" }}
+                  style={{ background: "#3B82F6" }}
                 >
                   <MaterialIcon name="smart_toy" className="text-sm" /> AI Reply
                 </Link>
@@ -253,7 +253,7 @@ export default function LeadProfilePage({
                   <div className="flex justify-between items-end mt-1">
                     <p
                       className="font-bold text-lg leading-none"
-                      style={{ color: "#137fec" }}
+                      style={{ color: "#3B82F6" }}
                     >
                       {lead.vehicle.priceDisplay}
                     </p>
@@ -367,14 +367,14 @@ export default function LeadProfilePage({
           >
             <div
               className="text-white p-1 rounded-lg shrink-0"
-              style={{ background: "#137fec" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="auto_awesome" className="!text-[18px]" />
             </div>
             <div className="flex-1">
               <p
                 className="text-[11px] font-bold uppercase mb-0.5"
-                style={{ color: "#137fec" }}
+                style={{ color: "#3B82F6" }}
               >
                 AI Suggestion
               </p>
@@ -384,7 +384,7 @@ export default function LeadProfilePage({
             </div>
             <button
               className="text-white text-[10px] font-bold px-3 py-1.5 rounded-lg shrink-0 self-center"
-              style={{ background: "#137fec" }}
+              style={{ background: "#3B82F6" }}
               onClick={() => setMessageText("Would you like to schedule a quick test drive or appraisal?")}
             >
               Use
@@ -407,7 +407,7 @@ export default function LeadProfilePage({
               />
               <button
                 className="absolute right-2 top-1/2 -translate-y-1/2"
-                style={{ color: "#137fec" }}
+                style={{ color: "#3B82F6" }}
               >
                 <MaterialIcon name="mic" className="text-xl" />
               </button>
@@ -415,7 +415,7 @@ export default function LeadProfilePage({
             <button
               className="w-10 h-10 rounded-full flex items-center justify-center text-white disabled:opacity-50"
               style={{
-                background: "#137fec",
+                background: "#3B82F6",
                 boxShadow: "0 4px 12px rgba(19,127,236,0.3)",
               }}
               onClick={handleSendMessage}

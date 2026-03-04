@@ -43,9 +43,9 @@ export default function ExpertReviewPage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-white max-w-lg mx-auto ">
+    <div className="min-h-screen bg-[#0A1628] text-white max-w-lg mx-auto ">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-lg border-b border-white/5">
+      <header className="sticky top-0 z-40 bg-[#0A1628]/90 backdrop-blur-lg border-b border-white/5">
         <div className="flex items-center gap-3 px-4 py-3">
           <Link href="/expert-reviews" className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 transition">
             <MaterialIcon name="arrow_back" className="text-xl text-white/80" />
@@ -56,10 +56,10 @@ export default function ExpertReviewPage({
 
       {/* Hero */}
       <section className="px-4 pt-5">
-        <div className="rounded-2xl bg-gradient-to-br from-[#1152d4]/20 to-white/[0.02] border border-white/5 p-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#1152d4]/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="rounded-2xl bg-gradient-to-br from-[#3B82F6]/20 to-white/[0.02] border border-white/5 p-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#3B82F6]/10 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="relative">
-            <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-[#1152d4]/15 text-[#1152d4] rounded-full px-2.5 py-1 mb-3">
+            <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-[#3B82F6]/15 text-[#3B82F6] rounded-full px-2.5 py-1 mb-3">
               CaroBest Expert Review
             </span>
             <h2 className="text-2xl font-bold leading-tight mb-4">{modelName}</h2>
@@ -92,7 +92,7 @@ export default function ExpertReviewPage({
       <section className="px-4 pt-6">
         <div className="bg-white/[0.03] border border-white/5 rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
-            <MaterialIcon name="gavel" className="text-lg text-[#1152d4]" />
+            <MaterialIcon name="gavel" className="text-lg text-[#3B82F6]" />
             <h3 className="text-sm font-semibold">Our Verdict</h3>
           </div>
           <p className="text-sm text-white/60 leading-relaxed">
@@ -153,7 +153,7 @@ export default function ExpertReviewPage({
               </div>
               <div className="h-2 rounded-full bg-white/5 overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-[#1152d4] to-[#1152d4]/70 transition-all duration-500"
+                  className="h-full rounded-full bg-gradient-to-r from-[#3B82F6] to-[#3B82F6]/70 transition-all duration-500"
                   style={{ width: `${(item.score / 5) * 100}%` }}
                 />
               </div>
@@ -166,7 +166,7 @@ export default function ExpertReviewPage({
       <section className="px-4 pt-8 space-y-6">
         <div>
           <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
-            <MaterialIcon name="speed" className="text-lg text-[#1152d4]" />
+            <MaterialIcon name="speed" className="text-lg text-[#3B82F6]" />
             Drive Experience
           </h3>
           <p className="text-sm text-white/60 leading-relaxed">
@@ -181,7 +181,7 @@ export default function ExpertReviewPage({
         </div>
         <div>
           <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
-            <MaterialIcon name="weekend" className="text-lg text-[#1152d4]" />
+            <MaterialIcon name="weekend" className="text-lg text-[#3B82F6]" />
             Interior & Features
           </h3>
           <p className="text-sm text-white/60 leading-relaxed">
@@ -200,7 +200,7 @@ export default function ExpertReviewPage({
       <section className="px-4 pt-8 pb-6">
         <Link
           href={`/cars/${slug}`}
-          className="w-full py-3.5 rounded-xl bg-[#1152d4] text-white font-semibold text-sm hover:bg-[#0e44b5] transition flex items-center justify-center gap-2"
+          className="w-full py-3.5 rounded-xl bg-[#3B82F6] text-white font-semibold text-sm hover:bg-[#3B82F6] transition flex items-center justify-center gap-2"
         >
           <MaterialIcon name="currency_rupee" className="text-lg" />
           View On-Road Price

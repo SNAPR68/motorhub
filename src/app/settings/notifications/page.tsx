@@ -7,7 +7,7 @@ import { useApi } from "@/lib/hooks/use-api";
 import { fetchNotifications, fetchDealerPreferences, updateDealerPreferences } from "@/lib/api";
 
 /* ── design tokens: dealer_notification_settings ── */
-// primary: #196ee6, font: Noto Serif (headings) + Noto Sans (body), bg: #0a0a0a
+// primary: #196ee6, font: Noto Serif (headings) + Noto Sans (body), bg: #0A1628
 
 const STORAGE_KEY = "av_notif_prefs";
 
@@ -83,7 +83,7 @@ export default function NotificationsPage() {
       className="min-h-screen max-w-md mx-auto flex flex-col pb-24 overflow-x-hidden"
       style={{
         fontFamily: "'Noto Sans', sans-serif",
-        background: "#0a0a0a",
+        background: "#0A1628",
         color: "#f1f5f9",
         borderLeft: "1px solid rgba(192,192,192,0.1)",
         borderRight: "1px solid rgba(192,192,192,0.1)",
@@ -93,7 +93,7 @@ export default function NotificationsPage() {
       <header
         className="sticky top-0 z-10 pt-12 pb-6 px-6 border-b"
         style={{
-          background: "rgba(10,10,10,0.95)",
+          background: "rgba(10,22,40,0.95)",
           backdropFilter: "blur(12px)",
           borderColor: "rgba(192,192,192,0.15)",
         }}
@@ -137,7 +137,7 @@ export default function NotificationsPage() {
       <div
         className="grid grid-cols-12 px-6 pt-8 pb-3 sticky top-[156px] z-[5]"
         style={{
-          background: "#0a0a0a",
+          background: "#0A1628",
           borderBottom: "0.5px solid rgba(192,192,192,0.15)",
         }}
       >
@@ -234,7 +234,7 @@ export default function NotificationsPage() {
       <nav
         className="fixed bottom-0 left-0 right-0 max-w-md mx-auto px-6 pb-8 pt-4 border-t md:hidden"
         style={{
-          background: "rgba(10,10,10,0.8)",
+          background: "rgba(10,22,40,0.8)",
           backdropFilter: "blur(16px)",
           borderColor: "rgba(192,192,192,0.1)",
         }}

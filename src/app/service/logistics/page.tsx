@@ -6,7 +6,7 @@ import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { createServiceBooking } from "@/lib/api";
 
-/* Stitch: service_logistics_&_confirmation — #dab80b, Space Grotesk, #0a0a0a */
+/* Stitch: service_logistics_&_confirmation — #E5C158, Space Grotesk, #0A1628 */
 
 function ServiceLogisticsInner() {
   const searchParams = useSearchParams();
@@ -92,9 +92,9 @@ function ServiceLogisticsInner() {
 
   if (confirmed) {
     return (
-      <div className="min-h-dvh flex flex-col items-center justify-center px-6 text-center max-w-md mx-auto" style={{ background: "#0a0a0a", fontFamily: "'Space Grotesk', sans-serif" }}>
+      <div className="min-h-dvh flex flex-col items-center justify-center px-6 text-center max-w-md mx-auto" style={{ background: "#0A1628", fontFamily: "'Space Grotesk', sans-serif" }}>
         <div className="h-20 w-20 rounded-full flex items-center justify-center mb-6" style={{ background: "rgba(218,184,11,0.15)" }}>
-          <MaterialIcon name="check_circle" className="text-[48px]" style={{ color: "#dab80b" }} />
+          <MaterialIcon name="check_circle" className="text-[48px]" style={{ color: "#E5C158" }} />
         </div>
         <h2 className="text-2xl font-black text-white mb-2">Booking Confirmed</h2>
         <p className="text-sm text-slate-400 mb-1">{packageName}</p>
@@ -103,7 +103,7 @@ function ServiceLogisticsInner() {
           <p className="text-xs font-mono text-slate-600 mb-8">Ref: {appointmentId.slice(0, 8).toUpperCase()}</p>
         )}
         <div className="flex flex-col gap-3 w-full">
-          <Link href="/my-cars" className="flex items-center justify-center h-12 rounded-xl text-sm font-bold text-black w-full" style={{ background: "#dab80b" }}>
+          <Link href="/my-cars" className="flex items-center justify-center h-12 rounded-xl text-sm font-bold text-black w-full" style={{ background: "#E5C158" }}>
             Back to My Cars
           </Link>
           <Link href="/service" className="flex items-center justify-center h-12 rounded-xl text-sm font-semibold border border-white/10 w-full text-slate-300">
@@ -117,23 +117,23 @@ function ServiceLogisticsInner() {
   return (
     <div
       className="relative flex h-dvh max-w-md mx-auto flex-col overflow-hidden shadow-2xl text-slate-100"
-      style={{ fontFamily: "'Space Grotesk', sans-serif", background: "#0a0a0a" }}
+      style={{ fontFamily: "'Space Grotesk', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
       <header className="flex items-center justify-between px-6 pt-12 pb-4">
         <Link
           href={`/service${vehicleId ? `?vehicleId=${vehicleId}` : ""}`}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2a2a2a] text-slate-100"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0F1D32] text-slate-100"
         >
           <MaterialIcon name="arrow_back_ios_new" className="text-[20px]" />
         </Link>
         <div className="text-center">
           <h1 className="text-lg font-bold tracking-tight">Service Logistics</h1>
-          <p className="text-[10px] uppercase tracking-[0.2em] text-[#dab80b] font-medium">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-[#E5C158] font-medium">
             Step 3 of 4
           </p>
         </div>
-        <button className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2a2a2a] text-slate-100">
+        <button className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0F1D32] text-slate-100">
           <MaterialIcon name="help_outline" className="text-[20px]" />
         </button>
       </header>
@@ -142,15 +142,15 @@ function ServiceLogisticsInner() {
       <main className="flex-1 overflow-y-auto px-6 pb-32">
         {/* Stepper Progress */}
         <div className="flex w-full items-center justify-center gap-2 py-6">
-          <div className="h-1 w-8 rounded-full bg-[#dab80b]" />
-          <div className="h-1 w-8 rounded-full bg-[#dab80b]" />
-          <div className="h-1 w-12 rounded-full bg-[#dab80b]" style={{ boxShadow: "0 0 10px rgba(218,184,11,0.5)" }} />
-          <div className="h-1 w-8 rounded-full bg-[#2a2a2a]" />
+          <div className="h-1 w-8 rounded-full bg-[#E5C158]" />
+          <div className="h-1 w-8 rounded-full bg-[#E5C158]" />
+          <div className="h-1 w-12 rounded-full bg-[#E5C158]" style={{ boxShadow: "0 0 10px rgba(218,184,11,0.5)" }} />
+          <div className="h-1 w-8 rounded-full bg-[#0F1D32]" />
         </div>
 
         {/* Booking summary */}
-        <div className="mb-6 rounded-xl p-4 border border-[#dab80b]/20" style={{ background: "rgba(218,184,11,0.05)" }}>
-          <p className="text-[10px] font-bold uppercase tracking-widest text-[#dab80b] mb-2">Booking Summary</p>
+        <div className="mb-6 rounded-xl p-4 border border-[#E5C158]/20" style={{ background: "rgba(218,184,11,0.05)" }}>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-[#E5C158] mb-2">Booking Summary</p>
           <div className="space-y-1.5">
             {[
               { label: "Package", val: packageName },
@@ -168,12 +168,12 @@ function ServiceLogisticsInner() {
         {/* Logistics Toggle */}
         <div className="mb-8">
           <p className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-3">Pickup Option</p>
-          <div className="flex h-12 w-full items-center gap-1 rounded-xl bg-[#161616] p-1 border border-[#2a2a2a]">
+          <div className="flex h-12 w-full items-center gap-1 rounded-xl bg-[#0A1628] p-1 border border-[#1E3048]">
             {(["valet", "self"] as const).map((opt) => (
               <button
                 key={opt}
                 onClick={() => setLogistics(opt)}
-                className={`flex h-full flex-1 items-center justify-center rounded-lg px-2 transition-all text-sm font-semibold tracking-wide ${logistics === opt ? "bg-[#dab80b] text-[#0a0a0a]" : "text-slate-400"}`}
+                className={`flex h-full flex-1 items-center justify-center rounded-lg px-2 transition-all text-sm font-semibold tracking-wide ${logistics === opt ? "bg-[#E5C158] text-[#0A1628]" : "text-slate-400"}`}
               >
                 {opt === "valet" ? "Valet Pick-up" : "Self Drop-off"}
               </button>
@@ -187,12 +187,12 @@ function ServiceLogisticsInner() {
         </div>
 
         {/* Map Module */}
-        <div className="relative mb-8 overflow-hidden rounded-2xl border border-[#2a2a2a] aspect-[4/3]">
+        <div className="relative mb-8 overflow-hidden rounded-2xl border border-[#1E3048] aspect-[4/3]">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(10,10,10,0) 0%, rgba(10,10,10,0.8) 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(10,22,40,0) 0%, rgba(10,22,40,0.8) 100%)" }} />
           <div className="absolute top-4 left-4 right-4">
             <div className="p-3 rounded-xl flex items-center gap-3 w-fit" style={{ background: "rgba(22,22,22,0.7)", backdropFilter: "blur(12px)", border: "1px solid rgba(218,184,11,0.1)" }}>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#dab80b]/20 text-[#dab80b]">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#E5C158]/20 text-[#E5C158]">
                 <MaterialIcon name="home" className="text-[18px]" />
               </div>
               <div>
@@ -204,14 +204,14 @@ function ServiceLogisticsInner() {
           <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl" style={{ background: "rgba(22,22,22,0.7)", backdropFilter: "blur(12px)", border: "1px solid rgba(218,184,11,0.1)" }}>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-[#dab80b] animate-pulse" />
-                <span className="text-xs font-medium text-[#dab80b] uppercase tracking-widest">Live Estimate</span>
+                <div className="h-2 w-2 rounded-full bg-[#E5C158] animate-pulse" />
+                <span className="text-xs font-medium text-[#E5C158] uppercase tracking-widest">Live Estimate</span>
               </div>
               <span className="text-xs font-bold">14 Mins Away</span>
             </div>
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10">
-                <MaterialIcon name="precision_manufacturing" className="text-[#dab80b]" />
+                <MaterialIcon name="precision_manufacturing" className="text-[#E5C158]" />
               </div>
               <div className="flex-1">
                 <h4 className="text-sm font-bold">CaroBest South Delhi</h4>
@@ -225,12 +225,12 @@ function ServiceLogisticsInner() {
         <div className="mb-6">
           <div className="flex items-center justify-between mb-3 px-1">
             <label className="text-sm font-bold uppercase tracking-widest text-slate-400">Concierge Notes</label>
-            <MaterialIcon name="edit_note" className="text-[#dab80b] text-[20px]" />
+            <MaterialIcon name="edit_note" className="text-[#E5C158] text-[20px]" />
           </div>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="w-full h-32 rounded-xl bg-[#161616] border border-[#2a2a2a] p-4 text-sm focus:border-[#dab80b] outline-none transition-all placeholder:text-slate-600 resize-none text-slate-100"
+            className="w-full h-32 rounded-xl bg-[#0A1628] border border-[#1E3048] p-4 text-sm focus:border-[#E5C158] outline-none transition-all placeholder:text-slate-600 resize-none text-slate-100"
             placeholder="Specify any special requests for our master technicians (e.g., 'Check brake noise', 'Detail interior')..."
           />
         </div>
@@ -244,10 +244,10 @@ function ServiceLogisticsInner() {
       </main>
 
       {/* Bottom Slide-to-Confirm */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 pb-10 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a] to-transparent">
+      <div className="absolute bottom-0 left-0 right-0 p-6 pb-10 bg-gradient-to-t from-[#0A1628] via-[#0A1628] to-transparent">
         <div
           ref={sliderRef}
-          className="relative flex h-16 w-full items-center overflow-hidden rounded-full bg-[#161616] border border-[#2a2a2a] p-1"
+          className="relative flex h-16 w-full items-center overflow-hidden rounded-full bg-[#0A1628] border border-[#1E3048] p-1"
         >
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <span className="text-sm font-bold uppercase tracking-[0.3em] text-slate-500 pl-8">
@@ -259,11 +259,11 @@ function ServiceLogisticsInner() {
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
-            className="relative z-10 flex h-14 w-14 cursor-grab active:cursor-grabbing items-center justify-center rounded-full bg-[#dab80b] text-[#0a0a0a] shadow-lg shadow-[#dab80b]/20 select-none"
+            className="relative z-10 flex h-14 w-14 cursor-grab active:cursor-grabbing items-center justify-center rounded-full bg-[#E5C158] text-[#0A1628] shadow-lg shadow-[#E5C158]/20 select-none"
             style={{ touchAction: "none" }}
           >
             {submitting
-              ? <div className="h-5 w-5 rounded-full border-2 border-[#0a0a0a] border-t-transparent animate-spin" />
+              ? <div className="h-5 w-5 rounded-full border-2 border-[#0A1628] border-t-transparent animate-spin" />
               : <MaterialIcon name="keyboard_double_arrow_right" className="font-bold" />
             }
           </div>
@@ -276,8 +276,8 @@ function ServiceLogisticsInner() {
 export default function ServiceLogisticsPage() {
   return (
     <Suspense fallback={
-      <div className="flex min-h-dvh items-center justify-center bg-[#0a0a0a]">
-        <div className="w-8 h-8 border-2 border-[#dab80b] border-t-transparent rounded-full animate-spin" />
+      <div className="flex min-h-dvh items-center justify-center bg-[#0A1628]">
+        <div className="w-8 h-8 border-2 border-[#E5C158] border-t-transparent rounded-full animate-spin" />
       </div>
     }>
       <ServiceLogisticsInner />

@@ -6,7 +6,7 @@ import { useApi } from "@/lib/hooks/use-api";
 import { fetchDealerProfile, fetchDashboard } from "@/lib/api";
 
 /* ── design tokens: ai_enhancements_&_billing ── */
-// primary: #1754cf, font: Manrope, bg: #111621, card: #1a2232, border: #243047
+// primary: #3B82F6, font: Manrope, bg: #0A1628, card: #1a2232, border: #243047
 
 const ADDONS = [
   {
@@ -15,7 +15,7 @@ const ADDONS = [
     desc: "Add 10 additional high-resolution rendering slots to your monthly inventory limit.",
     price: "\u20b93,999",
     period: "/mo",
-    ctaBg: "#1754cf",
+    ctaBg: "#3B82F6",
     ctaColor: "white",
   },
   {
@@ -64,16 +64,16 @@ export default function BillingPage() {
   return (
     <div
       className="min-h-screen max-w-md mx-auto flex flex-col pb-24"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#111621", color: "#f1f5f9" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628", color: "#f1f5f9" }}
     >
       {/* ── Status Bar Spacer ── */}
-      <div className="h-12 w-full" style={{ background: "#111621" }} />
+      <div className="h-12 w-full" style={{ background: "#0A1628" }} />
 
       {/* ── Header ── */}
       <header
         className="sticky top-12 z-50 px-4 py-4 flex items-center justify-between border-b"
         style={{
-          background: "rgba(17,22,33,0.8)",
+          background: "rgba(10,22,40,0.8)",
           backdropFilter: "blur(12px)",
           borderColor: "#243047",
         }}
@@ -104,7 +104,7 @@ export default function BillingPage() {
           >
             <div className="flex justify-between items-start mb-6">
               <div>
-                <p className="text-xs font-bold mb-1 tracking-wide" style={{ color: "#1754cf" }}>
+                <p className="text-xs font-bold mb-1 tracking-wide" style={{ color: "#3B82F6" }}>
                   ACTIVE
                 </p>
                 <h3 className="text-xl font-extrabold text-white capitalize">{planTier}</h3>
@@ -112,7 +112,7 @@ export default function BillingPage() {
               </div>
               <div
                 className="px-3 py-1 rounded-full text-xs font-bold capitalize"
-                style={{ background: "rgba(23,84,207,0.1)", color: "#1754cf" }}
+                style={{ background: "rgba(23,84,207,0.1)", color: "#3B82F6" }}
               >
                 {billingCycle}
               </div>
@@ -130,7 +130,7 @@ export default function BillingPage() {
                 >
                   <div
                     className="h-full rounded-full"
-                    style={{ width: `${slotPct}%`, background: "#1754cf" }}
+                    style={{ width: `${slotPct}%`, background: "#3B82F6" }}
                   />
                 </div>
                 <p className="text-[10px] text-slate-500 mt-2 italic">{slotPct}% capacity reached</p>
@@ -168,7 +168,7 @@ export default function BillingPage() {
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <MaterialIcon name={addon.icon} className="text-xl text-[#1754cf]" />
+                      <MaterialIcon name={addon.icon} className="text-xl text-[#3B82F6]" />
                       <h3 className="font-bold text-base text-white">{addon.name}</h3>
                     </div>
                     <p className="text-xs leading-relaxed text-slate-400">{addon.desc}</p>
@@ -183,7 +183,7 @@ export default function BillingPage() {
                   style={{
                     background: addon.ctaBg,
                     color: addon.ctaColor,
-                    ...(addon.ctaBg === "#1754cf"
+                    ...(addon.ctaBg === "#3B82F6"
                       ? { boxShadow: "0 4px 16px rgba(23,84,207,0.2)" }
                       : {}),
                   }}
@@ -216,7 +216,7 @@ export default function BillingPage() {
       <nav
         className="fixed bottom-0 left-0 right-0 z-50 pb-8 pt-3 px-6 border-t max-w-md mx-auto md:hidden"
         style={{
-          background: "rgba(17,22,33,0.8)",
+          background: "rgba(10,22,40,0.8)",
           backdropFilter: "blur(12px)",
           borderColor: "#243047",
         }}
@@ -232,7 +232,7 @@ export default function BillingPage() {
               key={item.label}
               href={item.href}
               className="flex flex-col items-center gap-1"
-              style={{ color: item.active ? "#1754cf" : "#64748b" }}
+              style={{ color: item.active ? "#3B82F6" : "#64748b" }}
             >
               <MaterialIcon name={item.icon} fill={item.active} />
               <span className="text-[10px] font-medium uppercase tracking-tighter">

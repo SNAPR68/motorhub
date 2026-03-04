@@ -24,7 +24,7 @@ const BRAND_GROUPS: OriginGroup[] = [
     origin: "Indian",
     icon: "flag",
     brands: [
-      { name: "Tata", slug: "tata", models: 10, color: "#1152d4" },
+      { name: "Tata", slug: "tata", models: 10, color: "#3B82F6" },
       { name: "Mahindra", slug: "mahindra", models: 9, color: "#dc2626" },
       { name: "Maruti Suzuki", slug: "maruti", models: 16, color: "#16a34a" },
     ],
@@ -42,7 +42,7 @@ const BRAND_GROUPS: OriginGroup[] = [
     origin: "Korean",
     icon: "language",
     brands: [
-      { name: "Hyundai", slug: "hyundai", models: 12, color: "#1152d4" },
+      { name: "Hyundai", slug: "hyundai", models: 12, color: "#3B82F6" },
       { name: "Kia", slug: "kia", models: 6, color: "#dc2626" },
     ],
   },
@@ -50,9 +50,9 @@ const BRAND_GROUPS: OriginGroup[] = [
     origin: "European",
     icon: "language",
     brands: [
-      { name: "Volkswagen", slug: "volkswagen", models: 6, color: "#1152d4" },
+      { name: "Volkswagen", slug: "volkswagen", models: 6, color: "#3B82F6" },
       { name: "Skoda", slug: "skoda", models: 5, color: "#16a34a" },
-      { name: "BMW", slug: "bmw", models: 11, color: "#1152d4" },
+      { name: "BMW", slug: "bmw", models: 11, color: "#3B82F6" },
       { name: "Audi", slug: "audi", models: 10, color: "#9ca3af" },
       { name: "Mercedes-Benz", slug: "mercedes-benz", models: 13, color: "#9ca3af" },
     ],
@@ -61,7 +61,7 @@ const BRAND_GROUPS: OriginGroup[] = [
     origin: "American",
     icon: "language",
     brands: [
-      { name: "Ford", slug: "ford", models: 5, color: "#1152d4" },
+      { name: "Ford", slug: "ford", models: 5, color: "#3B82F6" },
       { name: "Jeep", slug: "jeep", models: 4, color: "#16a34a" },
     ],
   },
@@ -70,7 +70,7 @@ const BRAND_GROUPS: OriginGroup[] = [
     icon: "language",
     brands: [
       { name: "MG", slug: "mg", models: 5, color: "#dc2626" },
-      { name: "BYD", slug: "byd", models: 4, color: "#1152d4" },
+      { name: "BYD", slug: "byd", models: 4, color: "#3B82F6" },
     ],
   },
 ];
@@ -105,9 +105,9 @@ export default function AllBrandsPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-white ">
+    <div className="min-h-screen bg-[#0A1628] text-white ">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#080a0f]/95 backdrop-blur border-b border-white/5 max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
+      <header className="sticky top-0 z-40 bg-[#0A1628]/95 backdrop-blur border-b border-white/5 max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
         <Link href="/" className="p-2 rounded-full hover:bg-white/10 transition-colors -ml-2">
           <MaterialIcon name="arrow_back" className="text-[22px]" />
         </Link>
@@ -123,7 +123,7 @@ export default function AllBrandsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search brands..."
-            className="w-full bg-white/5 border border-white/10 rounded-full pl-10 pr-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition-colors text-sm"
+            className="w-full bg-white/5 border border-white/10 rounded-full pl-10 pr-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm"
           />
           {search && (
             <button
@@ -137,7 +137,7 @@ export default function AllBrandsPage() {
 
         {/* Stats strip */}
         <div className="mt-4 flex items-center gap-3 bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3">
-          <MaterialIcon name="directions_car" className="text-[22px] text-[#1152d4]" />
+          <MaterialIcon name="directions_car" className="text-[22px] text-[#3B82F6]" />
           <div>
             <p className="font-bold text-sm text-white">
               {search ? `${totalFiltered} Brand${totalFiltered !== 1 ? "s" : ""} found` : "32 Brands · 500+ Models"}
@@ -165,7 +165,7 @@ export default function AllBrandsPage() {
                   <Link
                     key={brand.slug}
                     href={`/cars/${brand.slug}`}
-                    className="flex items-center gap-4 bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3.5 hover:border-[#1152d4]/30 hover:bg-white/[0.05] transition-all group"
+                    className="flex items-center gap-4 bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3.5 hover:border-[#3B82F6]/30 hover:bg-white/[0.05] transition-all group"
                   >
                     <BrandAvatar name={brand.name} color={brand.color} />
                     <div className="flex-1 min-w-0">
@@ -177,7 +177,7 @@ export default function AllBrandsPage() {
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-[#1152d4] bg-[#1152d4]/10 px-2 py-0.5 rounded-full">
+                      <span className="text-xs font-bold text-[#3B82F6] bg-[#3B82F6]/10 px-2 py-0.5 rounded-full">
                         {brand.models}
                       </span>
                       <MaterialIcon name="chevron_right" className="text-[20px] text-slate-600 group-hover:text-slate-400 transition-colors" />

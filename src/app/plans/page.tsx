@@ -10,7 +10,7 @@ import { PLAN_DISPLAY } from "@/lib/plan-limits";
 import type { PlanKey } from "@/lib/plan-limits";
 
 /* -- design tokens: premium_dealer_plans -- */
-// primary: #f4c025 (gold), font: Manrope, bg: #221e10
+// primary: #E5C158 (gold), font: Manrope, bg: #221e10
 
 const PLAN_KEY_MAP: Record<string, string> = {
   FREE: "Free",
@@ -103,7 +103,7 @@ export default function PlansPage() {
           modal: {
             ondismiss: () => setUpgrading(null),
           },
-          theme: { color: "#f4c025" },
+          theme: { color: "#E5C158" },
         });
         rzp.open();
       } catch {
@@ -152,8 +152,8 @@ export default function PlansPage() {
             className="flex h-full grow items-center justify-center overflow-hidden rounded-lg px-2 text-sm font-semibold transition-all"
             style={
               billing === "monthly"
-                ? { background: "#f4c025", color: "#221e10" }
-                : { color: "#f4c025" }
+                ? { background: "#E5C158", color: "#221e10" }
+                : { color: "#E5C158" }
             }
           >
             Monthly
@@ -163,14 +163,14 @@ export default function PlansPage() {
             className="flex h-full grow items-center justify-center overflow-hidden rounded-lg px-2 text-sm font-semibold transition-all relative"
             style={
               billing === "annual"
-                ? { background: "#f4c025", color: "#221e10" }
-                : { color: "#f4c025" }
+                ? { background: "#E5C158", color: "#221e10" }
+                : { color: "#E5C158" }
             }
           >
             Annual
             <span
               className="absolute -top-1 -right-1 px-1.5 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider"
-              style={{ background: "#f4c025", color: "#221e10" }}
+              style={{ background: "#E5C158", color: "#221e10" }}
             >
               2 Mo Free
             </span>
@@ -218,7 +218,7 @@ export default function PlansPage() {
                   ? "rgba(244,192,37,0.05)"
                   : "rgba(255,255,255,0.05)",
                 border: isHighlight
-                  ? "2px solid #f4c025"
+                  ? "2px solid #E5C158"
                   : isCurrent
                     ? "1px solid rgba(16,185,129,0.4)"
                     : "1px solid rgba(244,192,37,0.1)",
@@ -229,7 +229,7 @@ export default function PlansPage() {
                 <div className="absolute top-0 right-0">
                   <div
                     className="text-[10px] font-black px-4 py-1 rotate-45 translate-x-3 translate-y-2 w-32 text-center uppercase"
-                    style={{ background: "#f4c025", color: "#221e10" }}
+                    style={{ background: "#E5C158", color: "#221e10" }}
                   >
                     Popular
                   </div>
@@ -241,7 +241,7 @@ export default function PlansPage() {
                   <h3
                     className="text-xs font-bold uppercase tracking-widest leading-tight"
                     style={{
-                      color: isHighlight ? "#f4c025" : "#94a3b8",
+                      color: isHighlight ? "#E5C158" : "#94a3b8",
                     }}
                   >
                     {plan.tagline}
@@ -271,7 +271,7 @@ export default function PlansPage() {
                         color:
                           plan.badge === "Platinum Dealer"
                             ? "#a855f7"
-                            : "#f4c025",
+                            : "#E5C158",
                       }}
                     >
                       {plan.badge}
@@ -322,7 +322,7 @@ export default function PlansPage() {
                   >
                     <MaterialIcon
                       name={isHighlight ? "verified" : "check_circle"}
-                      className="text-base text-[#f4c025] shrink-0 mt-0.5"
+                      className="text-base text-[#E5C158] shrink-0 mt-0.5"
                     />
                     {f}
                   </div>
@@ -345,7 +345,7 @@ export default function PlansPage() {
                     : isDowngrade
                       ? "#1e293b"
                       : isHighlight
-                        ? "#f4c025"
+                        ? "#E5C158"
                         : "rgba(244,192,37,0.2)",
                   color: isCurrent
                     ? "#94a3b8"
@@ -353,7 +353,7 @@ export default function PlansPage() {
                       ? "#64748b"
                       : isHighlight
                         ? "#221e10"
-                        : "#f4c025",
+                        : "#E5C158",
                   ...(!canUpgrade
                     ? { opacity: 0.5, cursor: "not-allowed" }
                     : {}),
@@ -406,7 +406,7 @@ export default function PlansPage() {
             key={item.label}
             href={item.href}
             className="flex flex-1 flex-col items-center justify-center gap-1"
-            style={{ color: item.active ? "#f4c025" : "#94a3b8" }}
+            style={{ color: item.active ? "#E5C158" : "#94a3b8" }}
           >
             <MaterialIcon name={item.icon} fill={item.active} />
             <p className="text-[10px] font-medium leading-normal tracking-wide">

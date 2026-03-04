@@ -43,10 +43,10 @@ const STATUS_MAP: Record<string, OrderStatus> = {
 };
 
 const STATUS_CONFIG: Record<OrderStatus, { bg: string; color: string; label: string }> = {
-  BOOKING_CONFIRMED: { bg: "rgba(17,82,212,0.12)", color: "#60a5fa", label: "Booking Confirmed" },
+  BOOKING_CONFIRMED: { bg: "rgba(59,130,246,0.12)", color: "#60a5fa", label: "Booking Confirmed" },
   COMPLETED: { bg: "rgba(16,185,129,0.12)", color: "#34d399", label: "Completed" },
   CANCELLED: { bg: "rgba(239,68,68,0.12)", color: "#f87171", label: "Cancelled" },
-  IN_TRANSIT: { bg: "rgba(245,158,11,0.12)", color: "#fbbf24", label: "In Transit" },
+  IN_TRANSIT: { bg: "rgba(245,158,11,0.12)", color: "#E5C158", label: "In Transit" },
 };
 
 const STATUS_FILTER_MAP: Record<OrderStatus, OrderFilter> = {
@@ -109,11 +109,11 @@ export default function MyOrdersPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -148,9 +148,9 @@ export default function MyOrdersPage() {
                 onClick={() => setActiveFilter(filter)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0"
                 style={{
-                  background: active ? "#1152d4" : "rgba(255,255,255,0.05)",
+                  background: active ? "#3B82F6" : "rgba(255,255,255,0.05)",
                   color: active ? "#fff" : "#94a3b8",
-                  border: active ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.08)",
+                  border: active ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 {filter}
@@ -234,9 +234,9 @@ export default function MyOrdersPage() {
                         <button
                           className="flex-1 h-9 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5"
                           style={{
-                            background: "rgba(17,82,212,0.12)",
+                            background: "rgba(59,130,246,0.12)",
                             color: "#60a5fa",
-                            border: "1px solid rgba(17,82,212,0.2)",
+                            border: "1px solid rgba(59,130,246,0.2)",
                           }}
                         >
                           <MaterialIcon name="local_shipping" className="text-[14px]" />
@@ -284,9 +284,9 @@ export default function MyOrdersPage() {
                       <button
                         className="flex-1 h-9 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5"
                         style={{
-                          background: "rgba(17,82,212,0.12)",
+                          background: "rgba(59,130,246,0.12)",
                           color: "#60a5fa",
-                          border: "1px solid rgba(17,82,212,0.2)",
+                          border: "1px solid rgba(59,130,246,0.2)",
                         }}
                       >
                         <MaterialIcon name="refresh" className="text-[14px]" />

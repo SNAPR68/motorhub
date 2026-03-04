@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 
 /* Stitch: DemandPulse — Market Forecasting */
-/* Design tokens: #0dccf2 (cyan), Manrope, #0a0a0a bg, #161b1d card */
+/* Design tokens: #0dccf2 (cyan), Manrope, #0A1628 bg, #161b1d card */
 
 /* ── types ── */
 type Segment = "Hatchbacks" | "Sedans" | "SUVs" | "Premium";
@@ -172,13 +172,13 @@ export default function ForecastPage() {
   return (
     <div
       className="min-h-dvh w-full flex flex-col max-w-md mx-auto text-slate-100 pb-24"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0a0a" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628" }}
     >
       {/* ── Header ── */}
       <header
         className="sticky top-0 z-50 px-4 py-4 flex items-center justify-between border-b"
         style={{
-          background: "rgba(10,10,10,0.8)",
+          background: "rgba(10,22,40,0.8)",
           backdropFilter: "blur(12px)",
           borderColor: "rgba(255,255,255,0.05)",
         }}
@@ -211,7 +211,7 @@ export default function ForecastPage() {
         <section
           className="rounded-2xl p-5 mb-6 relative overflow-hidden"
           style={{
-            background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)",
+            background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)",
             border: "1px solid rgba(148,163,184,0.1)",
           }}
         >
@@ -275,7 +275,7 @@ export default function ForecastPage() {
                   key={seg}
                   className="rounded-xl p-4 relative overflow-hidden"
                   style={{
-                    background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)",
+                    background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)",
                     border: "1px solid rgba(148,163,184,0.1)",
                   }}
                 >
@@ -346,7 +346,7 @@ export default function ForecastPage() {
           <div
             className="rounded-2xl p-5"
             style={{
-              background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)",
+              background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)",
               border: "1px solid rgba(148,163,184,0.1)",
             }}
           >
@@ -503,7 +503,7 @@ export default function ForecastPage() {
                 className="px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all whitespace-nowrap"
                 style={{
                   background: compareModel === m ? "#0dccf2" : "rgba(255,255,255,0.05)",
-                  color: compareModel === m ? "#0a0a0a" : "#94a3b8",
+                  color: compareModel === m ? "#0A1628" : "#94a3b8",
                   border: compareModel === m ? "none" : "1px solid rgba(255,255,255,0.05)",
                 }}
               >
@@ -515,7 +515,7 @@ export default function ForecastPage() {
           <div
             className="rounded-2xl p-4"
             style={{
-              background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)",
+              background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)",
               border: "1px solid rgba(148,163,184,0.1)",
             }}
           >
@@ -570,7 +570,7 @@ export default function ForecastPage() {
                 key={insight.title}
                 className="rounded-xl p-4 flex items-start gap-3 relative overflow-hidden"
                 style={{
-                  background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)",
+                  background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)",
                   border: "1px solid rgba(148,163,184,0.1)",
                 }}
               >
@@ -600,7 +600,7 @@ export default function ForecastPage() {
           <div
             className="rounded-2xl p-5 relative overflow-hidden"
             style={{
-              background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)",
+              background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)",
               border: "1px solid rgba(13,204,242,0.15)",
             }}
           >
@@ -653,7 +653,7 @@ export default function ForecastPage() {
       <nav
         className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 pb-8 pt-2 px-6 flex justify-between items-center border-t md:hidden"
         style={{
-          background: "rgba(10,10,10,0.9)",
+          background: "rgba(10,22,40,0.9)",
           backdropFilter: "blur(16px)",
           borderColor: "rgba(255,255,255,0.05)",
         }}
@@ -668,10 +668,10 @@ export default function ForecastPage() {
             style={{
               background: "#0dccf2",
               boxShadow: "0 8px 20px rgba(13,204,242,0.4)",
-              border: "4px solid #0a0a0a",
+              border: "4px solid #0A1628",
             }}
           >
-            <MaterialIcon name="query_stats" className="text-[#0a0a0a] font-bold -rotate-45" />
+            <MaterialIcon name="query_stats" className="text-[#0A1628] font-bold -rotate-45" />
           </div>
           <span className="text-[10px] font-black tracking-widest uppercase mt-4 text-[#0dccf2]">Insights</span>
         </Link>

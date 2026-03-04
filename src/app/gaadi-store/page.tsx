@@ -53,7 +53,7 @@ const FEATURE_ICONS: Record<string, string> = {
 };
 
 const FEATURE_COLORS: Record<string, string> = {
-  "Test Drive": "#1152d4",
+  "Test Drive": "#3B82F6",
   Inspection: "#10b981",
   Finance: "#f59e0b",
 };
@@ -65,11 +65,11 @@ export default function GaadiStorePage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -87,7 +87,7 @@ export default function GaadiStorePage() {
         {/* Description */}
         <div
           className="rounded-2xl p-5 text-white"
-          style={{ background: "linear-gradient(135deg, #1152d4 0%, #0a3ba8 60%, #071e6b 100%)" }}
+          style={{ background: "linear-gradient(135deg, #3B82F6 0%, #0a3ba8 60%, #071e6b 100%)" }}
         >
           <div className="flex items-center gap-2 mb-2">
             <MaterialIcon name="storefront" className="text-[24px]" />
@@ -108,9 +108,9 @@ export default function GaadiStorePage() {
               onClick={() => setSelectedCity("All")}
               className="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0"
               style={{
-                background: selectedCity === "All" ? "#1152d4" : "rgba(255,255,255,0.05)",
+                background: selectedCity === "All" ? "#3B82F6" : "rgba(255,255,255,0.05)",
                 color: selectedCity === "All" ? "#fff" : "#94a3b8",
-                border: selectedCity === "All" ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.08)",
+                border: selectedCity === "All" ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.08)",
               }}
             >
               All Cities
@@ -123,9 +123,9 @@ export default function GaadiStorePage() {
                   onClick={() => setSelectedCity(city)}
                   className="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0"
                   style={{
-                    background: active ? "#1152d4" : "rgba(255,255,255,0.05)",
+                    background: active ? "#3B82F6" : "rgba(255,255,255,0.05)",
                     color: active ? "#fff" : "#94a3b8",
-                    border: active ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.08)",
+                    border: active ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.08)",
                   }}
                 >
                   {city}

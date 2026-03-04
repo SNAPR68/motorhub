@@ -107,13 +107,13 @@ export default function DocumentVaultPage() {
     <BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -169,7 +169,7 @@ export default function DocumentVaultPage() {
           <div className="flex flex-col items-center py-20 text-center">
             <div
               className="h-16 w-16 rounded-2xl flex items-center justify-center mb-4"
-              style={{ background: "rgba(17,82,212,0.08)" }}
+              style={{ background: "rgba(59,130,246,0.08)" }}
             >
               <MaterialIcon name="folder_open" className="text-[32px]" style={{ color: "#60a5fa" }} />
             </div>
@@ -180,7 +180,7 @@ export default function DocumentVaultPage() {
             <Link
               href="/new-cars"
               className="h-11 px-6 rounded-xl flex items-center gap-2 text-sm font-semibold text-white transition-all"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="search" className="text-[18px]" />
               Browse Cars
@@ -200,7 +200,7 @@ export default function DocumentVaultPage() {
                   className="flex-1 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap px-3 min-w-0"
                   style={
                     selectedId === car.id
-                      ? { background: "#1152d4", color: "#fff" }
+                      ? { background: "#3B82F6", color: "#fff" }
                       : { color: "#64748b" }
                   }
                 >
@@ -287,7 +287,7 @@ export default function DocumentVaultPage() {
                           style={{
                             background: isExpiring
                               ? "rgba(245,158,11,0.15)"
-                              : "rgba(17,82,212,0.15)",
+                              : "rgba(59,130,246,0.15)",
                             color: isExpiring ? "#f59e0b" : "#60a5fa",
                           }}
                         >
@@ -325,12 +325,12 @@ export default function DocumentVaultPage() {
             >
               <div
                 className="h-12 w-12 rounded-full flex items-center justify-center"
-                style={{ background: "rgba(17,82,212,0.1)" }}
+                style={{ background: "rgba(59,130,246,0.1)" }}
               >
                 <MaterialIcon
                   name="cloud_upload"
                   className="text-[24px]"
-                  style={{ color: "#1152d4" }}
+                  style={{ color: "#3B82F6" }}
                 />
               </div>
               <p className="text-sm font-bold text-white">
@@ -341,7 +341,7 @@ export default function DocumentVaultPage() {
               </p>
               <button
                 className="mt-1 h-9 px-5 rounded-xl text-xs font-bold text-white"
-                style={{ background: "#1152d4" }}
+                style={{ background: "#3B82F6" }}
               >
                 Browse Files
               </button>

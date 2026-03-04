@@ -12,16 +12,16 @@ const UPCOMING: Record<CarYear, { id: number; name: string; expectedDate: string
     { id: 1, name: "Maruti Dzire 2025", expectedDate: "Aug 2025", priceRange: "₹8–12L", bodyType: "Sedan", gradient: "linear-gradient(135deg, rgba(99,102,241,0.2), rgba(59,130,246,0.15))" },
     { id: 2, name: "Hyundai Creta EV 2025", expectedDate: "Jun 2025", priceRange: "₹18–23L", bodyType: "EV SUV", gradient: "linear-gradient(135deg, rgba(16,185,129,0.2), rgba(6,95,70,0.15))" },
     { id: 3, name: "Tata Curvv", expectedDate: "Sep 2025", priceRange: "₹10–18L", bodyType: "Coupe SUV", gradient: "linear-gradient(135deg, rgba(239,68,68,0.15), rgba(217,119,6,0.12))" },
-    { id: 4, name: "Kia Syros", expectedDate: "Mar 2025", priceRange: "₹9–15L", bodyType: "SUV", gradient: "linear-gradient(135deg, rgba(17,82,212,0.2), rgba(99,102,241,0.15))" },
+    { id: 4, name: "Kia Syros", expectedDate: "Mar 2025", priceRange: "₹9–15L", bodyType: "SUV", gradient: "linear-gradient(135deg, rgba(59,130,246,0.2), rgba(99,102,241,0.15))" },
   ],
   "2026": [
-    { id: 5, name: "Mahindra XEV 7e", expectedDate: "Q1 2026", priceRange: "₹25–35L", bodyType: "EV SUV", gradient: "linear-gradient(135deg, rgba(16,185,129,0.2), rgba(17,82,212,0.15))" },
+    { id: 5, name: "Mahindra XEV 7e", expectedDate: "Q1 2026", priceRange: "₹25–35L", bodyType: "EV SUV", gradient: "linear-gradient(135deg, rgba(16,185,129,0.2), rgba(59,130,246,0.15))" },
     { id: 6, name: "Volkswagen Tiguan 2026", expectedDate: "Q2 2026", priceRange: "₹32–42L", bodyType: "SUV", gradient: "linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.15))" },
     { id: 7, name: "Mercedes EQB", expectedDate: "Q3 2026", priceRange: "₹68–75L", bodyType: "EV SUV", gradient: "linear-gradient(135deg, rgba(148,163,184,0.15), rgba(71,85,105,0.1))" },
   ],
   "2027": [
     { id: 8, name: "Tata Sierra EV", expectedDate: "2027", priceRange: "₹20–30L", bodyType: "EV SUV", gradient: "linear-gradient(135deg, rgba(16,185,129,0.2), rgba(6,95,70,0.12))" },
-    { id: 9, name: "Maruti Alto EV", expectedDate: "2027", priceRange: "₹6–9L", bodyType: "EV Hatchback", gradient: "linear-gradient(135deg, rgba(17,82,212,0.2), rgba(59,130,246,0.12))" },
+    { id: 9, name: "Maruti Alto EV", expectedDate: "2027", priceRange: "₹6–9L", bodyType: "EV Hatchback", gradient: "linear-gradient(135deg, rgba(59,130,246,0.2), rgba(59,130,246,0.12))" },
   ],
 };
 
@@ -39,11 +39,11 @@ export default function UpcomingCarsPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -56,7 +56,7 @@ export default function UpcomingCarsPage() {
           <h1 className="text-base font-bold text-white flex-1">Upcoming Cars</h1>
           <span
             className="text-[11px] font-bold px-2.5 py-1 rounded-full"
-            style={{ background: "rgba(245,158,11,0.12)", color: "#fbbf24", border: "1px solid rgba(245,158,11,0.2)" }}
+            style={{ background: "rgba(245,158,11,0.12)", color: "#E5C158", border: "1px solid rgba(245,158,11,0.2)" }}
           >
             {Object.values(UPCOMING).flat().length} cars
           </span>
@@ -75,7 +75,7 @@ export default function UpcomingCarsPage() {
               onClick={() => setActiveYear(year)}
               className="flex-1 py-2 rounded-xl text-sm font-bold transition-all"
               style={{
-                background: activeYear === year ? "#1152d4" : "transparent",
+                background: activeYear === year ? "#3B82F6" : "transparent",
                 color: activeYear === year ? "#fff" : "#64748b",
               }}
             >
@@ -106,7 +106,7 @@ export default function UpcomingCarsPage() {
                 </div>
                 <span
                   className="absolute top-3 left-3 flex items-center gap-1 text-[10px] font-bold px-2.5 py-1 rounded-full"
-                  style={{ background: "rgba(245,158,11,0.2)", color: "#fbbf24", border: "1px solid rgba(245,158,11,0.25)" }}
+                  style={{ background: "rgba(245,158,11,0.2)", color: "#E5C158", border: "1px solid rgba(245,158,11,0.25)" }}
                 >
                   <MaterialIcon name="schedule" className="text-[11px]" />
                   {car.expectedDate}
@@ -131,7 +131,7 @@ export default function UpcomingCarsPage() {
                   style={
                     alerts.includes(car.id)
                       ? { background: "rgba(16,185,129,0.15)", color: "#34d399", border: "1px solid rgba(16,185,129,0.25)" }
-                      : { background: "rgba(17,82,212,0.15)", color: "#60a5fa", border: "1px solid rgba(17,82,212,0.25)" }
+                      : { background: "rgba(59,130,246,0.15)", color: "#60a5fa", border: "1px solid rgba(59,130,246,0.25)" }
                   }
                 >
                   <MaterialIcon
@@ -148,7 +148,7 @@ export default function UpcomingCarsPage() {
         {/* Newsletter strip */}
         <div
           className="rounded-2xl p-4 border border-white/5"
-          style={{ background: "rgba(17,82,212,0.06)" }}
+          style={{ background: "rgba(59,130,246,0.06)" }}
         >
           <div className="flex items-center gap-2 mb-3">
             <MaterialIcon name="campaign" className="text-[20px] text-blue-400" />
@@ -179,7 +179,7 @@ export default function UpcomingCarsPage() {
               <button
                 onClick={() => email && setSubscribed(true)}
                 className="h-10 px-4 rounded-xl text-sm font-bold text-white shrink-0"
-                style={{ background: "#1152d4" }}
+                style={{ background: "#3B82F6" }}
               >
                 Subscribe
               </button>

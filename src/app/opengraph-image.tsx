@@ -16,7 +16,7 @@ export default function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #080a0f 0%, #0f1724 50%, #080a0f 100%)",
+          background: "linear-gradient(135deg, #0A1628 0%, #0f1724 50%, #0A1628 100%)",
           fontFamily: "system-ui, sans-serif",
         }}
       >
@@ -29,7 +29,7 @@ export default function Image() {
             width: 400,
             height: 400,
             borderRadius: "50%",
-            background: "rgba(17,82,212,0.08)",
+            background: "rgba(59,130,246,0.08)",
           }}
         />
         <div
@@ -40,7 +40,7 @@ export default function Image() {
             width: 350,
             height: 350,
             borderRadius: "50%",
-            background: "rgba(17,82,212,0.06)",
+            background: "rgba(59,130,246,0.06)",
           }}
         />
 
@@ -58,7 +58,7 @@ export default function Image() {
               width: 48,
               height: 48,
               borderRadius: 14,
-              background: "linear-gradient(135deg, #1152d4, #0e44b5)",
+              background: "linear-gradient(135deg, #3B82F6, #0e44b5)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -124,8 +124,8 @@ export default function Image() {
                 style={{
                   padding: "8px 20px",
                   borderRadius: 20,
-                  background: "rgba(17,82,212,0.15)",
-                  border: "1px solid rgba(17,82,212,0.3)",
+                  background: "rgba(59,130,246,0.15)",
+                  border: "1px solid rgba(59,130,246,0.3)",
                   color: "#60a5fa",
                   fontSize: 16,
                   fontWeight: 600,

@@ -5,7 +5,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle } from "@/lib/api";
 
-/* Stitch: curated_interests_grid — #137fec, Manrope, #0a0c10 */
+/* Stitch: curated_interests_grid — #3B82F6, Manrope, #0A1628 */
 
 export default function InterestsPage() {
   const { data } = useApi(() => fetchVehicles({ limit: 6 }), []);
@@ -16,10 +16,10 @@ export default function InterestsPage() {
   return (
     <div
       className="relative flex min-h-dvh w-full flex-col max-w-[430px] mx-auto overflow-x-hidden text-slate-100"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0c10" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
-      <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0c10]/80 backdrop-blur-md border-b border-slate-800/50">
+      <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0A1628]/80 backdrop-blur-md border-b border-slate-800/50">
         <Link
           href="/"
           className="flex items-center justify-center size-10 rounded-full hover:bg-slate-800 transition-colors"
@@ -38,7 +38,7 @@ export default function InterestsPage() {
         {/* Grid Title */}
         <div className="px-6 pt-8 pb-4 flex justify-between items-end">
           <div>
-            <p className="text-[10px] font-bold text-[#137fec] tracking-[0.3em] uppercase mb-1">
+            <p className="text-[10px] font-bold text-[#3B82F6] tracking-[0.3em] uppercase mb-1">
               Portfolio
             </p>
             <h2 className="text-2xl font-light tracking-tight">Curated Grid</h2>
@@ -77,7 +77,7 @@ export default function InterestsPage() {
             <MaterialIcon
               name="auto_awesome"
               fill
-              className="text-[#137fec] text-[20px]"
+              className="text-[#3B82F6] text-[20px]"
             />
             <h3 className="text-sm font-bold tracking-[0.1em] uppercase">
               Recommended by AI Concierge
@@ -94,7 +94,7 @@ export default function InterestsPage() {
               >
                 <div className="relative h-[180px] rounded-xl overflow-hidden mb-3 bg-slate-900 border border-slate-800">
                   <div className="absolute top-3 left-3 z-10">
-                    <span className="bg-[#137fec]/20 backdrop-blur-md text-[#137fec] text-[10px] font-bold px-2 py-1 rounded border border-[#137fec]/30 tracking-wider">
+                    <span className="bg-[#3B82F6]/20 backdrop-blur-md text-[#3B82F6] text-[10px] font-bold px-2 py-1 rounded border border-[#3B82F6]/30 tracking-wider">
                       {i === 0 ? "98" : "94"}% MATCH
                     </span>
                   </div>
@@ -123,7 +123,7 @@ export default function InterestsPage() {
       </main>
 
       {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-[#0a0c10]/95 backdrop-blur-xl border-t border-slate-800/80 px-6 pt-3 pb-8 flex justify-between items-center z-50 md:hidden">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-[#0A1628]/95 backdrop-blur-xl border-t border-slate-800/80 px-6 pt-3 pb-8 flex justify-between items-center z-50 md:hidden">
         <Link href="/" className="flex flex-col items-center gap-1 text-slate-500">
           <MaterialIcon name="home" className="text-[26px]" />
           <span className="text-[9px] font-bold uppercase tracking-widest">Home</span>
@@ -132,7 +132,7 @@ export default function InterestsPage() {
           <MaterialIcon name="search" className="text-[26px]" />
           <span className="text-[9px] font-bold uppercase tracking-widest">Search</span>
         </Link>
-        <Link href="/interests" className="flex flex-col items-center gap-1 text-[#137fec]">
+        <Link href="/interests" className="flex flex-col items-center gap-1 text-[#3B82F6]">
           <MaterialIcon name="grid_view" fill className="text-[26px]" />
           <span className="text-[9px] font-bold uppercase tracking-widest">Collection</span>
         </Link>

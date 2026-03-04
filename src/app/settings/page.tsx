@@ -6,7 +6,7 @@ import { useApi } from "@/lib/hooks/use-api";
 import { fetchDealerProfile } from "@/lib/api";
 
 /* ── design tokens: settings hub (matches billing stitch tokens) ── */
-// primary: #1754cf, font: Manrope, bg: #111621, card: #1a2232, border: #243047
+// primary: #3B82F6, font: Manrope, bg: #0A1628, card: #1a2232, border: #243047
 
 const SECTIONS = [
   {
@@ -54,13 +54,13 @@ export default function SettingsPage() {
   return (
     <div
       className="min-h-screen max-w-md mx-auto flex flex-col pb-24"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#111621", color: "#e2e8f0" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ── Header ── */}
       <header
         className="sticky top-0 z-50 px-4 py-4 border-b"
         style={{
-          background: "rgba(17,22,33,0.8)",
+          background: "rgba(10,22,40,0.8)",
           backdropFilter: "blur(12px)",
           borderColor: "#243047",
         }}
@@ -77,7 +77,7 @@ export default function SettingsPage() {
         >
           <div
             className="w-14 h-14 rounded-full flex items-center justify-center text-white text-xl font-bold"
-            style={{ background: "#1754cf" }}
+            style={{ background: "#3B82F6" }}
           >
             {initials}
           </div>
@@ -86,7 +86,7 @@ export default function SettingsPage() {
             <p className="text-xs text-slate-400">{dealershipName ?? "Your Dealership"}{city ? ` \u2022 ${city}` : ""}</p>
             <span
               className="text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block"
-              style={{ background: "rgba(23,84,207,0.15)", color: "#1754cf" }}
+              style={{ background: "rgba(23,84,207,0.15)", color: "#3B82F6" }}
             >
               PREMIUM DEALER
             </span>
@@ -120,7 +120,7 @@ export default function SettingsPage() {
                     className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                     style={{ background: "rgba(23,84,207,0.1)" }}
                   >
-                    <MaterialIcon name={item.icon} className="text-xl text-[#1754cf]" />
+                    <MaterialIcon name={item.icon} className="text-xl text-[#3B82F6]" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -128,7 +128,7 @@ export default function SettingsPage() {
                       {item.badge && (
                         <span
                           className="text-[9px] font-bold px-1.5 py-0.5 rounded"
-                          style={{ background: "rgba(23,84,207,0.15)", color: "#1754cf" }}
+                          style={{ background: "rgba(23,84,207,0.15)", color: "#3B82F6" }}
                         >
                           {item.badge}
                         </span>
@@ -161,7 +161,7 @@ export default function SettingsPage() {
       <nav
         className="fixed bottom-0 left-0 right-0 z-50 pb-6 pt-3 px-6 flex justify-between items-center border-t max-w-md mx-auto md:hidden"
         style={{
-          background: "rgba(17,22,33,0.9)",
+          background: "rgba(10,22,40,0.9)",
           backdropFilter: "blur(12px)",
           borderColor: "#243047",
         }}
@@ -176,7 +176,7 @@ export default function SettingsPage() {
             key={item.label}
             href={item.href}
             className="flex flex-col items-center gap-1"
-            style={{ color: item.active ? "#1754cf" : "#64748b" }}
+            style={{ color: item.active ? "#3B82F6" : "#64748b" }}
           >
             <MaterialIcon name={item.icon} fill={item.active} className="text-2xl" />
             <span className="text-[10px] font-bold">{item.label}</span>

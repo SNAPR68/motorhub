@@ -5,7 +5,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchCurrentUser } from "@/lib/api";
 
-/* Stitch: vip_membership_confirmation — #f2cc0d, Manrope, #0a0a0a */
+/* Stitch: vip_membership_confirmation — #E5C158, Manrope, #0A1628 */
 
 const QUICK_MENU = [
   {
@@ -39,7 +39,7 @@ export default function VIPConfirmationPage() {
   return (
     <div
       className="relative flex h-dvh min-h-dvh w-full flex-col overflow-x-hidden max-w-md mx-auto border-x border-white/5 text-slate-100"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0a0a" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
       <div className="flex items-center p-6 justify-between">
@@ -55,8 +55,8 @@ export default function VIPConfirmationPage() {
           <MaterialIcon name="close" className="text-xl" />
         </Link>
         <div className="flex items-center gap-2">
-          <div className="size-2 rounded-full bg-[#f2cc0d] animate-pulse" />
-          <span className="text-[#f2cc0d] text-xs font-bold tracking-[0.2em] uppercase">
+          <div className="size-2 rounded-full bg-[#E5C158] animate-pulse" />
+          <span className="text-[#E5C158] text-xs font-bold tracking-[0.2em] uppercase">
             Status: Active
           </span>
         </div>
@@ -77,7 +77,7 @@ export default function VIPConfirmationPage() {
         {/* VIP Digital Card */}
         <div className="w-full">
           <div
-            className="rounded-xl p-8 border border-[#f2cc0d]/20 aspect-[1.586/1] flex flex-col justify-between relative overflow-hidden"
+            className="rounded-xl p-8 border border-[#E5C158]/20 aspect-[1.586/1] flex flex-col justify-between relative overflow-hidden"
             style={{
               background:
                 "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)",
@@ -95,7 +95,7 @@ export default function VIPConfirmationPage() {
             />
             <div className="flex justify-between items-start relative z-10">
               <div className="flex flex-col">
-                <span className="text-[#f2cc0d] text-[10px] font-black tracking-[0.3em] uppercase mb-1">
+                <span className="text-[#E5C158] text-[10px] font-black tracking-[0.3em] uppercase mb-1">
                   CaroBest
                 </span>
                 <span className="text-white/40 text-[9px] font-medium tracking-widest uppercase">
@@ -104,11 +104,11 @@ export default function VIPConfirmationPage() {
               </div>
               <MaterialIcon
                 name="verified"
-                className="text-[#f2cc0d] text-3xl"
+                className="text-[#E5C158] text-3xl"
               />
             </div>
             <div className="relative z-10">
-              <p className="text-[#f2cc0d] tracking-[0.2em] text-xs font-bold mb-1">
+              <p className="text-[#E5C158] tracking-[0.2em] text-xs font-bold mb-1">
                 VIP MEMBER
               </p>
               <h2 className="text-white text-2xl font-bold tracking-tight uppercase">
@@ -129,13 +129,13 @@ export default function VIPConfirmationPage() {
                 </span>
               </div>
               <div className="flex -space-x-2">
-                <div className="size-6 rounded-full border border-[#0a0a0a] bg-slate-800 flex items-center justify-center text-[8px] font-bold">
+                <div className="size-6 rounded-full border border-[#0A1628] bg-slate-800 flex items-center justify-center text-[8px] font-bold">
                   V
                 </div>
-                <div className="size-6 rounded-full border border-[#0a0a0a] bg-slate-700 flex items-center justify-center text-[8px] font-bold">
+                <div className="size-6 rounded-full border border-[#0A1628] bg-slate-700 flex items-center justify-center text-[8px] font-bold">
                   I
                 </div>
-                <div className="size-6 rounded-full border border-[#0a0a0a] bg-[#f2cc0d] text-[#0a0a0a] flex items-center justify-center text-[8px] font-bold">
+                <div className="size-6 rounded-full border border-[#0A1628] bg-[#E5C158] text-[#0A1628] flex items-center justify-center text-[8px] font-bold">
                   P
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function VIPConfirmationPage() {
               href={item.href}
               className={`w-full flex items-center gap-4 p-4 rounded-xl font-bold transition-all active:scale-[0.98] ${
                 item.primary
-                  ? "bg-[#f2cc0d] text-[#0a0a0a]"
+                  ? "bg-[#E5C158] text-[#0A1628]"
                   : "text-white font-semibold"
               }`}
               style={
@@ -169,13 +169,13 @@ export default function VIPConfirmationPage() {
             >
               <div
                 className={`size-10 rounded-lg flex items-center justify-center ${
-                  item.primary ? "bg-[#0a0a0a]/10" : "bg-[#f2cc0d]/10"
+                  item.primary ? "bg-[#0A1628]/10" : "bg-[#E5C158]/10"
                 }`}
               >
                 <MaterialIcon
                   name={item.icon}
                   className={
-                    item.primary ? "text-[#0a0a0a]" : "text-[#f2cc0d]"
+                    item.primary ? "text-[#0A1628]" : "text-[#E5C158]"
                   }
                 />
               </div>
@@ -185,7 +185,7 @@ export default function VIPConfirmationPage() {
               <MaterialIcon
                 name="chevron_right"
                 className={`text-sm ${
-                  item.primary ? "text-[#0a0a0a]" : "text-slate-500"
+                  item.primary ? "text-[#0A1628]" : "text-slate-500"
                 }`}
               />
             </Link>
@@ -199,20 +199,20 @@ export default function VIPConfirmationPage() {
           href="/my-cars"
           className="w-full flex flex-col items-center gap-1 group"
         >
-          <span className="text-slate-500 text-xs font-medium group-hover:text-[#f2cc0d] transition-colors">
+          <span className="text-slate-500 text-xs font-medium group-hover:text-[#E5C158] transition-colors">
             Go to Dashboard
           </span>
           <div className="h-0.5 w-8 bg-slate-800 rounded-full overflow-hidden">
-            <div className="h-full w-0 group-hover:w-full bg-[#f2cc0d] transition-all duration-300" />
+            <div className="h-full w-0 group-hover:w-full bg-[#E5C158] transition-all duration-300" />
           </div>
         </Link>
       </div>
 
       {/* Bottom Navigation */}
-      <div className="flex gap-2 border-t border-white/5 bg-[#0a0a0a]/80 backdrop-blur-xl px-4 pb-8 pt-4">
+      <div className="flex gap-2 border-t border-white/5 bg-[#0A1628]/80 backdrop-blur-xl px-4 pb-8 pt-4">
         <Link
           href="/"
-          className="flex flex-1 flex-col items-center justify-end gap-1 text-[#f2cc0d]"
+          className="flex flex-1 flex-col items-center justify-end gap-1 text-[#E5C158]"
         >
           <div className="flex h-8 items-center justify-center">
             <MaterialIcon name="home" fill />

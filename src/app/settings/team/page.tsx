@@ -11,7 +11,7 @@ import type { DbTeamMember } from "@/lib/api";
 import { SkeletonList } from "@/components/ui/Skeleton";
 
 /* ── design tokens: dealer_team_management ── */
-// primary: #1754cf, font: Noto Serif (headings) + Noto Sans (body), bg: #111621, card: #1E1E1E, border: silver/20
+// primary: #3B82F6, font: Noto Serif (headings) + Noto Sans (body), bg: #0A1628, card: #1E1E1E, border: silver/20
 
 const ROLE_STYLES: Record<string, { bg: string; color: string }> = {
   ADMIN: { bg: "rgba(245,158,11,0.1)", color: "rgba(245,158,11,0.9)" },
@@ -74,13 +74,13 @@ export default function TeamPage() {
   return (
     <div
       className="min-h-screen max-w-md mx-auto flex flex-col pb-24"
-      style={{ fontFamily: "'Noto Sans', sans-serif", background: "#111621", color: "#f1f5f9" }}
+      style={{ fontFamily: "'Noto Sans', sans-serif", background: "#0A1628", color: "#f1f5f9" }}
     >
       {/* ── Header ── */}
       <header
         className="sticky top-0 z-50 px-4 py-4 flex items-center justify-between border-b"
         style={{
-          background: "rgba(17,22,33,0.8)",
+          background: "rgba(10,22,40,0.8)",
           backdropFilter: "blur(12px)",
           borderColor: "rgba(23,84,207,0.1)",
         }}
@@ -117,7 +117,7 @@ export default function TeamPage() {
             <div className="flex flex-col">
               <span
                 className="text-xs uppercase font-semibold mb-1"
-                style={{ letterSpacing: "0.2em", color: "#1754cf" }}
+                style={{ letterSpacing: "0.2em", color: "#3B82F6" }}
               >
                 Dealership Overview
               </span>
@@ -136,7 +136,7 @@ export default function TeamPage() {
               className="flex items-center justify-center gap-2 bg-transparent font-medium py-3 px-6 rounded-lg transition-all active:scale-95"
               style={{ border: "1px solid rgba(192,192,192,0.4)", color: "white" }}
             >
-              <MaterialIcon name="person_add" className="text-xl text-[#1754cf]" />
+              <MaterialIcon name="person_add" className="text-xl text-[#3B82F6]" />
               <span className="text-sm tracking-wide">+ Invite Member</span>
             </button>
           </div>
@@ -253,7 +253,7 @@ export default function TeamPage() {
                       <button
                         onClick={() => setExpandedIdx(i === expandedIdx ? -1 : i)}
                         className="p-2 rounded-lg transition-colors flex flex-col items-center"
-                        style={{ color: i === expandedIdx ? "#1754cf" : "#64748b" }}
+                        style={{ color: i === expandedIdx ? "#3B82F6" : "#64748b" }}
                       >
                         <MaterialIcon name={i === expandedIdx ? "settings_suggest" : "tune"} />
                         <span className="text-[10px] font-bold uppercase mt-1">Perms</span>
@@ -282,7 +282,7 @@ export default function TeamPage() {
                           <span className="text-sm text-slate-300">{perm}</span>
                           <div
                             className="w-10 h-5 rounded-full relative"
-                            style={{ background: enabled ? "#1754cf" : "#334155" }}
+                            style={{ background: enabled ? "#3B82F6" : "#334155" }}
                           >
                             <div
                               className="absolute top-1 w-3 h-3 rounded-full"
@@ -322,7 +322,7 @@ export default function TeamPage() {
               value={inviteName}
               onChange={(e) => setInviteName(e.target.value)}
               placeholder="e.g., Priya Sharma"
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#1754cf]/50"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50"
             />
           </div>
           <div>
@@ -334,7 +334,7 @@ export default function TeamPage() {
               value={inviteEmail}
               onChange={(e) => setInviteEmail(e.target.value)}
               placeholder="e.g., priya@dealership.in"
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#1754cf]/50"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50"
             />
           </div>
           <div>
@@ -344,7 +344,7 @@ export default function TeamPage() {
             <select
               value={inviteRole}
               onChange={(e) => setInviteRole(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#1754cf]/50"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white outline-none focus:border-[#3B82F6]/50"
             >
               <option value="Sales Executive">Sales Executive</option>
               <option value="Marketing Manager">Marketing Manager</option>
@@ -362,7 +362,7 @@ export default function TeamPage() {
             <button
               onClick={handleInvite}
               disabled={!inviteName.trim() || !inviteEmail.trim() || inviteMember.isSubmitting}
-              className="flex-1 rounded-lg bg-[#1754cf] py-3 text-sm font-bold text-white disabled:opacity-50"
+              className="flex-1 rounded-lg bg-[#3B82F6] py-3 text-sm font-bold text-white disabled:opacity-50"
             >
               {inviteMember.isSubmitting ? "Inviting..." : "Send Invite"}
             </button>
@@ -374,7 +374,7 @@ export default function TeamPage() {
       <nav
         className="fixed bottom-0 left-0 right-0 z-50 px-2 pb-6 pt-2 flex justify-around items-end border-t max-w-md mx-auto md:hidden"
         style={{
-          background: "#111621",
+          background: "#0A1628",
           borderColor: "rgba(23,84,207,0.1)",
         }}
       >
@@ -390,8 +390,8 @@ export default function TeamPage() {
             href={item.href}
             className="flex flex-col items-center gap-1 py-1 px-3"
             style={{
-              color: item.active ? "#1754cf" : "#64748b",
-              borderTop: item.active ? "2px solid #1754cf" : "2px solid transparent",
+              color: item.active ? "#3B82F6" : "#64748b",
+              borderTop: item.active ? "2px solid #3B82F6" : "2px solid transparent",
             }}
           >
             <MaterialIcon name={item.icon} fill={item.active} />

@@ -295,7 +295,7 @@ function formatINRFull(n: number): string {
 // ── Cost category colors ──
 
 const COST_COLORS = {
-  purchase: "#1152d4",
+  purchase: "#3B82F6",
   maintenance: "#f59e0b",
   insurance: "#8b5cf6",
   fuel: "#ef4444",
@@ -340,7 +340,7 @@ export default function TrueCostPage({
     return (
       <div
         className="min-h-dvh flex items-center justify-center"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <div className="flex flex-col items-center gap-3">
           <div className="h-10 w-10 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
@@ -355,7 +355,7 @@ export default function TrueCostPage({
     return (
       <div
         className="min-h-dvh flex items-center justify-center"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <div className="text-center px-6">
           <MaterialIcon
@@ -366,7 +366,7 @@ export default function TrueCostPage({
           <Link
             href="/used-cars"
             className="mt-4 inline-flex items-center gap-1 text-sm font-semibold"
-            style={{ color: "#1152d4" }}
+            style={{ color: "#3B82F6" }}
           >
             <MaterialIcon name="arrow_back" className="text-[15px]" /> Browse
             used cars
@@ -409,13 +409,13 @@ export default function TrueCostPage({
   return (
     <div
       className="min-h-dvh w-full pb-10"
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -440,12 +440,12 @@ export default function TrueCostPage({
           </div>
           <div
             className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0"
-            style={{ background: "rgba(17,82,212,0.12)" }}
+            style={{ background: "rgba(59,130,246,0.12)" }}
           >
             <MaterialIcon
               name="calculate"
               className="text-[20px]"
-              style={{ color: "#1152d4" }}
+              style={{ color: "#3B82F6" }}
             />
           </div>
         </div>
@@ -485,7 +485,7 @@ export default function TrueCostPage({
               className="flex-1 py-2.5 rounded-lg text-xs font-bold transition-all"
               style={{
                 background:
-                  period === yr ? "#1152d4" : "transparent",
+                  period === yr ? "#3B82F6" : "transparent",
                 color: period === yr ? "#ffffff" : "#94a3b8",
               }}
             >
@@ -498,8 +498,8 @@ export default function TrueCostPage({
         <div
           className="rounded-2xl p-5 border text-center"
           style={{
-            background: "rgba(17,82,212,0.06)",
-            borderColor: "rgba(17,82,212,0.2)",
+            background: "rgba(59,130,246,0.06)",
+            borderColor: "rgba(59,130,246,0.2)",
           }}
         >
           <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">
@@ -584,8 +584,8 @@ export default function TrueCostPage({
                       <div
                         className="h-8 w-8 rounded-lg flex items-center justify-center text-xs font-black"
                         style={{
-                          background: "rgba(17,82,212,0.1)",
-                          color: "#1152d4",
+                          background: "rgba(59,130,246,0.1)",
+                          color: "#3B82F6",
                         }}
                       >
                         Y{yr.year}
@@ -909,7 +909,7 @@ export default function TrueCostPage({
         <Link
           href="/compare"
           className="flex items-center justify-center gap-2 h-12 rounded-2xl text-sm font-bold text-white w-full"
-          style={{ background: "#1152d4" }}
+          style={{ background: "#3B82F6" }}
         >
           <MaterialIcon name="compare_arrows" className="text-[18px]" />
           Compare with Similar Cars

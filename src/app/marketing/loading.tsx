@@ -4,7 +4,7 @@ import { SkeletonStat } from "@/components/ui/Skeleton";
 
 export default function MarketingLoading() {
   return (
-    <div className="min-h-dvh p-6" style={{ background: "#0a0c10" }}>
+    <div className="min-h-dvh p-6" style={{ background: "#0A1628" }}>
       <div className="max-w-md mx-auto space-y-6">
         <div className="h-8 w-48 animate-pulse rounded-lg bg-white/5" />
         <div className="grid grid-cols-2 gap-4">

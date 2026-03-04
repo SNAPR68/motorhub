@@ -56,11 +56,11 @@ export default function BankRatesPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh pb-36" style={{ background: "#080a0f", color: "#f1f5f9" }}>
+    <div className="min-h-dvh pb-36" style={{ background: "#0A1628", color: "#f1f5f9" }}>
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/car-loan"
@@ -80,9 +80,9 @@ export default function BankRatesPage() {
               onClick={() => setFilter(f)}
               className="rounded-full px-4 py-2 text-xs font-semibold whitespace-nowrap transition-colors"
               style={{
-                background: filter === f ? "#1152d4" : "rgba(255,255,255,0.06)",
+                background: filter === f ? "#3B82F6" : "rgba(255,255,255,0.06)",
                 color: filter === f ? "#fff" : "#94a3b8",
-                border: filter === f ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.1)",
+                border: filter === f ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.1)",
               }}
             >
               {f}
@@ -100,7 +100,7 @@ export default function BankRatesPage() {
               onClick={() => setSort(s)}
               className="text-xs font-semibold px-3 py-1.5 rounded-full transition-colors"
               style={{
-                background: sort === s ? "rgba(17,82,212,0.15)" : "transparent",
+                background: sort === s ? "rgba(59,130,246,0.15)" : "transparent",
                 color: sort === s ? "#60a5fa" : "#64748b",
               }}
             >
@@ -165,7 +165,7 @@ export default function BankRatesPage() {
                 <Link
                   href="/car-loan/apply"
                   className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
-                  style={{ background: "#1152d4" }}
+                  style={{ background: "#3B82F6" }}
                 >
                   Apply with {bank.name}
                   <MaterialIcon name="arrow_forward" className="text-[16px]" />

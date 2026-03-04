@@ -33,7 +33,7 @@ function formatINR(n: number): string {
 export default function EmiCalculatorPage() {
   return (
     <BuyerAppShell>
-      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}><div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" /></div>}>
+      <Suspense fallback={<div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}><div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" /></div>}>
         <EmiCalculatorInner />
       </Suspense>
     </BuyerAppShell>
@@ -63,10 +63,10 @@ function EmiCalculatorInner() {
   const interestPctVal = 100 - principalPct;
 
   return (
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link href="/my-account" className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
@@ -78,7 +78,7 @@ function EmiCalculatorInner() {
       <main className="max-w-lg mx-auto px-4 pt-4 space-y-4">
 
         {/* ─── EMI Result card ─── */}
-        <div className="rounded-2xl p-5 border border-blue-500/20" style={{ background: "rgba(17,82,212,0.06)" }}>
+        <div className="rounded-2xl p-5 border border-blue-500/20" style={{ background: "rgba(59,130,246,0.06)" }}>
           <div className="flex items-end justify-between">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-1">Monthly EMI</p>
@@ -96,11 +96,11 @@ function EmiCalculatorInner() {
           {/* Visual bar: principal vs interest */}
           <div className="mt-4">
             <div className="flex h-2 rounded-full overflow-hidden gap-px">
-              <div className="h-full rounded-l-full transition-all" style={{ width: `${principalPct}%`, background: "#1152d4" }} />
+              <div className="h-full rounded-l-full transition-all" style={{ width: `${principalPct}%`, background: "#3B82F6" }} />
               <div className="h-full rounded-r-full transition-all" style={{ width: `${interestPctVal}%`, background: "#ef4444" }} />
             </div>
             <div className="flex justify-between mt-2 text-[10px] text-slate-500">
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full inline-block" style={{ background: "#1152d4" }} /> Principal {formatINR(principal)}</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full inline-block" style={{ background: "#3B82F6" }} /> Principal {formatINR(principal)}</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full inline-block" style={{ background: "#ef4444" }} /> Interest {formatINR(totalInterest)}</span>
             </div>
           </div>
@@ -192,7 +192,7 @@ function EmiCalculatorInner() {
         <div>
           <div className="flex items-center justify-between mb-2">
             <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Bank Comparison</p>
-            <button onClick={() => setShowBreakdown(!showBreakdown)} className="text-[10px] font-semibold" style={{ color: "#1152d4" }}>
+            <button onClick={() => setShowBreakdown(!showBreakdown)} className="text-[10px] font-semibold" style={{ color: "#3B82F6" }}>
               {showBreakdown ? "Hide" : "Show"}
             </button>
           </div>
@@ -206,11 +206,11 @@ function EmiCalculatorInner() {
                     key={bank.name}
                     onClick={() => setRate(bank.rate)}
                     className={`flex items-center justify-between px-4 py-3 w-full text-left transition-all ${i > 0 ? "border-t border-white/5" : ""}`}
-                    style={{ background: isSelected ? "rgba(17,82,212,0.08)" : "transparent" }}
+                    style={{ background: isSelected ? "rgba(59,130,246,0.08)" : "transparent" }}
                   >
                     <div className="flex items-center gap-3">
                       <div className="h-8 w-8 rounded-lg flex items-center justify-center text-[10px] font-black text-white shrink-0"
-                        style={{ background: isSelected ? "#1152d4" : "rgba(255,255,255,0.07)" }}>
+                        style={{ background: isSelected ? "#3B82F6" : "rgba(255,255,255,0.07)" }}>
                         {bank.name[0]}
                       </div>
                       <div>
@@ -247,7 +247,7 @@ function EmiCalculatorInner() {
         </div>
 
         {/* CTA */}
-        <button className="flex items-center justify-center gap-2 w-full h-12 rounded-2xl text-sm font-bold text-white" style={{ background: "#1152d4" }}>
+        <button className="flex items-center justify-center gap-2 w-full h-12 rounded-2xl text-sm font-bold text-white" style={{ background: "#3B82F6" }}>
           <MaterialIcon name="account_balance" className="text-[18px]" />
           Apply for Car Loan
         </button>

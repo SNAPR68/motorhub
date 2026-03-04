@@ -67,7 +67,7 @@ export default function MarketingCinemaPage() {
         <Link href="/marketing" className="p-2 rounded-full hover:bg-white/5">
           <MaterialIcon name="arrow_back" className="text-slate-400" />
         </Link>
-        <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-[#3366FF]">Cinema Studio</h1>
+        <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-[#3B82F6]">Cinema Studio</h1>
         <button className="text-slate-400 p-2"><MaterialIcon name="more_vert" /></button>
       </header>
 
@@ -77,14 +77,14 @@ export default function MarketingCinemaPage() {
           <div className="relative w-full aspect-video rounded-2xl overflow-hidden"
             style={{ background: "linear-gradient(145deg, #0f1d36, #0a1222)", border: "1px solid rgba(51,102,255,0.15)" }}>
             <div className="absolute inset-0 flex items-center justify-center">
-              <button className="size-16 rounded-full bg-[#3366FF] flex items-center justify-center shadow-lg shadow-[#3366FF]/30">
+              <button className="size-16 rounded-full bg-[#3B82F6] flex items-center justify-center shadow-lg shadow-[#3366FF]/30">
                 <MaterialIcon name="play_arrow" className="text-white text-4xl" />
               </button>
             </div>
             <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
               <span className="text-[10px] font-bold text-slate-400 uppercase">00:00 / 00:30</span>
               <div className="flex gap-2">
-                <span className="px-2 py-0.5 rounded bg-[#3366FF]/20 text-[#3366FF] text-[10px] font-bold">{quality}</span>
+                <span className="px-2 py-0.5 rounded bg-[#3B82F6]/20 text-[#3B82F6] text-[10px] font-bold">{quality}</span>
                 <span className="px-2 py-0.5 rounded bg-white/10 text-white text-[10px] font-bold">{selectedMood}</span>
               </div>
             </div>
@@ -129,7 +129,7 @@ export default function MarketingCinemaPage() {
                 <div className={`w-10 h-10 rounded-lg mx-auto mb-2 bg-gradient-to-br ${mood.gradient} flex items-center justify-center`}>
                   <MaterialIcon name={mood.icon} className="text-white text-lg" />
                 </div>
-                <p className={`text-xs font-bold ${selectedMood === mood.name ? "text-[#3366FF]" : "text-slate-400"}`}>{mood.name}</p>
+                <p className={`text-xs font-bold ${selectedMood === mood.name ? "text-[#3B82F6]" : "text-slate-400"}`}>{mood.name}</p>
                 <p className="text-[10px] text-slate-600 mt-0.5">{mood.desc}</p>
               </button>
             ))}
@@ -150,8 +150,8 @@ export default function MarketingCinemaPage() {
                   border: selectedPlatform === p.label ? "1px solid rgba(51,102,255,0.3)" : "1px solid rgba(255,255,255,0.05)",
                 }}
               >
-                <MaterialIcon name={p.icon} className={`text-2xl mb-1 ${selectedPlatform === p.label ? "text-[#3366FF]" : "text-slate-500"}`} />
-                <p className={`text-[10px] font-bold ${selectedPlatform === p.label ? "text-[#3366FF]" : "text-slate-500"}`}>{p.label}</p>
+                <MaterialIcon name={p.icon} className={`text-2xl mb-1 ${selectedPlatform === p.label ? "text-[#3B82F6]" : "text-slate-500"}`} />
+                <p className={`text-[10px] font-bold ${selectedPlatform === p.label ? "text-[#3B82F6]" : "text-slate-500"}`}>{p.label}</p>
                 <p className="text-[9px] text-slate-600">{p.ratio}</p>
               </button>
             ))}
@@ -168,7 +168,7 @@ export default function MarketingCinemaPage() {
           <button
             onClick={handleExport}
             disabled={exporting}
-            className="w-full bg-[#3366FF] text-white py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#3366FF]/30 active:scale-[0.98] transition-transform disabled:opacity-50"
+            className="w-full bg-[#3B82F6] text-white py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#3366FF]/30 active:scale-[0.98] transition-transform disabled:opacity-50"
           >
             {exporting ? (
               <div className="h-5 w-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
@@ -192,7 +192,7 @@ export default function MarketingCinemaPage() {
           <span className="text-[10px] font-bold uppercase">Inventory</span>
         </Link>
         <Link href="/studio" className="relative -top-4">
-          <div className="size-14 rounded-full bg-[#3366FF] flex items-center justify-center shadow-lg shadow-[#3366FF]/30 border-4 border-[#0B1426]">
+          <div className="size-14 rounded-full bg-[#3B82F6] flex items-center justify-center shadow-lg shadow-[#3366FF]/30 border-4 border-[#0B1426]">
             <MaterialIcon name="auto_awesome" className="text-white text-2xl" />
           </div>
         </Link>

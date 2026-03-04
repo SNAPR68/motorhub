@@ -90,13 +90,13 @@ export default function EvaluatePage() {
   return (<BuyerAppShell>
     <div
       className="min-h-dvh w-full "
-      style={{ background: "#080a0f", color: "#e2e8f0" }}
+      style={{ background: "#0A1628", color: "#e2e8f0" }}
     >
       {/* ─── HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
         style={{
-          background: "rgba(8,10,15,0.97)",
+          background: "rgba(10,22,40,0.97)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -138,7 +138,7 @@ export default function EvaluatePage() {
               className="h-full rounded-full transition-all duration-500"
               style={{
                 width: `${(step / TOTAL_STEPS) * 100}%`,
-                background: "linear-gradient(90deg, #1152d4, #3b82f6)",
+                background: "linear-gradient(90deg, #3B82F6, #3b82f6)",
               }}
             />
           </div>
@@ -149,7 +149,7 @@ export default function EvaluatePage() {
               <span
                 key={label}
                 className="text-[9px] font-semibold uppercase tracking-wide"
-                style={{ color: idx + 1 <= step ? "#1152d4" : "#334155" }}
+                style={{ color: idx + 1 <= step ? "#3B82F6" : "#334155" }}
               >
                 {label}
               </span>
@@ -176,7 +176,7 @@ export default function EvaluatePage() {
                     background: "rgba(255,255,255,0.05)",
                     color: form.brand ? "#fff" : "#475569",
                     borderColor: form.brand
-                      ? "rgba(17,82,212,0.5)"
+                      ? "rgba(59,130,246,0.5)"
                       : "rgba(255,255,255,0.1)",
                   }}
                 >
@@ -208,7 +208,7 @@ export default function EvaluatePage() {
                     background: "rgba(255,255,255,0.05)",
                     color: form.year ? "#fff" : "#475569",
                     borderColor: form.year
-                      ? "rgba(17,82,212,0.5)"
+                      ? "rgba(59,130,246,0.5)"
                       : "rgba(255,255,255,0.1)",
                   }}
                 >
@@ -316,14 +316,14 @@ export default function EvaluatePage() {
             <div
               className="flex gap-3 rounded-xl p-3.5 border"
               style={{
-                background: "rgba(17,82,212,0.06)",
-                borderColor: "rgba(17,82,212,0.15)",
+                background: "rgba(59,130,246,0.06)",
+                borderColor: "rgba(59,130,246,0.15)",
               }}
             >
               <MaterialIcon
                 name="info"
                 className="text-[18px] shrink-0 mt-0.5"
-                style={{ color: "#1152d4" }}
+                style={{ color: "#3B82F6" }}
               />
               <p className="text-[11px] text-slate-400 leading-relaxed">
                 Accurate mileage helps us give you the most precise valuation. Inflating or under-reporting km can affect your final offer.
@@ -345,7 +345,7 @@ export default function EvaluatePage() {
                 style={{
                   background: "rgba(255,255,255,0.05)",
                   borderColor: form.phone
-                    ? "rgba(17,82,212,0.5)"
+                    ? "rgba(59,130,246,0.5)"
                     : "rgba(255,255,255,0.1)",
                 }}
               >
@@ -464,9 +464,9 @@ export default function EvaluatePage() {
             className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl font-bold text-[15px] text-white transition-all active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
             style={{
               background: canProceed()
-                ? "linear-gradient(135deg, #1152d4 0%, #1d4ed8 100%)"
+                ? "linear-gradient(135deg, #3B82F6 0%, #1d4ed8 100%)"
                 : "rgba(255,255,255,0.06)",
-              boxShadow: canProceed() ? "0 8px 24px rgba(17,82,212,0.35)" : "none",
+              boxShadow: canProceed() ? "0 8px 24px rgba(59,130,246,0.35)" : "none",
             }}
           >
             {step === TOTAL_STEPS ? (
@@ -503,9 +503,9 @@ function SectionTitle({ icon, label }: { icon: string; label: string }) {
     <div className="flex items-center gap-2.5 mb-1">
       <div
         className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0"
-        style={{ background: "rgba(17,82,212,0.12)" }}
+        style={{ background: "rgba(59,130,246,0.12)" }}
       >
-        <MaterialIcon name={icon} className="text-[18px]" style={{ color: "#1152d4" }} />
+        <MaterialIcon name={icon} className="text-[18px]" style={{ color: "#3B82F6" }} />
       </div>
       <p className="text-[15px] font-bold text-white">{label}</p>
     </div>
@@ -532,7 +532,7 @@ function TextInput({
       className="w-full rounded-xl px-4 py-3.5 text-sm font-semibold text-white outline-none border transition-colors placeholder:text-slate-600"
       style={{
         background: "rgba(255,255,255,0.05)",
-        borderColor: value ? "rgba(17,82,212,0.5)" : "rgba(255,255,255,0.1)",
+        borderColor: value ? "rgba(59,130,246,0.5)" : "rgba(255,255,255,0.1)",
       }}
     />
   );
@@ -557,10 +557,10 @@ function PillGroup({
             onClick={() => onChange(opt)}
             className="h-10 px-4 rounded-xl text-[13px] font-semibold border transition-all"
             style={{
-              background: active ? "rgba(17,82,212,0.18)" : "rgba(255,255,255,0.04)",
+              background: active ? "rgba(59,130,246,0.18)" : "rgba(255,255,255,0.04)",
               color: active ? "#fff" : "#64748b",
-              borderColor: active ? "#1152d4" : "rgba(255,255,255,0.1)",
-              boxShadow: active ? "0 0 0 1px #1152d4" : "none",
+              borderColor: active ? "#3B82F6" : "rgba(255,255,255,0.1)",
+              boxShadow: active ? "0 0 0 1px #3B82F6" : "none",
             }}
           >
             {opt}

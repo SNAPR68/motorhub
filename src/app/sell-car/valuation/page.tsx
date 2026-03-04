@@ -121,8 +121,8 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
             <div
               className="h-8 w-8 rounded-full flex items-center justify-center transition-all duration-500"
               style={{
-                background: i < current ? "#1152d4" : i === current ? "rgba(17,82,212,0.25)" : "rgba(255,255,255,0.05)",
-                border: i === current ? "2px solid #1152d4" : "2px solid transparent",
+                background: i < current ? "#3B82F6" : i === current ? "rgba(59,130,246,0.25)" : "rgba(255,255,255,0.05)",
+                border: i === current ? "2px solid #3B82F6" : "2px solid transparent",
               }}
             >
               {i < current ? (
@@ -131,7 +131,7 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
                 <MaterialIcon
                   name={step.icon}
                   className="text-[16px]"
-                  style={{ color: i === current ? "#1152d4" : "#475569" }}
+                  style={{ color: i === current ? "#3B82F6" : "#475569" }}
                 />
               )}
             </div>
@@ -145,7 +145,7 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
           {i < total - 1 && (
             <div
               className="h-[2px] w-8 mx-1 -mt-4 rounded-full transition-all duration-500"
-              style={{ background: i < current ? "#1152d4" : "rgba(255,255,255,0.08)" }}
+              style={{ background: i < current ? "#3B82F6" : "rgba(255,255,255,0.08)" }}
             />
           )}
         </div>
@@ -173,9 +173,9 @@ function PillGroup({
           onClick={() => onChange(opt)}
           className="h-9 px-4 rounded-xl text-xs font-semibold transition-all duration-200"
           style={{
-            background: value === opt ? "#1152d4" : "rgba(255,255,255,0.05)",
+            background: value === opt ? "#3B82F6" : "rgba(255,255,255,0.05)",
             color: value === opt ? "#fff" : "#94a3b8",
-            border: value === opt ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.08)",
+            border: value === opt ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.08)",
           }}
         >
           {opt}
@@ -320,12 +320,12 @@ function ValuationPageInner() {
   const step3Valid = selectedDate && selectedTime && address.trim().length > 5 && phone.trim().length >= 10;
 
   return (
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <button
@@ -473,7 +473,7 @@ function ValuationPageInner() {
                 onClick={goForward}
                 disabled={!step1Valid}
                 className="flex items-center justify-center gap-2 h-12 rounded-2xl text-sm font-bold text-white w-full transition-all disabled:opacity-30 disabled:pointer-events-none"
-                style={{ background: "#1152d4" }}
+                style={{ background: "#3B82F6" }}
               >
                 <MaterialIcon name="auto_awesome" className="text-[18px]" />
                 Get AI Valuation
@@ -487,8 +487,8 @@ function ValuationPageInner() {
 
               {/* Car summary */}
               <div className="flex items-center gap-3 rounded-xl p-3 border border-white/5" style={{ background: "rgba(255,255,255,0.03)" }}>
-                <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(17,82,212,0.15)" }}>
-                  <MaterialIcon name="directions_car" className="text-[20px]" style={{ color: "#1152d4" }} />
+                <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(59,130,246,0.15)" }}>
+                  <MaterialIcon name="directions_car" className="text-[20px]" style={{ color: "#3B82F6" }} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-bold text-white truncate">{year} {brand} {model}</p>
@@ -497,8 +497,8 @@ function ValuationPageInner() {
               </div>
 
               {/* Big valuation card */}
-              <div className="rounded-2xl p-5 border border-blue-500/20 relative overflow-hidden" style={{ background: "rgba(17,82,212,0.07)" }}>
-                <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full" style={{ background: "rgba(17,82,212,0.15)", filter: "blur(40px)" }} />
+              <div className="rounded-2xl p-5 border border-blue-500/20 relative overflow-hidden" style={{ background: "rgba(59,130,246,0.07)" }}>
+                <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full" style={{ background: "rgba(59,130,246,0.15)", filter: "blur(40px)" }} />
                 <div className="absolute -left-10 -bottom-10 w-32 h-32 rounded-full" style={{ background: "rgba(16,185,129,0.1)", filter: "blur(32px)" }} />
 
                 <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-1 relative z-10">Your Car&apos;s Market Value</p>
@@ -540,7 +540,7 @@ function ValuationPageInner() {
                     valuation.factors.map((f, i) => {
                       const icons = ["directions_car", "speed", "star", "location_city", "trending_up", "local_gas_station"];
                       const colors = [
-                        { bg: "rgba(17,82,212,0.15)", fg: "#1152d4" },
+                        { bg: "rgba(59,130,246,0.15)", fg: "#3B82F6" },
                         { bg: "rgba(239,68,68,0.15)", fg: "#ef4444" },
                         { bg: "rgba(245,158,11,0.15)", fg: "#f59e0b" },
                         { bg: "rgba(139,92,246,0.15)", fg: "#8b5cf6" },
@@ -567,8 +567,8 @@ function ValuationPageInner() {
                     <>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(17,82,212,0.15)" }}>
-                            <MaterialIcon name="directions_car" className="text-[14px]" style={{ color: "#1152d4" }} />
+                          <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(59,130,246,0.15)" }}>
+                            <MaterialIcon name="directions_car" className="text-[14px]" style={{ color: "#3B82F6" }} />
                           </div>
                           <span className="text-xs text-slate-400">Base value ({brand} {year})</span>
                         </div>
@@ -637,7 +637,7 @@ function ValuationPageInner() {
                     style={{
                       left: "15%",
                       right: "15%",
-                      background: "linear-gradient(90deg, #10b981, #1152d4)",
+                      background: "linear-gradient(90deg, #10b981, #3B82F6)",
                       opacity: 0.6,
                     }}
                   />
@@ -645,7 +645,7 @@ function ValuationPageInner() {
                     className="absolute top-1/2 -translate-y-1/2 h-3.5 w-3.5 rounded-full border-2 border-white shadow-lg"
                     style={{
                       left: "48%",
-                      background: "#1152d4",
+                      background: "#3B82F6",
                     }}
                   />
                 </div>
@@ -722,8 +722,8 @@ function ValuationPageInner() {
                       onClick={() => setSelectedDate(d.value)}
                       className="flex flex-col items-center gap-0.5 min-w-[60px] py-2.5 px-2 rounded-xl transition-all duration-200 shrink-0"
                       style={{
-                        background: selectedDate === d.value ? "#1152d4" : "rgba(255,255,255,0.04)",
-                        border: selectedDate === d.value ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.06)",
+                        background: selectedDate === d.value ? "#3B82F6" : "rgba(255,255,255,0.04)",
+                        border: selectedDate === d.value ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.06)",
                       }}
                     >
                       <span className="text-[10px] font-bold uppercase" style={{ color: selectedDate === d.value ? "rgba(255,255,255,0.7)" : "#64748b" }}>{d.label}</span>
@@ -745,8 +745,8 @@ function ValuationPageInner() {
                       onClick={() => setSelectedTime(t.value)}
                       className="flex flex-col items-center gap-1 py-3 rounded-xl transition-all duration-200"
                       style={{
-                        background: selectedTime === t.value ? "#1152d4" : "rgba(255,255,255,0.04)",
-                        border: selectedTime === t.value ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.06)",
+                        background: selectedTime === t.value ? "#3B82F6" : "rgba(255,255,255,0.04)",
+                        border: selectedTime === t.value ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.06)",
                       }}
                     >
                       <MaterialIcon
@@ -839,8 +839,8 @@ function ValuationPageInner() {
 
                 <div className="space-y-2.5">
                   <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: "rgba(17,82,212,0.15)" }}>
-                      <MaterialIcon name="directions_car" className="text-[16px]" style={{ color: "#1152d4" }} />
+                    <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: "rgba(59,130,246,0.15)" }}>
+                      <MaterialIcon name="directions_car" className="text-[16px]" style={{ color: "#3B82F6" }} />
                     </div>
                     <div>
                       <p className="text-[10px] text-slate-500">Vehicle</p>
@@ -900,7 +900,7 @@ function ValuationPageInner() {
               <div className="rounded-2xl p-4 border border-white/5 space-y-2.5" style={{ background: "rgba(255,255,255,0.03)" }}>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">What Happens Next</p>
                 {[
-                  { icon: "sms", text: "Confirmation SMS & WhatsApp sent", color: "#1152d4" },
+                  { icon: "sms", text: "Confirmation SMS & WhatsApp sent", color: "#3B82F6" },
                   { icon: "engineering", text: "Certified inspector visits your location", color: "#f59e0b" },
                   { icon: "fact_check", text: "250-point inspection completed in ~45 min", color: "#10b981" },
                   { icon: "payments", text: "Same-day bank transfer on deal closure", color: "#8b5cf6" },
@@ -919,7 +919,7 @@ function ValuationPageInner() {
                 <Link
                   href="/"
                   className="flex items-center justify-center gap-2 h-12 rounded-2xl text-sm font-bold text-white w-full transition-all"
-                  style={{ background: "#1152d4" }}
+                  style={{ background: "#3B82F6" }}
                 >
                   <MaterialIcon name="home" className="text-[18px]" />
                   Back to Home
@@ -946,7 +946,7 @@ export default function SellCarValuationPage() {
     <BuyerAppShell>
     <Suspense
       fallback={
-        <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+        <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
           <div className="flex flex-col items-center gap-3">
             <div className="h-10 w-10 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
             <p className="text-xs text-slate-500 font-semibold">Loading valuation...</p>

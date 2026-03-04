@@ -38,12 +38,12 @@ export default function EligibilityPage() {
     <BuyerAppShell>
     <div
       className="min-h-dvh pb-36"
-      style={{ background: "#080a0f", color: "#f1f5f9" }}
+      style={{ background: "#0A1628", color: "#f1f5f9" }}
     >
       {/* Header */}
       <div
         className="sticky top-0 z-40 flex items-center gap-3 px-4 py-4 border-b border-white/10"
-        style={{ background: "#080a0f" }}
+        style={{ background: "#0A1628" }}
       >
         <Link
           href="/car-loan"
@@ -69,7 +69,7 @@ export default function EligibilityPage() {
                   onClick={() => setEmployment(t)}
                   className="flex-1 rounded-xl py-2.5 text-sm font-medium transition-all"
                   style={{
-                    background: employment === t ? "#1152d4" : "#1a2235",
+                    background: employment === t ? "#3B82F6" : "#0F1D32",
                     color: employment === t ? "#fff" : "#94a3b8",
                   }}
                 >
@@ -140,7 +140,7 @@ export default function EligibilityPage() {
               value={city}
               onChange={(e) => setCity(e.target.value)}
               className="w-full rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm border border-white/10 focus:outline-none focus:border-blue-500"
-              style={{ background: "#1a2235" }}
+              style={{ background: "#0F1D32" }}
             />
           </div>
 
@@ -158,9 +158,9 @@ export default function EligibilityPage() {
                   onClick={() => setCibil(opt)}
                   className="rounded-full px-4 py-2 text-sm font-medium transition-all"
                   style={{
-                    background: cibil === opt ? "#1152d4" : "#1a2235",
+                    background: cibil === opt ? "#3B82F6" : "#0F1D32",
                     color: cibil === opt ? "#fff" : "#94a3b8",
-                    border: cibil === opt ? "1px solid #1152d4" : "1px solid transparent",
+                    border: cibil === opt ? "1px solid #3B82F6" : "1px solid transparent",
                   }}
                 >
                   {opt}
@@ -172,7 +172,7 @@ export default function EligibilityPage() {
           <button
             type="submit"
             className="w-full rounded-xl py-4 text-white font-bold text-base flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <MaterialIcon name="fact_check" className="text-[20px]" />
             Check Eligibility
@@ -236,7 +236,7 @@ export default function EligibilityPage() {
             <Link
               href="/car-loan/apply"
               className="flex items-center justify-center gap-2 w-full rounded-xl py-4 text-white font-bold text-base transition-opacity hover:opacity-90"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="assignment" className="text-[20px]" />
               Apply Now

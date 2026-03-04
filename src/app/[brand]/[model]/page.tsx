@@ -44,7 +44,7 @@ export default function ModelPage({
   if (loading) {
     return (
     <BuyerAppShell>
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
       </div>
     
@@ -54,11 +54,11 @@ export default function ModelPage({
 
   if (notFound || !car) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="text-center px-6">
           <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
           <p className="text-slate-400 font-semibold">Model not found</p>
-          <Link href="/new-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#1152d4" }}>
+          <Link href="/new-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#3B82F6" }}>
             <MaterialIcon name="arrow_back" className="text-[15px]" /> Browse New Cars
           </Link>
         </div>
@@ -68,10 +68,10 @@ export default function ModelPage({
 
   const gallery = car.gallery?.length ? car.gallery : [car.image];
 
-  return (<div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+  return (<div className="min-h-dvh w-full pb-36" style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link href="/new-cars" className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
@@ -101,10 +101,10 @@ export default function ModelPage({
             className="object-cover"
             unoptimized
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.9) 0%, transparent 50%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,22,40,0.9) 0%, transparent 50%)" }} />
 
           {car.tag && (
-            <span className="absolute top-3 left-3 text-[10px] font-bold px-2 py-1 rounded-full text-white" style={{ background: "rgba(17,82,212,0.9)", backdropFilter: "blur(4px)" }}>
+            <span className="absolute top-3 left-3 text-[10px] font-bold px-2 py-1 rounded-full text-white" style={{ background: "rgba(59,130,246,0.9)", backdropFilter: "blur(4px)" }}>
               {car.tag}
             </span>
           )}
@@ -137,7 +137,7 @@ export default function ModelPage({
                 key={i}
                 onClick={() => setActiveImg(i)}
                 className="relative shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all"
-                style={{ borderColor: i === activeImg ? "#1152d4" : "transparent" }}
+                style={{ borderColor: i === activeImg ? "#3B82F6" : "transparent" }}
               >
                 <Image src={img} alt="" fill sizes="64px" className="object-cover" unoptimized />
               </button>
@@ -179,7 +179,7 @@ export default function ModelPage({
       </div>
 
       {/* ─── TABS ─── */}
-      <div className="sticky top-14 z-30 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <div className="sticky top-14 z-30 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto flex overflow-x-auto no-scrollbar">
           {TABS.map((tab) => (
             <button
@@ -187,7 +187,7 @@ export default function ModelPage({
               onClick={() => setActiveTab(tab)}
               className="shrink-0 px-4 py-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-all whitespace-nowrap"
               style={{
-                borderColor: activeTab === tab ? "#1152d4" : "transparent",
+                borderColor: activeTab === tab ? "#3B82F6" : "transparent",
                 color: activeTab === tab ? "#fff" : "#64748b",
               }}
             >
@@ -213,7 +213,7 @@ export default function ModelPage({
                   </span>
                 ))}
                 {car.transmissions.map((t) => (
-                  <span key={t} className="px-3 py-1 rounded-full text-xs font-semibold border border-blue-500/20" style={{ background: "rgba(17,82,212,0.06)", color: "#60a5fa" }}>
+                  <span key={t} className="px-3 py-1 rounded-full text-xs font-semibold border border-blue-500/20" style={{ background: "rgba(59,130,246,0.06)", color: "#60a5fa" }}>
                     {t}
                   </span>
                 ))}
@@ -390,7 +390,7 @@ export default function ModelPage({
             <Link
               href="/compare"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white"
-              style={{ background: "#1152d4" }}
+              style={{ background: "#3B82F6" }}
             >
               <MaterialIcon name="compare_arrows" className="text-[18px]" />
               Go to Compare Tool
@@ -413,7 +413,7 @@ export default function ModelPage({
           <Link
             href={`/showroom?search=${encodeURIComponent(car?.name || modelSlug)}`}
             className="flex-1 h-12 rounded-2xl font-bold text-sm text-white flex items-center justify-center gap-2 transition-all"
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <MaterialIcon name="directions_car" className="text-[18px]" />
             Find & Test Drive

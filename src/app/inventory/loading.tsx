@@ -4,7 +4,7 @@ import { SkeletonCard } from "@/components/ui/Skeleton";
 
 export default function InventoryLoading() {
   return (
-    <div className="min-h-dvh p-6" style={{ background: "#0a0c10" }}>
+    <div className="min-h-dvh p-6" style={{ background: "#0A1628" }}>
       <div className="max-w-md mx-auto space-y-8">
         <div className="flex items-center justify-between">
           <div className="h-8 w-32 animate-pulse rounded-lg bg-white/5" />

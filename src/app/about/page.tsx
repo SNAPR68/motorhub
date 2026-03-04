@@ -26,7 +26,7 @@ const values = [
 export default function AboutPage() {
   return (
     <BuyerAppShell>
-    <div className="min-h-screen bg-[#080a0f] text-[#e2e8f0]">
+    <div className="min-h-screen bg-[#0A1628] text-[#e2e8f0]">
       <div className="max-w-lg mx-auto px-4 ">
         {/* Header */}
         <header className="flex items-center gap-3 py-4">
@@ -38,8 +38,8 @@ export default function AboutPage() {
 
         {/* Hero */}
         <div className="mt-6 mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-[#1152d4]/10 flex items-center justify-center mb-4">
-            <MaterialIcon name="auto_awesome" className="text-3xl text-[#1152d4]" />
+          <div className="w-14 h-14 rounded-2xl bg-[#3B82F6]/10 flex items-center justify-center mb-4">
+            <MaterialIcon name="auto_awesome" className="text-3xl text-[#3B82F6]" />
           </div>
           <h2 className="text-2xl font-bold leading-tight">
             India&apos;s AI-Powered<br />Used Car Marketplace
@@ -64,7 +64,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 gap-3">
             {stats.map((stat) => (
               <div key={stat.label} className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
-                <div className="text-2xl font-bold text-[#1152d4]">{stat.value}</div>
+                <div className="text-2xl font-bold text-[#3B82F6]">{stat.value}</div>
                 <div className="text-xs text-slate-400 mt-1">{stat.label}</div>
               </div>
             ))}
@@ -77,8 +77,8 @@ export default function AboutPage() {
           <div className="space-y-3">
             {team.map((member) => (
               <div key={member.name} className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-4">
-                <div className="w-12 h-12 rounded-full bg-[#1152d4]/10 flex items-center justify-center flex-shrink-0">
-                  <MaterialIcon name={member.icon} className="text-xl text-[#1152d4]" />
+                <div className="w-12 h-12 rounded-full bg-[#3B82F6]/10 flex items-center justify-center flex-shrink-0">
+                  <MaterialIcon name={member.icon} className="text-xl text-[#3B82F6]" />
                 </div>
                 <div>
                   <div className="font-medium">{member.name}</div>

@@ -10,7 +10,7 @@ import type { DbVehicle } from "@/lib/api";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { AuthGuard } from "@/components/AuthGuard";
 
-/* Stitch: premium_ownership_dashboard — #dab80b, Space Grotesk, #16150d */
+/* Stitch: premium_ownership_dashboard — #E5C158, Space Grotesk, #16150d */
 
 const DOCUMENTS = [
   { icon: "description", title: "Title", desc: "Digital Certified Copy" },
@@ -35,13 +35,13 @@ export default function MyCarsPage() {
         <div className="flex items-center justify-between max-w-lg mx-auto">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="size-12 rounded-full border-2 border-[#dab80b]/30 p-0.5 bg-[#221f10] flex items-center justify-center">
-                <MaterialIcon name="person" className="text-[#dab80b] text-2xl" />
+              <div className="size-12 rounded-full border-2 border-[#E5C158]/30 p-0.5 bg-[#221f10] flex items-center justify-center">
+                <MaterialIcon name="person" className="text-[#E5C158] text-2xl" />
               </div>
               <div className="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-[#16150d] rounded-full" />
             </div>
             <div>
-              <p className="text-xs text-[#dab80b]/60 uppercase tracking-widest font-bold">
+              <p className="text-xs text-[#E5C158]/60 uppercase tracking-widest font-bold">
                 My Collection
               </p>
               <h1 className="text-xl font-bold tracking-tight">My Garage</h1>
@@ -49,7 +49,7 @@ export default function MyCarsPage() {
           </div>
           <Link
             href="/notifications/history"
-            className="size-10 flex items-center justify-center rounded-full bg-[#221f10] border border-[#342f18] text-[#dab80b]"
+            className="size-10 flex items-center justify-center rounded-full bg-[#221f10] border border-[#342f18] text-[#E5C158]"
           >
             <MaterialIcon name="notifications" className="text-[22px]" />
           </Link>
@@ -88,7 +88,7 @@ export default function MyCarsPage() {
             <Link href={`/vehicle/${primaryCar.id}`}>
               <div className="relative overflow-hidden rounded-2xl bg-[#221f10] border border-[#342f18] shadow-2xl group">
                 <div className="absolute top-4 right-4 z-10">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#dab80b] text-[#16150d] text-[10px] font-bold uppercase tracking-wider">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#E5C158] text-[#16150d] text-[10px] font-bold uppercase tracking-wider">
                     <MaterialIcon name="favorite" className="text-sm" />
                     Wishlisted
                   </span>
@@ -116,11 +116,11 @@ export default function MyCarsPage() {
                       <h2 className="text-2xl font-bold text-white tracking-tight">
                         {primaryCar.name}
                       </h2>
-                      <p className="text-[#dab80b]/80 font-mono text-sm mt-1">
+                      <p className="text-[#E5C158]/80 font-mono text-sm mt-1">
                         {primaryCar.year} &bull; {primaryCar.km} km
                       </p>
                     </div>
-                    <span className="text-lg font-bold text-[#dab80b]">
+                    <span className="text-lg font-bold text-[#E5C158]">
                       {primaryCar.price}
                     </span>
                   </div>
@@ -161,7 +161,7 @@ export default function MyCarsPage() {
               <h3 className="text-lg font-bold tracking-tight">
                 More in Your Garage
               </h3>
-              <span className="text-xs text-[#dab80b] font-bold px-2 py-0.5 bg-[#dab80b]/10 rounded">
+              <span className="text-xs text-[#E5C158] font-bold px-2 py-0.5 bg-[#E5C158]/10 rounded">
                 {vehicles.length} cars
               </span>
             </div>
@@ -196,7 +196,7 @@ export default function MyCarsPage() {
                     </p>
                   </div>
                   <div className="text-right shrink-0">
-                    <p className="text-sm font-extrabold text-[#dab80b]">{car.price}</p>
+                    <p className="text-sm font-extrabold text-[#E5C158]">{car.price}</p>
                   </div>
                 </Link>
               ))}
@@ -209,7 +209,7 @@ export default function MyCarsPage() {
           <section className="mt-10">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold tracking-tight">Documents Vault</h3>
-              <Link href="/my-account/documents" className="text-xs text-[#dab80b] font-bold">Manage All</Link>
+              <Link href="/my-account/documents" className="text-xs text-[#E5C158] font-bold">Manage All</Link>
             </div>
             <div className="flex overflow-x-auto gap-4 pb-4 -mx-6 px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {DOCUMENTS.map((doc) => (
@@ -219,13 +219,13 @@ export default function MyCarsPage() {
                   className="flex-none w-40 bg-[#221f10] border border-[#342f18] rounded-xl p-4 flex flex-col gap-3"
                 >
                   <div className="size-10 rounded-lg bg-[#16150d] border border-[#342f18] flex items-center justify-center">
-                    <MaterialIcon name={doc.icon} className="text-[#dab80b]" />
+                    <MaterialIcon name={doc.icon} className="text-[#E5C158]" />
                   </div>
                   <div>
                     <p className="text-sm font-bold">{doc.title}</p>
                     <p className="text-[10px] text-slate-500 mt-0.5">{doc.desc}</p>
                   </div>
-                  <span className="mt-2 w-full py-2 bg-[#dab80b]/10 rounded-lg text-[#dab80b] text-[10px] font-bold uppercase tracking-widest text-center">
+                  <span className="mt-2 w-full py-2 bg-[#E5C158]/10 rounded-lg text-[#E5C158] text-[10px] font-bold uppercase tracking-widest text-center">
                     Open
                   </span>
                 </Link>
@@ -244,14 +244,14 @@ export default function MyCarsPage() {
               href="/concierge"
               className="bg-[#221f10] border border-[#342f18] rounded-2xl p-4 flex items-center gap-3"
             >
-              <MaterialIcon name="support_agent" className="text-[#dab80b]" />
+              <MaterialIcon name="support_agent" className="text-[#E5C158]" />
               <span className="text-sm font-medium">Concierge</span>
             </Link>
             <Link
               href="/showroom"
               className="bg-[#221f10] border border-[#342f18] rounded-2xl p-4 flex items-center gap-3"
             >
-              <MaterialIcon name="storefront" className="text-[#dab80b]" />
+              <MaterialIcon name="storefront" className="text-[#E5C158]" />
               <span className="text-sm font-medium">Showroom</span>
             </Link>
           </div>
@@ -270,7 +270,7 @@ export default function MyCarsPage() {
           </Link>
           <Link
             href="/my-cars"
-            className="flex flex-col items-center gap-1 text-[#dab80b]"
+            className="flex flex-col items-center gap-1 text-[#E5C158]"
           >
             <MaterialIcon name="garage" fill />
             <span className="text-[10px] font-bold tracking-wide">GARAGE</span>
@@ -278,7 +278,7 @@ export default function MyCarsPage() {
           <div className="relative -mt-10">
             <Link
               href="/showroom"
-              className="size-14 rounded-full bg-[#dab80b] text-[#16150d] shadow-xl shadow-[#dab80b]/20 flex items-center justify-center border-4 border-[#16150d]"
+              className="size-14 rounded-full bg-[#E5C158] text-[#16150d] shadow-xl shadow-[#E5C158]/20 flex items-center justify-center border-4 border-[#16150d]"
             >
               <MaterialIcon name="search" className="text-3xl" />
             </Link>

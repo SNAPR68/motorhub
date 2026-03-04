@@ -13,7 +13,7 @@ const TIMELINE_STEPS = [
     label: "Both Parties Agree",
     desc: "You and the swap partner confirm the deal terms",
     status: "active" as const,
-    color: "#1152d4",
+    color: "#3B82F6",
   },
   {
     icon: "verified",
@@ -43,10 +43,10 @@ export default function SwapDealPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full pb-36" style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link href="/swap/matches" className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
@@ -69,7 +69,7 @@ export default function SwapDealPage() {
             {/* Side by side cars */}
             <div className="grid grid-cols-2 gap-3 mb-4">
               {/* Your car */}
-              <div className="rounded-xl p-3 border border-blue-500/15" style={{ background: "rgba(17,82,212,0.05)" }}>
+              <div className="rounded-xl p-3 border border-blue-500/15" style={{ background: "rgba(59,130,246,0.05)" }}>
                 <p className="text-[9px] font-bold uppercase tracking-wider text-blue-400 mb-2">Your Car</p>
                 <div className="h-16 w-full rounded-lg flex items-center justify-center mb-2" style={{ background: "rgba(255,255,255,0.04)" }}>
                   <MaterialIcon name="directions_car" className="text-[28px] text-slate-600" />
@@ -129,7 +129,7 @@ export default function SwapDealPage() {
           <div className="space-y-2">
             {/* Your car inspection */}
             <div className="rounded-xl p-3 flex items-center gap-3 border border-white/5" style={{ background: "rgba(255,255,255,0.02)" }}>
-              <div className="h-9 w-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(17,82,212,0.15)" }}>
+              <div className="h-9 w-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(59,130,246,0.15)" }}>
                 <MaterialIcon name="directions_car" className="text-[18px] text-blue-400" />
               </div>
               <div className="flex-1 min-w-0">
@@ -162,7 +162,7 @@ export default function SwapDealPage() {
         {/* Transaction Flow Timeline */}
         <div className="rounded-2xl p-4 border border-white/5" style={{ background: "rgba(255,255,255,0.03)" }}>
           <div className="flex items-center gap-2 mb-4">
-            <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(17,82,212,0.15)" }}>
+            <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(59,130,246,0.15)" }}>
               <MaterialIcon name="timeline" className="text-[14px] text-blue-400" />
             </div>
             <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Transaction Flow</p>
@@ -292,7 +292,7 @@ export default function SwapDealPage() {
       {/* Bottom CTA */}
       <div className="fixed bottom-24 left-0 right-0 z-30 px-4">
         <div className="max-w-lg mx-auto">
-          <div className="rounded-2xl p-3 border border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+          <div className="rounded-2xl p-3 border border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
             <div className="flex items-center gap-3 mb-3">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
@@ -307,7 +307,7 @@ export default function SwapDealPage() {
             <button
               disabled={!depositAgreed}
               className={`flex items-center justify-center gap-2 h-12 rounded-2xl text-sm font-bold text-white w-full transition-all ${!depositAgreed ? "opacity-40" : ""}`}
-              style={{ background: depositAgreed ? "#1152d4" : "#1152d4" }}
+              style={{ background: depositAgreed ? "#3B82F6" : "#3B82F6" }}
             >
               <MaterialIcon name="swap_horiz" className="text-[18px]" />
               Initiate Swap &mdash; ₹999 Refundable Deposit

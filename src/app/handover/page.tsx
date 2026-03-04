@@ -6,17 +6,17 @@ import { INTERIOR } from "@/lib/car-images";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicles, adaptVehicle } from "@/lib/api";
 
-/* Stitch: digital_handover_experience_1 — #ecc813, Manrope + Playfair Display, #0a0a0a */
+/* Stitch: digital_handover_experience_1 — #E5C158, Manrope + Playfair Display, #0A1628 */
 
 const ACTION_CARDS = [
   {
     icon: "calendar_month",
-    iconBg: "bg-[#ecc813]/10",
-    iconColor: "text-[#ecc813]",
+    iconBg: "bg-[#E5C158]/10",
+    iconColor: "text-[#E5C158]",
     title: "Schedule Delivery",
     desc: "Choose your preferred arrival window",
     trailing: "chevron_right",
-    trailingHover: "group-hover:text-[#ecc813]",
+    trailingHover: "group-hover:text-[#E5C158]",
   },
   {
     icon: "description",
@@ -29,12 +29,12 @@ const ACTION_CARDS = [
   },
   {
     icon: "support_agent",
-    iconBg: "bg-[#ecc813]/10",
-    iconColor: "text-[#ecc813]",
+    iconBg: "bg-[#E5C158]/10",
+    iconColor: "text-[#E5C158]",
     title: "Meet Your Concierge",
     desc: "Personalized assistance for your new drive",
     trailing: "contact_support",
-    trailingHover: "group-hover:text-[#ecc813]",
+    trailingHover: "group-hover:text-[#E5C158]",
     shimmer: true,
   },
 ];
@@ -45,7 +45,7 @@ export default function HandoverPage() {
 
   if (!vehicle) {
     return (
-      <div className="min-h-dvh flex items-center justify-center bg-[#0a0a0a] text-white">
+      <div className="min-h-dvh flex items-center justify-center bg-[#0A1628] text-white">
         <div className="animate-pulse text-white/50">Loading...</div>
       </div>
     );
@@ -54,12 +54,12 @@ export default function HandoverPage() {
   return (
     <div
       className="relative flex min-h-dvh w-full flex-col max-w-[430px] mx-auto text-slate-100 antialiased overflow-x-hidden"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0a0a" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628" }}
     >
       {/* Header */}
-      <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0a0a]/80 backdrop-blur-md">
+      <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0A1628]/80 backdrop-blur-md">
         <div className="flex items-center gap-2">
-          <span className="text-[#ecc813] font-bold tracking-widest text-xs uppercase">
+          <span className="text-[#E5C158] font-bold tracking-widest text-xs uppercase">
             CaroBest
           </span>
         </div>
@@ -70,7 +70,7 @@ export default function HandoverPage() {
 
       {/* Cinematic Video Hero */}
       <section className="relative w-full aspect-[9/12] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-transparent to-transparent z-10" />
         <div className="absolute inset-0 bg-black/20 z-10" />
         <div
           className="w-full h-full bg-cover bg-center"
@@ -96,15 +96,15 @@ export default function HandoverPage() {
           className="rounded-xl p-[1px] shadow-2xl"
           style={{
             background:
-              "linear-gradient(135deg, #ecc813 0%, #fff 50%, #ecc813 100%)",
+              "linear-gradient(135deg, #E5C158 0%, #fff 50%, #E5C158 100%)",
           }}
         >
-          <div className="bg-[#141414] rounded-[11px] p-6 flex flex-col items-center text-center space-y-6">
-            <div className="w-16 h-16 rounded-full bg-[#ecc813]/10 flex items-center justify-center text-[#ecc813] border border-[#ecc813]/20">
+          <div className="bg-[#0A1628] rounded-[11px] p-6 flex flex-col items-center text-center space-y-6">
+            <div className="w-16 h-16 rounded-full bg-[#E5C158]/10 flex items-center justify-center text-[#E5C158] border border-[#E5C158]/20">
               <MaterialIcon name="verified_user" className="text-4xl" />
             </div>
             <div className="space-y-2">
-              <h2 className="text-[#ecc813] tracking-widest text-xs uppercase font-semibold">
+              <h2 className="text-[#E5C158] tracking-widest text-xs uppercase font-semibold">
                 Ownership Certificate
               </h2>
               <h3
@@ -114,7 +114,7 @@ export default function HandoverPage() {
                 {vehicle.year} {vehicle.name}
               </h3>
             </div>
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-[#ecc813]/30 to-transparent" />
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-[#E5C158]/30 to-transparent" />
             <div className="grid grid-cols-2 gap-8 w-full">
               <div className="text-left">
                 <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
@@ -126,8 +126,8 @@ export default function HandoverPage() {
                 <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
                   Status
                 </p>
-                <p className="text-sm font-medium text-[#ecc813] flex items-center gap-1">
-                  <span className="size-1.5 rounded-full bg-[#ecc813] animate-pulse" />
+                <p className="text-sm font-medium text-[#E5C158] flex items-center gap-1">
+                  <span className="size-1.5 rounded-full bg-[#E5C158] animate-pulse" />
                   Secured
                 </p>
               </div>
@@ -194,7 +194,7 @@ export default function HandoverPage() {
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50 md:hidden">
-        <div className="flex gap-2 border-t border-white/5 bg-[#141414]/95 backdrop-blur-xl px-6 pb-6 pt-3">
+        <div className="flex gap-2 border-t border-white/5 bg-[#0A1628]/95 backdrop-blur-xl px-6 pb-6 pt-3">
           <Link
             href="/"
             className="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500"
@@ -213,7 +213,7 @@ export default function HandoverPage() {
           </Link>
           <Link
             href="/my-cars"
-            className="flex flex-1 flex-col items-center justify-center gap-1 text-[#ecc813]"
+            className="flex flex-1 flex-col items-center justify-center gap-1 text-[#E5C158]"
           >
             <MaterialIcon name="stars" fill className="text-2xl" />
             <p className="text-[10px] font-medium uppercase tracking-wider">Garage</p>

@@ -62,7 +62,7 @@ export default function OnRoadPricePage({
   /* ── Loading state ── */
   if (loading) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
@@ -71,11 +71,11 @@ export default function OnRoadPricePage({
   /* ── 404 state ── */
   if (notFound || !car) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#080a0f" }}>
+      <div className="min-h-dvh flex items-center justify-center" style={{ background: "#0A1628" }}>
         <div className="text-center px-6">
           <MaterialIcon name="search_off" className="text-[48px] text-slate-700 mb-3" />
           <p className="text-slate-400 font-semibold">Model not found</p>
-          <Link href="/new-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#1152d4" }}>
+          <Link href="/new-cars" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold" style={{ color: "#3B82F6" }}>
             <MaterialIcon name="arrow_back" className="text-[15px]" /> Browse New Cars
           </Link>
         </div>
@@ -115,10 +115,10 @@ export default function OnRoadPricePage({
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full pb-36" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full pb-36" style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── HEADER ─── */}
-      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}>
+      <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link href={`/${brandSlug}/${modelSlug}`} className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
             <MaterialIcon name="arrow_back" className="text-[20px] text-slate-300" />
@@ -173,8 +173,8 @@ export default function OnRoadPricePage({
                 onClick={() => setSelectedVariantIdx(i)}
                 className="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold border transition-all"
                 style={{
-                  background: selectedVariantIdx === i ? "rgba(17,82,212,0.12)" : "rgba(255,255,255,0.03)",
-                  borderColor: selectedVariantIdx === i ? "rgba(17,82,212,0.4)" : "rgba(255,255,255,0.05)",
+                  background: selectedVariantIdx === i ? "rgba(59,130,246,0.12)" : "rgba(255,255,255,0.03)",
+                  borderColor: selectedVariantIdx === i ? "rgba(59,130,246,0.4)" : "rgba(255,255,255,0.05)",
                   color: selectedVariantIdx === i ? "#60a5fa" : "#64748b",
                 }}
               >
@@ -207,7 +207,7 @@ export default function OnRoadPricePage({
           ))}
 
           {/* Total */}
-          <div className="flex items-center justify-between px-4 py-4 border-t border-white/10" style={{ background: "rgba(17,82,212,0.04)" }}>
+          <div className="flex items-center justify-between px-4 py-4 border-t border-white/10" style={{ background: "rgba(59,130,246,0.04)" }}>
             <span className="text-sm font-bold text-white">On-Road Price</span>
             <span className="text-xl font-black text-white">{formatPrice(breakdown.total)}</span>
           </div>
@@ -235,7 +235,7 @@ export default function OnRoadPricePage({
             </div>
           </div>
 
-          <div className="rounded-xl p-3 text-center" style={{ background: "rgba(17,82,212,0.08)", border: "1px solid rgba(17,82,212,0.2)" }}>
+          <div className="rounded-xl p-3 text-center" style={{ background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.2)" }}>
             <p className="text-[10px] text-slate-500 mb-0.5">Estimated Monthly EMI</p>
             <p className="text-2xl font-black text-white">{formatPrice(breakdown.emi)}<span className="text-sm font-semibold text-slate-400">/mo</span></p>
           </div>
@@ -246,7 +246,7 @@ export default function OnRoadPricePage({
           <Link
             href={`/showroom?search=${encodeURIComponent(car?.name || modelSlug)}`}
             className="w-full h-12 rounded-2xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
-            style={{ background: "#1152d4" }}
+            style={{ background: "#3B82F6" }}
           >
             <MaterialIcon name="directions_car" className="text-[18px]" />
             Find & Test Drive

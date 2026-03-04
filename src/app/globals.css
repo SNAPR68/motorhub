@@ -14,26 +14,26 @@
 }
 
 :root {
-  /* P2P Marketplace palette (UI/UX Pro #50 dark mode) */
-  --primary: #00969E;
-  --primary-dark: #007A80;
+  /* Automotive Showroom palette (UI/UX Pro #54 dark mode) */
+  --primary: #3B82F6;
+  --primary-dark: #2563EB;
   --background-light: #f6f6f8;
-  --background-dark: #111318;
-  --bg-dark: #111318;
-  --glass-bg: rgba(26, 29, 36, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.06);
+  --background-dark: #0A1628;
+  --bg-dark: #0A1628;
+  --glass-bg: rgba(15, 29, 50, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
 
   /* Extended tokens */
-  --primary-alt: #00969E;
-  --bg-pure: #0d0f14;
+  --primary-alt: #3B82F6;
+  --bg-pure: #060E1C;
   --success: #10B981;
-  --accent: #FF4D33;
+  --accent: #E5C158;
   --danger: #EF4444;
   --warning: #F59E0B;
-  --secondary: #4A9A6A;
-  --surface: #1A1D24;
-  --text-muted: #8B95A5;
-  --border: #252830;
+  --secondary: #1E3A5F;
+  --surface: #0F1D32;
+  --text-muted: #8B9BAA;
+  --border: #1E3048;
 }
 
 @theme inline {
@@ -50,7 +50,7 @@
   --color-warning: var(--warning);
   --color-glass-border: var(--glass-border);
   --font-sans: 'Noto Sans', sans-serif;
-  --font-display: 'Noto Serif', serif;
+  --font-display: 'Newsreader', 'Noto Serif', serif;
   --font-body: 'Noto Sans', sans-serif;
   --radius: 0.25rem;
   --radius-lg: 0.5rem;
@@ -66,11 +66,11 @@ body {
 }
 
 ::selection {
-  background: rgba(0, 150, 158, 0.25);
+  background: rgba(59, 130, 246, 0.25);
 }
 
 .font-display,
-.serif-text { font-family: 'Noto Serif', serif; }
+.serif-text { font-family: 'Newsreader', 'Noto Serif', serif; }
 .font-body { font-family: 'Noto Sans', sans-serif; }
 
 /* ── Stitch dark page (background-dark) ── */
@@ -79,18 +79,18 @@ body {
   color: #e2e8f0;
 }
 
-/* Stitch glass-effect — rgba(16,22,34,0.6) + blur */
+/* Stitch glass-effect — Glassmorphism 3.0 */
 .glass-effect {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
 }
 
 .glass-effect-strong {
-  background: rgba(16, 22, 34, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(10, 22, 40, 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--glass-border);
 }
 
@@ -102,7 +102,7 @@ body {
 /* Stitch glass-panel (dealer dashboards) */
 .glass-panel {
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 

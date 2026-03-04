@@ -7,7 +7,7 @@ import { INTERIOR } from "@/lib/car-images";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchVehicle, adaptVehicle } from "@/lib/api";
 
-/* Stitch: cinematic_vehicle_storyboard — #1773cf, Manrope, #0b0f14 */
+/* Stitch: cinematic_vehicle_storyboard — #3B82F6, Manrope, #0b0f14 */
 
 const SECTIONS = [
   {
@@ -53,7 +53,7 @@ export default function StoryboardPage({
 
   if (!vehicle) {
     return (
-      <div className="min-h-dvh flex items-center justify-center bg-[#0b0f14] text-white">
+      <div className="min-h-dvh flex items-center justify-center bg-[#0A1628] text-white">
         <div className="animate-pulse text-white/50">Loading...</div>
       </div>
     );
@@ -88,7 +88,7 @@ export default function StoryboardPage({
 
       {/* Floating Share Button */}
       <div className="fixed bottom-24 right-6 z-50 max-w-[430px]">
-        <button className="flex items-center justify-center size-14 rounded-full bg-[#1773cf] text-white shadow-lg shadow-[#1773cf]/30 ring-4 ring-[#0b0f14]/50">
+        <button className="flex items-center justify-center size-14 rounded-full bg-[#3B82F6] text-white shadow-lg shadow-[#3B82F6]/30 ring-4 ring-[#0b0f14]/50">
           <MaterialIcon name="share" />
         </button>
       </div>
@@ -99,7 +99,7 @@ export default function StoryboardPage({
           <div
             key={i}
             className={`w-0.5 rounded-full transition-all duration-300 ${
-              i === activeIdx ? "h-4 bg-[#1773cf]" : "h-2 bg-white/20"
+              i === activeIdx ? "h-4 bg-[#3B82F6]" : "h-2 bg-white/20"
             }`}
           />
         ))}
@@ -145,7 +145,7 @@ export default function StoryboardPage({
               }`}
             >
               {s.label && (
-                <span className="text-[#1773cf] uppercase tracking-[0.4em] text-xs font-bold block mb-2">
+                <span className="text-[#3B82F6] uppercase tracking-[0.4em] text-xs font-bold block mb-2">
                   {s.label}
                 </span>
               )}
@@ -160,14 +160,14 @@ export default function StoryboardPage({
                 {"titleAccent" in s && s.titleAccent && (
                   <>
                     <br />
-                    <span className="text-[#1773cf] font-black not-italic">
+                    <span className="text-[#3B82F6] font-black not-italic">
                       {s.titleAccent}
                     </span>
                   </>
                 )}
               </h2>
               {s.align === "center" && (
-                <div className="w-12 h-px bg-[#1773cf] mx-auto" />
+                <div className="w-12 h-px bg-[#3B82F6] mx-auto" />
               )}
               <p
                 className={`text-slate-300 text-sm max-w-xs leading-relaxed ${
@@ -185,10 +185,10 @@ export default function StoryboardPage({
         ))}
 
         {/* Section 5: CTA */}
-        <section className="relative h-dvh w-full snap-start bg-[#0b0f14] flex flex-col items-center justify-center px-8 text-center">
+        <section className="relative h-dvh w-full snap-start bg-[#0A1628] flex flex-col items-center justify-center px-8 text-center">
           <div className="mb-12">
-            <div className="size-20 rounded-2xl bg-[#1773cf]/10 flex items-center justify-center mb-6 mx-auto">
-              <MaterialIcon name="verified" className="text-[#1773cf] text-4xl" />
+            <div className="size-20 rounded-2xl bg-[#3B82F6]/10 flex items-center justify-center mb-6 mx-auto">
+              <MaterialIcon name="verified" className="text-[#3B82F6] text-4xl" />
             </div>
             <h2 className="text-3xl font-bold text-white mb-2">Own the Legend</h2>
             <p className="text-slate-400">
@@ -201,7 +201,7 @@ export default function StoryboardPage({
           <div className="w-full space-y-4 max-w-sm">
             <Link
               href="/reservation"
-              className="block w-full py-5 bg-[#1773cf] text-white font-bold rounded-xl tracking-wide uppercase text-sm shadow-xl shadow-[#1773cf]/20 text-center"
+              className="block w-full py-5 bg-[#3B82F6] text-white font-bold rounded-xl tracking-wide uppercase text-sm shadow-xl shadow-[#3B82F6]/20 text-center"
             >
               Book a Private Viewing
             </Link>
@@ -222,11 +222,11 @@ export default function StoryboardPage({
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50 bg-[#0b0f14]/80 backdrop-blur-xl border-t border-white/5 md:hidden">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50 bg-[#0A1628]/80 backdrop-blur-xl border-t border-white/5 md:hidden">
         <div className="flex items-center justify-around h-20 px-4">
           <Link
             href={`/storyboard/${id}`}
-            className="flex flex-col items-center gap-1 text-[#1773cf]"
+            className="flex flex-col items-center gap-1 text-[#3B82F6]"
           >
             <MaterialIcon name="auto_stories" fill />
             <span className="text-[10px] font-bold uppercase tracking-tighter">

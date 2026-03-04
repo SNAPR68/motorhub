@@ -65,7 +65,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080a0f] text-[#e2e8f0]">
+    <div className="min-h-screen bg-[#0A1628] text-[#e2e8f0]">
       <div className="max-w-lg mx-auto px-4 pb-32">
         {/* Header */}
         <header className="flex items-center gap-3 py-4">
@@ -107,7 +107,7 @@ export default function RegisterPage() {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Enter your full name"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition"
                   />
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function RegisterPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition"
                   />
                 </div>
               </div>
@@ -139,7 +139,7 @@ export default function RegisterPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="Enter phone number"
-                    className="w-full bg-white/5 border border-white/10 rounded-r-xl px-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition"
+                    className="w-full bg-white/5 border border-white/10 rounded-r-xl px-4 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition"
                   />
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function RegisterPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Create a password"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-11 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-11 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition"
                   />
                   <button
                     type="button"
@@ -176,7 +176,7 @@ export default function RegisterPage() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirm your password"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-11 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#1152d4] transition"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-11 py-3 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#3B82F6] transition"
                   />
                   <button
                     type="button"
@@ -192,7 +192,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-[#1152d4] hover:bg-[#1152d4]/90 text-white font-semibold py-3.5 rounded-xl transition mt-2 disabled:opacity-50"
+                className="w-full bg-[#3B82F6] hover:bg-[#3B82F6]/90 text-white font-semibold py-3.5 rounded-xl transition mt-2 disabled:opacity-50"
               >
                 {isLoading ? "Creating Account..." : "Sign Up"}
               </button>
@@ -225,7 +225,7 @@ export default function RegisterPage() {
         {/* Sign In Link */}
         <p className="text-center text-sm text-slate-400 mt-6">
           Already have an account?{" "}
-          <Link href="/login/buyer" className="text-[#1152d4] font-medium hover:underline">
+          <Link href="/login/buyer" className="text-[#3B82F6] font-medium hover:underline">
             Sign In
           </Link>
         </p>

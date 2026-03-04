@@ -9,7 +9,7 @@ import { fetchVehicles, fetchDashboard } from "@/lib/api";
 import { BLUR_DATA_URL } from "@/lib/car-images";
 
 /* ── design tokens: ai_market_intelligence_hub_1 ── */
-// primary: #0dccf2 (cyan), font: Manrope, bg: #0a0a0a, card: #161b1d, silver: #94a3b8
+// primary: #0dccf2 (cyan), font: Manrope, bg: #0A1628, card: #161b1d, silver: #94a3b8
 
 const SOURCES = ["OLX AUTOS", "CARS24", "SPINNY", "DROOM", "CARDEKHO"];
 
@@ -39,19 +39,19 @@ export default function IntelligencePage() {
   return (
     <div
       className="min-h-screen max-w-md mx-auto flex flex-col pb-24"
-      style={{ fontFamily: "'Manrope', sans-serif", background: "#0a0a0a", color: "#f1f5f9" }}
+      style={{ fontFamily: "'Manrope', sans-serif", background: "#0A1628", color: "#f1f5f9" }}
     >
       {/* Header */}
-      <header className="sticky top-0 z-50 px-4 py-4 flex items-center justify-between border-b" style={{ background: "rgba(10,10,10,0.8)", backdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.05)" }}>
+      <header className="sticky top-0 z-50 px-4 py-4 flex items-center justify-between border-b" style={{ background: "rgba(10,22,40,0.8)", backdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.05)" }}>
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "#0dccf2" }}>
-            <MaterialIcon name="auto_awesome" className="text-[#0a0a0a] font-bold text-sm" />
+            <MaterialIcon name="auto_awesome" className="text-[#0A1628] font-bold text-sm" />
           </div>
           <h1 className="text-xl font-extrabold tracking-tight">
             Market <span style={{ color: "#0dccf2" }}>Intelligence</span>
           </h1>
         </div>
-        <Link href="/notifications/history" className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
+        <Link href="/notifications/history" className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
           <MaterialIcon name="notifications" className="text-[#94a3b8]" />
         </Link>
       </header>
@@ -75,7 +75,7 @@ export default function IntelligencePage() {
         </div>
 
         {/* Market Value Card */}
-        <section className="rounded-2xl p-5 mb-6" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
+        <section className="rounded-2xl p-5 mb-6" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
           <div className="flex justify-between items-start mb-4">
             <div>
               <h2 className="text-sm font-semibold uppercase tracking-widest mb-1" style={{ color: "#94a3b8" }}>
@@ -121,7 +121,7 @@ export default function IntelligencePage() {
 
         {/* Volatility & Demand Dials */}
         <section className="grid grid-cols-2 gap-4 mb-6">
-          <div className="rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
+          <div className="rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
             <div className="absolute top-0 left-0 w-full h-1" style={{ background: "linear-gradient(to right, transparent, rgba(13,204,242,0.5), transparent)" }} />
             <h3 className="text-[10px] font-bold uppercase tracking-widest mb-4" style={{ color: "#94a3b8" }}>Volatility Index</h3>
             <div className="relative w-24 h-24 flex items-center justify-center">
@@ -134,7 +134,7 @@ export default function IntelligencePage() {
             </div>
           </div>
 
-          <div className="rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
+          <div className="rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
             <div className="absolute top-0 left-0 w-full h-1" style={{ background: "linear-gradient(to right, transparent, rgba(13,204,242,0.5), transparent)" }} />
             <h3 className="text-[10px] font-bold uppercase tracking-widest mb-4" style={{ color: "#94a3b8" }}>Demand Score</h3>
             <div className="relative w-24 h-24 flex items-center justify-center">
@@ -162,7 +162,7 @@ export default function IntelligencePage() {
           {isLoading && (
             <div className="space-y-3">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="rounded-xl p-3 flex gap-4 items-center animate-pulse" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
+                <div key={i} className="rounded-xl p-3 flex gap-4 items-center animate-pulse" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)", border: "1px solid rgba(148,163,184,0.1)" }}>
                   <div className="w-20 h-20 rounded-lg bg-slate-800 shrink-0" />
                   <div className="flex-1 space-y-2">
                     <div className="h-3 bg-slate-800 rounded w-3/4" />
@@ -184,7 +184,7 @@ export default function IntelligencePage() {
           <div className="space-y-3">
             {filtered.map((v, i) => (
               <Link key={v.id} href={`/showcase/${v.id}`}>
-                <div className="rounded-xl p-3 flex gap-4 items-center" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,10,10,1) 100%)", border: "1px solid rgba(148,163,184,0.1)", opacity: 1 - i * 0.06 }}>
+                <div className="rounded-xl p-3 flex gap-4 items-center" style={{ background: "linear-gradient(145deg, rgba(22,27,29,1) 0%, rgba(10,22,40,1) 100%)", border: "1px solid rgba(148,163,184,0.1)", opacity: 1 - i * 0.06 }}>
                   <div className="w-20 h-20 rounded-lg overflow-hidden shrink-0" style={{ border: "1px solid rgba(255,255,255,0.05)" }}>
                     {v.images[0] ? (
                       <Image src={v.images[0]} alt="" width={80} height={80} className="w-full h-full object-cover" />
@@ -219,14 +219,14 @@ export default function IntelligencePage() {
       </main>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 pb-8 pt-2 px-6 flex justify-between items-center border-t md:hidden" style={{ background: "rgba(10,10,10,0.9)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}>
+      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 pb-8 pt-2 px-6 flex justify-between items-center border-t md:hidden" style={{ background: "rgba(10,22,40,0.9)", backdropFilter: "blur(16px)", borderColor: "rgba(255,255,255,0.05)" }}>
         <Link href="/inventory" className="flex flex-col items-center gap-1">
           <MaterialIcon name="directions_car" className="text-[#94a3b8]" />
           <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "#94a3b8" }}>Inventory</span>
         </Link>
         <Link href="/intelligence" className="flex flex-col items-center gap-1 relative">
-          <div className="absolute -top-12 w-14 h-14 rounded-2xl flex items-center justify-center rotate-45" style={{ background: "#0dccf2", boxShadow: "0 8px 20px rgba(13,204,242,0.4)", border: "4px solid #0a0a0a" }}>
-            <MaterialIcon name="query_stats" className="text-[#0a0a0a] font-bold -rotate-45" />
+          <div className="absolute -top-12 w-14 h-14 rounded-2xl flex items-center justify-center rotate-45" style={{ background: "#0dccf2", boxShadow: "0 8px 20px rgba(13,204,242,0.4)", border: "4px solid #0A1628" }}>
+            <MaterialIcon name="query_stats" className="text-[#0A1628] font-bold -rotate-45" />
           </div>
           <span className="text-[10px] font-black tracking-widest uppercase mt-4" style={{ color: "#0dccf2" }}>Insights</span>
         </Link>

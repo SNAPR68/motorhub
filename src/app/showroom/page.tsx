@@ -164,12 +164,12 @@ export default function ShowroomPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full" style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full" style={{ background: "#0A1628", color: "#e2e8f0" }}>
 
       {/* ─── STICKY HEADER ─── */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg md:max-w-none mx-auto px-4 pt-3 pb-0">
 
@@ -207,7 +207,7 @@ export default function ShowroomPage() {
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="relative flex h-9 w-9 items-center justify-center rounded-xl shrink-0 transition-colors"
-              style={{ background: showFilters ? "#1152d4" : "rgba(255,255,255,0.05)", color: showFilters ? "#fff" : "#94a3b8" }}
+              style={{ background: showFilters ? "#3B82F6" : "rgba(255,255,255,0.05)", color: showFilters ? "#fff" : "#94a3b8" }}
             >
               <MaterialIcon name="tune" className="text-[20px]" />
               {activeFilterCount > 0 && (
@@ -226,9 +226,9 @@ export default function ShowroomPage() {
                 onClick={() => { setActiveCatIdx(i); updateUrl({ q: search, category: cat.value, price: priceRange, sort }); }}
                 className="flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3.5 text-xs font-semibold transition-all"
                 style={{
-                  background: i === activeCatIdx ? "#1152d4" : "rgba(255,255,255,0.05)",
+                  background: i === activeCatIdx ? "#3B82F6" : "rgba(255,255,255,0.05)",
                   color: i === activeCatIdx ? "#fff" : "#94a3b8",
-                  boxShadow: i === activeCatIdx ? "0 4px 12px rgba(17,82,212,0.25)" : "none",
+                  boxShadow: i === activeCatIdx ? "0 4px 12px rgba(59,130,246,0.25)" : "none",
                 }}
               >
                 <span>{cat.icon}</span>
@@ -251,9 +251,9 @@ export default function ShowroomPage() {
                     onClick={() => setPriceRange(priceRange === b.value ? "" : b.value)}
                     className="shrink-0 h-7 px-3 rounded-full text-[11px] font-semibold transition-all border"
                     style={{
-                      background: priceRange === b.value ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)",
+                      background: priceRange === b.value ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.03)",
                       color: priceRange === b.value ? "#fff" : "#94a3b8",
-                      borderColor: priceRange === b.value ? "#1152d4" : "rgba(255,255,255,0.1)",
+                      borderColor: priceRange === b.value ? "#3B82F6" : "rgba(255,255,255,0.1)",
                     }}
                   >
                     {b.label}
@@ -273,9 +273,9 @@ export default function ShowroomPage() {
                       onClick={() => setFuel(fuel === f ? "" : f)}
                       className="h-7 px-2.5 rounded-full text-[11px] font-semibold transition-all border"
                       style={{
-                        background: fuel === f ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)",
+                        background: fuel === f ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.03)",
                         color: fuel === f ? "#fff" : "#94a3b8",
-                        borderColor: fuel === f ? "#1152d4" : "rgba(255,255,255,0.1)",
+                        borderColor: fuel === f ? "#3B82F6" : "rgba(255,255,255,0.1)",
                       }}
                     >
                       {f}
@@ -294,9 +294,9 @@ export default function ShowroomPage() {
                       onClick={() => setTransmission(transmission === t ? "" : t)}
                       className="h-7 px-2.5 rounded-full text-[11px] font-semibold transition-all border text-left"
                       style={{
-                        background: transmission === t ? "rgba(17,82,212,0.2)" : "rgba(255,255,255,0.03)",
+                        background: transmission === t ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.03)",
                         color: transmission === t ? "#fff" : "#94a3b8",
-                        borderColor: transmission === t ? "#1152d4" : "rgba(255,255,255,0.1)",
+                        borderColor: transmission === t ? "#3B82F6" : "rgba(255,255,255,0.1)",
                       }}
                     >
                       {t}
@@ -317,7 +317,7 @@ export default function ShowroomPage() {
                   style={{ background: "rgba(255,255,255,0.06)" }}
                 >
                   {SORT_OPTIONS.map((o) => (
-                    <option key={o.value} value={o.value} style={{ background: "#080a0f" }}>{o.label}</option>
+                    <option key={o.value} value={o.value} style={{ background: "#0A1628" }}>{o.label}</option>
                   ))}
                 </select>
               </div>
@@ -353,7 +353,7 @@ export default function ShowroomPage() {
             )}
           </p>
           {hasFilters && (
-            <button onClick={clearAll} className="text-xs font-semibold flex items-center gap-1" style={{ color: "#1152d4" }}>
+            <button onClick={clearAll} className="text-xs font-semibold flex items-center gap-1" style={{ color: "#3B82F6" }}>
               Clear all <MaterialIcon name="close" className="text-[13px]" />
             </button>
           )}
@@ -458,7 +458,7 @@ function CarListCard({
         {vehicle.aiTag && (
           <div
             className="absolute top-2 left-2 flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[9px] font-bold text-white"
-            style={{ background: "rgba(17,82,212,0.9)", backdropFilter: "blur(4px)" }}
+            style={{ background: "rgba(59,130,246,0.9)", backdropFilter: "blur(4px)" }}
           >
             <MaterialIcon name="verified" className="text-[9px]" />
             AI

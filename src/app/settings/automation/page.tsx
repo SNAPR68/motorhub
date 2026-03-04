@@ -6,7 +6,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { fetchDealerPreferences, updateDealerPreferences } from "@/lib/api";
 
 /* ── design tokens: ai_automation_&_scheduling ── */
-// primary: #137fec, font: Inter, bg: #101922 (dark), light card: #0f172a
+// primary: #3B82F6, font: Inter, bg: #101922 (dark), light card: #0f172a
 
 const STORAGE_KEY = "av_automation_prefs";
 
@@ -14,7 +14,7 @@ const RULES = [
   {
     icon: "auto_fix_high",
     iconBg: "rgba(19,127,236,0.1)",
-    iconColor: "#137fec",
+    iconColor: "#3B82F6",
     name: "Auto-Enhance Photos",
     trigger: "Trigger: On upload",
     setting: "Processing delay:",
@@ -125,14 +125,14 @@ export default function AutomationPage() {
         }}
       >
         <div className="flex items-center justify-between px-4 h-14">
-          <Link href="/settings" className="flex items-center" style={{ color: "#137fec" }}>
+          <Link href="/settings" className="flex items-center" style={{ color: "#3B82F6" }}>
             <MaterialIcon name="arrow_back_ios_new" className="text-[28px]" />
             <span className="text-lg">Settings</span>
           </Link>
           <h1 className="text-lg font-semibold absolute left-1/2 -translate-x-1/2 text-white">
             AI Automation
           </h1>
-          <button onClick={handleSave} disabled={saving} className="font-medium transition-colors" style={{ color: saved ? "#16a34a" : "#137fec" }}>
+          <button onClick={handleSave} disabled={saving} className="font-medium transition-colors" style={{ color: saved ? "#16a34a" : "#3B82F6" }}>
             {saving ? "Saving..." : saved ? "Saved" : "Save"}
           </button>
         </div>
@@ -178,7 +178,7 @@ export default function AutomationPage() {
                       setToggles(next);
                     }}
                     className="w-11 h-6 rounded-full relative transition-colors"
-                    style={{ background: toggles[i] ? "#137fec" : "#334155" }}
+                    style={{ background: toggles[i] ? "#3B82F6" : "#334155" }}
                   >
                     <div
                       className="absolute top-[2px] w-5 h-5 bg-white rounded-full transition-all shadow-sm"
@@ -192,7 +192,7 @@ export default function AutomationPage() {
                 >
                   <span className="text-sm font-medium">
                     {rule.setting}{" "}
-                    <span style={{ color: "#137fec" }}>{rule.value}</span>
+                    <span style={{ color: "#3B82F6" }}>{rule.value}</span>
                   </span>
                   <button
                     className="text-xs font-semibold px-3 py-1.5 rounded-lg"
@@ -220,7 +220,7 @@ export default function AutomationPage() {
                 Scheduled Posts for Feb 24 - Mar 2
               </p>
               <div className="flex gap-1">
-                <span className="w-2 h-2 rounded-full" style={{ background: "#137fec" }} />
+                <span className="w-2 h-2 rounded-full" style={{ background: "#3B82F6" }} />
                 <span className="w-2 h-2 rounded-full" style={{ background: "rgba(19,127,236,0.3)" }} />
               </div>
             </div>
@@ -233,7 +233,7 @@ export default function AutomationPage() {
                     className="w-full aspect-square rounded-lg flex items-center justify-center relative"
                     style={{
                       background: "#1e293b",
-                      border: d.active ? "2px solid #137fec" : "none",
+                      border: d.active ? "2px solid #3B82F6" : "none",
                     }}
                   >
                     {d.hasPost ? (
@@ -244,7 +244,7 @@ export default function AutomationPage() {
                     {d.scheduled && (
                       <div
                         className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
-                        style={{ background: "#137fec", border: "2px solid #0f172a" }}
+                        style={{ background: "#3B82F6", border: "2px solid #0f172a" }}
                       />
                     )}
                   </div>
@@ -259,8 +259,8 @@ export default function AutomationPage() {
                 border: "1px solid rgba(19,127,236,0.1)",
               }}
             >
-              <MaterialIcon name="info" className="text-xl text-[#137fec]" />
-              <p className="text-xs leading-tight" style={{ color: "#137fec" }}>
+              <MaterialIcon name="info" className="text-xl text-[#3B82F6]" />
+              <p className="text-xs leading-tight" style={{ color: "#3B82F6" }}>
                 AI has scheduled 3 posts this week based on peak engagement times for car buyers in
                 your area.
               </p>
@@ -290,7 +290,7 @@ export default function AutomationPage() {
               key={item.label}
               href={item.href}
               className="flex flex-col items-center gap-1 px-3"
-              style={{ color: item.active ? "#137fec" : "#94a3b8" }}
+              style={{ color: item.active ? "#3B82F6" : "#94a3b8" }}
             >
               <MaterialIcon name={item.icon} fill={item.active} />
               <span className="text-[10px] font-medium">{item.label}</span>

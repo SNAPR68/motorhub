@@ -7,7 +7,7 @@ import { MaterialIcon } from "@/components/MaterialIcon";
 import { useApi } from "@/lib/hooks/use-api";
 import { fetchWishlist, fetchVehicle, adaptVehicle } from "@/lib/api";
 
-/* Stitch: luxury_service_selection — #2bdeee, Space Grotesk, #0a0a0a */
+/* Stitch: luxury_service_selection — #2bdeee, Space Grotesk, #0A1628 */
 
 const DATES = [
   { day: "Mon", date: 23 },
@@ -82,10 +82,10 @@ function ServicePageInner() {
   return (
     <div
       className="relative flex min-h-dvh w-full flex-col max-w-md mx-auto text-slate-100"
-      style={{ fontFamily: "'Space Grotesk', sans-serif", background: "#0a0a0a" }}
+      style={{ fontFamily: "'Space Grotesk', sans-serif", background: "#0A1628" }}
     >
       {/* Top App Bar */}
-      <div className="sticky top-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-md px-4 py-4 border-b border-[#2bdeee]/10">
+      <div className="sticky top-0 z-50 bg-[#0A1628]/80 backdrop-blur-md px-4 py-4 border-b border-[#2bdeee]/10">
         <div className="flex items-center justify-between">
           <Link
             href="/my-cars"
@@ -111,7 +111,7 @@ function ServicePageInner() {
         {/* Calendar Section */}
         <section className="mt-6 px-4">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-[#c0c0c0] text-sm font-semibold tracking-widest uppercase">
+            <h2 className="text-[#8B9BAA] text-sm font-semibold tracking-widest uppercase">
               Select Date
             </h2>
             <span className="text-xs text-[#2bdeee] font-medium">
@@ -126,7 +126,7 @@ function ServicePageInner() {
                 className={`flex-shrink-0 w-14 h-20 rounded-xl flex flex-col items-center justify-center border ${
                   d.date === selectedDate
                     ? "border-[#2bdeee]/40 bg-[#2bdeee]/10"
-                    : "border-white/5 bg-[#121212]"
+                    : "border-white/5 bg-[#0A1628]"
                 } ${d.disabled ? "opacity-50" : ""}`}
                 style={
                   d.date === selectedDate
@@ -138,7 +138,7 @@ function ServicePageInner() {
                   className={`text-[10px] uppercase mb-1 ${
                     d.date === selectedDate
                       ? "text-[#2bdeee] font-bold"
-                      : "text-[#c0c0c0]"
+                      : "text-[#8B9BAA]"
                   }`}
                 >
                   {d.day}
@@ -160,7 +160,7 @@ function ServicePageInner() {
 
         {/* Time Slots */}
         <section className="mt-6 px-4">
-          <h2 className="text-[#c0c0c0] text-sm font-semibold tracking-widest uppercase mb-4">
+          <h2 className="text-[#8B9BAA] text-sm font-semibold tracking-widest uppercase mb-4">
             Available Slots
           </h2>
           <div className="grid grid-cols-3 gap-3">
@@ -174,7 +174,7 @@ function ServicePageInner() {
                     ? "border-white/5 bg-white/5 text-white/20 cursor-not-allowed"
                     : s.time === selectedTime
                     ? "border-[#2bdeee]/50 bg-[#2bdeee]/5 font-bold text-[#2bdeee]"
-                    : "border-white/10 bg-[#121212] hover:border-[#2bdeee]/50"
+                    : "border-white/10 bg-[#0A1628] hover:border-[#2bdeee]/50"
                 }`}
                 style={
                   s.time === selectedTime
@@ -205,7 +205,7 @@ function ServicePageInner() {
                 AI Diagnostic Summary
               </h2>
             </div>
-            <p className="text-[#c0c0c0] text-sm leading-relaxed mb-4">
+            <p className="text-[#8B9BAA] text-sm leading-relaxed mb-4">
               Telemetry analysis indicates your{" "}
               <span className="text-white font-medium">{carSubtitle}</span>{" "}
               requires a{" "}
@@ -215,7 +215,7 @@ function ServicePageInner() {
               </span>{" "}
               within the next 3,000 km to maintain optimal performance.
             </p>
-            <div className="flex items-center justify-between text-[11px] text-[#c0c0c0]/60 pt-3 border-t border-white/5">
+            <div className="flex items-center justify-between text-[11px] text-[#8B9BAA]/60 pt-3 border-t border-white/5">
               <span className="flex items-center gap-1">
                 <MaterialIcon name="history" className="text-xs" /> Last service: 45
                 days ago
@@ -230,14 +230,14 @@ function ServicePageInner() {
 
         {/* Service Packages */}
         <section className="mt-8 px-4 pb-10">
-          <h2 className="text-[#c0c0c0] text-sm font-semibold tracking-widest uppercase mb-4">
+          <h2 className="text-[#8B9BAA] text-sm font-semibold tracking-widest uppercase mb-4">
             Service Packages
           </h2>
           <div className="space-y-4">
             {PACKAGES.map((pkg) => (
               <div
                 key={pkg.name}
-                className={`group relative bg-[#121212] rounded-xl p-4 transition-all duration-300 active:scale-[0.98] ${
+                className={`group relative bg-[#0A1628] rounded-xl p-4 transition-all duration-300 active:scale-[0.98] ${
                   pkg.featured
                     ? "border-2 border-[#2bdeee]/50"
                     : "border border-white/5 hover:border-[#2bdeee]/30"
@@ -249,7 +249,7 @@ function ServicePageInner() {
                 }
               >
                 {pkg.featured && (
-                  <div className="absolute -top-3 left-4 bg-[#2bdeee] text-[#0a0a0a] text-[10px] font-black uppercase px-2 py-0.5 rounded-sm">
+                  <div className="absolute -top-3 left-4 bg-[#2bdeee] text-[#0A1628] text-[10px] font-black uppercase px-2 py-0.5 rounded-sm">
                     Recommended
                   </div>
                 )}
@@ -269,11 +269,11 @@ function ServicePageInner() {
                       {pkg.name}
                     </h3>
                     <div className="flex items-center gap-3 mt-1">
-                      <span className="flex items-center gap-1 text-[11px] text-[#c0c0c0] uppercase">
+                      <span className="flex items-center gap-1 text-[11px] text-[#8B9BAA] uppercase">
                         <MaterialIcon name="schedule" className="text-[14px]" />{" "}
                         {pkg.duration}
                       </span>
-                      <span className="flex items-center gap-1 text-[11px] text-[#c0c0c0] uppercase">
+                      <span className="flex items-center gap-1 text-[11px] text-[#8B9BAA] uppercase">
                         <MaterialIcon
                           name={pkg.badgeIcon}
                           className="text-[14px]"
@@ -293,10 +293,10 @@ function ServicePageInner() {
       </main>
 
       {/* Bottom Action Bar */}
-      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 p-4 bg-[#0a0a0a]/90 backdrop-blur-xl border-t border-white/5">
+      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 p-4 bg-[#0A1628]/90 backdrop-blur-xl border-t border-white/5">
         <div className="max-w-md mx-auto flex items-center justify-between gap-4">
           <div className="flex flex-col">
-            <span className="text-[10px] text-[#c0c0c0] uppercase font-bold tracking-widest">
+            <span className="text-[10px] text-[#8B9BAA] uppercase font-bold tracking-widest">
               Est. Total
             </span>
             <span className="text-2xl font-bold text-white leading-none">
@@ -305,7 +305,7 @@ function ServicePageInner() {
           </div>
           <Link
             href={`/service/logistics${vehicleId ? `?vehicleId=${vehicleId}` : ""}`}
-            className="flex-1 bg-[#2bdeee] text-[#0a0a0a] font-black uppercase tracking-widest py-4 rounded-xl shadow-lg shadow-[#2bdeee]/20 active:scale-95 transition-transform flex items-center justify-center gap-2"
+            className="flex-1 bg-[#2bdeee] text-[#0A1628] font-black uppercase tracking-widest py-4 rounded-xl shadow-lg shadow-[#2bdeee]/20 active:scale-95 transition-transform flex items-center justify-center gap-2"
           >
             Continue
             <MaterialIcon name="arrow_forward" className="font-bold" />
@@ -319,7 +319,7 @@ function ServicePageInner() {
 export default function ServicePage() {
   return (
     <Suspense fallback={
-      <div className="flex min-h-dvh items-center justify-center bg-[#0a0a0a]">
+      <div className="flex min-h-dvh items-center justify-center bg-[#0A1628]">
         <div className="w-8 h-8 border-2 border-[#2bdeee] border-t-transparent rounded-full animate-spin" />
       </div>
     }>

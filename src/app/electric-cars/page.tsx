@@ -14,8 +14,8 @@ const EV_MODELS = [
     range: 465,
     zeroToHundred: "7.2s",
     tag: "Best Seller",
-    tagColor: "#1152d4",
-    tagBg: "rgba(17,82,212,0.15)",
+    tagColor: "#3B82F6",
+    tagBg: "rgba(59,130,246,0.15)",
     slug: "/tata/nexon-ev",
   },
   {
@@ -108,11 +108,11 @@ export default function ElectricCarsPage() {
 
   return (
     <BuyerAppShell>
-    <div className="min-h-dvh w-full " style={{ background: "#080a0f", color: "#e2e8f0" }}>
+    <div className="min-h-dvh w-full " style={{ background: "#0A1628", color: "#e2e8f0" }}>
       {/* Header */}
       <header
         className="sticky top-0 z-40 border-b border-white/5"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <Link
@@ -179,9 +179,9 @@ export default function ElectricCarsPage() {
                   onClick={() => setActiveBudget(active ? null : pill)}
                   className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all"
                   style={{
-                    background: active ? "#1152d4" : "rgba(255,255,255,0.05)",
+                    background: active ? "#3B82F6" : "rgba(255,255,255,0.05)",
                     color: active ? "#fff" : "#94a3b8",
-                    border: active ? "1px solid #1152d4" : "1px solid rgba(255,255,255,0.08)",
+                    border: active ? "1px solid #3B82F6" : "1px solid rgba(255,255,255,0.08)",
                   }}
                 >
                   {pill}
@@ -230,7 +230,7 @@ export default function ElectricCarsPage() {
               <div
                 className="h-36 relative flex items-center justify-center"
                 style={{
-                  background: "linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(17,82,212,0.08) 100%)",
+                  background: "linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(59,130,246,0.08) 100%)",
                 }}
               >
                 <MaterialIcon name="electric_car" className="text-[56px] text-slate-700" />
@@ -261,8 +261,8 @@ export default function ElectricCarsPage() {
                     <div
                       className="w-4 h-4 rounded flex items-center justify-center border transition-all"
                       style={{
-                        background: compared.includes(car.id) ? "#1152d4" : "transparent",
-                        borderColor: compared.includes(car.id) ? "#1152d4" : "rgba(255,255,255,0.2)",
+                        background: compared.includes(car.id) ? "#3B82F6" : "transparent",
+                        borderColor: compared.includes(car.id) ? "#3B82F6" : "rgba(255,255,255,0.2)",
                       }}
                       onClick={() => toggleCompare(car.id)}
                     >
@@ -294,7 +294,7 @@ export default function ElectricCarsPage() {
                 <Link
                   href={car.slug}
                   className="flex items-center justify-center gap-2 w-full h-10 rounded-xl text-sm font-bold text-white transition-all active:scale-95"
-                  style={{ background: "rgba(17,82,212,0.2)", border: "1px solid rgba(17,82,212,0.3)" }}
+                  style={{ background: "rgba(59,130,246,0.2)", border: "1px solid rgba(59,130,246,0.3)" }}
                 >
                   View Details
                   <MaterialIcon name="arrow_forward" className="text-[16px]" />
@@ -308,7 +308,7 @@ export default function ElectricCarsPage() {
         {compared.length >= 2 && (
           <div
             className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl"
-            style={{ background: "#1152d4", maxWidth: "calc(100% - 32px)" }}
+            style={{ background: "#3B82F6", maxWidth: "calc(100% - 32px)" }}
           >
             <MaterialIcon name="compare_arrows" className="text-[20px] text-white" />
             <span className="text-sm font-bold text-white flex-1">Compare {compared.length} EVs</span>

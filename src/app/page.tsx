@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { MaterialIcon } from "@/components/MaterialIcon";
 import { BuyerAppShell } from "@/components/BuyerAppShell";
 import { useAuthStore } from "@/lib/stores";
 import {
@@ -14,26 +13,53 @@ import {
   formatEmi,
 } from "@/lib/car-catalog";
 import { fetchCarBrands, fetchCarModels, type ApiBrand, type ApiCarModel } from "@/lib/api";
+import {
+  Gem,
+  ShieldCheck,
+  Search,
+  ArrowRight,
+  MapPin,
+  ChevronDown,
+  ChevronUp,
+  Car,
+  Star,
+  Wallet,
+  Store,
+  User,
+  X,
+  Check,
+  IndianRupee,
+  Tag,
+  Bot,
+  ArrowLeftRight,
+  Calculator,
+  Fuel,
+  Shield,
+  Landmark,
+  Calendar,
+  Zap,
+  Newspaper,
+  Sparkles,
+} from "lucide-react";
 
-/* ─── CaroBest Homepage — Fresh Marketplace Design ─── */
-/* Color palette: P2P Marketplace Dark Mode (UI/UX Pro #50) */
-/* Primary: #00969E (teal), CTA: #FF4D33 (coral), Secondary: #4A9A6A (green) */
+/* ─── CaroBest Homepage — Premium Automotive Design ─── */
+/* Color palette: UI/UX Pro Automotive #54 Dark Mode */
+/* Primary: #3B82F6 (brand blue), CTA: #E5C158 (gold), BG: #0A1628 (showroom navy) */
 
 const C = {
-  bg: "#111318",
-  surface: "#1A1D24",
-  primary: "#00969E",
-  primaryLight: "#00b8c2",
-  secondary: "#4A9A6A",
-  secondaryLight: "#5cb87c",
-  cta: "#FF4D33",
-  ctaLight: "#ff6b55",
-  text: "#F5F5F5",
-  muted: "#8B95A5",
-  dim: "#5a6374",
-  border: "#252830",
-  glass: "rgba(26,29,36,0.75)",
-  glassBorder: "rgba(255,255,255,0.06)",
+  bg: "#0A1628",
+  surface: "#0F1D32",
+  primary: "#1E3A5F",
+  primaryLight: "#3B82F6",
+  accent: "#E5C158",
+  accentGlow: "rgba(229,193,88,0.45)",
+  text: "#F8FAFC",
+  muted: "#8B9BAA",
+  dim: "#5A6B7A",
+  border: "#1E3048",
+  success: "#10B981",
+  glass: "rgba(15,29,50,0.75)",
+  glassBorder: "rgba(255,255,255,0.08)",
 } as const;
 
 const POPULAR_SEARCHES = ["Brezza", "Creta", "Nexon", "Swift", "Seltos", "XUV700"];
@@ -59,11 +85,11 @@ const HERO_SLIDES = [
 
 type BrowseTab = "body" | "budget" | "brand";
 
-/* ─── Inline keyframes ─── */
+/* ─── Inline keyframes — Premium Automotive ─── */
 const PAGE_STYLES = `
 @keyframes cb-fade-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 @keyframes cb-slide-down {
   from { opacity: 0; transform: translateY(-8px); max-height: 0; }
@@ -77,11 +103,100 @@ const PAGE_STYLES = `
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
-.cb-stagger-1 { animation: cb-fade-up 0.5s ease-out 0.05s both; }
-.cb-stagger-2 { animation: cb-fade-up 0.5s ease-out 0.15s both; }
-.cb-stagger-3 { animation: cb-fade-up 0.5s ease-out 0.25s both; }
-.cb-stagger-4 { animation: cb-fade-up 0.5s ease-out 0.35s both; }
-.cb-card-enter { animation: cb-fade-up 0.45s ease-out both; }
+@keyframes cb-gold-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(229,193,88,0.12), 0 0 60px rgba(229,193,88,0.04); }
+  50% { box-shadow: 0 0 30px rgba(229,193,88,0.22), 0 0 80px rgba(229,193,88,0.08); }
+}
+@keyframes cb-card-shine {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+.cb-stagger-1 { animation: cb-fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+.cb-stagger-2 { animation: cb-fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
+.cb-stagger-3 { animation: cb-fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+.cb-stagger-4 { animation: cb-fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+.cb-card-enter { animation: cb-fade-up 0.55s cubic-bezier(0.16,1,0.3,1) both; }
+/* Premium card glass */
+.cb-glass-card {
+  background: linear-gradient(145deg, rgba(15,29,50,0.85) 0%, rgba(10,22,40,0.65) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  overflow: hidden;
+  position: relative;
+}
+.cb-glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 50%, rgba(229,193,88,0.08) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+.cb-glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.4), 0 0 0 1px rgba(59,130,246,0.2), 0 0 40px rgba(59,130,246,0.06);
+  border-color: rgba(59,130,246,0.2);
+}
+.cb-glass-card:hover .cb-card-img {
+  transform: scale(1.08);
+}
+.cb-glass-card:hover .cb-card-shimmer {
+  animation: cb-card-shine 0.8s ease-out;
+}
+/* Card image */
+.cb-card-img {
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+/* Shimmer overlay */
+.cb-card-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  transform: skewX(-15deg);
+  z-index: 2;
+  pointer-events: none;
+}
+/* CTA glass card */
+.cb-cta-card {
+  background: linear-gradient(145deg, rgba(15,29,50,0.8) 0%, rgba(10,22,40,0.6) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+  overflow: hidden;
+}
+.cb-cta-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.cb-cta-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  border-color: rgba(255,255,255,0.1);
+}
 `;
 
 export default function HomePage() {
@@ -175,11 +290,11 @@ export default function HomePage() {
       {/* ─── MOBILE HEADER ─── */}
       <header
         className="sticky top-0 z-50 flex items-center justify-between px-4 h-14 border-b md:hidden"
-        style={{ background: "rgba(17,19,24,0.92)", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)", borderColor: C.glassBorder }}
+        style={{ background: "rgba(10,22,40,0.92)", backdropFilter: "blur(24px) saturate(180%)", WebkitBackdropFilter: "blur(24px) saturate(180%)", borderColor: C.glassBorder }}
       >
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.primaryLight})` }}>
-            <MaterialIcon name="diamond" className="text-[14px] text-white" />
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${C.primaryLight}, #60A5FA)` }}>
+            <Gem size={14} strokeWidth={2.5} className="text-white" />
           </div>
           <span className="text-base font-extrabold text-white tracking-tight" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
             CaroBest
@@ -188,39 +303,39 @@ export default function HomePage() {
         <button
           onClick={() => setShowCityPicker(true)}
           className="flex items-center gap-1 rounded-full px-3 h-8 text-xs font-semibold active:scale-95 transition-transform"
-          style={{ background: `${C.primary}15`, color: C.primaryLight, border: `1px solid ${C.primary}30` }}
+          style={{ background: `${C.primaryLight}15`, color: C.primaryLight, border: `1px solid ${C.primaryLight}30` }}
         >
-          <MaterialIcon name="location_on" className="text-[13px]" />
+          <MapPin size={13} strokeWidth={2.5} />
           {selectedCity}
-          <MaterialIcon name="expand_more" className="text-[13px]" />
+          <ChevronDown size={13} strokeWidth={2.5} />
         </button>
         <div className="flex items-center gap-1.5">
           {isAuthenticated && user ? (
-            <Link href="/my-account" className="flex h-8 w-8 items-center justify-center rounded-full text-[10px] font-black text-white" style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.primaryLight})` }}>
+            <Link href="/my-account" className="flex h-8 w-8 items-center justify-center rounded-full text-[10px] font-black text-white" style={{ background: `linear-gradient(135deg, ${C.primaryLight}, #60A5FA)` }}>
               {userInitials}
             </Link>
           ) : (
             <Link href="/login/buyer" className="flex h-8 w-8 items-center justify-center rounded-full" style={{ background: "rgba(255,255,255,0.06)", border: `1px solid ${C.glassBorder}` }}>
-              <MaterialIcon name="person" className="text-[18px]" style={{ color: C.muted }} />
+              <User size={18} strokeWidth={1.8} style={{ color: C.muted }} />
             </Link>
           )}
         </div>
       </header>
 
-      {/* ─── HERO — Modern Split Layout ─── */}
+      {/* ─── HERO — Premium Split Layout ─── */}
       <section
         className="relative w-full overflow-hidden md:-mx-8 lg:-mx-12 md:-mt-6 md:w-[calc(100%+4rem)] lg:w-[calc(100%+6rem)]"
         style={{ minHeight: "480px" }}
       >
-        {/* Ambient gradient mesh */}
+        {/* Deep ambient gradient mesh */}
         <div className="absolute inset-0 z-0" style={{
-          background: `radial-gradient(ellipse 80% 60% at 70% 40%, ${C.primary}12 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 20% 80%, ${C.primary}08 0%, transparent 60%), ${C.bg}`,
+          background: `radial-gradient(ellipse 80% 60% at 70% 40%, ${C.primaryLight}10 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 20% 80%, ${C.primaryLight}06 0%, transparent 60%), ${C.bg}`,
         }} />
 
-        {/* Subtle dot pattern */}
-        <div className="absolute inset-0 z-[1] opacity-[0.025]" style={{
-          backgroundImage: `radial-gradient(${C.muted} 1px, transparent 1px)`,
-          backgroundSize: "24px 24px",
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 z-[1] opacity-[0.03]" style={{
+          backgroundImage: `linear-gradient(${C.primaryLight}15 1px, transparent 1px), linear-gradient(90deg, ${C.primaryLight}15 1px, transparent 1px)`,
+          backgroundSize: "48px 48px",
         }} />
 
         {/* Desktop: Split layout */}
@@ -231,21 +346,21 @@ export default function HomePage() {
               <div
                 className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-5"
                 style={{
-                  background: `${C.primary}12`,
-                  border: `1px solid ${C.primary}25`,
+                  background: `${C.primaryLight}10`,
+                  border: `1px solid ${C.primaryLight}20`,
                 }}
               >
-                <MaterialIcon name="verified" className="text-[12px]" style={{ color: C.primary }} />
-                <span className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: C.primary }}>100% Verified Cars</span>
+                <ShieldCheck size={12} strokeWidth={2.5} style={{ color: C.primaryLight }} />
+                <span className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: C.primaryLight }}>100% Verified Cars</span>
               </div>
 
               <h1
                 className="text-3xl md:text-[3.2rem] lg:text-[3.6rem] font-bold text-white leading-[1.08] mb-4 tracking-tight"
-                style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                style={{ fontFamily: "Newsreader, serif" }}
               >
                 Find Your
                 <br />
-                <span style={{ color: C.primary }}>Perfect</span> Car
+                <span style={{ color: C.accent }}>Perfect</span> Car
               </h1>
 
               <p className="text-sm md:text-[15px] leading-relaxed mb-7 max-w-md" style={{ color: C.muted }}>
@@ -257,13 +372,13 @@ export default function HomePage() {
                 <div
                   className="flex items-center gap-3 rounded-2xl px-4 py-3 md:py-3.5 transition-all duration-300"
                   style={{
-                    background: searchFocused ? `${C.primary}0a` : "rgba(255,255,255,0.04)",
-                    border: `1px solid ${searchFocused ? `${C.primary}50` : C.glassBorder}`,
-                    backdropFilter: "blur(16px)",
-                    boxShadow: searchFocused ? `0 0 30px ${C.primary}10, inset 0 1px 0 rgba(255,255,255,0.04)` : "inset 0 1px 0 rgba(255,255,255,0.02)",
+                    background: searchFocused ? `${C.primaryLight}08` : C.glass,
+                    border: `1px solid ${searchFocused ? `${C.primaryLight}40` : C.glassBorder}`,
+                    backdropFilter: "blur(20px) saturate(180%)",
+                    boxShadow: searchFocused ? `0 0 40px ${C.primaryLight}08, inset 0 1px 0 rgba(255,255,255,0.04)` : `0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.03)`,
                   }}
                 >
-                  <MaterialIcon name="search" className="text-[22px] shrink-0" style={{ color: searchFocused ? C.primary : C.dim }} />
+                  <Search size={20} strokeWidth={2} className="shrink-0" style={{ color: searchFocused ? C.primaryLight : C.dim }} />
                   <input
                     type="text"
                     value={search}
@@ -276,10 +391,10 @@ export default function HomePage() {
                   />
                   <button
                     onClick={() => handleSearch()}
-                    className="flex h-10 w-10 items-center justify-center rounded-xl text-white shrink-0 transition-all duration-200 active:scale-90 hover:shadow-lg"
-                    style={{ background: `linear-gradient(135deg, ${C.cta}, ${C.ctaLight})`, boxShadow: `0 4px 15px ${C.cta}40` }}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl text-black shrink-0 transition-all duration-200 active:scale-90 hover:shadow-lg"
+                    style={{ background: `linear-gradient(135deg, ${C.accent}, #F0D580)`, boxShadow: `0 4px 20px ${C.accentGlow}` }}
                   >
-                    <MaterialIcon name="arrow_forward" className="text-[18px]" />
+                    <ArrowRight size={18} strokeWidth={2.5} />
                   </button>
                 </div>
 
@@ -298,7 +413,7 @@ export default function HomePage() {
                         background: "rgba(255,255,255,0.03)",
                         border: `1px solid ${C.glassBorder}`,
                       }}
-                      onMouseEnter={(e) => { e.currentTarget.style.background = `${C.primary}12`; e.currentTarget.style.borderColor = `${C.primary}30`; }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = `${C.primaryLight}10`; e.currentTarget.style.borderColor = `${C.primaryLight}25`; }}
                       onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.03)"; e.currentTarget.style.borderColor = C.glassBorder; }}
                     >
                       {q}
@@ -311,9 +426,9 @@ export default function HomePage() {
 
           {/* Right: Featured Car Image (desktop) */}
           <div className="hidden md:flex flex-1 items-end justify-center relative overflow-hidden">
-            {/* Teal halo behind car */}
+            {/* Blue halo behind car */}
             <div className="absolute bottom-0 right-0 w-full h-full" style={{
-              background: `radial-gradient(ellipse 70% 60% at 50% 70%, ${C.primary}18 0%, ${C.primary}08 40%, transparent 70%)`,
+              background: `radial-gradient(ellipse 70% 60% at 50% 70%, ${C.primaryLight}14 0%, ${C.primaryLight}06 40%, transparent 70%)`,
               animation: "cb-glow-pulse 4s ease-in-out infinite",
             }} />
 
@@ -356,7 +471,7 @@ export default function HomePage() {
                     style={{
                       width: heroIndex === i ? "20px" : "6px",
                       height: "6px",
-                      background: heroIndex === i ? C.primary : "rgba(255,255,255,0.2)",
+                      background: heroIndex === i ? C.accent : "rgba(255,255,255,0.2)",
                     }}
                   />
                 ))}
@@ -373,7 +488,7 @@ export default function HomePage() {
                 style={{ opacity: heroIndex === i ? 1 : 0, zIndex: heroIndex === i ? 1 : 0 }}
               >
                 <Image src={slide.src} alt={slide.alt} fill sizes="100vw" className="object-cover object-center" priority={i === 0} unoptimized />
-                <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${C.bg} 0%, rgba(17,19,24,0.3) 60%, rgba(17,19,24,0.6) 100%)` }} />
+                <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${C.bg} 0%, rgba(10,22,40,0.3) 60%, rgba(10,22,40,0.6) 100%)` }} />
               </div>
             ))}
             {/* Mobile dots */}
@@ -383,7 +498,7 @@ export default function HomePage() {
                   key={i}
                   onClick={() => setHeroIndex(i)}
                   className="rounded-full transition-all duration-300"
-                  style={{ width: heroIndex === i ? "18px" : "5px", height: "5px", background: heroIndex === i ? C.primary : "rgba(255,255,255,0.25)" }}
+                  style={{ width: heroIndex === i ? "18px" : "5px", height: "5px", background: heroIndex === i ? C.accent : "rgba(255,255,255,0.25)" }}
                 />
               ))}
             </div>
@@ -404,11 +519,11 @@ export default function HomePage() {
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-base font-bold text-white" style={{ fontFamily: "Space Grotesk, sans-serif" }}>Select City</h3>
               <button onClick={() => setShowCityPicker(false)} className="flex h-8 w-8 items-center justify-center rounded-full transition-colors hover:bg-white/10" style={{ background: "rgba(255,255,255,0.06)" }}>
-                <MaterialIcon name="close" className="text-[18px]" style={{ color: C.muted }} />
+                <X size={18} strokeWidth={2} style={{ color: C.muted }} />
               </button>
             </div>
             <div className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 mb-4" style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${C.glassBorder}` }}>
-              <MaterialIcon name="search" className="text-[18px]" style={{ color: C.dim }} />
+              <Search size={18} strokeWidth={2} style={{ color: C.dim }} />
               <input type="text" value={citySearch} onChange={(e) => setCitySearch(e.target.value)} placeholder="Search city..." className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500" autoFocus />
             </div>
             {!citySearch && (
@@ -416,7 +531,7 @@ export default function HomePage() {
                 <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: C.dim }}>Popular Cities</p>
                 <div className="flex flex-wrap gap-2">
                   {["Delhi", "Mumbai", "Bengaluru", "Chennai", "Hyderabad", "Pune"].map((c) => (
-                    <button key={c} onClick={() => handleCitySelect(c)} className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all active:scale-95 ${selectedCity === c ? "text-white" : "text-slate-400"}`} style={{ background: selectedCity === c ? `linear-gradient(135deg, ${C.primary}, ${C.primaryLight})` : "rgba(255,255,255,0.04)", border: `1px solid ${selectedCity === c ? "transparent" : C.glassBorder}` }}>{c}</button>
+                    <button key={c} onClick={() => handleCitySelect(c)} className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all active:scale-95 ${selectedCity === c ? "text-white" : "text-slate-400"}`} style={{ background: selectedCity === c ? `linear-gradient(135deg, ${C.primaryLight}, #60A5FA)` : "rgba(255,255,255,0.04)", border: `1px solid ${selectedCity === c ? "transparent" : C.glassBorder}` }}>{c}</button>
                   ))}
                 </div>
               </div>
@@ -424,10 +539,10 @@ export default function HomePage() {
             <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: C.dim }}>{citySearch ? "Results" : "All Cities"}</p>
             <div className="flex-1 overflow-y-auto space-y-0.5">
               {filteredCities.map((c) => (
-                <button key={c} onClick={() => handleCitySelect(c)} className="flex items-center gap-3 w-full rounded-xl px-3 py-2.5 text-left transition-all active:scale-[0.99]" style={{ background: selectedCity === c ? `${C.primary}12` : "transparent" }}>
-                  <MaterialIcon name="location_on" className="text-[16px]" style={{ color: selectedCity === c ? C.primary : C.dim }} />
+                <button key={c} onClick={() => handleCitySelect(c)} className="flex items-center gap-3 w-full rounded-xl px-3 py-2.5 text-left transition-all active:scale-[0.99]" style={{ background: selectedCity === c ? `${C.primaryLight}10` : "transparent" }}>
+                  <MapPin size={16} strokeWidth={2} style={{ color: selectedCity === c ? C.primaryLight : C.dim }} />
                   <span className="text-sm font-medium" style={{ color: selectedCity === c ? C.primaryLight : "#cbd5e1" }}>{c}</span>
-                  {selectedCity === c && <MaterialIcon name="check" className="text-[16px] ml-auto" style={{ color: C.primary }} />}
+                  {selectedCity === c && <Check size={16} strokeWidth={2.5} className="ml-auto" style={{ color: C.primaryLight }} />}
                 </button>
               ))}
               {filteredCities.length === 0 && <p className="text-sm text-slate-500 text-center py-4">No cities found</p>}
@@ -439,26 +554,30 @@ export default function HomePage() {
       {/* ─── TRUST STRIP ─── */}
       <section className="px-4 md:px-0 pt-8 md:pt-10">
         <div
-          className="flex items-center justify-between md:justify-center md:gap-0 rounded-2xl py-4 px-5 md:px-0"
+          className="flex items-center justify-between md:justify-center md:gap-0 rounded-3xl py-4 px-5 md:px-0 relative overflow-hidden"
           style={{
-            background: `linear-gradient(135deg, ${C.primary}08 0%, rgba(255,255,255,0.02) 50%, ${C.primary}06 100%)`,
+            background: `linear-gradient(145deg, rgba(15,29,50,0.8) 0%, rgba(10,22,40,0.6) 100%)`,
+            backdropFilter: "blur(20px) saturate(180%)",
             border: `1px solid ${C.glassBorder}`,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.05)",
           }}
         >
+          {/* Subtle top highlight */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px]" style={{ background: `linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)` }} />
           {[
-            { value: "50K+", label: "New Cars", icon: "directions_car" },
-            { value: "12K+", label: "Certified Used", icon: "verified" },
-            { value: "2.5K+", label: "Trusted Dealers", icon: "storefront" },
-            { value: "4.8", label: "User Rating", icon: "star", star: true },
+            { value: "50K+", label: "New Cars", icon: Car },
+            { value: "12K+", label: "Certified Used", icon: ShieldCheck },
+            { value: "2.5K+", label: "Trusted Dealers", icon: Store },
+            { value: "4.8", label: "User Rating", icon: Star, star: true },
           ].map((s, idx) => (
             <div key={s.label} className="flex items-center gap-0 md:gap-3 flex-col md:flex-row text-center md:text-left">
               {idx > 0 && <div className="hidden md:block w-px h-8 mx-6" style={{ background: C.glassBorder }} />}
-              <div className="hidden md:flex h-9 w-9 items-center justify-center rounded-xl" style={{ background: `${C.primary}12` }}>
-                <MaterialIcon name={s.icon} className="text-[18px]" style={{ color: C.primary }} />
+              <div className="hidden md:flex h-9 w-9 items-center justify-center rounded-xl" style={{ background: `${C.primaryLight}10` }}>
+                <s.icon size={18} strokeWidth={2} style={{ color: C.primaryLight }} />
               </div>
               <div>
                 <p className="text-lg md:text-xl font-extrabold text-white leading-none" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
-                  {s.value}{s.star && <span className="text-amber-400 ml-0.5 text-sm">&#9733;</span>}
+                  {s.value}{s.star && <span className="ml-0.5 text-sm" style={{ color: C.accent }}>&#9733;</span>}
                 </p>
                 <p className="text-[10px] md:text-[11px] font-medium mt-0.5" style={{ color: C.muted }}>{s.label}</p>
               </div>
@@ -475,9 +594,9 @@ export default function HomePage() {
               Browse by
             </h2>
             {([
-              { key: "body" as BrowseTab, label: "Body Type", icon: "directions_car" },
-              { key: "budget" as BrowseTab, label: "Budget", icon: "account_balance_wallet" },
-              { key: "brand" as BrowseTab, label: "Brand", icon: "star" },
+              { key: "body" as BrowseTab, label: "Body Type", icon: Car },
+              { key: "budget" as BrowseTab, label: "Budget", icon: Wallet },
+              { key: "brand" as BrowseTab, label: "Brand", icon: Star },
             ]).map((tab) => {
               const isActive = browseTab === tab.key && browseOpen;
               return (
@@ -486,18 +605,15 @@ export default function HomePage() {
                   onClick={() => { setBrowseTab(tab.key); setBrowseOpen(browseTab === tab.key ? !browseOpen : true); }}
                   className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition-all duration-200 active:scale-95"
                   style={{
-                    background: isActive ? `${C.primary}18` : "rgba(255,255,255,0.03)",
-                    border: `1px solid ${isActive ? `${C.primary}40` : C.glassBorder}`,
+                    background: isActive ? `${C.primaryLight}15` : "rgba(255,255,255,0.03)",
+                    border: `1px solid ${isActive ? `${C.primaryLight}35` : C.glassBorder}`,
                     color: isActive ? C.primaryLight : C.muted,
-                    boxShadow: isActive ? `0 0 20px ${C.primary}10` : "none",
+                    boxShadow: isActive ? `0 0 24px ${C.primaryLight}08` : "none",
                   }}
                 >
-                  <MaterialIcon name={tab.icon} className="text-[15px]" />
+                  <tab.icon size={15} strokeWidth={2} />
                   {tab.label}
-                  <MaterialIcon
-                    name={isActive ? "expand_less" : "expand_more"}
-                    className="text-[16px] -mr-1"
-                  />
+                  {isActive ? <ChevronUp size={16} strokeWidth={2} className="-mr-1" /> : <ChevronDown size={16} strokeWidth={2} className="-mr-1" />}
                 </button>
               );
             })}
@@ -509,10 +625,10 @@ export default function HomePage() {
               className="rounded-2xl p-4 md:p-5 mb-4"
               style={{
                 background: C.glass,
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
+                backdropFilter: "blur(20px) saturate(180%)",
+                WebkitBackdropFilter: "blur(20px) saturate(180%)",
                 border: `1px solid ${C.glassBorder}`,
-                boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03)",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)",
                 animation: "cb-slide-down 0.25s ease-out both",
               }}
             >
@@ -524,7 +640,7 @@ export default function HomePage() {
                       href={`/new-cars?body=${bt.value}`}
                       className="group flex items-center gap-2.5 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 active:scale-95"
                       style={{ color: "#cbd5e1", background: "rgba(255,255,255,0.04)", border: `1px solid ${C.glassBorder}` }}
-                      onMouseEnter={(e) => { e.currentTarget.style.background = `${C.primary}12`; e.currentTarget.style.borderColor = `${C.primary}30`; e.currentTarget.style.color = "#fff"; }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = `${C.primaryLight}10`; e.currentTarget.style.borderColor = `${C.primaryLight}25`; e.currentTarget.style.color = "#fff"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = C.glassBorder; e.currentTarget.style.color = "#cbd5e1"; }}
                     >
                       <span className="text-lg">{bt.icon}</span>
@@ -541,10 +657,10 @@ export default function HomePage() {
                       href={`/new-cars?minPrice=${b.min}&maxPrice=${b.max}`}
                       className="group flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 active:scale-95"
                       style={{ color: "#cbd5e1", background: "rgba(255,255,255,0.04)", border: `1px solid ${C.glassBorder}` }}
-                      onMouseEnter={(e) => { e.currentTarget.style.background = `${C.primary}12`; e.currentTarget.style.borderColor = `${C.primary}30`; e.currentTarget.style.color = "#fff"; }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = `${C.primaryLight}10`; e.currentTarget.style.borderColor = `${C.primaryLight}25`; e.currentTarget.style.color = "#fff"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = C.glassBorder; e.currentTarget.style.color = "#cbd5e1"; }}
                     >
-                      <MaterialIcon name="currency_rupee" className="text-[15px]" style={{ color: C.primary }} />
+                      <IndianRupee size={15} strokeWidth={2} style={{ color: C.accent }} />
                       {b.label}
                     </Link>
                   ))}
@@ -558,7 +674,7 @@ export default function HomePage() {
                       href={`/new-cars?brand=${brand.slug}`}
                       className="group flex items-center gap-2.5 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 active:scale-95"
                       style={{ color: "#cbd5e1", background: "rgba(255,255,255,0.04)", border: `1px solid ${C.glassBorder}` }}
-                      onMouseEnter={(e) => { e.currentTarget.style.background = `${C.primary}12`; e.currentTarget.style.borderColor = `${C.primary}30`; e.currentTarget.style.color = "#fff"; }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = `${C.primaryLight}10`; e.currentTarget.style.borderColor = `${C.primaryLight}25`; e.currentTarget.style.color = "#fff"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = C.glassBorder; e.currentTarget.style.color = "#cbd5e1"; }}
                     >
                       <div
@@ -573,10 +689,10 @@ export default function HomePage() {
                   <Link
                     href="/new-cars"
                     className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 active:scale-95"
-                    style={{ color: C.primaryLight, background: `${C.primary}08`, border: `1px solid ${C.primary}25` }}
+                    style={{ color: C.primaryLight, background: `${C.primaryLight}08`, border: `1px solid ${C.primaryLight}20` }}
                   >
                     View all brands
-                    <MaterialIcon name="arrow_forward" className="text-[15px]" />
+                    <ArrowRight size={15} strokeWidth={2} />
                   </Link>
                 </div>
               )}
@@ -589,18 +705,18 @@ export default function HomePage() {
       <section className="mb-12 md:mb-16 pt-4 md:pt-6">
         <div className="flex items-end justify-between px-4 md:px-0 mb-6">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.2em] font-bold mb-1.5" style={{ color: C.primary }}>New Arrivals</p>
+            <p className="text-[10px] uppercase tracking-[0.25em] font-bold mb-1.5" style={{ color: C.accent, letterSpacing: "0.25em" }}>New Arrivals</p>
             <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
               Popular New Cars
             </h2>
           </div>
           <Link
             href="/new-cars"
-            className="flex items-center gap-1.5 text-xs md:text-sm font-semibold transition-all duration-200 group"
+            className="flex items-center gap-1.5 text-xs md:text-sm font-semibold transition-all duration-300 group"
             style={{ color: C.primaryLight }}
           >
             View all
-            <MaterialIcon name="arrow_forward" className="text-[16px] transition-transform duration-200 group-hover:translate-x-0.5" />
+            <ArrowRight size={16} strokeWidth={2} className="transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
 
@@ -609,61 +725,62 @@ export default function HomePage() {
             <Link
               key={car.slug}
               href={`/${car.brand.slug}/${car.slug}`}
-              className="group shrink-0 w-[260px] md:w-auto md:shrink snap-start rounded-2xl overflow-hidden transition-all duration-300 block cb-card-enter"
-              style={{
-                background: C.surface,
-                border: `1px solid ${C.border}`,
-                animationDelay: `${idx * 0.08}s`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = `0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px ${C.primary}30`;
-                e.currentTarget.style.borderColor = `${C.primary}35`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.borderColor = C.border;
-              }}
+              className="group shrink-0 w-[260px] md:w-auto md:shrink snap-start cb-glass-card block cb-card-enter"
+              style={{ animationDelay: `${idx * 0.08}s` }}
             >
+              {/* Shimmer overlay */}
+              <div className="cb-card-shimmer" />
+
               {/* Car image */}
               <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
-                <div className="absolute inset-0 z-0" style={{ background: `linear-gradient(135deg, ${C.surface} 0%, #151820 50%, ${C.surface} 100%)` }} />
+                <div className="absolute inset-0 z-0" style={{ background: `radial-gradient(ellipse at 50% 80%, ${C.primary}40 0%, ${C.surface} 70%)` }} />
                 <Image
                   src={car.image}
                   alt={car.fullName}
                   fill
                   sizes="(max-width: 768px) 260px, 25vw"
-                  className="object-cover relative z-[1] transition-transform duration-500 group-hover:scale-[1.06]"
+                  className="object-cover relative z-[1] cb-card-img"
                   unoptimized
+                  priority={idx < 2}
                 />
-                <div className="absolute inset-x-0 bottom-0 h-1/2 z-[2]" style={{ background: `linear-gradient(to top, ${C.surface}cc 0%, transparent 100%)` }} />
+                {/* Bottom gradient */}
+                <div className="absolute inset-x-0 bottom-0 h-2/3 z-[2]" style={{ background: `linear-gradient(to top, rgba(15,29,50,0.95) 0%, rgba(15,29,50,0.4) 50%, transparent 100%)` }} />
 
+                {/* Tag badge */}
                 {car.tag && (
                   <span className="absolute top-3 left-3 z-[3] text-[10px] font-bold px-2.5 py-1 rounded-lg text-white" style={{
-                    background: `linear-gradient(135deg, ${C.primary}, ${C.primaryLight})`,
-                    boxShadow: `0 2px 8px ${C.primary}40`,
+                    background: `linear-gradient(135deg, ${C.primaryLight}, #60A5FA)`,
+                    boxShadow: `0 4px 12px ${C.primaryLight}40`,
                   }}>
                     {car.tag}
                   </span>
                 )}
-                <div className="absolute bottom-3 right-3 z-[3] flex items-center gap-1 text-amber-400">
-                  <span className="text-xs font-bold">{car.rating}</span>
-                  <MaterialIcon name="star" fill className="text-[13px]" />
+
+                {/* Rating badge */}
+                <div className="absolute bottom-3 right-3 z-[3] flex items-center gap-1 px-2 py-0.5 rounded-md" style={{ background: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
+                  <Star size={12} strokeWidth={0} fill={C.accent} />
+                  <span className="text-xs font-bold" style={{ color: C.accent }}>{car.rating}</span>
                 </div>
+
+                {/* Brand name overlaid on image */}
+                <p className="absolute bottom-3 left-4 z-[3] text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  {car.brand.name}
+                </p>
               </div>
 
-              <div className="p-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: C.muted }}>{car.brand.name}</p>
-                <h3 className="text-sm md:text-[15px] font-bold text-white mt-1.5 leading-tight">{car.name}</h3>
-                <div className="flex items-baseline gap-1.5 mt-2.5">
-                  <p className="text-sm md:text-base font-extrabold" style={{ color: C.cta }}>{car.startingPriceDisplay}</p>
-                  <span className="text-[10px] font-medium" style={{ color: C.muted }}>onwards</span>
+              {/* Card content */}
+              <div className="p-4 relative z-[3]">
+                <h3 className="text-[15px] md:text-base font-bold text-white leading-tight">{car.name}</h3>
+
+                <div className="flex items-baseline gap-2 mt-3">
+                  <p className="text-base md:text-lg font-extrabold" style={{ color: C.accent, fontFamily: "Space Grotesk, sans-serif" }}>{car.startingPriceDisplay}</p>
+                  <span className="text-[10px] font-medium" style={{ color: C.dim }}>onwards</span>
                 </div>
-                <div className="flex items-center justify-between mt-2">
+
+                <div className="flex items-center justify-between mt-3 pt-3" style={{ borderTop: `1px solid ${C.glassBorder}` }}>
                   <p className="text-[11px] font-medium" style={{ color: C.muted }}>EMI {formatEmi(car.startingPrice)}</p>
-                  <span className="text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: C.primaryLight }}>
-                    View Details &rarr;
+                  <span className="flex items-center gap-1 text-[11px] font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-[-4px] group-hover:translate-x-0" style={{ color: C.primaryLight }}>
+                    Explore <ArrowRight size={12} strokeWidth={2.5} />
                   </span>
                 </div>
               </div>
@@ -677,14 +794,14 @@ export default function HomePage() {
         <section className="mb-12 md:mb-16">
           <div className="flex items-end justify-between px-4 md:px-0 mb-6">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] font-bold mb-1.5" style={{ color: C.secondary }}>Inspected &amp; Warranted</p>
+              <p className="text-[10px] uppercase tracking-[0.25em] font-bold mb-1.5" style={{ color: C.success, letterSpacing: "0.25em" }}>Inspected &amp; Warranted</p>
               <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
                 Certified Used Cars
               </h2>
             </div>
-            <Link href="/used-cars" className="flex items-center gap-1.5 text-xs md:text-sm font-semibold transition-all duration-200 group" style={{ color: C.secondaryLight }}>
+            <Link href="/used-cars" className="flex items-center gap-1.5 text-xs md:text-sm font-semibold transition-all duration-300 group" style={{ color: C.success }}>
               View all
-              <MaterialIcon name="arrow_forward" className="text-[16px] transition-transform duration-200 group-hover:translate-x-0.5" />
+              <ArrowRight size={16} strokeWidth={2} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
 
@@ -693,50 +810,45 @@ export default function HomePage() {
               <Link
                 key={car.id}
                 href={`/used-cars/details/${car.id}`}
-                className="group shrink-0 w-[260px] md:w-auto md:shrink snap-start rounded-2xl overflow-hidden transition-all duration-300 block cb-card-enter"
-                style={{
-                  background: C.surface,
-                  border: `1px solid ${C.border}`,
-                  animationDelay: `${idx * 0.08}s`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow = `0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px ${C.secondary}30`;
-                  e.currentTarget.style.borderColor = `${C.secondary}35`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                  e.currentTarget.style.borderColor = C.border;
-                }}
+                className="group shrink-0 w-[260px] md:w-auto md:shrink snap-start cb-glass-card block cb-card-enter"
+                style={{ animationDelay: `${idx * 0.08}s` }}
               >
+                <div className="cb-card-shimmer" />
+
                 <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
-                  <div className="absolute inset-0 z-0" style={{ background: `linear-gradient(135deg, ${C.surface} 0%, #151820 50%, ${C.surface} 100%)` }} />
+                  <div className="absolute inset-0 z-0" style={{ background: `radial-gradient(ellipse at 50% 80%, ${C.primary}40 0%, ${C.surface} 70%)` }} />
                   {car.images?.[0] ? (
-                    <Image src={car.images[0]} alt={car.name} fill sizes="(max-width: 768px) 260px, 33vw" className="object-cover relative z-[1] transition-transform duration-500 group-hover:scale-[1.06]" unoptimized />
+                    <Image src={car.images[0]} alt={car.name} fill sizes="(max-width: 768px) 260px, 33vw" className="object-cover relative z-[1] cb-card-img" unoptimized />
                   ) : (
-                    <div className="h-full w-full flex items-center justify-center relative z-[1]" style={{ background: "rgba(255,255,255,0.04)" }}>
-                      <MaterialIcon name="directions_car" className="text-[40px]" style={{ color: C.border }} />
+                    <div className="h-full w-full flex items-center justify-center relative z-[1]" style={{ background: "rgba(255,255,255,0.03)" }}>
+                      <Car size={40} strokeWidth={1} style={{ color: C.dim }} />
                     </div>
                   )}
-                  <div className="absolute inset-x-0 bottom-0 h-1/2 z-[2]" style={{ background: `linear-gradient(to top, ${C.surface}cc 0%, transparent 100%)` }} />
+                  <div className="absolute inset-x-0 bottom-0 h-2/3 z-[2]" style={{ background: `linear-gradient(to top, rgba(15,29,50,0.95) 0%, rgba(15,29,50,0.4) 50%, transparent 100%)` }} />
+
+                  {/* Certified badge */}
                   <span className="absolute top-3 left-3 z-[3] text-[10px] font-bold px-2.5 py-1 rounded-lg text-white flex items-center gap-1" style={{
-                    background: `linear-gradient(135deg, ${C.secondary}, ${C.secondaryLight})`,
-                    boxShadow: `0 2px 8px ${C.secondary}40`,
+                    background: `linear-gradient(135deg, ${C.success}, #34D399)`,
+                    boxShadow: `0 4px 12px ${C.success}40`,
                   }}>
-                    <MaterialIcon name="verified" className="text-[11px]" />
+                    <ShieldCheck size={11} strokeWidth={2.5} />
                     Certified
                   </span>
+
+                  {/* Year + fuel overlaid */}
+                  <p className="absolute bottom-3 left-4 z-[3] text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "rgba(255,255,255,0.5)" }}>
+                    {car.year} &middot; {car.fuel}
+                  </p>
                 </div>
 
-                <div className="p-4">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: C.muted }}>{car.year} &middot; {car.fuel}</p>
-                  <h3 className="text-sm md:text-[15px] font-bold text-white mt-1.5 leading-tight">{car.name}</h3>
-                  <p className="text-sm md:text-base font-extrabold mt-2.5" style={{ color: C.cta }}>{car.priceDisplay || `\u20B9${(car.price / 100000).toFixed(1)} Lakh`}</p>
-                  <div className="flex items-center justify-between mt-2">
+                <div className="p-4 relative z-[3]">
+                  <h3 className="text-[15px] md:text-base font-bold text-white leading-tight">{car.name}</h3>
+                  <p className="text-base md:text-lg font-extrabold mt-3" style={{ color: C.accent, fontFamily: "Space Grotesk, sans-serif" }}>{car.priceDisplay || `\u20B9${(car.price / 100000).toFixed(1)} Lakh`}</p>
+
+                  <div className="flex items-center justify-between mt-3 pt-3" style={{ borderTop: `1px solid ${C.glassBorder}` }}>
                     <p className="text-[11px] font-medium" style={{ color: C.muted }}>{car.km} &middot; {car.location || selectedCity}</p>
-                    <span className="text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: C.secondaryLight }}>
-                      View &rarr;
+                    <span className="flex items-center gap-1 text-[11px] font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-[-4px] group-hover:translate-x-0" style={{ color: C.success }}>
+                      View <ArrowRight size={12} strokeWidth={2.5} />
                     </span>
                   </div>
                 </div>
@@ -749,83 +861,45 @@ export default function HomePage() {
       {/* ─── CTA STRIP ─── */}
       <section className="px-4 md:px-0 mb-12 md:mb-16">
         <div className="grid md:grid-cols-3 gap-4">
-          {/* Sell your car */}
-          <Link
-            href="/sell-car"
-            className="group relative overflow-hidden rounded-2xl p-5 md:p-6 transition-all duration-300 active:scale-[0.99]"
-            style={{
-              background: `linear-gradient(135deg, ${C.primary}14 0%, ${C.primary}06 100%)`,
-              border: `1px solid ${C.primary}20`,
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${C.primary}40`; e.currentTarget.style.boxShadow = `0 8px 30px ${C.primary}12`; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${C.primary}20`; e.currentTarget.style.boxShadow = "none"; }}
-          >
-            <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20" style={{ background: `radial-gradient(circle, ${C.primary}, transparent)` }} />
-            <div className="relative flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: `${C.primary}18`, border: `1px solid ${C.primary}25` }}>
-                <MaterialIcon name="sell" className="text-[24px]" style={{ color: C.primaryLight }} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-white">Sell Your Car</p>
-                <p className="text-xs mt-0.5" style={{ color: C.muted }}>AI valuation in 30 seconds</p>
-              </div>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full shrink-0 transition-all duration-200 group-hover:translate-x-1" style={{ background: `${C.primary}12` }}>
-                <MaterialIcon name="arrow_forward" className="text-[16px]" style={{ color: C.primaryLight }} />
-              </div>
-            </div>
-          </Link>
+          {[
+            { href: "/sell-car", icon: Tag, title: "Sell Your Car", desc: "AI valuation in 30 seconds", color: C.accent },
+            { href: "/concierge", icon: Bot, title: "AI Concierge", desc: "Tell us your needs, AI finds your match", color: C.primaryLight },
+            { href: "/compare", icon: ArrowLeftRight, title: "Compare Cars", desc: "Side-by-side specs comparison", color: C.success },
+          ].map((cta) => (
+            <Link
+              key={cta.href}
+              href={cta.href}
+              className="group cb-cta-card p-5 md:p-6 active:scale-[0.98]"
+            >
+              {/* Ambient glow orb */}
+              <div className="absolute -top-8 -right-8 w-28 h-28 rounded-full opacity-[0.08] transition-opacity duration-500 group-hover:opacity-[0.15]" style={{ background: `radial-gradient(circle, ${cta.color}, transparent)` }} />
+              {/* Bottom edge glow */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(90deg, transparent, ${cta.color}40, transparent)` }} />
 
-          {/* AI Concierge */}
-          <Link
-            href="/concierge"
-            className="group relative overflow-hidden rounded-2xl p-5 md:p-6 transition-all duration-300 active:scale-[0.99]"
-            style={{
-              background: `linear-gradient(135deg, ${C.cta}12 0%, ${C.cta}04 100%)`,
-              border: `1px solid ${C.cta}18`,
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${C.cta}38`; e.currentTarget.style.boxShadow = `0 8px 30px ${C.cta}10`; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${C.cta}18`; e.currentTarget.style.boxShadow = "none"; }}
-          >
-            <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20" style={{ background: `radial-gradient(circle, ${C.cta}, transparent)` }} />
-            <div className="relative flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: `${C.cta}15`, border: `1px solid ${C.cta}20` }}>
-                <MaterialIcon name="smart_toy" className="text-[24px]" style={{ color: C.ctaLight }} />
+              <div className="relative flex items-center gap-4">
+                <div
+                  className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0 transition-all duration-300 group-hover:scale-110"
+                  style={{
+                    background: `linear-gradient(135deg, ${cta.color}15, ${cta.color}08)`,
+                    border: `1px solid ${cta.color}20`,
+                    boxShadow: `0 0 0 0 ${cta.color}00`,
+                  }}
+                >
+                  <cta.icon size={22} strokeWidth={1.8} style={{ color: cta.color }} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold text-white">{cta.title}</p>
+                  <p className="text-xs mt-0.5" style={{ color: C.muted }}>{cta.desc}</p>
+                </div>
+                <div
+                  className="flex h-9 w-9 items-center justify-center rounded-full shrink-0 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-105"
+                  style={{ background: `${cta.color}10`, border: `1px solid ${cta.color}15` }}
+                >
+                  <ArrowRight size={16} strokeWidth={2} style={{ color: cta.color }} />
+                </div>
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-white">AI Concierge</p>
-                <p className="text-xs mt-0.5" style={{ color: C.muted }}>Tell us your needs, AI finds your match</p>
-              </div>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full shrink-0 transition-all duration-200 group-hover:translate-x-1" style={{ background: `${C.cta}10` }}>
-                <MaterialIcon name="arrow_forward" className="text-[16px]" style={{ color: C.ctaLight }} />
-              </div>
-            </div>
-          </Link>
-
-          {/* Compare */}
-          <Link
-            href="/compare"
-            className="group relative overflow-hidden rounded-2xl p-5 md:p-6 transition-all duration-300 active:scale-[0.99]"
-            style={{
-              background: `linear-gradient(135deg, ${C.secondary}14 0%, ${C.secondary}06 100%)`,
-              border: `1px solid ${C.secondary}20`,
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${C.secondary}40`; e.currentTarget.style.boxShadow = `0 8px 30px ${C.secondary}10`; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${C.secondary}20`; e.currentTarget.style.boxShadow = "none"; }}
-          >
-            <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20" style={{ background: `radial-gradient(circle, ${C.secondary}, transparent)` }} />
-            <div className="relative flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: `${C.secondary}18`, border: `1px solid ${C.secondary}25` }}>
-                <MaterialIcon name="compare_arrows" className="text-[24px]" style={{ color: C.secondaryLight }} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-white">Compare Cars</p>
-                <p className="text-xs mt-0.5" style={{ color: C.muted }}>Side-by-side specs comparison</p>
-              </div>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full shrink-0 transition-all duration-200 group-hover:translate-x-1" style={{ background: `${C.secondary}12` }}>
-                <MaterialIcon name="arrow_forward" className="text-[16px]" style={{ color: C.secondaryLight }} />
-              </div>
-            </div>
-          </Link>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -834,14 +908,14 @@ export default function HomePage() {
         <div className="flex flex-wrap items-center gap-2.5 md:gap-3">
           <span className="text-[10px] uppercase tracking-[0.15em] font-bold mr-1" style={{ color: C.dim }}>Explore</span>
           {[
-            { label: "EMI Calculator", href: "/car-loan/emi-calculator", icon: "calculate" },
-            { label: "Fuel Prices", href: "/fuel-price", icon: "local_gas_station" },
-            { label: "Car Insurance", href: "/car-insurance", icon: "shield" },
-            { label: "Car Loan", href: "/car-loan", icon: "account_balance" },
-            { label: "Upcoming Cars", href: "/upcoming-cars", icon: "event" },
-            { label: "Electric Cars", href: "/electric-cars", icon: "bolt" },
-            { label: "Find Dealers", href: "/dealers", icon: "storefront" },
-            { label: "Car News", href: "/car-news", icon: "newspaper" },
+            { label: "EMI Calculator", href: "/car-loan/emi-calculator", icon: Calculator },
+            { label: "Fuel Prices", href: "/fuel-price", icon: Fuel },
+            { label: "Car Insurance", href: "/car-insurance", icon: Shield },
+            { label: "Car Loan", href: "/car-loan", icon: Landmark },
+            { label: "Upcoming Cars", href: "/upcoming-cars", icon: Calendar },
+            { label: "Electric Cars", href: "/electric-cars", icon: Zap },
+            { label: "Find Dealers", href: "/dealers", icon: Store },
+            { label: "Car News", href: "/car-news", icon: Newspaper },
           ].map((link) => (
             <Link
               key={link.href}
@@ -851,7 +925,7 @@ export default function HomePage() {
               onMouseEnter={(e) => { e.currentTarget.style.color = C.text; e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = C.muted; e.currentTarget.style.background = "rgba(255,255,255,0.02)"; e.currentTarget.style.borderColor = C.glassBorder; }}
             >
-              <MaterialIcon name={link.icon} className="text-[13px]" />
+              <link.icon size={13} strokeWidth={2} />
               {link.label}
             </Link>
           ))}
@@ -864,8 +938,8 @@ export default function HomePage() {
           <div className="md:flex md:items-start md:justify-between md:gap-12">
             <div className="mb-5 md:mb-0">
               <div className="flex items-center gap-2.5 mb-2.5">
-                <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.primaryLight})` }}>
-                  <MaterialIcon name="diamond" className="text-[13px] text-white" />
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${C.primaryLight}, #60A5FA)` }}>
+                  <Gem size={13} strokeWidth={2.5} className="text-white" />
                 </div>
                 <span className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: "Space Grotesk, sans-serif" }}>CaroBest</span>
               </div>

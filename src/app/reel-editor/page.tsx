@@ -109,7 +109,7 @@ export default function ReelEditorPage() {
           onClick={handleExport}
           disabled={!audioUrl}
           className="px-4 py-2 text-white text-xs font-bold rounded-full disabled:opacity-50"
-          style={{ background: "#1773cf", boxShadow: "0 4px 12px rgba(23,115,207,0.2)" }}
+          style={{ background: "#3B82F6", boxShadow: "0 4px 12px rgba(23,115,207,0.2)" }}
         >
           EXPORT
         </button>
@@ -124,7 +124,7 @@ export default function ReelEditorPage() {
               onClick={() => setSelectedIndex(i)}
               className="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 transition-colors"
               style={{
-                borderColor: selectedIndex === i ? "#1773cf" : "rgba(255,255,255,0.2)",
+                borderColor: selectedIndex === i ? "#3B82F6" : "rgba(255,255,255,0.2)",
                 boxShadow: selectedIndex === i ? "0 0 0 2px rgba(23,115,207,0.3)" : undefined,
               }}
             >
@@ -160,7 +160,7 @@ export default function ReelEditorPage() {
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
             <h2 className="text-3xl font-extrabold text-white text-center px-8 opacity-90" style={{ letterSpacing: "-0.05em" }}>
               {scriptLoading ? "..." : script.split(".")[0]?.slice(0, 40) || "THE NEW"}
-              {vehicle && <><br /><span style={{ color: "#1773cf" }}>{vehicle.name.toUpperCase()}</span></>}
+              {vehicle && <><br /><span style={{ color: "#3B82F6" }}>{vehicle.name.toUpperCase()}</span></>}
             </h2>
           </div>
 
@@ -175,7 +175,7 @@ export default function ReelEditorPage() {
                 <div
                   className="w-12 h-12 rounded-lg overflow-hidden border-2"
                   style={{
-                    borderColor: preset.active ? "#1773cf" : "rgba(255,255,255,0.2)",
+                    borderColor: preset.active ? "#3B82F6" : "rgba(255,255,255,0.2)",
                     ...(preset.active ? { boxShadow: "0 4px 12px rgba(0,0,0,0.5), 0 0 0 2px rgba(23,115,207,0.2)" } : {}),
                   }}
                 >
@@ -197,7 +197,7 @@ export default function ReelEditorPage() {
               border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
-            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#1773cf" }} />
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#3B82F6" }} />
             <span className="text-[10px] font-bold text-white/80 tracking-widest uppercase">
               AI Tracking active
             </span>
@@ -221,10 +221,10 @@ export default function ReelEditorPage() {
           {/* AI Keyframes Label */}
           <div className="flex justify-between items-center px-1">
             <div className="flex items-center gap-2">
-              <span style={{ color: "#1773cf" }}>
+              <span style={{ color: "#3B82F6" }}>
                 <MaterialIcon name="auto_videocam" className="text-sm" />
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-tighter" style={{ color: "#1773cf" }}>
+              <span className="text-[10px] font-bold uppercase tracking-tighter" style={{ color: "#3B82F6" }}>
                 AI Keyframes
               </span>
             </div>
@@ -255,7 +255,7 @@ export default function ReelEditorPage() {
                 className="absolute top-0 h-full flex flex-col items-center justify-between py-1"
                 style={{ left: kf.pos }}
               >
-                <MaterialIcon name={kf.icon} fill className="text-[12px] text-[#1773cf]" />
+                <MaterialIcon name={kf.icon} fill className="text-[12px] text-[#3B82F6]" />
                 <div className="w-0.5 flex-1 rounded-full" style={{ background: "rgba(23,115,207,0.4)" }} />
               </div>
             ))}
@@ -302,7 +302,7 @@ export default function ReelEditorPage() {
             onClick={generateTts}
             disabled={ttsLoading || !script.trim()}
             className="flex-1 h-12 flex items-center justify-center gap-2 rounded-xl font-bold text-sm text-white disabled:opacity-50"
-            style={{ background: "#1773cf", boxShadow: "0 8px 20px rgba(23,115,207,0.1)" }}
+            style={{ background: "#3B82F6", boxShadow: "0 8px 20px rgba(23,115,207,0.1)" }}
           >
             {ttsLoading ? <MaterialIcon name="hourglass_empty" className="text-[18px] animate-spin" /> : <MaterialIcon name="auto_awesome" className="text-[18px]" />}
             <span>{ttsLoading ? "GENERATING..." : "AI AUTO-SYNC"}</span>
@@ -325,7 +325,7 @@ export default function ReelEditorPage() {
             key={item.label}
             href={item.href}
             className="flex flex-col items-center gap-1"
-            style={{ color: item.active ? "#1773cf" : "#94a3b8" }}
+            style={{ color: item.active ? "#3B82F6" : "#94a3b8" }}
           >
             <MaterialIcon name={item.icon} fill={item.active} className="text-[24px]" />
             <span className="text-[9px] font-bold uppercase tracking-widest">{item.label}</span>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { MaterialIcon } from "@/components/MaterialIcon";
 import { INTERIOR } from "@/lib/car-images";
 
-/* Stitch: vip_membership_invitation — #1754cf, Newsreader, #111621 */
+/* Stitch: vip_membership_invitation — #3B82F6, Newsreader, #0A1628 */
 
 const VALUE_PROPS = [
   { icon: "priority_high", text: "Early access to rare inventory" },
@@ -27,7 +27,7 @@ export default function VIPMembershipPage() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(17,22,33,0.4) 0%, rgba(17,22,33,0.8) 60%, rgba(17,22,33,1) 100%)",
+              "linear-gradient(to bottom, rgba(10,22,40,0.4) 0%, rgba(10,22,40,0.8) 60%, rgba(10,22,40,1) 100%)",
           }}
         />
       </div>
@@ -36,7 +36,7 @@ export default function VIPMembershipPage() {
       <div className="relative z-10 flex items-center justify-between p-6">
         <div className="flex items-center gap-2">
           <span
-            className="text-[#1754cf] font-bold text-xl tracking-tighter uppercase"
+            className="text-[#3B82F6] font-bold text-xl tracking-tighter uppercase"
             style={{ fontFamily: "'Newsreader', serif" }}
           >
             CaroBest
@@ -54,7 +54,7 @@ export default function VIPMembershipPage() {
       <div className="relative z-10 flex flex-1 flex-col justify-end px-8 pb-16">
         <div className="max-w-md mx-auto w-full">
           {/* Badge */}
-          <div className="mb-4 inline-flex items-center rounded-full bg-[#1754cf]/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[#1754cf] ring-1 ring-inset ring-[#1754cf]/30">
+          <div className="mb-4 inline-flex items-center rounded-full bg-[#3B82F6]/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[#3B82F6] ring-1 ring-inset ring-[#3B82F6]/30">
             Exclusive Invitation
           </div>
 
@@ -73,7 +73,7 @@ export default function VIPMembershipPage() {
           <div className="space-y-4 mb-12">
             {VALUE_PROPS.map((prop) => (
               <div key={prop.icon} className="flex items-center gap-4">
-                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#1754cf]/50 text-[#1754cf]">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#3B82F6]/50 text-[#3B82F6]">
                   <MaterialIcon name={prop.icon} className="text-[16px]" />
                 </div>
                 <p className="text-sm font-medium tracking-wide text-slate-200">
@@ -86,7 +86,7 @@ export default function VIPMembershipPage() {
           {/* CTA Button */}
           <Link
             href="/vip/confirmation"
-            className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-[#1754cf] px-8 py-5 text-lg font-bold text-white shadow-2xl transition-all active:scale-[0.98]"
+            className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-[#3B82F6] px-8 py-5 text-lg font-bold text-white shadow-2xl transition-all active:scale-[0.98]"
           >
             <span className="relative z-10">Begin Application</span>
             <MaterialIcon
@@ -109,7 +109,7 @@ export default function VIPMembershipPage() {
       </div>
 
       {/* Decorative bottom line */}
-      <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-[#1754cf]/50 to-transparent opacity-30 z-10" />
+      <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-[#3B82F6]/50 to-transparent opacity-30 z-10" />
     </div>
   );
 }
