@@ -22,10 +22,10 @@ export function BuyerAppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen bg-[#0a0c10] flex">
+    <div className="min-h-screen bg-[#0A1628] flex">
 
       {/* ── Desktop Sidebar ── */}
-      <aside className="hidden md:flex flex-col w-56 lg:w-64 shrink-0 border-r border-white/[0.06] bg-[#0c0e14] sticky top-0 h-screen overflow-y-auto">
+      <aside className="hidden md:flex flex-col w-56 lg:w-64 shrink-0 border-r border-white/[0.06] bg-[#0F1D32] sticky top-0 h-screen overflow-y-auto">
         {/* Logo */}
         <div className="px-5 py-5 border-b border-white/[0.06]">
           <Link href="/" className="flex items-center gap-2.5">
@@ -105,8 +105,8 @@ export function BuyerAppShell({ children }: { children: React.ReactNode }) {
           <BuyerBottomNav />
         </div>
 
-        {/* Desktop: wide content container */}
-        <div className="hidden md:block min-h-screen max-w-[1280px] mx-auto px-8 lg:px-12 py-6">
+        {/* Desktop: wide content container — buyer-desktop strips nested max-w-md/lg */}
+        <div className="hidden md:block min-h-screen max-w-[1280px] mx-auto px-8 lg:px-12 py-6 w-full buyer-desktop">
           {children}
         </div>
       </div>

@@ -116,7 +116,7 @@ body {
   -webkit-backdrop-filter: blur(20px);
 }
 
-/* ── Desktop dealer layout: override mobile max-width constraints ── */
+/* ── Desktop layout: override mobile max-width constraints ── */
 @media (min-width: 768px) {
   .dealer-desktop > *,
   .dealer-desktop .max-w-md,
@@ -134,6 +134,11 @@ body {
   /* Widen horizontal scroll sections into grids on desktop */
   .dealer-desktop .overflow-x-auto.hide-scrollbar {
     overflow-x: visible;
+  }
+
+  /* ── Buyer desktop ── */
+  .buyer-desktop .pb-24 {
+    padding-bottom: 2rem !important;
   }
 }
 

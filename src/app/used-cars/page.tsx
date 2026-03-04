@@ -75,7 +75,7 @@ export default function UsedCarsPage() {
 
       {/* ─── HEADER ─── */}
       <header className="sticky top-0 z-40 border-b border-white/5" style={{ background: "rgba(10,22,40,0.97)", backdropFilter: "blur(20px)" }}>
-        <div className="max-w-lg mx-auto px-4 pt-3 pb-0">
+        <div className="max-w-lg md:max-w-none mx-auto px-4 pt-3 pb-0">
 
           <div className="flex items-center gap-2 mb-3">
             <Link href="/" className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
@@ -134,7 +134,7 @@ export default function UsedCarsPage() {
 
         {/* Filter panel */}
         {showFilters && (
-          <div className="max-w-lg mx-auto px-4 pb-4 border-t border-white/5 pt-3 space-y-4">
+          <div className="max-w-lg md:max-w-none mx-auto px-4 pb-4 border-t border-white/5 pt-3 space-y-4">
             {/* Budget */}
             <div>
               <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Budget</p>
@@ -219,7 +219,7 @@ export default function UsedCarsPage() {
       </header>
 
       {/* ─── RESULTS ─── */}
-      <main className="max-w-lg mx-auto px-4 pt-4">
+      <main className="max-w-lg md:max-w-none mx-auto px-4 pt-4">
         <div className="flex items-center justify-between mb-4">
           <p className="text-xs text-slate-500">
             <span className="text-white font-semibold">{loading ? "..." : filtered.length}</span> used cars found
@@ -255,7 +255,7 @@ export default function UsedCarsPage() {
           </div>
         )}
 
-        <div className="space-y-3">
+        <div className="space-y-3 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4">
           {filtered.map((car) => (
             <UsedCarCard key={car.id} car={car} />
           ))}
@@ -274,11 +274,11 @@ function UsedCarCard({ car }: { car: Vehicle }) {
   return (
     <Link
       href={`/used-cars/details/${car.id}`}
-      className="flex rounded-2xl overflow-hidden border transition-all active:scale-[0.99] hover:border-white/12 block"
+      className="flex md:flex-col rounded-2xl overflow-hidden border transition-all active:scale-[0.99] hover:border-white/12 block"
       style={{ background: "rgba(255,255,255,0.035)", borderColor: "rgba(255,255,255,0.07)" }}
     >
       {/* Image */}
-      <div className="relative w-36 shrink-0" style={{ minHeight: "120px" }}>
+      <div className="relative w-36 md:w-full shrink-0" style={{ minHeight: "120px" }}>
         {car.image ? (
           <Image
             src={car.image}

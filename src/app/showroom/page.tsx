@@ -240,7 +240,7 @@ export default function ShowroomPage() {
 
         {/* ─── FILTER PANEL ─── */}
         {showFilters && (
-          <div className="max-w-lg mx-auto px-4 pb-4 border-t border-white/5 pt-4 space-y-4">
+          <div className="max-w-lg md:max-w-none mx-auto px-4 pb-4 border-t border-white/5 pt-4 space-y-4">
             {/* Budget */}
             <div>
               <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Budget</p>
@@ -429,11 +429,11 @@ function CarListCard({
   return (
     <Link
       href={`/vehicle/${vehicle.id}`}
-      className="flex rounded-2xl overflow-hidden border transition-all active:scale-[0.99] hover:border-white/10 block"
+      className="flex md:flex-col rounded-2xl overflow-hidden border transition-all active:scale-[0.99] hover:border-white/10 block"
       style={{ background: "rgba(255,255,255,0.035)", borderColor: "rgba(255,255,255,0.07)" }}
     >
       {/* Image */}
-      <div className="relative w-36 shrink-0 min-h-[112px]">
+      <div className="relative w-36 md:w-full shrink-0 min-h-[112px] md:min-h-[160px]">
         <Image
           src={vehicle.image || "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400"}
           alt={vehicle.name}
