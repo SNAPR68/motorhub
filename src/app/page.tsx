@@ -15,7 +15,7 @@ import {
 } from "@/lib/car-catalog";
 import { fetchCarBrands, fetchCarModels, type ApiBrand, type ApiCarModel } from "@/lib/api";
 
-/* ─── CaroBest Homepage — Premium Automotive Marketplace ─── */
+/* ─── CaroBest Homepage — Cinematic Automotive ─── */
 
 const POPULAR_SEARCHES = ["Brezza", "Creta", "Nexon", "Swift", "Seltos", "XUV700"];
 
@@ -38,8 +38,44 @@ const HERO_SLIDES = [
   { src: "/hero-4.jpg", alt: "Car on open road", label: "Tata Nexon" },
 ];
 
-/* Browse filter tab type */
 type BrowseTab = "body" | "budget" | "brand";
+
+/* ─── Inline keyframes for the page ─── */
+const PAGE_STYLES = `
+@keyframes cb-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes cb-glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+@keyframes cb-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes cb-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cb-hero-reveal {
+  from { opacity: 0; transform: scale(1.08); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes cb-slide-down {
+  from { opacity: 0; transform: translateY(-8px); max-height: 0; }
+  to { opacity: 1; transform: translateY(0); max-height: 500px; }
+}
+@keyframes cb-border-glow {
+  0%, 100% { border-color: rgba(17,82,212,0.15); }
+  50% { border-color: rgba(17,82,212,0.4); }
+}
+.cb-stagger-1 { animation: cb-fade-up 0.6s ease-out 0.1s both; }
+.cb-stagger-2 { animation: cb-fade-up 0.6s ease-out 0.2s both; }
+.cb-stagger-3 { animation: cb-fade-up 0.6s ease-out 0.3s both; }
+.cb-stagger-4 { animation: cb-fade-up 0.6s ease-out 0.4s both; }
+.cb-card-enter { animation: cb-fade-up 0.5s ease-out both; }
+`;
 
 export default function HomePage() {
   const router = useRouter();
@@ -56,6 +92,7 @@ export default function HomePage() {
   const [browseTab, setBrowseTab] = useState<BrowseTab>("body");
   const [browseOpen, setBrowseOpen] = useState(false);
   const browseRef = useRef<HTMLDivElement>(null);
+  const [searchFocused, setSearchFocused] = useState(false);
 
   /* Auto-rotate hero */
   const nextSlide = useCallback(() => {
@@ -125,27 +162,30 @@ export default function HomePage() {
 
   return (
     <BuyerAppShell>
+    <style dangerouslySetInnerHTML={{ __html: PAGE_STYLES }} />
     <div className="min-h-dvh w-full" style={{ background: "#080a0f", color: "#e2e8f0" }}>
 
       {/* ─── MOBILE HEADER ─── */}
       <header
         className="sticky top-0 z-50 flex items-center justify-between px-4 h-14 border-b border-white/5 md:hidden"
-        style={{ background: "rgba(8,10,15,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(8,10,15,0.92)", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)" }}
       >
         <Link href="/" className="flex items-center gap-2">
-          <MaterialIcon name="token" className="text-[24px]" style={{ color: "#1152d4" }} />
-          <span className="text-lg font-bold text-white" style={{ fontFamily: "Newsreader, serif" }}>
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1152d4, #3b82f6)" }}>
+            <MaterialIcon name="diamond" className="text-[14px] text-white" />
+          </div>
+          <span className="text-base font-extrabold text-white tracking-tight" style={{ fontFamily: "Playfair Display, serif" }}>
             CaroBest
           </span>
         </Link>
         <button
           onClick={() => setShowCityPicker(true)}
-          className="flex items-center gap-1 rounded-full px-3 h-8 text-xs font-semibold border border-white/10 active:scale-95"
-          style={{ background: "rgba(255,255,255,0.04)", color: "#94a3b8" }}
+          className="flex items-center gap-1 rounded-full px-3 h-8 text-xs font-semibold active:scale-95 transition-transform"
+          style={{ background: "rgba(17,82,212,0.1)", color: "#60a5fa", border: "1px solid rgba(17,82,212,0.2)" }}
         >
-          <MaterialIcon name="location_on" className="text-[13px]" style={{ color: "#1152d4" }} />
+          <MaterialIcon name="location_on" className="text-[13px]" />
           {selectedCity}
-          <MaterialIcon name="keyboard_arrow_down" className="text-[13px]" />
+          <MaterialIcon name="expand_more" className="text-[13px]" />
         </button>
         <div className="flex items-center gap-1.5">
           {isAuthenticated && user ? (
@@ -153,98 +193,191 @@ export default function HomePage() {
               {userInitials}
             </Link>
           ) : (
-            <Link href="/login/buyer" className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10" style={{ background: "rgba(255,255,255,0.04)" }}>
+            <Link href="/login/buyer" className="flex h-8 w-8 items-center justify-center rounded-full" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <MaterialIcon name="person" className="text-[18px] text-slate-400" />
             </Link>
           )}
         </div>
       </header>
 
-      {/* ─── HERO ─── */}
+      {/* ─── HERO — Cinematic Split Layout ─── */}
       <section
         className="relative w-full overflow-hidden md:-mx-8 lg:-mx-12 md:-mt-6 md:w-[calc(100%+4rem)] lg:w-[calc(100%+6rem)]"
-        style={{ height: "520px", maxHeight: "65vh" }}
+        style={{ minHeight: "480px" }}
       >
-        <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(135deg, #0c1a35 0%, #0a1225 50%, #0e1a30 100%)" }} />
+        {/* Ambient background mesh */}
+        <div className="absolute inset-0 z-0" style={{
+          background: "radial-gradient(ellipse 80% 60% at 70% 40%, rgba(17,82,212,0.12) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 20% 80%, rgba(17,82,212,0.06) 0%, transparent 60%), #080a0f",
+        }} />
 
-        {HERO_SLIDES.map((slide, i) => (
-          <div
-            key={slide.alt}
-            className="absolute inset-0 transition-opacity duration-1000"
-            style={{ opacity: heroIndex === i ? 1 : 0, zIndex: heroIndex === i ? 1 : 0 }}
-          >
-            <Image src={slide.src} alt={slide.alt} fill sizes="100vw" className="object-cover" priority={i === 0} unoptimized />
-          </div>
-        ))}
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 z-[1] opacity-[0.03]" style={{
+          backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }} />
 
-        {/* Gradient overlay -- lighter to show car */}
-        <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.95) 0%, rgba(8,10,15,0.5) 35%, rgba(8,10,15,0.1) 70%, rgba(8,10,15,0.2) 100%)" }} />
-
-        {/* Hero content */}
-        <div className="relative z-30 flex flex-col items-center justify-end h-full pb-8 md:pb-12 px-6 text-center md:items-start md:text-left md:px-12 lg:px-16">
-          <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 border border-blue-400/20" style={{ background: "rgba(17,82,212,0.12)" }}>
-              <MaterialIcon name="auto_awesome" className="text-[12px] text-blue-400" />
-              <span className="text-[10px] uppercase tracking-[0.25em] font-semibold text-blue-400">AI-Powered Marketplace</span>
-            </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-white leading-[1.1] mb-3" style={{ fontFamily: "Newsreader, serif" }}>
-              Find Your Next Car
-            </h1>
-            <p className="text-sm md:text-base text-slate-400 leading-relaxed mb-6 max-w-md">
-              AI-inspected, dealer-certified cars across 50+ Indian cities. 200-point check, 1-year warranty, easy returns.
-            </p>
-
-            {/* Search bar -- the main action */}
-            <div className="w-full max-w-lg">
+        {/* Desktop: Split layout */}
+        <div className="relative z-10 flex flex-col md:flex-row h-full min-h-[480px]">
+          {/* Left: Text + Search */}
+          <div className="flex-1 flex flex-col justify-center px-6 pt-16 pb-8 md:px-12 lg:px-16 md:pt-12 md:pb-12">
+            <div className="max-w-xl cb-stagger-1">
               <div
-                className="flex items-center gap-3 rounded-2xl px-4 py-3.5 md:py-4 border border-white/15 focus-within:border-blue-500/50 transition-all"
-                style={{ background: "rgba(8,10,15,0.85)", backdropFilter: "blur(20px)" }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-5"
+                style={{
+                  background: "linear-gradient(135deg, rgba(17,82,212,0.15) 0%, rgba(59,130,246,0.08) 100%)",
+                  border: "1px solid rgba(17,82,212,0.25)",
+                }}
               >
-                <MaterialIcon name="search" className="text-[22px] text-slate-500 shrink-0" />
-                <input
-                  type="text"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                  placeholder="Search any car..."
-                  className="flex-1 bg-transparent text-sm md:text-base text-white outline-none placeholder:text-slate-500"
-                  style={{ fontFamily: "Manrope, sans-serif" }}
-                />
-                <button
-                  onClick={() => handleSearch()}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl text-white shrink-0 transition-transform active:scale-95"
-                  style={{ background: "#1152d4" }}
-                >
-                  <MaterialIcon name="arrow_forward" className="text-[18px]" />
-                </button>
+                <MaterialIcon name="auto_awesome" className="text-[11px]" style={{ color: "#60a5fa" }} />
+                <span className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: "#60a5fa" }}>AI-Powered Marketplace</span>
               </div>
-              <div className="flex items-center gap-2 mt-3 overflow-x-auto no-scrollbar">
-                <span className="text-[11px] text-slate-600 shrink-0 font-medium" style={{ fontFamily: "Manrope, sans-serif" }}>Popular:</span>
-                {POPULAR_SEARCHES.map((q) => (
+
+              <h1 className="text-3xl md:text-[3.2rem] lg:text-[3.6rem] font-bold text-white leading-[1.05] mb-4 tracking-tight" style={{ fontFamily: "Playfair Display, serif" }}>
+                Find Your
+                <br />
+                <span style={{ color: "#60a5fa" }}>Perfect</span> Car
+              </h1>
+
+              <p className="text-sm md:text-[15px] leading-relaxed mb-7 max-w-md" style={{ color: "#8b9dc3", fontFamily: "Manrope, sans-serif" }}>
+                AI-inspected, dealer-certified vehicles across 50+ Indian cities. Every car passes our 200-point quality check.
+              </p>
+
+              {/* Search bar */}
+              <div className="w-full max-w-lg cb-stagger-2">
+                <div
+                  className="flex items-center gap-3 rounded-2xl px-4 py-3 md:py-3.5 transition-all duration-300"
+                  style={{
+                    background: searchFocused ? "rgba(17,82,212,0.08)" : "rgba(255,255,255,0.04)",
+                    border: `1px solid ${searchFocused ? "rgba(17,82,212,0.4)" : "rgba(255,255,255,0.1)"}`,
+                    backdropFilter: "blur(20px)",
+                    boxShadow: searchFocused ? "0 0 30px rgba(17,82,212,0.1), inset 0 1px 0 rgba(255,255,255,0.05)" : "inset 0 1px 0 rgba(255,255,255,0.03)",
+                  }}
+                >
+                  <MaterialIcon name="search" className="text-[22px] shrink-0" style={{ color: searchFocused ? "#60a5fa" : "#475569" }} />
+                  <input
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                    onFocus={() => setSearchFocused(true)}
+                    onBlur={() => setSearchFocused(false)}
+                    placeholder="Search by brand, model, or budget..."
+                    className="flex-1 bg-transparent text-sm md:text-[15px] text-white outline-none placeholder:text-slate-500"
+                    style={{ fontFamily: "Manrope, sans-serif" }}
+                  />
                   <button
-                    key={q}
-                    onClick={() => handleSearch(q)}
-                    className="shrink-0 rounded-full px-3 py-1 text-[11px] font-medium text-slate-400 border border-white/8 transition-all hover:border-white/20 hover:text-white active:scale-95"
-                    style={{ background: "rgba(255,255,255,0.04)" }}
+                    onClick={() => handleSearch()}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl text-white shrink-0 transition-all duration-200 active:scale-90 hover:shadow-lg"
+                    style={{ background: "linear-gradient(135deg, #1152d4, #2563eb)", boxShadow: "0 4px 15px rgba(17,82,212,0.3)" }}
                   >
-                    {q}
+                    <MaterialIcon name="arrow_forward" className="text-[18px]" />
                   </button>
+                </div>
+
+                {/* Popular searches */}
+                <div className="flex items-center gap-2 mt-3.5 overflow-x-auto no-scrollbar cb-stagger-3">
+                  <span className="text-[10px] uppercase tracking-[0.15em] shrink-0 font-bold" style={{ color: "#475569", fontFamily: "Manrope, sans-serif" }}>
+                    Trending
+                  </span>
+                  {POPULAR_SEARCHES.map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => handleSearch(q)}
+                      className="shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold transition-all duration-200 hover:text-white active:scale-95"
+                      style={{
+                        color: "#64748b",
+                        background: "rgba(255,255,255,0.03)",
+                        border: "1px solid rgba(255,255,255,0.06)",
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(17,82,212,0.1)"; e.currentTarget.style.borderColor = "rgba(17,82,212,0.3)"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.03)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; }}
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Featured Car Image (desktop) */}
+          <div className="hidden md:flex flex-1 items-end justify-center relative overflow-hidden">
+            {/* Luminous halo behind car */}
+            <div className="absolute bottom-0 right-0 w-full h-full" style={{
+              background: "radial-gradient(ellipse 70% 60% at 50% 70%, rgba(17,82,212,0.15) 0%, rgba(17,82,212,0.05) 40%, transparent 70%)",
+              animation: "cb-glow-pulse 4s ease-in-out infinite",
+            }} />
+
+            {/* Car images */}
+            {HERO_SLIDES.map((slide, i) => (
+              <div
+                key={slide.alt}
+                className="absolute inset-0 flex items-end justify-center transition-all duration-1000"
+                style={{
+                  opacity: heroIndex === i ? 1 : 0,
+                  transform: heroIndex === i ? "scale(1) translateX(0)" : "scale(0.95) translateX(30px)",
+                  zIndex: heroIndex === i ? 1 : 0,
+                }}
+              >
+                <div className="relative w-[90%] h-[85%]">
+                  <Image
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    sizes="50vw"
+                    className="object-contain object-bottom drop-shadow-2xl"
+                    priority={i === 0}
+                    unoptimized
+                  />
+                </div>
+              </div>
+            ))}
+
+            {/* Car label + dots */}
+            <div className="absolute bottom-6 right-8 z-20 flex items-center gap-3">
+              <span className="text-xs font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "Manrope, sans-serif" }}>
+                {HERO_SLIDES[heroIndex].label}
+              </span>
+              <div className="flex items-center gap-1.5">
+                {HERO_SLIDES.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setHeroIndex(i)}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width: heroIndex === i ? "20px" : "6px",
+                      height: "6px",
+                      background: heroIndex === i ? "#1152d4" : "rgba(255,255,255,0.2)",
+                    }}
+                  />
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Carousel dots */}
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 md:left-auto md:right-12 md:translate-x-0 flex items-center gap-2">
-            <span className="text-[10px] font-medium text-white/50 mr-1 hidden md:block">{HERO_SLIDES[heroIndex].label}</span>
-            {HERO_SLIDES.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setHeroIndex(i)}
-                className="h-1.5 rounded-full transition-all"
-                style={{ width: heroIndex === i ? "24px" : "6px", background: heroIndex === i ? "#1152d4" : "rgba(255,255,255,0.25)" }}
-              />
+          {/* Mobile: Car image underneath text */}
+          <div className="relative h-48 w-full overflow-hidden md:hidden -mt-4">
+            {HERO_SLIDES.map((slide, i) => (
+              <div
+                key={`mob-${slide.alt}`}
+                className="absolute inset-0 transition-opacity duration-1000"
+                style={{ opacity: heroIndex === i ? 1 : 0, zIndex: heroIndex === i ? 1 : 0 }}
+              >
+                <Image src={slide.src} alt={slide.alt} fill sizes="100vw" className="object-cover object-center" priority={i === 0} unoptimized />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #080a0f 0%, rgba(8,10,15,0.3) 60%, rgba(8,10,15,0.6) 100%)" }} />
+              </div>
             ))}
+            {/* Mobile dots */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
+              {HERO_SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setHeroIndex(i)}
+                  className="rounded-full transition-all duration-300"
+                  style={{ width: heroIndex === i ? "18px" : "5px", height: "5px", background: heroIndex === i ? "#1152d4" : "rgba(255,255,255,0.25)" }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -252,28 +385,29 @@ export default function HomePage() {
       {/* ─── CITY PICKER MODAL ─── */}
       {showCityPicker && (
         <div className="fixed inset-0 z-[60] flex items-end justify-center" onClick={() => setShowCityPicker(false)}>
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-black/60" style={{ backdropFilter: "blur(8px)" }} />
           <div
             className="relative w-full max-w-lg rounded-t-3xl p-5 pb-8 max-h-[70vh] flex flex-col"
-            style={{ background: "#0e1117", border: "1px solid rgba(255,255,255,0.08)" }}
+            style={{ background: "linear-gradient(180deg, #111827 0%, #0e1117 100%)", border: "1px solid rgba(255,255,255,0.08)" }}
             onClick={(e) => e.stopPropagation()}
           >
+            <div className="w-10 h-1 rounded-full mx-auto mb-4" style={{ background: "rgba(255,255,255,0.15)" }} />
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-base font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>Select City</h3>
-              <button onClick={() => setShowCityPicker(false)} className="flex h-8 w-8 items-center justify-center rounded-full" style={{ background: "rgba(255,255,255,0.06)" }}>
+              <button onClick={() => setShowCityPicker(false)} className="flex h-8 w-8 items-center justify-center rounded-full transition-colors hover:bg-white/10" style={{ background: "rgba(255,255,255,0.06)" }}>
                 <MaterialIcon name="close" className="text-[18px] text-slate-400" />
               </button>
             </div>
-            <div className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 mb-4 border border-white/10" style={{ background: "rgba(255,255,255,0.04)" }}>
+            <div className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 mb-4" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <MaterialIcon name="search" className="text-[18px] text-slate-500" />
               <input type="text" value={citySearch} onChange={(e) => setCitySearch(e.target.value)} placeholder="Search city..." className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500" autoFocus />
             </div>
             {!citySearch && (
               <div className="mb-3">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Popular Cities</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2" style={{ fontFamily: "Manrope, sans-serif" }}>Popular Cities</p>
                 <div className="flex flex-wrap gap-2">
                   {["Delhi", "Mumbai", "Bengaluru", "Chennai", "Hyderabad", "Pune"].map((c) => (
-                    <button key={c} onClick={() => handleCitySelect(c)} className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all active:scale-95 ${selectedCity === c ? "text-white" : "text-slate-400 border border-white/10"}`} style={{ background: selectedCity === c ? "#1152d4" : "rgba(255,255,255,0.04)" }}>{c}</button>
+                    <button key={c} onClick={() => handleCitySelect(c)} className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all active:scale-95 ${selectedCity === c ? "text-white" : "text-slate-400"}`} style={{ background: selectedCity === c ? "linear-gradient(135deg, #1152d4, #2563eb)" : "rgba(255,255,255,0.04)", border: `1px solid ${selectedCity === c ? "transparent" : "rgba(255,255,255,0.08)"}` }}>{c}</button>
                   ))}
                 </div>
               </div>
@@ -293,71 +427,96 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* ─── STATS + BROWSE FILTERS (consolidated) ─── */}
-      <section className="px-4 md:px-0 pt-8 md:pt-10 pb-6">
-        {/* Stats row */}
-        <div className="flex items-center justify-between md:justify-start md:gap-12 mb-8">
+      {/* ─── TRUST STRIP — Elegant horizontal stats ─── */}
+      <section className="px-4 md:px-0 pt-8 md:pt-10">
+        <div
+          className="flex items-center justify-between md:justify-center md:gap-0 rounded-2xl py-4 px-5 md:px-0"
+          style={{
+            background: "linear-gradient(135deg, rgba(17,82,212,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(17,82,212,0.04) 100%)",
+            border: "1px solid rgba(255,255,255,0.06)",
+          }}
+        >
           {[
-            { value: "50K+", label: "New Cars" },
-            { value: "12K+", label: "Used Cars" },
-            { value: "2.5K+", label: "Dealers" },
-            { value: "4.8", label: "Rating", star: true },
-          ].map((s) => (
-            <div key={s.label} className="text-center md:text-left">
-              <p className="text-lg md:text-2xl font-extrabold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>
-                {s.value}{s.star && <span className="text-amber-400 ml-0.5">★</span>}
-              </p>
-              <p className="text-[10px] md:text-xs text-slate-500 font-medium mt-0.5">{s.label}</p>
+            { value: "50K+", label: "New Cars", icon: "directions_car" },
+            { value: "12K+", label: "Certified Used", icon: "verified" },
+            { value: "2.5K+", label: "Trusted Dealers", icon: "storefront" },
+            { value: "4.8", label: "User Rating", icon: "star", star: true },
+          ].map((s, idx) => (
+            <div key={s.label} className="flex items-center gap-0 md:gap-3 flex-col md:flex-row text-center md:text-left">
+              {idx > 0 && <div className="hidden md:block w-px h-8 mx-6" style={{ background: "rgba(255,255,255,0.06)" }} />}
+              <div className="hidden md:flex h-9 w-9 items-center justify-center rounded-xl" style={{ background: "rgba(17,82,212,0.1)" }}>
+                <MaterialIcon name={s.icon} className="text-[18px]" style={{ color: "#60a5fa" }} />
+              </div>
+              <div>
+                <p className="text-lg md:text-xl font-extrabold text-white leading-none" style={{ fontFamily: "Manrope, sans-serif" }}>
+                  {s.value}{s.star && <span className="text-amber-400 ml-0.5 text-sm">&#9733;</span>}
+                </p>
+                <p className="text-[10px] md:text-[11px] font-medium mt-0.5" style={{ color: "#64748b", fontFamily: "Manrope, sans-serif" }}>{s.label}</p>
+              </div>
             </div>
           ))}
         </div>
+      </section>
 
-        {/* Browse filters -- dropdown tabs instead of icon grids */}
+      {/* ─── BROWSE FILTERS — Frosted glass dropdown ─── */}
+      <section className="px-4 md:px-0 pt-8 md:pt-10 pb-2">
         <div ref={browseRef} className="relative">
-          <div className="flex items-center gap-2 md:gap-3 mb-4">
-            <h2 className="text-base md:text-lg font-bold text-white mr-2" style={{ fontFamily: "Newsreader, serif" }}>Browse by</h2>
+          <div className="flex items-center gap-2 md:gap-3 mb-3">
+            <h2 className="text-base md:text-xl font-bold text-white mr-1 tracking-tight" style={{ fontFamily: "Playfair Display, serif" }}>
+              Browse by
+            </h2>
             {([
               { key: "body" as BrowseTab, label: "Body Type", icon: "directions_car" },
-              { key: "budget" as BrowseTab, label: "Budget", icon: "currency_rupee" },
+              { key: "budget" as BrowseTab, label: "Budget", icon: "account_balance_wallet" },
               { key: "brand" as BrowseTab, label: "Brand", icon: "star" },
-            ]).map((tab) => (
-              <button
-                key={tab.key}
-                onClick={() => { setBrowseTab(tab.key); setBrowseOpen(browseTab === tab.key ? !browseOpen : true); }}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition-all active:scale-95 ${
-                  browseTab === tab.key && browseOpen
-                    ? "text-white border-blue-500/50"
-                    : "text-slate-400 border-white/10 hover:text-white hover:border-white/20"
-                }`}
-                style={{
-                  background: browseTab === tab.key && browseOpen ? "rgba(17,82,212,0.15)" : "rgba(255,255,255,0.04)",
-                  border: `1px solid ${browseTab === tab.key && browseOpen ? "rgba(17,82,212,0.4)" : "rgba(255,255,255,0.08)"}`,
-                }}
-              >
-                <MaterialIcon name={tab.icon} className="text-[16px]" />
-                {tab.label}
-                <MaterialIcon
-                  name={browseTab === tab.key && browseOpen ? "expand_less" : "expand_more"}
-                  className="text-[16px] -mr-1"
-                />
-              </button>
-            ))}
+            ]).map((tab) => {
+              const isActive = browseTab === tab.key && browseOpen;
+              return (
+                <button
+                  key={tab.key}
+                  onClick={() => { setBrowseTab(tab.key); setBrowseOpen(browseTab === tab.key ? !browseOpen : true); }}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition-all duration-200 active:scale-95"
+                  style={{
+                    background: isActive ? "rgba(17,82,212,0.15)" : "rgba(255,255,255,0.03)",
+                    border: `1px solid ${isActive ? "rgba(17,82,212,0.4)" : "rgba(255,255,255,0.07)"}`,
+                    color: isActive ? "#60a5fa" : "#94a3b8",
+                    boxShadow: isActive ? "0 0 20px rgba(17,82,212,0.08)" : "none",
+                  }}
+                >
+                  <MaterialIcon name={tab.icon} className="text-[15px]" />
+                  {tab.label}
+                  <MaterialIcon
+                    name={isActive ? "expand_less" : "expand_more"}
+                    className="text-[16px] -mr-1"
+                  />
+                </button>
+              );
+            })}
           </div>
 
-          {/* Dropdown content */}
+          {/* Dropdown panel with frosted glass */}
           {browseOpen && (
             <div
-              className="rounded-2xl p-4 md:p-5 mb-2 border border-white/8 animate-in fade-in slide-in-from-top-2 duration-200"
-              style={{ background: "rgba(255,255,255,0.03)" }}
+              className="rounded-2xl p-4 md:p-5 mb-4"
+              style={{
+                background: "rgba(15,20,35,0.8)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)",
+                animation: "cb-slide-down 0.25s ease-out both",
+              }}
             >
               {browseTab === "body" && (
-                <div className="flex flex-wrap gap-2 md:gap-3">
+                <div className="flex flex-wrap gap-2.5 md:gap-3">
                   {BODY_TYPES.map((bt) => (
                     <Link
                       key={bt.value}
                       href={`/new-cars?body=${bt.value}`}
-                      className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-300 border border-white/8 transition-all hover:border-blue-500/30 hover:text-white hover:bg-blue-500/5 active:scale-95"
-                      style={{ background: "rgba(255,255,255,0.03)" }}
+                      className="group flex items-center gap-2.5 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 active:scale-95"
+                      style={{ color: "#cbd5e1", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(17,82,212,0.1)"; e.currentTarget.style.borderColor = "rgba(17,82,212,0.3)"; e.currentTarget.style.color = "#fff"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "#cbd5e1"; }}
                     >
                       <span className="text-lg">{bt.icon}</span>
                       {bt.label}
@@ -366,32 +525,36 @@ export default function HomePage() {
                 </div>
               )}
               {browseTab === "budget" && (
-                <div className="flex flex-wrap gap-2 md:gap-3">
+                <div className="flex flex-wrap gap-2.5 md:gap-3">
                   {BUDGET_SEGMENTS.map((b) => (
                     <Link
                       key={b.label}
                       href={`/new-cars?minPrice=${b.min}&maxPrice=${b.max}`}
-                      className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-300 border border-white/8 transition-all hover:border-blue-500/30 hover:text-white hover:bg-blue-500/5 active:scale-95"
-                      style={{ background: "rgba(255,255,255,0.03)" }}
+                      className="group flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 active:scale-95"
+                      style={{ color: "#cbd5e1", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(17,82,212,0.1)"; e.currentTarget.style.borderColor = "rgba(17,82,212,0.3)"; e.currentTarget.style.color = "#fff"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "#cbd5e1"; }}
                     >
-                      <MaterialIcon name="currency_rupee" className="text-[16px] text-blue-400" />
+                      <MaterialIcon name="currency_rupee" className="text-[15px]" style={{ color: "#60a5fa" }} />
                       {b.label}
                     </Link>
                   ))}
                 </div>
               )}
               {browseTab === "brand" && (
-                <div className="flex flex-wrap gap-2 md:gap-3">
+                <div className="flex flex-wrap gap-2.5 md:gap-3">
                   {popularBrands.map((brand) => (
                     <Link
                       key={brand.slug}
                       href={`/new-cars?brand=${brand.slug}`}
-                      className="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-300 border border-white/8 transition-all hover:border-blue-500/30 hover:text-white hover:bg-blue-500/5 active:scale-95"
-                      style={{ background: "rgba(255,255,255,0.03)" }}
+                      className="group flex items-center gap-2.5 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 active:scale-95"
+                      style={{ color: "#cbd5e1", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(17,82,212,0.1)"; e.currentTarget.style.borderColor = "rgba(17,82,212,0.3)"; e.currentTarget.style.color = "#fff"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "#cbd5e1"; }}
                     >
                       <div
-                        className="h-7 w-7 rounded-full flex items-center justify-center text-[10px] font-black"
-                        style={{ background: `${brand.color}22`, border: `1px solid ${brand.color}44`, color: brand.color }}
+                        className="h-7 w-7 rounded-lg flex items-center justify-center text-[10px] font-black"
+                        style={{ background: `${brand.color}18`, border: `1px solid ${brand.color}33`, color: brand.color }}
                       >
                         {brand.logo}
                       </div>
@@ -400,11 +563,11 @@ export default function HomePage() {
                   ))}
                   <Link
                     href="/new-cars"
-                    className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-blue-400 border border-blue-500/20 transition-all hover:bg-blue-500/5 active:scale-95"
-                    style={{ background: "rgba(17,82,212,0.05)" }}
+                    className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 active:scale-95"
+                    style={{ color: "#60a5fa", background: "rgba(17,82,212,0.06)", border: "1px solid rgba(17,82,212,0.2)" }}
                   >
                     View all brands
-                    <MaterialIcon name="arrow_forward" className="text-[16px]" />
+                    <MaterialIcon name="arrow_forward" className="text-[15px]" />
                   </Link>
                 </div>
               )}
@@ -413,104 +576,161 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── POPULAR NEW CARS ─── */}
-      <section className="mb-10 md:mb-14">
-        <div className="flex items-center justify-between px-4 md:px-0 mb-5">
+      {/* ─── POPULAR NEW CARS — Premium Card Grid ─── */}
+      <section className="mb-12 md:mb-16 pt-4 md:pt-6">
+        <div className="flex items-end justify-between px-4 md:px-0 mb-6">
           <div>
-            <h2 className="text-lg md:text-2xl font-bold text-white" style={{ fontFamily: "Newsreader, serif" }}>
+            <p className="text-[10px] uppercase tracking-[0.2em] font-bold mb-1.5" style={{ color: "#1152d4", fontFamily: "Manrope, sans-serif" }}>New Arrivals</p>
+            <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "Playfair Display, serif" }}>
               Popular New Cars
             </h2>
-            <p className="text-xs md:text-sm text-slate-500 mt-0.5">Top picks across India</p>
           </div>
           <Link
             href="/new-cars"
-            className="flex items-center gap-1 text-xs md:text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+            className="flex items-center gap-1.5 text-xs md:text-sm font-semibold transition-all duration-200 group"
+            style={{ color: "#60a5fa" }}
           >
-            View all <MaterialIcon name="arrow_forward" className="text-[16px]" />
+            View all
+            <MaterialIcon name="arrow_forward" className="text-[16px] transition-transform duration-200 group-hover:translate-x-0.5" />
           </Link>
         </div>
+
         <div className="flex gap-4 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-5 md:overflow-visible md:snap-none md:px-0">
-          {popularModels.map((car) => (
+          {popularModels.map((car, idx) => (
             <Link
               key={car.slug}
               href={`/${car.brand.slug}/${car.slug}`}
-              className="group shrink-0 w-[280px] md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/[0.06] transition-all hover:border-white/15 active:scale-[0.98] block"
-              style={{ background: "rgba(255,255,255,0.03)" }}
+              className="group shrink-0 w-[260px] md:w-auto md:shrink snap-start rounded-2xl overflow-hidden transition-all duration-300 block cb-card-enter"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.06)",
+                animationDelay: `${idx * 0.08}s`,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(17,82,212,0.2)";
+                e.currentTarget.style.borderColor = "rgba(17,82,212,0.25)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+              }}
             >
+              {/* Car image with light gradient backdrop */}
               <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
+                <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(135deg, #1a2332 0%, #0f1923 50%, #162030 100%)" }} />
                 <Image
                   src={car.image}
                   alt={car.fullName}
                   fill
-                  sizes="(max-width: 768px) 280px, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 260px, 25vw"
+                  className="object-cover relative z-[1] transition-transform duration-500 group-hover:scale-[1.06]"
                   unoptimized
                 />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.6) 0%, transparent 50%)" }} />
+                {/* Bottom gradient for text readability */}
+                <div className="absolute inset-x-0 bottom-0 h-1/2 z-[2]" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.7) 0%, transparent 100%)" }} />
+
                 {car.tag && (
-                  <span className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-lg text-white" style={{ background: "rgba(17,82,212,0.85)", backdropFilter: "blur(4px)" }}>
+                  <span className="absolute top-3 left-3 z-[3] text-[10px] font-bold px-2.5 py-1 rounded-lg text-white" style={{
+                    background: "linear-gradient(135deg, #1152d4, #2563eb)",
+                    boxShadow: "0 2px 8px rgba(17,82,212,0.3)",
+                  }}>
                     {car.tag}
                   </span>
                 )}
-                <div className="absolute bottom-3 right-3 flex items-center gap-1 text-amber-400">
+                <div className="absolute bottom-3 right-3 z-[3] flex items-center gap-1 text-amber-400">
                   <span className="text-xs font-bold">{car.rating}</span>
-                  <MaterialIcon name="star" fill className="text-[14px]" />
+                  <MaterialIcon name="star" fill className="text-[13px]" />
                 </div>
               </div>
+
               <div className="p-4">
-                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{car.brand.name}</p>
-                <h3 className="text-sm md:text-base font-bold text-white mt-1" style={{ fontFamily: "Manrope, sans-serif" }}>{car.name}</h3>
-                <div className="flex items-baseline gap-2 mt-2">
-                  <p className="text-sm md:text-base font-extrabold text-white">{car.startingPriceDisplay}</p>
-                  <span className="text-[10px] text-slate-500 font-medium">onwards</span>
+                <p className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: "#64748b", fontFamily: "Manrope, sans-serif" }}>{car.brand.name}</p>
+                <h3 className="text-sm md:text-[15px] font-bold text-white mt-1.5 leading-tight" style={{ fontFamily: "Manrope, sans-serif" }}>{car.name}</h3>
+                <div className="flex items-baseline gap-1.5 mt-2.5">
+                  <p className="text-sm md:text-base font-extrabold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>{car.startingPriceDisplay}</p>
+                  <span className="text-[10px] font-medium" style={{ color: "#64748b" }}>onwards</span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-1">EMI {formatEmi(car.startingPrice)}</p>
+                <div className="flex items-center justify-between mt-2">
+                  <p className="text-[11px] font-medium" style={{ color: "#64748b" }}>EMI {formatEmi(car.startingPrice)}</p>
+                  <span className="text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: "#60a5fa" }}>
+                    View Details &rarr;
+                  </span>
+                </div>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ─── RECENTLY LISTED USED CARS ─── */}
+      {/* ─── CERTIFIED USED CARS ─── */}
       {!usedCarsLoading && usedCars.length > 0 && (
-        <section className="mb-10 md:mb-14">
-          <div className="flex items-center justify-between px-4 md:px-0 mb-5">
+        <section className="mb-12 md:mb-16">
+          <div className="flex items-end justify-between px-4 md:px-0 mb-6">
             <div>
-              <h2 className="text-lg md:text-2xl font-bold text-white" style={{ fontFamily: "Newsreader, serif" }}>
+              <p className="text-[10px] uppercase tracking-[0.2em] font-bold mb-1.5" style={{ color: "#10b981", fontFamily: "Manrope, sans-serif" }}>Inspected &amp; Warranted</p>
+              <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "Playfair Display, serif" }}>
                 Certified Used Cars
               </h2>
-              <p className="text-xs md:text-sm text-slate-500 mt-0.5">Inspected &amp; warranted in {selectedCity}</p>
             </div>
-            <Link href="/used-cars" className="flex items-center gap-1 text-xs md:text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors">
-              View all <MaterialIcon name="arrow_forward" className="text-[16px]" />
+            <Link href="/used-cars" className="flex items-center gap-1.5 text-xs md:text-sm font-semibold transition-all duration-200 group" style={{ color: "#34d399" }}>
+              View all
+              <MaterialIcon name="arrow_forward" className="text-[16px] transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
           </div>
+
           <div className="flex gap-4 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:snap-none md:px-0">
-            {usedCars.map((car) => (
+            {usedCars.map((car, idx) => (
               <Link
                 key={car.id}
                 href={`/used-cars/details/${car.id}`}
-                className="group shrink-0 w-[280px] md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/[0.06] transition-all hover:border-white/15 active:scale-[0.98] block"
-                style={{ background: "rgba(255,255,255,0.03)" }}
+                className="group shrink-0 w-[260px] md:w-auto md:shrink snap-start rounded-2xl overflow-hidden transition-all duration-300 block cb-card-enter"
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                  animationDelay: `${idx * 0.08}s`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(16,185,129,0.2)";
+                  e.currentTarget.style.borderColor = "rgba(16,185,129,0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                }}
               >
                 <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
+                  <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(135deg, #1a2332 0%, #0f1923 50%, #162030 100%)" }} />
                   {car.images?.[0] ? (
-                    <Image src={car.images[0]} alt={car.name} fill sizes="(max-width: 768px) 280px, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" unoptimized />
+                    <Image src={car.images[0]} alt={car.name} fill sizes="(max-width: 768px) 260px, 33vw" className="object-cover relative z-[1] transition-transform duration-500 group-hover:scale-[1.06]" unoptimized />
                   ) : (
-                    <div className="h-full w-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.04)" }}>
-                      <MaterialIcon name="directions_car" className="text-[40px] text-slate-700" />
+                    <div className="h-full w-full flex items-center justify-center relative z-[1]" style={{ background: "rgba(255,255,255,0.04)" }}>
+                      <MaterialIcon name="directions_car" className="text-[40px]" style={{ color: "#1e293b" }} />
                     </div>
                   )}
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.6) 0%, transparent 50%)" }} />
-                  <span className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-lg text-white" style={{ background: "rgba(16,185,129,0.85)", backdropFilter: "blur(4px)" }}>
+                  <div className="absolute inset-x-0 bottom-0 h-1/2 z-[2]" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.7) 0%, transparent 100%)" }} />
+                  <span className="absolute top-3 left-3 z-[3] text-[10px] font-bold px-2.5 py-1 rounded-lg text-white flex items-center gap-1" style={{
+                    background: "linear-gradient(135deg, #059669, #10b981)",
+                    boxShadow: "0 2px 8px rgba(16,185,129,0.3)",
+                  }}>
+                    <MaterialIcon name="verified" className="text-[11px]" />
                     Certified
                   </span>
                 </div>
+
                 <div className="p-4">
-                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{car.year} · {car.fuel}</p>
-                  <h3 className="text-sm md:text-base font-bold text-white mt-1" style={{ fontFamily: "Manrope, sans-serif" }}>{car.name}</h3>
-                  <p className="text-sm md:text-base font-extrabold text-white mt-2">{car.priceDisplay || `₹${(car.price / 100000).toFixed(1)} Lakh`}</p>
-                  <p className="text-[11px] text-slate-500 mt-1">{car.km} · {car.location || selectedCity}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: "#64748b", fontFamily: "Manrope, sans-serif" }}>{car.year} &middot; {car.fuel}</p>
+                  <h3 className="text-sm md:text-[15px] font-bold text-white mt-1.5 leading-tight" style={{ fontFamily: "Manrope, sans-serif" }}>{car.name}</h3>
+                  <p className="text-sm md:text-base font-extrabold text-white mt-2.5">{car.priceDisplay || `\u20B9${(car.price / 100000).toFixed(1)} Lakh`}</p>
+                  <div className="flex items-center justify-between mt-2">
+                    <p className="text-[11px] font-medium" style={{ color: "#64748b" }}>{car.km} &middot; {car.location || selectedCity}</p>
+                    <span className="text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: "#34d399" }}>
+                      View &rarr;
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -518,79 +738,113 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* ─── CTA STRIP ─── */}
-      <section className="px-4 md:px-0 mb-10 md:mb-14">
+      {/* ─── CTA STRIP — Gradient Action Cards ─── */}
+      <section className="px-4 md:px-0 mb-12 md:mb-16">
         <div className="grid md:grid-cols-3 gap-4">
           {/* Sell your car */}
           <Link
             href="/sell-car"
-            className="group flex items-center gap-4 rounded-2xl p-5 md:p-6 border border-emerald-500/15 transition-all hover:border-emerald-500/30 active:scale-[0.99]"
-            style={{ background: "linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%)" }}
+            className="group relative overflow-hidden rounded-2xl p-5 md:p-6 transition-all duration-300 active:scale-[0.99]"
+            style={{
+              background: "linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(16,185,129,0.04) 100%)",
+              border: "1px solid rgba(16,185,129,0.15)",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(16,185,129,0.35)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(16,185,129,0.1)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(16,185,129,0.15)"; e.currentTarget.style.boxShadow = "none"; }}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(16,185,129,0.12)" }}>
-              <MaterialIcon name="sell" className="text-[24px] text-emerald-400" />
+            {/* Decorative corner accent */}
+            <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20" style={{ background: "radial-gradient(circle, #10b981, transparent)" }} />
+            <div className="relative flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(16,185,129,0.15)", border: "1px solid rgba(16,185,129,0.2)" }}>
+                <MaterialIcon name="sell" className="text-[24px]" style={{ color: "#34d399" }} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>Sell Your Car</p>
+                <p className="text-xs mt-0.5" style={{ color: "#64748b" }}>AI valuation in 30 seconds</p>
+              </div>
+              <div className="flex h-8 w-8 items-center justify-center rounded-full shrink-0 transition-all duration-200 group-hover:translate-x-1" style={{ background: "rgba(16,185,129,0.1)" }}>
+                <MaterialIcon name="arrow_forward" className="text-[16px]" style={{ color: "#34d399" }} />
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>Sell Your Car</p>
-              <p className="text-xs text-slate-500 mt-0.5">AI valuation in 30 seconds</p>
-            </div>
-            <MaterialIcon name="arrow_forward" className="text-[18px] text-emerald-400/50 group-hover:text-emerald-400 transition-colors shrink-0" />
           </Link>
 
           {/* AI Concierge */}
           <Link
             href="/concierge"
-            className="group flex items-center gap-4 rounded-2xl p-5 md:p-6 border border-blue-500/15 transition-all hover:border-blue-500/30 active:scale-[0.99]"
-            style={{ background: "linear-gradient(135deg, rgba(17,82,212,0.08) 0%, rgba(17,82,212,0.03) 100%)" }}
+            className="group relative overflow-hidden rounded-2xl p-5 md:p-6 transition-all duration-300 active:scale-[0.99]"
+            style={{
+              background: "linear-gradient(135deg, rgba(17,82,212,0.12) 0%, rgba(17,82,212,0.04) 100%)",
+              border: "1px solid rgba(17,82,212,0.15)",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(17,82,212,0.35)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(17,82,212,0.1)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(17,82,212,0.15)"; e.currentTarget.style.boxShadow = "none"; }}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(17,82,212,0.15)" }}>
-              <MaterialIcon name="smart_toy" className="text-[24px] text-blue-400" />
+            <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20" style={{ background: "radial-gradient(circle, #1152d4, transparent)" }} />
+            <div className="relative flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(17,82,212,0.15)", border: "1px solid rgba(17,82,212,0.2)" }}>
+                <MaterialIcon name="smart_toy" className="text-[24px]" style={{ color: "#60a5fa" }} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>AI Concierge</p>
+                <p className="text-xs mt-0.5" style={{ color: "#64748b" }}>Tell us your needs, AI finds your match</p>
+              </div>
+              <div className="flex h-8 w-8 items-center justify-center rounded-full shrink-0 transition-all duration-200 group-hover:translate-x-1" style={{ background: "rgba(17,82,212,0.1)" }}>
+                <MaterialIcon name="arrow_forward" className="text-[16px]" style={{ color: "#60a5fa" }} />
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>AI Concierge</p>
-              <p className="text-xs text-slate-500 mt-0.5">Tell us your needs, AI finds your match</p>
-            </div>
-            <MaterialIcon name="arrow_forward" className="text-[18px] text-blue-400/50 group-hover:text-blue-400 transition-colors shrink-0" />
           </Link>
 
           {/* Compare */}
           <Link
             href="/compare"
-            className="group flex items-center gap-4 rounded-2xl p-5 md:p-6 border border-amber-500/15 transition-all hover:border-amber-500/30 active:scale-[0.99]"
-            style={{ background: "linear-gradient(135deg, rgba(245,158,11,0.06) 0%, rgba(245,158,11,0.02) 100%)" }}
+            className="group relative overflow-hidden rounded-2xl p-5 md:p-6 transition-all duration-300 active:scale-[0.99]"
+            style={{
+              background: "linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(245,158,11,0.03) 100%)",
+              border: "1px solid rgba(245,158,11,0.15)",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(245,158,11,0.35)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(245,158,11,0.08)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(245,158,11,0.15)"; e.currentTarget.style.boxShadow = "none"; }}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(245,158,11,0.12)" }}>
-              <MaterialIcon name="compare_arrows" className="text-[24px] text-amber-400" />
+            <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20" style={{ background: "radial-gradient(circle, #f59e0b, transparent)" }} />
+            <div className="relative flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(245,158,11,0.12)", border: "1px solid rgba(245,158,11,0.2)" }}>
+                <MaterialIcon name="compare_arrows" className="text-[24px]" style={{ color: "#fbbf24" }} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>Compare Cars</p>
+                <p className="text-xs mt-0.5" style={{ color: "#64748b" }}>Side-by-side specs comparison</p>
+              </div>
+              <div className="flex h-8 w-8 items-center justify-center rounded-full shrink-0 transition-all duration-200 group-hover:translate-x-1" style={{ background: "rgba(245,158,11,0.1)" }}>
+                <MaterialIcon name="arrow_forward" className="text-[16px]" style={{ color: "#fbbf24" }} />
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>Compare Cars</p>
-              <p className="text-xs text-slate-500 mt-0.5">Side-by-side specs comparison</p>
-            </div>
-            <MaterialIcon name="arrow_forward" className="text-[18px] text-amber-400/50 group-hover:text-amber-400 transition-colors shrink-0" />
           </Link>
         </div>
       </section>
 
       {/* ─── QUICK LINKS ─── */}
-      <section className="px-4 md:px-0 mb-8 md:mb-12">
-        <div className="flex flex-wrap items-center gap-2 md:gap-3">
-          <span className="text-xs text-slate-600 font-medium mr-1">Quick links:</span>
+      <section className="px-4 md:px-0 mb-10 md:mb-14">
+        <div className="flex flex-wrap items-center gap-2.5 md:gap-3">
+          <span className="text-[10px] uppercase tracking-[0.15em] font-bold mr-1" style={{ color: "#334155", fontFamily: "Manrope, sans-serif" }}>Explore</span>
           {[
-            { label: "EMI Calculator", href: "/car-loan/emi-calculator" },
-            { label: "Fuel Prices", href: "/fuel-price" },
-            { label: "Car Insurance", href: "/car-insurance" },
-            { label: "Car Loan", href: "/car-loan" },
-            { label: "Upcoming Cars", href: "/upcoming-cars" },
-            { label: "Electric Cars", href: "/electric-cars" },
-            { label: "Find Dealers", href: "/dealers" },
-            { label: "Car News", href: "/car-news" },
+            { label: "EMI Calculator", href: "/car-loan/emi-calculator", icon: "calculate" },
+            { label: "Fuel Prices", href: "/fuel-price", icon: "local_gas_station" },
+            { label: "Car Insurance", href: "/car-insurance", icon: "shield" },
+            { label: "Car Loan", href: "/car-loan", icon: "account_balance" },
+            { label: "Upcoming Cars", href: "/upcoming-cars", icon: "event" },
+            { label: "Electric Cars", href: "/electric-cars", icon: "bolt" },
+            { label: "Find Dealers", href: "/dealers", icon: "storefront" },
+            { label: "Car News", href: "/car-news", icon: "newspaper" },
           ].map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-xs font-medium text-slate-400 px-3 py-1.5 rounded-full border border-white/6 hover:text-white hover:border-white/15 transition-all"
-              style={{ background: "rgba(255,255,255,0.02)" }}
+              className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-200"
+              style={{ color: "#64748b", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "#e2e8f0"; e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "#64748b"; e.currentTarget.style.background = "rgba(255,255,255,0.02)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)"; }}
             >
+              <MaterialIcon name={link.icon} className="text-[13px]" />
               {link.label}
             </Link>
           ))}
@@ -599,18 +853,20 @@ export default function HomePage() {
 
       {/* ─── FOOTER ─── */}
       <footer className="px-4 md:px-0 pb-4 md:pb-8">
-        <div className="border-t border-white/[0.06] pt-6 md:pt-8">
+        <div className="pt-8 md:pt-10" style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
           <div className="md:flex md:items-start md:justify-between md:gap-12">
-            <div className="mb-4 md:mb-0">
-              <div className="flex items-center gap-2 mb-2">
-                <MaterialIcon name="token" className="text-[18px]" style={{ color: "#1152d4" }} />
-                <span className="text-sm font-bold text-white" style={{ fontFamily: "Newsreader, serif" }}>CaroBest</span>
+            <div className="mb-5 md:mb-0">
+              <div className="flex items-center gap-2.5 mb-2.5">
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1152d4, #3b82f6)" }}>
+                  <MaterialIcon name="diamond" className="text-[13px] text-white" />
+                </div>
+                <span className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: "Playfair Display, serif" }}>CaroBest</span>
               </div>
-              <p className="text-[11px] text-slate-500 leading-relaxed max-w-xs">
+              <p className="text-[11px] leading-relaxed max-w-xs" style={{ color: "#475569", fontFamily: "Manrope, sans-serif" }}>
                 India&apos;s AI-powered car marketplace. Buy, sell &amp; compare new and used cars with confidence.
               </p>
             </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <div className="flex flex-wrap gap-x-7 gap-y-2.5">
               {[
                 { label: "About", href: "/about" },
                 { label: "Careers", href: "/careers" },
@@ -619,12 +875,17 @@ export default function HomePage() {
                 { label: "Dealers", href: "/dealers" },
                 { label: "Luxury Portal", href: "/landing" },
               ].map((l) => (
-                <Link key={l.href} href={l.href} className="text-xs text-slate-500 hover:text-slate-300 transition-colors">{l.label}</Link>
+                <Link key={l.href} href={l.href} className="text-xs transition-colors duration-200" style={{ color: "#475569", fontFamily: "Manrope, sans-serif" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = "#cbd5e1"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = "#475569"; }}
+                >
+                  {l.label}
+                </Link>
               ))}
             </div>
           </div>
-          <div className="border-t border-white/[0.04] mt-6 pt-4">
-            <p className="text-[10px] text-slate-700">&copy; 2026 The Singularity Covenant LLP</p>
+          <div className="mt-6 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.03)" }}>
+            <p className="text-[10px]" style={{ color: "#1e293b", fontFamily: "Manrope, sans-serif" }}>&copy; 2026 The Singularity Covenant LLP. All rights reserved.</p>
           </div>
         </div>
       </footer>
