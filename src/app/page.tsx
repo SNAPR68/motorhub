@@ -182,7 +182,7 @@ export default function HomePage() {
       </header>
 
       {/* ─── HERO CAROUSEL ─── */}
-      <section className="relative w-full overflow-hidden md:rounded-2xl" style={{ height: "480px", maxHeight: "60vh" }}>
+      <section className="relative w-full overflow-hidden md:-mx-8 lg:-mx-12 md:w-[calc(100%+4rem)] lg:w-[calc(100%+6rem)]" style={{ height: "480px", maxHeight: "60vh" }}>
         {/* Carousel slides */}
         {HERO_SLIDES.map((slide, i) => (
           <div
@@ -194,7 +194,7 @@ export default function HomePage() {
               src={slide.src}
               alt={slide.alt}
               fill
-              sizes="(max-width: 768px) 100vw, 1024px"
+              sizes="100vw"
               className="object-cover"
               priority={i === 0}
               unoptimized
@@ -380,12 +380,16 @@ export default function HomePage() {
       )}
 
       {/* ─── HERO SEARCH ─── */}
-      <section className="px-4 md:px-0 pt-6 pb-5" style={{ background: "linear-gradient(180deg, rgba(17,82,212,0.08) 0%, transparent 100%)" }}>
-        <h1 className="text-2xl md:text-3xl font-bold text-white leading-tight mb-1" style={{ fontFamily: "'Noto Serif', serif" }}>
-          Find Your Perfect Car
-        </h1>
-        <p className="text-sm text-slate-400 mb-4">New, used &amp; upcoming cars — all in one place</p>
+      <section className="px-4 md:px-0 pt-6 pb-5 md:pt-8 md:pb-6 md:rounded-2xl" style={{ background: "linear-gradient(180deg, rgba(17,82,212,0.08) 0%, transparent 100%)" }}>
+        <div className="md:flex md:items-start md:justify-between md:gap-8">
+          <div className="md:shrink-0">
+            <h1 className="text-2xl md:text-3xl font-bold text-white leading-tight mb-1" style={{ fontFamily: "'Noto Serif', serif" }}>
+              Find Your Perfect Car
+            </h1>
+            <p className="text-sm text-slate-400 mb-4 md:mb-0">New, used &amp; upcoming cars — all in one place</p>
+          </div>
 
+          <div className="md:flex-1 md:max-w-xl">
         {/* Tab toggle */}
         <div className="flex rounded-xl overflow-hidden border border-white/10 mb-3" style={{ background: "rgba(255,255,255,0.04)" }}>
           {(["new", "used"] as const).map((tab) => (
@@ -469,83 +473,85 @@ export default function HomePage() {
             </div>
           </div>
         )}
+          </div>{/* close md:max-w-xl */}
+        </div>{/* close md:flex */}
       </section>
 
       {/* ─── TRUST STRIP ─── */}
-      <section className="mx-4 md:mx-0 mb-5 rounded-2xl px-4 py-3 border border-blue-500/15" style={{ background: "rgba(17,82,212,0.05)" }}>
-        <div className="grid grid-cols-4 gap-1 text-center">
+      <section className="mx-4 md:mx-0 mb-5 md:mb-8 rounded-2xl px-4 md:px-6 py-3 md:py-4 border border-blue-500/15" style={{ background: "rgba(17,82,212,0.05)" }}>
+        <div className="grid grid-cols-4 gap-1 md:gap-4 text-center">
           {[{ v: "50K+", l: "New Cars" }, { v: "12K+", l: "Used Cars" }, { v: "2.5K+", l: "Dealers" }, { v: "4.8", l: "Rated" }].map((s) => (
             <div key={s.l}>
-              <p className="text-sm font-black text-white">{s.v}{s.l === "Rated" && <span className="text-amber-400">★</span>}</p>
-              <p className="text-[10px] text-slate-500 mt-0.5">{s.l}</p>
+              <p className="text-sm md:text-lg font-black text-white">{s.v}{s.l === "Rated" && <span className="text-amber-400">★</span>}</p>
+              <p className="text-[10px] md:text-xs text-slate-500 mt-0.5">{s.l}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ─── QUICK TOOLS ─── */}
-      <section className="px-4 md:px-0 mb-5">
-        <div className="flex gap-2 overflow-x-auto no-scrollbar md:grid md:grid-cols-6 md:overflow-visible">
+      <section className="px-4 md:px-0 mb-5 md:mb-8">
+        <div className="flex gap-2 md:gap-3 overflow-x-auto no-scrollbar md:grid md:grid-cols-6 md:overflow-visible">
           {QUICK_TOOLS.map((tool) => (
             <Link
               key={tool.label}
               href={tool.href}
-              className="flex flex-col items-center gap-1.5 rounded-2xl py-3 px-3 border border-white/6 shrink-0 md:shrink transition-all active:scale-95"
+              className="flex flex-col items-center gap-1.5 md:gap-2 rounded-2xl py-3 md:py-4 px-3 border border-white/6 shrink-0 md:shrink transition-all active:scale-95 hover:border-white/15 hover:bg-white/[0.06]"
               style={{ background: "rgba(255,255,255,0.04)", minWidth: "72px" }}
             >
               <div
-                className="h-9 w-9 rounded-xl flex items-center justify-center"
+                className="h-9 w-9 md:h-11 md:w-11 rounded-xl flex items-center justify-center"
                 style={{ background: `${tool.color}15` }}
               >
-                <MaterialIcon name={tool.icon} className="text-[18px]" style={{ color: tool.color }} />
+                <MaterialIcon name={tool.icon} className="text-[18px] md:text-[22px]" style={{ color: tool.color }} />
               </div>
-              <span className="text-[10px] font-semibold text-slate-400 whitespace-nowrap">{tool.label}</span>
+              <span className="text-[10px] md:text-xs font-semibold text-slate-400 whitespace-nowrap">{tool.label}</span>
             </Link>
           ))}
         </div>
       </section>
 
       {/* ─── BROWSE BY BODY TYPE ─── */}
-      <section className="px-4 md:px-0 mb-5">
+      <section className="px-4 md:px-0 mb-5 md:mb-8">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm md:text-base font-bold text-white">Browse by Body Type</h2>
+          <h2 className="text-sm md:text-lg font-bold text-white">Browse by Body Type</h2>
           <div className="flex items-center gap-4">
-            <Link href="/interests" className="text-xs font-semibold" style={{ color: "#1152d4" }}>Curated for You</Link>
-            <Link href="/new-cars" className="text-xs font-semibold" style={{ color: "#1152d4" }}>View all</Link>
+            <Link href="/interests" className="text-xs md:text-sm font-semibold" style={{ color: "#1152d4" }}>Curated for You</Link>
+            <Link href="/new-cars" className="text-xs md:text-sm font-semibold" style={{ color: "#1152d4" }}>View all</Link>
           </div>
         </div>
-        <div className="flex gap-3 overflow-x-auto no-scrollbar md:grid md:grid-cols-6 md:overflow-visible">
+        <div className="flex gap-3 overflow-x-auto no-scrollbar md:grid md:grid-cols-6 md:gap-4 md:overflow-visible">
           {BODY_TYPES.map((bt) => (
             <Link
               key={bt.value}
               href={`/new-cars?body=${bt.value}`}
-              className="flex flex-col items-center gap-2 rounded-2xl py-3 px-4 border border-white/6 shrink-0 md:shrink transition-all active:scale-95"
+              className="flex flex-col items-center gap-2 rounded-2xl py-3 md:py-4 px-4 border border-white/6 shrink-0 md:shrink transition-all active:scale-95 hover:border-white/15 hover:bg-white/[0.06]"
               style={{ background: "rgba(255,255,255,0.04)", minWidth: "72px" }}
             >
-              <span className="text-2xl">{bt.icon}</span>
-              <span className="text-[11px] font-semibold text-slate-300 whitespace-nowrap">{bt.label}</span>
+              <span className="text-2xl md:text-3xl">{bt.icon}</span>
+              <span className="text-[11px] md:text-sm font-semibold text-slate-300 whitespace-nowrap">{bt.label}</span>
             </Link>
           ))}
         </div>
       </section>
 
       {/* ─── POPULAR NEW CARS ─── */}
-      <section className="mb-5">
+      <section className="mb-5 md:mb-8">
         <div className="flex items-center justify-between px-4 md:px-0 mb-3">
           <div>
-            <h2 className="text-sm md:text-base font-bold text-white">Popular New Cars</h2>
-            <p className="text-[11px] text-slate-500">Top picks in India right now</p>
+            <h2 className="text-sm md:text-lg font-bold text-white">Popular New Cars</h2>
+            <p className="text-[11px] md:text-sm text-slate-500">Top picks in India right now</p>
           </div>
-          <Link href="/new-cars" className="text-xs font-semibold flex items-center gap-0.5" style={{ color: "#1152d4" }}>
+          <Link href="/new-cars" className="text-xs md:text-sm font-semibold flex items-center gap-0.5" style={{ color: "#1152d4" }}>
             See all <MaterialIcon name="chevron_right" className="text-[14px]" />
           </Link>
         </div>
-        <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:snap-none md:px-0">
+        <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-5 md:overflow-visible md:snap-none md:px-0">
           {popularModels.map((car) => (
             <Link
               key={car.slug}
               href={`/${car.brand.slug}/${car.slug}`}
-              className="shrink-0 w-44 md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/6 transition-all active:scale-[0.98] block"
+              className="shrink-0 w-44 md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/6 transition-all active:scale-[0.98] block hover:border-white/15 hover:bg-white/[0.06]"
               style={{ background: "rgba(255,255,255,0.04)" }}
             >
               <div className="relative" style={{ aspectRatio: "4/3" }}>
@@ -553,28 +559,28 @@ export default function HomePage() {
                   src={car.image}
                   alt={car.fullName}
                   fill
-                  sizes="176px"
+                  sizes="(max-width: 768px) 176px, 25vw"
                   className="object-cover"
                   unoptimized
                 />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(8,10,15,0.6) 0%, transparent 60%)" }} />
                 {car.tag && (
                   <span
-                    className="absolute top-2 left-2 text-[9px] font-bold px-2 py-0.5 rounded-full text-white"
+                    className="absolute top-2 left-2 text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-full text-white"
                     style={{ background: "rgba(17,82,212,0.9)" }}
                   >
                     {car.tag}
                   </span>
                 )}
-                <span className="absolute bottom-2 right-2 text-[10px] font-bold text-amber-400">
+                <span className="absolute bottom-2 right-2 text-[10px] md:text-xs font-bold text-amber-400">
                   {car.rating}★
                 </span>
               </div>
-              <div className="p-3">
-                <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wide truncate">{car.brand.name.toUpperCase()}</p>
-                <h3 className="text-[13px] font-bold text-white truncate mt-0.5">{car.name}</h3>
-                <p className="text-xs font-black text-white mt-1">{car.startingPriceDisplay} <span className="text-[10px] font-normal text-slate-500">onwards</span></p>
-                <p className="text-[10px] text-slate-500 mt-0.5">EMI {formatEmi(car.startingPrice)}</p>
+              <div className="p-3 md:p-4">
+                <p className="text-[10px] md:text-[11px] text-slate-500 font-semibold uppercase tracking-wide truncate">{car.brand.name.toUpperCase()}</p>
+                <h3 className="text-[13px] md:text-sm font-bold text-white truncate mt-0.5">{car.name}</h3>
+                <p className="text-xs md:text-sm font-black text-white mt-1">{car.startingPriceDisplay} <span className="text-[10px] md:text-xs font-normal text-slate-500">onwards</span></p>
+                <p className="text-[10px] md:text-xs text-slate-500 mt-0.5">EMI {formatEmi(car.startingPrice)}</p>
               </div>
             </Link>
           ))}
@@ -582,47 +588,47 @@ export default function HomePage() {
       </section>
 
       {/* ─── BROWSE BY BUDGET ─── */}
-      <section className="px-4 md:px-0 mb-5">
+      <section className="px-4 md:px-0 mb-5 md:mb-8">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm md:text-base font-bold text-white">Browse by Budget</h2>
-          <Link href="/new-cars" className="text-xs font-semibold" style={{ color: "#1152d4" }}>See all</Link>
+          <h2 className="text-sm md:text-lg font-bold text-white">Browse by Budget</h2>
+          <Link href="/new-cars" className="text-xs md:text-sm font-semibold" style={{ color: "#1152d4" }}>See all</Link>
         </div>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
           {BUDGET_SEGMENTS.map((b) => (
             <Link
               key={b.label}
               href={`/new-cars?minPrice=${b.min}&maxPrice=${b.max}`}
-              className="flex flex-col items-center gap-1.5 rounded-2xl py-3.5 px-2 border border-white/6 text-center transition-all active:scale-95"
+              className="flex flex-col items-center gap-1.5 md:gap-2 rounded-2xl py-3.5 md:py-4 px-2 border border-white/6 text-center transition-all active:scale-95 hover:border-white/15 hover:bg-white/[0.06]"
               style={{ background: "rgba(255,255,255,0.04)" }}
             >
-              <MaterialIcon name="currency_rupee" className="text-[18px]" style={{ color: "#1152d4" }} />
-              <span className="text-[11px] font-bold text-slate-300 leading-tight">{b.label}</span>
+              <MaterialIcon name="currency_rupee" className="text-[18px] md:text-[22px]" style={{ color: "#1152d4" }} />
+              <span className="text-[11px] md:text-sm font-bold text-slate-300 leading-tight">{b.label}</span>
             </Link>
           ))}
         </div>
       </section>
 
       {/* ─── POPULAR BRANDS ─── */}
-      <section className="px-4 md:px-0 mb-5">
+      <section className="px-4 md:px-0 mb-5 md:mb-8">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm md:text-base font-bold text-white">Popular Brands</h2>
-          <Link href="/new-cars" className="text-xs font-semibold" style={{ color: "#1152d4" }}>All brands</Link>
+          <h2 className="text-sm md:text-lg font-bold text-white">Popular Brands</h2>
+          <Link href="/new-cars" className="text-xs md:text-sm font-semibold" style={{ color: "#1152d4" }}>All brands</Link>
         </div>
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-2.5">
+        <div className="grid grid-cols-4 md:grid-cols-8 gap-2.5 md:gap-4">
           {popularBrands.map((brand) => (
             <Link
               key={brand.slug}
               href={`/new-cars?brand=${brand.slug}`}
-              className="flex flex-col items-center gap-2 rounded-2xl py-3 px-2 border border-white/6 transition-all active:scale-95"
+              className="flex flex-col items-center gap-2 rounded-2xl py-3 md:py-4 px-2 border border-white/6 transition-all active:scale-95 hover:border-white/15 hover:bg-white/[0.06]"
               style={{ background: "rgba(255,255,255,0.04)" }}
             >
               <div
-                className="h-10 w-10 rounded-full flex items-center justify-center text-xs font-black"
+                className="h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center text-xs md:text-sm font-black"
                 style={{ background: `${brand.color}22`, border: `1px solid ${brand.color}44`, color: brand.color }}
               >
                 {brand.logo}
               </div>
-              <span className="text-[10px] font-semibold text-slate-400 text-center leading-tight">{brand.name.split(" ")[0]}</span>
+              <span className="text-[10px] md:text-xs font-semibold text-slate-400 text-center leading-tight">{brand.name.split(" ")[0]}</span>
             </Link>
           ))}
         </div>
@@ -630,22 +636,22 @@ export default function HomePage() {
 
       {/* ─── RECENTLY LISTED USED CARS (from DB) ─── */}
       {!usedCarsLoading && usedCars.length > 0 && (
-        <section className="mb-5">
+        <section className="mb-5 md:mb-8">
           <div className="flex items-center justify-between px-4 md:px-0 mb-3">
             <div>
-              <h2 className="text-sm md:text-base font-bold text-white">Recently Listed Used Cars</h2>
-              <p className="text-[11px] text-slate-500">Certified &amp; inspected in {selectedCity}</p>
+              <h2 className="text-sm md:text-lg font-bold text-white">Recently Listed Used Cars</h2>
+              <p className="text-[11px] md:text-sm text-slate-500">Certified &amp; inspected in {selectedCity}</p>
             </div>
-            <Link href="/used-cars" className="text-xs font-semibold flex items-center gap-0.5" style={{ color: "#10b981" }}>
+            <Link href="/used-cars" className="text-xs md:text-sm font-semibold flex items-center gap-0.5" style={{ color: "#10b981" }}>
               See all <MaterialIcon name="chevron_right" className="text-[14px]" />
             </Link>
           </div>
-          <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:snap-none md:px-0">
+          <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:snap-none md:px-0">
             {usedCars.map((car) => (
               <Link
                 key={car.id}
                 href={`/used-cars/details/${car.id}`}
-                className="shrink-0 w-44 md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/6 transition-all active:scale-[0.98] block"
+                className="shrink-0 w-44 md:w-auto md:shrink snap-start rounded-2xl overflow-hidden border border-white/6 transition-all active:scale-[0.98] block hover:border-white/15 hover:bg-white/[0.06]"
                 style={{ background: "rgba(255,255,255,0.04)" }}
               >
                 <div className="relative" style={{ aspectRatio: "4/3" }}>
@@ -654,7 +660,7 @@ export default function HomePage() {
                       src={car.images[0]}
                       alt={car.name}
                       fill
-                      sizes="176px"
+                      sizes="(max-width: 768px) 176px, 33vw"
                       className="object-cover"
                       unoptimized
                     />
@@ -668,15 +674,15 @@ export default function HomePage() {
                     Certified
                   </span>
                 </div>
-                <div className="p-3">
-                  <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wide truncate">
+                <div className="p-3 md:p-4">
+                  <p className="text-[10px] md:text-[11px] text-slate-500 font-semibold uppercase tracking-wide truncate">
                     {car.year} · {car.fuel}
                   </p>
-                  <h3 className="text-[13px] font-bold text-white truncate mt-0.5">{car.name}</h3>
-                  <p className="text-xs font-black text-white mt-1">
+                  <h3 className="text-[13px] md:text-sm font-bold text-white truncate mt-0.5">{car.name}</h3>
+                  <p className="text-xs md:text-sm font-black text-white mt-1">
                     {car.priceDisplay || `₹${(car.price / 100000).toFixed(1)}L`}
                   </p>
-                  <p className="text-[10px] text-slate-500 mt-0.5">{car.km} · {car.location || selectedCity}</p>
+                  <p className="text-[10px] md:text-xs text-slate-500 mt-0.5">{car.km} · {car.location || selectedCity}</p>
                 </div>
               </Link>
             ))}
@@ -685,20 +691,20 @@ export default function HomePage() {
       )}
 
       {/* ─── BANNERS ─── */}
-      <div className="md:grid md:grid-cols-2 md:gap-4">
+      <div className="md:grid md:grid-cols-2 md:gap-5 md:mb-8">
         <section className="px-4 md:px-0 mb-4 md:mb-0">
           <Link
             href="/used-cars"
-            className="flex items-center gap-4 rounded-2xl p-4 border border-emerald-500/20 transition-all active:scale-[0.99] block h-full"
+            className="flex items-center gap-4 rounded-2xl p-4 md:p-5 border border-emerald-500/20 transition-all active:scale-[0.99] block h-full hover:border-emerald-500/40"
             style={{ background: "linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.03) 100%)" }}
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(16,185,129,0.15)" }}>
               <MaterialIcon name="directions_car" className="text-[26px] text-emerald-400" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-white">Certified Used Cars</p>
-              <p className="text-xs text-slate-400 mt-0.5">Inspected, warranted &amp; ready to drive</p>
-              <p className="text-[10px] text-emerald-400 font-semibold mt-1">Browse in {selectedCity}</p>
+              <p className="text-sm md:text-base font-bold text-white">Certified Used Cars</p>
+              <p className="text-xs md:text-sm text-slate-400 mt-0.5">Inspected, warranted &amp; ready to drive</p>
+              <p className="text-[10px] md:text-xs text-emerald-400 font-semibold mt-1">Browse in {selectedCity}</p>
             </div>
             <MaterialIcon name="arrow_forward_ios" className="text-[14px] text-emerald-400 shrink-0" />
           </Link>
@@ -707,15 +713,15 @@ export default function HomePage() {
         <section className="px-4 md:px-0 mb-5 md:mb-0">
           <Link
             href="/concierge"
-            className="flex items-center gap-4 rounded-2xl p-4 border border-blue-500/20 transition-all active:scale-[0.99] block h-full"
+            className="flex items-center gap-4 rounded-2xl p-4 md:p-5 border border-blue-500/20 transition-all active:scale-[0.99] block h-full hover:border-blue-500/40"
             style={{ background: "linear-gradient(135deg, rgba(17,82,212,0.1) 0%, rgba(17,82,212,0.04) 100%)" }}
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl shrink-0" style={{ background: "rgba(17,82,212,0.18)" }}>
               <MaterialIcon name="smart_toy" className="text-[26px]" style={{ color: "#1152d4" }} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-white">AI Car Concierge</p>
-              <p className="text-xs text-slate-400 mt-0.5">Tell us your budget &amp; needs — AI finds your match</p>
+              <p className="text-sm md:text-base font-bold text-white">AI Car Concierge</p>
+              <p className="text-xs md:text-sm text-slate-400 mt-0.5">Tell us your budget &amp; needs — AI finds your match</p>
             </div>
             <MaterialIcon name="arrow_forward_ios" className="text-[14px] text-blue-400 shrink-0" />
           </Link>
@@ -723,15 +729,15 @@ export default function HomePage() {
       </div>
 
       {/* ─── DEALER / SELL CTA ─── */}
-      <section className="px-4 md:px-0 mb-5">
-        <div className="rounded-2xl p-4 border border-white/7" style={{ background: "rgba(255,255,255,0.03)" }}>
+      <section className="px-4 md:px-0 mb-5 md:mb-8">
+        <div className="rounded-2xl p-4 md:p-6 border border-white/7" style={{ background: "rgba(255,255,255,0.03)" }}>
           <div className="flex items-center gap-3 mb-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(16,185,129,0.12)" }}>
-              <MaterialIcon name="sell" className="text-[22px] text-emerald-400" />
+            <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-xl shrink-0" style={{ background: "rgba(16,185,129,0.12)" }}>
+              <MaterialIcon name="sell" className="text-[22px] md:text-[26px] text-emerald-400" />
             </div>
             <div>
-              <p className="text-sm font-bold text-white">Sell Your Car</p>
-              <p className="text-xs text-slate-500">Free listing · AI valuation · Instant payment</p>
+              <p className="text-sm md:text-base font-bold text-white">Sell Your Car</p>
+              <p className="text-xs md:text-sm text-slate-500">Free listing · AI valuation · Instant payment</p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-2">
@@ -748,9 +754,9 @@ export default function HomePage() {
       </section>
 
       {/* ─── EXPLORE MORE ─── */}
-      <section className="px-4 md:px-0 mb-5">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Explore More</p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+      <section className="px-4 md:px-0 mb-5 md:mb-8">
+        <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Explore More</p>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
           {[
             { icon: "upcoming", label: "Upcoming Cars", href: "/upcoming-cars", color: "#f59e0b" },
             { icon: "electric_car", label: "Electric Cars", href: "/electric-cars", color: "#10b981" },
@@ -762,24 +768,24 @@ export default function HomePage() {
             <Link
               key={item.label}
               href={item.href}
-              className="flex items-center gap-3 rounded-xl p-3 border border-white/5 transition-all active:scale-95"
+              className="flex items-center gap-3 rounded-xl p-3 md:p-4 border border-white/5 transition-all active:scale-95 hover:border-white/15 hover:bg-white/[0.06]"
               style={{ background: "rgba(255,255,255,0.03)" }}
             >
               <div
-                className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0"
+                className="h-8 w-8 md:h-10 md:w-10 rounded-lg flex items-center justify-center shrink-0"
                 style={{ background: `${item.color}15` }}
               >
-                <MaterialIcon name={item.icon} className="text-[16px]" style={{ color: item.color }} />
+                <MaterialIcon name={item.icon} className="text-[16px] md:text-[20px]" style={{ color: item.color }} />
               </div>
-              <span className="text-xs font-semibold text-slate-300">{item.label}</span>
+              <span className="text-xs md:text-sm font-semibold text-slate-300">{item.label}</span>
             </Link>
           ))}
         </div>
       </section>
 
       {/* ─── FOOTER ─── */}
-      <footer className="px-4 md:px-0 pb-4">
-        <div className="rounded-2xl p-4 border border-white/5" style={{ background: "rgba(255,255,255,0.02)" }}>
+      <footer className="px-4 md:px-0 pb-4 md:pb-8">
+        <div className="rounded-2xl p-4 md:p-6 border border-white/5" style={{ background: "rgba(255,255,255,0.02)" }}>
           <div className="flex items-center gap-2 mb-3">
             <MaterialIcon name="token" className="text-[18px]" style={{ color: "#1152d4" }} />
             <span className="text-sm font-bold text-white" style={{ fontFamily: "'Noto Serif', serif" }}>CaroBest</span>
